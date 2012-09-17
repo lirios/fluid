@@ -1,0 +1,3 @@
+add_subdirectory(corecomponents)
+add_subdirectory(uicomponents)
+add_subdirectory(uicomponentsplugin)

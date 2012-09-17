@@ -1,0 +1,14 @@
+CMakeLists.txt.user
+build/
+*~
+*.a
+*.la
+*.core
+*.moc
+*.o
+*.obj
+*.orig
+*.swp
+*.rej
+*.so
+.DS_Store

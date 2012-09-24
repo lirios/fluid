@@ -26,7 +26,7 @@
 
 #include <VibeCore/VSharedPointer>
 
-namespace FluidUi
+namespace Fluid
 {
     class Svg;
 

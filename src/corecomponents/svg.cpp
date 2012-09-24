@@ -36,7 +36,7 @@
 #include "theme.h"
 #endif
 
-namespace FluidUi
+namespace Fluid
 {
     SharedSvgRenderer::SharedSvgRenderer(QObject *parent)
         : QSvgRenderer(parent)
@@ -237,7 +237,7 @@ namespace FluidUi
     Theme *SvgPrivate::actualTheme()
     {
         if (!theme) {
-            theme = FluidUi::Theme::defaultTheme();
+            theme = Fluid::Theme::defaultTheme();
         }
 
         return theme.data();
@@ -251,7 +251,7 @@ namespace FluidUi
             // use a separate cache source for unthemed svg's
             if (!s_systemColorsCache) {
                 //FIXME: reference count this, so that it is deleted when no longer in use
-                s_systemColorsCache = new FluidUi::Theme("internal-system-colors");
+                s_systemColorsCache = new Fluid::Theme("internal-system-colors");
             }
 
             return s_systemColorsCache.data();
@@ -814,7 +814,7 @@ namespace FluidUi
     }
 
 #ifdef PLFIORINI
-    void Svg::setTheme(FluidUi::Theme *theme)
+    void Svg::setTheme(Fluid::Theme *theme)
     {
         if (!theme || theme == d->theme.data()) {
             return;

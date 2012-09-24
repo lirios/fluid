@@ -1,142 +1,76 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/*
+*   Copyright (C) 21.0 by Marco Martin <mart@kde.org>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU Library General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
+*/
 
-// The ToolBar is a container for toolbar items such as ToolItem or ToolButton.
+/**Documented API
+Inherits:
+        FluidCore.FrameSvgItem
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+        A plasma theme based toolbar.
+
+Properties:
+
+        Item tools:
+        The ToolBarLayout that contains the ToolButton components that
+        are contained in the ToolBar. ToolBarLayout is not mandatory.
+        The default value is NULL.
+
+
+        string transition:
+        The type of transition to be used for the ToolBar when
+        the page changes on the relevant PageStack.
+        The possible values can be one of the following:
+              set         an instantaneous change (default)
+              push        follows page stack push animation
+              pop         follows page stack pop animation
+              replace     follows page stack replace animation
+
+Methods:
+        void setTools( tools, transition ):
+        This sets the tools for the ToolBar and the transition type that
+        will be used when the page changes on the relevant PageStack.
+        @arg Item tools see tool property
+        @arg string transition see transition property
+**/
 
 import QtQuick 2.0
-import "." 1.0
+import FluidCore 1.0
 
-Item {
-    id: root
-
-    width: parent ? parent.width : 0
-    height: bgImage.height
-
-    // Dummy property to allow qt component deprecated API clients to fail more gracefully
-    property bool __hidden: false
-
-    property int privateVisibility: ToolBarVisibility.Visible
-
-    // Styling for the ToolBar
-    property Style platformStyle: ToolBarStyle {}
-
-    // Deprecated, TODO remove
-    property alias style: root.platformStyle
-
-    // Shadows:
-    Image {
-        anchors.top : bgImage.top
-        anchors.right: bgImage.left
-        anchors.bottom : bgImage.bottom
-        source: "image://theme/meegotouch-menu-shadow-left"
-    }
-    Image {
-        anchors.bottom : bgImage.top
-        anchors.left: bgImage.left
-        anchors.right : bgImage.right
-        source: "image://theme/meegotouch-menu-shadow-top"
-    }
-    Image {
-        anchors.top : bgImage.top
-        anchors.left: bgImage.right
-        anchors.bottom : bgImage.bottom
-        source: "image://theme/meegotouch-menu-shadow-right"
-    }
-    Image {
-        anchors.top : bgImage.bottom
-        anchors.left: bgImage.left
-        anchors.right : bgImage.right
-        source: "image://theme/meegotouch-menu-shadow-bottom"
-    }
-    // Toolbar background.
-    BorderImage {
-        id: bgImage
-        width: root.width
-        border.left: 10
-        border.right: 10
-        border.top: 10
-        border.bottom: 10
-        source: platformStyle.background
-
-        // Mousearea that eats clicks so they don't go through the toolbar to content
-        // that may exist below it in z-order, such as unclipped listview items.
-        MouseArea { anchors.fill: parent }
-    }
-
-    states: [
-        // Inactive state.
-        State {
-            name: "hidden"
-            when: privateVisibility == ToolBarVisibility.Hidden || tools == null
-            PropertyChanges { target: root; height: 0; }
-        },
-        State {
-            name: "HiddenImmediately"
-            when: privateVisibility == ToolBarVisibility.HiddenImmediately
-            PropertyChanges { target: root; height: 0; }
-        },
-        State {
-            name: ""
-            when: !(privateVisibility == ToolBarVisibility.Visible || tools == null)
-            PropertyChanges { target: root; height: bgImage.height }
+Item{
+    id: toolBar
+    width: parent.width
+    height: (tools && enabled) ? tools.height + frameSvg.margins.top + frameSvg.margins.bottom : 0
+    visible: height > 0
+    Behavior on height {
+        PropertyAnimation { 
+            id: heightAnimation
+            duration: 250
         }
-
-    ]
-
-    transitions: [
-        // Transition between active and inactive states.
-        Transition {
-            from: ""; to: "hidden"; reversible: true
-            ParallelAnimation {
-                PropertyAnimation { properties: "height"; easing.type: Easing.InOutExpo; duration: platformStyle.visibilityTransitionDuration }
-            }
-        }
-    ]
-
-    // The current set of tools.
-    property Item tools: null
-
-    onToolsChanged: {
-        __performTransition(__transition || transition);
-        __transition = undefined;
     }
+    z: 1000
+
+    // The current set of tools; null if none.
+    property Item tools
 
     // The transition type. One of the following:
     //      set         an instantaneous change (default)
@@ -145,159 +79,169 @@ Item {
     //      replace     follows page stack replace animation
     property string transition: "set"
 
-    // The currently displayed container; null if none.
-    property Item __currentContainer: null
-
-    // Alternating containers used for transitions.
-    property Item __containerA: null
-    property Item __containerB: null
-
-    // The transition to perform next.
-    property variant __transition
-
+    //This invisible item keeps all the old dismissed tools:
+    //note that the outside application still has to keep references to them (or explicitly delete them) or they will just accumulate wasting memory
+    Item {
+        id: oldToolsItem
+        visible: false
+    }
     // Sets the tools with a transition.
-    function setTools(tools, transition) {
-        __transition = transition;
-        root.tools = tools;
+    function setTools(tools, transition)
+    {
+        if (toolBar.tools == tools) {
+            return
+        }
+
+        if (connection.oldTools) {
+            connection.oldTools.parent = oldToolsItem
+        }
+        connection.oldTools = toolBar.tools
+        toolBar.transition = transition
+        toolBar.tools = tools
     }
+    Connections {
+        id: connection
+        target: toolBar
+        property Item oldTools
 
-    // Performs a transition between tools in the toolbar.
-    function __performTransition(transition) {
-        // lazily create containers if they have not been created
-        if (!__currentContainer) {
-            // Parent is bgImage because it doesn't change height when toolbar gets hidden
-            __containerA = containerComponent.createObject(bgImage);
-            __containerB = containerComponent.createObject(bgImage);
-            __currentContainer = __containerB;
-        }
+        function internalToolsChanged()
+        {
+            var newContainer
+            var oldContainer
+            if (containerA.current) {
+                newContainer = containerB
+                oldContainer = containerA
+            } else {
+                newContainer = containerA
+                oldContainer = containerB
+            }
+            containerA.current = !containerA.current
 
-        // no transition if the tools are unchanged
-        if (__currentContainer.tools == tools) {
-            return;
-        }
-
-        // select container states based on the transition animation
-        var transitions = {
-            "set":      { "new": "",        "old": "hidden" },
-            "push":     { "new": "right",   "old": "left" },
-            "pop":      { "new": "left",    "old": "right" },
-            "replace":  { "new": "front",   "old": "back" }
-        };
-        var animation = transitions[transition];
-
-        // initialize the free container
-        var container = __currentContainer == __containerA ? __containerB : __containerA;
-        container.state = "hidden";
-        if (tools) {
-            container.tools = tools;
-            container.owner = tools.parent;
-            tools.parent = container;
-            tools.visible = true;
-        }
-
-        // perform transition
-        __currentContainer.state = animation["old"];
-        if (tools) {
-            container.state = animation["new"];
-            container.state = "";
-        }
-
-        __currentContainer = container;
-    }
-
-    // Component for toolbar containers.
-    Component {
-        id: containerComponent
-
-        Item {
-            id: container
-
-            width: parent ? parent.width : 0
-            height: parent ? parent.height : 0
-
-            // The states correspond to the different possible positions of the container.
-            state: "hidden"
-
-            // The tools held by this container.
-            property Item tools: null
-            // The owner of the tools.
-            property Item owner: null
-
-            // re-parent back to original owner and reset the container
-            function __transformToHidden() {
-                if (container.tools) {
-                    tools.visible = false;
-                    tools.parent = owner;
-                    container.tools = container.owner = null;
-                }
+            if(tools) {
+                tools.parent = newContainer
+                tools.visible = true
+                tools.anchors.left = newContainer.left
+                tools.anchors.right = newContainer.right
+                tools.anchors.verticalCenter = newContainer.verticalCenter
             }
 
-            states: [
-                // Start state for pop entry, end state for push exit.
-                State {
-                    name: "left"
-                    PropertyChanges { target: container; x: -30; opacity: 0.0 }
-                },
-                // Start state for push entry, end state for pop exit.
-                State {
-                    name: "right"
-                    PropertyChanges { target: container; x: 30; opacity: 0.0 }
-                },
-                // Start state for replace entry.
-                State {
-                    name: "front"
-                    PropertyChanges { target: container; scale: 1.25; opacity: 0.0 }
-                },
-                // End state for replace exit.
-                State {
-                    name: "back"
-                    PropertyChanges { target: container; scale: 0.85; opacity: 0.0 }
-                },
-                // Inactive state.
-                State {
-                    name: "hidden"
-                    PropertyChanges { target: container; visible: false }
-                    StateChangeScript { script: __transformToHidden() }
-                }
-            ]
+            switch (transition) {
+            case "push":
+                containerA.animationsEnabled = true
+                oldContainer.x = -oldContainer.width/2
 
-            transitions: [
-                // Pop entry and push exit transition.
-                Transition {
-                    from: ""; to: "left"; reversible: true
-                    SequentialAnimation {
-                        PropertyAnimation { properties: "x,opacity"; easing.type: Easing.InCubic; duration: platformStyle.contentTransitionDuration / 2 }
-                        PauseAnimation { duration: platformStyle.contentTransitionDuration / 2 }
-                        ScriptAction { script: if (state == "left") state = "hidden" }
-                    }
-                },
-                // Push entry and pop exit transition.
-                Transition {
-                    from: ""; to: "right"; reversible: true
-                    SequentialAnimation {
-                        PropertyAnimation { properties: "x,opacity"; easing.type: Easing.InCubic; duration: platformStyle.contentTransitionDuration / 2 }
-                        PauseAnimation { duration: platformStyle.contentTransitionDuration / 2 }
-                        ScriptAction { script: if (state == "right") state = "hidden" }
-                    }
-                },
-                Transition {
-                    // Replace entry transition.
-                    from: "front"; to: "";
-                    SequentialAnimation {
-                        PropertyAnimation { properties: "scale,opacity"; easing.type: Easing.InOutExpo; duration: platformStyle.contentTransitionDuration }
-                    }
-                },
-                Transition {
-                    // Replace exit transition.
-                    from: ""; to: "back";
-                    SequentialAnimation {
-                        PropertyAnimation { properties: "scale,opacity"; easing.type: Easing.InOutExpo; duration: platformStyle.contentTransitionDuration }
-                        ScriptAction { script: if (state == "back") state = "hidden" }
-                    }
-                }
-            ]
+                containerA.animationsEnabled = false
+                newContainer.x = newContainer.width/2
+                newContainer.y = 0
+                containerA.animationsEnabled = true
+                newContainer.x = 0
+                break
+            case "pop":
+                containerA.animationsEnabled = true
+                oldContainer.x = oldContainer.width/2
 
+                containerA.animationsEnabled = false
+                newContainer.x = -newContainer.width/2
+                newContainer.y = 0
+                containerA.animationsEnabled = true
+                newContainer.x = 0
+                break
+            case "replace":
+                containerA.animationsEnabled = true
+                oldContainer.y = oldContainer.height
+
+                containerA.animationsEnabled = false
+                newContainer.x = 0
+                newContainer.y = -newContainer.height
+                containerA.animationsEnabled = true
+                newContainer.y = 0
+                break
+            case "set":
+            default:
+                containerA.animationsEnabled = false
+                containerA.animationsEnabled = false
+                oldContainer.x = -oldContainer.width/2
+                newContainer.x = 0
+                break
+            }
+
+            newContainer.opacity = 1
+            oldContainer.opacity = 0
+        }
+        onToolsChanged: connection.internalToolsChanged()
+        Component.onCompleted: connection.internalToolsChanged()
+    }
+
+    FluidCore.FrameSvgItem {
+        id: frameSvg
+        imagePath: "widgets/toolbar"
+        anchors {
+            fill: parent
+            leftMargin: -margins.left
+            rightMargin: -margins.right
+            //FIXME: difference between actial border and shadow
+            topMargin: toolBar.y <= 0 ? -margins.top : -margins.top/2
+            bottomMargin: toolBar.y >= toolBar.parent.height - toolBar.height ? -margins.bottom : -margins.bottom/2
         }
     }
 
+    Item {
+        clip: containerAOpacityAnimation.running || heightAnimation.running
+        anchors {
+            fill: parent
+            leftMargin: frameSvg.margins.left/2
+            topMargin: frameSvg.margins.top/2
+            rightMargin: frameSvg.margins.right/2
+            bottomMargin: frameSvg.margins.bottom/2
+        }
+
+        Item {
+            id: containerA
+            width: parent.width
+            height: parent.height
+            property bool animationsEnabled: false
+            opacity: 0
+            //this asymmetry just to not export a property
+            property bool current: false
+            Behavior on opacity {
+                PropertyAnimation {
+                    id: containerAOpacityAnimation
+                    duration: 250
+                }
+            }
+            Behavior on x {
+                enabled: containerA.animationsEnabled
+                PropertyAnimation {
+                    duration: 250
+                }
+            }
+            Behavior on y {
+                enabled: containerA.animationsEnabled
+                PropertyAnimation {
+                    duration: 250
+                }
+            }
+        }
+        Item {
+            id: containerB
+            width: parent.width
+            height: parent.height
+            opacity: 0
+            Behavior on opacity {
+                PropertyAnimation { duration: 250 }
+            }
+            Behavior on x {
+                enabled: containerA.animationsEnabled
+                PropertyAnimation {
+                    duration: 250
+                }
+            }
+            Behavior on y {
+                enabled: containerA.animationsEnabled
+                PropertyAnimation {
+                    duration: 250
+                }
+            }
+        }
+    }
 }

@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,34 +38,43 @@
 **
 ****************************************************************************/
 
-// The Page item is intended for use as a root item in QML items that make
-// up pages to use with the PageStack.
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        everything in the same dir which are version 1.0
+
+Description:
+        Defines the content of a piece of the user interface, it's meant to be loaded by a PageStack or TabGroup element.
+        The typical use can be in small plasmoids or  mobile devices where the whole screen is a series of interchangeable and flickable pages, of which the user navigates across.
+
+
+Properties:
+        * int status:
+        The current status of the page. It can be one of the following values:
+        PageStatus.Inactive (default) - the page is not visible.
+        PageStatus.Activating - the page is becoming to the active page.
+        PageStatus.Active - the page is the currently active page.
+        PageStatus.Deactivating - the page is becoming to inactive page.
+
+        * PageStack pageStack:
+        The page stack that this page is owned by.
+
+        * int orientationLock:
+        Sets the orientation for the Page
+
+        * Item tools:
+        Defines the toolbar contents for the page. If the page stack is set up using a toolbar instance, it automatically shows the currently active page's toolbar contents in the toolbar. The default value is null resulting in the page's toolbar to be invisible when the page is active.
+**/
 
 import QtQuick 2.0
+
 import "." 1.0
-import "UIConstants.js" as UI
 
 Item {
     id: root
-
-    visible: false
-
-    // Note we do not use anchor fill here because it will force us to relayout
-    // hidden children when rotating the screen as well
-    width: visible && parent ? parent.width - anchors.leftMargin - anchors.rightMargin : __prevWidth
-    height: visible && parent ? parent.height  - anchors.topMargin - anchors.bottomMargin : __prevHeight
-    x: parent ? anchors.leftMargin : 0
-    y: parent ? anchors.topMargin : 0
-
-    onWidthChanged: __prevWidth = visible ? width : __prevWidth
-    onHeightChanged: __prevHeight = visible ? height : __prevHeight
-
-    property int __prevWidth: 0
-    property int __prevHeight: 0
-
-    property bool __isPage: true
-
-    anchors.margins: 0 // Page margins should generally be 16 pixels as defined by UI.MARGIN_XLARGE
 
     // The status of the page. One of the following:
     //      PageStatus.Inactive - the page is not visible
@@ -73,52 +82,32 @@ Item {
     //      PageStatus.Active - the page is the current active page
     //      PageStatus.Deactivating - the page is transitioning into becoming inactive
     property int status: PageStatus.Inactive
-    
-    // Defines the tools for the page; null for none.
-    property Item tools: null
-    
-    // The page stack that the page is in.
-    property PageStack pageStack
 
-    // Defines if page is locked in landscape.
-    property bool lockInLandscape: false // Deprecated
-    onLockInLandscapeChanged: console.log("warning: Page.lockInLandscape is deprecated, use Page.orientationLock")
-
-    // Defines if page is locked in portrait.
-    property bool lockInPortrait: false // Deprecated
-    onLockInPortraitChanged: console.log("warning: Page.lockInPortrait is deprecated, use Page.orientationLock")
+    property Item pageStack
 
     // Defines orientation lock for a page
     property int orientationLock: PageOrientation.Automatic
 
-    onStatusChanged: {
-        if (status == PageStatus.Activating) {
-            __updateOrientationLock()
-        }
-    }
+    property Item tools: null
 
-    onOrientationLockChanged: {
-        __updateOrientationLock()
-    }
+    visible: false
 
-    function __updateOrientationLock() {
-        switch (orientationLock) {
-        case PageOrientation.Automatic:
-            screen.setAllowedOrientations(Screen.Portrait | Screen.Landscape);
-            break
-        case PageOrientation.LockPortrait:
-            screen.setAllowedOrientations(Screen.Portrait);
-            break
-        case PageOrientation.LockLandscape:
-            screen.setAllowedOrientations(Screen.Landscape);
-            break
-        case PageOrientation.LockPrevious:
-            // Allowed orientation should be changed to current
-            // if previously it was locked, it will remain locked
-            // if previously it was not locked, it will be locked to current
-            screen.setAllowedOrientations(screen.currentOrientation);
-            break
-        }
+    width: visible && parent ? parent.width : internal.previousWidth
+    height: visible && parent ? parent.height : internal.previousHeight
+
+    onWidthChanged: internal.previousWidth = (visible ? width : internal.previousWidth)
+    onHeightChanged: internal.previousHeight = (visible ? height : internal.previousHeight)
+
+    // This is needed to make a parentless Page component visible in the Designer of QtCreator.
+    // It's done here instead of binding the visible property because binding it to a script
+    // block returning false would cause an element on the Page not to end up focused despite
+    // specifying focus=true inside the active focus scope. The focus would be gained and lost
+    // in createObject.
+    Component.onCompleted: if (!parent) visible = true
+
+    QtObject {
+        id: internal
+        property int previousWidth: 0
+        property int previousHeight: 0
     }
 }
-

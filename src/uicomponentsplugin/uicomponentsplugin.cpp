@@ -32,12 +32,12 @@
 
 void UiComponentsPlugin::registerTypes(const char *uri)
 {
+    Q_ASSERT(uri == QLatin1String("FluidUi"));
     qmlRegisterType<FluidUi::RangeModel>(uri, 1, 0, "RangeModel");
 }
 
 void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
-    Q_UNUSED(uri);
     engine->addImageProvider("desktoptheme", new IconImageProvider);
 }
 

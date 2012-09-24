@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -39,126 +41,146 @@
 ****************************************************************************/
 
 import QtQuick 2.0
+import FluidCore 1.0
+import "private" as Private
 import "." 1.0
 
+
+/**Documented API
+Inherits:
+        Dialog
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+        CommonDialog is a convenience component that provides a dialog with the platform-style title area. You only have to define titleText. CommonDialog handles its layout automatically.
+        Note: This component is experimental, so it may be changed or removed in future releases.
+
+Properties:
+        string titleText:
+        the title of the dialog.
+
+        string titleIcon:
+        the name or path of the dialog title icon
+
+        Array variant buttonTexts:
+        the texts of all the buttons
+
+Signals:
+        buttonClicked(int index):
+        Emitted when the user clicks on a button
+        @arg int index: the index of the clicked button: buttonTexts[index] will hold the text of the clicked button.
+
+**/
 Dialog {
-    id: genericDialog
+    id: root
 
-    property string titleText: ""
+    property alias titleText: titleAreaText.text
+    property string titleIcon
+    property variant buttonTexts: []
 
-    property Style platformStyle: SelectionDialogStyle {}
+    signal buttonClicked(int index)
 
-    //Deprecated, TODO Remove this on w13
-    property alias style: genericDialog.platformStyle
-
-    //private
-    property bool __drawFooterLine: false
-
-    title: Item {
-        id: header
-        height: genericDialog.platformStyle.titleBarHeight
-
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-
-        Item {
-            id: labelField
-
-            anchors.fill:  parent
-
-            Item {
-                id: labelWrapper
-                anchors.left: labelField.left
-                anchors.right: closeButton.left
-
-                anchors.bottom:  parent.bottom
-                anchors.bottomMargin: genericDialog.platformStyle.titleBarLineMargin
-
-                //anchors.verticalCenter: labelField.verticalCenter
-
-                height: titleLabel.height
-
-                Label {
-                    id: titleLabel
-                    x: genericDialog.platformStyle.titleBarIndent
-                    width: parent.width - closeButton.width
-                    //anchors.baseline:  parent.bottom
-                    font: genericDialog.platformStyle.titleBarFont
-                    color: genericDialog.platformStyle.commonLabelColor
-                    elide: genericDialog.platformStyle.titleElideMode
-                    text: genericDialog.titleText
-                }
-
-            }
-
-            Image {
-                id: closeButton
-                anchors.bottom:  parent.bottom
-                anchors.bottomMargin: genericDialog.platformStyle.titleBarLineMargin-6
-                //anchors.verticalCenter: labelField.verticalCenter
-                anchors.right: labelField.right
-
-                opacity: closeButtonArea.pressed ? 0.5 : 1.0
-
-                source: "image://theme/icon-m-common-dialog-close"
-
-                MouseArea {
-                    id: closeButtonArea
-                    anchors.fill: parent
-                    onClicked:  {genericDialog.reject();}
-                }
-
-            }
-
+    onButtonTextsChanged: {
+        for (var i = buttonRow.children.length; i > 0; --i) {
+            buttonRow.children[i - 1].destroy()
         }
-
-        Rectangle {
-            id: headerLine
-
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            anchors.bottom:  header.bottom
-
-            height: 1
-
-            color: "#4D4D4D"
+        for (var j = 0; j < buttonTexts.length; ++j) {
+            var button = buttonComponent.createObject(buttonRow)
+            button.text = buttonTexts[j]
+            button.index = j
         }
-
     }
 
-    content: Item {id: contentField}
+    Component {
+        id: buttonComponent
+        Button {
+            property int index
 
-    buttons: Item {
-         id: footer
+            onClicked: {
+                if (root.status == DialogStatus.Open) {
+                    root.buttonClicked(index)
+                    root.close()
+                }
+            }
+        }
+    }
 
-         width: parent.width
-         height: childrenRect.height
+    QtObject {
+        id: internal
 
-         //hack to make sure, we're evaluating the correct height
-         Item {
-             id: lineWrapper
-             width: parent.width
-             height: childrenRect.height
-             y: 10
+        /*function buttonWidth() {
+            switch (buttonTexts.length) {
+                case 0: return 0
+                case 1: return Math.round((800 - 3 * 4) / 2)
+                default: return (buttonContainer.width - (buttonTexts.length + 1) *
+                    4) / buttonTexts.length
+            }
+        }*/
 
-             Rectangle {
-                 id: footerLine
+        function iconSource() {
+            return root.titleIcon
+        }
+    }
 
-                 anchors.left: parent.left
-                 anchors.right: parent.right
-                 anchors.top: parent.top
-                 height: genericDialog.__drawFooterLine ? 1 : 0
+    title: FluidCore.FrameSvgItem {
+        imagePath: "widgets/extender-dragger"
+        prefix: "root"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        //FIXME: +5 because of Plasma::Dialog margins
+        height: titleAreaText.paintedHeight + margins.top + margins.bottom
 
-                 color: "#4D4D4D"
-             }
-         }
+        LayoutMirroring.childrenInherit: true
 
-         //ugly hack to assure, that we're always evaluating the correct height
-         Item {id: dummy; anchors.fill:  parent}
+        Column {
+            id: titleLayoutHelper // needed to make the text mirror correctly
 
-     }
+            anchors {
+                right: parent.right
+                left: titleAreaIcon.source == "" ? parent.left : titleAreaIcon.right
+                top: parent.top
+                bottom: parent.bottom
+                leftMargin: parent.margins.left
+                rightMargin: parent.margins.right
+                topMargin: parent.margins.top
+                bottomMargin: parent.margins.bottom
+            }
 
+            Label {
+                id: titleAreaText
+                LayoutMirroring.enabled: root.LayoutMirroring.enabled
+                elide: Text.ElideRight
+                height: paintedHeight
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+        }
+
+        Private.IconLoader {
+            id: titleAreaIcon
+            width: theme.iconSizeSmall
+            height: theme.iconSizeSmall
+            source: titleIcon
+            anchors.left: parent.left
+            anchors.rightMargin: 4
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    buttons: Row {
+        id: buttonRow
+
+        LayoutMirroring.enabled: false
+        LayoutMirroring.childrenInherit: true
+        objectName: "buttonRow"
+        anchors.centerIn: parent
+        spacing: 4
+    }
 }

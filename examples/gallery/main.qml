@@ -6,14 +6,6 @@ Item {
 	width: 300
 	height: 300
 
-Menu {
-        id: myMenu
-        MenuLayout {
-            MenuItem { text: "Theme color default" }
-        }
-    }
-
-
 	Column {
 		id: column
 		spacing: 30
@@ -34,9 +26,6 @@ Switch {
                 Switch {
                     id: switch1
                     checked: false
-                    platformStyle: SwitchStyle {
-                        inverted: true
-                    }
                 }
 
 	}

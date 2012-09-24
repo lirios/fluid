@@ -1,154 +1,181 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/*
+*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
+*/
+
+/**Documented API
+        Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+            It is a simple progressBar which is using the plasma theme.
+            Some operations take a period of time to be performed and the user needs a confirmation that the operation is still ongoing. If the user does not get any confirmation, they might suspect that they did something wrong or that the device has broken. A progress bar is one of available mechanisms for providing this reassurance to the user.
+
+Properties:
+          * real minimumValue:
+            Minimum Value for the progressBar
+
+          * real maximumValue:
+            Maximum value for the progressBar
+
+            real value:
+            Current value of the progressBar
+
+          * bool indeterminate:
+            Indicates whether the operation's duration is known or not. The property can have the following values:
+            true - the operation's duration is unknown, so the progress bar is animated. The value, minimum, and maximum properties are ignored.
+            false - the operation's duration is known, so the progress bar is drawn to indicate progress between the minimum and maximum values.
+            The default value is false.
+
+          * int orientation:
+            Orientation of the progressBar:
+            Qt.Horizontal or
+            Qt.Vertical
+**/
 
 import QtQuick 2.0
-import "." 1.0
-import FluidUi 1.0
+import FluidCore 1.0
+import org.kde.qtextracomponents 1.0
 
-import "Utils.js" as Utils
+Item {
+    id: progressBar
 
-ImplicitSizeItem {
-    id: container
+    // Common API
+    property alias minimumValue: range.minimumValue
+    property alias maximumValue: range.maximumValue
+    property alias value: range.value
+    property alias indeterminate: indeterminateAnimation.running
 
-    property alias minimumValue: progressModel.minimumValue
-    property alias maximumValue: progressModel.maximumValue
-    property alias value: progressModel.value
-    property bool indeterminate: false
+    // Plasma API
+    property int orientation: Qt.Horizontal
 
-    // Styling for the ProgressBar
-    property Style platformStyle: ProgressBarStyle{}
-
-    //Deprecated, can be removed on W13
-    property alias style: container.platformStyle
-
-    implicitWidth: platformStyle.sizeButton
-    implicitHeight: background.height
-
-    QtObject {
-        id: internal
-        property Flickable flick
-        property bool offScreen: false
-    }
-
-    BorderImage {
-        id: background
-        width: parent.width
-        horizontalTileMode: BorderImage.Repeat
-        source: platformStyle.barBackground
-
-        border {
-            left: 6
-            top: 4
-            right: 6
-            bottom: 4
-        }
-    }
-
-    MaskedItem {
-        id: foreground
-        width: parent.width
-        height: parent.height
-
-        mask: BorderImage {
-            width: indeterminate ? container.width : progressModel.position
-            height: foreground.height
-            source: platformStyle.barMask
-
-            border {
-                left: 4
-                top: 4
-                right: 4
-                bottom: 4
-            }
-        }        
-
-        Image {
-            id: texture
-            width: foreground.width + sourceSize.width + 25
-            height: foreground.height
-            fillMode: Image.Tile
-
-            property real xTemp;                 
-           
-            source: indeterminate ? platformStyle.unknownTexture : platformStyle.knownTexture
- 
-            onXTempChanged: {   
-                // Control the animation speed with this multiplier and the NumberAnimation duration divider
-                texture.x = Math.round(texture.xTemp) * 4;
-            }
-
-            NumberAnimation on xTemp {
-                running: indeterminate && container.visible && Qt.application.active && !internal.offScreen
-                loops: Animation.Infinite
-                from: -texture.sourceSize.width
-                to: 0
-                // time = distance / speed, where speed = 10 from the platformStyle
-                duration: (1000 * texture.sourceSize.width / 10)
-            }
-        }
-    }
+    width: 100
+    height: 20
+    opacity: enabled ? 1.0 : 0.5
 
     RangeModel {
-        id: progressModel
-        positionAtMinimum: 0
-        positionAtMaximum: background.width
+        id: range
 
-        // Defaults from Common API specification
-        minimumValue: 0
+        // default values
+        minimumValue: 0.0
         maximumValue: 1.0
+        value: 0
+
+        positionAtMinimum: 0
+        positionAtMaximum: backgroundPixmapItem.width
     }
 
-    Connections {
-        target: internal.flick
+    Item {
+        id: contents
 
-        onMovementStarted: internal.offScreen = false
+        property bool _isVertical: orientation == Qt.Vertical
+        property int _tileWidth: width
 
-        onMovementEnded: {
-            var pos = mapToItem(internal.flick, 0, 0)
-            internal.offScreen = (pos.y + container.height <= 0) || (pos.y >= internal.flick.height) || (pos.x + container.width <= 0) || (pos.x >= internal.flick.width)
+        width: _isVertical ? progressBar.height : progressBar.width
+        height: _isVertical ? progressBar.width : progressBar.height
+        rotation: _isVertical ? 90 : 0
+        anchors.centerIn: parent
+
+        Timer {
+            id: resizeTimer
+            repeat: false
+            interval: 0
+            running: false
+            onTriggered: {
+                contents._tileWidth = Math.floor(contents.width/(Math.floor(contents.width/(contents.height/1.6))))
+
+
+                if (barFrameSvg.hasElement("hint-bar-stretch")) {
+                    barFrameSvg.resizeFrame(Qt.size(barPixmapItem.width, barPixmapItem.height))
+                } else {
+                    barFrameSvg.resizeFrame(Qt.size(contents._tileWidth, contents.height))
+                }
+                barPixmapItem.pixmap = barFrameSvg.framePixmap()
+
+                if (backgroundFrameSvg.hasElement("hint-bar-stretch")) {
+                    backgroundFrameSvg.resizeFrame(Qt.size(backgroundPixmapItem.width, backgroundPixmapItem.height))
+                } else {
+                    backgroundFrameSvg.resizeFrame(Qt.size(contents._tileWidth, contents.height))
+                }
+                backgroundPixmapItem.pixmap = backgroundFrameSvg.framePixmap()
+            }
         }
-    }
+        FluidCore.FrameSvg {
+            id: barFrameSvg
+            Component.onCompleted: {
+                barFrameSvg.setImagePath("widgets/bar_meter_horizontal")
+                barFrameSvg.setElementPrefix("bar-active")
+                resizeTimer.restart()
+            }
+        }
+        FluidCore.FrameSvg {
+            id: backgroundFrameSvg
+            Component.onCompleted: {
+                backgroundFrameSvg.setImagePath("widgets/bar_meter_horizontal")
+                backgroundFrameSvg.setElementPrefix("bar-inactive")
+                resizeTimer.restart()
+            }
+        }
+        QPixmapItem {
+            id: backgroundPixmapItem
+            anchors.fill: parent
+            fillMode: QPixmapItem.TileHorizontally
+            onWidthChanged: resizeTimer.restart()
+            onHeightChanged: resizeTimer.restart()
+        }
 
-    Component.onCompleted: {
-        var flick = Utils.findFlickable()
-        if (flick)
-            internal.flick = flick
+
+        QPixmapItem {
+            id: barPixmapItem
+            fillMode: QPixmapItem.TileHorizontally
+            width: indeterminate ? contents._tileWidth*2 : range.position
+            height: contents.height
+
+            visible: indeterminate || value > 0
+            onWidthChanged: resizeTimer.restart()
+
+            SequentialAnimation {
+                id: indeterminateAnimation
+
+                loops: Animation.Infinite
+
+                onRunningChanged: {
+                    if (!running) {
+                        barPixmapItem.x = 0
+                    }
+                }
+
+                PropertyAnimation {
+                    target: barPixmapItem
+                    property: "x"
+                    duration: 800
+                    to: 0
+                }
+                PropertyAnimation {
+                    target: barPixmapItem
+                    property: "x"
+                    duration: 800
+                    to: backgroundPixmapItem.width - barPixmapItem.width
+                }
+            }
+        }
     }
 }

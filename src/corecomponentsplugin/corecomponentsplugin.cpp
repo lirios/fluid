@@ -22,17 +22,19 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#ifndef FLUIDCORECOMPONENTSGLOBAL_H
-#define FLUIDCORECOMPONENTSGLOBAL_H
+#include <QQmlEngine>
+#include <QQmlComponent>
 
-#include <QtCore/qglobal.h>
+#include "corecomponentsplugin.h"
 
-#if !defined(FLUID_CORECOMPONENTS_EXPORT)
-#  if defined(QT_SHARED)
-#    define FLUID_CORECOMPONENTS_EXPORT Q_DECL_EXPORT
-#  else
-#    define FLUID_CORECOMPONENTS_EXPORT
-#  endif
-#endif
+void CoreComponentsPlugin::registerTypes(const char *uri)
+{
+    Q_ASSERT(uri == QLatin1String("FluidCore"));
+}
 
-#endif // FLUIDCORECOMPONENTSGLOBAL_H
+void CoreComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    Q_UNUSED(uri);
+}
+
+#include "moc_corecomponentsplugin.cpp"

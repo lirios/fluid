@@ -1,666 +1,340 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/*
+*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
+*/
+
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+
+Description:
+        Creates a simple plasma theme based text field widget.
+
+Properties:
+      * font font:
+        This property holds the font used in the text field.
+    The default font value is the font from plasma desktop theme.
+
+      * Qt::InputMethodHints inputMethodHints:
+        This property holds the the currently supported input method hints
+     for the text field.
+     The default values is Qt.ImhNone.
+
+      * bool errorHighlight:
+        This property holds if the text field is highlighted or not
+    If it is true then the problematic lines will be highlighted.
+    This feature is defined in the Common API but is unimplemented in plasma components.
+
+      * int cursorPosition:
+        This property holds the current cursor position.
+
+      * bool readOnly:
+        This property holds if the text field can be modified by the user interaction.
+    The default value is false.
+
+      * string selectedText:
+        This property holds the text selected by the user.
+    If no text is selected it holds an empty string.
+    This property is read-only.
+
+      * int selectionEnd:
+        This property holds the cursor position after the last character in the current selection.
+    This property is read-only.
+
+      * int selectionStart:
+        This property holds the cursor position before the first character in the current selection.
+    This property is read-only.
+
+      * string text:
+        This property holds the entire text in the text field.
+
+      * string placeholderText:
+        This property holds the text displayed in when the text is empty.
+    The default value is empty string, meaning no placeholderText shown.
+
+      * enumeration echoMode:
+        This property specifies how the text should be displayed in the TextField.
+    The acceptable values are:
+        - TextInput.Normal - Displays the text as it is. (Default)
+        - TextInput.Password - Displays asterixes instead of characters.
+        - TextInput.NoEcho - Displays nothing.
+        - TextInput.PasswordEchoOnEdit - Displays all but the current character as asterixes.
+    The default value is TextInput.Normal
+
+      * string inputMask:
+        Allows you to set an input mask on the TextField, restricting the allowable text inputs.
+    See QLineEdit::inputMask for further details, as the exact same mask strings are used by TextInput.
+
+      * Validator validator:
+        Allows you to set a validator on the TextField. When a validator is set the TextField
+    will only accept input which leaves the text property in an acceptable or intermediate state.
+    The accepted signal will only be sent if the text is in an acceptable state when enter is pressed.
+    Currently supported validators are IntValidator, DoubleValidator and RegExpValidator.
+    An example of using validators is shown below, which allows input of integers
+    between 11 and 31 into the text input:
+    <code>
+    import QtQuick 2.0
+    TextInput {
+        validator: IntValidator { bottom: 11; top: 31 }
+        focus: true
+    }
+    </code>
+
+      * int maximumLength:
+        The maximum permitted length of the text in the TextField.
+    If the text is too long, it is truncated at the limit.
+    By default, this property contains a value of 32767.
+
+       * bool acceptableInput:
+         This property is always true unless a validator or input mask has been set.
+    If a validator or input mask has been set, this property will only be true if the current
+    text is acceptable to the validator or input mask as a final string (not as an intermediate string).
+    This property is always true unless a validator has been set.
+    If a validator has been set, this property will only be true if the current text is acceptable to the
+    validator as a final string (not as an intermediate string).
+    This property is read-only.
+
+       * bool clearButtonShown:
+         Holds if the button to clear the text from TextField is visible.
+Signals:
+       * accepted():
+        This signal is emitted when the text input is accepted.
+
+Methods:
+       * void copy():
+         Copies the currently selected text to the system clipboard.
+
+       * void cut():
+         Moves the currently selected text to the system clipboard.
+
+       * void deselect():
+         Removes active text selection.
+
+       * void paste():
+         Replaces the currently selected text by the contents of the system clipboard.
+
+       * void select(int start, int end):
+         Causes the text from start to end to be selected.
+     If either start or end is out of range, the selection is not changed.
+     After calling this, selectionStart will become the lesser and selectionEnd will become the greater
+     (regardless of the order passed to this method).
+
+       * void selectAll():
+         Causes all text to be selected.
+
+       * void selectWord():
+         Causes the word closest to the current cursor position to be selected.
+
+       * void positionAt(int position):
+         This function returns the character position at x pixels from the left of the TextField.
+     Position 0 is before the first character, position 1 is after the first character but before the second,
+     and so on until position text.length, which is after all characters.
+     This means that for all x values before the first character this function returns 0,
+     and for all x values after the last character this function returns text.length.
+
+       * rectangle positionToRectangle(position):
+         Returns the rectangle at the given position in the text.
+     The x, y, and height properties correspond to the cursor that would describe that position.
+**/
 
 import QtQuick 2.0
-import "." 1.0
-import "Utils.js" as Utils
-import "UIConstants.js" as UI
-import "EditBubble.js" as Popup
-import "TextAreaHelper.js" as TextAreaHelper
-import "Magnifier.js" as MagnifierPopup
-import "SelectionHandles.js" as SelectionHandles
+import FluidCore 1.0
+import "private" as Private
 
 FocusScope {
-    id: root
+    id: textField
 
-    // Common public API
-    property alias text: textInput.text
-    property alias placeholderText: prompt.text
-
+    // Common API
+    property bool errorHighlight: false // TODO
+    property string placeholderText
     property alias inputMethodHints: textInput.inputMethodHints
     property alias font: textInput.font
+
     property alias cursorPosition: textInput.cursorPosition
-    property alias maximumLength: textInput.maximumLength
     property alias readOnly: textInput.readOnly
-    property alias acceptableInput: textInput.acceptableInput
+    property alias echoMode: textInput.echoMode // Supports TextInput.Normal,TextInput.Password, TextInput.NoEcho, TextInput.PasswordEchoOnEdit
+    property alias passwordCharacter: textInput.passwordCharacter
+    property alias acceptableInput: textInput.acceptableInput // read-only
     property alias inputMask: textInput.inputMask
     property alias validator: textInput.validator
+    property alias selectedText: textInput.selectedText // read-only
+    property alias selectionEnd: textInput.selectionEnd // read-only
+    property alias selectionStart: textInput.selectionStart // read-only
+    property alias text: textInput.text
+    property alias maximumLength: textInput.maximumLength
 
-    property alias selectedText: textInput.selectedText
-    property alias selectionStart: textInput.selectionStart
-    property alias selectionEnd: textInput.selectionEnd
+    signal accepted()
 
-    property alias echoMode: textInput.echoMode // ### TODO: declare own enum { Normal, Password }
-
-    property bool errorHighlight: !acceptableInput
-    // Property enableSoftwareInputPanel is DEPRECATED
-    property alias enableSoftwareInputPanel: textInput.activeFocusOnPress
-
-    property Item platformSipAttributes
-
-    property bool platformEnableEditBubble: true
-    property bool platformEnableMagnifier: true
-
-    property QtObject platformStyle: TextFieldStyle {}
-
-    property alias style: root.platformStyle
-
-    property Component customSoftwareInputPanel
-
-    property Component platformCustomSoftwareInputPanel
-
-    property alias platformPreedit: inputMethodObserver.preedit
-
-    //force a western numeric input panel even when vkb is set to arabic
-    property alias platformWesternNumericInputEnforced: textInput.westernNumericInputEnforced
-    property bool platformSelectable: true
-
-    signal accepted
-
-    onPlatformSipAttributesChanged: {
-        platformSipAttributes.registerInputElement(textInput)
-    }
-
-    onCustomSoftwareInputPanelChanged: {
-        console.log("TextField's property customSoftwareInputPanel is deprecated. Use property platformCustomSoftwareInputPanel instead.")
-        platformCustomSoftwareInputPanel = customSoftwareInputPanel
-    }
-
-    onPlatformCustomSoftwareInputPanelChanged: {
-        textInput.activeFocusOnPress = platformCustomSoftwareInputPanel == null
-    }
+    //Plasma api
+    property bool clearButtonShown: false
 
     function copy() {
-        textInput.copy()
-    }
-
-    Connections {
-        target: platformWindow
-
-        onActiveChanged: {
-            if(platformWindow.active) {
-                if (__hadFocusBeforeMinimization) {
-                    __hadFocusBeforeMinimization = false
-                    textInput.select( __priorSelectionStart, __priorSelectionEnd )
-                    if (root.parent)
-                        root.focus = true
-                    else
-                        textInput.focus = true
-                }
-
-                if (activeFocus) {
-                    if ( Popup.isOpened() && platformEnableEditBubble )
-                        Popup.open(textInput, textInput.positionToRectangle(textInput.cursorPosition));
-                    if (textInput.selectionStart != textInput.selectionEnd && platformEnableEditBubble)
-                        SelectionHandles.open(textInput);
-                    if (!readOnly && platformCustomSoftwareInputPanel != null) {
-                        platformOpenSoftwareInputPanel();
-                    } else {
-                        inputContext.simulateSipOpen();
-                    }
-
-                    repositionTimer.running = true;
-                }
-            } else {
-                if (activeFocus) {
-                    __priorSelectionStart = selectionStart
-                    __priorSelectionEnd = selectionEnd
-                    platformCloseSoftwareInputPanel();
-                    Popup.close(textInput);
-                    SelectionHandles.close(textInput);
-                    if (textInput.selectionStart != textInput.selectionEnd)
-                        textInput.deselect();
-
-                    __hadFocusBeforeMinimization = true
-                    if (root.parent)
-                        root.parent.focus = true
-                    else
-                        textInput.focus = false
-                }
-                MagnifierPopup.clean(textInput);
-            }
-        }
-
-        onAnimatingChanged: {
-            if (!platformWindow.animating && root.activeFocus) {
-                TextAreaHelper.repositionFlickable(contentMovingAnimation);
-            }
-        }
+        textInput.copy();
     }
 
     function paste() {
-        textInput.paste()
+        textInput.paste();
     }
 
     function cut() {
-        textInput.cut()
+        textInput.cut();
     }
 
     function select(start, end) {
-        textInput.select(start, end)
+        textInput.select(start, end);
     }
 
     function selectAll() {
-        textInput.selectAll()
+        textInput.selectAll();
     }
 
     function selectWord() {
-        textInput.selectWord()
+        textInput.selectWord();
     }
 
-    function positionAt(x) {
-        var p = mapToItem(textInput, x, 0);
-        return textInput.positionAt(p.x)
+    function positionAt(pos) {
+        return textInput.positionAt(pos);
     }
 
     function positionToRectangle(pos) {
-        var rect = textInput.positionToRectangle(pos)
-        rect.x = mapFromItem(textInput, rect.x, 0).x
-        return rect;
+        return textInput.positionToRectangle(pos);
     }
 
-    // ensure propagation of forceActiveFocus
+
+    // Set active focus to it's internal textInput.
+    // Overriding QtQuick.Item forceActiveFocus function.
     function forceActiveFocus() {
-        textInput.forceActiveFocus()
+        textInput.forceActiveFocus();
     }
 
-    function closeSoftwareInputPanel() {
-        console.log("TextField's function closeSoftwareInputPanel is deprecated. Use function platformCloseSoftwareInputPanel instead.")
-        platformCloseSoftwareInputPanel()
+    // Overriding QtQuick.Item activeFocus property.
+    property alias activeFocus: textInput.activeFocus
+
+    // TODO: fix default size
+    implicitWidth: theme.defaultFont.mSize.width*12
+    implicitHeight: theme.defaultFont.mSize.height*1.6
+    // TODO: needs to define if there will be specific graphics for
+    //     disabled text fields
+    opacity: enabled ? 1.0 : 0.5
+
+    Private.TextFieldFocus {
+        id: hover
+        state: textInput.activeFocus ? "focus" : (mouseWatcher.containsMouse ? "hover" : "hidden")
+        anchors.fill: base
     }
 
-    function platformCloseSoftwareInputPanel() {
-        inputContext.simulateSipClose();
-        if (inputContext.customSoftwareInputPanelVisible) {
-            inputContext.customSoftwareInputPanelVisible = false
-            inputContext.customSoftwareInputPanelComponent = null
-            inputContext.customSoftwareInputPanelTextField = null
-        } else {
-            textInput.closeSoftwareInputPanel();
-        }
-    }
+    FluidCore.FrameSvgItem {
+        id: base
 
-    function openSoftwareInputPanel() {
-        console.log("TextField's function openSoftwareInputPanel is deprecated. Use function platformOpenSoftwareInputPanel instead.")
-        platformOpenSoftwareInputPanel()
-    }
-
-    function platformOpenSoftwareInputPanel() {
-        inputContext.simulateSipOpen();
-        if (platformCustomSoftwareInputPanel != null && !inputContext.customSoftwareInputPanelVisible) {
-            inputContext.customSoftwareInputPanelTextField = root
-            inputContext.customSoftwareInputPanelComponent = platformCustomSoftwareInputPanel
-            inputContext.customSoftwareInputPanelVisible = true
-        } else {
-            textInput.openSoftwareInputPanel();
-        }
-    }
-
-    // private
-    property bool __expanding: true // Layout hint used but ToolBarLayout
-    property int __preeditDisabledMask: Qt.ImhHiddenText|
-                                        Qt.ImhNoPredictiveText|
-                                        Qt.ImhDigitsOnly|
-                                        Qt.ImhFormattedNumbersOnly|
-                                        Qt.ImhDialableCharactersOnly|
-                                        Qt.ImhEmailCharactersOnly|
-                                        Qt.ImhUrlCharactersOnly 
-
-    property bool __hadFocusBeforeMinimization: false
-    property int __priorSelectionStart
-    property int __priorSelectionEnd
-
-    implicitWidth: platformStyle.defaultWidth
-    implicitHeight: UI.FIELD_DEFAULT_HEIGHT
-
-    onActiveFocusChanged: {
-        if (activeFocus) {
-            if (!readOnly && platformCustomSoftwareInputPanel != null) {
-                platformOpenSoftwareInputPanel();
-            } else {
-                inputContext.simulateSipOpen();
-            }
-
-            repositionTimer.running = true;
-        } else {                
-            platformCloseSoftwareInputPanel();
-            Popup.close(textInput);
-            SelectionHandles.close(textInput);
-        }
-
-        if (!activeFocus)
-            MagnifierPopup.close();
-        background.source = pickBackground();
-    }
-
-    function pickBackground() {
-        if (errorHighlight) {
-            return platformStyle.backgroundError;
-        }
-        if (textInput.activeFocus) {
-            return platformStyle.backgroundSelected;
-        }
-        if (readOnly) {
-            return platformStyle.backgroundDisabled;
-        }
-        return platformStyle.background;
-    }
-
-    BorderImage {
-        id: background
-        source: pickBackground();
+        // TODO: see what is the correct policy for margins
         anchors.fill: parent
-        border.left: root.platformStyle.backgroundCornerMargin; border.top: root.platformStyle.backgroundCornerMargin
-        border.right: root.platformStyle.backgroundCornerMargin; border.bottom: root.platformStyle.backgroundCornerMargin
-    }
-
-    Text {
-        id: prompt
-
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            right: parent.right
-            leftMargin: root.platformStyle.paddingLeft
-            rightMargin: root.platformStyle.paddingRight
-            verticalCenterOffset: root.platformStyle.baselineOffset
-        }
-
-        font: root.platformStyle.textFont
-        color: root.platformStyle.promptTextColor
-        elide: Text.ElideRight
-
-        // opacity for default state
-        opacity: 0.0
-
-        states: [
-            State {
-                name: "unfocused"
-                // memory allocation optimization: cursorPosition is checked to minimize displayText evaluations
-                when: !root.activeFocus && textInput.cursorPosition == 0 && !textInput.text && prompt.text && !textInput.inputMethodComposing
-                PropertyChanges { target: prompt; opacity: 1.0; }
-            },
-            State {
-                name: "focused"
-                // memory allocation optimization: cursorPosition is checked to minimize displayText evaluations
-                when: root.activeFocus && textInput.cursorPosition == 0 && !textInput.text && prompt.text && !textInput.inputMethodComposing
-                PropertyChanges { target: prompt; opacity: 0.6; }
-            }
-        ]
-
-        transitions: [
-            Transition {
-                from: "unfocused"; to: "focused";
-                reversible: true
-                SequentialAnimation {
-                    PauseAnimation { duration: 60 }
-                    NumberAnimation { target: prompt; properties: "opacity"; duration: 150  }
-                }
-            },
-            Transition {
-                from: "focused"; to: "";
-                reversible: true
-                SequentialAnimation {
-                    PauseAnimation { duration:  60 }
-                    NumberAnimation { target: prompt; properties: "opacity"; duration: 100 }
-                }
-            }
-        ]
+        imagePath: "widgets/lineedit"
+        prefix: "base"
     }
 
     MouseArea {
-        enabled: !textInput.activeFocus
-        z: enabled?1:0
-        anchors.fill: parent
-        anchors.margins: UI.TOUCH_EXPANSION_MARGIN
+        id: mouseWatcher
+        anchors.fill: hover
+        hoverEnabled: true
         onClicked: {
-            if (!textInput.activeFocus) {
-                textInput.forceActiveFocus();
-
-                // activate to preedit and/or move the cursor
-                var preeditDisabled = root.inputMethodHints &
-                                      root.__preeditDisabledMask
-                var injectionSucceeded = false;
-                var newCursorPosition = textInput.positionAt(mapToItem(textInput, mouseX, mouseY).x,TextInput.CursorOnCharacter);
-                if (!preeditDisabled) {
-                    var beforeText = textInput.text
-                    if (!TextAreaHelper.atSpace(newCursorPosition, beforeText)
-                        && newCursorPosition != beforeText.length
-                        && !(newCursorPosition == 0 || TextAreaHelper.atSpace(newCursorPosition - 1, beforeText))) {
-
-                        injectionSucceeded = TextAreaHelper.injectWordToPreedit(newCursorPosition, beforeText);
-                    }
-                }
-                if (!injectionSucceeded) {
-                    textInput.cursorPosition=newCursorPosition;
-                }
-            }
+            // If we don't set focus on click here then clicking between the
+            // line of text and the bottom or top of the widget will not focus
+            // it.
+            textInput.forceActiveFocus();
         }
+    }
+
+    Text {
+        anchors {
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            leftMargin: 2 * base.margins.left
+            rightMargin: 2 * base.margins.right
+        }
+        text: placeholderText
+        visible: textInput.text == "" && !textField.activeFocus
+        // XXX: using textColor and low opacity for theming placeholderText
+        color: theme.buttonTextColor
+        opacity: 0.5
+        elide: Text.ElideRight
+        clip: true
+        font.capitalization: theme.defaultFont.capitalization
+        font.family: theme.defaultFont.family
+        font.italic: theme.defaultFont.italic
+        font.letterSpacing: theme.defaultFont.letterSpacing
+        font.pointSize: theme.defaultFont.pointSize
+        font.strikeout: theme.defaultFont.strikeout
+        font.underline: theme.defaultFont.underline
+        font.weight: theme.defaultFont.weight
+        font.wordSpacing: theme.defaultFont.wordSpacing
     }
 
     TextInput {
         id: textInput
 
-        property alias preedit: inputMethodObserver.preedit
-        property alias preeditCursorPosition: inputMethodObserver.preeditCursorPosition
-
-        // this properties are evaluated by the input method framework
-        property bool westernNumericInputEnforced: false
-        property bool suppressInputMethod: !activeFocusOnPress
-
-        onWesternNumericInputEnforcedChanged: {
-            inputContext.update();
+        anchors {
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            // TODO: see what is the correct policy for margins
+            leftMargin: 2 * base.margins.left
+            rightMargin: 2 * base.margins.right + (clearButton.opacity > 0 ? clearButton.width : 0)
         }
-
-        anchors {verticalCenter: parent.verticalCenter; left: parent.left; right: parent.right}
-        anchors.leftMargin: root.platformStyle.paddingLeft
-        anchors.rightMargin: root.platformStyle.paddingRight
-        anchors.verticalCenterOffset: root.platformStyle.baselineOffset
-
-        passwordCharacter: "\u2022"
-        font: root.platformStyle.textFont
-        color: root.platformStyle.textColor
-        selectByMouse: false
-        selectedTextColor: root.platformStyle.selectedTextColor
-        selectionColor: root.platformStyle.selectionColor
-        mouseSelectionMode: TextInput.SelectWords
+        passwordCharacter: "•"
+        selectByMouse: true
+        color: theme.buttonTextColor
+        enabled: textField.enabled
+        clip: true
         focus: true
-
-        Component.onDestruction: {
-            SelectionHandles.close(textInput);
-            Popup.close(textInput);
-        }
-
-        Connections {
-            target: Utils.findFlickable(root.parent)
-
-            onContentYChanged: if (root.activeFocus) TextAreaHelper.filteredInputContextUpdate();
-            onContentXChanged: if (root.activeFocus) TextAreaHelper.filteredInputContextUpdate();
-            onMovementEnded: inputContext.update();
-        }
-
-        Connections {
-            target: inputContext
-
-            onSoftwareInputPanelRectChanged: {
-                if (activeFocus) {
-                    repositionTimer.running = true
-                }
+        onActiveFocusChanged: {
+            if (!textField.activeFocus) {
+                textInput.closeSoftwareInputPanel()
             }
         }
+        onAccepted: textField.accepted()
+    }
 
-        onTextChanged: {
-            if(root.activeFocus) {
-                TextAreaHelper.repositionFlickable(contentMovingAnimation)
-            }
-
-            if (Popup.isOpened(textInput)) {
-                if (Popup.hasPastingText()) {
-                    inputContext.clearClipboard();
-                    Popup.clearPastingText();
-                }
-                if (!Popup.isChangingInput()) {
-                    Popup.close(textInput);
-                }
-            }
-            SelectionHandles.close(textInput);
-        }
-
-        onCursorPositionChanged: {
-            if (MagnifierPopup.isOpened() &&
-                Popup.isOpened()) {
-                Popup.close(textInput);
-            } else if (!mouseFilter.attemptToActivate ||
-                textInput.cursorPosition == textInput.text.length) {
-                if ( Popup.isOpened(textInput) &&
-                !Popup.isChangingInput() && platformEnableEditBubble) {
-                    Popup.close(textInput);
-                    Popup.open(textInput,
-                        textInput.positionToRectangle(textInput.cursorPosition));
-                }
-                if ( SelectionHandles.isOpened(textInput) && textInput.selectedText == "") {
-                    SelectionHandles.close( textInput );
-                }
-                if ( !SelectionHandles.isOpened(textInput) && textInput.selectedText != ""
-                     && platformEnableEditBubble == true ) {
-                    SelectionHandles.open( textInput );
-                }
-                SelectionHandles.adjustPosition();
+    Private.IconLoader {
+        id: clearButton
+        source: "edit-clear-locationbar-rtl"
+        height: Math.max(textInput.height, theme.smallIconSize)
+        width: height
+        opacity: (textInput.text != "" && clearButtonShown) ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.InOutQuad
             }
         }
-
-        onSelectedTextChanged: {
-            if ( !platformSelectable )
-                textInput.deselect(); // enforce deselection in all cases we didn't think of
-
-            if (Popup.isOpened(textInput) && !Popup.isChangingInput()) {
-                Popup.close(textInput);
-            }
-            if ( SelectionHandles.isOpened(textInput) && textInput.selectedText == "") {
-                SelectionHandles.close( textInput )
-            }
+        anchors {
+            right: parent.right
+            rightMargin: y
+            verticalCenter: textInput.verticalCenter
         }
-
-        InputMethodObserver {
-            id: inputMethodObserver
-
-            onPreeditChanged: {
-                if(root.activeFocus) {
-                    TextAreaHelper.repositionFlickable(contentMovingAnimation)
-                }
-
-                if (Popup.isOpened(textInput) && !Popup.isChangingInput()) {
-                    Popup.close(textInput);
-                }
-            }
-        }
-
-        Timer {
-            id: repositionTimer
-            interval: 350
-            onTriggered: {
-                TextAreaHelper.repositionFlickable(contentMovingAnimation)
-            }
-        }
-
-        PropertyAnimation {
-            id: contentMovingAnimation
-            property: "contentY"
-            duration: 200
-            easing.type: Easing.InOutCubic
-        }
-
-        MouseFilter {
-            id: mouseFilter
-            anchors {
-                fill: parent
-                leftMargin:  UI.TOUCH_EXPANSION_MARGIN - root.platformStyle.paddingLeft
-                rightMargin:  UI.TOUCH_EXPANSION_MARGIN - root.platformStyle.paddingRight
-                topMargin: UI.TOUCH_EXPANSION_MARGIN - ((root.height - parent.height) / 2)
-                bottomMargin:  UI.TOUCH_EXPANSION_MARGIN - ((root.height - parent.height) / 2)
-            }
-            property bool attemptToActivate: false
-            property bool pressOnPreedit: false
-            property int oldCursorPosition: 0
-
-            property variant editBubblePosition: null
-
-            onPressed: {
-                var mousePosition = textInput.positionAt(mouse.x,TextInput.CursorOnCharacter);
-                pressOnPreedit = textInput.cursorPosition==mousePosition
-                oldCursorPosition = textInput.cursorPosition;
-                var preeditDisabled = root.inputMethodHints &
-                                      root.__preeditDisabledMask
-
-                attemptToActivate = !pressOnPreedit && !root.readOnly && !preeditDisabled && root.activeFocus &&
-                                    !(mousePosition == 0 || TextAreaHelper.atSpace(mousePosition - 1) || TextAreaHelper.atSpace(mousePosition));
-                mouse.filtered = true;
-            }
-
-            onDelayedPressSent: {
-                if (textInput.preedit) {
-                    textInput.cursorPosition = oldCursorPosition;
-                }
-            }
-
-            onHorizontalDrag: {
-                // possible pre-edit word have to be commited before selection
-                if (root.activeFocus || root.readOnly) {
-                    inputContext.reset()                    
-                    if( platformSelectable )
-                        parent.selectByMouse = true
-                    attemptToActivate = false
-                }
-            }
-
-            onPressAndHold:{
-                // possible pre-edit word have to be commited before showing the magnifier
-                if (platformEnableMagnifier &&
-                    (root.text != "" || inputMethodObserver.preedit != "") && root.activeFocus) {
-                    inputContext.reset()
-                    attemptToActivate = false
-                    MagnifierPopup.open(root);
-                    var magnifier = MagnifierPopup.popup;
-                    var cursorPos = textInput.positionToRectangle(0);
-                    var mappedPosMf = mapFromItem(parent,mouse.x,cursorPos.y+cursorPos.height/2+4);
-                    magnifier.xCenter = mapToItem(magnifier.sourceItem,mappedPosMf.x,0).x;
-                    var mappedPos =  mapToItem(magnifier.parent, mappedPosMf.x - magnifier.width / 2,
-                                               textInput.y - 120 - UI.MARGIN_XLARGE - (height / 2));
-                    var yAdjustment = -mapFromItem(magnifier.__rootElement, 0, 0).y < magnifier.height / 2.5 ? magnifier.height / 2.5 + mapFromItem(magnifier.__rootElement, 0,0).y : 0
-                    magnifier.x = mappedPos.x;
-                    magnifier.y = mappedPos.y + yAdjustment;
-                    magnifier.yCenter = Math.round(mapToItem(magnifier.sourceItem,0,mappedPosMf.y).y);
-                    parent.cursorPosition = textInput.positionAt(mouse.x)
-                }
-            }
-
-            onReleased: {
-                if (MagnifierPopup.isOpened()) {
-                    MagnifierPopup.close();
-                }
-
-                if (attemptToActivate)
-                    inputContext.reset();
-
-                var newCursorPosition = textInput.positionAt(mouse.x,TextInput.CursorOnCharacter); 
-                if (textInput.preedit.length == 0)
-                    editBubblePosition = textInput.positionToRectangle(newCursorPosition);
-
-                if (attemptToActivate) {
-                    var beforeText = textInput.text;
-
-                    textInput.cursorPosition = newCursorPosition;
-                    var injectionSucceeded = false;
-
-                    if (!TextAreaHelper.atSpace(newCursorPosition, beforeText)
-                             && newCursorPosition != beforeText.length) {
-                        injectionSucceeded = TextAreaHelper.injectWordToPreedit(newCursorPosition, beforeText);
-                    }
-                    if (injectionSucceeded) {
-                        mouse.filtered=true;
-                        if (textInput.preedit.length >=1 && textInput.preedit.length <= 4)
-                            editBubblePosition = textInput.positionToRectangle(textInput.cursorPosition+1)
-                    } else {
-                        textInput.text=beforeText;
-                        textInput.cursorPosition=newCursorPosition;
-                    }
-                } else if (!parent.selectByMouse) {
-                    if (!pressOnPreedit) inputContext.reset();
-                    textInput.cursorPosition = textInput.positionAt(mouse.x,TextInput.CursorOnCharacter);
-                }
-                parent.selectByMouse = false;
-            }
-
-            onFinished: {
-                if (root.activeFocus && platformEnableEditBubble) {
-                    if (textInput.preedit.length == 0)
-                        editBubblePosition = textInput.positionToRectangle(textInput.cursorPosition);
-                    if (editBubblePosition != null) {
-                        Popup.open(textInput,editBubblePosition);
-                        editBubblePosition = null
-                    }
-                    if (textInput.selectedText != "")
-                        SelectionHandles.open( textInput );
-                    SelectionHandles.adjustPosition();
-                }
-                attemptToActivate = false
-            }
-
-            onMousePositionChanged: {
-                if (MagnifierPopup.isOpened() && !parent.selectByMouse) {
-                    textInput.cursorPosition = textInput.positionAt(mouse.x)
-                    var magnifier = MagnifierPopup.popup;
-                    var mappedPosMf = mapFromItem(parent,mouse.x,0);
-                    var mappedPos =  mapToItem(magnifier.parent,mappedPosMf.x - magnifier.width / 2.0, 0);
-                    magnifier.xCenter = mapToItem(magnifier.sourceItem,mappedPosMf.x,0).x;
-                    magnifier.x = mappedPos.x;
-                }
-                SelectionHandles.adjustPosition();
-            }
-
-            onDoubleClicked: {
-                // possible pre-edit word have to be commited before selection
-                inputContext.reset()
-                // Ignore doubleclicks which occur outside the smallest rectangle around the full text of the textfield
-                if (typeof showStatusBar !== "undefined" && locale.directionForText(textInput.text) === 1 /* RightToLef */) {
-                    if ( platformSelectable && mouse.x > width - textInput.positionToRectangle( textInput.text.length ).x )
-                        parent.selectByMouse = true;
-                } else if ( platformSelectable && mouse.x <= textInput.positionToRectangle( textInput.text.length ).x )
-                    parent.selectByMouse = true;
-                attemptToActivate = false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                textInput.text = ""
+                textInput.forceActiveFocus()
             }
         }
     }
-
-    InverseMouseArea {
-        anchors.fill: parent
-        anchors.margins: UI.TOUCH_EXPANSION_MARGIN
-        enabled: textInput.activeFocus
-        onClickedOutside: {
-            if (Popup.isOpened(textInput) && ((mouseX > Popup.geometry().left && mouseX < Popup.geometry().right) &&
-                                           (mouseY > Popup.geometry().top && mouseY < Popup.geometry().bottom))) {
-                return;
-            }
-            root.parent.focus = true;
-        }
-    }
-
-    Component.onCompleted: textInput.accepted.connect(accepted)
 }

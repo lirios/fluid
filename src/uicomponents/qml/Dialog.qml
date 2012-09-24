@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,245 +40,188 @@
 **
 ****************************************************************************/
 
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+        Provides a top-level window for short-term tasks and brief interaction with the user.
+        A dialog floats on the top layer of the application view, usually overlapping the area reserved for the application content. Normally, a dialog provides information and gives warnings to the user, or asks the user to answer a question or select an option.
+
+Properties:
+        list<Item> buttons:
+        A list of items in the dialog's button area. For example, you can use Row or Button components but you can also use any number of components that are based on Item component.
+
+        list<Item> content:
+        A list of items in the dialog's content area. You can use any component that is based on Item. For example, you can use ListView, so that the user can select from a list of names.
+
+        int status:
+        Indicates the dialog's phase in its life cycle. The values are as follows:
+            - DialogStatus.Opening - the dialog is opening
+            - DialogStatus.Open - the dialog is open and visible to the user
+            - DialogStatus.Closing - the dialog is closing
+            - DialogStatus.Closed - the dialog is closed and not visible to the user
+        The dialog's initial status is DialogStatus.Closed.
+
+        list<Item> title:
+        A list of items in the dialog's title area. You can use a Text component but also any number of components that are based on Item. For example, you can use Text and Image components.
+
+        Item visualParent:
+        The item that is dimmed when the dialog opens. By default the root parent object is visualParent.
+
+Signals:
+        accepted():
+        This signal is emitted when the user accepts the dialog's request or the accept() method is called.
+        See also rejected().
+
+        clickedOutside(): This signal is emitted when the user taps in the area that is inside the dialog's visual parent area but outside the dialog's area. Normally the visual parent is the root object. In that case this signal is emitted if the user taps anywhere outside the dialog's area.
+        See also visualParent.
+
+        rejected():
+        This signal is emitted when the user rejects the dialog's request or the reject() method is called.
+        See also accepted().
+
+Methods:
+        void accept():
+        Accepts the dialog's request without any user interaction. The method emits the accepted() signal and closes the dialog.
+        See also reject().
+
+        void close():
+        Closes the dialog without any user interaction.
+
+        void open():
+        Shows the dialog to the user.
+
+        void reject():
+        Rejects the dialog's request without any user interaction. The method emits the rejected() signal and closes the dialog.
+        See also accept().
+**/
+
 import QtQuick 2.0
+import FluidCore 1.0
+import "private/AppManager.js" as Utils
 import "." 1.0
 
-Popup {
+Item {
     id: root
-    objectName: "baseDialog"
 
-    // API
     property alias title: titleBar.children
-    property alias content: contentField.children
-    property alias buttons: buttonRow.children
+    property alias content: contentItem.children
+    property alias buttons: buttonItem.children
+//    property alias visualParent: dialog.visualParent
+    property int status: DialogStatus.Closed
+
+
+    property alias privateTitleHeight: titleBar.height
+    property alias privateButtonsHeight: buttonItem.height
 
     signal accepted
     signal rejected
+    signal clickedOutside
 
-    property Style platformStyle: DialogStyle {}
+    function open()
+    {
+        var pos = dialog.popupPosition(null, Qt.AlignCenter)
+        dialog.x = pos.x
+        dialog.y = pos.y
 
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
+        dialog.visible = true
+        dialog.activateWindow()
+    }
 
-    // private api
-    property string __animationChief: "baseDialog"
-    __dim: platformStyle.dim
-    __fadeInDuration:  platformStyle.fadeInDuration
-    __fadeOutDuration: platformStyle.fadeOutDuration
-    __fadeInDelay:     platformStyle.fadeInDelay
-    __fadeOutDelay:    platformStyle.fadeOutDelay
-
-    // true: center of the content field is center of the background rect
-    // false: the whole dialog is centered
-    property bool __centerContentField: false
-
-    width:  parent.width - platformStyle.leftMargin - platformStyle.rightMargin  // ToDo: better width heuristic
-    height: titleBar.height + contentField.height + buttonRow.height
-
-    anchors.centerIn: parent
+    function accept()
+    {
+        if (status == DialogStatus.Open) {
+            dialog.visible = false
+            accepted()
+        }
+    }
 
     function reject() {
-        close();
-        rejected();
+        if (status == DialogStatus.Open) {
+            dialog.visible = false
+            rejected()
+        }
     }
 
-    function accept() {
-        close();
-        accepted();
+    function close() {
+        dialog.visible = false
     }
 
-    function __beginTransformationToHidden() {
-        __fader().state = "hidden";
+    visible: false
 
-        backgroundRect.opacity = 1.0;
-        contentField.opacity = 1.0
-        root.opacity = 1.0
+    FluidCore.Dialog {
+        id: dialog
+        windowFlags: Qt.Dialog
 
-        statesWrapper.__buttonSaver = buttonRow.y
-        statesWrapper.__titleSaver = titleBar.y
-        root.status = DialogStatus.Closing;
-    }
 
-    // reset button and title bar
-    // make sure, root isn't visible
-    function __endTransformationToHidden() {
-        buttonRow.y = statesWrapper.__buttonSaver
-        titleBar.y = statesWrapper.__titleSaver
-        backgroundRect = 0.0;
-        root.opacity = 0.0;
-        status = DialogStatus.Closed;
-    }
+        //onFaderClicked: root.clickedOutside()
+        property Item rootItem
 
-    function __beginTransformationToVisible() {
-        __fader().state = "visible";
-        statesWrapper.__buttonSaver = buttonRow.y
-        statesWrapper.__titleSaver = titleBar.y
-
-        root.status = DialogStatus.Opening;
-        // UPPERCASE-UGLY, but necessary to avoid flicker
-        root.opacity = 1.0;
-        backgroundRect.opacity = 1.0;
-        titleBar.opacity = 0.0;
-        contentField.opacity = 0.0;
-        buttonRow.opacity = 0.0;
-    }
-
-    // reset button and title bar   
-    function __endTransformationToVisible() {
-        buttonRow.y = statesWrapper.__buttonSaver
-        titleBar.y   = statesWrapper.__titleSaver
-        root.status = DialogStatus.Open;
-    }
-
-    transform: Scale {
-        id: contentScale
-        xScale: 1.0; yScale: 1.0
-        origin.x:  mapFromItem(root, root.width / 2, root.height / 2).x
-        origin.y: mapFromItem(root, root.width / 2, root.height / 2).y
-
-    }
-
-    // this item contains the whole dialog (title bar + content rectangle, button row)
-    Item {
-        id: backgroundRect
-
-        height:  root.height
-        width: root.width
-
-        anchors.centerIn:  root
-
-        // center the whole dialog, not just the content field
-        transform: Translate {
-            id: contentTranslation
-            y: root.__centerContentField ? 0 : (titleBar.height - buttonRow.height) / 2
+        //state: "Hidden"
+        visible: false
+        onVisibleChanged: {
+            if (visible) {
+                status = DialogStatus.Open
+            } else {
+                status = DialogStatus.Closed
+            }
         }
 
+        mainItem: Item {
+            id: mainItem
+            width: theme.defaultFont.mSize.width * 40
+            height: titleBar.childrenRect.height + contentItem.childrenRect.height + buttonItem.childrenRect.height + 8
 
-        // title bar
-        Item {
-            id: titleBar
+            // Consume all key events that are not processed by children
+            Keys.onPressed: event.accepted = true
+            Keys.onReleased: event.accepted = true
 
-            width: root.width
-            height: childrenRect.height
+            Item {
+                id: titleBar
 
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: contentField.top
-
-            // animate over bottomMargin (i.e. the distance between the content field)
-            anchors.bottomMargin: 0
-
-        }
-
-        //content area
-        Item {
-            id: contentField
-
-            anchors.left: parent.left
-            //anchors.right: parent.right
-
-           anchors.horizontalCenter: backgroundRect.horizontalCenter
-           anchors.verticalCenter: backgroundRect.verticalCenter
-
-           height: childrenRect.height
-        }
-
-        //button row
-        Item {
-            id: buttonRow
-
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            anchors.top: contentField.bottom
-
-            // animate over topMargin (i.e. the distance between the content field)
-            anchors.topMargin: 0
-
-            height: childrenRect.height
-        }
-
-    }
-
-    onPrivateClicked:  if (!__platformModal) reject();
-
-    StateGroup {
-        id: statesWrapper
-
-        state: "hidden"
-
-        // needed for button and title bar animation
-        // without resetting the button row's/title bar's coordinate system would be translated
-        property int __buttonSaver: buttonRow.y
-        property int __titleSaver: titleBar.y
-
-
-        states: [
-            State {
-                name: "visible"
-                when: root.__animationChief == "baseDialog" && (status == DialogStatus.Opening || status == DialogStatus.Open)
-                PropertyChanges {
-                    target: backgroundRect
-                    opacity: 1.0
-                }
-            },
-            State {
-                name: "hidden"
-                when: root.__animationChief == "baseDialog" && (status == DialogStatus.Closing || status == DialogStatus.Closed)
-                PropertyChanges {
-                    target: backgroundRect
-                    opacity: 0.0
+                height: childrenRect.height
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
                 }
             }
-        ]
 
-        transitions: [
-            Transition {
-                from: "visible"; to: "hidden"
-                SequentialAnimation {
-                    ScriptAction {script: __beginTransformationToHidden()}
+            Item {
+                id: contentItem
 
-                    NumberAnimation { target: backgroundRect; properties: "opacity"; from: 0.0; to: 1.0; duration: 0 }
-                    NumberAnimation { target: contentField; properties: "opacity"; from: 0.0; to: 1.0; duration: 0 }
-                    NumberAnimation { target: root; properties: "opacity"; from: 0.0; to: 1.0; duration: 0 }
+                onChildrenRectChanged: mainItem.width = Math.max(childrenRect.width, buttonItem.childrenRect.width)
 
-                    // The closing transition fades out the dialog's content from 100% to 0%,
-                    // scales down the content to 80% anchored in the center over 175msec, quintic ease in,
-                    // then, after a 175ms delay the background fades to alpha 0% (350ms, quintic ease out).
-                    // (background fading is done in Fader.qml)
-
-                    SequentialAnimation {
-                        ParallelAnimation {
-                            PropertyAnimation {target: buttonRow; properties: "opacity"; from: 1.0; to: 0.0; duration: 175; easing.type: Easing.InQuint; }
-                            PropertyAnimation {target: titleBar; properties: "opacity"; from: 1.0; to: 0.0; duration: 175; easing.type: Easing.InQuint; }
-                            PropertyAnimation {target: contentField; properties: "opacity"; from: 1.0; to: 0.0; duration: 175; easing.type: Easing.InQuint; }
-                            PropertyAnimation {target: contentScale; properties: "xScale,yScale"; from: 1.0 ; to: 0.8; duration: 175; easing.type: Easing.InQuint; }
-                        }
-                    }
-
-                    ScriptAction {script: __endTransformationToHidden()}
-                }
-            },
-            Transition {
-                from: "hidden"; to: "visible"
-                SequentialAnimation {
-                    ScriptAction {script: __beginTransformationToVisible()}           
-
-                    // The opening transition fades in from 0% to 100% and at the same time
-                    // scales in the content from 80% to 100%, anchored in the center
-                    // cubic ease out). --> Done inside the fader
-
-                    ParallelAnimation {
-                        PropertyAnimation {target: root; properties: "opacity"; from: 0.0; to: 1.0; duration: 350; easing.type: Easing.OutCubic; }
-                        PropertyAnimation {target: buttonRow; properties: "opacity"; from: 0.0; to: 1.0; duration: 350; easing.type: Easing.OutCubic; }
-                        PropertyAnimation {target: titleBar; properties: "opacity"; from: 0.0; to: 1.0; duration: 350; easing.type: Easing.OutCubic; }
-                        PropertyAnimation {target: contentField; properties: "opacity"; from: 0.0; to: 1.0; duration: 350; easing.type: Easing.OutCubic; }
-                        PropertyAnimation {target: contentScale; properties: "xScale,yScale"; from: 0.8 ; to: 1.0; duration: 350; easing.type: Easing.OutCubic; }
-                    }
-
-                    ScriptAction {script: __endTransformationToVisible()}
+                clip: true
+                anchors {
+                    top: titleBar.bottom
+                    left: parent.left
+                    right: parent.right
+                    bottom: buttonItem.top
+                    bottomMargin: 8
                 }
             }
-        ]
+
+            Item {
+                id: buttonItem
+
+                height: childrenRect.height
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    bottomMargin: 4
+                }
+            }
+        }
+
+        Component.onCompleted: {
+            rootItem = Utils.rootObject()
+        }
     }
 }

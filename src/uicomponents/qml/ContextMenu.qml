@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,76 +40,31 @@
 **
 ****************************************************************************/
 
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+	FluidUi
+
+Description:
+        Provides a component with list of options that the user can choose from.
+
+Properties:
+      * QtObject model:
+        This property holds the model providing data for the menu.
+        The model provides the set of data that is used to create the items in the view.
+	Each model item must have a property called "text" or "display".
+
+Methods:
+      * void rebuildMenu():
+        Rebuild the menu if property model is defined.
+**/
+
 import QtQuick 2.0
-import "." 1.0
+import FluidUi 1.0
 
-AbstractMenu {
+Menu {
     id: root
-
-    // API
-    property string platformTitleText
-    property string titleText
-    property url platformIcon
-    property url icon
-
-    // platformStyle API
-    property Style platformStyle: ContextMenuStyle{}
-    property Style style:         ContextMenuStyle{}
-
-    onPlatformTitleTextChanged: logDeprecatedMsg("platformTitleText")
-    onTitleTextChanged:         logDeprecatedMsg("titleText")
-    onPlatformIconChanged:      logDeprecatedMsg("platformIcon")
-    onIconChanged:              logDeprecatedMsg("iconChanged")
-    onPlatformStyleChanged:     logDeprecatedMsg("platformStyle")
-    onStyleChanged:             logDeprecatedMsg("style")
-
-    function logDeprecatedMsg(name) {
-        console.log("Warning: " + name + " is deprecated");
-    }
-
-    function __beginTransformationToHidden() {
-        __fader().state = "hidden";
-        root.status = DialogStatus.Closing;
-    }
-
-    function __beginTransformationToVisible() {
-        __fader().state = "visible";
-        root.status = DialogStatus.Opening;
-        __menuPane.anchors.rightMargin = 0;
-        __menuPane.anchors.bottomMargin = 0;
-    }
-
-    __statesWrapper.transitions: [
-        Transition {
-            from: "visible"; to: "hidden"
-            SequentialAnimation {
-                ScriptAction {script: __beginTransformationToHidden()}
-
-                NumberAnimation {target: __menuPane;
-                              property: screen.currentOrientation == Screen.Portrait ? "anchors.bottomMargin" : "anchors.rightMargin";
-                              easing.type: Easing.InOutQuint;
-                              to: screen.currentOrientation == Screen.Portrait ? -__menuPane.height : -__menuPane.width;
-                              from: 0; duration: 350}
-
-                NumberAnimation {target: __menuPane; property: "opacity";
-                              from: 1.0; to: 0.0; duration: 0}
-
-                ScriptAction {script: status = DialogStatus.Closed}
-            }
-        },
-        Transition {
-            from: "hidden"; to: "visible"
-            SequentialAnimation {
-                ScriptAction {script: __beginTransformationToVisible()}
-
-                NumberAnimation {target: __menuPane;
-                                 property: screen.currentOrientation == Screen.Portrait ? "anchors.bottomMargin" : "anchors.rightMargin";
-                                 easing.type: Easing.InOutQuint;
-                                 from: screen.currentOrientation == Screen.Portrait ? -__menuPane.height : -__menuPane.width;
-                                 to: 0; duration: 350}
-
-                ScriptAction {script: status = DialogStatus.Open}
-            }
-        }
-    ]
 }

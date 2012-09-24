@@ -19,7 +19,7 @@
 
 #include "fluid.h"
 
-namespace FluidCore
+namespace Fluid
 {
     Direction locationToDirection(Location location)
     {

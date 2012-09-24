@@ -31,11 +31,9 @@
 #include "framesvg.h"
 #include "framesvg_p.h"
 #include "svg_p.h"
-#ifdef PLFIORINI
 #include "theme.h"
-#endif
 
-namespace FluidUi
+namespace Fluid
 {
     QHash<QString, FrameData *> FrameSvgPrivate::s_sharedFrames;
 
@@ -178,19 +176,19 @@ namespace FluidUi
         }
     }
 
-    void FrameSvg::setElementPrefix(FluidCore::Location location)
+    void FrameSvg::setElementPrefix(Fluid::Location location)
     {
         switch (location) {
-            case FluidCore::TopEdge:
+            case Fluid::TopEdge:
                 setElementPrefix("north");
                 break;
-            case FluidCore::BottomEdge:
+            case Fluid::BottomEdge:
                 setElementPrefix("south");
                 break;
-            case FluidCore::LeftEdge:
+            case Fluid::LeftEdge:
                 setElementPrefix("west");
                 break;
-            case FluidCore::RightEdge:
+            case Fluid::RightEdge:
                 setElementPrefix("east");
                 break;
             default:
@@ -267,7 +265,7 @@ namespace FluidUi
             }
         }
 
-        d->location = FluidCore::Floating;
+        d->location = Fluid::Floating;
     }
 
     bool FrameSvg::hasElementPrefix(const QString &prefix) const
@@ -281,19 +279,19 @@ namespace FluidUi
         }
     }
 
-    bool FrameSvg::hasElementPrefix(FluidCore::Location location) const
+    bool FrameSvg::hasElementPrefix(Fluid::Location location) const
     {
         switch (location) {
-            case FluidCore::TopEdge:
+            case Fluid::TopEdge:
                 return hasElementPrefix("north");
                 break;
-            case FluidCore::BottomEdge:
+            case Fluid::BottomEdge:
                 return hasElementPrefix("south");
                 break;
-            case FluidCore::LeftEdge:
+            case Fluid::LeftEdge:
                 return hasElementPrefix("west");
                 break;
-            case FluidCore::RightEdge:
+            case Fluid::RightEdge:
                 return hasElementPrefix("east");
                 break;
             default:
@@ -384,26 +382,26 @@ namespace FluidUi
         }
     }
 
-    qreal FrameSvg::marginSize(const FluidCore::MarginEdge edge) const
+    qreal FrameSvg::marginSize(const Fluid::MarginEdge edge) const
     {
         if (d->frames[d->prefix]->noBorderPadding) {
             return .0;
         }
 
         switch (edge) {
-            case FluidCore::TopMargin:
+            case Fluid::TopMargin:
                 return d->frames[d->prefix]->topMargin;
                 break;
 
-            case FluidCore::LeftMargin:
+            case Fluid::LeftMargin:
                 return d->frames[d->prefix]->leftMargin;
                 break;
 
-            case FluidCore::RightMargin:
+            case Fluid::RightMargin:
                 return d->frames[d->prefix]->rightMargin;
                 break;
 
-                //FluidUi::BottomMargin
+                //Fluid::BottomMargin
             default:
                 return d->frames[d->prefix]->bottomMargin;
                 break;
@@ -455,7 +453,7 @@ namespace FluidUi
             if (frame->cachedMasks.count() > frame->MAX_CACHED_MASKS) {
                 frame->cachedMasks.clear();
             }
-            frame->cachedMasks.insert(id, QRegion(QBitmap(d->alphaMask().alphaChannel().createMaskFromColor(Qt::black))));
+            frame->cachedMasks.insert(id, QRegion(QBitmap(d->alphaMask().createMaskFromColor(Qt::black))));
         }
         return frame->cachedMasks[id];
     }
@@ -671,7 +669,6 @@ namespace FluidUi
 
     void FrameSvgPrivate::generateBackground(FrameData *frame)
     {
-#ifdef PLFIORINI
         if (!frame->cachedBackground.isNull() || !q->hasElementPrefix(q->prefix())) {
             return;
         }
@@ -746,7 +743,6 @@ namespace FluidUi
             p.setCompositionMode(QPainter::CompositionMode_SourceOver);
             p.drawPixmap(actualOverlayPos, overlay, QRect(actualOverlayPos, overlaySize));
         }
-#endif
     }
 
     void FrameSvgPrivate::generateFrameBackground(FrameData *frame)

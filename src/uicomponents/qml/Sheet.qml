@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,195 +40,240 @@
 **
 ****************************************************************************/
 
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+        Provides a top-level window for short-term tasks and brief interaction with the user.
+        Is intended to be for interaction more complex and bigger in size then Dialog. On the desktop its looks is almost identical to Dialog, on touch interfaces is an almost fullscreen sliding Sheet. It is provided mostly for compatibility with mobile implementations
+
+Properties:
+        list<Item> content:
+        A list of items in the dialog's content area. You can use any component that is based on Item. For example, you can use ListView, so that the user can select from a list of names.
+
+        int status:
+        Indicates the dialog's phase in its life cycle. The values are as follows:
+            - DialogStatus.Opening - the dialog is opening
+            - DialogStatus.Open - the dialog is open and visible to the user
+            - DialogStatus.Closing - the dialog is closing
+            - DialogStatus.Closed - the dialog is closed and not visible to the user
+        The dialog's initial status is DialogStatus.Closed.
+
+        string title:
+        The title text of this Sheet.
+
+        Item acceptButton:
+        button that when pressed will close the dialog, representing the user accepting it, accepted() will be called
+
+        Item rejectButton:
+        button that when pressed will close the dialog, representing the user rejecting it, rejected() will be called
+
+        string acceptButtonText:
+        Text of the accept button
+
+        string rejectButtonText:
+        Text of the reject button
+
+        Item visualParent:
+        The item that is dimmed when the dialog opens. By default the root parent object is visualParent.
+
+Signals:
+        accepted():
+        This signal is emitted when the user accepts the dialog's request or the accept() method is called.
+        See also rejected().
+
+        clickedOutside(): This signal is emitted when the user taps in the area that is inside the dialog's visual parent area but outside the dialog's area. Normally the visual parent is the root object. In that case this signal is emitted if the user taps anywhere outside the dialog's area.
+        See also visualParent.
+
+        rejected():
+        This signal is emitted when the user rejects the dialog's request or the reject() method is called.
+        See also accepted().
+
+Methods:
+        void accept():
+        Accepts the dialog's request without any user interaction. The method emits the accepted() signal and closes the dialog.
+        See also reject().
+
+        void close():
+        Closes the dialog without any user interaction.
+
+        void open():
+        Shows the dialog to the user.
+
+        void reject():
+        Rejects the dialog's request without any user interaction. The method emits the rejected() signal and closes the dialog.
+        See also accept().
+**/
+
 import QtQuick 2.0
+import FluidCore 1.0
+import "private/AppManager.js" as Utils
 import "." 1.0
 
 Item {
     id: root
 
-    width: parent ? parent.width : 0
-    height: parent ? parent.height : 0
-
-    property alias title: titleBar.children 
-    property alias content: contentField.children
-    property alias buttons: buttonRow.children
-    property Item visualParent
+    property alias title: titleLabel.text
+    property alias content: contentItem.children
+//    property alias visualParent: dialog.visualParent
     property int status: DialogStatus.Closed
-
     property alias acceptButtonText: acceptButton.text
     property alias rejectButtonText: rejectButton.text
-
     property alias acceptButton: acceptButton
     property alias rejectButton: rejectButton
 
+
+    property alias privateTitleHeight: titleBar.height
+    property alias privateButtonsHeight: buttonsRow.height
+
     signal accepted
     signal rejected
+    signal clickedOutside
 
-    property QtObject platformStyle: SheetStyle {}
+    function open()
+    {
+        var pos = dialog.popupPosition(null, Qt.AlignCenter)
+        dialog.x = pos.x
+        dialog.y = pos.y
 
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
+        dialog.visible = true
+        dialog.activateWindow()
+    }
+
+    function accept()
+    {
+        if (status == DialogStatus.Open) {
+            dialog.visible = false
+            accepted()
+        }
+    }
 
     function reject() {
-        close();
-        rejected();
-    }
-
-    function accept() {
-        close();
-        accepted();
-    }
-
-    visible: status != DialogStatus.Closed;
-    
-    function open() {
-        parent = visualParent || __findParent();
-        sheet.state = "";
+        if (status == DialogStatus.Open) {
+            dialog.visible = false
+            rejected()
+        }
     }
 
     function close() {
-        sheet.state = "closed";
+        dialog.visible = false
     }
 
-    function __findParent() {
-        var next = parent;
-        while (next && next.parent
-               && next.objectName != "appWindowContent"
-               && next.objectName != "windowContent") {
-            next = next.parent;
-        }
-        return next;
-    }
+    visible: false
 
-    function getButton(name) {
-        for (var i=0; i<buttons.length; ++i) {
-            if (buttons[i].objectName == name)
-                return buttons[i];
-        }
-        return undefined;
-    }
+    FluidCore.Dialog {
+        id: dialog
+        windowFlags: Qt.Dialog
+        location: 4 //FIXME: replace with BottomEdge when we have an enum reachable from everywhere in core
 
-    MouseArea {
-        id: blockMouseInput
-        anchors.fill: parent
-    }
-    
-    Item {
-        id: sheet
 
-        //when the sheet is part of a page do nothing
-        //when the sheet is a direct child of a PageStackWindow, consider the status bar
-        property int statusBarOffset: (typeof __isPage != "undefined") ? 0
-                                     : (typeof __statusBarHeight == "undefined") ? 0
-                                     :  __statusBarHeight
-        
-        width: parent.width
-        height: parent.height - statusBarOffset
+        //onFaderClicked: root.clickedOutside()
+        property Item rootItem
 
-        y: statusBarOffset
-
-        clip: true
-        
-        property int transitionDurationIn: 300
-        property int transitionDurationOut: 450
-        
-        state: "closed"
-        
-        function transitionStarted() {
-            status = (state == "closed") ? DialogStatus.Closing : DialogStatus.Opening;
-        }
-        
-        function transitionEnded() {
-            status = (state == "closed") ? DialogStatus.Closed : DialogStatus.Open;
-        }
-        
-        states: [
-            // Closed state.
-            State {
-                name: "closed"
-                // consider input panel height when input panel is open
-                PropertyChanges { target: sheet; y: !inputContext.softwareInputPanelVisible
-                                                    ? height : inputContext.softwareInputPanelRect.height + height; }
-            }
-        ]
-
-        transitions: [
-            // Transition between open and closed states.
-            Transition {
-                from: ""; to: "closed"; reversible: false
-                SequentialAnimation {
-                    ScriptAction { script: if (sheet.state == "closed") { sheet.transitionStarted(); } else { sheet.transitionEnded(); } }
-                    PropertyAnimation { properties: "y"; easing.type: Easing.InOutQuint; duration: sheet.transitionDurationOut }
-                    ScriptAction { script: if (sheet.state == "closed") { sheet.transitionEnded(); } else { sheet.transitionStarted(); } }
-                }                
-            },
-            Transition {
-                from: "closed"; to: ""; reversible: false
-                SequentialAnimation {
-                    ScriptAction { script: if (sheet.state == "") { sheet.transitionStarted(); } else { sheet.transitionEnded(); } }
-                    PropertyAnimation { properties: "y"; easing.type: Easing.OutQuint; duration: sheet.transitionDurationIn }
-                    ScriptAction { script: if (sheet.state == "") { sheet.transitionEnded(); } else { sheet.transitionStarted(); } }
-                }
-            }
-        ]
-        
-        BorderImage {
-            source: platformStyle.background
-            width: parent.width
-            anchors.top: header.bottom
-            anchors.bottom: parent.bottom
-            Item {
-                id: contentField
-                anchors.fill: parent
+        //state: "Hidden"
+        visible: false
+        onVisibleChanged: {
+            if (visible) {
+                status = DialogStatus.Open
+            } else {
+                status = DialogStatus.Closed
             }
         }
 
-        Item {
-            id: header
-            width: parent.width
-            height: headerBackground.height
-            BorderImage {
-                id: headerBackground
-                border {
-                    left: platformStyle.headerBackgroundMarginLeft
-                    right: platformStyle.headerBackgroundMarginRight
-                    top: platformStyle.headerBackgroundMarginTop
-                    bottom: platformStyle.headerBackgroundMarginBottom
-                }
-                source: platformStyle.headerBackground
-                width: header.width
-            }
-            Item {
-                id: buttonRow
-                anchors.fill: parent
-                SheetButton {
-                    id: rejectButton
-                    objectName: "rejectButton"
-                    anchors.left: parent.left
-                    anchors.leftMargin: root.platformStyle.rejectButtonLeftMargin
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: text != ""
-                    onClicked: close()
-                }
-                SheetButton {
-                    id: acceptButton
-                    objectName: "acceptButton"
-                    anchors.right: parent.right
-                    anchors.rightMargin: root.platformStyle.acceptButtonRightMargin
-                    anchors.verticalCenter: parent.verticalCenter
-                    platformStyle: SheetButtonAccentStyle { }
-                    visible: text != ""     
-                    onClicked: close()
-                }
-                Component.onCompleted: {
-                    acceptButton.clicked.connect(accepted)
-                    rejectButton.clicked.connect(rejected)
-                }
-            }
-            Item {
+        mainItem: Item {
+            id: mainItem
+            width: theme.defaultFont.mSize.width * 40
+            height: Math.max(titleBar.childrenRect.height + contentItem.childrenRect.height + buttonsRow.childrenRect.height + 8, theme.defaultFont.mSize.height * 25)
+
+            // Consume all key events that are not processed by children
+            Keys.onPressed: event.accepted = true
+            Keys.onReleased: event.accepted = true
+
+            FluidCore.FrameSvgItem {
                 id: titleBar
-                anchors.fill: parent
+                imagePath: "widgets/extender-dragger"
+                prefix: "root"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                //FIXME: +5 because of Plasma::Dialog margins
+                height: titleLabel.paintedHeight + margins.top + margins.bottom
+
+                Column {
+                    id: titleLayoutHelper // needed to make the text mirror correctly
+
+                    anchors {
+                        right: parent.right
+                        left: parent.left
+                        top: parent.top
+                        bottom: parent.bottom
+                        leftMargin: parent.margins.left
+                        rightMargin: parent.margins.right
+                        topMargin: parent.margins.top
+                        bottomMargin: parent.margins.bottom
+                    }
+
+                    Label {
+                        id: titleLabel
+                        elide: Text.ElideRight
+                        height: paintedHeight
+                        font.pointSize: theme.defaultFont.pointSize * 1.1
+                        font.weight: Font.Bold
+                        style: Text.Raised
+                        styleColor: Qt.rgba(1,1,1,0.8)
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
             }
+
+            Item {
+                id: contentItem
+
+                onChildrenRectChanged: mainItem.width = Math.max(childrenRect.width, buttonsRow.childrenRect.width)
+
+                clip: true
+                anchors {
+                    top: titleBar.bottom
+                    left: parent.left
+                    right: parent.right
+                    bottom: buttonsRow.top
+                    bottomMargin: 8
+                }
+            }
+
+            Row {
+                id: buttonsRow
+                spacing: 8
+                anchors {
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    //the bottom margin is disabled but we want it anyways
+                    bottomMargin: theme.defaultFont.mSize.height*0.6
+                }
+
+                Button {
+                    id: acceptButton
+                    onClicked: accept()
+                }
+
+                Button {
+                    id: rejectButton
+                    onClicked: reject()
+                }
+            }
+        }
+
+        Component.onCompleted: {
+            rootItem = Utils.rootObject()
         }
     }
 }

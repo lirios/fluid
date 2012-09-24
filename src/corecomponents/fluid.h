@@ -24,14 +24,14 @@
 
 #include <QPainterPath>
 
-#include <FluidCore/CoreComponentsGlobal>
+#include <Fluid/FluidExport>
 
 class QAction;
 
 /**
  * Namespace for everything in libplasma
  */
-namespace FluidCore
+namespace Fluid
 {
     /**
      * The Constraint enumeration lists the various constraints that FluidUi
@@ -287,9 +287,9 @@ namespace FluidCore
     FLUID_CORECOMPONENTS_EXPORT Direction locationToInverseDirection(Location location);
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(FluidCore::Constraints)
-Q_DECLARE_OPERATORS_FOR_FLAGS(FluidCore::Flip)
-Q_DECLARE_OPERATORS_FOR_FLAGS(FluidCore::ComponentTypes)
-Q_DECLARE_OPERATORS_FOR_FLAGS(FluidCore::MessageButtons)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Fluid::Constraints)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Fluid::Flip)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Fluid::ComponentTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Fluid::MessageButtons)
 
 #endif // FLUID_H

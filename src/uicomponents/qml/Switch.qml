@@ -1,182 +1,106 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
-
-import QtQuick 2.0
-
 /*
-Class: Switch
-   The Switch component is similar to the CheckBox component but instead of
-   selecting items it should be used when setting options to On/Off.
+*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
 */
-Item {
-    id: root
 
-    width: slider.width
-    height: slider.height
+/**Documented API
+Inherits:
+        DualStateButton
 
-    /*
-    * Property: checked
-     * [bool=false] The checked state of switch
-     */
-    property bool checked: false
+Imports:
+        QtQuick 2.0
+        FluidCore
 
-    // Styling for the Switch
-    property Style platformStyle: SwitchStyle {}
+Description:
+        You can bind the Switch component to a feature that the application
+        has to enable or disable depending on the user's input, for example.
+        Switch has similar usage and API as CheckBox, except that Switch does
+        not provide a built-in label.
 
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
+Properties:
+            bool checked:
+            Returns true if the Button is checked, otherwise
+            it returns false.
 
-    property alias platformMouseAnchors: mouseArea.anchors
+            bool pressed:
+            Returns true if the Button is pressed, otherwise
+            it returns false.
 
-    /*
-    * Property: enabled
-     * [bool=true] Enables/Disables the component. Notice that the disable state is not Toolkit compliant
-     * and not present inside the qt-components
-     */
+            string text:
+            Sets the text for the switch.
+            The default value is empty.No text
+            will be displayed.
 
-    Item {
-        id: slider
+Signals:
+        onClicked:
+        The signal is emited when the button is clicked!
+**/
+import QtQuick 2.0
+import FluidCore 1.0
+import "private" as Private
 
-        width: 66
-        height: 42
+Private.DualStateButton {
+    id: switchItem
 
-        state: root.checked ? "checked" : "unchecked"
+    view: FluidCore.FrameSvgItem {
+        imagePath: "widgets/slider"
+        prefix: "groove"
+        width: height * 2
+        height: Math.max(theme.defaultFont.mSize.height + margins.top + margins.bottom,
+                         button.margins.top + button.margins.bottom)
 
-        property real knobPos: (knob.x - platformStyle.minKnobX) / (platformStyle.maxKnobX - platformStyle.minKnobX)
+        FluidCore.FrameSvgItem {
+            id: highlight
+            imagePath: "widgets/slider"
+            prefix: "groove-highlight"
+            anchors.fill: parent
 
-        Image {
-            source: platformStyle.switchOn
-            opacity: slider.knobPos
-        }
-        Image {
-            source: platformStyle.switchOff
-            opacity: 1.0 - slider.knobPos
-        }
-
-        states: [
-            State {
-                name: "unchecked"
-                PropertyChanges { target: knob; x: platformStyle.minKnobX }
-            },
-            State {
-                name: "checked"
-                PropertyChanges { target: knob; x: platformStyle.maxKnobX }
+            opacity: checked ? 1 : 0
+            Behavior on opacity {
+                PropertyAnimation { duration: 100 }
             }
-        ]
-
-        transitions: [
-            Transition {
-                SmoothedAnimation { properties: "x"; velocity: 500; maximumEasingTime: 0 }
-            }
-        ]
-
-        // thumb (shadow)
-        Image {
-            id: knob
-
-            // thumb (inline)
-            Image {
-                width: 30
-                height: 30
-                x: 0
-                y: -2
-                source: (slider.enabled ? (mouseArea.pressed ? platformStyle.thumbPressed : platformStyle.thumb) : platformStyle.thumbDisabled)
-            }
-
-            source: platformStyle.shadow
-
-            y: 8
-
-            width: 30
-            height: 30
         }
 
-        MouseArea {
-            id: mouseArea
-            property int downMouseX
-            property int downKnobX
+        FluidCore.FrameSvgItem {
+            imagePath: "widgets/button"
+            prefix: "shadow"
             anchors {
-                fill: parent
-                rightMargin: platformStyle.mouseMarginRight
-                leftMargin: platformStyle.mouseMarginLeft
-                topMargin: platformStyle.mouseMarginTop
-                bottomMargin: platformStyle.mouseMarginBottom
+                fill: button
+                leftMargin: -margins.left
+                topMargin: -margins.top
+                rightMargin: -margins.right
+                bottomMargin: -margins.bottom
             }
+        }
 
-            function snap() {
-                if (knob.x < (platformStyle.maxKnobX + platformStyle.minKnobX) / 2) {
-                    if (root.checked) {
-                        root.checked = false;
-                    } else {
-                        knob.x = platformStyle.minKnobX;
-                    }
-                } else {
-                    if (!root.checked) {
-                        root.checked = true;
-                    } else {
-                        knob.x = platformStyle.maxKnobX;
-                    }
-                }
+        FluidCore.FrameSvgItem {
+            id: button
+            imagePath: "widgets/button"
+            prefix: "normal"
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
             }
-
-            onPressed: {
-                downMouseX = mouseX;
-                downKnobX = knob.x;
+            width: height
+            x: checked ? width : 0
+            Behavior on x {
+                PropertyAnimation { duration: 100 }
             }
-
-            onPositionChanged: {
-                var newKnobX = downKnobX - (downMouseX - mouseX);
-                knob.x = newKnobX < platformStyle.minKnobX ? platformStyle.minKnobX : newKnobX > platformStyle.maxKnobX ? platformStyle.maxKnobX : newKnobX;
-            }
-
-            onReleased: {
-                if (Math.abs(downMouseX - mouseX) < 5)
-                    root.checked = !root.checked;
-                else
-                    snap();
-            }
-
-            onCanceled: {
-                snap();
-            }
-
         }
     }
 }
+

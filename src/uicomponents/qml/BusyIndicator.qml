@@ -1,100 +1,90 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/*
+*   Copyright (C) 2010 by Artur Duque de Souza <asouzakde.org>
+*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
+*/
+
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        FluidCore
+        QtQuick 2.0
+
+Description:
+        It is just a simple Busy Indicator, it is used to indicate a task which duration is unknown. If the task duration/number of steps is known, a ProgressBar should be used instead.
+        TODO An image has to be added!
+
+Properties:
+
+        bool running:
+        This property holds whether the busy animation is running.
+        The default value is false.
+
+        bool smoothAnimation:
+        Set this property if you don't want to apply a filter to smooth
+        the busy icon while animating.
+        Smooth filtering gives better visual quality, but is slower.
+        The default value is true.
+**/
 
 import QtQuick 2.0
-import "." 1.0
+import FluidCore 1.0
 
-import "UIConstants.js" as UI
-import "Utils.js" as Utils
+Item {
+    id: busy
 
-// ### Display Entered / Exited! Pause animation when not "on display".
-// ### LayoutDirection
-
-ImplicitSizeItem {
-    id: root
-
+    // Common API
     property bool running: false
 
-    property Style platformStyle: BusyIndicatorStyle{}
+    // Plasma API
+    property bool smoothAnimation: true
 
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
+    implicitWidth: 52
+    implicitHeight: 52
 
-    implicitWidth: platformStyle.size == "small" ? 24 : platformStyle.size == "medium" ? 32 : 96;
-    implicitHeight: implicitWidth
-
-    QtObject {
-        id: internal
-        property Flickable flick
-        property bool offScreen: false
+    // Should use animation's pause to keep the
+    // rotation smooth when running changes but
+    // it has lot's of side effects on
+    // initialization.
+    onRunningChanged: {
+        rotationAnimation.from = rotation;
+        rotationAnimation.to = rotation + 360;
     }
 
-    Image {
-        id: spinner
-        property int index: 1
-        // This is re-evaluated for each frame. Could be optimized by calculating the sources separately is js
-        source: root.platformStyle.spinnerFrames + "_" + root.implicitWidth + "_" + index
-        smooth: true
+    RotationAnimation on rotation {
+        id: rotationAnimation
 
-        NumberAnimation on index {
-            from: 1; to: root.platformStyle.numberOfFrames
-            duration: root.platformStyle.period
-            running: root.running && root.visible && Qt.application.active && !internal.offScreen
-            loops: Animation.Infinite
-        }
+        from: 0
+        to: 360
+        duration: 1500
+        running: busy.running
+        loops: Animation.Infinite
     }
 
-    Connections {
-        target: internal.flick
+    FluidCore.SvgItem {
+        id: widget
+        svg: FluidCore.Svg { imagePath: "widgets/busywidget" }
+        elementId: "busywidget"
 
-        onMovementStarted: internal.offScreen = false
-
-        onMovementEnded: {
-            var pos = mapToItem(internal.flick, 0, 0)
-            internal.offScreen = (pos.y + root.height <= 0) || (pos.y >= internal.flick.height) || (pos.x + root.width <= 0) || (pos.x >= internal.flick.width)
-        }
-    }
-
-    Component.onCompleted: {
-        var flick = Utils.findFlickable()
-        if (flick)
-            internal.flick = flick
+        anchors.centerIn: parent
+        width: busy.width
+        height: busy.height
+        smooth: !running || smoothAnimation
     }
 }

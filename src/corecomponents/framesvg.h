@@ -24,9 +24,8 @@
 #include <QObject>
 #include <QPixmap>
 
-#include <FluidCore/Fluid>
-#include <FluidUi/UiComponentsGlobal>
-#include <FluidUi/Svg>
+#include <Fluid/Fluid>
+#include <Fluid/Svg>
 
 class QPainter;
 class QPoint;
@@ -37,12 +36,12 @@ class QSize;
 class QSizeF;
 class QMatrix;
 
-namespace FluidUi
+namespace Fluid
 {
     class FrameSvgPrivate;
 
     /**
-     * @class FrameSvg plasma/framesvg.h <FluidUi/FrameSvg>
+     * @class FrameSvg plasma/framesvg.h <Fluid/FrameSvg>
      *
      * @short Provides an SVG with borders.
      *
@@ -69,9 +68,9 @@ namespace FluidUi
      * @c topright will be ignored if @c top does not exist, and similarly for
      * @c bottomleft and @c bottomright.
      *
-     * @see FluidUi::Svg
+     * @see Fluid::Svg
      **/
-    class FLUID_UICOMPONENTS_EXPORT FrameSvg : public Svg
+    class FLUID_CORECOMPONENTS_EXPORT FrameSvg : public Svg
     {
         Q_OBJECT
 
@@ -93,12 +92,12 @@ namespace FluidUi
 
         /**
          * Constructs a new FrameSvg that paints the proper named subelements
-         * as borders. It may also be used as a regular FluidUi::Svg object
+         * as borders. It may also be used as a regular Fluid::Svg object
          * for direct access to elements in the Svg.
          *
          * @param parent options QObject to parent this to
          *
-         * @related FluidUi::Theme
+         * @related Fluid::Theme
          */
         explicit FrameSvg(QObject *parent = 0);
         ~FrameSvg();
@@ -137,7 +136,7 @@ namespace FluidUi
          * @param edge the margin edge we want, top, bottom, left or right
          * @return the margin size
          */
-        Q_INVOKABLE qreal marginSize(const FluidCore::MarginEdge edge) const;
+        Q_INVOKABLE qreal marginSize(const Fluid::MarginEdge edge) const;
 
         /**
          * Convenience method that extracts the size of the four margins
@@ -163,7 +162,7 @@ namespace FluidUi
          * called successfully after setImagePath is called.
          * @param location location in the UI this frame will be drawn
          */
-        Q_INVOKABLE void setElementPrefix(FluidCore::Location location);
+        Q_INVOKABLE void setElementPrefix(Fluid::Location location);
 
         /**
          * Sets the prefix for the SVG elements to be used for painting. For example,
@@ -198,7 +197,7 @@ namespace FluidUi
          * to draw a frame.
          * @param location the given prefix we want to check if drawable
          */
-        Q_INVOKABLE bool hasElementPrefix(FluidCore::Location location) const;
+        Q_INVOKABLE bool hasElementPrefix(Fluid::Location location) const;
 
         /**
          * Returns the prefix for SVG elements of the FrameSvg
@@ -270,6 +269,6 @@ namespace FluidUi
     };
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(FluidUi::FrameSvg::EnabledBorders)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Fluid::FrameSvg::EnabledBorders)
 
 #endif // FRAMESVG_H

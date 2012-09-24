@@ -1,2 +1,2 @@
-add_subdirectory(FluidCore)
+add_subdirectory(Fluid)
 add_subdirectory(FluidUi)

@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QPixmap>
 
-#include <FluidUi/UiComponentsGlobal>
+#include <Fluid/FluidExport>
 
 class QPainter;
 class QPoint;
@@ -34,25 +34,25 @@ class QSize;
 class QSizeF;
 class QMatrix;
 
-namespace FluidUi
+namespace Fluid
 {
     class FrameSvgPrivate;
     class SvgPrivate;
     class Theme;
 
     /**
-     * @class Svg plasma/svg.h <FluidUi/Svg>
+     * @class Svg plasma/svg.h <Fluid/Svg>
      *
      * @short A theme aware image-centric SVG class
      *
-     * FluidUi::Svg provides a class for rendering SVG images to a QPainter in a
+     * Fluid::Svg provides a class for rendering SVG images to a QPainter in a
      * convenient manner. Unless an absolute path to a file is provided, it loads
-     * the SVG document using FluidUi::Theme. It also provides a number of internal
+     * the SVG document using Fluid::Theme. It also provides a number of internal
      * optimizations to help lower the cost of painting SVGs, such as caching.
      *
-     * @see FluidUi::FrameSvg
+     * @see Fluid::FrameSvg
      **/
-    class FLUID_UICOMPONENTS_EXPORT Svg : public QObject
+    class FLUID_CORECOMPONENTS_EXPORT Svg : public QObject
     {
         Q_OBJECT
         Q_ENUMS(ContentType)
@@ -65,7 +65,7 @@ namespace FluidUi
          * Constructs an SVG object that implicitly shares and caches rendering.
          *
          * Unlike QSvgRenderer, which this class uses internally,
-         * FluidUi::Svg represents an image generated from an SVG. As such, it
+         * Fluid::Svg represents an image generated from an SVG. As such, it
          * has a related size and transform matrix (the latter being provided
          * by the painter used to paint the image).
          *
@@ -73,7 +73,7 @@ namespace FluidUi
          *
          * @param parent options QObject to parent this to
          *
-         * @related FluidUi::Theme
+         * @related Fluid::Theme
          */
         explicit Svg(QObject *parent = 0);
         ~Svg();
@@ -286,11 +286,11 @@ namespace FluidUi
         /**
          * Set the SVG file to render.
          *
-         * Relative paths are looked for in the current FluidUi theme,
+         * Relative paths are looked for in the current Fluid theme,
          * and should not include the file extension (.svg and .svgz
          * files will be searched for).  See Theme::imagePath().
          *
-         * If the parent object of this Svg is a FluidUi::Applet,
+         * If the parent object of this Svg is a Fluid::Applet,
          * relative paths will be searched for in the applet's package
          * first.
          *
@@ -338,19 +338,19 @@ namespace FluidUi
 
 #ifdef PLFIORINI
         /**
-         * Sets the FluidUi::Theme to use with this Svg object.
+         * Sets the Fluid::Theme to use with this Svg object.
          *
-         * By default, Svg objects use FluidUi::Theme::default().
+         * By default, Svg objects use Fluid::Theme::default().
          *
          * This determines how relative image paths are interpreted.
          *
          * @param theme  the theme object to use
          * @since 4.3
          */
-        void setTheme(FluidUi::Theme *theme);
+        void setTheme(Fluid::Theme *theme);
 
         /**
-         * The FluidUi::Theme used by this Svg object.
+         * The Fluid::Theme used by this Svg object.
          *
          * This determines how relative image paths are interpreted.
          *

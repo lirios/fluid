@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -37,170 +37,117 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        FluidCore
+
+Description:
+        It's similar to a ScrollBar or a ScrollDecorator.
+        It's interactive and works on ListViews that have section.property set,
+        so its contents are categorized.
+        An indicator will say to what category the user scrolled to.
+        Useful for things like address books or things sorted by date.
+        Don't use with models too big (thousands of items) because implies
+        loading all the items to memory, as well loses precision.
+
+Properties:
+        ListView listView:
+         As The ScrollBar, this is the listview the sectionScroller will operate on. This component doesn't work with simple Flickable or GridView.
+**/
 
 import QtQuick 2.0
-import "." 1.0
-import "SectionScroller.js" as Sections
+import "private/SectionScroller.js" as Sections
+import FluidCore 1.0
 
 Item {
     id: root
 
+    /*
+     * The listview this scroll indicator will work on
+     */
     property ListView listView
 
     onListViewChanged: {
-        if (listView && listView.model) {
+        if (listView && listView.model)
             internal.initDirtyObserver();
-        } else if (listView) {
-            listView.modelChanged.connect(function() {
-                if (listView.model) {
-                    internal.initDirtyObserver();
-                }
-            });
-        }
-    }
-
-    property Style platformStyle: SectionScrollerStyle {}
-
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
-
-    Rectangle {
-        id: container
-        color: "transparent"
-        width: 80
-        height: listView.height
-        x: listView.x + listView.width - width
-        property bool dragging: false
-
-        MouseArea {
-            id: dragArea
-            objectName: "dragArea"
-            anchors.fill: parent
-            drag.target: tooltip
-            drag.axis: Drag.YAxis
-            drag.minimumY: listView.y
-            drag.maximumY: listView.y + listView.height - tooltip.height
-
-            onPressed: {
-                mouseDownTimer.start()
-            }
-
-            onReleased: {
-                container.dragging = false;
-                mouseDownTimer.stop()
-            }
-
-            onPositionChanged: {
-                internal.adjustContentPosition(dragArea.mouseY);
-            }
-
-            Timer {
-                id: mouseDownTimer
-                interval: 150
-
-                onTriggered: {
-                    container.dragging = true;
-                    internal.adjustContentPosition(dragArea.mouseY);
-                    tooltip.positionAtY(dragArea.mouseY);
-                }
-            }
-            states: [
-                State {
-                    name: "dragging"; when: container.dragging
-                    PropertyChanges { target: container; color: Qt.rgba(1, 1, 1, 0.5) }
-                }
-            ]
-        }
-        Item {
-            id: tooltip
-            objectName: "popup"
-            opacity: container.dragging ? 1 : 0
-            anchors.right: parent.right
-            width: listView.width
-            height: childrenRect.height
-
-            function positionAtY(yCoord) {
-                tooltip.y = Math.max(dragArea.drag.minimumY, Math.min(yCoord - tooltip.height/2, dragArea.drag.maximumY));
-            }
-
-            Rectangle {
-                id: background
-                width: parent.width
-                height: childrenRect.height// + 20
-                anchors.left: parent.left
-                color: Qt.rgba(0, 0, 0, 0.5)
-
-                    SectionScrollerLabel {
-                        id: currentSectionLabel
-                        objectName: "currentSectionLabel"
-                        text: internal.currentSection
-                        highlighted: true
-                        up: !internal.down
-                    }
-                }
-
-            states: [
-                State {
-                    name: "visible"
-                    when: container.dragging
-                },
-
-                State {
-                    extend: "visible"
-                    name: "atTop"
-                    when: internal.curPos === "first"
-                    PropertyChanges {
-                        target: currentSectionLabel
-                        text: internal.nextSection
-                    }
-                },
-
-                State {
-                    extend: "visible"
-                    name: "atBottom"
-                    when: internal.curPos === "last"
-                    PropertyChanges {
-                        target: currentSectionLabel
-                        text: internal.prevSection
-                    }
-                }
-            ]
-
-            Behavior on opacity {
-                NumberAnimation { duration: 100 }
-            }
-        }
-    }
-
-    Timer {
-        id: dirtyTimer
-        interval: 100
-        running: false
-        onTriggered: {
-            Sections.initSectionData(listView);
-            internal.modelDirty = false;
-        }
     }
 
     Connections {
-        target: root.listView
-        onCurrentSectionChanged: internal.curSect = container.dragging ? internal.curSect : ""
+        target: listView
+        onModelChanged: {
+            if (listView && listView.model) {
+                internal.initDirtyObserver()
+            }
+        }
     }
+
+    width: 22
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 250
+        }
+    }
+
+    anchors {
+        right: listView.right
+        top: listView.top
+        bottom: listView.bottom
+    }
+
+
+    RangeModel {
+        id: range
+
+        minimumValue: 0
+        maximumValue: Math.max(0, listView.contentHeight - listView.height)
+        stepSize: 0
+        //inverted: true
+        positionAtMinimum: root.width*2
+        positionAtMaximum: root.height - root.width*2
+        value: listView.contentY
+        onPositionChanged: sectionLabel.text = Sections.closestSection(position/listView.height)
+
+    }
+
+    ScrollBar {
+        id: scrollBar
+        flickableItem: listView
+        anchors.fill: parent
+        interactive: true
+    }
+    FluidCore.FrameSvgItem {
+        imagePath: "widgets/tooltip"
+        width: sectionLabel.paintedWidth + margins.left + margins.right
+        height: sectionLabel.paintedHeight + margins.top + margins.bottom
+        Label {
+            id: sectionLabel
+            font.pointSize: theme.defaultFont.pointSize*3
+            x: parent.margins.left
+            y: parent.margins.top
+        }
+        y: Math.min(root.height-height-scrollBar.width, Math.max(scrollBar.width, range.position - height/2))
+        anchors {
+            //verticalCenter: handle.verticalCenter
+            right: parent.left
+        }
+        opacity: sectionLabel.text && scrollBar.pressed?1:0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 250
+            }
+        }
+    }
+
 
     QtObject {
         id: internal
 
-        property string prevSection: ""
-        property string currentSection: listView.currentSection
-        property string nextSection: ""
-        property string curSect: ""
-        property string curPos: "first"
-        property int oldY: 0
-        property bool modelDirty: false
-        property bool down: true
-
         function initDirtyObserver() {
-            Sections.initialize(listView);
+            Sections.initSectionData(listView);
             function dirtyObserver() {
                 if (!internal.modelDirty) {
                     internal.modelDirty = true;
@@ -222,25 +169,8 @@ Item {
 
             if (listView.model.itemsRemoved)
                 listView.model.itemsRemoved.connect(dirtyObserver);
+
+            sectionsRepeater.model = Sections._sections.length
         }
-
-        function adjustContentPosition(y) {
-            if (y < 0 || y > dragArea.height) return;
-
-            internal.down = (y > internal.oldY);
-            var sect = Sections.getClosestSection((y / dragArea.height), internal.down);
-            internal.oldY = y;
-            if (internal.curSect != sect) {
-                internal.curSect = sect;
-                internal.curPos = Sections.getSectionPositionString(internal.curSect);
-                var sec = Sections.getRelativeSections(internal.curSect);
-                internal.prevSection = sec[0];
-                internal.currentSection = sec[1];
-                internal.nextSection = sec[2];
-                var idx = Sections.getIndexFor(sect);
-                listView.positionViewAtIndex(idx, ListView.Beginning);
-            }
-        }
-
     }
 }

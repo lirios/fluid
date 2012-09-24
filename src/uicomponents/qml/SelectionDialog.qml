@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,147 +40,153 @@
 **
 ****************************************************************************/
 
+/**Documentanted API
+Inherits:
+        CommonDialog
+
+Imports:
+        FluidCore
+        QtQuick 2.0
+        "." 1.0
+
+Description:
+        This is plasma themed SelectionDialog, with which you can customize the visual representation
+        of the selectable items' list by overriding the ListView delegate.
+        By default SelectionDialog provides a scrollable list of textual menu items.
+        The user can choose one item from the list at a time.
+
+Properties:
+        QtObject: listView.model:
+        The model of selectionDialog.
+        Can be a simple model or a custom QAbstractItemModel
+
+        int selectedIndex: -1
+        It returns the index that the user has selected.
+        The default value is -1.
+
+        Component delegate:
+        This is a common delegate with which,you will choose
+        how your items will be displayed.
+**/
+
 import QtQuick 2.0
+import FluidCore 1.0
+
 import "." 1.0
-import "UIConstants.js" as UI
 
 CommonDialog {
     id: root
 
     // Common API
-    property alias model: selectionListView.model
-    property int deselectedIndex: -1   // read & write
-    property int selectedIndex: -1   // read & write
-    //property string titleText: "Selection Dialog"
+    property alias model: listView.model
+    property int selectedIndex: -1
+    property Component delegate: defaultDelegate
 
+    Component {
+        id: defaultDelegate
 
-    property Component delegate:          // Note that this is the default delegate for the list
-        Component {
-            id: defaultDelegate
-
-            Item {
-                id: delegateItem
-                property bool selected: index == selectedIndex;
-
-                height: root.platformStyle.itemHeight
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-    // Legacy. "name" used to be the role which was used by delegate
-    // "modelData" available for JS array and for models with one role
-    // C++ models have "display" role available always
-   function __setItemText() {
-       try {
-           itemText.text = name
-       } catch(err) {
-           try {
-               itemText.text = modelData
-           } catch (err) {
-               itemText.text = display
-           }
-       }
-   }
-
-
-                MouseArea {
-                    id: delegateMouseArea
-                    anchors.fill: parent;
-                    onPressed: {
-                        deselectedIndex = selectedIndex;
-                        selectedIndex = index;
-                    }
-                    onClicked:  accept();
+        Label {
+            visible: modelData.search(RegExp(filterField.filterText, "i")) != -1
+            height: visible? paintedHeight*2 : 0
+            text: modelData
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    selectedIndex = index
+                    root.accept()
                 }
+            }
 
-                Rectangle {
-                    id: backgroundRect
-                    anchors.fill: parent
-                    color: delegateItem.selected ? root.platformStyle.itemSelectedBackgroundColor : root.platformStyle.itemBackgroundColor
-                }
-
-                BorderImage {
-                    id: background
-                    anchors.fill: parent
-                    border { left: UI.CORNER_MARGINS; top: UI.CORNER_MARGINS; right: UI.CORNER_MARGINS; bottom: UI.CORNER_MARGINS }
-                    source: delegateMouseArea.pressed ? root.platformStyle.itemPressedBackground :
-                            delegateItem.selected ? root.platformStyle.itemSelectedBackground :
-                            root.platformStyle.itemBackground
-                }
-
-                Text {
-                    id: itemText
-                    elide: Text.ElideRight
-                    color: delegateItem.selected ? root.platformStyle.itemSelectedTextColor : root.platformStyle.itemTextColor
-                    anchors.verticalCenter: delegateItem.verticalCenter
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: root.platformStyle.itemLeftMargin
-                    anchors.rightMargin: root.platformStyle.itemRightMargin
-                    text: modelData
-                    font: root.platformStyle.itemFont
-                }
-
-                Component.onCompleted: __setItemText() 
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Up || event.key == Qt.Key_Down)
+                    scrollBar.flash()
             }
         }
-
-    onStatusChanged: {
-      if (status == DialogStatus.Opening && selectedIndex >= 0) {
-          selectionListView.positionViewAtIndex(selectedIndex, ListView.Center)
-      }
     }
 
-    // Style API
-    property Style platformStyle: SelectionDialogStyle {}
-
-    //Deprecated, TODO Remove this on w13
-    property alias style: root.platformStyle
-
-    // private api
-    property int __pressDelay: platformStyle.pressDelay
-
-    // the title field consists of the following parts: title string and
-    // a close button (which is in fact an image)
-    // it can additionally have an icon
-    titleText:"Selection Dialog"
-
-    // the content field which contains the selection content
     content: Item {
+        id: contentItem
+        property alias filterText: filterField.filterText
+        implicitWidth: theme.defaultFont.mSize.width * 40
+        height: theme.defaultFont.mSize.height * 12
 
-        id: selectionContent
-        property int listViewHeight
-        property int maxListViewHeight : visualParent
-        ? visualParent.height * 0.87
-                - root.platformStyle.titleBarHeight - root.platformStyle.contentSpacing - 50
-        : root.parent
-                ? root.parent.height * 0.87
-                        - root.platformStyle.titleBarHeight - root.platformStyle.contentSpacing - 50
-                : 350
-        height: listViewHeight > maxListViewHeight ? maxListViewHeight : listViewHeight
-        width: root.width
-        y : root.platformStyle.contentSpacing
-
-        ListView {
-            id: selectionListView
-            model: ListModel {}
-
-            currentIndex : -1
-            anchors.fill: parent
-            delegate: root.delegate
-            focus: true
-            clip: true
-            pressDelay: __pressDelay
-
-            ScrollDecorator {
-                id: scrollDecorator
-                flickableItem: selectionListView
-                platformStyle.inverted: true
+        TextField {
+            id: filterField
+            property string filterText
+            onTextChanged: searchTimer.restart()
+            clearButtonShown: true
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
             }
-            onCountChanged: selectionContent.listViewHeight = (typeof model.count === 'undefined' ? model.length : model.count) * platformStyle.itemHeight
-            onModelChanged: selectionContent.listViewHeight = (typeof model.count === 'undefined' ? model.length : model.count) * platformStyle.itemHeight
+            Timer {
+                id: searchTimer
+                running: false
+                repeat: false
+                interval: 500
+                onTriggered: filterField.filterText = filterField.text
+            }
+        }
+        ListView {
+            id: listView
+
+            anchors {
+                top: filterField.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            currentIndex : -1
+            delegate: root.delegate
+            clip: true
+
+            Keys.onPressed: {
+                if (event.key == Qt.Key_Up || event.key == Qt.Key_Down
+                    || event.key == Qt.Key_Left || event.key == Qt.Key_Right
+                    || event.key == Qt.Key_Select || event.key == Qt.Key_Enter
+                    || event.key == Qt.Key_Return) {
+                    listView.currentIndex = 0
+                    event.accepted = true
+                }
+            }
         }
 
+        ScrollBar {
+            id: scrollBar
+            flickableItem: listView
+            visible: listView.contentHeight > contentItem.height
+            //platformInverted: root.platformInverted
+            anchors { top: contentItem.top; right: contentItem.right }
+        }
+    }
+
+    onClickedOutside: {
+        reject()
+    }
+
+    Timer {
+        id: focusTimer
+        interval: 100
+        onTriggered: {
+            filterField.forceActiveFocus()
+        }
+    }
+    onStatusChanged: {
+        //FIXME: why needs focus deactivation then activation?
+        if (status == DialogStatus.Open) {
+            filterField.focus = false
+            focusTimer.running = true
+        }
+
+        if (status == DialogStatus.Opening) {
+            if (listView.currentItem != null) {
+                listView.currentItem.focus = false
+            }
+            listView.currentIndex = -1
+            listView.positionViewAtIndex(0, ListView.Beginning)
+        } else if (status == DialogStatus.Open) {
+            listView.focus = true
+        }
     }
 }
-
-

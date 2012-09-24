@@ -1,6 +1,8 @@
 /****************************************************************************
 **
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright 21.0 Marco Martin <mart@kde.org>
+**
+** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -38,36 +40,137 @@
 **
 ****************************************************************************/
 
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        QtQuick 2.0
+        AppManager.js
+
+Description:
+        A simple tab button which is using the  plasma theme.
+
+Properties:
+        Item tab:
+        The reference to the tab content (one of the children of a TabGroup,
+        usually a Page) that is activated when this TabButton is clicked.
+
+        bool checked:
+        True if the button is checked,otherwise false.
+
+        bool pressed:
+        True if the button is being pressed,otherwise false.
+
+        string text:
+        Sets the text for the button.
+
+        string iconSource:
+        Icon for the button. It can be a Freedesktop icon name, a full path to a ong/svg file,
+        or any name for which the application has an image handler registered.
+
+Signals:
+        onClicked:
+        The signal is emmited when the button is clicked.
+**/
+
 import QtQuick 2.0
-import "." 1.0
+import "private/AppManager.js" as Utils
+import "private" as Private
 
-Button {
-    id: tabButton
+Item {
+    id: root
 
-    // Common public API
+    // Common Public API
     property Item tab
-    property QtObject platformStyle: TabButtonStyle {}
-    
-    //Deprecated: TODO, remove this! 
-    property alias style: tabButton.platformStyle
+    property bool checked: (internal.tabGroup == null) ? (root.parent.parent.currentTab == root) : (internal.tabGroup.currentTab == tab)
 
-    property Item __tabGroup: tab !== null ? tab.parent : null
+    property bool pressed: mouseArea.pressed == true && mouseArea.containsMouse
+    property alias text: label.text
+    property alias iconSource: imageLoader.source
 
+    signal clicked
+
+    implicitWidth: label.paintedWidth + (internal.portrait ? 0 : (iconSource != null ? 16 : 0))
+    implicitHeight: label.paintedHeight + (internal.portrait ? (iconSource != null ? 16 : 0) : 0)
+
+    opacity: enabled ? 1 : 0.6
+    //long notation to not make it overwritten by implementations
     Connections {
-        target: __tabGroup
-        onCurrentTabChanged: checked = __tabGroup.currentTab == tab;
+        target: root
+        onPressedChanged: {
+            //TabBar is the granparent
+            root.parent.parent.currentTab = root
+            root.parent.parent.forceActiveFocus()
+        }
+        onVisibleChanged: root.parent.childrenChanged()
     }
 
-    onClicked: privatePressed()
+    QtObject {
+        id: internal
 
-    function privatePressed() {
-        if (tabButton.checkable) {
-            tabButton.checked = !tabButton.checked;
-        }    
-        
-        if (__tabGroup != null && 
-            tab != null) {
-            __tabGroup.currenTab == tab ? __tabGroup.currentTab.pop(): __tabGroup.currentTab = tab;
-        }		
+        property Item tabGroup: Utils.findParent(tab, "currentTab")
+        property bool portrait: root.height >= label.paintedHeight + 16
+
+        function click() {
+            root.clicked()
+            if (internal.tabGroup) {
+                internal.tabGroup.currentTab = tab
+            }
+        }
+
+        Component.onCompleted: {
+            if (internal.tabGroup && internal.tabGroup.currentTab == tab) {
+                internal.tabGroup.currentTab = tab
+            }
+        }
+    }
+
+    Label {
+        id: label
+
+        objectName: "label"
+
+        anchors {
+            top: internal.portrait && iconSource != null ? imageLoader.bottom : parent.top
+            left: internal.portrait || iconSource == null ? parent.left : imageLoader.right
+            leftMargin: iconSource == null ? 0 : parent.parent.anchors.leftMargin
+            right: parent.right
+            bottom: parent.bottom
+        }
+
+        elide: Text.ElideRight
+        horizontalAlignment: !internal.portrait && iconSource != null ? Text.AlignLeft : Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+
+        color: root.checked ? theme.buttonTextColor : theme.textColor
+    }
+
+    Private.IconLoader {
+        id: imageLoader
+
+        implicitWidth: internal.portrait ? Math.max(theme.smallIconSize, root.height - (label.text ? label.height : 0)) : Math.max(theme.smallIconSize, root.height)
+        implicitHeight: implicitWidth
+
+        anchors {
+            left: internal.portrait ? undefined : parent.left
+            horizontalCenter: internal.portrait ? parent.horizontalCenter : undefined
+            verticalCenter: internal.portrait ? undefined : parent.verticalCenter
+        }
+    }
+
+    MouseArea {
+        id: mouseArea
+
+        onClicked: {
+            root.clicked()
+            if (internal.tabGroup) {
+                internal.tabGroup.currentTab = tab
+            }
+            //TabBar is the granparent, done here too in case of no tabgroup
+            root.parent.parent.currentTab = root
+        }
+
+        anchors.fill: parent
     }
 }

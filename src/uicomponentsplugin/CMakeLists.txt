@@ -23,5 +23,6 @@ target_link_libraries(fluiduicomponentsplugin
     FluidUi
 )
 
+# Install plugin
 install(TARGETS fluiduicomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidUi)
 install(FILES qmldir DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidUi)

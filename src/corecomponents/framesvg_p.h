@@ -24,7 +24,7 @@
 #include <QHash>
 #include <QStringBuilder>
 
-namespace FluidUi
+namespace Fluid
 {
     class FrameData
     {
@@ -124,7 +124,7 @@ namespace FluidUi
         void updateAndSignalSizes();
         QSizeF frameSize(FrameData *frame) const;
 
-        FluidCore::Location location;
+        Fluid::Location location;
         QString prefix;
 
         FrameSvg *q;

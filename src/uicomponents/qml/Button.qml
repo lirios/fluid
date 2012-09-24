@@ -1,145 +1,265 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the Qt Components project.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/*
+*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
+*   Copyright (C) 21.0 by Mark Gaiser <markg85@gmail.com>
+*   Copyright (C) 21.0 by Marco Martin <mart@kde.org>
+*
+*   This program is free software; you can redistribute it and/or modify
+*   it under the terms of the GNU Library General Public License as
+*   published by the Free Software Foundation; either version 2, or
+*   (at your option) any later version.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU Library General Public License for more details
+*
+*   You should have received a copy of the GNU Library General Public
+*   License along with this program; if not, write to the
+*   Free Software Foundation, Inc.,
+*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
+*/
+
+
+/**Documented API
+Inherits:
+        Item
+
+Imports:
+        FluidCore
+        QtQuick 2.0
+
+Description:
+        A simple button, with optional label and icon which uses the plasma theme.
+	This button component can also be used as a checkable button by using the checkable
+	and checked properties for that.
+        Plasma theme is the theme which changes via the systemsetting-workspace appearance
+        -desktop theme.
+
+Properties:
+      * bool checked:
+        This property holds whether this button is checked or not.
+	The button must be in the checkable state for enable users check or uncheck it.
+	The default value is false.
+	See also checkable property.
+
+      * bool checkable:
+        This property holds if the button is acting like a checkable button or not.
+	The default value is false.
+
+       * bool pressed:
+        This property holds if the button is pressed or not.
+	Read-only.
+
+      * string text:
+        This property holds the text label for the button.
+        For example,the ok button has text 'ok'.
+	The default value for this property is an empty string.
+
+      * url iconSource:
+        This property holds the source url for the Button's icon.
+    The default value is an empty url, which displays no icon.
+    It can be any image from any protocol supported by the Image element, or a freedesktop-compatible icon name
+
+      * font font:
+        This property holds the font used by the button label.
+	See also Qt documentation for font type.
+
+Signals:
+      * clicked():
+        This handler is called when there is a click.
+**/
 
 import QtQuick 2.0
-import "." 1.0
-import "UIConstants.js" as UI
 
-FocusScope {
+import FluidCore 1.0
+import "private" as Private
+
+Item {
     id: button
 
-    // Common public API
+    // Commmon API
     property bool checked: false
     property bool checkable: false
-    property alias pressed: mouseArea.pressed
+    property alias pressed: mouse.pressed
     property alias text: label.text
-    property url iconSource
-    property alias platformMouseAnchors: mouseArea.anchors
-
-    signal clicked
-
-    // Used in ButtonGroup.js to set the segmented look on the buttons.
-    property string __buttonType
-
-    // Styling for the Button
-    property Style platformStyle: ButtonStyle {}
-
-    implicitWidth: platformStyle.buttonWidth
-    implicitHeight: platformStyle.buttonHeight
-    width: implicitWidth
-
+    property alias iconSource: icon.source
     property alias font: label.font
 
-    // private property
-    // deprecated, use positive/negative dialog instead
-    property bool __dialogButton: false
+    signal clicked()
 
-    property bool __positiveDialogButton: false
-    property bool __negativeDialogButton: false
+    implicitWidth: {
+        if (label.paintedWidth == 0) {
+            return height
+        } else {
+            //return Math.max(theme.defaultFont.mSize.width*12, label.paintedWidth)
+            return Math.max(theme.defaultFont.mSize.width*12, icon.width + label.paintedWidth + surfaceNormal.margins.left + surfaceNormal.margins.right) + ((icon.valid) ? surfaceNormal.margins.left : 0)
+        }
+    }
+    implicitHeight: Math.max(theme.defaultFont.mSize.height*1.6, Math.max(icon.height, label.paintedHeight) + surfaceNormal.margins.top/2 + surfaceNormal.margins.bottom/2)
 
-    BorderImage {
-        id: background
+    // TODO: needs to define if there will be specific graphics for
+    //     disabled buttons
+    opacity: enabled ? 1.0 : 0.5
+
+    QtObject {
+        id: internal
+        property bool userPressed: false
+
+        function belongsToButtonGroup()
+        {
+            return button.parent
+                   && button.parent.hasOwnProperty("checkedButton")
+                   && button.parent.exclusive
+        }
+
+        function clickButton()
+        {
+            userPressed = false
+            if (!button.enabled) {
+                return
+            }
+
+            if ((!belongsToButtonGroup() || !button.checked) && button.checkable) {
+                button.checked = !button.checked
+            }
+
+            button.forceActiveFocus()
+            button.clicked()
+        }
+    }
+
+    Keys.onSpacePressed: internal.userPressed = true
+    Keys.onReturnPressed: internal.userPressed = true
+    Keys.onReleased: {
+        internal.userPressed = false
+        if (event.key == Qt.Key_Space ||
+            event.key == Qt.Key_Return)
+            internal.clickButton();
+    }
+
+    Private.ButtonShadow {
+        id: shadow
         anchors.fill: parent
-        border { left: button.platformStyle.backgroundMarginLeft; top: button.platformStyle.backgroundMarginTop;
-                 right: button.platformStyle.backgroundMarginRight; bottom: button.platformStyle.backgroundMarginBottom }
-
-        source: __dialogButton ? (pressed ? button.platformStyle.pressedDialog : button.platformStyle.dialog) :
-                __positiveDialogButton ? (pressed ? button.platformStyle.pressedPositiveDialog : button.platformStyle.positiveDialog) :
-                __negativeDialogButton ? (pressed ? button.platformStyle.pressedNegativeDialog : button.platformStyle.negativeDialog) :
-                !enabled ? (checked ? button.platformStyle.checkedDisabledBackground : button.platformStyle.disabledBackground) :
-                pressed ? button.platformStyle.pressedBackground :
-                checked ? button.platformStyle.checkedBackground :
-                button.platformStyle.background;
+        state: {
+            if (internal.userPressed || checked) {
+                return "hidden"
+            } else if (mouse.containsMouse) {
+                return "hover"
+            } else if (button.activeFocus) {
+                return "focus"
+            } else {
+                return "shadow"
+            }
+        }
     }
 
-    Image {
-        id: icon
-        anchors.left: label.visible ? parent.left : undefined
-        anchors.leftMargin: label.visible ? UI.MARGIN_XLARGE : 0
-        anchors.centerIn: label.visible ? undefined : parent
+    // The normal button state
+    FluidCore.FrameSvgItem {
+        id: surfaceNormal
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -1
-
-        source: button.iconSource
-
-        visible: source != ""
+        anchors.fill: parent
+        imagePath: "widgets/button"
+        prefix: "normal"
     }
 
-    Label {
-        id: label
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: icon.visible ? icon.right : parent.left
-        anchors.leftMargin: icon.visible ? UI.PADDING_XLARGE : UI.BUTTON_LABEL_MARGIN
-        anchors.right: parent.right
-        anchors.rightMargin: UI.BUTTON_LABEL_MARGIN
+    // The pressed state
+    FluidCore.FrameSvgItem {
+        id: surfacePressed
 
-        horizontalAlignment: icon.visible ? Text.AlignLeft : button.platformStyle.horizontalAlignment
-        elide: Text.ElideRight
+        anchors.fill: parent
+        imagePath: "widgets/button"
+        prefix: "pressed"
+        opacity: 0
+    }
 
-        font.family: button.platformStyle.fontFamily
-        font.weight: checked ? button.platformStyle.checkedFontWeight : button.platformStyle.fontWeight
-        font.pixelSize: button.platformStyle.fontPixelSize
-        font.capitalization: button.platformStyle.fontCapitalization
-        color: !enabled ? button.platformStyle.disabledTextColor :
-               pressed ? button.platformStyle.pressedTextColor :
-               checked ? button.platformStyle.checkedTextColor :
-                         button.platformStyle.textColor;
-        text: ""
-        visible: text != ""
+    Item {
+        id: buttonContent
+        state: (internal.userPressed || checked) ? "pressed" : "normal"
+
+        states: [
+            State { name: "normal" },
+            State { name: "pressed" 
+                    PropertyChanges {
+                        target: surfaceNormal
+                        opacity: 0
+                    }
+                    PropertyChanges {
+                        target: surfacePressed
+                        opacity: 1
+                    }
+            }
+        ]
+        transitions: [
+            Transition {
+                to: "normal"
+                // Cross fade from pressed to normal
+                ParallelAnimation {
+                    NumberAnimation { target: surfaceNormal; property: "opacity"; to: 1; duration: 100 }
+                    NumberAnimation { target: surfacePressed; property: "opacity"; to: 0; duration: 100 }
+                }
+            }
+        ]
+
+        anchors {
+            fill: parent
+            leftMargin: surfaceNormal.margins.left
+            topMargin: surfaceNormal.margins.top
+            rightMargin: surfaceNormal.margins.right
+            bottomMargin: surfaceNormal.margins.bottom
+        }
+
+        Private.IconLoader {
+            id: icon
+
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: label.paintedWidth > 0 ? parent.left : undefined
+                horizontalCenter: label.paintedWidth > 0 ? undefined : parent.horizontalCenter
+            }
+            height: roundToStandardSize(parent.height)
+            width: height
+        }
+
+        Text {
+            id: label
+
+            //FIXME: why this is needed?
+            onPaintedWidthChanged: {
+                icon.anchors.horizontalCenter = label.paintedWidth > 0 ? undefined : icon.parent.horizontalCenter
+                icon.anchors.left = label.paintedWidth > 0 ? icon.parent.left : undefined
+            }
+
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.right
+                left: icon.valid ? icon.right : parent.left
+                leftMargin: icon.valid ? parent.anchors.leftMargin : 0
+            }
+
+            font.capitalization: theme.defaultFont.capitalization
+            font.family: theme.defaultFont.family
+            font.italic: theme.defaultFont.italic
+            font.letterSpacing: theme.defaultFont.letterSpacing
+            font.pointSize: theme.defaultFont.pointSize
+            font.strikeout: theme.defaultFont.strikeout
+            font.underline: theme.defaultFont.underline
+            font.weight: theme.defaultFont.weight
+            font.wordSpacing: theme.defaultFont.wordSpacing
+            color: theme.buttonTextColor
+            horizontalAlignment: icon.valid ? Text.AlignLeft : Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
     }
 
     MouseArea {
-        id: mouseArea
-        anchors {
-            fill: parent
-            rightMargin: (platformStyle.position != "horizontal-center"
-                            && platformStyle.position != "horizontal-left") ? platformStyle.mouseMarginRight : 0
-            leftMargin: (platformStyle.position != "horizontal-center"
-                            && platformStyle.position != "horizontal-right") ? platformStyle.mouseMarginLeft : 0
-            topMargin: (platformStyle.position != "vertical-center"
-                            && platformStyle.position != "vertical-bottom") ? platformStyle.mouseMarginTop : 0
-            bottomMargin: (platformStyle.position != "vertical-center"
-                            && platformStyle.position != "vertical-top") ? platformStyle.mouseMarginBottom : 0
-        }
-	onClicked: if (button.checkable) button.checked = !button.checked
+        id: mouse
+
+        anchors.fill: parent
+        hoverEnabled: true
+        onPressed: internal.userPressed = true
+        onReleased: internal.userPressed = false
+        onCanceled: internal.userPressed = false
+        onClicked: internal.clickButton()
     }
-    Component.onCompleted: mouseArea.clicked.connect(clicked)
 }

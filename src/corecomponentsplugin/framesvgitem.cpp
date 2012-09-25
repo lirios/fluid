@@ -17,17 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "framesvgitem.h"
-
 #include <QPainter>
 
-#include "kdebug.h"
+#include "framesvgitem.h"
 
-
-namespace Plasma
-{
-
-FrameSvgItemMargins::FrameSvgItemMargins(Plasma::FrameSvg *frameSvg, QObject *parent)
+FrameSvgItemMargins::FrameSvgItemMargins(Fluid::FrameSvg *frameSvg, QObject *parent)
     : QObject(parent),
       m_frameSvg(frameSvg)
 {
@@ -54,10 +48,10 @@ qreal FrameSvgItemMargins::bottom() const
     return m_frameSvg->marginSize(BottomMargin);
 }
 
-FrameSvgItem::FrameSvgItem(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent)
+FrameSvgItem::FrameSvgItem(QQuickItem *parent)
+    : QQuickItem(parent)
 {
-    m_frameSvg = new Plasma::FrameSvg(this);
+    m_frameSvg = new Fluid::FrameSvg(this);
     m_margins = new FrameSvgItemMargins(m_frameSvg, this);
     setFlag(QGraphicsItem::ItemHasNoContents, false);
     connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SLOT(doUpdate()));
@@ -108,7 +102,7 @@ FrameSvgItemMargins *FrameSvgItem::margins() const
     return m_margins;
 }
 
-void FrameSvgItem::setEnabledBorders(const Plasma::FrameSvg::EnabledBorders borders)
+void FrameSvgItem::setEnabledBorders(const Fluid::FrameSvg::EnabledBorders borders)
 {
     if (m_frameSvg->enabledBorders() == borders)
         return;
@@ -117,7 +111,7 @@ void FrameSvgItem::setEnabledBorders(const Plasma::FrameSvg::EnabledBorders bord
     emit enabledBordersChanged();
 }
 
-Plasma::FrameSvg::EnabledBorders FrameSvgItem::enabledBorders() const
+Fluid::FrameSvg::EnabledBorders FrameSvgItem::enabledBorders() const
 {
     return m_frameSvg->enabledBorders();
 }
@@ -131,10 +125,10 @@ void FrameSvgItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 }
 
 void FrameSvgItem::geometryChanged(const QRectF &newGeometry,
-                                          const QRectF &oldGeometry)
+                                   const QRectF &oldGeometry)
 {
     m_frameSvg->resizeFrame(newGeometry.size());
-    QDeclarativeItem::geometryChanged(newGeometry, oldGeometry);
+    QQuickItem::geometryChanged(newGeometry, oldGeometry);
 }
 
 void FrameSvgItem::doUpdate()
@@ -142,6 +136,4 @@ void FrameSvgItem::doUpdate()
     update();
 }
 
-} // Plasma namespace
-
-#include "framesvgitem.moc"
+#include "moc_framesvgitem.cpp"

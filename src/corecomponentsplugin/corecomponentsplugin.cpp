@@ -25,11 +25,22 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 
+#include <Fluid/RangeModel>
+
 #include "corecomponentsplugin.h"
+#include "framesvgitem.h"
+#include "svgitem.h"
+#include "themeproxy.h"
 
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
+    qmlRegisterType<Fluid::FrameSvg>(uri, 1, 0, "FrameSvg");
+    qmlRegisterType<FrameSvgItem>(uri, 1, 0, "FrameSvgItem");
+    qmlRegisterType<Fluid::RangeModel>(uri, 1, 0, "RangeModel");
+    qmlRegisterType<Fluid::Svg>(uri, 1, 0, "Svg");
+    qmlRegisterType<SvgItem>(uri, 1, 0, "SvgItem");
+    qmlRegisterType<ThemeProxy>(uri, 1, 0, "Theme");
 }
 
 void CoreComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

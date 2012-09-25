@@ -16,16 +16,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef FRAMESVGITEM_P
-#define FRAMESVGITEM_P
 
-#include <QDeclarativeItem>
+#ifndef FRAMESVGITEM_H
+#define FRAMESVGITEM_H
 
-#include <Plasma/FrameSvg>
+#include <QQuickItem>
 
-namespace Plasma {
+#include <Fluid/FrameSvg>
 
+namespace Fluid
+{
     class FrameSvg;
+}
 
 class FrameSvgItemMargins : public QObject
 {
@@ -52,7 +54,7 @@ class FrameSvgItemMargins : public QObject
     Q_PROPERTY(qreal bottom READ bottom NOTIFY marginsChanged)
 
 public:
-    FrameSvgItemMargins(Plasma::FrameSvg *frameSvg, QObject *parent = 0);
+    FrameSvgItemMargins(Fluid::FrameSvg *frameSvg, QObject *parent = 0);
 
     qreal left() const;
     qreal top() const;
@@ -63,10 +65,10 @@ Q_SIGNALS:
     void marginsChanged();
 
 private:
-    FrameSvg *m_frameSvg;
+    Fluid::FrameSvg *m_frameSvg;
 };
 
-class FrameSvgItem : public QDeclarativeItem
+class FrameSvgItem : public QQuickItem
 {
     Q_OBJECT
 
@@ -77,7 +79,7 @@ class FrameSvgItem : public QDeclarativeItem
 
     /**
      * prefix for the 9 piece svg, like "pushed" or "normal" for the button
-     * see http://techbase.kde.org/Development/Tutorials/Plasma/ThemeDetails
+     * see http://techbase.kde.org/Development/Tutorials/Fluid/ThemeDetails
      * for a list of paths and prefixes
      */
     Q_PROPERTY(QString prefix READ prefix WRITE setPrefix NOTIFY prefixChanged)
@@ -88,7 +90,7 @@ class FrameSvgItem : public QDeclarativeItem
      */
     Q_PROPERTY(QObject *margins READ margins CONSTANT)
 
-    Q_FLAGS(Plasma::FrameSvg::EnabledBorders)
+    Q_FLAGS(Fluid::FrameSvg::EnabledBorders)
     /**
      * The borders that will be rendered, it's a flag combination of:
      *  NoBorder
@@ -97,10 +99,10 @@ class FrameSvgItem : public QDeclarativeItem
      *  LeftBorder
      *  RightBorder
      */
-    Q_PROPERTY(Plasma::FrameSvg::EnabledBorders enabledBorders READ enabledBorders WRITE setEnabledBorders NOTIFY enabledBordersChanged)
+    Q_PROPERTY(Fluid::FrameSvg::EnabledBorders enabledBorders READ enabledBorders WRITE setEnabledBorders NOTIFY enabledBordersChanged)
 
 public:
-    FrameSvgItem(QDeclarativeItem *parent=0);
+    FrameSvgItem(QQuickItem *parent = 0);
     ~FrameSvgItem();
 
     void setImagePath(const QString &path);
@@ -109,15 +111,15 @@ public:
     void setPrefix(const QString &prefix);
     QString prefix() const;
 
-    void setEnabledBorders(const Plasma::FrameSvg::EnabledBorders borders);
-    Plasma::FrameSvg::EnabledBorders enabledBorders() const;
+    void setEnabledBorders(const Fluid::FrameSvg::EnabledBorders borders);
+    Fluid::FrameSvg::EnabledBorders enabledBorders() const;
 
     FrameSvgItemMargins *margins() const;
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void geometryChanged(const QRectF &newGeometry,
-                              const QRectF &oldGeometry);
+                         const QRectF &oldGeometry);
 
 signals:
     void imagePathChanged();
@@ -128,11 +130,9 @@ private Q_SLOTS:
     void doUpdate();
 
 private:
-    Plasma::FrameSvg *m_frameSvg;
+    Fluid::FrameSvg *m_frameSvg;
     FrameSvgItemMargins *m_margins;
     QString m_prefix;
 };
 
-}
-
-#endif
+#endif // FRAMESVGITEM_H

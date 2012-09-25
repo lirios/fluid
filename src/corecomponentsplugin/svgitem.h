@@ -16,16 +16,18 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-#ifndef SVGITEM_P
-#define SVGITEM_P
 
-#include <QDeclarativeItem>
+#ifndef SVGITEM_H
+#define SVGITEM_H
 
-namespace Plasma {
+#include <QQuickItem>
 
+namespace Fluid
+{
     class Svg;
+}
 
-class SvgItem : public QDeclarativeItem
+class SvgItem : public QQuickItem
 {
     Q_OBJECT
 
@@ -44,7 +46,7 @@ class SvgItem : public QDeclarativeItem
      * </code>
      * Instead of a Svg declaration it can also be the id of a Svg declared elsewhere, useful to share Svg instances.
      */
-    Q_PROPERTY(Plasma::Svg * svg READ svg WRITE setSvg NOTIFY svgChanged)
+    Q_PROPERTY(Fluid::Svg *svg READ svg WRITE setSvg NOTIFY svgChanged)
 
     /**
      * The natural, unscaled size of the svg document or the element. useful if a pixel perfect rendering of outlines is needed.
@@ -57,14 +59,14 @@ class SvgItem : public QDeclarativeItem
     Q_PROPERTY(bool smooth READ smooth WRITE setSmooth NOTIFY smoothChanged)
 
 public:
-    SvgItem(QDeclarativeItem *parent=0);
+    SvgItem(QQuickItem *parent = 0);
     ~SvgItem();
 
     void setElementId(const QString &elementID);
     QString elementId() const;
 
-    void setSvg(Plasma::Svg *svg);
-    Plasma::Svg *svg() const;
+    void setSvg(Fluid::Svg *svg);
+    Fluid::Svg *svg() const;
 
     void setSmooth(const bool smooth);
     bool smooth() const;
@@ -83,10 +85,9 @@ protected Q_SLOTS:
     void updateNeeded();
 
 private:
-    QWeakPointer<Plasma::Svg> m_svg;
+    QWeakPointer<Fluid::Svg> m_svg;
     QString m_elementID;
     bool m_smooth;
 };
-}
 
-#endif
+#endif // SVGITEM_H

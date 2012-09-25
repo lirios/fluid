@@ -17,23 +17,16 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "svgitem.h"
-
 #include <QPainter>
 
-#include "kdebug.h"
-#include "plasma/svg.h"
+#include "svgitem.h"
 
-namespace Plasma
-{
-
-SvgItem::SvgItem(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+SvgItem::SvgItem(QQuickItem *parent)
+    : QQuickItem(parent),
       m_smooth(false)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasNoContents, false);
 }
-
 
 SvgItem::~SvgItem()
 {
@@ -68,7 +61,7 @@ QSizeF SvgItem::naturalSize() const
 }
 
 
-void SvgItem::setSvg(Plasma::Svg *svg)
+void SvgItem::setSvg(Fluid::Svg *svg)
 {
     if (m_svg) {
         disconnect(m_svg.data(), 0, this, 0);
@@ -83,7 +76,7 @@ void SvgItem::setSvg(Plasma::Svg *svg)
     emit naturalSizeChanged();
 }
 
-Plasma::Svg *SvgItem::svg() const
+Fluid::Svg *SvgItem::svg() const
 {
     return m_svg.data();
 }
@@ -129,6 +122,4 @@ void SvgItem::updateNeeded()
     update();
 }
 
-} // Plasma namespace
-
-#include "svgitem.moc"
+#include "moc_svgitem.cpp"

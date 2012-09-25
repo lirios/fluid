@@ -22,20 +22,17 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QQmlEngine>
-#include <QQmlComponent>
+#ifndef FLUIDEXPORT_H
+#define FLUIDEXPORT_H
 
-#include "uicomponentsplugin.h"
-#include "iconimageprovider.h"
+#include <QtCore/qglobal.h>
 
-void UiComponentsPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("FluidUi"));
-}
+#if !defined(FLUID_EXPORT)
+#  if defined(QT_SHARED)
+#    define FLUID_EXPORT Q_DECL_EXPORT
+#  else
+#    define FLUID_EXPORT
+#  endif
+#endif
 
-void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    engine->addImageProvider("desktoptheme", new IconImageProvider);
-}
-
-#include "moc_uicomponentsplugin.cpp"
+#endif // FLUIDEXPORT_H

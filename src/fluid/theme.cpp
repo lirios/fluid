@@ -136,7 +136,7 @@ namespace Fluid
         bool useNativeWidgetStyle : 1;
     };
 
-    const char *ThemePrivate::defaultTheme = "Vanish";
+    const char *ThemePrivate::defaultTheme = "default";
 
     // The system colors theme is used to cache unthemed svgs with colorization needs
     // these svgs do not follow the theme's colors, but rather the system colors
@@ -149,9 +149,8 @@ namespace Fluid
 
     QString ThemePrivate::findInTheme(const QString &image, const QString &theme, bool cache)
     {
-        if (cache && discoveries.contains(image)) {
+        if (cache && discoveries.contains(image))
             return discoveries[image];
-        }
 
         QString search;
 
@@ -346,7 +345,7 @@ namespace Fluid
           d(new ThemePrivate(this))
     {
         // Default theme settings
-        d->setThemeName(QStringLiteral("Vanish"), false);
+        d->setThemeName(QStringLiteral("default"), false);
         d->toolTipDelay = 700;
 
         if (QCoreApplication::instance()) {

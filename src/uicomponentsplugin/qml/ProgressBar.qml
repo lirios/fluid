@@ -24,6 +24,7 @@
 Imports:
         QtQuick 2.0
         FluidCore
+        FluidExtra
 
 Description:
             It is a simple progressBar which is using the plasma theme.
@@ -53,7 +54,7 @@ Properties:
 
 import QtQuick 2.0
 import FluidCore 1.0 as FluidCore
-import org.kde.qtextracomponents 1.0
+import FluidExtra 1.0 as FluidExtra
 
 Item {
     id: progressBar
@@ -134,18 +135,17 @@ Item {
                 resizeTimer.restart()
             }
         }
-        QPixmapItem {
+        FluidExtra.PixmapItem {
             id: backgroundPixmapItem
             anchors.fill: parent
-            fillMode: QPixmapItem.TileHorizontally
+            fillMode: FluidExtra.PixmapItem.TileHorizontally
             onWidthChanged: resizeTimer.restart()
             onHeightChanged: resizeTimer.restart()
         }
 
-
-        QPixmapItem {
+        FluidExtra.PixmapItem {
             id: barPixmapItem
-            fillMode: QPixmapItem.TileHorizontally
+            fillMode: FluidExtra.PixmapItem.TileHorizontally
             width: indeterminate ? contents._tileWidth*2 : range.position
             height: contents.height
 

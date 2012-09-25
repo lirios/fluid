@@ -39,7 +39,7 @@ Properties:
 
 import QtQuick 2.0
 import FluidCore 1.0 as FluidCore
-import org.kde.qtextracomponents 1.0
+import FluidExtra 1.0 as FluidExtra
 
 Item {
     id: root
@@ -117,7 +117,7 @@ Item {
         Component {
             id: iconComponent
 
-            QIconItem {
+            FluidExtra.IconItem {
                 icon: (typeof source == "string") ? QIcon(root.source) : root.source
                 smooth: true
                 anchors.fill: parent

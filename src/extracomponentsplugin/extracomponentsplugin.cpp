@@ -31,9 +31,9 @@ void ExtraComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidExtra"));
 
-    qmlRegisterType<QPixmapItem>(uri, 1, 0, "QPixmapItem");
-    qmlRegisterType<QImageItem>(uri, 1, 0, "QImageItem");
-    qmlRegisterType<QIconItem>(uri, 1, 0, "QIconItem");
+    qmlRegisterType<QPixmapItem>(uri, 1, 0, "PixmapItem");
+    qmlRegisterType<QImageItem>(uri, 1, 0, "ImageItem");
+    qmlRegisterType<QIconItem>(uri, 1, 0, "IconItem");
 }
 
 #include "moc_extracomponentsplugin.cpp"

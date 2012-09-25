@@ -27,7 +27,7 @@
 
 #include <QQmlExtensionPlugin>
 
-class ExtraComponentsPlugin : public QQMlExtensionPlugin
+class ExtraComponentsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

@@ -28,7 +28,7 @@
 #define QICONITEM_H
 
 #include <QQuickItem>
-#include <QPixmap>
+#include <QIcon>
 #include <QVariant>
 
 class QIconItem : public QQuickPaintedItem
@@ -42,9 +42,9 @@ class QIconItem : public QQuickPaintedItem
     Q_ENUMS(State)
 public:
     enum State {
-        DefaultState, ///The default state.
-        ActiveState, ///Icon is active.
-        DisabledState ///Icon is disabled.
+        DefaultState,   //! The default state
+        ActiveState,    //! Icon is active
+        DisabledState   //! Icon is disabled
     };
 
     QIconItem(QQuickItem *parent = 0);

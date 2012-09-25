@@ -24,7 +24,6 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QIcon>
 #include <QPainter>
 
 #include "qiconitem.h"

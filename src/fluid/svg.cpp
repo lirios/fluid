@@ -400,6 +400,11 @@ namespace Fluid
                     qWarning() << "No image path found for" << themePath;
             }
         }
+#else
+        path = actualTheme()->imagePath(themePath);
+        themeFailed = path.isEmpty();
+        if (themeFailed)
+            qWarning() << "No image path found for" << themePath;
 #endif
 
         //qDebug() << "********************************";

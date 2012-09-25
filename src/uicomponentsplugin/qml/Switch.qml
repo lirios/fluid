@@ -50,7 +50,7 @@ Signals:
         The signal is emited when the button is clicked!
 **/
 import QtQuick 2.0
-import FluidCore 1.0
+import FluidCore 1.0 as FluidCore
 import "private" as Private
 
 Private.DualStateButton {

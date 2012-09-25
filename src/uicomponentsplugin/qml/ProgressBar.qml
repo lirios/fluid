@@ -52,7 +52,7 @@ Properties:
 **/
 
 import QtQuick 2.0
-import FluidCore 1.0
+import FluidCore 1.0 as FluidCore
 import org.kde.qtextracomponents 1.0
 
 Item {

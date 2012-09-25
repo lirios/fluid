@@ -54,7 +54,7 @@ Methods:
 **/
 
 import QtQuick 2.0
-import FluidCore 1.0
+import FluidCore 1.0 as FluidCore
 
 Item{
     id: toolBar

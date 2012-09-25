@@ -115,7 +115,7 @@ Item {
             //FIXME: see how this margin will be set
             leftMargin: height/4
         }
-        color: theme.textColor
+        color: theme.windowTextColor
         verticalAlignment: Text.AlignVCenter
     }
 

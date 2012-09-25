@@ -358,11 +358,13 @@ namespace Fluid
         renderPainter.end();
 
         // Apply current color scheme if the svg asks for it
+#if 0
         if (applyColors) {
             QImage itmp = p.toImage();
             VIconEffect::colorize(itmp, cacheAndColorsTheme()->color(Theme::BackgroundColor), 1.0);
             p = p.fromImage(itmp);
         }
+#endif
 
         if (cacheRendering)
             cacheAndColorsTheme()->insertIntoCache(id, p, QString::number((qint64)q, 16) % QLSEP % actualElementId);

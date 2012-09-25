@@ -298,7 +298,7 @@ Item {
             font.underline: theme.defaultFont.underline
             font.weight: theme.defaultFont.weight
             font.wordSpacing: theme.defaultFont.wordSpacing
-            color: theme.buttonTextColor
+            color: theme.textColor
             selectByMouse: verticalScroll.interactive
 
             onCursorPositionChanged: {
@@ -336,7 +336,7 @@ Item {
                 anchors.fill: parent
                 text: textArea.placeholderText
                 visible: textEdit.text == "" && !textArea.activeFocus
-                color: theme.buttonTextColor
+                color: theme.textColor
                 opacity: 0.5
             }
             onActiveFocusChanged: {

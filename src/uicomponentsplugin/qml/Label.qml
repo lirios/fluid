@@ -61,5 +61,5 @@ Text {
     font.underline: theme.defaultFont.underline
     font.weight: theme.defaultFont.weight
     font.wordSpacing: theme.defaultFont.wordSpacing
-    color: theme.textColor
+    color: theme.windowTextColor
 }

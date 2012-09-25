@@ -38,6 +38,9 @@
 #include <QTimer>
 #include <QUrl>
 
+#include <QtGui/private/qguiapplication_p.h>
+#include <qpa/qplatformtheme.h>
+
 #include <VDesktopFile>
 #include <VSettings>
 
@@ -63,11 +66,6 @@ namespace Fluid
     public:
         ThemePrivate(Theme *theme)
             : q(theme),
-#if 0
-              colorScheme(QPalette::Active, KColorScheme::Window, KSharedConfigPtr(0)),
-              buttonColorScheme(QPalette::Active, KColorScheme::Button, KSharedConfigPtr(0)),
-              viewColorScheme(QPalette::Active, KColorScheme::View, KSharedConfigPtr(0)),
-#endif
               cachesToDiscard(NoCache),
               locolor(false),
               compositingActive(true),
@@ -76,6 +74,9 @@ namespace Fluid
               useGlobal(true),
               useNativeWidgetStyle(false) {
             generalFont = QApplication::font();
+
+            //QPlatformTheme *platformTheme = QGuiApplicationPrivate::platformTheme();
+            palette = new QPalette();
 
             saveTimer = new QTimer(q);
             saveTimer->setSingleShot(true);
@@ -102,6 +103,11 @@ namespace Fluid
 #endif
         }
 
+        ~ThemePrivate() {
+            delete palette;
+            delete settings;
+        }
+
         QString findInTheme(const QString &image, const QString &theme, bool cache = true);
         void compositingChanged(bool active);
         void discardCache(CacheTypes caches);
@@ -125,14 +131,9 @@ namespace Fluid
         Theme *q;
         QString themeName;
         QList<QString> fallbackThemes;
-#if 0
-        KSharedConfigPtr colors;
-        KColorScheme colorScheme;
-        KColorScheme buttonColorScheme;
-        KColorScheme viewColorScheme;
-#endif
         VSettings *settings;
         QFont generalFont;
+        QPalette *palette;
         QString pixmapCachePrefix;
 #if 0
         KSharedConfigPtr svgElementsCache;
@@ -195,9 +196,8 @@ namespace Fluid
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
         }
 
-        if (cache && !search.isEmpty()) {
+        if (cache && !search.isEmpty())
             discoveries.insert(image, search);
-        }
 
         return search;
     }
@@ -255,12 +255,7 @@ namespace Fluid
 
     void ThemePrivate::colorsChanged()
     {
-#if 0
-        colorScheme = KColorScheme(QPalette::Active, KColorScheme::Window, colors);
-        buttonColorScheme = KColorScheme(QPalette::Active, KColorScheme::Button, colors);
-        viewColorScheme = KColorScheme(QPalette::Active, KColorScheme::View, colors);
         scheduleThemeChangeNotification(PixmapCache);
-#endif
     }
 
     void ThemePrivate::blurBehindChanged(bool blur)
@@ -334,35 +329,36 @@ namespace Fluid
             stylesheet = css;
         }
 
-#if 0
         QHash<QString, QString> elements;
         // If you add elements here, make sure their names are sufficiently unique to not cause
         // clashes between element keys
-        elements["%textcolor"] = q->color(Theme::TextColor).name();
-        elements["%backgroundcolor"] = q->color(Theme::BackgroundColor).name();
-        elements["%visitedlink"] = q->color(Theme::VisitedLinkColor).name();
-        elements["%activatedlink"] = q->color(Theme::HighlightColor).name();
-        elements["%hoveredlink"] = q->color(Theme::HighlightColor).name();
-        elements["%link"] = q->color(Theme::LinkColor).name();
-        elements["%buttontextcolor"] = q->color(Theme::ButtonTextColor).name();
-        elements["%buttonbackgroundcolor"] = q->color(Theme::ButtonBackgroundColor).name();
-        elements["%buttonhovercolor"] = q->color(Theme::ButtonHoverColor).name();
-        elements["%buttonfocuscolor"] = q->color(Theme::ButtonFocusColor).name();
-        elements["%viewtextcolor"] = q->color(Theme::ViewTextColor).name();
-        elements["%viewbackgroundcolor"] = q->color(Theme::ViewBackgroundColor).name();
-        elements["%viewhovercolor"] = q->color(Theme::ViewHoverColor).name();
-        elements["%viewfocuscolor"] = q->color(Theme::ViewFocusColor).name();
+        elements["%backgroundcolor"] = q->color(QPalette::Active, QPalette::Window).name();
+        elements["%textcolor"] = q->color(QPalette::Active, QPalette::WindowText).name();
+        elements["%viewbackgroundcolor"] = q->color(QPalette::Active, QPalette::Base).name();
+        elements["%viewhovercolor"] = q->color(QPalette::Active, QPalette::AlternateBase).name();
+        elements["%viewtextcolor"] = q->color(QPalette::Active, QPalette::Text).name();
+        elements["%buttonbackgroundcolor"] = q->color(QPalette::Active, QPalette::Button).name();
+        elements["%buttontextcolor"] = q->color(QPalette::Active, QPalette::ButtonText).name();
+        elements["%link"] = q->color(QPalette::Active, QPalette::Link).name();
+        elements["%visitedlink"] = q->color(QPalette::Active, QPalette::LinkVisited).name();
+
+#if 0
+        elements["%activatedlink"] = q->color(QPalette::Active, Theme::HighlightColor).name();
+        elements["%hoveredlink"] = q->color(QPalette::Active, Theme::HighlightColor).name();
+        elements["%buttonhovercolor"] = q->color(QPalette::Active, Theme::ButtonHoverColor).name();
+        elements["%buttonfocuscolor"] = q->color(QPalette::Active, Theme::ButtonFocusColor).name();
+        elements["%viewfocuscolor"] = q->color(QPalette::Active, Theme::ViewFocusColor).name();
 
         QFont font = q->font(Theme::DefaultFont);
         elements["%fontsize"] = QString("%1pt").arg(font.pointSize());
         elements["%fontfamily"] = font.family().split('[').first();
         elements["%smallfontsize"] = QString("%1pt").arg(KGlobalSettings::smallestReadableFont().pointSize());
+#endif
 
         QHash<QString, QString>::const_iterator it = elements.constBegin();
         QHash<QString, QString>::const_iterator itEnd = elements.constEnd();
         for (; it != itEnd; ++it)
             stylesheet.replace(it.key(), it.value());
-#endif
         return stylesheet;
     }
 
@@ -620,58 +616,10 @@ namespace Fluid
                !(d->findInTheme(name % QLatin1Literal(".svg"), d->themeName, false).isEmpty());
     }
 
-#if 0
-    KSharedConfigPtr Theme::colorScheme() const
+    QColor Theme::color(QPalette::ColorGroup group, QPalette::ColorRole role) const
     {
-        return d->colors;
+        return d->palette->color(group, role);
     }
-
-    QColor Theme::color(ColorRole role) const
-    {
-        switch (role) {
-            case TextColor:
-                return d->colorScheme.foreground(KColorScheme::NormalText).color();
-
-            case HighlightColor:
-                return d->colorScheme.decoration(KColorScheme::HoverColor).color();
-
-            case BackgroundColor:
-                return d->colorScheme.background(KColorScheme::NormalBackground).color();
-
-            case ButtonTextColor:
-                return d->buttonColorScheme.foreground(KColorScheme::NormalText).color();
-
-            case ButtonBackgroundColor:
-                return d->buttonColorScheme.background(KColorScheme::NormalBackground).color();
-
-            case ButtonHoverColor:
-                return d->buttonColorScheme.decoration(KColorScheme::HoverColor).color();
-
-            case ButtonFocusColor:
-                return d->buttonColorScheme.decoration(KColorScheme::FocusColor).color();
-
-            case ViewTextColor:
-                return d->viewColorScheme.foreground(KColorScheme::NormalText).color();
-
-            case ViewBackgroundColor:
-                return d->viewColorScheme.background(KColorScheme::NormalBackground).color();
-
-            case ViewHoverColor:
-                return d->viewColorScheme.decoration(KColorScheme::HoverColor).color();
-
-            case ViewFocusColor:
-                return d->viewColorScheme.decoration(KColorScheme::FocusColor).color();
-
-            case LinkColor:
-                return d->viewColorScheme.foreground(KColorScheme::LinkText).color();
-
-            case VisitedLinkColor:
-                return d->viewColorScheme.foreground(KColorScheme::VisitedText).color();
-        }
-
-        return QColor();
-    }
-#endif
 
     void Theme::setFont(const QFont &font, FontRole role)
     {

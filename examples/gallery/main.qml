@@ -1,6 +1,7 @@
 
 import QtQuick 2.0
-import FluidCore 1.0
+import FluidCore 1.0 as FluidCore
+import FluidUi 1.0 as FluidUi
 
 Rectangle {
 	width: 300
@@ -12,8 +13,7 @@ Rectangle {
 		spacing: 30
 		width: 100
 
-		Label { text: "CIAO" }
-		FluidCore.Button { id: disabledButton; text: "Disabled"; enabled: false }
-		FluidCore.Button { id: enabledButton; text: "Enabled" }
+		FluidUi.Label { text: "This is a label" }
+		FluidUi.Button { enabled: false; text: "Disabled Button" }
 	}
 }

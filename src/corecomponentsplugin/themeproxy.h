@@ -172,31 +172,34 @@ class ThemeProxy : public QObject
     Q_PROPERTY(QUrl homepage READ homepage NOTIFY themeChanged)
     Q_PROPERTY(bool useGlobalSettings READ useGlobalSettings NOTIFY themeChanged)
 
-    //fonts
+    // Fonts
     Q_PROPERTY(QObject *defaultFont READ defaultFont CONSTANT)
     Q_PROPERTY(QObject *desktopFont READ desktopFont CONSTANT)
     Q_PROPERTY(QObject *smallestFont READ smallestFont CONSTANT)
 
-#if 0
-    // colors
+    // Colors
+    Q_PROPERTY(QColor windowColor READ windowColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor windowTextColor READ windowTextColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor baseColor READ baseColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor alternateBaseColor READ alternateBaseColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor toolTipBaseColor READ toolTipBaseColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor toolTipTextColor READ toolTipTextColor NOTIFY themeChanged)
     Q_PROPERTY(QColor textColor READ textColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor backgroundColor READ backgroundColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor buttonColor READ buttonColor NOTIFY themeChanged)
     Q_PROPERTY(QColor buttonTextColor READ buttonTextColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor buttonBackgroundColor READ buttonBackgroundColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor brightTextColor READ brightTextColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor lightColor READ lightColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor midlightColor READ midlightColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor darkColor READ darkColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor midColor READ midColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor shadowColor READ shadowColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY themeChanged)
+    Q_PROPERTY(QColor highlightedTextColor READ highlightedTextColor NOTIFY themeChanged)
     Q_PROPERTY(QColor linkColor READ linkColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor visitedLinkColor READ visitedLinkColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor buttonHoverColor READ buttonHoverColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor buttonFocusColor READ buttonFocusColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor viewTextColor READ viewTextColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor viewBackgroundColor READ viewBackgroundColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor viewHoverColor READ viewHoverColor NOTIFY themeChanged)
-    Q_PROPERTY(QColor viewFocusColor READ viewFocusColor NOTIFY themeChanged)
-#endif
+    Q_PROPERTY(QColor linkVisitedColor READ linkVisitedColor NOTIFY themeChanged)
     Q_PROPERTY(QString styleSheet READ styleSheet NOTIFY themeChanged)
 
-    // icon sizes
+    // Icon sizes
     Q_PROPERTY(int smallIconSize READ smallIconSize CONSTANT)
     Q_PROPERTY(int smallMediumIconSize READ smallMediumIconSize CONSTANT)
     Q_PROPERTY(int mediumIconSize READ mediumIconSize CONSTANT)
@@ -217,21 +220,25 @@ public:
     QUrl homepage() const;
     bool useGlobalSettings() const;
 
-#if 0
+    QColor windowColor() const;
+    QColor windowTextColor() const;
+    QColor baseColor() const;
+    QColor alternateBaseColor() const;
+    QColor toolTipBaseColor() const;
+    QColor toolTipTextColor() const;
     QColor textColor() const;
-    QColor highlightColor() const;
-    QColor backgroundColor() const;
+    QColor buttonColor() const;
     QColor buttonTextColor() const;
-    QColor buttonBackgroundColor() const;
+    QColor brightTextColor() const;
+    QColor lightColor() const;
+    QColor midlightColor() const;
+    QColor darkColor() const;
+    QColor midColor() const;
+    QColor shadowColor() const;
+    QColor highlightColor() const;
+    QColor highlightedTextColor() const;
     QColor linkColor() const;
-    QColor visitedLinkColor() const;
-    QColor buttonHoverColor() const;
-    QColor buttonFocusColor() const;
-    QColor viewTextColor() const;
-    QColor viewBackgroundColor() const;
-    QColor viewHoverColor() const;
-    QColor viewFocusColor() const;
-#endif
+    QColor linkVisitedColor() const;
     QString styleSheet() const;
 
     int smallIconSize() const;

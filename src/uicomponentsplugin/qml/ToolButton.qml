@@ -212,7 +212,7 @@ Item {
             font.weight: theme.defaultFont.weight
             font.wordSpacing: theme.defaultFont.wordSpacing
 
-            color: mouse.containsMouse ? theme.buttonTextColor : theme.textColor
+            color: mouse.containsMouse ? theme.buttonTextColor : theme.windowTextColor
             Behavior on color { ColorAnimation { duration: 100 } }
 
             horizontalAlignment: icon.valid ? Text.AlignLeft : Text.AlignHCenter

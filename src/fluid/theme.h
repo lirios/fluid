@@ -30,6 +30,7 @@
 #include <QObject>
 #include <QFont>
 #include <QFontMetrics>
+#include <QPalette>
 
 #include <Fluid/FluidExport>
 
@@ -61,23 +62,6 @@ namespace Fluid
         Q_PROPERTY(QString themeName READ themeName)
 
     public:
-        enum ColorRole {
-            TextColor = 0, /**<  the text color to be used by items resting on the background */
-            HighlightColor = 1, /**<  the text higlight color to be used by items resting
-                                   on the background */
-            BackgroundColor = 2, /**< the default background color */
-            ButtonTextColor = 4, /** text color for buttons */
-            ButtonBackgroundColor = 8, /** background color for buttons*/
-            LinkColor = 16, /** color for clickable links */
-            VisitedLinkColor = 32, /** color visited clickable links */
-            ButtonHoverColor = 64, /** color for hover effect on buttons */
-            ButtonFocusColor = 128, /** color for focus effect on buttons */
-            ViewTextColor = 256, /** text color for views */
-            ViewBackgroundColor = 512, /** background color for views */
-            ViewHoverColor = 1024, /** color for hover effect on view */
-            ViewFocusColor = 2048 /** color for focus effect on view */
-        };
-
         enum FontRole {
             DefaultFont = 0, /**< The standard text font */
             DesktopFont, /**< The standard text font */
@@ -141,21 +125,13 @@ namespace Fluid
          */
         Q_INVOKABLE bool currentThemeHasImage(const QString &name) const;
 
-#if 0
-        /**
-         * Returns the color scheme configurationthat goes along this theme.
-         * This can be used with KStatefulBrush and KColorScheme to determine
-         * the proper colours to use along with the visual elements in this theme.
-         */
-        Q_INVOKABLE KSharedConfigPtr colorScheme() const;
-
         /**
          * Returns the text color to be used by items resting on the background
          *
+         * @param group which color group to get the color from
          * @param role which role (usage pattern) to get the color for
          */
-        Q_INVOKABLE QColor color(ColorRole role) const;
-#endif
+        Q_INVOKABLE QColor color(QPalette::ColorGroup group, QPalette::ColorRole role) const;
 
         /**
          * Sets the default font to be used with themed items. Defaults to

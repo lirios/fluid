@@ -208,72 +208,100 @@ bool ThemeProxy::useGlobalSettings() const
     return Fluid::Theme::defaultTheme()->useGlobalSettings();
 }
 
-#if 0
+QColor ThemeProxy::windowColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Window);
+}
+
+QColor ThemeProxy::windowTextColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::WindowText);
+}
+
+QColor ThemeProxy::baseColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Base);
+}
+
+QColor ThemeProxy::alternateBaseColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::AlternateBase);
+}
+
+QColor ThemeProxy::toolTipBaseColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::ToolTipBase);
+}
+
+QColor ThemeProxy::toolTipTextColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::ToolTipText);
+}
+
 QColor ThemeProxy::textColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::TextColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Text);
 }
 
-QColor ThemeProxy::highlightColor() const
+QColor ThemeProxy::buttonColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::HighlightColor);
-}
-
-QColor ThemeProxy::backgroundColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::BackgroundColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Button);
 }
 
 QColor ThemeProxy::buttonTextColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ButtonTextColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::ButtonText);
 }
 
-QColor ThemeProxy::buttonBackgroundColor() const
+QColor ThemeProxy::brightTextColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ButtonBackgroundColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::BrightText);
+}
+
+QColor ThemeProxy::lightColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Light);
+}
+
+QColor ThemeProxy::midlightColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Midlight);
+}
+
+QColor ThemeProxy::darkColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Dark);
+}
+
+QColor ThemeProxy::midColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Mid);
+}
+
+QColor ThemeProxy::shadowColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Shadow);
+}
+
+QColor ThemeProxy::highlightColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Highlight);
+}
+
+QColor ThemeProxy::highlightedTextColor() const
+{
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::HighlightedText);
 }
 
 QColor ThemeProxy::linkColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::LinkColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Link);
 }
 
-QColor ThemeProxy::visitedLinkColor() const
+QColor ThemeProxy::linkVisitedColor() const
 {
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::VisitedLinkColor);
+    return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::LinkVisited);
 }
-
-QColor ThemeProxy::buttonHoverColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ButtonHoverColor);
-}
-
-QColor ThemeProxy::buttonFocusColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ButtonFocusColor);
-}
-
-QColor ThemeProxy::viewTextColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ViewTextColor);
-}
-
-QColor ThemeProxy::viewBackgroundColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ViewBackgroundColor);
-}
-
-QColor ThemeProxy::viewHoverColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ViewHoverColor);
-}
-
-QColor ThemeProxy::viewFocusColor() const
-{
-    return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ViewFocusColor);
-}
-#endif
 
 QString ThemeProxy::styleSheet() const
 {

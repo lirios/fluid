@@ -1,35 +1,40 @@
-/*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2011 Marco Martin
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <mart@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
-
-#include "qpixmapitem.h"
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 #include <QPainter>
 
+#include "qpixmapitem.h"
 
-QPixmapItem::QPixmapItem(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+QPixmapItem::QPixmapItem(QQuickItem *parent)
+    : QQuickPaintedItem(parent),
       m_smooth(false),
       m_fillMode(QPixmapItem::Stretch)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasContents);
 }
-
 
 QPixmapItem::~QPixmapItem()
 {
@@ -43,9 +48,8 @@ void QPixmapItem::setPixmap(const QPixmap &pixmap)
     emit nativeWidthChanged();
     emit nativeHeightChanged();
     emit pixmapChanged();
-    if (oldPixmapNull != m_pixmap.isNull()) {
+    if (oldPixmapNull != m_pixmap.isNull())
         emit nullChanged();
-    }
 }
 
 QPixmap QPixmapItem::pixmap() const
@@ -55,9 +59,8 @@ QPixmap QPixmapItem::pixmap() const
 
 void QPixmapItem::setSmooth(const bool smooth)
 {
-    if (smooth == m_smooth) {
+    if (smooth == m_smooth)
         return;
-    }
     m_smooth = smooth;
     update();
 }
@@ -84,23 +87,19 @@ QPixmapItem::FillMode QPixmapItem::fillMode() const
 
 void QPixmapItem::setFillMode(QPixmapItem::FillMode mode)
 {
-    if (mode == m_fillMode) {
+    if (mode == m_fillMode)
         return;
-    }
 
     m_fillMode = mode;
     update();
     emit fillModeChanged();
 }
 
-void QPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QPixmapItem::paint(QPainter *painter)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-
-    if (m_pixmap.isNull()) {
+    if (m_pixmap.isNull())
         return;
-    }
+
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing, m_smooth);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, m_smooth);
@@ -139,11 +138,10 @@ void QPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
             destRect = boundingRect().toRect();
     }
 
-    if (m_fillMode >= Tile) {
+    if (m_fillMode >= Tile)
         painter->drawTiledPixmap(destRect, m_pixmap);
-    } else {
+    else
         painter->drawPixmap(destRect, m_pixmap, m_pixmap.rect());
-    }
 
     painter->restore();
 }
@@ -153,4 +151,4 @@ bool QPixmapItem::isNull() const
     return m_pixmap.isNull();
 }
 
-#include "qpixmapitem.moc"
+#include "moc_qpixmapitem.cpp"

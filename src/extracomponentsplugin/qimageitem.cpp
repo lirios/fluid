@@ -1,35 +1,40 @@
-/*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2011 Marco Martin
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <mart@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
-
-#include "qimageitem.h"
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 #include <QPainter>
 
+#include "qimageitem.h"
 
-QImageItem::QImageItem(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+QImageItem::QImageItem(QQuickItem *parent)
+    : QQuickPaintedItem(parent),
       m_smooth(false),
       m_fillMode(QImageItem::Stretch)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasContents);
 }
-
 
 QImageItem::~QImageItem()
 {
@@ -43,9 +48,8 @@ void QImageItem::setImage(const QImage &image)
     emit nativeWidthChanged();
     emit nativeHeightChanged();
     emit imageChanged();
-    if (oldImageNull != m_image.isNull()) {
+    if (oldImageNull != m_image.isNull())
         emit nullChanged();
-    }
 }
 
 QImage QImageItem::image() const
@@ -55,9 +59,8 @@ QImage QImageItem::image() const
 
 void QImageItem::setSmooth(const bool smooth)
 {
-    if (smooth == m_smooth) {
+    if (smooth == m_smooth)
         return;
-    }
     m_smooth = smooth;
     update();
 }
@@ -84,23 +87,19 @@ QImageItem::FillMode QImageItem::fillMode() const
 
 void QImageItem::setFillMode(QImageItem::FillMode mode)
 {
-    if (mode == m_fillMode) {
+    if (mode == m_fillMode)
         return;
-    }
 
     m_fillMode = mode;
     update();
     emit fillModeChanged();
 }
 
-void QImageItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QImageItem::paint(QPainter *painter)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-
-    if (m_image.isNull()) {
+    if (m_image.isNull())
         return;
-    }
+
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing, m_smooth);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, m_smooth);
@@ -153,4 +152,4 @@ bool QImageItem::isNull() const
     return m_image.isNull();
 }
 
-#include "qimageitem.moc"
+#include "moc_qimageitem.cpp"

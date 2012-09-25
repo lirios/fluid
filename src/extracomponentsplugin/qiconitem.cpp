@@ -1,38 +1,41 @@
-/*
- *   Copyright 2011 Marco Martin <mart@kde.org>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2011 Marco Martin
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <mart@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+#include <QIcon>
+#include <QPainter>
 
 #include "qiconitem.h"
 
-#include <KIcon>
-#include <KIconLoader>
-#include <KIconEffect>
-#include <QPainter>
-
-
-QIconItem::QIconItem(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+QIconItem::QIconItem(QQuickItem *parent)
+    : QQuickPaintedItem(parent),
       m_smooth(false),
       m_state(DefaultState)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasContents);
 }
-
 
 QIconItem::~QIconItem()
 {
@@ -40,13 +43,12 @@ QIconItem::~QIconItem()
 
 void QIconItem::setIcon(const QVariant &icon)
 {
-    if (icon.canConvert<QIcon>()) {
+    if (icon.canConvert<QIcon>())
         m_icon = icon.value<QIcon>();
-    } else if (icon.canConvert<QString>()) {
+    else if (icon.canConvert<QString>())
         m_icon = KIcon(icon.toString());
-    } else {
+    else
         m_icon = QIcon();
-    }
     update();
 }
 
@@ -62,9 +64,8 @@ QIconItem::State QIconItem::state() const
 
 void QIconItem::setState(QIconItem::State state)
 {
-    if (m_state == state) {
+    if (m_state == state)
         return;
-    }
 
     m_state = state;
     emit stateChanged(state);
@@ -73,19 +74,28 @@ void QIconItem::setState(QIconItem::State state)
 
 int QIconItem::implicitWidth() const
 {
+#if 0
     return KIconLoader::global()->currentSize(KIconLoader::Desktop);
+#else
+    // TODO: use vsettings
+    return 48;
+#endif
 }
 
 int QIconItem::implicitHeight() const
 {
+#if 0
     return KIconLoader::global()->currentSize(KIconLoader::Desktop);
+#else
+    // TODO: use vsettings
+    return 48;
+#endif
 }
 
 void QIconItem::setSmooth(const bool smooth)
 {
-    if (smooth == m_smooth) {
+    if (smooth == m_smooth)
         return;
-    }
     m_smooth = smooth;
     update();
 }
@@ -95,15 +105,12 @@ bool QIconItem::smooth() const
     return m_smooth;
 }
 
-void QIconItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void QIconItem::paint(QPainter *painter)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-
-    if (m_icon.isNull()) {
+    if (m_icon.isNull())
         return;
-    }
-    //do without painter save, faster and the support can be compiled out
+
+    // Do without painter save, faster and the support can be compiled out
     const bool wasAntiAlias = painter->testRenderHint(QPainter::Antialiasing);
     const bool wasSmoothTransform = painter->testRenderHint(QPainter::SmoothPixmapTransform);
     painter->setRenderHint(QPainter::Antialiasing, m_smooth);
@@ -121,5 +128,4 @@ void QIconItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     painter->setRenderHint(QPainter::SmoothPixmapTransform, wasSmoothTransform);
 }
 
-
-#include "qiconitem.moc"
+#include "moc_qitem.cpp"

@@ -69,7 +69,6 @@ namespace Fluid
               cachesToDiscard(NoCache),
               locolor(false),
               compositingActive(true),
-              blurActive(false),
               isDefault(false),
               useGlobal(true),
               useNativeWidgetStyle(false) {
@@ -87,20 +86,6 @@ namespace Fluid
             updateNotificationTimer->setSingleShot(true);
             updateNotificationTimer->setInterval(500);
             QObject::connect(updateNotificationTimer, SIGNAL(timeout()), q, SLOT(notifyOfChanged()));
-
-#if 0
-            if (QPixmap::defaultDepth() > 8) {
-                QObject::connect(KWindowSystem::self(), SIGNAL(compositingChanged(bool)), q, SLOT(compositingChanged(bool)));
-#if HAVE_X11
-                //watch for blur effect property changes as well
-                if (!s_blurEffectWatcher) {
-                    s_blurEffectWatcher = new EffectWatcher("_KDE_NET_WM_BLUR_BEHIND_REGION");
-                }
-
-                QObject::connect(s_blurEffectWatcher, SIGNAL(effectChanged(bool)), q, SLOT(blurBehindChanged(bool)));
-#endif
-            }
-#endif
         }
 
         ~ThemePrivate() {
@@ -109,13 +94,11 @@ namespace Fluid
         }
 
         QString findInTheme(const QString &image, const QString &theme, bool cache = true);
-        void compositingChanged(bool active);
         void discardCache(CacheTypes caches);
         void scheduledCacheUpdate();
         void scheduleThemeChangeNotification(CacheTypes caches);
         void notifyOfChanged();
         void colorsChanged();
-        void blurBehindChanged(bool blur);
         void settingsChanged(const QString &key, const QVariant &value);
         void setThemeName(const QString &themeName, bool writeSettings);
         void onAppExitCleanup();
@@ -124,9 +107,6 @@ namespace Fluid
 
         static const char *defaultTheme;
         static const char *systemColorsTheme;
-#if HAVE_X11
-        static EffectWatcher *s_blurEffectWatcher;
-#endif
 
         Theme *q;
         QString themeName;
@@ -151,7 +131,6 @@ namespace Fluid
 
         bool locolor : 1;
         bool compositingActive : 1;
-        bool blurActive : 1;
         bool isDefault : 1;
         bool useGlobal : 1;
         bool useNativeWidgetStyle : 1;
@@ -159,12 +138,9 @@ namespace Fluid
 
     const char *ThemePrivate::defaultTheme = "Vanish";
 
-    // the system colors theme is used to cache unthemed svgs with colorization needs
+    // The system colors theme is used to cache unthemed svgs with colorization needs
     // these svgs do not follow the theme's colors, but rather the system colors
     const char *ThemePrivate::systemColorsTheme = "internal-system-colors";
-#if HAVE_X11
-    EffectWatcher *ThemePrivate::s_blurEffectWatcher = 0;
-#endif
 
     void ThemePrivate::onAppExitCleanup()
     {
@@ -190,7 +166,7 @@ namespace Fluid
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
         }
 
-        //not found or compositing enabled
+        // Not found or compositing enabled
         if (search.isEmpty()) {
             search = QLatin1Literal("themes/") % theme % QLatin1Char('/') % image;
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
@@ -200,17 +176,6 @@ namespace Fluid
             discoveries.insert(image, search);
 
         return search;
-    }
-
-    void ThemePrivate::compositingChanged(bool active)
-    {
-#if HAVE_X11
-        if (compositingActive != active) {
-            compositingActive = active;
-            //qDebug() << QTime::currentTime();
-            scheduleThemeChangeNotification(PixmapCache | SvgElementsCache);
-        }
-#endif
     }
 
     void ThemePrivate::discardCache(CacheTypes caches)
@@ -256,14 +221,6 @@ namespace Fluid
     void ThemePrivate::colorsChanged()
     {
         scheduleThemeChangeNotification(PixmapCache);
-    }
-
-    void ThemePrivate::blurBehindChanged(bool blur)
-    {
-        if (blurActive != blur) {
-            blurActive = blur;
-            scheduleThemeChangeNotification(PixmapCache | SvgElementsCache);
-        }
     }
 
     void ThemePrivate::scheduleThemeChangeNotification(CacheTypes caches)

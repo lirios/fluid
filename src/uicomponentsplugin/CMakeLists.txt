@@ -2,7 +2,7 @@ include_directories(
     ${Qt5Qml_INCLUDE_DIRS}
     ${Qt5Quick_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/headers
-    ${CMAKE_SOURCE_DIR}/headers/FluidUi
+    ${CMAKE_SOURCE_DIR}/headers/FluidCore
 )
 
 add_definitions(

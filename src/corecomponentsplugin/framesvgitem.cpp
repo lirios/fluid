@@ -30,33 +30,32 @@ FrameSvgItemMargins::FrameSvgItemMargins(Fluid::FrameSvg *frameSvg, QObject *par
 
 qreal FrameSvgItemMargins::left() const
 {
-    return m_frameSvg->marginSize(LeftMargin);
+    return m_frameSvg->marginSize(Fluid::LeftMargin);
 }
 
 qreal FrameSvgItemMargins::top() const
 {
-    return m_frameSvg->marginSize(TopMargin);
+    return m_frameSvg->marginSize(Fluid::TopMargin);
 }
 
 qreal FrameSvgItemMargins::right() const
 {
-    return m_frameSvg->marginSize(RightMargin);
+    return m_frameSvg->marginSize(Fluid::RightMargin);
 }
 
 qreal FrameSvgItemMargins::bottom() const
 {
-    return m_frameSvg->marginSize(BottomMargin);
+    return m_frameSvg->marginSize(Fluid::BottomMargin);
 }
 
 FrameSvgItem::FrameSvgItem(QQuickItem *parent)
-    : QQuickItem(parent)
+    : QQuickPaintedItem(parent)
 {
     m_frameSvg = new Fluid::FrameSvg(this);
     m_margins = new FrameSvgItemMargins(m_frameSvg, this);
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasContents);
     connect(m_frameSvg, SIGNAL(repaintNeeded()), this, SLOT(doUpdate()));
 }
-
 
 FrameSvgItem::~FrameSvgItem()
 {
@@ -116,11 +115,8 @@ Fluid::FrameSvg::EnabledBorders FrameSvgItem::enabledBorders() const
     return m_frameSvg->enabledBorders();
 }
 
-void FrameSvgItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void FrameSvgItem::paint(QPainter *painter)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-
     m_frameSvg->paintFrame(painter);
 }
 

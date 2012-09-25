@@ -17,25 +17,29 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-#include "theme.h"
-
-#include <KIconLoader>
+#include "themeproxy.h"
 
 class FontProxySingleton
 {
 public:
     FontProxySingleton()
-        : defaultFont(Fluid::Theme::DefaultFont),
-          desktopFont(Fluid::Theme::DesktopFont),
-          smallestFont(Fluid::Theme::SmallestFont) {
+        : defaultFont(new FontProxy(Fluid::Theme::DefaultFont)),
+          desktopFont(new FontProxy(Fluid::Theme::DesktopFont)),
+          smallestFont(new FontProxy(Fluid::Theme::SmallestFont)) {
     }
 
-    FontProxy defaultFont;
-    FontProxy desktopFont;
-    FontProxy smallestFont;
+    ~FontProxySingleton() {
+        delete defaultFont;
+        delete desktopFont;
+        delete smallestFont;
+    }
+
+    FontProxy *defaultFont;
+    FontProxy *desktopFont;
+    FontProxy *smallestFont;
 };
 
-K_GLOBAL_STATIC(FontProxySingleton, privateFontProxySingleton)
+Q_GLOBAL_STATIC(FontProxySingleton, privateFontProxySingleton)
 
 FontProxy::FontProxy(Fluid::Theme::FontRole role, QObject *parent)
     : QObject(parent),
@@ -73,17 +77,17 @@ FontProxy::~FontProxy()
 
 FontProxy *FontProxy::defaultFont()
 {
-    return &privateFontProxySingleton->defaultFont;
+    return privateFontProxySingleton()->defaultFont;
 }
 
 FontProxy *FontProxy::desktopFont()
 {
-    return &privateFontProxySingleton->desktopFont;
+    return privateFontProxySingleton()->desktopFont;
 }
 
 FontProxy *FontProxy::smallestFont()
 {
-    return &privateFontProxySingleton->smallestFont;
+    return privateFontProxySingleton()->smallestFont;
 }
 
 bool FontProxy::bold() const
@@ -152,10 +156,17 @@ QSize FontProxy::mSize() const
 ThemeProxy::ThemeProxy(QObject *parent)
     : QObject(parent)
 {
+#if 0
     m_defaultIconSize = KIconLoader::global()->currentSize(KIconLoader::Desktop);
+#else
+    // TODO: from VSettings
+    m_defaultIconSize = 64;
+#endif
 
     connect(Fluid::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(themeChanged()));
+#if 0
     connect(KIconLoader::global(), SIGNAL(iconLoaderSettingsChanged()), this, SLOT(iconLoaderSettingsChanged()));
+#endif
 }
 
 ThemeProxy::~ThemeProxy()
@@ -187,7 +198,7 @@ bool ThemeProxy::windowTranslucencyEnabled() const
     return Fluid::Theme::defaultTheme()->windowTranslucencyEnabled();
 }
 
-KUrl ThemeProxy::homepage() const
+QUrl ThemeProxy::homepage() const
 {
     return Fluid::Theme::defaultTheme()->homepage();
 }
@@ -197,16 +208,7 @@ bool ThemeProxy::useGlobalSettings() const
     return Fluid::Theme::defaultTheme()->useGlobalSettings();
 }
 
-QString ThemeProxy::wallpaperPath() const
-{
-    return Fluid::Theme::defaultTheme()->wallpaperPath();
-}
-
-QString ThemeProxy::wallpaperPathForSize(int width, int height) const
-{
-    return Fluid::Theme::defaultTheme()->wallpaperPath(QSize(width, height));
-}
-
+#if 0
 QColor ThemeProxy::textColor() const
 {
     return Fluid::Theme::defaultTheme()->color(Fluid::Theme::TextColor);
@@ -271,6 +273,7 @@ QColor ThemeProxy::viewFocusColor() const
 {
     return Fluid::Theme::defaultTheme()->color(Fluid::Theme::ViewFocusColor);
 }
+#endif
 
 QString ThemeProxy::styleSheet() const
 {
@@ -279,43 +282,62 @@ QString ThemeProxy::styleSheet() const
 
 int ThemeProxy::smallIconSize() const
 {
+#if 0
     return KIconLoader::SizeSmall;
+#endif
+    return 16;
 }
 
 int ThemeProxy::smallMediumIconSize() const
 {
+#if 0
     return KIconLoader::SizeSmallMedium;
+#endif
+    return 24;
 }
 
 int ThemeProxy::mediumIconSize() const
 {
+#if 0
     return KIconLoader::SizeMedium;
+#endif
+    return 32;
 }
 
 int ThemeProxy::largeIconSize() const
 {
+#if 0
     return KIconLoader::SizeLarge;
+#endif
+    return 48;
 }
 
 int ThemeProxy::hugeIconSize() const
 {
+#if 0
     return KIconLoader::SizeHuge;
+#endif
+    return 64;
 }
 
 int ThemeProxy::enormousIconSize() const
 {
+#if 0
     return KIconLoader::SizeEnormous;
+#endif
+    return 128;
 }
 
 void ThemeProxy::iconLoaderSettingsChanged()
 {
-    if (m_defaultIconSize == KIconLoader::global()->currentSize(KIconLoader::Desktop)) {
+#if 0
+    if (m_defaultIconSize == KIconLoader::global()->currentSize(KIconLoader::Desktop))
         return;
-    }
 
     m_defaultIconSize = KIconLoader::global()->currentSize(KIconLoader::Desktop);
 
     emit defaultIconSizeChanged();
+#endif
 }
 
 int ThemeProxy::defaultIconSize() const

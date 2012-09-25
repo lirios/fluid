@@ -20,7 +20,6 @@ add_library(fluiduicomponentsplugin SHARED ${SOURCES})
 target_link_libraries(fluiduicomponentsplugin
     ${Qt5Qml_LIBRARIES}
     ${Qt5Quick_LIBRARIES}
-    FluidUi
 )
 
 # Install plugin

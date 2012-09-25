@@ -20,14 +20,15 @@
 #ifndef SVGITEM_H
 #define SVGITEM_H
 
-#include <QQuickItem>
+#include <QQuickPaintedItem>
+#include <QPointer>
 
 namespace Fluid
 {
     class Svg;
 }
 
-class SvgItem : public QQuickItem
+class SvgItem : public QQuickPaintedItem
 {
     Q_OBJECT
 
@@ -73,7 +74,7 @@ public:
 
     QSizeF naturalSize() const;
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter);
 
 Q_SIGNALS:
     void elementIdChanged();
@@ -85,7 +86,7 @@ protected Q_SLOTS:
     void updateNeeded();
 
 private:
-    QWeakPointer<Fluid::Svg> m_svg;
+    QPointer<Fluid::Svg> m_svg;
     QString m_elementID;
     bool m_smooth;
 };

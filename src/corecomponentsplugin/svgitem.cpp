@@ -19,13 +19,15 @@
 
 #include <QPainter>
 
+#include <Fluid/Svg>
+
 #include "svgitem.h"
 
 SvgItem::SvgItem(QQuickItem *parent)
-    : QQuickItem(parent),
+    : QQuickPaintedItem(parent),
       m_smooth(false)
 {
-    setFlag(QQuickItem::ItemHasNoContents, false);
+    setFlag(QQuickItem::ItemHasContents);
 }
 
 SvgItem::~SvgItem()
@@ -51,11 +53,10 @@ QString SvgItem::elementId() const
 
 QSizeF SvgItem::naturalSize() const
 {
-    if (!m_svg) {
+    if (!m_svg)
         return QSizeF();
-    } else if (!m_elementID.isEmpty()) {
+    else if (!m_elementID.isEmpty())
         return m_svg.data()->elementSize(m_elementID);
-    }
 
     return m_svg.data()->size();
 }
@@ -63,9 +64,8 @@ QSizeF SvgItem::naturalSize() const
 
 void SvgItem::setSvg(Fluid::Svg *svg)
 {
-    if (m_svg) {
+    if (m_svg)
         disconnect(m_svg.data(), 0, this, 0);
-    }
     m_svg = svg;
     if (svg) {
         connect(svg, SIGNAL(repaintNeeded()), this, SLOT(updateNeeded()));
@@ -96,21 +96,18 @@ bool SvgItem::smooth() const
     return m_smooth;
 }
 
-void SvgItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void SvgItem::paint(QPainter *painter)
 {
-    Q_UNUSED(option);
-    Q_UNUSED(widget);
-
-    if (!m_svg) {
+    if (!m_svg)
         return;
-    }
-    //do without painter save, faster and the support can be compiled out
+
+    // Do without painter save, faster and the support can be compiled out
     const bool wasAntiAlias = painter->testRenderHint(QPainter::Antialiasing);
     const bool wasSmoothTransform = painter->testRenderHint(QPainter::SmoothPixmapTransform);
     painter->setRenderHint(QPainter::Antialiasing, m_smooth);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, m_smooth);
 
-    //setContainsMultipleImages has to be done there since m_frameSvg can be shared with somebody else
+    // setContainsMultipleImages has to be done there since m_frameSvg can be shared with somebody else
     m_svg.data()->setContainsMultipleImages(!m_elementID.isEmpty());
     m_svg.data()->paint(painter, boundingRect(), m_elementID);
     painter->setRenderHint(QPainter::Antialiasing, wasAntiAlias);

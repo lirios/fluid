@@ -122,7 +122,7 @@ public:
         Black = 87
     };
 
-    FontProxy(Plasma::Theme::FontRole role, QObject *parent = 0);
+    FontProxy(Fluid::Theme::FontRole role, QObject *parent = 0);
     ~FontProxy();
     static FontProxy *defaultFont();
     static FontProxy *desktopFont();
@@ -160,7 +160,7 @@ Q_SIGNALS:
     void mSizeChanged();
 
 private:
-    Plasma::Theme::FontRole m_fontRole;
+    Fluid::Theme::FontRole m_fontRole;
 };
 
 class ThemeProxy : public QObject
@@ -169,15 +169,15 @@ class ThemeProxy : public QObject
 
     Q_PROPERTY(QString themeName READ themeName NOTIFY themeChanged)
     Q_PROPERTY(bool windowTranslucentEnabled READ windowTranslucencyEnabled NOTIFY themeChanged)
-    Q_PROPERTY(KUrl homepage READ homepage NOTIFY themeChanged)
+    Q_PROPERTY(QUrl homepage READ homepage NOTIFY themeChanged)
     Q_PROPERTY(bool useGlobalSettings READ useGlobalSettings NOTIFY themeChanged)
-    Q_PROPERTY(QString wallpaperPath READ wallpaperPath NOTIFY themeChanged)
 
     //fonts
     Q_PROPERTY(QObject *defaultFont READ defaultFont CONSTANT)
     Q_PROPERTY(QObject *desktopFont READ desktopFont CONSTANT)
     Q_PROPERTY(QObject *smallestFont READ smallestFont CONSTANT)
 
+#if 0
     // colors
     Q_PROPERTY(QColor textColor READ textColor NOTIFY themeChanged)
     Q_PROPERTY(QColor highlightColor READ highlightColor NOTIFY themeChanged)
@@ -193,6 +193,7 @@ class ThemeProxy : public QObject
     Q_PROPERTY(QColor viewBackgroundColor READ viewBackgroundColor NOTIFY themeChanged)
     Q_PROPERTY(QColor viewHoverColor READ viewHoverColor NOTIFY themeChanged)
     Q_PROPERTY(QColor viewFocusColor READ viewFocusColor NOTIFY themeChanged)
+#endif
     Q_PROPERTY(QString styleSheet READ styleSheet NOTIFY themeChanged)
 
     // icon sizes
@@ -213,11 +214,10 @@ public:
     QObject *desktopFont() const;
     QObject *smallestFont() const;
     bool windowTranslucencyEnabled() const;
-    KUrl homepage() const;
+    QUrl homepage() const;
     bool useGlobalSettings() const;
-    QString wallpaperPath() const;
-    Q_INVOKABLE QString wallpaperPathForSize(int width = -1, int height = -1) const;
 
+#if 0
     QColor textColor() const;
     QColor highlightColor() const;
     QColor backgroundColor() const;
@@ -231,6 +231,7 @@ public:
     QColor viewBackgroundColor() const;
     QColor viewHoverColor() const;
     QColor viewFocusColor() const;
+#endif
     QString styleSheet() const;
 
     int smallIconSize() const;

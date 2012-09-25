@@ -20,7 +20,7 @@
 #ifndef FRAMESVGITEM_H
 #define FRAMESVGITEM_H
 
-#include <QQuickItem>
+#include <QQuickPaintedItem>
 
 #include <Fluid/FrameSvg>
 
@@ -68,7 +68,7 @@ private:
     Fluid::FrameSvg *m_frameSvg;
 };
 
-class FrameSvgItem : public QQuickItem
+class FrameSvgItem : public QQuickPaintedItem
 {
     Q_OBJECT
 
@@ -116,7 +116,7 @@ public:
 
     FrameSvgItemMargins *margins() const;
 
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void paint(QPainter *painter);
 
     void geometryChanged(const QRectF &newGeometry,
                          const QRectF &oldGeometry);

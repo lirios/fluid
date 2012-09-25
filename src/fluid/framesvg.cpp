@@ -1,22 +1,30 @@
-/*
- *   Copyright 2008-2010 by Aaron Seigo <aseigo@kde.org>
- *   Copyright 2008-2010 Marco Martin <notmart@gmail.com>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2008-2010 Aaron Seigo
+ * Copyright (c) 2008-2010 Marco Martin
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <notmart@gmail.com>
+ *    Aaron Seigo <aseigo@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 #include <QAtomicInt>
 #include <QBitmap>
@@ -302,18 +310,16 @@ namespace Fluid
 
     QString FrameSvg::prefix()
     {
-        if (d->prefix.isEmpty()) {
+        if (d->prefix.isEmpty())
             return d->prefix;
-        }
 
         return d->prefix.left(d->prefix.size() - 1);
     }
 
     void FrameSvg::resizeFrame(const QSizeF &size)
     {
-        if (imagePath().isEmpty()) {
+        if (imagePath().isEmpty())
             return;
-        }
 
         if (size.isEmpty()) {
 #ifdef DEBUG
@@ -323,9 +329,8 @@ namespace Fluid
         }
 
         FrameData *fd = d->frames[d->prefix];
-        if (size == fd->frameSize) {
+        if (size == fd->frameSize)
             return;
-        }
 
         const QString oldKey = d->cacheId(fd, d->prefix);
         const QSize currentSize = fd->frameSize;
@@ -375,18 +380,16 @@ namespace Fluid
     {
         QHash<QString, FrameData *>::const_iterator it = d->frames.constFind(d->prefix);
 
-        if (it == d->frames.constEnd()) {
+        if (it == d->frames.constEnd())
             return QSize(-1, -1);
-        } else {
+        else
             return d->frameSize(it.value());
-        }
     }
 
     qreal FrameSvg::marginSize(const Fluid::MarginEdge edge) const
     {
-        if (d->frames[d->prefix]->noBorderPadding) {
+        if (d->frames[d->prefix]->noBorderPadding)
             return .0;
-        }
 
         switch (edge) {
             case Fluid::TopMargin:
@@ -450,9 +453,8 @@ namespace Fluid
         QString id = d->cacheId(frame, QString());
         if (!frame->cachedMasks.contains(id)) {
             //TODO: Implement a better way to cap the number of cached masks
-            if (frame->cachedMasks.count() > frame->MAX_CACHED_MASKS) {
+            if (frame->cachedMasks.count() > frame->MAX_CACHED_MASKS)
                 frame->cachedMasks.clear();
-            }
             frame->cachedMasks.insert(id, QRegion(QBitmap(d->alphaMask().createMaskFromColor(Qt::black))));
         }
         return frame->cachedMasks[id];
@@ -460,9 +462,8 @@ namespace Fluid
 
     void FrameSvg::setCacheAllRenderedFrames(bool cache)
     {
-        if (d->cacheAll && !cache) {
+        if (d->cacheAll && !cache)
             clearCache();
-        }
 
         d->cacheAll = cache;
     }
@@ -606,16 +607,14 @@ namespace Fluid
         FrameData *frame = frames[prefix];
         QString maskPrefix;
 
-        if (q->hasElement("mask-" % prefix % "center")) {
+        if (q->hasElement("mask-" % prefix % "center"))
             maskPrefix = "mask-";
-        }
 
         if (maskPrefix.isNull()) {
             if (frame->cachedBackground.isNull()) {
                 generateBackground(frame);
-                if (frame->cachedBackground.isNull()) {
+                if (frame->cachedBackground.isNull())
                     return QPixmap();
-                }
             }
 
             return frame->cachedBackground;
@@ -657,9 +656,8 @@ namespace Fluid
                 maskFrame->cachedBackground = QPixmap();
 
                 generateBackground(maskFrame);
-                if (maskFrame->cachedBackground.isNull()) {
+                if (maskFrame->cachedBackground.isNull())
                     return QPixmap();
-                }
             }
 
             prefix = oldPrefix;
@@ -683,16 +681,15 @@ namespace Fluid
         if (q->isUsingRenderingCache()) {
             frameCached = theme->findInCache(id, frame->cachedBackground) && !frame->cachedBackground.isNull();
 
-            if (overlayAvailable) {
+            if (overlayAvailable)
                 overlayCached = theme->findInCache("overlay_" % id, overlay) && !overlay.isNull();
-            }
         }
 
         if (!frameCached) {
             generateFrameBackground(frame);
         }
 
-        //Overlays
+        // Overlays
         QSize overlaySize;
         QPoint actualOverlayPos = QPoint(0, 0);
         if (overlayAvailable && !overlayCached) {
@@ -703,7 +700,7 @@ namespace Fluid
                 actualOverlayPos.setX(frame->frameSize.width() - overlaySize.width());
             } else if (q->hasElement(prefix % "hint-overlay-pos-bottom")) {
                 actualOverlayPos.setY(frame->frameSize.height() - overlaySize.height());
-                //Stretched or Tiled?
+                // Stretched or Tiled?
             } else if (q->hasElement(prefix % "hint-overlay-stretch")) {
                 overlaySize = frameSize(frame).toSize();
             } else {
@@ -718,7 +715,7 @@ namespace Fluid
             overlay = alphaMask();
             QPainter overlayPainter(&overlay);
             overlayPainter.setCompositionMode(QPainter::CompositionMode_SourceIn);
-            //Tiling?
+            // Tiling?
             if (q->hasElement(prefix % "hint-overlay-tile-horizontal") ||
                     q->hasElement(prefix % "hint-overlay-tile-vertical")) {
 
@@ -820,9 +817,8 @@ namespace Fluid
             p.setCompositionMode(QPainter::CompositionMode_SourceOver);
         }
 
-        if (frame->enabledBorders & FrameSvg::LeftBorder && q->hasElement(prefix % "left")) {
+        if (frame->enabledBorders & FrameSvg::LeftBorder && q->hasElement(prefix % "left"))
             rightOffset += frame->leftWidth;
-        }
 
         // Corners
         if (frame->enabledBorders & FrameSvg::TopBorder && q->hasElement(prefix % "top")) {
@@ -835,9 +831,8 @@ namespace Fluid
                 contentLeft = frame->leftWidth;
             }
 
-            if (q->hasElement(prefix % "topright") && frame->enabledBorders & FrameSvg::RightBorder) {
+            if (q->hasElement(prefix % "topright") && frame->enabledBorders & FrameSvg::RightBorder)
                 q->paint(&p, QRect(rightOffset, topOffset, frame->rightWidth, frame->topHeight), prefix % "topright");
-            }
         }
 
         if (frame->enabledBorders & FrameSvg::BottomBorder && q->hasElement(prefix % "bottom")) {
@@ -924,7 +919,6 @@ namespace Fluid
                 p.drawTiledPixmap(QRect(contentLeft, bottomOffset, contentWidth, frame->bottomHeight), bottom);
             }
         }
-
     }
 
     QString FrameSvgPrivate::cacheId(FrameData *frame, const QString &prefixToSave) const
@@ -936,29 +930,26 @@ namespace Fluid
 
     void FrameSvgPrivate::cacheFrame(const QString &prefixToSave, const QPixmap &background, const QPixmap &overlay)
     {
-        if (!q->isUsingRenderingCache()) {
+        if (!q->isUsingRenderingCache())
             return;
-        }
 
         //insert background
         FrameData *frame = frames.value(prefixToSave);
 
-        if (!frame) {
+        if (!frame)
             return;
-        }
 
         const QString id = cacheId(frame, prefixToSave);
 
         //qDebug()<<"Saving to cache frame"<<id;
 
-#ifdef PLFIORINI
         Theme::defaultTheme()->insertIntoCache(id, background, QString::number((qint64)q, 16) % prefixToSave);
 
         if (!overlay.isNull()) {
-            //insert overlay
-            Theme::defaultTheme()->insertIntoCache("overlay_" % id, overlay, QString::number((qint64)q, 16) % prefixToSave % "overlay");
+            // Insert overlay into cache
+            Theme::defaultTheme()->insertIntoCache("overlay_" % id, overlay,
+                                                   QString::number((qint64)q, 16) % prefixToSave % "overlay");
         }
-#endif
     }
 
     void FrameSvgPrivate::updateSizes() const

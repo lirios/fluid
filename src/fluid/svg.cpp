@@ -1,22 +1,30 @@
-/*
- *   Copyright 2006-2007 Aaron Seigo <aseigo@kde.org>
- *   Copyright 2008-2010 Marco Martin <notmart@gmail.com>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2006-2007 Aaron Seigo
+ * Copyright (c) 2008-2010 Marco Martin
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <notmart@gmail.com>
+ *    Aaron Seigo <aseigo@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 #include <cmath>
 
@@ -32,9 +40,7 @@
 
 #include "svg.h"
 #include "svg_p.h"
-#ifdef PLFIORINI
 #include "theme.h"
-#endif
 
 namespace Fluid
 {
@@ -163,7 +169,6 @@ namespace Fluid
 
     bool SvgPrivate::setImagePath(const QString &imagePath)
     {
-#ifdef PLFIORINI
         const bool isThemed = !QDir::isAbsolutePath(imagePath);
 
         // lets check to see if we're already set to this file
@@ -230,15 +235,12 @@ namespace Fluid
         }
 
         return updateNeeded;
-#endif
     }
 
-#ifdef PLFIORINI
     Theme *SvgPrivate::actualTheme()
     {
-        if (!theme) {
+        if (!theme)
             theme = Fluid::Theme::defaultTheme();
-        }
 
         return theme.data();
     }
@@ -257,7 +259,6 @@ namespace Fluid
             return s_systemColorsCache.data();
         }
     }
-#endif
 
     QPixmap SvgPrivate::findInCache(const QString &elementId, const QSizeF &s)
     {
@@ -269,24 +270,20 @@ namespace Fluid
             // and store them locally.
             QRegExp sizeHintedKeyExpr(CACHE_ID_NATURAL_SIZE("(\\d+)-(\\d+)-(.+)"));
 
-#ifdef PLFIORINI
             foreach(const QString & key, cacheAndColorsTheme()->listCachedRectKeys(path)) {
                 if (sizeHintedKeyExpr.exactMatch(key)) {
                     QString baseElementId = sizeHintedKeyExpr.cap(3);
                     QSize sizeHint(sizeHintedKeyExpr.cap(1).toInt(),
                                    sizeHintedKeyExpr.cap(2).toInt());
 
-                    if (sizeHint.isValid()) {
+                    if (sizeHint.isValid())
                         elementsWithSizeHints.insertMulti(baseElementId, sizeHint);
-                    }
                 }
             }
-#endif
 
-            if (elementsWithSizeHints.isEmpty()) {
+            if (elementsWithSizeHints.isEmpty())
                 // Make sure we won't query the theme unnecessarily.
                 elementsWithSizeHints.insert(QString(), QSize());
-            }
         }
 
         // Look at the size hinted elements and try to find the smallest one with an
@@ -313,29 +310,24 @@ namespace Fluid
             }
         }
 
-        if (elementId.isEmpty() || !q->hasElement(actualElementId)) {
+        if (elementId.isEmpty() || !q->hasElement(actualElementId))
             actualElementId = elementId;
-        }
 
-        if (elementId.isEmpty() || (multipleImages && s.isValid())) {
+        if (elementId.isEmpty() || (multipleImages && s.isValid()))
             size = s.toSize();
-        } else {
+        else
             size = elementRect(actualElementId).size().toSize();
-        }
 
-        if (size.isEmpty()) {
+        if (size.isEmpty())
             return QPixmap();
-        }
 
         QString id = cachePath(path, size);
 
-        if (!actualElementId.isEmpty()) {
+        if (!actualElementId.isEmpty())
             id.append(actualElementId);
-        }
 
         //qDebug() << "id is " << id;
 
-#ifdef PLFIORINI
         QPixmap p;
         if (cacheRendering && cacheAndColorsTheme()->findInCache(id, p, lastModified)) {
             //qDebug() << "found cached version of " << id << p.size();
@@ -376,7 +368,6 @@ namespace Fluid
             cacheAndColorsTheme()->insertIntoCache(id, p, QString::number((qint64)q, 16) % QLSEP % actualElementId);
 
         return p;
-#endif
     }
 
     void SvgPrivate::createRenderer()
@@ -403,9 +394,8 @@ namespace Fluid
             if (path.isEmpty()) {
                 path = actualTheme()->imagePath(themePath);
                 themeFailed = path.isEmpty();
-                if (themeFailed) {
-                    kWarning() << "No image path found for" << themePath;
-                }
+                if (themeFailed)
+                    qWarning() << "No image path found for" << themePath;
             }
         }
 #endif
@@ -414,7 +404,6 @@ namespace Fluid
         //qDebug() << "FAIL! **************************";
         //qDebug() << path << "**";
 
-#ifdef PLFIORINI
         QString styleSheet = cacheAndColorsTheme()->styleSheet("SVG");
         styleCrc = qChecksum(styleSheet.toUtf8(), styleSheet.size());
 
@@ -447,22 +436,18 @@ namespace Fluid
             s_renderers[styleCrc + path] = renderer;
         }
 
-        if (size == QSizeF()) {
+        if (size == QSizeF())
             size = renderer->defaultSize();
-        }
-#endif
     }
 
     void SvgPrivate::eraseRenderer()
     {
         if (renderer && renderer.count() == 2) {
-            // this and the cache reference it
+            // This and the cache reference it
             s_renderers.erase(s_renderers.find(styleCrc + path));
 
-#ifdef PLFIORINI
             if (theme)
                 theme.data()->releaseRectsCache(path);
-#endif
         }
 
         renderer = 0;
@@ -473,35 +458,29 @@ namespace Fluid
 
     QRectF SvgPrivate::elementRect(const QString &elementId)
     {
-#ifdef PLFIORINI
         if (themed && path.isEmpty()) {
-            if (themeFailed) {
+            if (themeFailed)
                 return QRectF();
-            }
 
             path = actualTheme()->imagePath(themePath);
             themeFailed = path.isEmpty();
 
-            if (themeFailed) {
+            if (themeFailed)
                 return QRectF();
-            }
         }
 
         QString id = cacheId(elementId);
 
-        if (localRectCache.contains(id)) {
+        if (localRectCache.contains(id))
             return localRectCache.value(id);
-        }
 
         QRectF rect;
-        if (cacheAndColorsTheme()->findInRectsCache(path, id, rect)) {
+        if (cacheAndColorsTheme()->findInRectsCache(path, id, rect))
             localRectCache.insert(id, rect);
-        } else {
+        else
             rect = findAndCacheElementRect(elementId);
-        }
 
         return rect;
-#endif
     }
 
     QRectF SvgPrivate::findAndCacheElementRect(const QString &elementId)
@@ -510,9 +489,8 @@ namespace Fluid
 
         // createRenderer() can insert some interesting rects in the cache, so check it
         const QString id = cacheId(elementId);
-        if (localRectCache.contains(id)) {
+        if (localRectCache.contains(id))
             return localRectCache.value(id);
-        }
 
         QRectF elementRect = renderer->elementExists(elementId) ?
                              renderer->matrixForElement(elementId).map(renderer->boundsOnElement(elementId)).boundingRect() :
@@ -524,9 +502,7 @@ namespace Fluid
         elementRect = QRectF(elementRect.x() * dx, elementRect.y() * dy,
                              elementRect.width() * dx, elementRect.height() * dy);
 
-#ifdef PLFIORINI
         cacheAndColorsTheme()->insertIntoRectsCache(path, id, elementRect);
-#endif
         return elementRect;
     }
 
@@ -549,7 +525,7 @@ namespace Fluid
             usesColors = false;
         }
 
-#ifdef GIGI
+#ifdef PLFIORINI
         // check to see if we are using colors, but the theme isn't being used or isn't providing
         // a colorscheme
         if (usesColors && (!themed || !actualTheme()->colorScheme())) {
@@ -580,9 +556,8 @@ namespace Fluid
 
     QRectF SvgPrivate::makeUniform(const QRectF &orig, const QRectF &dst)
     {
-        if (qFuzzyIsNull(orig.x()) || qFuzzyIsNull(orig.y())) {
+        if (qFuzzyIsNull(orig.x()) || qFuzzyIsNull(orig.y()))
             return dst;
-        }
 
         QRectF res(dst);
         qreal div_w = dst.width() / orig.width();
@@ -614,14 +589,12 @@ namespace Fluid
 
     void SvgPrivate::themeChanged()
     {
-        if (q->imagePath().isEmpty()) {
+        if (q->imagePath().isEmpty())
             return;
-        }
 
-        if (themed) {
-            // check if new theme svg wants colorscheme applied
+        if (themed)
+            // Check if new theme svg wants colorscheme applied
             checkColorHints();
-        }
 
         QString currentPath = themed ? themePath : path;
         themePath.clear();
@@ -644,7 +617,7 @@ namespace Fluid
     }
 
     QHash<QString, SharedSvgRenderer::Ptr> SvgPrivate::s_renderers;
-    QWeakPointer<Theme> SvgPrivate::s_systemColorsCache;
+    QPointer<Theme> SvgPrivate::s_systemColorsCache;
 
     Svg::Svg(QObject *parent)
         : QObject(parent),
@@ -671,9 +644,8 @@ namespace Fluid
         QPixmap pix((elementID.isNull() || d->multipleImages) ? d->findInCache(elementID, size()) :
                     d->findInCache(elementID));
 
-        if (pix.isNull()) {
+        if (pix.isNull())
             return;
-        }
 
         painter->drawPixmap(QRectF(point, pix.size()), pix, QRectF(QPointF(0, 0), pix.size()));
     }
@@ -697,9 +669,8 @@ namespace Fluid
 
     QSize Svg::size() const
     {
-        if (d->size.isEmpty()) {
+        if (d->size.isEmpty())
             d->size = d->naturalSize;
-        }
 
         return d->size.toSize();
     }
@@ -712,9 +683,8 @@ namespace Fluid
     void Svg::resize(const QSizeF &size)
     {
         if (qFuzzyCompare(size.width(), d->size.width()) &&
-                qFuzzyCompare(size.height(), d->size.height())) {
+                qFuzzyCompare(size.height(), d->size.height()))
             return;
-        }
 
         d->size = size;
         d->localRectCache.clear();
@@ -724,9 +694,8 @@ namespace Fluid
     void Svg::resize()
     {
         if (qFuzzyCompare(d->naturalSize.width(), d->size.width()) &&
-                qFuzzyCompare(d->naturalSize.height(), d->size.height())) {
+                qFuzzyCompare(d->naturalSize.height(), d->size.height()))
             return;
-        }
 
         d->size = d->naturalSize;
         d->localRectCache.clear();
@@ -745,9 +714,8 @@ namespace Fluid
 
     bool Svg::hasElement(const QString &elementId) const
     {
-        if (d->path.isNull() && d->themePath.isNull()) {
+        if (d->path.isNull() && d->themePath.isNull())
             return false;
-        }
 
         return d->elementRect(elementId).isValid();
     }
@@ -772,9 +740,8 @@ namespace Fluid
 
     bool Svg::isValid() const
     {
-        if (d->path.isNull() && d->themePath.isNull()) {
+        if (d->path.isNull() && d->themePath.isNull())
             return false;
-        }
 
         d->createRenderer();
         return d->renderer->isValid();
@@ -813,16 +780,13 @@ namespace Fluid
         return d->cacheRendering;
     }
 
-#ifdef PLFIORINI
     void Svg::setTheme(Fluid::Theme *theme)
     {
-        if (!theme || theme == d->theme.data()) {
+        if (!theme || theme == d->theme.data())
             return;
-        }
 
-        if (d->theme) {
+        if (d->theme)
             disconnect(d->theme.data(), 0, this, 0);
-        }
 
         d->theme = theme;
         connect(theme, SIGNAL(themeChanged()), this, SLOT(themeChanged()));
@@ -833,7 +797,6 @@ namespace Fluid
     {
         return d->theme ? d->theme.data() : Theme::defaultTheme();
     }
-#endif
 }
 
 #include "moc_svg.cpp"

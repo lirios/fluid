@@ -1,21 +1,28 @@
-/*
- *   Copyright 2006-2007 Aaron Seigo <aseigo@kde.org>
+/****************************************************************************
+ * This file is part of Fluid.
  *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2006-2007 Aaron Seigo
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Aaron Seigo <aseigo@kde.org>
  *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 #ifndef SVG_H
 #define SVG_H
@@ -336,7 +343,6 @@ namespace Fluid
          */
         bool isUsingRenderingCache() const;
 
-#ifdef PLFIORINI
         /**
          * Sets the Fluid::Theme to use with this Svg object.
          *
@@ -357,7 +363,6 @@ namespace Fluid
          * @return  the theme used by this Svg
          */
         Theme *theme() const;
-#endif
 
     Q_SIGNALS:
         /**
@@ -381,9 +386,7 @@ namespace Fluid
     private:
         SvgPrivate *const d;
 
-#ifdef PLFIORINI
         Q_PRIVATE_SLOT(d, void themeChanged())
-#endif
         Q_PRIVATE_SLOT(d, void colorsChanged())
 
         friend class SvgPrivate;

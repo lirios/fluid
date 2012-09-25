@@ -1,5 +1,4 @@
-plugin fluiduicomponentsplugin
-
+module FluidUi
 BusyIndicator 1.0 BusyIndicator.qml
 Button 1.0 Button.qml
 ButtonColumn 1.0 ButtonColumn.qml
@@ -30,3 +29,4 @@ TextField 1.0 TextField.qml
 ToolBar 1.0 ToolBar.qml
 ToolBarLayout 1.0 ToolBarLayout.qml
 ToolButton 1.0 ToolButton.qml
+plugin fluiduicomponentsplugin

@@ -13,6 +13,9 @@ add_definitions(
 
 set(SOURCES
     extracomponentsplugin.cpp
+    qiconitem.cpp
+    qimageitem.cpp
+    qpixmapitem.cpp
 )
 
 add_library(fluidextracomponentsplugin SHARED ${SOURCES})

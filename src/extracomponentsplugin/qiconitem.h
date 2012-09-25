@@ -27,7 +27,7 @@
 #ifndef QICONITEM_H
 #define QICONITEM_H
 
-#include <QQuickItem>
+#include <QQuickPaintedItem>
 #include <QIcon>
 #include <QVariant>
 

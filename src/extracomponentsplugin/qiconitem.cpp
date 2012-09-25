@@ -45,7 +45,7 @@ void QIconItem::setIcon(const QVariant &icon)
     if (icon.canConvert<QIcon>())
         m_icon = icon.value<QIcon>();
     else if (icon.canConvert<QString>())
-        m_icon = KIcon(icon.toString());
+        m_icon = QIcon::fromTheme(icon.toString());
     else
         m_icon = QIcon();
     update();
@@ -115,6 +115,7 @@ void QIconItem::paint(QPainter *painter)
     painter->setRenderHint(QPainter::Antialiasing, m_smooth);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, m_smooth);
 
+#if 0
     if (m_state == ActiveState) {
         QPixmap result = m_icon.pixmap(boundingRect().size().toSize());
         result = KIconLoader::global()->iconEffect()->apply(result, KIconLoader::Desktop, KIconLoader::ActiveState);
@@ -122,9 +123,13 @@ void QIconItem::paint(QPainter *painter)
     } else {
         m_icon.paint(painter, boundingRect().toRect(), Qt::AlignCenter, isEnabled() ? QIcon::Normal : QIcon::Disabled);
     }
+#else
+    // TODO:
+    m_icon.paint(painter, boundingRect().toRect(), Qt::AlignCenter, isEnabled() ? QIcon::Normal : QIcon::Disabled);
+#endif
 
     painter->setRenderHint(QPainter::Antialiasing, wasAntiAlias);
     painter->setRenderHint(QPainter::SmoothPixmapTransform, wasSmoothTransform);
 }
 
-#include "moc_qitem.cpp"
+#include "moc_qiconitem.cpp"

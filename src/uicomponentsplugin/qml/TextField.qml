@@ -69,6 +69,9 @@ Properties:
         This property holds the text displayed in when the text is empty.
     The default value is empty string, meaning no placeholderText shown.
 
+      * bool passwordMode:
+        This property holds if the text field displays asterixes instead of characters.
+
       * enumeration echoMode:
         This property specifies how the text should be displayed in the TextField.
     The acceptable values are:
@@ -169,6 +172,7 @@ FocusScope {
 
     property alias cursorPosition: textInput.cursorPosition
     property alias readOnly: textInput.readOnly
+    property bool passwordMode: false
     property alias echoMode: textInput.echoMode // Supports TextInput.Normal,TextInput.Password, TextInput.NoEcho, TextInput.PasswordEchoOnEdit
     property alias passwordCharacter: textInput.passwordCharacter
     property alias acceptableInput: textInput.acceptableInput // read-only
@@ -298,6 +302,7 @@ FocusScope {
             leftMargin: 2 * base.margins.left
             rightMargin: 2 * base.margins.right + (clearButton.opacity > 0 ? clearButton.width : 0)
         }
+        echoMode: passwordMode ? TextInput.Password : TextInput.Normal
         passwordCharacter: "•"
         selectByMouse: true
         color: theme.textColor

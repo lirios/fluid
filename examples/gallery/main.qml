@@ -14,6 +14,9 @@ Rectangle {
 		width: 100
 
 		FluidUi.Label { text: "This is a label" }
+		FluidUi.Button { enabled: true; text: "Enabled Button" }
 		FluidUi.Button { enabled: false; text: "Disabled Button" }
+		FluidUi.RadioButton { text: "Radio 1" }
+		FluidUi.RadioButton { text: "Radio 2" }
 	}
 }

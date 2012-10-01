@@ -158,7 +158,7 @@ Item {
 
         anchors.centerIn: parent
 
-        RangeModel {
+        FluidCore.RangeModel {
             id: range
 
             minimumValue: 0.0

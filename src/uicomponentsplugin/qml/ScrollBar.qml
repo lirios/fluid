@@ -162,7 +162,7 @@ Item {
             onYChanged: updateFromHandleTimer.running = true
             onXChanged: updateFromHandleTimer.running = true
         }
-        RangeModel {
+        FluidCore.RangeModel {
             id: range
 
             minimumValue: 0

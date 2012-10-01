@@ -33,8 +33,6 @@ Description:
 **/
 
 import QtQuick 2.0
-import "." 1.0
-
 
 Row {
     id: root

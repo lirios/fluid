@@ -99,7 +99,7 @@ Item {
     }
 
 
-    RangeModel {
+    FluidCore.RangeModel {
         id: range
 
         minimumValue: 0

@@ -23,6 +23,7 @@ set(SOURCES
 
 set(HEADERS
     fluid.h
+    fluidexport.h
     framesvg.h
     svg.h
     theme.h

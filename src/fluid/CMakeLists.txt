@@ -36,6 +36,9 @@ target_link_libraries(Fluid
     ${Qt5Svg_LIBRARIES}
     ${VibeCore_LIBRARIES}
 )
+set_target_properties(Fluid PROPERTIES
+    VERSION ${FLUID_VERSION_STRING}
+    SOVERSION ${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_VERSION_PATCH})
 
 # Install library and headers
 install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Fluid)

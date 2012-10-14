@@ -1,37 +1,44 @@
-/*
-*   Copyright (C) 2010 by Artur Duque de Souza <asouzakde.org>
-*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
-*
-*   This program is free software; you can redistribute it and/or modify
-*   it under the terms of the GNU Library General Public License as
-*   published by the Free Software Foundation; either version 2, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details
-*
-*   You should have received a copy of the GNU Library General Public
-*   License along with this program; if not, write to the
-*   Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
-*/
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2011 Artur Duque de Souza
+ * Copyright (c) 2011 Daker Fernandes Pinheiro
+ *
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Daker Fernandes Pinheiro <dakerfp@gmail.com>
+ *    Artur Duque de Souza <asouzakde.org>
+ *
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 /**Documented API
 Inherits:
         Item
 
 Imports:
-        FluidCore
         QtQuick 2.0
+        FluidCore
 
 Description:
         It is just a simple Busy Indicator, it is used to indicate a task which duration is unknown. If the task duration/number of steps is known, a ProgressBar should be used instead.
         TODO An image has to be added!
 
 Properties:
-
         bool running:
         This property holds whether the busy animation is running.
         The default value is false.

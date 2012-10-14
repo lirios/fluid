@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2012 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 ** Copyright (C) 21.0 Marco Martin  <mart@kde.org>
 **
 ** Copyright (C) 21.0 Nokia Corporation and/or its subsidiary(-ies).
@@ -72,8 +73,8 @@ Signals:
         buttonClicked(int index):
         Emitted when the user clicks on a button
         @arg int index: the index of the clicked button: buttonTexts[index] will hold the text of the clicked button.
-
 **/
+
 Dialog {
     id: root
 

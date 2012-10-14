@@ -44,9 +44,8 @@ Inherits:
         Column
 
 Imports:
+        QtQuick 2.0
         ButtonGroup.js
-        Qt 4.7
-
 
 Description:
         A ButtonColumn allows you to group Buttons in a column. It provides a selection-behavior as well.
@@ -69,7 +68,8 @@ Properties:
         Item checkedButton:
         Returns the last checked button.
 **/
-import Qt 4.7
+
+import QtQuick 2.0
 import "ButtonGroup.js" as Behavior
 
 Column {
@@ -86,5 +86,4 @@ Column {
     Component.onDestruction: {
         Behavior.destroy();
     }
-
 }

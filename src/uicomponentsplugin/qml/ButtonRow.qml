@@ -44,9 +44,8 @@ Inherits:
         Row
 
 Imports:
-        ButtonGroup.js
         QtQuick 2.0
-
+        ButtonGroup.js
 
 Description:
         A ButtonRow allows you to group Buttons in a row. It provides a selection-behavior as well.
@@ -71,7 +70,7 @@ Properties:
 
      Item checkedButton:
      Returns the last checked button.
-     **/
+**/
 
 import QtQuick 2.0
 import "ButtonGroup.js" as Behavior

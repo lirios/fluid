@@ -1,32 +1,40 @@
-/*
-*   Copyright (C) 21.0 by Daker Fernandes Pinheiro <dakerfp@gmail.com>
-*   Copyright (C) 21.0 by Mark Gaiser <markg85@gmail.com>
-*   Copyright (C) 21.0 by Marco Martin <mart@kde.org>
-*
-*   This program is free software; you can redistribute it and/or modify
-*   it under the terms of the GNU Library General Public License as
-*   published by the Free Software Foundation; either version 2, or
-*   (at your option) any later version.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU Library General Public License for more details
-*
-*   You should have received a copy of the GNU Library General Public
-*   License along with this program; if not, write to the
-*   Free Software Foundation, Inc.,
-*   51 Franklin Street, Fifth Floor, Boston, MA  1.011.0301, USA.
-*/
-
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (c) 2011 Daker Fernandes Pinheiro
+ * Copyright (c) 2011 Mark Gaiser
+ * Copyright (c) 2011 Marco Martin
+ *
+ * Author(s):
+ *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Mark Gaiser <markg85@gmail.com>
+ *    Marco Martin <mart@kde.org>
+ *    Daker Fernandes Pinheiro <dakerfp@gmail.com>
+ *
+ * $BEGIN_LICENSE:LGPL-ONLY$
+ *
+ * This file may be used under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation and
+ * appearing in the file LICENSE.LGPL included in the packaging of
+ * this file, either version 2.1 of the License, or (at your option) any
+ * later version.  Please review the following information to ensure the
+ * GNU Lesser General Public License version 2.1 requirements
+ * will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+ *
+ * If you have questions regarding the use of this file, please contact
+ * us via http://www.maui-project.org/.
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
 
 /**Documented API
 Inherits:
         Item
 
 Imports:
-        FluidCore
         QtQuick 2.0
+        FluidCore
 
 Description:
         A simple button, with optional label and icon which uses the plasma theme.
@@ -57,8 +65,8 @@ Properties:
 
       * url iconSource:
         This property holds the source url for the Button's icon.
-    The default value is an empty url, which displays no icon.
-    It can be any image from any protocol supported by the Image element, or a freedesktop-compatible icon name
+        The default value is an empty url, which displays no icon.
+        It can be any image from any protocol supported by the Image element, or a freedesktop-compatible icon name.
 
       * font font:
         This property holds the font used by the button label.

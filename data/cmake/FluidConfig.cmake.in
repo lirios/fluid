@@ -1,0 +1,103 @@
+#
+# Copyright (c) 2012 Pier Luigi Fiorini
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+# 3. Neither the name of the project nor the
+#    names of its contributors may be used to endorse or promote products
+#    derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDER ''AS IS'' AND ANY
+# EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+
+get_filename_component(_fluid_install_prefix "${CMAKE_CURRENT_LIST_DIR}/$${CMAKE_RELATIVE_INSTALL_DIR}" ABSOLUTE)
+
+set(@CMAKE_MODULE_NAME@_VERSION_MAJOR "@FLUID_VERSION_MAJOR@")
+set(@CMAKE_MODULE_NAME@_VERSION_MINOR "@FLUID_VERSION_MINOR@")
+set(@CMAKE_MODULE_NAME@_VERSION_PATCH "@FLUID_VERSION_PATCH@")
+
+set(@CMAKE_MODULE_NAME@_LIBRARIES @CMAKE_MODULE_NAME@)
+set(@CMAKE_MODULE_NAME@_INCLUDE_DIRS "@CMAKE_INSTALL_FULL_INCLUDEDIR@" "@CMAKE_INSTALL_FULL_INCLUDEDIR@/@CMAKE_MODULE_NAME@")
+
+string(TOUPPER @CMAKE_MODULE_NAME@ _CMAKE_MODULE_NAME_UPPER)
+set(@CMAKE_MODULE_NAME@_DEFINITIONS -D${_CMAKE_MODULE_NAME_UPPER}_LIB)
+set(@CMAKE_MODULE_NAME@_COMPILE_DEFINITIONS ${_CMAKE_MODULE_NAME_UPPER}_LIB)
+
+set(_Fluid_MODULE_DEPENDENCIES "@CMAKE_MODULE_DEPS@")
+foreach(_module_dep ${_Fluid_MODULE_DEPENDENCIES})
+    if (NOT ${_module_dep}_FOUND)
+        find_package(${_module_dep} REQUIRED)
+    endif()
+
+    # Compatibility with ECM modules
+    # FIXME: Fix ECM variable names with ours because they are actually the same as Qt 5
+    if("${${_module_dep}_INCLUDE_DIR}")
+        set(${_module_dep}_INCLUDE_DIRS ${_module_dep}_INCLUDE_DIR)
+    endif()
+    if("${${_module_dep}_LIBRARY_DIR}")
+        set(${_module_dep}_LIBRARIES -L${_module_dep}_LIBRARY_DIR ${_module_dep}_LIBRARY_DIR)
+    else()
+        if("${${_module_dep}_LIBRARY}")
+            set(${_module_dep}_LIBRARIES ${_module_dep}_LIBRARY)
+        endif()
+    endif()
+
+    list(APPEND @CMAKE_MODULE_NAME@_INCLUDE_DIRS ${${_module_dep}_INCLUDE_DIRS})
+    list(APPEND @CMAKE_MODULE_NAME@_DEFINITIONS ${${_module_dep}_DEFINITIONS})
+    list(APPEND @CMAKE_MODULE_NAME@_COMPILE_DEFINITIONS ${${_module_dep}_COMPILE_DEFINITIONS})
+    list(APPEND _Fluid_MODULE_LIBRARIES ${${_module_dep}_LIBRARIES})
+endforeach()
+list(REMOVE_DUPLICATES @CMAKE_MODULE_NAME@_INCLUDE_DIRS)
+list(REMOVE_DUPLICATES @CMAKE_MODULE_NAME@_DEFINITIONS)
+list(REMOVE_DUPLICATES @CMAKE_MODULE_NAME@_COMPILE_DEFINITIONS)
+list(REMOVE_DUPLICATES _Fluid_MODULE_LIBRARIES)
+
+if (NOT _@CMAKE_MODULE_NAME@_target)
+    set(_@CMAKE_MODULE_NAME@_target 1)
+    if ("${CMAKE_STATIC_TYPE}" STREQUAL "")
+        add_library(@CMAKE_MODULE_NAME@ SHARED IMPORTED)
+    else()
+        add_library(@CMAKE_MODULE_NAME@ STATIC IMPORTED)
+    endif()
+endif()
+
+if ("@CMAKE_BUILD_TYPE@" STREQUAL "Debug")
+    set_property(TARGET @CMAKE_MODULE_NAME@ APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+    set_target_properties(@CMAKE_MODULE_NAME@ PROPERTIES
+        IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG "${_Fluid_MODULE_LIBRARIES}"
+        IMPORTED_LOCATION_DEBUG "@CMAKE_INSTALL_FULL_LIBDIR@/lib@CMAKE_MODULE_NAME@.so.0.0.0"
+    )
+    if (NOT "@CMAKE_IMPLIB_FILE_LOCATION_DEBUG@" STREQUAL "")
+        set_target_properties(@CMAKE_MODULE_NAME@ PROPERTIES
+            IMPORTED_IMPLIB_DEBUG "@CMAKE_INSTALL_FULL_LIBDIR@"
+        )
+    endif()
+endif()
+
+if ("@CMAKE_BUILD_TYPE@" MATCHES "^[Rr]elease$" OR "@CMAKE_BUILD_TYPE@" MATCHES "^[Rr]el[Ww]ith[Dd]eb[Ii]nfo$")
+    set_property(TARGET @CMAKE_MODULE_NAME@ APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+    set_target_properties(@CMAKE_MODULE_NAME@ PROPERTIES
+        IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE "${_Fluid_MODULE_LIBRARIES}"
+        IMPORTED_LOCATION_RELEASE "@CMAKE_INSTALL_FULL_LIBDIR@/lib@CMAKE_MODULE_NAME@.so.0.0.0"
+    )
+    if (NOT "@CMAKE_IMPLIB_FILE_LOCATION_RELEASE@" STREQUAL "")
+        set_target_properties(Fluid::@CMAKE_MODULE_NAME@ PROPERTIES
+            IMPORTED_IMPLIB_RELEASE "@CMAKE_INSTALL_FULL_LIBDIR@"
+        )
+    endif()
+endif()

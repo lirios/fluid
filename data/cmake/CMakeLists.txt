@@ -8,7 +8,7 @@ configure_package_config_file(FluidConfig.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/F
                               INSTALL_DESTINATION ${INSTALL_CMAKEDIR}
                               PATH_VARS INSTALL_CMAKEDIR)
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/FluidConfigVersion.cmake
-                                 VERSION ${Fluid_VERSION_STRING}
+                                 VERSION ${FLUID_VERSION_STRING}
                                  COMPATIBILITY AnyNewerVersion)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/FluidConfig.cmake

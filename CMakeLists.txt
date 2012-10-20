@@ -13,7 +13,7 @@ set(FLUID_VERSION_PATCH 0)
 set(FLUID_VERSION_STRING "${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_VERSION_PATCH}")
 
 # Installation directories
-include(MauiInstallDirs)
+include(HawaiiInstallDirs)
 
 # Make CPack available to easy generate binary packages
 include(CPack)
@@ -72,6 +72,7 @@ if(NOT VibeCore_FOUND)
 endif()
 
 # Subdirectories
+add_subdirectory(data)
 add_subdirectory(headers)
 add_subdirectory(src)
 add_subdirectory(examples)

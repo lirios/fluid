@@ -33,7 +33,6 @@ public:
     explicit IconImageProvider();
 
     QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize);
-    QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize);
 };
 
 #endif // ICONIMAGEPROVIDER_H

@@ -57,29 +57,3 @@ QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSi
         *size = icon.actualSize(requestedSize);
     return QImage(icon.pixmap(requestedSize).toImage());
 }
-
-QPixmap IconImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
-{
-    // Special case for images whose full path was specified,
-    // we just need to resize to the requested size
-    if (id.startsWith("/") && id.length() > 1) {
-        QPixmap icon(id);
-        if (icon.isNull()) {
-            qWarning() << "Failed to load icon from" << id;
-            return QPixmap();
-        }
-
-        if (requestedSize.isValid())
-            icon = icon.scaled(requestedSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-        if (size)
-            *size = icon.size();
-        return icon;
-    }
-
-    // Perform icon lookup in the default theme
-    QIcon icon(QIcon::fromTheme(id, QIcon::fromTheme("unknown")));
-    if (size)
-        *size = icon.actualSize(requestedSize);
-    return icon.pixmap(requestedSize);
-}

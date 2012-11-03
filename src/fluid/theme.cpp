@@ -71,9 +71,7 @@ namespace Fluid
               cachesToDiscard(NoCache),
               locolor(false),
               compositingActive(true),
-              isDefault(false),
-              useGlobal(true),
-              useNativeWidgetStyle(false) {
+              isDefault(false) {
             generalFont = QApplication::font();
 
             //QPlatformTheme *platformTheme = QGuiApplicationPrivate::platformTheme();
@@ -134,15 +132,9 @@ namespace Fluid
         bool locolor : 1;
         bool compositingActive : 1;
         bool isDefault : 1;
-        bool useGlobal : 1;
-        bool useNativeWidgetStyle : 1;
     };
 
     const char *ThemePrivate::defaultTheme = "default";
-
-    // The system colors theme is used to cache unthemed svgs with colorization needs
-    // these svgs do not follow the theme's colors, but rather the system colors
-    const char *ThemePrivate::systemColorsTheme = "internal-system-colors";
 
     void ThemePrivate::onAppExitCleanup()
     {
@@ -417,26 +409,20 @@ namespace Fluid
             }
         }
 
-        // we have one special theme: essentially a dummy theme used to cache things with
-        // the system colors.
-        bool realTheme = theme != systemColorsTheme;
-        if (realTheme) {
-            QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1Literal("themes/") % theme % QLatin1Char('/'));
-            if (themePath.isEmpty() && themeName.isEmpty()) {
-                themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "themes/default", QStandardPaths::LocateDirectory);
+        QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                   QLatin1Literal("themes/") % theme % QLatin1Char('/'));
+        if (themePath.isEmpty() && themeName.isEmpty()) {
+            themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                               "themes/default", QStandardPaths::LocateDirectory);
+            if (themePath.isEmpty())
+                return;
 
-                if (themePath.isEmpty()) {
-                    return;
-                }
-
-                theme = ThemePrivate::defaultTheme;
-            }
+            theme = ThemePrivate::defaultTheme;
         }
 
         // check again as ThemePrivate::defaultTheme might be empty
-        if (themeName == theme) {
+        if (themeName == theme)
             return;
-        }
 
         themeName = theme;
 
@@ -454,7 +440,6 @@ namespace Fluid
             QSettings metadata(metadataPath, QSettings::IniFormat);
 
             metadata.beginGroup("Settings");
-            useNativeWidgetStyle = metadata.value("UseNativeWidgetStyle", false).toBool();
             QString fallback = metadata.value("FallbackTheme", QString()).toString();
 
             fallbackThemes.clear();
@@ -516,10 +501,10 @@ namespace Fluid
 
     QString Theme::imagePath(const QString &name) const
     {
-        // look for a compressed svg file in the theme
+        // Look for a compressed svg file in the theme
         if (name.contains("../") || name.isEmpty()) {
-            // we don't support relative paths
-            //qDebug() << "Theme says: bad image path " << name;
+            // We don't support relative paths
+            qDebug() << "Theme says: bad image path " << name;
             return QString();
         }
 
@@ -527,23 +512,21 @@ namespace Fluid
         QString path = d->findInTheme(svgzName, d->themeName);
 
         if (path.isEmpty()) {
-            // try for an uncompressed svg file
+            // Try for an uncompressed svg file
             const QString svgName = name % QLatin1Literal(".svg");
             path = d->findInTheme(svgName, d->themeName);
 
-            // search in fallback themes if necessary
+            // Search in fallback themes if necessary
             for (int i = 0; path.isEmpty() && i < d->fallbackThemes.count(); ++i) {
-                if (d->themeName == d->fallbackThemes[i]) {
+                if (d->themeName == d->fallbackThemes[i])
                     continue;
-                }
 
-                // try a compressed svg file in the fallback theme
+                // Try a compressed svg file in the fallback theme
                 path = d->findInTheme(svgzName, d->fallbackThemes[i]);
 
-                if (path.isEmpty()) {
-                    // try an uncompressed svg file in the fallback theme
+                if (path.isEmpty())
+                    // Try an uncompressed svg file in the fallback theme
                     path = d->findInTheme(svgName, d->fallbackThemes[i]);
-                }
             }
         }
 
@@ -618,27 +601,6 @@ namespace Fluid
     bool Theme::windowTranslucencyEnabled() const
     {
         return d->compositingActive;
-    }
-
-    void Theme::setUseGlobalSettings(bool useGlobal)
-    {
-        if (d->useGlobal == useGlobal) {
-            return;
-        }
-
-        d->useGlobal = useGlobal;
-        d->settings = new VSettings("org.hawaii.desktop.interface");
-        d->themeName.clear();
-    }
-
-    bool Theme::useGlobalSettings() const
-    {
-        return d->useGlobal;
-    }
-
-    bool Theme::useNativeWidgetStyle() const
-    {
-        return d->useNativeWidgetStyle;
     }
 
     bool Theme::findInCache(const QString &key, QPixmap &pix, unsigned int lastModified)

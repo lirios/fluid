@@ -212,11 +212,6 @@ QUrl ThemeProxy::homepage() const
     return Fluid::Theme::defaultTheme()->homepage();
 }
 
-bool ThemeProxy::useGlobalSettings() const
-{
-    return Fluid::Theme::defaultTheme()->useGlobalSettings();
-}
-
 QColor ThemeProxy::windowColor() const
 {
     return Fluid::Theme::defaultTheme()->color(QPalette::Active, QPalette::Window);

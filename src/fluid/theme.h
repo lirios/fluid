@@ -72,7 +72,7 @@ namespace Fluid
 
         /**
          * Singleton pattern accessor
-         **/
+         */
         static Theme *defaultTheme();
 
         /**
@@ -87,7 +87,6 @@ namespace Fluid
          * @see defaultTheme
          * @param themeName the name of the theme to create
          * @param parent the parent object
-         * @since 4.3
          */
         explicit Theme(const QString &themeName, QObject *parent = 0);
 
@@ -95,7 +94,6 @@ namespace Fluid
 
         /**
          * @return a list of all known themes
-         * @since 4.3
          */
         static QStringList listThemeInfo();
 
@@ -162,26 +160,6 @@ namespace Fluid
         Q_INVOKABLE bool windowTranslucencyEnabled() const;
 
         /**
-         * Tells the theme whether to follow the global settings or use application
-         * specific settings
-         *
-         * @param useGlobal pass in true to follow the global settings
-         */
-        void setUseGlobalSettings(bool useGlobal);
-
-        /**
-         * @return true if the global settings are followed, false if application
-         * specific settings are used.
-         */
-        bool useGlobalSettings() const;
-
-        /**
-         * @return true if the native widget styles should be used instead of themed
-         * widgets. Defaults is false.
-         */
-        bool useNativeWidgetStyle() const;
-
-        /**
          * Provides a Fluid::Theme-themed stylesheet for hybrid (web / native Fluid) widgets.
          *
          * You can use this method to retrieve a basic default stylesheet, or to theme your
@@ -215,11 +193,8 @@ namespace Fluid
          *
          * @return a piece of CSS that sets the most commonly used style elements to a theme
          * matching Fluid::Theme.
-         *
-         * @since 4.5
          */
         Q_INVOKABLE QString styleSheet(const QString &css = QString()) const;
-
 
         /**
          * This is an overloaded member provided to check with file timestamp
@@ -231,7 +206,6 @@ namespace Fluid
          *                     and must be newer than the timestamp to be loaded
          *
          * @return true when pixmap was found and loaded from cache, false otherwise
-         * @since 4.3
          **/
         bool findInCache(const QString &key, QPixmap &pix, unsigned int lastModified = 0);
 
@@ -261,7 +235,6 @@ namespace Fluid
          *           This is needed to limit disk writes of the cache.
          *           If an image with the same id changes quickly,
          *           only the last size where insertIntoCache was called is actually stored on disk
-         * @since 4.3
          **/
         void insertIntoCache(const QString &key, const QPixmap &pix, const QString &id);
 
@@ -292,8 +265,6 @@ namespace Fluid
          * @param image path of the image for which the keys should be returned
          *
          * @return a QStringList whose elements are the entry keys in the rects cache
-         *
-         * @since 4.6
          */
         QStringList listCachedRectKeys(const QString &image) const;
 
@@ -323,8 +294,7 @@ namespace Fluid
         void releaseRectsCache(const QString &image);
 
         /**
-         * @return the default homepage to use in conjunction with the branding svg content
-         * @since 4.7
+         * @return the default homepage to use in conjunction with the branding SVG content
          */
         QUrl homepage() const;
 

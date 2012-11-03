@@ -179,7 +179,6 @@ class ThemeProxy : public QObject
     Q_PROPERTY(QString themeName READ themeName NOTIFY themeChanged)
     Q_PROPERTY(bool windowTranslucentEnabled READ windowTranslucencyEnabled NOTIFY themeChanged)
     Q_PROPERTY(QUrl homepage READ homepage NOTIFY themeChanged)
-    Q_PROPERTY(bool useGlobalSettings READ useGlobalSettings NOTIFY themeChanged)
 
     // Fonts
     Q_PROPERTY(QObject *defaultFont READ defaultFont CONSTANT)

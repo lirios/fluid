@@ -95,7 +95,7 @@ namespace Fluid
         /**
          * @return a list of all known themes
          */
-        static QStringList listThemeInfo();
+        QStringList availableThemes();
 
         /**
          * Sets the current theme being used.

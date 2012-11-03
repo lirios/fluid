@@ -28,8 +28,14 @@
 
 #include <QApplication>
 #include <QDateTime>
+#include <QDebug>
+#include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonValue>
+#include <QJsonArray>
 #include <QMutableListIterator>
 #include <QPair>
 #include <QPixmapCache>
@@ -100,7 +106,7 @@ namespace Fluid
         void notifyOfChanged();
         void colorsChanged();
         void settingsChanged(const QString &key, const QVariant &value);
-        void setThemeName(const QString &themeName, bool writeSettings);
+        void setThemeName(const QString &theme);
         void onAppExitCleanup();
 
         const QString processStyleSheet(const QString &css);
@@ -339,7 +345,7 @@ namespace Fluid
           d(new ThemePrivate(this))
     {
         // Default theme settings
-        d->setThemeName(QStringLiteral("default"), false);
+        d->setThemeName(QLatin1Literal("elegant"));
         d->toolTipDelay = 700;
 
         if (QCoreApplication::instance()) {
@@ -375,10 +381,22 @@ namespace Fluid
         delete d;
     }
 
-    QStringList Theme::listThemeInfo()
+    QStringList Theme::availableThemes()
     {
-        const QStringList themes = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
-                                                             "themes/*/metadata.desktop");
+        QStringList themes;
+
+        QStringList paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
+                                                      QLatin1String("themes"),
+                                                      QStandardPaths::LocateDirectory);
+        foreach (QString path, paths) {
+            QDirIterator it(path, QDir::Dirs | QDir::Readable | QDir::NoDotAndDotDot, QDirIterator::FollowSymlinks);
+            while (it.hasNext()) {
+                QDir dir(it.next());
+                if (dir.exists(QLatin1String("theme.json")))
+                    themes.append(dir.dirName());
+            }
+        }
+
         return themes;
     }
 
@@ -386,46 +404,41 @@ namespace Fluid
     {
         if (key == "theme") {
             // TODO: take tooltipdelay from qplatformtheme
-            setThemeName(value.toString(), false);
+            setThemeName(value.toString());
             toolTipDelay = 700;
         }
     }
 
     void Theme::setThemeName(const QString &themeName)
     {
-        d->setThemeName(themeName, true);
+        d->setThemeName(themeName);
     }
 
-    void ThemePrivate::setThemeName(const QString &tempThemeName, bool writeSettings)
+    void ThemePrivate::setThemeName(const QString &theme)
     {
-        //qDebug() << tempThemeName;
-        QString theme = tempThemeName;
-        if (theme.isEmpty() || theme == themeName) {
-            // let's try and get the default theme at least
-            if (themeName.isEmpty()) {
-                theme = ThemePrivate::defaultTheme;
-            } else {
-                return;
-            }
-        }
-
-        QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                   QLatin1Literal("themes/") % theme % QLatin1Char('/'));
-        if (themePath.isEmpty() && themeName.isEmpty()) {
-            themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                               "themes/default", QStandardPaths::LocateDirectory);
-            if (themePath.isEmpty())
-                return;
-
-            theme = ThemePrivate::defaultTheme;
-        }
-
-        // check again as ThemePrivate::defaultTheme might be empty
-        if (themeName == theme)
+        // Ignore an invalid theme names
+        if (theme.isEmpty() || themeName == theme)
             return;
 
+        // Find the theme path
+        QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                   QLatin1Literal("themes/") % theme % QLatin1Char('/'));
+
+        // Read theme metadata
+        const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                          QLatin1Literal("themes/") % theme % QLatin1Literal("/theme.json")));
+        QFile metadataFile(metadataPath);
+        if (!metadataFile.open(QIODevice::ReadOnly))
+            return;
+        QJsonDocument metadataDocument = QJsonDocument::fromJson(metadataFile.readAll());
+        metadataFile.close();
+        QJsonObject metadataObject = metadataDocument.object();
+        fallbackThemes = metadataObject.value(QLatin1Literal("fallback")).toVariant().toStringList();
+
+        // Set the theme name
         themeName = theme;
 
+#if 0
         // load the color scheme config
         const QString colorsFile = realTheme ? QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1Literal("themes/") % theme % QLatin1Literal("/colors"))
                                    : QString();
@@ -487,6 +500,7 @@ namespace Fluid
             cg.sync();
         }
 #endif
+        #endif
 
         // Pixmap cache prefix
         pixmapCachePrefix = "fluid_theme_" + themeName;

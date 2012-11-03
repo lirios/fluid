@@ -59,9 +59,8 @@ namespace Fluid
         : QSvgRenderer(parent)
     {
         QIODevice *file = VCompressionFilter::deviceForFile(filename);
-        if (!file->open(QIODevice::ReadOnly)) {
+        if (!file->open(QIODevice::ReadOnly))
             return;
-        }
         load(file->readAll(), styleSheet, interestingElements);
     }
 
@@ -83,9 +82,8 @@ namespace Fluid
         // Apply the style sheet.
         if (!styleSheet.isEmpty() && contents.contains("current-color-scheme")) {
             QDomDocument svg;
-            if (!svg.setContent(contents)) {
+            if (!svg.setContent(contents))
                 return false;
-            }
 
             QDomNode defs = svg.elementsByTagName("defs").item(0);
 
@@ -99,13 +97,11 @@ namespace Fluid
                     colorScheme.appendChild(svg.createCDATASection(styleSheet));
 
                     interestingElements.insert("current-color-scheme", QRect(0, 0, 1, 1));
-
                     break;
                 }
             }
-            if (!QSvgRenderer::load(svg.toByteArray(-1))) {
+            if (!QSvgRenderer::load(svg.toByteArray(-1)))
                 return false;
-            }
         } else if (!QSvgRenderer::load(contents)) {
             return false;
         }
@@ -120,9 +116,8 @@ namespace Fluid
             QString elementId = idExpr.cap(2);
 
             QRectF elementRect = boundsOnElement(elementId);
-            if (elementRect.isValid()) {
+            if (elementRect.isValid())
                 interestingElements.insert(elementId, elementRect);
-            }
 
             pos += idExpr.matchedLength();
         }
@@ -153,14 +148,13 @@ namespace Fluid
         eraseRenderer();
     }
 
-    //This function is meant for the rects cache
+    // This function is meant for the rects cache
     QString SvgPrivate::cacheId(const QString &elementId)
     {
-        if (size.isValid() && size != naturalSize) {
+        if (size.isValid() && size != naturalSize)
             return CACHE_ID_WITH_SIZE(size, elementId);
-        } else {
+        else
             return CACHE_ID_NATURAL_SIZE(elementId);
-        }
     }
 
     //This function is meant for the pixmap cache
@@ -379,22 +373,7 @@ namespace Fluid
         if (renderer)
             return;
 
-        //qDebug() << kBacktrace();
-#ifdef PLFIORINI
         if (themed && path.isEmpty() && !themeFailed) {
-            Applet *applet = qobject_cast<Applet *>(q->parent());
-            //FIXME: this maybe could be more efficient if we knew if the package was empty, e.g. for
-            //C++; however, I'm not sure this has any real world runtime impact. something to measure
-            //for.
-            if (applet && applet->package().isValid()) {
-                const Package package = applet->package();
-                path = package.filePath("images", themePath + ".svg");
-
-                if (path.isEmpty()) {
-                    path = package.filePath("images", themePath + ".svgz");
-                }
-            }
-
             if (path.isEmpty()) {
                 path = actualTheme()->imagePath(themePath);
                 themeFailed = path.isEmpty();
@@ -402,12 +381,6 @@ namespace Fluid
                     qWarning() << "No image path found for" << themePath;
             }
         }
-#else
-        path = actualTheme()->imagePath(themePath);
-        themeFailed = path.isEmpty();
-        if (themeFailed)
-            qWarning() << "No image path found for" << themePath;
-#endif
 
         //qDebug() << "********************************";
         //qDebug() << "FAIL! **************************";

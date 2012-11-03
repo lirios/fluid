@@ -14,6 +14,7 @@ add_definitions(
 set(SOURCES
     uicomponentsplugin.cpp
     iconimageprovider.cpp
+    enums.cpp
 )
 
 add_library(fluiduicomponentsplugin SHARED ${SOURCES})

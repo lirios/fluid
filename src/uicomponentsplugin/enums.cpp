@@ -1,10 +1,12 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
+ * Copyright (c) 2011 Marco Martin
  * Copyright (c) 2012 Pier Luigi Fiorini
  *
  * Author(s):
  *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <mart@kde.org>
  *
  * $BEGIN_LICENSE:LGPL2.1+$
  *
@@ -24,27 +26,6 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QQmlEngine>
-#include <QQmlComponent>
-
-#include "uicomponentsplugin.h"
-#include "iconimageprovider.h"
 #include "enums.h"
 
-void UiComponentsPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("FluidUi"));
-
-    qmlRegisterUncreatableType<DialogStatus>(uri, 1, 0, "DialogStatus", "");
-    qmlRegisterUncreatableType<PageOrientation>(uri, 1, 0, "PageOrientation", "");
-    qmlRegisterUncreatableType<PageStatus>(uri, 1, 0, "PageStatus", "");
-}
-
-void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("FluidUi"));
-
-    engine->addImageProvider("desktoptheme", new IconImageProvider);
-}
-
-#include "moc_uicomponentsplugin.cpp"
+#include "moc_enums.cpp"

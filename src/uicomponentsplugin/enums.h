@@ -1,10 +1,12 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
+ * Copyright (c) 2011 Marco Martin
  * Copyright (c) 2012 Pier Luigi Fiorini
  *
  * Author(s):
  *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Marco Martin <mart@kde.org>
  *
  * $BEGIN_LICENSE:LGPL2.1+$
  *
@@ -24,27 +26,49 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QQmlEngine>
-#include <QQmlComponent>
+#ifndef ENUMS_H
+#define ENUMS_H
 
-#include "uicomponentsplugin.h"
-#include "iconimageprovider.h"
-#include "enums.h"
+#include <QObject>
 
-void UiComponentsPlugin::registerTypes(const char *uri)
+class DialogStatus : public QObject
 {
-    Q_ASSERT(uri == QLatin1String("FluidUi"));
+    Q_OBJECT
+    Q_ENUMS(Status)
+public:
+    enum Status {
+        Opening,
+        Open,
+        Closing,
+        Closed
+    };
+};
 
-    qmlRegisterUncreatableType<DialogStatus>(uri, 1, 0, "DialogStatus", "");
-    qmlRegisterUncreatableType<PageOrientation>(uri, 1, 0, "PageOrientation", "");
-    qmlRegisterUncreatableType<PageStatus>(uri, 1, 0, "PageStatus", "");
-}
-
-void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+class PageOrientation : public QObject
 {
-    Q_ASSERT(uri == QLatin1String("FluidUi"));
+    Q_OBJECT
+    Q_ENUMS(Orientation)
+public:
+    enum Orientation {
+        Automatic,
+        LockPortrait,
+        LockLandscape,
+        LockPrevious,
+        Manual
+    };
+};
 
-    engine->addImageProvider("desktoptheme", new IconImageProvider);
-}
+class PageStatus : public QObject
+{
+    Q_OBJECT
+    Q_ENUMS(Status)
+public:
+    enum Status {
+        Inactive,
+        Activating,
+        Active,
+        Deactivating
+    };
+};
 
-#include "moc_uicomponentsplugin.cpp"
+#endif // ENUMS_H

@@ -74,10 +74,11 @@ namespace Fluid
     public:
         ThemePrivate(Theme *theme)
             : q(theme),
-              cachesToDiscard(NoCache),
-              locolor(false),
+              cachesToDiscard(NoCache)
               compositingActive(true),
               isDefault(false) {
+            settings = new VSettings("org.hawaii.desktop");
+
             generalFont = QApplication::font();
 
             //QPlatformTheme *platformTheme = QGuiApplicationPrivate::platformTheme();
@@ -111,7 +112,6 @@ namespace Fluid
 
         const QString processStyleSheet(const QString &css);
 
-        static const char *defaultTheme;
         static const char *systemColorsTheme;
 
         Theme *q;
@@ -135,12 +135,9 @@ namespace Fluid
         int toolTipDelay;
         CacheTypes cachesToDiscard;
 
-        bool locolor : 1;
         bool compositingActive : 1;
         bool isDefault : 1;
     };
-
-    const char *ThemePrivate::defaultTheme = "default";
 
     void ThemePrivate::onAppExitCleanup()
     {
@@ -154,14 +151,11 @@ namespace Fluid
 
         QString search;
 
-        if (locolor) {
-            search = QLatin1Literal("themes/") % theme % QLatin1Literal("/locolor/") % image;
-            search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
-        } else if (!compositingActive) {
-            search = QLatin1Literal("themes/") % theme % QLatin1Literal("/opaque/") % image;
+        if (compositingActive) {
+            search = QLatin1Literal("themes/") % theme % QLatin1Literal("/translucent/") % image;
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
         } else {
-            search = QLatin1Literal("themes/") % theme % QLatin1Literal("/translucent/") % image;
+            search = QLatin1Literal("themes/") % theme % QLatin1Literal("/opaque/") % image;
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
         }
 
@@ -345,7 +339,7 @@ namespace Fluid
           d(new ThemePrivate(this))
     {
         // Default theme settings
-        d->setThemeName(QLatin1Literal("elegant"));
+        d->setThemeName(d->settings->value("interface/theme").toString());
         d->toolTipDelay = 700;
 
         if (QCoreApplication::instance()) {
@@ -544,14 +538,13 @@ namespace Fluid
             }
         }
 
-        /*
         if (path.isEmpty()) {
         #ifdef DEBUG
             qDebug() << "Theme says: bad image path " << name;
         #endif
         }
-        */
 
+        qDebug() << path;
         return path;
     }
 

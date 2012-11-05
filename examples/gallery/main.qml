@@ -73,6 +73,10 @@ Rectangle {
                 text: "Default push button"
             }
             Button {
+                text: "Push button with icon"
+                iconSource: "document-new"
+            }
+            Button {
                 checkable: true
                 checked: true
                 text: "Toggle Push Button"

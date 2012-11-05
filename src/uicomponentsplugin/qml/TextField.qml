@@ -248,19 +248,28 @@ FocusScope {
     //     disabled text fields
     opacity: enabled ? 1.0 : 0.5
 
+    // Internal style API
+    property int backgroundMarginRight: 5
+    property int backgroundMarginLeft: 5
+    property int backgroundMarginTop: 5
+    property int backgroundMarginBottom: 5
+
     Private.TextFieldFocus {
         id: hover
         state: textInput.activeFocus ? "focus" : (mouseWatcher.containsMouse ? "hover" : "hidden")
         anchors.fill: base
     }
 
-    FluidCore.FrameSvgItem {
+    BorderImage {
         id: base
-
-        // TODO: see what is the correct policy for margins
         anchors.fill: parent
-        imagePath: "widgets/lineedit"
-        prefix: "base"
+        source: "images/entry.png"
+        border {
+            left: textField.backgroundMarginLeft
+            top: textField.backgroundMarginTop
+            right: textField.backgroundMarginRight
+            bottom: textField.backgroundMarginBottom
+        }
     }
 
     MouseArea {
@@ -280,8 +289,8 @@ FocusScope {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
-            leftMargin: 2 * base.margins.left
-            rightMargin: 2 * base.margins.right
+            leftMargin: 2 * textField.backgroundMarginLeft
+            rightMargin: 2 * textField.backgroundMarginRight
         }
         text: placeholderText
         visible: textInput.text == "" && !textField.activeFocus
@@ -309,8 +318,8 @@ FocusScope {
             right: parent.right
             verticalCenter: parent.verticalCenter
             // TODO: see what is the correct policy for margins
-            leftMargin: 2 * base.margins.left
-            rightMargin: 2 * base.margins.right + (clearButton.opacity > 0 ? clearButton.width : 0)
+            leftMargin: 2 * textField.backgroundMarginLeft
+            rightMargin: 2 * textField.backgroundMarginRight + (clearButton.opacity > 0 ? clearButton.width : 0)
         }
         echoMode: passwordMode ? TextInput.Password : TextInput.Normal
         passwordCharacter: "•"

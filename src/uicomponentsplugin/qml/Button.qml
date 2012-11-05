@@ -97,15 +97,38 @@ Item {
 
     signal clicked()
 
+    // Internal style API
+property color textColor
+    property color pressedTextColor: textColor
+    property color disabledTextColor: textColor
+    property color checkedTextColor: textColor
+
+    property int backgroundMarginRight: 5
+    property int backgroundMarginLeft: 5
+    property int backgroundMarginTop: 5
+    property int backgroundMarginBottom: 5
+
+    property url background: "images/button.png"
+    property url hoverBackground: "images/button-hover.png"
+    property url focusedBackground: "images/button-focused.png"
+    property url focusedHoverBackground: "images/button-focused-hover.png"
+    property url disabledBackground: "images/button-disabled.png"
+    property url pressedBackground: "images/button-active.png"
+    property url pressedHoverBackground: "images/button-active-hover.png"
+    property url pressedFocusedBackground: "images/button-active-focused.png"
+    property url pressedFocusedHoverBackground: "images/button-active-focused-hover.png"
+    property url pressedDisabledBackground: "images/button-active-disabled.png"
+    //
+    property url defaultBackground: "images/button-default.png"
+    property url defaultHoverBackground: "images/button-default-hover.png"
+
     implicitWidth: {
-        if (label.paintedWidth == 0) {
-            return height
-        } else {
-            //return Math.max(theme.defaultFont.mSize.width*12, label.paintedWidth)
-            return Math.max(theme.defaultFont.mSize.width*12, icon.width + label.paintedWidth + surfaceNormal.margins.left + surfaceNormal.margins.right) + ((icon.valid) ? surfaceNormal.margins.left : 0)
-        }
+        if (label.paintedWidth == 0)
+            return height;
+        return Math.max(theme.defaultFont.mSize.width * 12,
+            icon.width + label.paintedWidth + backgroundMarginLeft + backgroundMarginRight) + ((icon.valid) ? backgroundMarginLeft : 0);
     }
-    implicitHeight: Math.max(theme.defaultFont.mSize.height*1.6, Math.max(icon.height, label.paintedHeight) + surfaceNormal.margins.top/2 + surfaceNormal.margins.bottom/2)
+    implicitHeight: Math.max(theme.defaultFont.mSize.height * 1.6, Math.max(icon.height, label.paintedHeight) + backgroundMarginTop/2 + backgroundMarginBottom/2)
 
     // TODO: needs to define if there will be specific graphics for
     //     disabled buttons
@@ -147,75 +170,42 @@ Item {
             internal.clickButton();
     }
 
-    Private.ButtonShadow {
-        id: shadow
+    BorderImage {
+        id: backgroundImage
         anchors.fill: parent
-        state: {
-            if (internal.userPressed || checked) {
-                return "hidden"
-            } else if (mouse.containsMouse) {
-                return "hover"
-            } else if (button.activeFocus) {
-                return "focus"
+        source: {
+            if (button.enabled) {
+                var pressed = internal.userPressed || checked;
+
+                if (button.activeFocus && mouse.containsMouse)
+                    return pressed ? button.pressedFocusedHoverBackground : button.focusedHoverBackground;
+                else if (mouse.containsMouse)
+                    return pressed ? button.pressedHoverBackground : button.hoverBackground;
+                else if (button.activeFocus)
+                    return pressed ? button.pressedFocusedBackground : button.focusedBackground;
+                return pressed ? button.pressedBackground : button.background;
             } else {
-                return "shadow"
+                if (internal.userPressed || checked)
+                    return button.pressedDisabledBackground;
+                return button.disabledBackground;
             }
         }
-    }
-
-    // The normal button state
-    FluidCore.FrameSvgItem {
-        id: surfaceNormal
-
-        anchors.fill: parent
-        imagePath: "widgets/button"
-        prefix: "normal"
-    }
-
-    // The pressed state
-    FluidCore.FrameSvgItem {
-        id: surfacePressed
-
-        anchors.fill: parent
-        imagePath: "widgets/button"
-        prefix: "pressed"
-        opacity: 0
+        border {
+            left: button.backgroundMarginLeft
+            top: button.backgroundMarginTop
+            right: button.backgroundMarginRight
+            bottom: button.backgroundMarginBottom
+        }
     }
 
     Item {
         id: buttonContent
-        state: (internal.userPressed || checked) ? "pressed" : "normal"
-
-        states: [
-            State { name: "normal" },
-            State { name: "pressed" 
-                    PropertyChanges {
-                        target: surfaceNormal
-                        opacity: 0
-                    }
-                    PropertyChanges {
-                        target: surfacePressed
-                        opacity: 1
-                    }
-            }
-        ]
-        transitions: [
-            Transition {
-                to: "normal"
-                // Cross fade from pressed to normal
-                ParallelAnimation {
-                    NumberAnimation { target: surfaceNormal; property: "opacity"; to: 1; duration: 100 }
-                    NumberAnimation { target: surfacePressed; property: "opacity"; to: 0; duration: 100 }
-                }
-            }
-        ]
-
         anchors {
             fill: parent
-            leftMargin: surfaceNormal.margins.left
-            topMargin: surfaceNormal.margins.top
-            rightMargin: surfaceNormal.margins.right
-            bottomMargin: surfaceNormal.margins.bottom
+            leftMargin: button.backgroundMarginLeft
+            topMargin: button.backgroundMarginTop
+            rightMargin: button.backgroundMarginRight
+            bottomMargin: button.backgroundMarginBottom
         }
 
         Private.IconLoader {
@@ -238,7 +228,6 @@ Item {
                 icon.anchors.horizontalCenter = label.paintedWidth > 0 ? undefined : icon.parent.horizontalCenter
                 icon.anchors.left = label.paintedWidth > 0 ? icon.parent.left : undefined
             }
-
             anchors {
                 top: parent.top
                 bottom: parent.bottom
@@ -256,7 +245,7 @@ Item {
             font.underline: theme.defaultFont.underline
             font.weight: theme.defaultFont.weight
             font.wordSpacing: theme.defaultFont.wordSpacing
-            color: theme.buttonTextColor
+            color: !button.enabled ? button.disabledTextColor : (button.pressed ? button.pressedTextColor : (button.checked ? button.checkedTextColor : theme.buttonTextColor))
             horizontalAlignment: icon.valid ? Text.AlignLeft : Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }

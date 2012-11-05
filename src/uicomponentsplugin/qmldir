@@ -11,8 +11,12 @@ Dialog 1.0 Dialog.qml
 Highlight 1.0 Highlight.qml
 Label 1.0 Label.qml
 ListItem 1.0 ListItem.qml
+MenuBar 1.0 MenuBar.qml
+Menu 1.0 Menu.qml
+MenuItem 1.0 MenuItem.qml
 Page 1.0 Page.qml
 PageStack 1.0 PageStack.qml
+Popup 1.0 Popup.qml
 ProgressBar 1.0 ProgressBar.qml
 RadioButton 1.0 RadioButton.qml
 ScrollBar 1.0 ScrollBar.qml

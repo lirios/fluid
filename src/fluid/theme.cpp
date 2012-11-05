@@ -74,7 +74,7 @@ namespace Fluid
     public:
         ThemePrivate(Theme *theme)
             : q(theme),
-              cachesToDiscard(NoCache)
+              cachesToDiscard(NoCache),
               compositingActive(true),
               isDefault(false) {
             settings = new VSettings("org.hawaii.desktop");
@@ -159,7 +159,7 @@ namespace Fluid
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
         }
 
-        // Not found or compositing enabled
+        // If not found look in the root
         if (search.isEmpty()) {
             search = QLatin1Literal("themes/") % theme % QLatin1Char('/') % image;
             search =  QStandardPaths::locate(QStandardPaths::GenericDataLocation, search);
@@ -352,7 +352,7 @@ namespace Fluid
         : QObject(parent),
           d(new ThemePrivate(this))
     {
-        setThemeName(themeName);
+        d->setThemeName(themeName);
         if (QCoreApplication::instance())
             connect(QCoreApplication::instance(), SIGNAL(aboutToQuit()),
                     this, SLOT(onAppExitCleanup()));
@@ -414,10 +414,6 @@ namespace Fluid
         if (theme.isEmpty() || themeName == theme)
             return;
 
-        // Find the theme path
-        QString themePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                   QLatin1Literal("themes/") % theme % QLatin1Char('/'));
-
         // Read theme metadata
         const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                                           QLatin1Literal("themes/") % theme % QLatin1Literal("/theme.json")));
@@ -431,6 +427,8 @@ namespace Fluid
 
         // Set the theme name
         themeName = theme;
+
+        qDebug() << "Loaded the" << themeName << "theme!";
 
 #if 0
         // load the color scheme config
@@ -512,7 +510,7 @@ namespace Fluid
         // Look for a compressed svg file in the theme
         if (name.contains("../") || name.isEmpty()) {
             // We don't support relative paths
-            qDebug() << "Theme says: bad image path " << name;
+            qWarning() << "Theme says: bad image path " << name;
             return QString();
         }
 
@@ -538,13 +536,9 @@ namespace Fluid
             }
         }
 
-        if (path.isEmpty()) {
-        #ifdef DEBUG
-            qDebug() << "Theme says: bad image path " << name;
-        #endif
-        }
+        if (path.isEmpty())
+            qWarning() << "Theme says: bad image path" << name;
 
-        qDebug() << path;
         return path;
     }
 

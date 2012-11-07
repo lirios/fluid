@@ -36,6 +36,8 @@
 
 #include <Fluid/Theme>
 
+class VSettings;
+
 class FontProxy : public QObject
 {
     Q_OBJECT
@@ -258,13 +260,14 @@ public:
     int defaultIconSize() const;
 
 private Q_SLOTS:
-    void iconLoaderSettingsChanged();
+    void settingsChanged();
 
 Q_SIGNALS:
     void themeChanged();
     void defaultIconSizeChanged();
 
 private:
+    VSettings *m_settings;
     int m_defaultIconSize;
 };
 

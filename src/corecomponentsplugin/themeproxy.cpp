@@ -26,6 +26,9 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <QVariant>
+#include <VSettings>
+
 #include "themeproxy.h"
 
 class FontProxySingleton
@@ -159,27 +162,21 @@ QSize FontProxy::mSize() const
     return QFontMetrics(Fluid::Theme::defaultTheme()->font(m_fontRole)).boundingRect("M").size();
 }
 
-
 //********** Theme *************
 
 ThemeProxy::ThemeProxy(QObject *parent)
     : QObject(parent)
 {
-#if 0
-    m_defaultIconSize = KIconLoader::global()->currentSize(KIconLoader::Desktop);
-#else
-    // TODO: from VSettings
-    m_defaultIconSize = 64;
-#endif
+    m_settings = new VSettings("org.hawaii.desktop");
+    m_defaultIconSize = m_settings->value("interface/huge-icon-size").toInt();
 
+    connect(m_settings, SIGNAL(changed()), this, SLOT(settingsChanged()));
     connect(Fluid::Theme::defaultTheme(), SIGNAL(themeChanged()), this, SIGNAL(themeChanged()));
-#if 0
-    connect(KIconLoader::global(), SIGNAL(iconLoaderSettingsChanged()), this, SLOT(iconLoaderSettingsChanged()));
-#endif
 }
 
 ThemeProxy::~ThemeProxy()
 {
+    delete m_settings;
 }
 
 QString ThemeProxy::themeName() const
@@ -314,62 +311,38 @@ QString ThemeProxy::styleSheet() const
 
 int ThemeProxy::smallIconSize() const
 {
-#if 0
-    return KIconLoader::SizeSmall;
-#endif
-    return 16;
+    return m_settings->value("interface/small-icon-size").toInt();
 }
 
 int ThemeProxy::smallMediumIconSize() const
 {
-#if 0
-    return KIconLoader::SizeSmallMedium;
-#endif
-    return 24;
+    return m_settings->value("interface/small-medium-icon-size").toInt();
 }
 
 int ThemeProxy::mediumIconSize() const
 {
-#if 0
-    return KIconLoader::SizeMedium;
-#endif
-    return 32;
+    return m_settings->value("interface/medium-icon-size").toInt();
 }
 
 int ThemeProxy::largeIconSize() const
 {
-#if 0
-    return KIconLoader::SizeLarge;
-#endif
-    return 48;
+    return m_settings->value("interface/large-icon-size").toInt();
 }
 
 int ThemeProxy::hugeIconSize() const
 {
-#if 0
-    return KIconLoader::SizeHuge;
-#endif
-    return 64;
+    return m_settings->value("interface/huge-icon-size").toInt();
 }
 
 int ThemeProxy::enormousIconSize() const
 {
-#if 0
-    return KIconLoader::SizeEnormous;
-#endif
-    return 128;
+    return m_settings->value("interface/enormous-icon-size").toInt();
 }
 
-void ThemeProxy::iconLoaderSettingsChanged()
+void ThemeProxy::settingsChanged()
 {
-#if 0
-    if (m_defaultIconSize == KIconLoader::global()->currentSize(KIconLoader::Desktop))
-        return;
-
-    m_defaultIconSize = KIconLoader::global()->currentSize(KIconLoader::Desktop);
-
-    emit defaultIconSizeChanged();
-#endif
+    m_defaultIconSize = m_settings->value("interface/huge-icon-size").toInt();
+    emit themeChanged();
 }
 
 int ThemeProxy::defaultIconSize() const

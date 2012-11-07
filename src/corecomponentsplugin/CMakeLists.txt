@@ -1,6 +1,7 @@
 include_directories(
     ${Qt5Qml_INCLUDE_DIRS}
     ${Qt5Quick_INCLUDE_DIRS}
+    ${VibeCore_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/headers
     ${CMAKE_SOURCE_DIR}/headers/Fluid
 )
@@ -22,6 +23,7 @@ add_library(fluidcorecomponentsplugin SHARED ${SOURCES})
 target_link_libraries(fluidcorecomponentsplugin
     ${Qt5Qml_LIBRARIES}
     ${Qt5Quick_LIBRARIES}
+    ${VibeCore_LIBRARIES}
     Fluid
 )
 

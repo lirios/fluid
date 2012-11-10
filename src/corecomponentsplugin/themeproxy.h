@@ -135,9 +135,11 @@ public:
 
     FontProxy(Fluid::Theme::FontRole role, QObject *parent = 0);
     ~FontProxy();
+
     static FontProxy *defaultFont();
-    static FontProxy *desktopFont();
-    static FontProxy *smallestFont();
+    static FontProxy *monospaceFont();
+    static FontProxy *smallFont();
+    static FontProxy *miniFont();
 
     bool bold() const;
     Capitalization capitalization() const;
@@ -184,8 +186,9 @@ class ThemeProxy : public QObject
 
     // Fonts
     Q_PROPERTY(QObject *defaultFont READ defaultFont CONSTANT)
-    Q_PROPERTY(QObject *desktopFont READ desktopFont CONSTANT)
-    Q_PROPERTY(QObject *smallestFont READ smallestFont CONSTANT)
+    Q_PROPERTY(QObject *monospaceFont READ monospaceFont CONSTANT)
+    Q_PROPERTY(QObject *smallFont READ smallFont CONSTANT)
+    Q_PROPERTY(QObject *miniFont READ miniFont CONSTANT)
 
     // Colors
     Q_PROPERTY(QColor windowColor READ windowColor NOTIFY themeChanged)
@@ -223,9 +226,12 @@ public:
     ~ThemeProxy();
 
     QString themeName() const;
+
     QObject *defaultFont() const;
-    QObject *desktopFont() const;
-    QObject *smallestFont() const;
+    QObject *monospaceFont() const;
+    QObject *smallFont() const;
+    QObject *miniFont() const;
+
     bool windowTranslucencyEnabled() const;
     QUrl homepage() const;
     bool useGlobalSettings() const;

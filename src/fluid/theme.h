@@ -62,12 +62,12 @@ namespace Fluid
     {
         Q_OBJECT
         Q_PROPERTY(QString themeName READ themeName)
-
     public:
         enum FontRole {
             DefaultFont = 0, /**< The standard text font */
-            DesktopFont, /**< The standard text font */
-            SmallestFont /**< The smallest readable font */
+            MonospaceFont,   /**< The standard monospace font */
+            SmallFont,       /**< A small readable font */
+            MiniFont         /**< The smallest readable font */
         };
 
         /**

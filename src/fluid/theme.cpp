@@ -565,32 +565,50 @@ namespace Fluid
 
     void Theme::setFont(const QFont &font, FontRole role)
     {
-        Q_UNUSED(role)
-        d->generalFont = font;
+        switch (role) {
+        case DefaultFont:
+            d->settings->setValue("interface/font-name", font.family());
+            d->settings->setValue("interface/font-size", font.pointSize());
+            break;
+        case MonospaceFont:
+            d->settings->setValue("interface/monospace-font-name", font.family());
+            d->settings->setValue("interface/monospace-font-size", font.pointSize());
+            break;
+        case SmallFont:
+            d->settings->setValue("interface/small-font-name", font.family());
+            d->settings->setValue("interface/small-font-size", font.pointSize());
+            break;
+        case MiniFont:
+            d->settings->setValue("interface/mini-font-name", font.family());
+            d->settings->setValue("interface/mini-font-size", font.pointSize());
+            break;
+        }
     }
 
     QFont Theme::font(FontRole role) const
     {
-#if 0 // TODO: platformtheme
+        QFont font;
+
         switch (role) {
-            case DesktopFont: {
-                KConfigGroup cg(KSharedConfig::openConfig(), "General");
-                return cg.readEntry("desktopFont", d->generalFont);
-            }
+        case DefaultFont:
+            font.setFamily(d->settings->value("interface/font-name").toString());
+            font.setPointSize(d->settings->value("interface/font-size").toInt());
             break;
-
-            case DefaultFont:
-            default:
-                return d->generalFont;
-                break;
-
-            case SmallestFont:
-                return KGlobalSettings::smallestReadableFont();
-                break;
+        case MonospaceFont:
+            font.setFamily(d->settings->value("interface/monospace-font-name").toString());
+            font.setPointSize(d->settings->value("interface/monospace-font-size").toInt());
+            break;
+        case SmallFont:
+            font.setFamily(d->settings->value("interface/font-name").toString());
+            font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.9);
+            break;
+        case MiniFont:
+            font.setFamily(d->settings->value("interface/font-name").toString());
+            font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.8);
+            break;
         }
-#endif
 
-        return d->generalFont;
+        return font;
     }
 
     QFontMetrics Theme::fontMetrics() const

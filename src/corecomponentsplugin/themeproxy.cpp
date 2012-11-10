@@ -36,19 +36,22 @@ class FontProxySingleton
 public:
     FontProxySingleton()
         : defaultFont(new FontProxy(Fluid::Theme::DefaultFont)),
-          desktopFont(new FontProxy(Fluid::Theme::DesktopFont)),
-          smallestFont(new FontProxy(Fluid::Theme::SmallestFont)) {
+          monospaceFont(new FontProxy(Fluid::Theme::MonospaceFont)),
+          smallFont(new FontProxy(Fluid::Theme::SmallFont)),
+          miniFont(new FontProxy(Fluid::Theme::MiniFont)) {
     }
 
     ~FontProxySingleton() {
         delete defaultFont;
-        delete desktopFont;
-        delete smallestFont;
+        delete monospaceFont;
+        delete smallFont;
+        delete miniFont;
     }
 
     FontProxy *defaultFont;
-    FontProxy *desktopFont;
-    FontProxy *smallestFont;
+    FontProxy *monospaceFont;
+    FontProxy *smallFont;
+    FontProxy *miniFont;
 };
 
 Q_GLOBAL_STATIC(FontProxySingleton, privateFontProxySingleton)
@@ -92,14 +95,19 @@ FontProxy *FontProxy::defaultFont()
     return privateFontProxySingleton()->defaultFont;
 }
 
-FontProxy *FontProxy::desktopFont()
+FontProxy *FontProxy::monospaceFont()
 {
-    return privateFontProxySingleton()->desktopFont;
+    return privateFontProxySingleton()->monospaceFont;
 }
 
-FontProxy *FontProxy::smallestFont()
+FontProxy *FontProxy::smallFont()
 {
-    return privateFontProxySingleton()->smallestFont;
+    return privateFontProxySingleton()->smallFont;
+}
+
+FontProxy *FontProxy::miniFont()
+{
+    return privateFontProxySingleton()->miniFont;
 }
 
 bool FontProxy::bold() const
@@ -189,14 +197,19 @@ QObject *ThemeProxy::defaultFont() const
     return FontProxy::defaultFont();
 }
 
-QObject *ThemeProxy::desktopFont() const
+QObject *ThemeProxy::monospaceFont() const
 {
-    return FontProxy::desktopFont();
+    return FontProxy::monospaceFont();
 }
 
-QObject *ThemeProxy::smallestFont() const
+QObject *ThemeProxy::smallFont() const
 {
-    return FontProxy::smallestFont();
+    return FontProxy::smallFont();
+}
+
+QObject *ThemeProxy::miniFont() const
+{
+    return FontProxy::miniFont();
 }
 
 bool ThemeProxy::windowTranslucencyEnabled() const

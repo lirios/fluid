@@ -108,19 +108,19 @@ property color textColor
     property int backgroundMarginTop: 5
     property int backgroundMarginBottom: 5
 
-    property url background: "images/button.png"
-    property url hoverBackground: "images/button-hover.png"
-    property url focusedBackground: "images/button-focused.png"
-    property url focusedHoverBackground: "images/button-focused-hover.png"
-    property url disabledBackground: "images/button-disabled.png"
-    property url pressedBackground: "images/button-active.png"
-    property url pressedHoverBackground: "images/button-active-hover.png"
-    property url pressedFocusedBackground: "images/button-active-focused.png"
-    property url pressedFocusedHoverBackground: "images/button-active-focused-hover.png"
-    property url pressedDisabledBackground: "images/button-active-disabled.png"
+    property url background: "image://uiwidgets/button"
+    property url hoverBackground: "image://uiwidgets/button-hover"
+    property url focusedBackground: "image://uiwidgets/button-focused"
+    property url focusedHoverBackground: "image://uiwidgets/button-focused-hover"
+    property url disabledBackground: "image://uiwidgets/button-disabled"
+    property url pressedBackground: "image://uiwidgets/button-active"
+    property url pressedHoverBackground: "image://uiwidgets/button-active-hover"
+    property url pressedFocusedBackground: "image://uiwidgets/button-active-focused"
+    property url pressedFocusedHoverBackground: "image://uiwidgets/button-active-focused-hover"
+    property url pressedDisabledBackground: "image://uiwidgets/button-active-disabled"
     //
-    property url defaultBackground: "images/button-default.png"
-    property url defaultHoverBackground: "images/button-default-hover.png"
+    property url defaultBackground: "image://uiwidgets/button-default"
+    property url defaultHoverBackground: "image://uiwidgets/button-default-hover"
 
     implicitWidth: {
         if (label.paintedWidth == 0)

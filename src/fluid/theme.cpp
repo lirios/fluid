@@ -121,6 +121,7 @@ namespace Fluid
         QFont generalFont;
         QPalette *palette;
         QString pixmapCachePrefix;
+        QPixmapCache uiWidgetsCache;
 #if 0
         KSharedConfigPtr svgElementsCache;
 #endif
@@ -417,6 +418,7 @@ namespace Fluid
         // Read theme metadata
         const QString metadataPath(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                                           QLatin1Literal("themes/") % theme % QLatin1Literal("/theme.json")));
+        QFileInfo metadataFileInfo(metadataPath);
         QFile metadataFile(metadataPath);
         if (!metadataFile.open(QIODevice::ReadOnly))
             return;
@@ -503,6 +505,35 @@ namespace Fluid
     QString Theme::themeName() const
     {
         return d->themeName;
+    }
+
+    QPixmap *Theme::uiWidget(const QString &name) const
+    {
+        // Try in cache first
+        QPixmap *pixmap = d->uiWidgetsCache.find(name);
+        if (pixmap && !pixmap->isNull())
+            return pixmap;
+
+        const QString pngName = QLatin1Literal("uiwidgets/") % name % QLatin1Literal(".png");
+        QString path = d->findInTheme(pngName, d->themeName);
+
+        if (path.isEmpty()) {
+            // Search in fallback themes if necessary
+            for (int i = 0; path.isEmpty() && i < d->fallbackThemes.count(); ++i) {
+                if (d->themeName == d->fallbackThemes[i])
+                    continue;
+
+                path = d->findInTheme(pngName, d->fallbackThemes[i]);
+            }
+        }
+
+        if (!path.isEmpty()) {
+            // Save this pixmap in cache
+            d->uiWidgetsCache.insert(name, QPixmap(path));
+            return d->uiWidgetsCache.find(name);
+        }
+
+        return 0;
     }
 
     QString Theme::imagePath(const QString &name) const

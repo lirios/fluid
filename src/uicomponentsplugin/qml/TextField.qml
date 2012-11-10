@@ -263,7 +263,7 @@ FocusScope {
     BorderImage {
         id: base
         anchors.fill: parent
-        source: "images/entry.png"
+        source: "image://uiwidgets/entry"
         border {
             left: textField.backgroundMarginLeft
             top: textField.backgroundMarginTop

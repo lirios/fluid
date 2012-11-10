@@ -24,6 +24,8 @@
  * $END_LICENSE$
  ***************************************************************************/
 
+#include <Fluid/Theme>
+
 #include "themeimageprovider.h"
 
 ThemeImageProvider::ThemeImageProvider()
@@ -33,5 +35,18 @@ ThemeImageProvider::ThemeImageProvider()
 
 QPixmap ThemeImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
-    return QPixmap();
+    QPixmap *pixmap = Fluid::Theme::defaultTheme()->uiWidget(id);
+    if (!pixmap)
+        return QPixmap();
+
+    if (!pixmap->isNull()) {
+        if (requestedSize.isValid()) {
+            if (size)
+                *size = requestedSize;
+
+            return pixmap->scaled(requestedSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        }
+    }
+
+    return *pixmap;
 }

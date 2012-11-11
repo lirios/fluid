@@ -51,9 +51,11 @@ Rectangle {
             left: parent.left
             margins: 10
         }
+        spacing: 8
         width: parent.width
 
         Column {
+            spacing: 8
             RadioButton {
                 text: "Radio button 1"
             }
@@ -69,6 +71,7 @@ Rectangle {
         }
 
         Column {
+            spacing: 8
             Button {
                 text: "Default push button"
             }
@@ -95,6 +98,7 @@ Rectangle {
             left: parent.left
             margins: 10
         }
+        spacing: 8
         width: parent.width
 
         Column {

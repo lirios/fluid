@@ -14,7 +14,6 @@ add_definitions(
 set(SOURCES
     uicomponentsplugin.cpp
     iconimageprovider.cpp
-    themeimageprovider.cpp
     enums.cpp
 )
 

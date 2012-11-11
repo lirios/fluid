@@ -29,7 +29,6 @@
 
 #include "uicomponentsplugin.h"
 #include "iconimageprovider.h"
-#include "themeimageprovider.h"
 #include "enums.h"
 
 void UiComponentsPlugin::registerTypes(const char *uri)
@@ -45,7 +44,6 @@ void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidUi"));
 
-    engine->addImageProvider("uiwidgets", new ThemeImageProvider);
     engine->addImageProvider("desktoptheme", new IconImageProvider);
 }
 

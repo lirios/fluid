@@ -39,9 +39,11 @@ Imports:
         FluidCore
 
 Description:
-        A simple button, with optional label and icon which uses the Fluid theme.
+        A simple button, with optional label and icon which uses the plasma theme.
 	This button component can also be used as a checkable button by using the checkable
 	and checked properties for that.
+        Plasma theme is the theme which changes via the systemsetting-workspace appearance
+        -desktop theme.
 
 Properties:
       * bool checked:
@@ -54,9 +56,9 @@ Properties:
         This property holds if the button is acting like a checkable button or not.
 	The default value is false.
 
-      * bool pressed:
+       * bool pressed:
         This property holds if the button is pressed or not.
-        Read-only.
+	Read-only.
 
       * string text:
         This property holds the text label for the button.
@@ -95,38 +97,15 @@ Item {
 
     signal clicked()
 
-    // Internal style API
-property color textColor
-    property color pressedTextColor: textColor
-    property color disabledTextColor: textColor
-    property color checkedTextColor: textColor
-
-    property int backgroundMarginRight: 5
-    property int backgroundMarginLeft: 5
-    property int backgroundMarginTop: 5
-    property int backgroundMarginBottom: 5
-
-    property url background: "image://uiwidgets/button"
-    property url hoverBackground: "image://uiwidgets/button-hover"
-    property url focusedBackground: "image://uiwidgets/button-focused"
-    property url focusedHoverBackground: "image://uiwidgets/button-focused-hover"
-    property url disabledBackground: "image://uiwidgets/button-disabled"
-    property url pressedBackground: "image://uiwidgets/button-active"
-    property url pressedHoverBackground: "image://uiwidgets/button-active-hover"
-    property url pressedFocusedBackground: "image://uiwidgets/button-active-focused"
-    property url pressedFocusedHoverBackground: "image://uiwidgets/button-active-focused-hover"
-    property url pressedDisabledBackground: "image://uiwidgets/button-active-disabled"
-    //
-    property url defaultBackground: "image://uiwidgets/button-default"
-    property url defaultHoverBackground: "image://uiwidgets/button-default-hover"
-
     implicitWidth: {
-        if (label.paintedWidth == 0)
-            return height;
-        return Math.max(theme.defaultFont.mSize.width * 12,
-            icon.width + label.paintedWidth + backgroundMarginLeft + backgroundMarginRight) + ((icon.valid) ? backgroundMarginLeft : 0);
+        if (label.paintedWidth == 0) {
+            return height
+        } else {
+            //return Math.max(theme.defaultFont.mSize.width*12, label.paintedWidth)
+            return Math.max(theme.defaultFont.mSize.width*12, icon.width + label.paintedWidth + surfaceNormal.margins.left + surfaceNormal.margins.right) + ((icon.valid) ? surfaceNormal.margins.left : 0)
+        }
     }
-    implicitHeight: Math.max(theme.defaultFont.mSize.height * 1.6, Math.max(icon.height, label.paintedHeight) + backgroundMarginTop/2 + backgroundMarginBottom/2)
+    implicitHeight: Math.max(theme.defaultFont.mSize.height*1.6, Math.max(icon.height, label.paintedHeight) + surfaceNormal.margins.top/2 + surfaceNormal.margins.bottom/2)
 
     // TODO: needs to define if there will be specific graphics for
     //     disabled buttons
@@ -168,42 +147,75 @@ property color textColor
             internal.clickButton();
     }
 
-    BorderImage {
-        id: backgroundImage
+    Private.ButtonShadow {
+        id: shadow
         anchors.fill: parent
-        source: {
-            if (button.enabled) {
-                var pressed = internal.userPressed || checked;
-
-                if (button.activeFocus && mouse.containsMouse)
-                    return pressed ? button.pressedFocusedHoverBackground : button.focusedHoverBackground;
-                else if (mouse.containsMouse)
-                    return pressed ? button.pressedHoverBackground : button.hoverBackground;
-                else if (button.activeFocus)
-                    return pressed ? button.pressedFocusedBackground : button.focusedBackground;
-                return pressed ? button.pressedBackground : button.background;
+        state: {
+            if (internal.userPressed || checked) {
+                return "hidden"
+            } else if (mouse.containsMouse) {
+                return "hover"
+            } else if (button.activeFocus) {
+                return "focus"
             } else {
-                if (internal.userPressed || checked)
-                    return button.pressedDisabledBackground;
-                return button.disabledBackground;
+                return "shadow"
             }
         }
-        border {
-            left: button.backgroundMarginLeft
-            top: button.backgroundMarginTop
-            right: button.backgroundMarginRight
-            bottom: button.backgroundMarginBottom
-        }
+    }
+
+    // The normal button state
+    FluidCore.FrameSvgItem {
+        id: surfaceNormal
+
+        anchors.fill: parent
+        imagePath: "widgets/button"
+        prefix: "normal"
+    }
+
+    // The pressed state
+    FluidCore.FrameSvgItem {
+        id: surfacePressed
+
+        anchors.fill: parent
+        imagePath: "widgets/button"
+        prefix: "pressed"
+        opacity: 0
     }
 
     Item {
         id: buttonContent
+        state: (internal.userPressed || checked) ? "pressed" : "normal"
+
+        states: [
+            State { name: "normal" },
+            State { name: "pressed" 
+                    PropertyChanges {
+                        target: surfaceNormal
+                        opacity: 0
+                    }
+                    PropertyChanges {
+                        target: surfacePressed
+                        opacity: 1
+                    }
+            }
+        ]
+        transitions: [
+            Transition {
+                to: "normal"
+                // Cross fade from pressed to normal
+                ParallelAnimation {
+                    NumberAnimation { target: surfaceNormal; property: "opacity"; to: 1; duration: 100 }
+                    NumberAnimation { target: surfacePressed; property: "opacity"; to: 0; duration: 100 }
+                }
+            }
+        ]
+
         anchors {
             fill: parent
-            leftMargin: button.backgroundMarginLeft
-            topMargin: button.backgroundMarginTop
-            rightMargin: button.backgroundMarginRight
-            bottomMargin: button.backgroundMarginBottom
+            leftMargin: surfaceNormal.margins.left
+            topMargin: surfaceNormal.margins.top
+            rightMargin: surfaceNormal.margins.right
+            bottomMargin: surfaceNormal.margins.bottom
         }
 
         Private.IconLoader {
@@ -226,6 +238,7 @@ property color textColor
                 icon.anchors.horizontalCenter = label.paintedWidth > 0 ? undefined : icon.parent.horizontalCenter
                 icon.anchors.left = label.paintedWidth > 0 ? icon.parent.left : undefined
             }
+
             anchors {
                 top: parent.top
                 bottom: parent.bottom
@@ -243,7 +256,7 @@ property color textColor
             font.underline: theme.defaultFont.underline
             font.weight: theme.defaultFont.weight
             font.wordSpacing: theme.defaultFont.wordSpacing
-            color: !button.enabled ? button.disabledTextColor : (button.pressed ? button.pressedTextColor : (button.checked ? button.checkedTextColor : theme.buttonTextColor))
+            color: theme.buttonTextColor
             horizontalAlignment: icon.valid ? Text.AlignLeft : Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
         }

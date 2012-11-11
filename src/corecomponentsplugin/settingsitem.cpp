@@ -54,6 +54,7 @@ void SettingsItem::setSchema(const QString &schema)
     delete m_settings;
     m_settings = new VSettings(schema);
     emit schemaChanged();
+    connect(m_settings, SIGNAL(changed()), this, SIGNAL(valueChanged()));
 }
 
 QString SettingsItem::group() const

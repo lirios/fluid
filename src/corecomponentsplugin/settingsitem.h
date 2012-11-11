@@ -52,6 +52,7 @@ public:
 signals:
     void schemaChanged();
     void groupChanged();
+    void valueChanged();
 
 private:
     VSettings *m_settings;

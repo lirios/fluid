@@ -58,7 +58,7 @@ namespace Fluid
         ContextConstraint = 64, /**< the context (e.g. activity) has changed */
         PopupConstraint = 128, /**< the position of the popup needs to be recalculated*/
         AllConstraints = FormFactorConstraint | LocationConstraint | ScreenConstraint |
-        SizeConstraint | ImmutableConstraint | PopupConstraint
+                         SizeConstraint | ImmutableConstraint | PopupConstraint
     };
     Q_DECLARE_FLAGS(Constraints, Constraint)
 

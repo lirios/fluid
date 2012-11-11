@@ -383,7 +383,7 @@ namespace Fluid
         QStringList paths = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
                                                       QLatin1String("themes"),
                                                       QStandardPaths::LocateDirectory);
-        foreach (QString path, paths) {
+        foreach(QString path, paths) {
             QDirIterator it(path, QDir::Dirs | QDir::Readable | QDir::NoDotAndDotDot, QDirIterator::FollowSymlinks);
             while (it.hasNext()) {
                 QDir dir(it.next());
@@ -494,7 +494,7 @@ namespace Fluid
             cg.sync();
         }
 #endif
-        #endif
+#endif
 
         // Pixmap cache prefix
         pixmapCachePrefix = "fluid_theme_" + themeName;
@@ -597,22 +597,22 @@ namespace Fluid
     void Theme::setFont(const QFont &font, FontRole role)
     {
         switch (role) {
-        case DefaultFont:
-            d->settings->setValue("interface/font-name", font.family());
-            d->settings->setValue("interface/font-size", font.pointSize());
-            break;
-        case MonospaceFont:
-            d->settings->setValue("interface/monospace-font-name", font.family());
-            d->settings->setValue("interface/monospace-font-size", font.pointSize());
-            break;
-        case SmallFont:
-            d->settings->setValue("interface/small-font-name", font.family());
-            d->settings->setValue("interface/small-font-size", font.pointSize());
-            break;
-        case MiniFont:
-            d->settings->setValue("interface/mini-font-name", font.family());
-            d->settings->setValue("interface/mini-font-size", font.pointSize());
-            break;
+            case DefaultFont:
+                d->settings->setValue("interface/font-name", font.family());
+                d->settings->setValue("interface/font-size", font.pointSize());
+                break;
+            case MonospaceFont:
+                d->settings->setValue("interface/monospace-font-name", font.family());
+                d->settings->setValue("interface/monospace-font-size", font.pointSize());
+                break;
+            case SmallFont:
+                d->settings->setValue("interface/small-font-name", font.family());
+                d->settings->setValue("interface/small-font-size", font.pointSize());
+                break;
+            case MiniFont:
+                d->settings->setValue("interface/mini-font-name", font.family());
+                d->settings->setValue("interface/mini-font-size", font.pointSize());
+                break;
         }
     }
 
@@ -621,22 +621,22 @@ namespace Fluid
         QFont font;
 
         switch (role) {
-        case DefaultFont:
-            font.setFamily(d->settings->value("interface/font-name").toString());
-            font.setPointSize(d->settings->value("interface/font-size").toInt());
-            break;
-        case MonospaceFont:
-            font.setFamily(d->settings->value("interface/monospace-font-name").toString());
-            font.setPointSize(d->settings->value("interface/monospace-font-size").toInt());
-            break;
-        case SmallFont:
-            font.setFamily(d->settings->value("interface/font-name").toString());
-            font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.9);
-            break;
-        case MiniFont:
-            font.setFamily(d->settings->value("interface/font-name").toString());
-            font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.8);
-            break;
+            case DefaultFont:
+                font.setFamily(d->settings->value("interface/font-name").toString());
+                font.setPointSize(d->settings->value("interface/font-size").toInt());
+                break;
+            case MonospaceFont:
+                font.setFamily(d->settings->value("interface/monospace-font-name").toString());
+                font.setPointSize(d->settings->value("interface/monospace-font-size").toInt());
+                break;
+            case SmallFont:
+                font.setFamily(d->settings->value("interface/font-name").toString());
+                font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.9);
+                break;
+            case MiniFont:
+                font.setFamily(d->settings->value("interface/font-name").toString());
+                font.setPointSize(d->settings->value("interface/font-size").toInt() * 0.8);
+                break;
         }
 
         return font;

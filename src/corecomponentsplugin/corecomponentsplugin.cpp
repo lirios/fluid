@@ -34,6 +34,7 @@
 #include "framesvgitem.h"
 #include "svgitem.h"
 #include "themeproxy.h"
+#include "settingsitem.h"
 
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
@@ -45,6 +46,7 @@ void CoreComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<Fluid::Svg>(uri, 1, 0, "Svg");
     qmlRegisterType<SvgItem>(uri, 1, 0, "SvgItem");
     qmlRegisterType<ThemeProxy>(uri, 1, 0, "Theme");
+    qmlRegisterType<SettingsItem>(uri, 1, 0, "Settings");
 }
 
 void CoreComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -17,6 +17,7 @@ set(SOURCES
     framesvgitem.cpp
     svgitem.cpp
     themeproxy.cpp
+    settingsitem.cpp
 )
 
 add_library(fluidcorecomponentsplugin SHARED ${SOURCES})

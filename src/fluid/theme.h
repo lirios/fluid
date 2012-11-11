@@ -108,15 +108,6 @@ namespace Fluid
         QString themeName() const;
 
         /**
-         * Retrieve the pixmap for a UI widget in the current name.
-         *
-         * @param name the name of the file in the theme directory (without
-         *             the ".png" part or a leading slash)
-         * @return the pixmap for the requested image
-         */
-        QPixmap *uiWidget(const QString &name) const;
-
-        /**
          * Retrieve the path for an SVG image in the current theme.
          *
          * @param name the name of the file in the theme directory (without the

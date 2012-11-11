@@ -39,11 +39,9 @@ Imports:
         FluidCore
 
 Description:
-        A simple button, with optional label and icon which uses the plasma theme.
+        A simple button, with optional label and icon which uses the Fluid theme.
 	This button component can also be used as a checkable button by using the checkable
 	and checked properties for that.
-        Plasma theme is the theme which changes via the systemsetting-workspace appearance
-        -desktop theme.
 
 Properties:
       * bool checked:
@@ -56,9 +54,9 @@ Properties:
         This property holds if the button is acting like a checkable button or not.
 	The default value is false.
 
-       * bool pressed:
+      * bool pressed:
         This property holds if the button is pressed or not.
-	Read-only.
+        Read-only.
 
       * string text:
         This property holds the text label for the button.

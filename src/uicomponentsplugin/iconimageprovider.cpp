@@ -30,32 +30,43 @@
 #include "iconimageprovider.h"
 
 IconImageProvider::IconImageProvider()
-    : QQuickImageProvider(QQuickImageProvider::Image)
+    : QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
 }
 
-QImage IconImageProvider::requestImage(const QString &id, QSize *size, const QSize &requestedSize)
+QPixmap IconImageProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
     // Special case for images whose full path was specified,
     // we just need to resize to the requested size
     if (id.startsWith("/") && id.length() > 1) {
-        QImage icon(id);
+        QPixmap icon(id);
         if (icon.isNull()) {
             qWarning() << "Failed to load icon from" << id;
-            return QImage();
+            return QPixmap();
         }
-
-        if (requestedSize.isValid())
-            icon = icon.scaled(requestedSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
         if (size)
             *size = icon.size();
+        if (requestedSize.isValid())
+            icon = icon.scaled(requestedSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
         return icon;
     }
 
     // Perform icon lookup in the default theme
-    QIcon icon(QIcon::fromTheme(id, QIcon::fromTheme("unknown")));
+    QIcon icon = QIcon::fromTheme(id, QIcon::fromTheme("unknown"));
+    if (icon.isNull()) {
+        qWarning() << "No" << id << "icon found!";
+        return QPixmap();
+    }
+
+    QSize iconSize = requestedSize;
+    if (!iconSize.isValid())
+        iconSize = QSize(256, 256);
+    iconSize = icon.actualSize(iconSize);
+
     if (size)
-        *size = icon.actualSize(requestedSize);
-    return QImage(icon.pixmap(requestedSize).toImage());
+        *size = iconSize;
+
+    return icon.pixmap(iconSize);
 }

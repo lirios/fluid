@@ -53,13 +53,22 @@ QPixmap IconImageProvider::requestPixmap(const QString &id, QSize *size, const Q
         return icon;
     }
 
+    QString iconName = id;
+
+    // Fallback to normal icons when the symbolic version doesn't exist
+    if (!QIcon::hasThemeIcon(iconName) && iconName.endsWith(QLatin1String("-symbolic"))) {
+        iconName = iconName.replace(QLatin1String("-symbolic"), QLatin1String(""));
+        qDebug() << "No" << id << "icon found, fallback to" << iconName;
+    }
+
     // Perform icon lookup in the default theme
-    QIcon icon = QIcon::fromTheme(id, QIcon::fromTheme("unknown"));
+    QIcon icon = QIcon::fromTheme(iconName, QIcon::fromTheme(QLatin1String("unknown")));
     if (icon.isNull()) {
-        qWarning() << "No" << id << "icon found!";
+        qWarning() << "No valid icon for" << id;
         return QPixmap();
     }
 
+    // Assume a default size if the requested size is not valid
     QSize iconSize = requestedSize;
     if (!iconSize.isValid())
         iconSize = QSize(256, 256);

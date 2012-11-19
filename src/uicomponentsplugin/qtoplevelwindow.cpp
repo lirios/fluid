@@ -38,9 +38,9 @@
 **
 ****************************************************************************/
 
-#include "qtoplevelwindow.h"
+#include <QScreen>
 
-#include <QDesktopWidget>
+#include "qtoplevelwindow.h"
 
 QTopLevelWindow::QTopLevelWindow()
     : QQuickView(), _positionIsDefined(false)
@@ -77,7 +77,7 @@ void QTopLevelWindow::initPosition()
 
 void QTopLevelWindow::center()
 {
-    QPoint parentCenter = QDesktopWidget().screenGeometry().center();
+    QPoint parentCenter = screen()->availableGeometry().center();
     QRect thisGeometry = geometry();
     thisGeometry.moveCenter(parentCenter);
     setGeometry(thisGeometry);

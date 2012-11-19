@@ -43,7 +43,6 @@
 
 #include <QtCore/qglobal.h>
 
-#include <QMainWindow>
 #include <QtQuick/QQuickView>
 
 #include <QWindowStateChangeEvent>
@@ -51,7 +50,6 @@
 
 // Qt 4, QtQuick1 : QTopLevelWindow is a QMainWindow with a QDeclarativeView centerWidget
 // Qt 5, QtQuick2 : QTopLevelWindow is a QQuickView.
-class QMenuBar;
 class QTopLevelWindow : public QQuickView {
     Q_OBJECT
 public:
@@ -59,7 +57,6 @@ public:
     ~QTopLevelWindow();
 
     QQuickView * view() { return this; }
-    QMenuBar *menuBar();
     void registerChildWindow(QTopLevelWindow* child);
     void hideChildWindows();
     void initPosition();
@@ -75,7 +72,6 @@ Q_SIGNALS:
     void windowStateChanged();
 
 private:
-    QMenuBar *_menuBar;
     bool _positionIsDefined;
 
 };

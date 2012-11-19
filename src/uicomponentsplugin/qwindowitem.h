@@ -46,7 +46,6 @@
 #include <QtGui/QGuiApplication>
 #include <QtQuick/QQuickItem>
 #include <QtQuick/QQuickView>
-#include <QMenuBar>
 
 class QWindowItem : public QQuickItem
 {

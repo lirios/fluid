@@ -54,7 +54,7 @@ class QWindowItem : public QQuickItem
     Q_PROPERTY(int maximumHeight READ maximumHeight WRITE setMaximumHeight NOTIFY maximumHeightChanged)
     Q_PROPERTY(int minimumWidth READ minimumWidth WRITE setMinimumWidth NOTIFY minimumWidthChanged)
     Q_PROPERTY(int maximumWidth READ maximumWidth WRITE setMaximumWidth NOTIFY maximumWidthChanged)
-    Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+    //Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
     Q_PROPERTY(bool windowDecoration READ windowDecoration WRITE setWindowDecoration NOTIFY windowDecorationChanged)
     Q_PROPERTY(bool modal READ modal WRITE setModal NOTIFY modalityChanged)
     Q_PROPERTY(bool deleteOnClose READ deleteOnClose WRITE setDeleteOnClose NOTIFY deleteOnCloseChanged)
@@ -103,7 +103,7 @@ protected Q_SLOTS:
     void moveWindow(int x, int y, int lx, int ly);
 
 Q_SIGNALS:
-    void visibleChanged();
+    //void visibleChanged();
     void windowDecorationChanged();
     void windowStateChanged();
     void minimumHeightChanged();

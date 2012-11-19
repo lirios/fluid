@@ -29,15 +29,10 @@
 
 #include "uicomponentsplugin.h"
 #include "iconimageprovider.h"
-#include "enums.h"
 
 void UiComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidUi"));
-
-    qmlRegisterUncreatableType<DialogStatus>(uri, 1, 0, "DialogStatus", "");
-    qmlRegisterUncreatableType<PageOrientation>(uri, 1, 0, "PageOrientation", "");
-    qmlRegisterUncreatableType<PageStatus>(uri, 1, 0, "PageStatus", "");
 }
 
 void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

@@ -41,17 +41,11 @@
 #include "qtoplevelwindow.h"
 
 #include <QDesktopWidget>
-#include <QtWidgets/QMenuBar>
 
 QTopLevelWindow::QTopLevelWindow()
-    : QQuickView(), _menuBar(new QMenuBar), _positionIsDefined(false)
+    : QQuickView(), _positionIsDefined(false)
 {
     setVisible(false);
-}
-
-QMenuBar *QTopLevelWindow::menuBar()
-{
-    return _menuBar;
 }
 
 QTopLevelWindow::~QTopLevelWindow()

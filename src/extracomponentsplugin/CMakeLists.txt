@@ -25,5 +25,5 @@ target_link_libraries(fluidextracomponentsplugin
 )
 
 # Install plugin
-install(TARGETS fluidextracomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidExtra)
-install(FILES qmldir DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidExtra)
+install(TARGETS fluidextracomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)
+install(FILES qmldir DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)

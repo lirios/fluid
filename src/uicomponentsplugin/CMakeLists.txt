@@ -24,8 +24,8 @@ target_link_libraries(fluiduicomponentsplugin
 )
 
 # Install plugin
-install(TARGETS fluiduicomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidUi)
-install(FILES qmldir DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidUi)
+install(TARGETS fluiduicomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
+install(FILES qmldir DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
 
 # QML and JavaScript code
 add_subdirectory(qml)

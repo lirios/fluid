@@ -30,5 +30,5 @@ target_link_libraries(fluidcorecomponentsplugin
 )
 
 # Install plugin
-install(TARGETS fluidcorecomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidCore)
-install(FILES qmldir DESTINATION ${CMAKE_INSTALL_IMPORTSDIR}/FluidCore)
+install(TARGETS fluidcorecomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidCore)
+install(FILES qmldir DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidCore)

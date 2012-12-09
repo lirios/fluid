@@ -13,6 +13,7 @@ add_definitions(
 
 set(SOURCES
     extracomponentsplugin.cpp
+    fallbackcomponent.cpp
     qiconitem.cpp
     qimageitem.cpp
     qpixmapitem.cpp

@@ -25,6 +25,7 @@
  ***************************************************************************/
 
 #include "extracomponentsplugin.h"
+#include "fallbackcomponent.h"
 #include "qpixmapitem.h"
 #include "qimageitem.h"
 #include "qiconitem.h"
@@ -33,6 +34,7 @@ void ExtraComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidExtra"));
 
+    qmlRegisterType<FallbackComponent>(uri, 1, 0, "FallbackComponent");
     qmlRegisterType<QPixmapItem>(uri, 1, 0, "PixmapItem");
     qmlRegisterType<QImageItem>(uri, 1, 0, "ImageItem");
     qmlRegisterType<QIconItem>(uri, 1, 0, "IconItem");

@@ -1,14 +1,14 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (c) 2012 Pier Luigi Fiorini
- * Copyright (c) 2008-2010 Aaron Seigo
- * Copyright (c) 2008-2010 Marco Martin
+ * Copyright (C) 2012 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2008-2010 Aaron Seigo <aseigo@kde.org>
+ * Copyright (C) 2008-2010 Marco Martin <notmart@gmail.com>
  *
  * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *    Marco Martin <notmart@gmail.com>
- *    Aaron Seigo <aseigo@kde.org>
+ *    Pier Luigi Fiorini
+ *    Marco Martin
+ *    Aaron Seigo
  *
  * $BEGIN_LICENSE:LGPL2.1+$
  *

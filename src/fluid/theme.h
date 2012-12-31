@@ -1,12 +1,12 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (c) 2012 Pier Luigi Fiorini
- * Copyright (c) 2006-2007 Aaron Seigo
+ * Copyright (C) 2012 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2006-2007 Aaron Seigo <aseigo@kde.org>
  *
  * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *    Aaron Seigo <aseigo@kde.org>
+ *    Pier Luigi Fiorini
+ *    Aaron Seigo
  *
  * $BEGIN_LICENSE:LGPL2.1+$
  *

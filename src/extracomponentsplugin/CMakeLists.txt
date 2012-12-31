@@ -1,15 +1,9 @@
 include_directories(
-    ${Qt5Qml_INCLUDE_DIRS}
-    ${Qt5Quick_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/headers
     ${CMAKE_SOURCE_DIR}/headers/FluidCore
 )
 
-add_definitions(
-    ${Qt5Qml_DEFINITIONS}
-    ${Qt5Quick_DEFINITIONS}
-    -DQT_PLUGIN
-)
+add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     extracomponentsplugin.cpp
@@ -20,11 +14,9 @@ set(SOURCES
 )
 
 add_library(fluidextracomponentsplugin SHARED ${SOURCES})
-target_link_libraries(fluidextracomponentsplugin
-    ${Qt5Qml_LIBRARIES}
-    ${Qt5Quick_LIBRARIES}
-)
+qt5_use_modules(fluidextracomponentsplugin Qml Quick)
 
-# Install plugin
-install(TARGETS fluidextracomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)
-install(FILES qmldir DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)
+install(TARGETS fluidextracomponentsplugin LIBRARY
+    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)
+install(FILES qmldir
+    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidExtra)

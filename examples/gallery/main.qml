@@ -1,10 +1,10 @@
 /****************************************************************************
  * This file is part of Fluid Examples.
  *
- * Copyright (c) 2012 Pier Luigi Fiorini
+ * Copyright (C) 2012-2013 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *    Pier Luigi Fiorini
  *
  * $BEGIN_LICENSE:BSD2$
  *

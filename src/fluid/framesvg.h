@@ -1,7 +1,7 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (C) 2012 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2012-2013 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2008 Aaron Seigo <aseigo@kde.org>
  * Copyright (C) 2008 Marco Martin <notmart@gmail.com>
  *

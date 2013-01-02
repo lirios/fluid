@@ -1,14 +1,14 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (c) 2012 Pier Luigi Fiorini
- * Copyright (c) 2011 Daker Fernandes Pinheiro
- * Copyright (c) 2011 Marco Martin
+ * Copyright (C) 2012-2013 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2011 Daker Fernandes Pinheiro <dakerfp@gmail.com>
+ * Copyright (C) 2011 Marco Martin <mart@kde.org>
  *
  * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *    Marco Martin <mart@kde.org>
- *    Daker Fernandes Pinheiro <dakerfp@gmail.com>
+ *    Pier Luigi Fiorini
+ *    Marco Martin
+ *    Daker Fernandes Pinheiro
  *
  * $BEGIN_LICENSE:LGPL2.1+$
  *

@@ -1,6 +1,7 @@
 include_directories(
     ${CMAKE_SOURCE_DIR}/headers
     ${CMAKE_SOURCE_DIR}/headers/FluidCore
+    ${CMAKE_BINARY_DIR}/src/fluid
 )
 
 add_definitions(-DQT_PLUGIN)

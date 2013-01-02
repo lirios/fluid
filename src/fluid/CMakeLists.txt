@@ -14,6 +14,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    ${CMAKE_CURRENT_BINARY_DIR}/fluid_export.h
     fluid.h
     framesvg.h
     svg.h
@@ -35,7 +36,7 @@ set_target_properties(Fluid PROPERTIES
     VERSION ${FLUID_VERSION_STRING}
     SOVERSION ${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_VERSION_PATCH})
 
-install(FILES ${HEADERS} ${CMAKE_CURRENT_BINARY_DIR}/fluid_export.h
+install(FILES ${HEADERS}
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/Fluid)
 install(TARGETS Fluid LIBRARY
     DESTINATION ${CMAKE_INSTALL_LIBDIR})

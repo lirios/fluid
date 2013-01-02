@@ -2,6 +2,7 @@ include_directories(
     ${VibeCore_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/headers
     ${CMAKE_SOURCE_DIR}/headers/Fluid
+    ${CMAKE_BINARY_DIR}/src/fluid
 )
 
 add_definitions(-DQT_PLUGIN)

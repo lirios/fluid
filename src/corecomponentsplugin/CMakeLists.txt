@@ -9,8 +9,6 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     corecomponentsplugin.cpp
-    framesvgitem.cpp
-    svgitem.cpp
     themeproxy.cpp
     settingsitem.cpp
 )

@@ -29,8 +29,6 @@
 #include <QQmlComponent>
 
 #include "corecomponentsplugin.h"
-#include "framesvgitem.h"
-#include "svgitem.h"
 #include "themeproxy.h"
 #include "settingsitem.h"
 
@@ -38,10 +36,6 @@ void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
 
-    qmlRegisterType<Fluid::FrameSvg>(uri, 1, 0, "FrameSvg");
-    qmlRegisterType<FrameSvgItem>(uri, 1, 0, "FrameSvgItem");
-    qmlRegisterType<Fluid::Svg>(uri, 1, 0, "Svg");
-    qmlRegisterType<SvgItem>(uri, 1, 0, "SvgItem");
     qmlRegisterType<ThemeProxy>(uri, 1, 0, "Theme");
     qmlRegisterType<SettingsItem>(uri, 1, 0, "Settings");
 }

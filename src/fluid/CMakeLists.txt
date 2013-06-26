@@ -7,16 +7,12 @@ include_directories(
 
 set(SOURCES
     fluid.cpp
-    framesvg.cpp
-    svg.cpp
     theme.cpp
 )
 
 set(HEADERS
     ${CMAKE_CURRENT_BINARY_DIR}/fluid_export.h
     fluid.h
-    framesvg.h
-    svg.h
     theme.h
 )
 

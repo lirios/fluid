@@ -1,8 +1,6 @@
 set(HEADERS
     Fluid
     FluidExport
-    FrameSvg
-    Svg
     Theme
 )
 

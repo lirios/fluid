@@ -8,7 +8,6 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     extracomponentsplugin.cpp
-    fallbackcomponent.cpp
     qiconitem.cpp
     qimageitem.cpp
     qpixmapitem.cpp

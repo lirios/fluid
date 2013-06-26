@@ -2,7 +2,6 @@ set(HEADERS
     Fluid
     FluidExport
     FrameSvg
-    RangeModel
     Svg
     Theme
 )

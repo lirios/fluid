@@ -13,7 +13,6 @@ set(SOURCES
     svgitem.cpp
     themeproxy.cpp
     settingsitem.cpp
-    enums.cpp
 )
 
 add_library(fluidcorecomponentsplugin SHARED ${SOURCES})

@@ -35,7 +35,6 @@
 #include "svgitem.h"
 #include "themeproxy.h"
 #include "settingsitem.h"
-#include "enums.h"
 
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
@@ -48,11 +47,6 @@ void CoreComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<SvgItem>(uri, 1, 0, "SvgItem");
     qmlRegisterType<ThemeProxy>(uri, 1, 0, "Theme");
     qmlRegisterType<SettingsItem>(uri, 1, 0, "Settings");
-
-    // Enums
-    qmlRegisterUncreatableType<DialogStatus>(uri, 1, 0, "DialogStatus", "");
-    qmlRegisterUncreatableType<PageOrientation>(uri, 1, 0, "PageOrientation", "");
-    qmlRegisterUncreatableType<PageStatus>(uri, 1, 0, "PageStatus", "");
 }
 
 void CoreComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)

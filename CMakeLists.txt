@@ -17,10 +17,10 @@ set(FLUID_VERSION_STRING "${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_
 # Installation directories
 include(HawaiiInstallDirs)
 
-# Log features
-include(MacroLogFeature)
+# Macro to print feature summary
+include(FeatureSummary)
 
-# Macros to generate the export header
+# Macro to generate the export header
 include(GenerateExportHeader)
 
 # Add custom uninstall target
@@ -53,15 +53,12 @@ endif()
 
 # Find Qt
 find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
-macro_log_feature(Qt5Qml_FOUND "Qt5Qml" "Support for Qt5Qml" "http://qt-project.org" "")
-macro_log_feature(Qt5Quick_FOUND "Qt5Quick" "Support for Qt5Quick" "http://qt-project.org" "")
 
 # Find Vibe libraries
 find_package(VibeCore REQUIRED)
 if(NOT VibeCore_FOUND)
     message(FATAL_ERROR "VibeCore module is required!")
 endif()
-macro_log_feature(VibeCore_FOUND "VibeCore" "Support for VibeCore" "http://www.maui-project.org" "")
 
 # Subdirectories
 add_subdirectory(data)
@@ -69,5 +66,5 @@ add_subdirectory(headers)
 add_subdirectory(src)
 add_subdirectory(examples)
 
-# Display featute log
-macro_display_feature_log()
+# Display featute summary
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

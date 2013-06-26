@@ -10,7 +10,6 @@ set(SOURCES
     framesvg.cpp
     svg.cpp
     theme.cpp
-    rangemodel.cpp
 )
 
 set(HEADERS
@@ -19,7 +18,6 @@ set(HEADERS
     framesvg.h
     svg.h
     theme.h
-    rangemodel.h
 )
 
 add_compiler_export_flags()

@@ -24,11 +24,10 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QQmlEngine>
-#include <QQmlComponent>
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlComponent>
 
 #include "uicomponentsplugin.h"
-#include "iconimageprovider.h"
 
 void UiComponentsPlugin::registerTypes(const char *uri)
 {
@@ -38,8 +37,6 @@ void UiComponentsPlugin::registerTypes(const char *uri)
 void UiComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidUi"));
-
-    engine->addImageProvider("desktoptheme", new IconImageProvider);
 }
 
 #include "moc_uicomponentsplugin.cpp"

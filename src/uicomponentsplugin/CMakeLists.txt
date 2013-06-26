@@ -8,16 +8,17 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     uicomponentsplugin.cpp
-    iconimageprovider.cpp
 )
 
 add_library(fluiduicomponentsplugin SHARED ${SOURCES})
-qt5_use_modules(fluiduicomponentsplugin Qml Quick)
+qt5_use_modules(fluiduicomponentsplugin Qml)
 target_link_libraries(fluiduicomponentsplugin Fluid)
 
 # Install plugin
-install(TARGETS fluiduicomponentsplugin LIBRARY DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
-install(FILES qmldir DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
+install(TARGETS fluiduicomponentsplugin LIBRARY
+    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
+install(FILES qmldir
+    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
 
 # QML and JavaScript code
-add_subdirectory(qml)
+#add_subdirectory(qml)

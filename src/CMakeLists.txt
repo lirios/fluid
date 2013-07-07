@@ -1,4 +1,3 @@
-add_subdirectory(fluid)
 add_subdirectory(corecomponentsplugin)
 add_subdirectory(uicomponentsplugin)
 add_subdirectory(extracomponentsplugin)

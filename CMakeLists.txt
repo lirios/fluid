@@ -62,7 +62,6 @@ endif()
 
 # Subdirectories
 add_subdirectory(data)
-add_subdirectory(headers)
 add_subdirectory(src)
 add_subdirectory(examples)
 

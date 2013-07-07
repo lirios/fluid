@@ -1,13 +1,17 @@
-# Install QML and JavaScript code
+# Install FluidUi code
 set(MODULE_FILES
+    qmldir
+    Icon.qml
 )
-set(JAVASCRIPT_FILES
-)
-install(FILES ${MODULE_FILES} ${JAVASCRIPT_FILES}
+install(FILES ${MODULE_FILES}
     DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
 
-# Install private code
-set(PRIVATE_FILES
+# Install FluidUi.ListItems code
+set(MODULE_FILES
+    ListItems/qmldir
+    ListItems/Empty.qml
+    ListItems/Base.qml
+    ListItems/Standard.qml
 )
-install(FILES ${PRIVATE_FILES}
-     DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi/private)
+install(FILES ${MODULE_FILES}
+    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi/ListItems)

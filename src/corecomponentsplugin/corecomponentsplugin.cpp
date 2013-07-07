@@ -29,25 +29,13 @@
 #include <QQmlComponent>
 
 #include "corecomponentsplugin.h"
-#include "themeproxy.h"
 #include "settingsitem.h"
 
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
 
-    qmlRegisterType<ThemeProxy>(uri, 1, 0, "Theme");
     qmlRegisterType<SettingsItem>(uri, 1, 0, "Settings");
-}
-
-void CoreComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("FluidCore"));
-
-    QQmlContext *context = engine->rootContext();
-
-    ThemeProxy *theme = new ThemeProxy(context);
-    context->setContextProperty("theme", theme);
 }
 
 #include "moc_corecomponentsplugin.cpp"

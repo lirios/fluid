@@ -9,7 +9,6 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     corecomponentsplugin.cpp
-    themeproxy.cpp
     settingsitem.cpp
 )
 

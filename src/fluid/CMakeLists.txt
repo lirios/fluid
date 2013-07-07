@@ -7,13 +7,11 @@ include_directories(
 
 set(SOURCES
     fluid.cpp
-    theme.cpp
 )
 
 set(HEADERS
     ${CMAKE_CURRENT_BINARY_DIR}/fluid_export.h
     fluid.h
-    theme.h
 )
 
 add_compiler_export_flags()

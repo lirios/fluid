@@ -35,7 +35,7 @@ void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
 
-    qmlRegisterType<SettingsItem>(uri, 1, 0, "Settings");
+    qmlRegisterType<SettingsItem>(uri, 0, 2, "Settings");
 }
 
 #include "moc_corecomponentsplugin.cpp"

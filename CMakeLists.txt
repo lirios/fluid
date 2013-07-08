@@ -63,7 +63,6 @@ endif()
 # Subdirectories
 add_subdirectory(data)
 add_subdirectory(src)
-add_subdirectory(examples)
 
 # Display featute summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

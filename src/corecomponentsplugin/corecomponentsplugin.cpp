@@ -24,18 +24,18 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QQmlEngine>
-#include <QQmlContext>
-#include <QQmlComponent>
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlContext>
+#include <QtQml/QQmlComponent>
 
 #include "corecomponentsplugin.h"
-#include "settingsitem.h"
+#include "qqmlsettings_p.h"
 
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
 
-    qmlRegisterType<SettingsItem>(uri, 0, 2, "Settings");
+    qmlRegisterType<QQmlSettings>(uri, 0, 2, "Settings");
 }
 
 #include "moc_corecomponentsplugin.cpp"

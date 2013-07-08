@@ -6,7 +6,7 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     corecomponentsplugin.cpp
-    settingsitem.cpp
+    qqmlsettings.cpp
 )
 
 add_library(fluidcorecomponentsplugin SHARED ${SOURCES})

@@ -55,7 +55,6 @@ endif()
 find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
 
 # Subdirectories
-add_subdirectory(data)
 add_subdirectory(src)
 
 # Display featute summary

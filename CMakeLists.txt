@@ -54,12 +54,6 @@ endif()
 # Find Qt
 find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
 
-# Find Vibe libraries
-find_package(VibeCore REQUIRED)
-if(NOT VibeCore_FOUND)
-    message(FATAL_ERROR "VibeCore module is required!")
-endif()
-
 # Subdirectories
 add_subdirectory(data)
 add_subdirectory(src)

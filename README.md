@@ -1,11 +1,17 @@
 Fluid
 =====
 
-Library for fluid and dynamic applications development with QtQuick.
+Modules for fluid and dynamic applications development with QtQuick.
 
 ## Dependencies
 
-In order to build and install Fluid you need Vibe.
+In order to build and install Fluid you need Qt 5.1 or better with
+at least the following modules:
+
+* qtbase
+* qtjsbackend
+* qtdeclarative
+* qtquickcontrols
 
 ## Build
 

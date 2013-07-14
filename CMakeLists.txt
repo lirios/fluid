@@ -15,7 +15,7 @@ set(FLUID_VERSION_PATCH 90)
 set(FLUID_VERSION_STRING "${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_VERSION_PATCH}")
 
 # Installation directories
-include(HawaiiInstallDirs)
+include(GNUInstallDirs)
 
 # Macro to print feature summary
 include(FeatureSummary)
@@ -53,6 +53,10 @@ endif()
 
 # Find Qt
 find_package(Qt5 REQUIRED COMPONENTS Qml Quick)
+
+# Find Qt imports dir
+get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+exec_program(${QMAKE_EXECUTABLE} ARGS "-query QT_INSTALL_IMPORTS" RETURN_VALUE return_code OUTPUT_VARIABLE QT_PLUGINS_DIR)
 
 # Subdirectories
 add_subdirectory(src)

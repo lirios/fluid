@@ -4,7 +4,7 @@ set(MODULE_FILES
     Icon.qml
 )
 install(FILES ${MODULE_FILES}
-    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi)
+    DESTINATION ${QT_IMPORTS_DIR}/FluidUi)
 
 # Install FluidUi.ListItems code
 set(MODULE_FILES
@@ -14,4 +14,4 @@ set(MODULE_FILES
     ListItems/Standard.qml
 )
 install(FILES ${MODULE_FILES}
-    DESTINATION ${CMAKE_INSTALL_QMLDIR}/FluidUi/ListItems)
+    DESTINATION ${QT_IMPORTS_DIR}/FluidUi/ListItems)

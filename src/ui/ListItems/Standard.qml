@@ -40,11 +40,20 @@ Empty {
 
     property alias control: controlContainer.children
 
+    property var __syspal: SystemPalette {
+        colorGroup: SystemPalette.Active
+    }
+
     RowLayout {
         Icon {
             id: icon
             width: 24
             height: 24
+            color: {
+                if (iconName.indexOf("-symbolic", iconName.length - 9) != -1)
+                    return selected ? __syspal.highlightedText : __syspal.text;
+                return Qt.rgba(0, 0, 0, 0);
+            }
             visible: iconName != ""
         }
 

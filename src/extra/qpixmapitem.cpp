@@ -28,38 +28,40 @@
 
 #include <QPainter>
 
-#include "qimageitem.h"
+#include "qpixmapitem.h"
 
-QImageItem::QImageItem(QQuickItem *parent)
+QT_BEGIN_NAMESPACE
+
+QPixmapItem::QPixmapItem(QQuickItem *parent)
     : QQuickPaintedItem(parent),
       m_smooth(false),
-      m_fillMode(QImageItem::Stretch)
+      m_fillMode(QPixmapItem::Stretch)
 {
     setFlag(QQuickItem::ItemHasContents);
 }
 
-QImageItem::~QImageItem()
+QPixmapItem::~QPixmapItem()
 {
 }
 
-void QImageItem::setImage(const QImage &image)
+void QPixmapItem::setPixmap(const QPixmap &pixmap)
 {
-    bool oldImageNull = m_image.isNull();
-    m_image = image;
+    bool oldPixmapNull = m_pixmap.isNull();
+    m_pixmap = pixmap;
     update();
     emit nativeWidthChanged();
     emit nativeHeightChanged();
-    emit imageChanged();
-    if (oldImageNull != m_image.isNull())
+    emit pixmapChanged();
+    if (oldPixmapNull != m_pixmap.isNull())
         emit nullChanged();
 }
 
-QImage QImageItem::image() const
+QPixmap QPixmapItem::pixmap() const
 {
-    return m_image;
+    return m_pixmap;
 }
 
-void QImageItem::setSmooth(const bool smooth)
+void QPixmapItem::setSmooth(const bool smooth)
 {
     if (smooth == m_smooth)
         return;
@@ -67,27 +69,27 @@ void QImageItem::setSmooth(const bool smooth)
     update();
 }
 
-bool QImageItem::smooth() const
+bool QPixmapItem::smooth() const
 {
     return m_smooth;
 }
 
-int QImageItem::nativeWidth() const
+int QPixmapItem::nativeWidth() const
 {
-    return m_image.size().width();
+    return m_pixmap.size().width();
 }
 
-int QImageItem::nativeHeight() const
+int QPixmapItem::nativeHeight() const
 {
-    return m_image.size().height();
+    return m_pixmap.size().height();
 }
 
-QImageItem::FillMode QImageItem::fillMode() const
+QPixmapItem::FillMode QPixmapItem::fillMode() const
 {
     return m_fillMode;
 }
 
-void QImageItem::setFillMode(QImageItem::FillMode mode)
+void QPixmapItem::setFillMode(QPixmapItem::FillMode mode)
 {
     if (mode == m_fillMode)
         return;
@@ -97,9 +99,9 @@ void QImageItem::setFillMode(QImageItem::FillMode mode)
     emit fillModeChanged();
 }
 
-void QImageItem::paint(QPainter *painter)
+void QPixmapItem::paint(QPainter *painter)
 {
-    if (m_image.isNull())
+    if (m_pixmap.isNull())
         return;
 
     painter->save();
@@ -109,7 +111,7 @@ void QImageItem::paint(QPainter *painter)
     QRect destRect;
     switch (m_fillMode) {
         case PreserveAspectFit: {
-            QSize scaled = m_image.size();
+            QSize scaled = m_pixmap.size();
 
             scaled.scale(boundingRect().size().toSize(), Qt::KeepAspectRatio);
             destRect = QRect(QPoint(0, 0), scaled);
@@ -117,21 +119,21 @@ void QImageItem::paint(QPainter *painter)
         }
         case PreserveAspectCrop: {
             painter->setClipRect(boundingRect(), Qt::IntersectClip);
-            QSize scaled = m_image.size();
+            QSize scaled = m_pixmap.size();
             scaled.scale(boundingRect().size().toSize(), Qt::KeepAspectRatioByExpanding);
             destRect = QRect(QPoint(0, 0), scaled);
             break;
         }
         case TileVertically: {
-            painter->scale(width() / (qreal)m_image.width(), 1);
+            painter->scale(width() / (qreal)m_pixmap.width(), 1);
             destRect = boundingRect().toRect();
-            destRect.setWidth(destRect.width() / (width() / (qreal)m_image.width()));
+            destRect.setWidth(destRect.width() / (width() / (qreal)m_pixmap.width()));
             break;
         }
         case TileHorizontally: {
-            painter->scale(1, height() / (qreal)m_image.height());
+            painter->scale(1, height() / (qreal)m_pixmap.height());
             destRect = boundingRect().toRect();
-            destRect.setHeight(destRect.height() / (height() / (qreal)m_image.height()));
+            destRect.setHeight(destRect.height() / (height() / (qreal)m_pixmap.height()));
             break;
         }
         case Stretch:
@@ -140,18 +142,17 @@ void QImageItem::paint(QPainter *painter)
             destRect = boundingRect().toRect();
     }
 
-    if (m_fillMode >= Tile) {
-        painter->drawTiledPixmap(destRect, QPixmap::fromImage(m_image));
-    } else {
-        painter->drawImage(destRect, m_image, m_image.rect());
-    }
+    if (m_fillMode >= Tile)
+        painter->drawTiledPixmap(destRect, m_pixmap);
+    else
+        painter->drawPixmap(destRect, m_pixmap, m_pixmap.rect());
 
     painter->restore();
 }
 
-bool QImageItem::isNull() const
+bool QPixmapItem::isNull() const
 {
-    return m_image.isNull();
+    return m_pixmap.isNull();
 }
 
-#include "moc_qimageitem.cpp"
+QT_END_NAMESPACE

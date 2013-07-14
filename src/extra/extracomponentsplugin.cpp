@@ -29,6 +29,8 @@
 #include "qimageitem.h"
 #include "qiconitem.h"
 
+QT_BEGIN_NAMESPACE
+
 void ExtraComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidExtra"));
@@ -38,4 +40,4 @@ void ExtraComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<QIconItem>(uri, 0, 2, "IconItem");
 }
 
-#include "moc_extracomponentsplugin.cpp"
+QT_END_NAMESPACE

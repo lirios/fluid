@@ -30,6 +30,8 @@
 
 #include "qiconitem.h"
 
+QT_BEGIN_NAMESPACE
+
 QIconItem::QIconItem(QQuickItem *parent)
     : QQuickPaintedItem(parent),
       m_smooth(false),
@@ -134,4 +136,4 @@ void QIconItem::paint(QPainter *painter)
     painter->setRenderHint(QPainter::SmoothPixmapTransform, wasSmoothTransform);
 }
 
-#include "moc_qiconitem.cpp"
+QT_END_NAMESPACE

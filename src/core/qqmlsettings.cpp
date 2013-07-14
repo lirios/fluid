@@ -389,5 +389,3 @@ void QQmlSettings::timerEvent(QTimerEvent *event)
 }
 
 QT_END_NAMESPACE
-
-#include "moc_qqmlsettings_p.cpp"

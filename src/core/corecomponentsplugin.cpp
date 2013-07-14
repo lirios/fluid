@@ -31,6 +31,8 @@
 #include "corecomponentsplugin.h"
 #include "qqmlsettings_p.h"
 
+QT_BEGIN_NAMESPACE
+
 void CoreComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("FluidCore"));
@@ -38,4 +40,4 @@ void CoreComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<QQmlSettings>(uri, 0, 2, "Settings");
 }
 
-#include "moc_corecomponentsplugin.cpp"
+QT_END_NAMESPACE

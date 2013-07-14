@@ -55,6 +55,21 @@ Item {
 
     Rectangle {
         anchors.fill: parent
+        gradient: Gradient {
+            GradientStop { position: 0; color: Qt.lighter(__syspal.highlight, 1.3) }
+            GradientStop { position: 1; color: Qt.lighter(__syspal.highlight, 1.0) }
+        }
+        visible: selected
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: "#cdcdcd"
+        visible: !selected
+    }
+
+    Rectangle {
+        anchors.fill: parent
         color: "#e6e6e6"
         opacity: 0.7
         visible: root.highlightWhenPressed && mouse.pressed

@@ -32,10 +32,15 @@ Empty {
 
     property alias text: label.text
 
+    property var __syspal: SystemPalette {
+        colorGroup: SystemPalette.Active
+    }
+
     height: label.paintedHeight
 
     Label {
         id: label
         anchors.fill: parent
+        color: selected ? __syspal.highlightedText : text
     }
 }

@@ -61,6 +61,7 @@ Empty {
 
         Label {
             id: label
+            color: selected ? __syspal.highlightedText : text
 
             Layout.fillWidth: true
         }

@@ -7,6 +7,7 @@ QML_FILES = \
     ListItems/Base.qml \
     ListItems/Empty.qml \
     ListItems/Standard.qml \
+    ListItems/Highlight.qml \
     ListItems/qmldir
 
 load(qml_module)

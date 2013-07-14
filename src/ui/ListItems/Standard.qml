@@ -27,12 +27,12 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
-import FluidUi 0.1
+import FluidUi 0.2
 
 Empty {
     id: root
 
-    property alias iconName: icon.name
+    property alias iconName: icon.iconName
 
     property alias text: label.text
 

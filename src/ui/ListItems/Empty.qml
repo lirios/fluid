@@ -31,9 +31,9 @@ Item {
 
     /*! This property holds whether the list item is selected.
 
-        The default value is \c false.
+        It's an alias for \c ListView.isCurrentItem
     */
-    property bool selected: false
+    readonly property bool selected: root.ListView.isCurrentItem
 
     /*! This property holds whether the list item is highlighted
         when it is pressed.

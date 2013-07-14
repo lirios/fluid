@@ -51,6 +51,8 @@ Item {
 
     default property alias children: body.children
 
+    width: root.ListView.view.width
+
     Rectangle {
         anchors.fill: parent
         color: "#e6e6e6"
@@ -62,7 +64,8 @@ Item {
         id: body
         anchors {
             left: parent.left
-            verticalCenter: parent.verticalCenter
+            top: parent.top
+            margins: 11
         }
     }
 

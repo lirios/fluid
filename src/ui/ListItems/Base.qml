@@ -32,7 +32,6 @@ Empty {
 
     property alias text: label.text
 
-    width: Math.max(implicitWidth, label.paintedWidth)
     height: label.paintedHeight
 
     Label {

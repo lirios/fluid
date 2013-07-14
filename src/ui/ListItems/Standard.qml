@@ -44,6 +44,8 @@ Empty {
         colorGroup: SystemPalette.Active
     }
 
+    height: Math.max(label.paintedHeight, icon.height) + 22
+
     RowLayout {
         Icon {
             id: icon

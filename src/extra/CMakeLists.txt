@@ -10,7 +10,7 @@ set(SOURCES
 add_library(declarative_fluidextra SHARED ${SOURCES})
 qt5_use_modules(declarative_fluidextra Qml Quick)
 
-install(TARGETS LIBRARY
+install(TARGETS declarative_fluidextra LIBRARY
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/qml/FluidExtra)
 install(FILES qmldir
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/qml/FluidExtra)

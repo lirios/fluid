@@ -13,6 +13,14 @@ at least the following modules:
 * qtdeclarative
 * qtquickcontrols
 
+You can either build Qt from git yourself or download binaries.
+
+More information about building Qt 5 from can be found here:
+
+  http://qt-project.org/wiki/Building-Qt-5-from-Git
+
+Qt 5 binaries can be downloaded from http://qt-project.org/downloads
+
 ## Build
 
 Building Fluid is a piece of cake.

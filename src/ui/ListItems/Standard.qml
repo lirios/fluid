@@ -38,7 +38,7 @@ Empty {
 
     property bool progression: false
 
-    property alias control: controlContainer.children
+    default property alias control: container.children
 
     property var __syspal: SystemPalette {
         colorGroup: SystemPalette.Active
@@ -67,8 +67,12 @@ Empty {
         }
 
         Item {
-            id: controlContainer
+            id: container
             visible: !progression
+
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
     }
 }

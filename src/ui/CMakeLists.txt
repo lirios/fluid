@@ -1,11 +1,6 @@
 set(FLUID_FILES
     qmldir
     Icon.qml
-    ListItems/Base.qml
-    ListItems/Empty.qml
-    ListItems/Standard.qml
-    ListItems/Highlight.qml
-    ListItems/qmldir
 )
 
 install(FILES ${FLUID_FILES}

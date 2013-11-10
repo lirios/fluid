@@ -9,7 +9,7 @@ In order to build and install Fluid you need Qt 5.1 or better with
 at least the following modules:
 
 * qtbase
-* qtjsbackend
+* qtjsbackend (doesn't exist on Qt >= 5.2)
 * qtdeclarative
 * qtquickcontrols
 

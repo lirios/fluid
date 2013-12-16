@@ -28,12 +28,14 @@ configure_file(
 add_custom_target(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # Set up packaging
-set(CPACK_PACKAGE_NAME hawaii-fluid)
-set(CPACK_PACKAGE_VERSION ${FLUID_VERSION_STRING})
-set(CPACK_SYSTEM_NAME "generic")
+set(CPACK_PACKAGE_NAME "fluid")
+set(CPACK_PACKAGE_VERSION "${FLUID_VERSION_STRING}")
 set(CPACK_GENERATOR "TGZ")
 set(CPACK_SET_DESTDIR FALSE)
+set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
+set(CPACK_SOURCE_IGNORE_FILES "/build/;/.git;/.tx/;~$;${CPACK_SOURCE_IGNORE_FILES}")
 include(CPack)
+add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # Build flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Wall -std=c++0x")

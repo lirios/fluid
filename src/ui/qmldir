@@ -1,2 +1,3 @@
 module FluidUi
 Icon 0.2 Icon.qml
+NoiseBackground 0.2 NoiseBackground.qml

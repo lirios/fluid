@@ -1,6 +1,7 @@
 set(FLUID_FILES
     qmldir
     Icon.qml
+    NoiseBackground.qml
 )
 
 install(FILES ${FLUID_FILES}

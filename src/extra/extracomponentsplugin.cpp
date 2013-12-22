@@ -33,7 +33,7 @@ QT_BEGIN_NAMESPACE
 
 void ExtraComponentsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("FluidExtra"));
+    Q_ASSERT(uri == QLatin1String("Fluid.Extra"));
 
     qmlRegisterType<QPixmapItem>(uri, 0, 2, "PixmapItem");
     qmlRegisterType<QImageItem>(uri, 0, 2, "ImageItem");

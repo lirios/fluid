@@ -1,2 +1,2 @@
-module FluidExtra
+module Fluid.Extra
 plugin declarative_fluidextra

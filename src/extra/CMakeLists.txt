@@ -11,6 +11,6 @@ add_library(declarative_fluidextra SHARED ${SOURCES})
 qt5_use_modules(declarative_fluidextra Qml Quick)
 
 install(TARGETS declarative_fluidextra LIBRARY
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/FluidExtra)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Extra)
 install(FILES qmldir
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/FluidExtra)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Extra)

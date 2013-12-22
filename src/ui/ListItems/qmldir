@@ -1,4 +1,4 @@
-module FluidUi.ListItems
+module Flui.dUi.ListItems
 Empty 0.2 Empty.qml
 Base 0.2 Base.qml
 Standard 0.2 Standard.qml

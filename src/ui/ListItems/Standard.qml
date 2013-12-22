@@ -27,7 +27,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
-import Fluid.Ui 0.2
+import Fluid.Ui 1.0
 
 Empty {
     id: root

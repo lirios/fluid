@@ -109,6 +109,30 @@ Item {
     */
     property alias color: effect.outputColor
 
+    /*!
+        \qmlproperty enumeration status
+
+        This property holds the status of image loading. It can be one of:
+
+        \list
+          \li Image.Null - no image has been set
+          \li Image.Ready - the image has been loaded
+          \li Image.Loading - the image is currently being loaded
+          \li Image.Error - an error occurred while loading the image
+        \endlist
+    */
+    property alias status: image.status
+
+    /*!
+        Specifies whether the image should be cached.
+        The default value is true.
+
+        Setting cache to false is useful when dealing with large images,
+        to make sure that they aren't cached at the expense of small
+        'ui element' images.
+    */
+    property alias cache: image.cache
+
     Image {
         id: image
         anchors.fill: parent

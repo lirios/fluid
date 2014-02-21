@@ -205,11 +205,17 @@ Item {
     QtObject {
         id: __priv
 
-        property size sourceSize: Qt.size(0, 0)
+        property size sourceSize: undefined
 
         property Image currentImage: image1
         property Image nextImage: image2
         property Image loadingImage: currentImage
+
+        onSourceSizeChanged: {
+            // Change source size for both images
+            image1.sourceSize = sourceSize;
+            image2.sourceSize = sourceSize;
+        }
 
         function swapImages() {
             // Swap images stacking order and start fading animation
@@ -279,8 +285,6 @@ Item {
     Image {
         id: image1
         anchors.fill: parent
-        sourceSize.width: __priv.sourceSize.width
-        sourceSize.height: __priv.sourceSize.height
         cache: false
         asynchronous: true
         fillMode: root.fillMode
@@ -292,8 +296,6 @@ Item {
     Image {
         id: image2
         anchors.fill: parent
-        sourceSize.width: __priv.sourceSize.width
-        sourceSize.height: __priv.sourceSize.height
         cache: false
         asynchronous: true
         fillMode: root.fillMode

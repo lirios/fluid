@@ -2,6 +2,7 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     plugin.cpp
+    standardpaths.cpp
 )
 
 add_library(declarative_fluidcore SHARED ${SOURCES})

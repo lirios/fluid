@@ -24,35 +24,40 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QtQml/qqml.h>
-#include <QtQml/QQmlExtensionPlugin>
+#ifndef STANDARDPATHS_H
+#define STANDARDPATHS_H
 
-#include "standardpaths.h"
+#include <QtCore/QObject>
 
-static QObject *standardpathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(jsEngine);
-
-    StandardPaths *paths = new StandardPaths();
-    return paths;
-}
-
-class FluidCorePlugin : public QQmlExtensionPlugin
+class StandardPaths : public QObject
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+    Q_ENUMS(StandardLocation)
 public:
-    void registerTypes(const char *uri);
+    enum StandardLocation {
+        DesktopLocation,
+        DocumentsLocation,
+        FontsLocation,
+        ApplicationsLocation,
+        MusicLocation,
+        MoviesLocation,
+        PicturesLocation,
+        TempLocation,
+        HomeLocation,
+        DataLocation,
+        CacheLocation,
+        GenericDataLocation,
+        RuntimeLocation,
+        ConfigLocation,
+        DownloadLocation,
+        GenericCacheLocation,
+        GenericConfigLocation
+    };
+
+    StandardPaths(QObject *parent = 0);
+
+    Q_INVOKABLE QString locateFile(StandardLocation type, const QString &fileName);
+    Q_INVOKABLE QString locateDirectory(StandardLocation type, const QString &dirName);
 };
 
-void FluidCorePlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
-
-    // @uri Fluid.Core
-    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
-                                            standardpathsProvider);
-}
-
-#include "plugin.moc"
+#endif // STANDARDPATHS_H

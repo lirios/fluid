@@ -24,35 +24,25 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QtQml/qqml.h>
-#include <QtQml/QQmlExtensionPlugin>
+#include <QtCore/QStandardPaths>
 
 #include "standardpaths.h"
 
-static QObject *standardpathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+StandardPaths::StandardPaths(QObject *parent)
+    : QObject(parent)
 {
-    Q_UNUSED(engine);
-    Q_UNUSED(jsEngine);
-
-    StandardPaths *paths = new StandardPaths();
-    return paths;
 }
 
-class FluidCorePlugin : public QQmlExtensionPlugin
+QString StandardPaths::locateFile(StandardLocation type, const QString &fileName)
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-public:
-    void registerTypes(const char *uri);
-};
-
-void FluidCorePlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
-
-    // @uri Fluid.Core
-    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
-                                            standardpathsProvider);
+    QStandardPaths::StandardLocation qtype = static_cast<QStandardPaths::StandardLocation>(type);
+    return QStandardPaths::locate(qtype, fileName);
 }
 
-#include "plugin.moc"
+QString StandardPaths::locateDirectory(StandardLocation type, const QString &dirName)
+{
+    QStandardPaths::StandardLocation qtype = static_cast<QStandardPaths::StandardLocation>(type);
+    return QStandardPaths::locate(qtype, dirName, QStandardPaths::LocateDirectory);
+}
+
+#include "moc_standardpaths.cpp"

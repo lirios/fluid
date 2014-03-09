@@ -3,6 +3,7 @@ set(FLUID_FILES
     Icon.qml
     NoiseBackground.qml
     SmoothFadeImage.qml
+    SmoothFadeLoader.qml
 )
 
 install(FILES ${FLUID_FILES}

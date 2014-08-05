@@ -5,14 +5,16 @@ set(SOURCES
     standardpaths.cpp
 )
 
-add_library(declarative_fluidcore SHARED ${SOURCES})
-qt5_use_modules(declarative_fluidcore Qml)
+add_library(declarative_hawaiicore SHARED ${SOURCES})
+target_link_libraries(declarative_hawaiicore
+    Qt5::Qml
+)
 
 set(FILES
     qmldir
 )
 
-install(TARGETS declarative_fluidcore LIBRARY
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Core)
+install(TARGETS declarative_hawaiicore LIBRARY
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Core)
 install(FILES ${FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Core)
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Core)

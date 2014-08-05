@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
@@ -38,7 +38,7 @@ static QObject *standardpathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
     return paths;
 }
 
-class FluidCorePlugin : public QQmlExtensionPlugin
+class HawaiiCorePlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
@@ -46,11 +46,11 @@ public:
     void registerTypes(const char *uri);
 };
 
-void FluidCorePlugin::registerTypes(const char *uri)
+void HawaiiCorePlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
+    Q_ASSERT(QByteArray("Hawaii.Core") == QByteArray(uri));
 
-    // @uri Fluid.Core
+    // @uri Hawaii.Core
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
                                             standardpathsProvider);
 }

@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2013-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
@@ -26,21 +26,53 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.0
+import QtQuick.Layouts 1.0
+import Hawaii.Components 1.0
 
 Empty {
     id: root
 
+    property alias iconName: icon.iconName
+
     property alias text: label.text
+
+    property bool progression: false
+
+    default property alias control: container.children
 
     property var __syspal: SystemPalette {
         colorGroup: SystemPalette.Active
     }
 
-    height: label.paintedHeight
+    height: Math.max(label.paintedHeight, icon.height) + 22
 
-    Label {
-        id: label
-        anchors.fill: parent
-        color: selected ? __syspal.highlightedText : text
+    RowLayout {
+        Icon {
+            id: icon
+            width: 24
+            height: 24
+            color: {
+                if (iconName.indexOf("-symbolic", iconName.length - 9) != -1)
+                    return selected ? __syspal.highlightedText : __syspal.text;
+                return Qt.rgba(0, 0, 0, 0);
+            }
+            visible: iconName != ""
+        }
+
+        Label {
+            id: label
+            color: selected ? __syspal.highlightedText : text
+
+            Layout.fillWidth: true
+        }
+
+        Item {
+            id: container
+            visible: !progression
+
+            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
 }

@@ -1,4 +1,4 @@
-set(FLUID_FILES
+set(FILES
     qmldir
     Icon.qml
     NoiseBackground.qml
@@ -6,8 +6,8 @@ set(FLUID_FILES
     SmoothFadeLoader.qml
 )
 
-install(FILES ${FLUID_FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Ui)
+install(FILES ${FILES}
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Components)
 
 set(LISTITEMS_FILES
     ListItems/Base.qml
@@ -18,4 +18,4 @@ set(LISTITEMS_FILES
 )
 
 install(FILES ${LISTITEMS_FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Ui/ListItems)
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Components/ListItems)

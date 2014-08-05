@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *

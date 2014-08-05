@@ -1,7 +1,7 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
- * Copyright (C) 2012-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2013-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * Author(s):
  *    Pier Luigi Fiorini
@@ -24,20 +24,23 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include "extracomponentsplugin.h"
-#include "qpixmapitem.h"
-#include "qimageitem.h"
-#include "qiconitem.h"
+import QtQuick 2.1
+import QtQuick.Controls 1.0
 
-QT_BEGIN_NAMESPACE
+Empty {
+    id: root
 
-void ExtraComponentsPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("Fluid.Extra"));
+    property alias text: label.text
 
-    qmlRegisterType<QPixmapItem>(uri, 1, 0, "PixmapItem");
-    qmlRegisterType<QImageItem>(uri, 1, 0, "ImageItem");
-    qmlRegisterType<QIconItem>(uri, 1, 0, "IconItem");
+    property var __syspal: SystemPalette {
+        colorGroup: SystemPalette.Active
+    }
+
+    height: label.paintedHeight
+
+    Label {
+        id: label
+        anchors.fill: parent
+        color: selected ? __syspal.highlightedText : text
+    }
 }
-
-QT_END_NAMESPACE

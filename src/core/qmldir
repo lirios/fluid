@@ -1,2 +1,2 @@
-module Fluid.Core
-plugin declarative_fluidcore
+module Hawaii.Core
+plugin declarative_hawaiicore

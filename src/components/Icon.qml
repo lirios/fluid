@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2013-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
@@ -28,8 +28,7 @@ import QtQuick 2.0
 
 /*!
     \qmltype Icon
-    \inqmlmodule FluidUi 0.2
-    \ingroup ui
+    \inqmlmodule Hawaii.Components 1.0
     \brief Displays an icon from the icon theme or another (local or remote) location.
 
     An icon from the icon theme can be specified with the \c iconName property
@@ -141,7 +140,7 @@ Item {
             if (width <= 0 || height <= 0)
                 return "";
 
-            // Icon names have precedence over icon URLs
+            // Icon names has precedence over icon URLs
             if (root.iconName != "")
                 return "image://desktoptheme/" + root.iconName;
             if (root.iconSource != "")

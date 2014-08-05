@@ -4,7 +4,7 @@
 ** Copyright (C) 2012 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
-** This file is part of Fluid and is derived from NoisyGradient.qml
+** This file is part of Hawaii Framework and is derived from NoisyGradient.qml
 ** from the Qt 5 launch demo.
 **
 ** $QT_BEGIN_LICENSE:BSD$

@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Fluid.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2013-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
@@ -28,8 +28,7 @@ import QtQuick 2.0
 
 /*!
     \qmltype SmoothFadeImage
-    \inqmlmodule Fluid.Ui 1.0
-    \ingroup ui
+    \inqmlmodule Hawaii.Components 1.0
     \brief Displays an image and smoothly fade when the source is changed.
 
     This component can be used in place of an Image when a smooth fade animation
@@ -44,7 +43,7 @@ import QtQuick 2.0
     Example of usage:
     \code
     import QtQuick 2.0
-    import Fluid.Ui 1.0
+    import Hawaii.Components 1.0
 
     Item {
         width: 128

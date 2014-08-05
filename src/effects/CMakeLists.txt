@@ -4,4 +4,4 @@ set(FILES
 )
 
 install(FILES ${FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Effects)
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Effects)

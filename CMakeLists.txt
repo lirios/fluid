@@ -1,4 +1,4 @@
-project(Fluid)
+project(HawaiiFramework)
 
 cmake_minimum_required(VERSION 2.8.9)
 
@@ -9,13 +9,17 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
 # Set version
-set(FLUID_VERSION_MAJOR 0)
-set(FLUID_VERSION_MINOR 3)
-set(FLUID_VERSION_PATCH 0)
-set(FLUID_VERSION_STRING "${FLUID_VERSION_MAJOR}.${FLUID_VERSION_MINOR}.${FLUID_VERSION_PATCH}")
+set(HAWAII_FRAMEWORK_VERSION_MAJOR 0)
+set(HAWAII_FRAMEWORK_VERSION_MINOR 3)
+set(HAWAII_FRAMEWORK_VERSION_PATCH 90)
+set(HAWAII_FRAMEWORK_VERSION_STRING "${HAWAII_FRAMEWORK_VERSION_MAJOR}.${HAWAII_FRAMEWORK_VERSION_MINOR}.${HAWAII_FRAMEWORK_VERSION_PATCH}")
+
+# ECM
+find_package(ECM 0.0.11 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
 
 # Installation directories
-include(GNUInstallDirs)
+include(KDEInstallDirs)
 
 # Macro to print feature summary
 include(FeatureSummary)
@@ -28,8 +32,8 @@ configure_file(
 add_custom_target(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # Set up packaging
-set(CPACK_PACKAGE_NAME "fluid")
-set(CPACK_PACKAGE_VERSION "${FLUID_VERSION_STRING}")
+set(CPACK_PACKAGE_NAME "hawaii-framework")
+set(CPACK_PACKAGE_VERSION "${HAWAII_FRAMEWORK_VERSION_STRING}")
 set(CPACK_GENERATOR "TGZ")
 set(CPACK_SET_DESTDIR FALSE)
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}")
@@ -38,7 +42,7 @@ include(CPack)
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 # Build flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Wall -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden -Wall -Wextra -Wno-unused-parameter -std=c++11")
 
 # Assume release build by default
 if(NOT CMAKE_BUILD_TYPE)
@@ -50,8 +54,15 @@ if(CMAKE_BUILD_TYPE MATCHES "^[Rr]elease$")
     add_definitions(-DQT_NO_DEBUG_OUTPUT)
 endif()
 
+# Minimum version requirements
+set(QT_MIN_VERSION "5.3.0")
+set(KF5_MIN_VERSION "5.0.0")
+
 # Find Qt5
-find_package(Qt5 5.1.0 REQUIRED COMPONENTS Qml Quick)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Qml Quick)
+
+# Find KF5
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma)
 
 # Subdirectories
 add_subdirectory(src)

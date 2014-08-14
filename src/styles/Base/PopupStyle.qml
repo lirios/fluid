@@ -1,5 +1,5 @@
 /****************************************************************************
- * This file is part of Hawaii Shell.
+ * This file is part of Hawaii Framework.
  *
  * Copyright (C) 2013-2014 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *

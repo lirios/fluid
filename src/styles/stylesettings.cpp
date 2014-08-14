@@ -55,11 +55,4 @@ QString StyleSettings::path() const
     return QString("file://%1/Hawaii/Shell/Styles/Base").arg(QML_INSTALL_DIR);
 }
 
-extern Q_GUI_EXPORT int qt_defaultDpiX();
-
-qreal StyleSettings::dpiScaleFactor() const
-{
-    return (qreal(qt_defaultDpiX()) / 96.0);
-}
-
 #include "moc_stylesettings.cpp"

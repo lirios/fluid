@@ -33,13 +33,10 @@ class StyleSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString path READ path NOTIFY pathChanged)
-    Q_PROPERTY(qreal dpiScaleFactor READ dpiScaleFactor CONSTANT)
 public:
     StyleSettings(QObject *parent = 0);
 
     QString path() const;
-
-    qreal dpiScaleFactor() const;
 
 Q_SIGNALS:
     void pathChanged();

@@ -1,3 +1,7 @@
+include_directories(
+    ${CMAKE_BINARY_DIR}/headers
+)
+
 add_definitions(-DQT_PLUGIN)
 
 set(SOURCES

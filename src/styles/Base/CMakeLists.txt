@@ -1,10 +1,8 @@
 set(MODULE_FILES
     qmldir
-    AppChooserButtonStyle.qml
     DialogStyle.qml
     NotificationBubbleStyle.qml
     OverlayStyle.qml
-    PanelIndicatorStyle.qml
     PanelStyle.qml
     PopupStyle.qml
     TooltipStyle.qml

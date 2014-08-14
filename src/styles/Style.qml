@@ -34,5 +34,6 @@ import Hawaii.Shell.Styles 1.0
 */
 
 AbstractStyle {
+    /*! The item attached to this style */
     readonly property Item item: __item
 }

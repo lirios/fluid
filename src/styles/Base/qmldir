@@ -1,0 +1,10 @@
+module Hawaii.Shell.Styles.Base
+AppChooserButtonStyle 1.0 AppChooserButtonStyle.qml
+DialogStyle 1.0 DialogStyle.qml
+LauncherStyle 1.0 LauncherStyle.qml
+NotificationBubbleStyle 1.0 NotificationBubbleStyle.qml
+OverlayStyle 1.0 OverlayStyle.qml
+PanelIndicatorStyle 1.0 PanelIndicatorStyle.qml
+PanelStyle 1.0 PanelStyle.qml
+PopupStyle 1.0 PopupStyle.qml
+TooltipStyle 1.0 TooltipStyle.qml

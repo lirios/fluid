@@ -1,0 +1,4 @@
+module Hawaii.Shell.Styles
+plugin declarative_hawaiistyles
+Style 1.0 Style.qml
+StyledItem 1.0 StyledItem.qml

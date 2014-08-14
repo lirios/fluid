@@ -52,4 +52,36 @@ Padding *AbstractStyle::padding()
     return &m_padding;
 }
 
+QQmlListProperty<QObject> AbstractStyle::data()
+{
+    return QQmlListProperty<QObject>(this, 0, &AbstractStyle::data_append, &AbstractStyle::data_count,
+                                     &AbstractStyle::data_at, &AbstractStyle::data_clear);
+}
+
+void AbstractStyle::data_append(QQmlListProperty<QObject> *list, QObject *object)
+{
+    if (AbstractStyle *style = qobject_cast<AbstractStyle *>(list->object))
+        style->m_data.append(object);
+}
+
+int AbstractStyle::data_count(QQmlListProperty<QObject> *list)
+{
+    if (AbstractStyle *style = qobject_cast<AbstractStyle *>(list->object))
+        return style->m_data.count();
+    return 0;
+}
+
+QObject *AbstractStyle::data_at(QQmlListProperty<QObject> *list, int index)
+{
+    if (AbstractStyle *style = qobject_cast<AbstractStyle *>(list->object))
+        return style->m_data.at(index);
+    return 0;
+}
+
+void AbstractStyle::data_clear(QQmlListProperty<QObject> *list)
+{
+    if (AbstractStyle *style = qobject_cast<AbstractStyle *>(list->object))
+        style->m_data.clear();
+}
+
 #include "moc_abstractstyle.cpp"

@@ -28,6 +28,7 @@
 #define ABSTRACTSTYLE_H
 
 #include <QtCore/QObject>
+#include <QtQml/QQmlListProperty>
 
 #include "padding.h"
 
@@ -35,13 +36,23 @@ class AbstractStyle : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(Padding *padding READ padding CONSTANT)
+    Q_PROPERTY(QQmlListProperty<QObject> data READ data DESIGNABLE false)
+    Q_CLASSINFO("DefaultProperty", "data")
 public:
     explicit AbstractStyle(QObject *parent = 0);
     
     Padding *padding();
 
+    QQmlListProperty<QObject> data();
+
 private:
     Padding m_padding;
+    QList<QObject *> m_data;
+
+    static void data_append(QQmlListProperty<QObject> *list, QObject *object);
+    static int data_count(QQmlListProperty<QObject> *list);
+    static QObject *data_at(QQmlListProperty<QObject> *list, int index);
+    static void data_clear(QQmlListProperty<QObject> *list);
 };
 
 #endif // ABSTRACTSTYLE_H

@@ -37,20 +37,22 @@ StyleSettings::StyleSettings(QObject *parent)
 
 QString StyleSettings::path() const
 {
-    //QString style = m_settings->style();
-    QString style = QStringLiteral("Aluminium");
+    // TODO: Read style from settings
+    QString style = QStringLiteral("Maui");
 
+    // Return style only if it exists
     QStringList paths =
             QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
                                       QStringLiteral("hawaii/styles/") + style,
                                       QStandardPaths::LocateDirectory);
-    for (QString path: paths) {
+    for (const QString &path: paths) {
         QDir dir(path);
         if (dir.exists())
             return QUrl::fromLocalFile(path).toString();
     }
 
-    return QString("file://%1/%2").arg(INSTALL_STYLESDIR).arg(style);
+    // Fall back to Base style
+    return QString("file://%1/Hawaii/Shell/Styles/Base").arg(QML_INSTALL_DIR);
 }
 
 extern Q_GUI_EXPORT int qt_defaultDpiX();

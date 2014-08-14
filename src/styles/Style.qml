@@ -35,7 +35,4 @@ import Hawaii.Shell.Styles 1.0
 
 AbstractStyle {
     readonly property Item item: __item
-
-    property var __syspal: SystemPalette {
-    }
 }

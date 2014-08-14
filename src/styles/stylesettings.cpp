@@ -32,11 +32,7 @@
 
 StyleSettings::StyleSettings(QObject *parent)
     : QObject(parent)
-    , m_settings(new QStaticConfiguration(this))
 {
-    m_settings->setCategory(QStringLiteral("shell"));
-    connect(m_settings, &QStaticConfiguration::valueChanged,
-            this, &StyleSettings::settingChanged);
 }
 
 QString StyleSettings::path() const
@@ -62,14 +58,6 @@ extern Q_GUI_EXPORT int qt_defaultDpiX();
 qreal StyleSettings::dpiScaleFactor() const
 {
     return (qreal(qt_defaultDpiX()) / 96.0);
-}
-
-void StyleSettings::settingChanged(const QString &key, const QVariant &value)
-{
-    Q_UNUSED(value);
-
-    if (key == QStringLiteral("style"))
-        Q_EMIT pathChanged();
 }
 
 #include "moc_stylesettings.cpp"

@@ -29,8 +29,6 @@
 
 #include <QtQml/QQmlEngine>
 
-#include <QtConfiguration/QStaticConfiguration>
-
 class StyleSettings : public QObject
 {
     Q_OBJECT
@@ -45,12 +43,6 @@ public:
 
 Q_SIGNALS:
     void pathChanged();
-
-private:
-    QStaticConfiguration *m_settings;
-
-private Q_SLOTS:
-    void settingChanged(const QString &key, const QVariant &value);
 };
 
 #endif // STYLESETTINGS_H

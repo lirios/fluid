@@ -35,10 +35,15 @@ StyleSettings::StyleSettings(QObject *parent)
 {
 }
 
+QString StyleSettings::name() const
+{
+    return QStringLiteral("Maui");
+}
+
 QString StyleSettings::path() const
 {
     // TODO: Read style from settings
-    QString style = QStringLiteral("Maui");
+    QString style = name();
 
     // Return style only if it exists
     QStringList paths =

@@ -32,13 +32,16 @@
 class StyleSettings : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString path READ path NOTIFY pathChanged)
 public:
     StyleSettings(QObject *parent = 0);
 
+    QString name() const;
     QString path() const;
 
 Q_SIGNALS:
+    void nameChanged();
     void pathChanged();
 };
 

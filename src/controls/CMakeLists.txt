@@ -2,6 +2,7 @@ set(FILES
     qmldir
     TextField.qml
     ToolButton.qml
+    ScrollView.qml
 )
 
 install(FILES ${FILES}

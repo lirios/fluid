@@ -39,7 +39,7 @@ QtControls.ToolButton {
 
     /**
      * Whether the tool button is flat.
-     * Tool buttons are flat by default.
+     * Tool buttons are not flat by default.
      */
-    property bool flat: true
+    property bool flat: false
 }

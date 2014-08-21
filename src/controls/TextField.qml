@@ -51,11 +51,12 @@ QtControls.TextField {
             rightMargin: units.smallSpacing
             verticalCenter: textField.verticalCenter
         }
-        iconName: "edit-clear-rtl-symbolic"
+        iconName: __style.clearButton.iconName
+        iconSource: __style.clearButton.iconSource
         width: height
-        height: Math.max(parent.height * 0.8, units.iconSizes.small)
+        height: Math.max(parent.height * 0.8, __style.clearButton.iconSize)
         opacity: (textField.text != "" && clearButtonShown && textField.enabled) ? 1 : 0
-        color: theme.viewTextColor
+        color: iconName ? __style.clearButton.color : Qt.rgba(0, 0, 0, 0)
 
         Behavior on opacity {
             NumberAnimation {

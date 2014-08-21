@@ -1,6 +1,7 @@
 set(FILES
     qmldir
     TextField.qml
+    ToolButton.qml
 )
 
 install(FILES ${FILES}

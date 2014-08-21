@@ -1,2 +1,3 @@
 module Hawaii.Shell.Controls
 TextField 1.0 TextField.qml
+ToolButton 1.0 ToolButton.qml

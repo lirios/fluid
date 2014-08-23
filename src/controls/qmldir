@@ -2,3 +2,4 @@ module Hawaii.Shell.Controls
 TextField 1.0 TextField.qml
 ToolButton 1.0 ToolButton.qml
 ScrollView 1.0 ScrollView.qml
+SidePanel 1.0 SidePanel.qml

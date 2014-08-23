@@ -3,6 +3,7 @@ set(FILES
     TextField.qml
     ToolButton.qml
     ScrollView.qml
+    SidePanel.qml
 )
 
 install(FILES ${FILES}

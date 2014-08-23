@@ -9,3 +9,9 @@ set(MODULE_FILES
 )
 install(FILES ${MODULE_FILES}
         DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Styles/Base)
+
+set(MODULE_FILES
+    SidePanelStyle.qml
+)
+install(FILES ${MODULE_FILES}
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Controls/Styles/Base)

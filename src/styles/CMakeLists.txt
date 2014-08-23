@@ -27,4 +27,8 @@ set(MODULE_FILES
 install(FILES ${MODULE_FILES}
         DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Styles)
 
+install(FILES qmldir2
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Controls/Styles
+        RENAME qmldir)
+
 add_subdirectory(Base)

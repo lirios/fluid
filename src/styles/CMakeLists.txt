@@ -6,8 +6,6 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     plugin.cpp
-    abstractstyle.cpp
-    padding.cpp
     stylesettings.cpp
 )
 

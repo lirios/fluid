@@ -25,7 +25,7 @@
  ***************************************************************************/
 
 import QtQuick 2.0
-import Hawaii.Shell.Styles 1.0
+import QtQuick.Controls.Private 1.0 as QtControlsPrivate
 
 /*!
     \qmltype Style
@@ -33,7 +33,7 @@ import Hawaii.Shell.Styles 1.0
     \inqmlmodule Hawaii.Shell.Styles 1.0
 */
 
-AbstractStyle {
+QtControlsPrivate.AbstractStyle {
     /*! The item attached to this style */
-    readonly property Item item: __item
+    readonly property Item control: __control
 }

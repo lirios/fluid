@@ -27,8 +27,6 @@
 #include <QtQml/QQmlExtensionPlugin>
 #include <QtQml/QQmlComponent>
 
-#include "abstractstyle.h"
-#include "padding.h"
 #include "stylesettings.h"
 
 class HawaiiShellStylesPlugin : public QQmlExtensionPlugin
@@ -44,8 +42,6 @@ public:
 void HawaiiShellStylesPlugin::registerTypes(const char *uri)
 {
     // @uri Hawaii.Shell.Styles
-    qmlRegisterType<AbstractStyle>(uri, 1, 0, "AbstractStyle");
-    qmlRegisterType<Padding>();
     qmlRegisterSingletonType<StyleSettings>(uri, 1, 0, "StyleSettings",
                                             HawaiiShellStylesPlugin::styleSettingsProvider);
 }

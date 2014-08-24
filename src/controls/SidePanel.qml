@@ -34,7 +34,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
  * @inherits org.kde.plasma.core.Dialog
  */
 PlasmaCore.Dialog {
-    default property alias children: contents.children
+    default property alias data: contents.data
 
     id: sidePanel
     location: PlasmaCore.Types.LeftEdge

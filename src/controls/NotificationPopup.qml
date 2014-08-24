@@ -34,7 +34,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
  * @inherits org.kde.plasma.core.Dialog
  */
 PlasmaCore.Dialog {
-    default property alias children: contents.children
+    default property alias data: contents.data
 
     id: sidePanel
     location: PlasmaCore.Types.Floating
@@ -45,7 +45,5 @@ PlasmaCore.Dialog {
         id: contents
         //style: Qt.createComponent(Styles.StyleSettings.path + "/NotificationStyle.qml", contents)
         style: Qt.createComponent("Styles/" + Styles.StyleSettings.name + "/NotificationStyle.qml", contents)
-        width: childrenRect.width
-        height: childrenRect.height
     }
 }

@@ -42,4 +42,9 @@ QtControls.ToolButton {
      * Tool buttons are not flat by default.
      */
     property bool flat: false
+
+    /**
+     * Desired icon size.
+     */
+   property int iconSize: -1
 }

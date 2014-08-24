@@ -1,6 +1,7 @@
 set(FILES
     qmldir
     Button.qml
+    NotificationPopup.qml
     TextField.qml
     ToolButton.qml
     ScrollView.qml

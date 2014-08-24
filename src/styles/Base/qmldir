@@ -1,6 +1,5 @@
 module Hawaii.Shell.Styles.Base
 DialogStyle 1.0 DialogStyle.qml
-NotificationBubbleStyle 1.0 NotificationBubbleStyle.qml
 OverlayStyle 1.0 OverlayStyle.qml
 PanelStyle 1.0 PanelStyle.qml
 PopupStyle 1.0 PopupStyle.qml

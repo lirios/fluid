@@ -27,7 +27,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.2 as QtControls
 import Hawaii.Components 1.0 as Components
-import Hawaii.Shell.Styles 1.0 as Styles
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 /**

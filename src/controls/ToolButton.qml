@@ -26,7 +26,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.2 as QtControls
-import Hawaii.Shell.Styles 1.0 as Styles
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 
 /**
  * A tool button control with Hawaii style.

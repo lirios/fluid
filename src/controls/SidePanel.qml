@@ -26,8 +26,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.2 as QtControls
-import QtQuick.Controls.Private 1.0 as QtControlsPrivate
-import Hawaii.Shell.Styles 1.0 as Styles
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 /**
@@ -42,7 +41,7 @@ PlasmaCore.Dialog {
     type: PlasmaCore.Dialog.Dock
     backgroundHints: PlasmaCore.Dialog.NoBackground
     hideOnWindowDeactivate: true
-    mainItem: QtControlsPrivate.Control {
+    mainItem: Styles.StyledItem {
         property alias location: sidePanel.location
 
         id: contents

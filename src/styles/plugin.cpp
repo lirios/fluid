@@ -41,7 +41,7 @@ public:
 
 void HawaiiShellStylesPlugin::registerTypes(const char *uri)
 {
-    // @uri Hawaii.Shell.Styles
+    // @uri Hawaii.Shell.Controls.Styles
     qmlRegisterSingletonType<StyleSettings>(uri, 1, 0, "StyleSettings",
                                             HawaiiShellStylesPlugin::styleSettingsProvider);
 }

@@ -15,7 +15,7 @@ target_link_libraries(declarative_hawaiistyles
 )
 
 install(TARGETS declarative_hawaiistyles LIBRARY
-        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Styles)
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Controls/Styles)
 
 set(MODULE_FILES
     qmldir
@@ -23,10 +23,6 @@ set(MODULE_FILES
     StyledItem.qml
 )
 install(FILES ${MODULE_FILES}
-        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Styles)
-
-install(FILES qmldir2
-        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Controls/Styles
-        RENAME qmldir)
+        DESTINATION ${QML_INSTALL_DIR}/Hawaii/Shell/Controls/Styles)
 
 add_subdirectory(Base)

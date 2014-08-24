@@ -30,7 +30,7 @@ import QtQuick.Controls.Private 1.0 as QtControlsPrivate
 /*!
     \qmltype Style
     \qmlabstract
-    \inqmlmodule Hawaii.Shell.Styles 1.0
+    \inqmlmodule Hawaii.Shell.Controls.Styles 1.0
 */
 
 QtControlsPrivate.AbstractStyle {

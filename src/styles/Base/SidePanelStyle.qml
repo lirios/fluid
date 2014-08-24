@@ -25,11 +25,11 @@
  ***************************************************************************/
 
 import QtQuick 2.1
-import QtQuick.Controls.Private 1.0 as QtControlsPrivate
 import Hawaii.Shell.Controls 1.0
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-QtControlsPrivate.Style {
+Styles.Style {
     readonly property var control: __control
 
     padding {

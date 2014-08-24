@@ -29,7 +29,7 @@ import QtQuick 2.0
 /*!
     \qmltype StyledItem
     \qmlabstract
-    \inqmlmodule Hawaii.Shell.Styles 1.0
+    \inqmlmodule Hawaii.Shell.Controls.Styles 1.0
 */
 
 Item {
@@ -37,7 +37,7 @@ Item {
 
     /*! \qmlproperty Component StyledItem::style
         The style Component for this item.
-        \sa {Hawaii Shell Styles QML Types}
+        \sa {Hawaii Shell Controls Styles QML Types}
     */
     property Component style
 

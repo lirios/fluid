@@ -25,9 +25,9 @@
  ***************************************************************************/
 
 import QtQuick 2.0
-import Hawaii.Shell.Styles 1.0
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 
-Style {
+Styles.Style {
     padding {
         left: 8
         top: 8

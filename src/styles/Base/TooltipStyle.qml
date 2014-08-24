@@ -25,9 +25,9 @@
  ***************************************************************************/
 
 import QtQuick 2.0
-import Hawaii.Shell.Styles 1.0
+import Hawaii.Shell.Controls.Styles 1.0 as Styles
 
-Style {
+Styles.Style {
     property color panelColor1: Qt.rgba(0.13, 0.13, 0.13, 0.8)
     property color panelColor2: Qt.rgba(0, 0, 0, 0.8)
     property color textColor: "white"

@@ -1,4 +1,11 @@
-module Hawaii.Shell.Styles
+module Hawaii.Shell.Controls.Styles
 plugin declarative_hawaiistyles
 Style 1.0 Style.qml
 StyledItem 1.0 StyledItem.qml
+DialogStyle 1.0 Base/DialogStyle.qml
+NotificationStyle 1.0 Base/NotificationStyle.qml
+OverlayStyle 1.0 Base/OverlayStyle.qml
+PanelStyle 1.0 Base/PanelStyle.qml
+PopupStyle 1.0 Base/PopupStyle.qml
+SidePanelStyle 1.0 Base/SidePanelStyle.qml
+TooltipStyle 1.0 Base/TooltipStyle.qml

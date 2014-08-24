@@ -1,3 +1,0 @@
-module Hawaii.Shell.Controls.Styles
-NotificationStyle 1.0 Base/NotificationStyle.qml
-SidePanelStyle 1.0 Base/SidePanelStyle.qml

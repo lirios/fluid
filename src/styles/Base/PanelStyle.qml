@@ -28,14 +28,14 @@ import QtQuick 2.0
 import Hawaii.Shell.Controls.Styles 1.0 as Styles
 
 Styles.Style {
-    property color panelColor: Qt.rgba(0, 0, 0, 0.7)
-
     padding {
-        left: 2
-        top: 2
+        left: units.smallSpacing
+        top: units.smallSpacing
+        right: units.smallSpacing
+        bottom: units.smallSpacing
     }
 
     property Component panel: Rectangle {
-        color: panelColor
+        color: Qt.rgba(0, 0, 0, 0.7)
     }
 }

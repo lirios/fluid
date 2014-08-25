@@ -4,6 +4,7 @@ set(FILES
     Calendar.qml
     GroupBox.qml
     NotificationPopup.qml
+    ProgressBar.qml
     TextField.qml
     ToolButton.qml
     ScrollView.qml

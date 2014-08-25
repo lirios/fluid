@@ -2,6 +2,7 @@ set(FILES
     qmldir
     Button.qml
     Calendar.qml
+    GroupBox.qml
     NotificationPopup.qml
     TextField.qml
     ToolButton.qml

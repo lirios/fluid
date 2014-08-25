@@ -35,5 +35,5 @@ import QtQuick.Controls.Private 1.0 as QtControlsPrivate
 
 QtControlsPrivate.AbstractStyle {
     /*! The item attached to this style */
-    readonly property Item control: __control
+    readonly property var control: __control
 }

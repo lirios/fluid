@@ -34,6 +34,6 @@ import Hawaii.Shell.Controls.Styles 1.0 as Styles
  */
 QtControls.Button {
     id: button
-    //style: Qt.createComponent(Styles.StyleSettings.path + "/ToolButtonStyle.qml", button)
-    style: Qt.createComponent("Styles/" + Styles.StyleSettings.name + "/ToolButtonStyle.qml", button)
+    //style: Qt.createComponent(Styles.StyleSettings.path + "/ButtonStyle.qml", button)
+    style: Qt.createComponent("Styles/" + Styles.StyleSettings.name + "/ButtonStyle.qml", button)
 }

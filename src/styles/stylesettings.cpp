@@ -45,6 +45,11 @@ QString StyleSettings::path() const
     // TODO: Read style from settings
     QString style = name();
 
+    // Try standard path first
+    QString path = QString("%1/Hawaii/Shell/Controls/Styles/%2").arg(QML_INSTALL_DIR).arg(style);
+    if (QDir(path).exists())
+        return path;
+
     // Return style only if it exists
     QStringList paths =
             QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
@@ -57,7 +62,7 @@ QString StyleSettings::path() const
     }
 
     // Fall back to Base style
-    return QString("file://%1/Hawaii/Shell/Styles/Base").arg(QML_INSTALL_DIR);
+    return QString("file://%1/Hawaii/Shell/Controls/Styles/Base").arg(QML_INSTALL_DIR);
 }
 
 #include "moc_stylesettings.cpp"

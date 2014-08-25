@@ -36,7 +36,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 PlasmaCore.Dialog {
     default property alias data: contents.data
 
-    id: sidePanel
+    property alias __control: notification
+
+    id: notification
     location: PlasmaCore.Types.Floating
     type: PlasmaCore.Dialog.Dock
     backgroundHints: PlasmaCore.Dialog.NoBackground

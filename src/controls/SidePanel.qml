@@ -36,6 +36,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 PlasmaCore.Dialog {
     default property alias data: contents.data
 
+    property alias __control: sidePanel
+
     id: sidePanel
     location: PlasmaCore.Types.LeftEdge
     type: PlasmaCore.Dialog.Dock

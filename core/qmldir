@@ -1,3 +1,4 @@
 module Fluid.Core
 plugin fluidcore
+class FluidCorePlugin
 typeinfo plugins.qmltypes

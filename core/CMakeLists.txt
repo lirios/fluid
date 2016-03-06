@@ -9,6 +9,7 @@ add_library(fluidcore SHARED ${SOURCES})
 target_link_libraries(fluidcore Qt5::Qml)
 
 set(FILES
+    plugins.qmltypes
     qmldir
 )
 

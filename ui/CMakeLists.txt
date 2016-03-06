@@ -7,7 +7,7 @@ set(FLUID_FILES
 )
 
 install(FILES ${FLUID_FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Ui)
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Ui)
 
 set(LISTITEMS_FILES
     ListItems/Base.qml
@@ -18,4 +18,4 @@ set(LISTITEMS_FILES
 )
 
 install(FILES ${LISTITEMS_FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Ui/ListItems)
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Ui/ListItems)

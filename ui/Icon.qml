@@ -28,8 +28,7 @@ import QtQuick 2.0
 
 /*!
     \qmltype Icon
-    \inqmlmodule FluidUi 0.2
-    \ingroup ui
+    \inqmlmodule Fluid.Ui 1.0
     \brief Displays an icon from the icon theme or another (local or remote) location.
 
     An icon from the icon theme can be specified with the \c iconName property
@@ -133,21 +132,28 @@ Item {
     */
     property alias cache: image.cache
 
+    onIconNameChanged: __priv.determineSource()
+    onIconSourceChanged: __priv.determineSource()
+
+    QtObject {
+        id: __priv
+
+        function determineSource() {
+            // Icon names have precedence over icon URLs
+            if (root.iconName.indexOf("/") != -1)
+                image.source = root.iconName;
+            else if (root.iconName != "")
+                image.source = "image://desktoptheme/" + root.iconName;
+            else if (root.iconSource != "")
+                image.source = root.iconSource;
+            else
+                image.source = "";
+        }
+    }
+
     Image {
         id: image
         anchors.fill: parent
-        source: {
-            // Don't load an image until this component is ready
-            if (width <= 0 || height <= 0)
-                return "";
-
-            // Icon names have precedence over icon URLs
-            if (root.iconName != "")
-                return "image://desktoptheme/" + root.iconName;
-            if (root.iconSource != "")
-                return root.iconSource;
-            return "";
-        }
         sourceSize.width: width
         sourceSize.height: height
         cache: true

@@ -50,6 +50,7 @@ set(REQUIRED_QT_VERSION 5.5.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS Qml Quick)
 
 # Subdirectories
+add_subdirectory(core)
 #add_subdirectory(src)
 
 # Display featute summary

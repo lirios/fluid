@@ -1,4 +1,5 @@
 set(FILES
+    plugins.qmltypes
     qmldir
     Vignette.qml
 )

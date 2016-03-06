@@ -1,2 +1,3 @@
 module Fluid.Effects
+typeinfo plugins.qmltypes
 Vignette 1.0 Vignette.qml

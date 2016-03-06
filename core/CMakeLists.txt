@@ -13,6 +13,6 @@ set(FILES
 )
 
 install(TARGETS fluidcore LIBRARY
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Core)
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Core)
 install(FILES ${FILES}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/hawaii/qml/Fluid/Core)
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Core)

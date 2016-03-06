@@ -51,6 +51,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS Qml Quick)
 
 # Subdirectories
 add_subdirectory(core)
+add_subdirectory(effects)
 #add_subdirectory(src)
 
 # Display featute summary

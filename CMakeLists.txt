@@ -1,6 +1,6 @@
 project(Fluid)
 
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 2.8.12)
 
 # Set version
 set(PROJECT_VERSION "0.3.90")

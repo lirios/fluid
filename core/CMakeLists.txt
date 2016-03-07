@@ -11,6 +11,7 @@ target_link_libraries(fluidcore Qt5::Qml)
 set(FILES
     plugins.qmltypes
     qmldir
+    Object.qml
 )
 
 install(TARGETS fluidcore LIBRARY

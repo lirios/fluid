@@ -6,5 +6,5 @@ set(FILES
     StandardListItem.qml
 )
 
-install(FILES ${LISTITEMS_FILES}
+install(FILES ${FILES}
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)

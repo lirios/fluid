@@ -10,14 +10,3 @@ set(FLUID_FILES
 
 install(FILES ${FLUID_FILES}
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Ui)
-
-set(LISTITEMS_FILES
-    ListItems/Base.qml
-    ListItems/Empty.qml
-    ListItems/Standard.qml
-    ListItems/Highlight.qml
-    ListItems/qmldir
-)
-
-install(FILES ${LISTITEMS_FILES}
-        DESTINATION ${QML_INSTALL_DIR}/Fluid/Ui/ListItems)

@@ -27,7 +27,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 
-Empty {
+EmptyListItem {
     id: root
 
     property alias text: label.text

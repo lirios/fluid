@@ -54,7 +54,6 @@ add_subdirectory(controls)
 add_subdirectory(core)
 add_subdirectory(effects)
 add_subdirectory(ui)
-#add_subdirectory(src)
 
 # Display featute summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

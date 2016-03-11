@@ -6,6 +6,7 @@ set(FLUID_FILES
     Showable.qml
     SmoothFadeImage.qml
     SmoothFadeLoader.qml
+    Units.qml
 )
 
 install(FILES ${FLUID_FILES}

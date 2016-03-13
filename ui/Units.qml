@@ -113,7 +113,7 @@ Item {
         else if (x < 64)
             return 48;
         else if (x < 128)
-            return 64:
+            return 64;
 
         return x;
     }

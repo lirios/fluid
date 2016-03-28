@@ -9,11 +9,12 @@ Modules for fluid and dynamic applications development with QtQuick.
 
 ## Dependencies
 
-Qt >= 5.5 with at least the following modules is required:
+Qt >= 5.6.0 with at least the following modules is required:
 
 * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
 * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
 * [qtquickcontrols](http://code.qt.io/cgit/qt/qtquickcontrols.git)
+* [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
 
 ## License
 

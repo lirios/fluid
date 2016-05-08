@@ -25,6 +25,8 @@
  ***************************************************************************/
 
 import QtQuick 2.1
+import Qt.labs.controls 1.0
+import Qt.labs.controls.material 1.0
 
 Item {
     id: root
@@ -56,8 +58,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0; color: Qt.lighter(__syspal.highlight, 1.3) }
-            GradientStop { position: 1; color: Qt.lighter(__syspal.highlight, 1.0) }
+            GradientStop { position: 0; color: Qt.lighter(Material.accentColor, 1.3) }
+            GradientStop { position: 1; color: Qt.lighter(Material.accentColor, 1.0) }
         }
         visible: selected
     }

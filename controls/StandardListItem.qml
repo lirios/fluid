@@ -25,14 +25,13 @@
  ***************************************************************************/
 
 import QtQuick 2.1
-import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.0
+import Qt.labs.controls 1.0
+import Qt.labs.controls.material 1.0
 import Fluid.Ui 1.0
 import Fluid.Controls 1.0
 
 EmptyListItem {
-    id: root
-
     property alias iconName: icon.iconName
 
     property alias text: label.text
@@ -41,20 +40,16 @@ EmptyListItem {
 
     default property alias control: container.children
 
-    property var __syspal: SystemPalette {
-        colorGroup: SystemPalette.Active
-    }
-
     height: Math.max(label.paintedHeight, icon.height) + 22
 
     RowLayout {
         Icon {
             id: icon
-            width: 24
-            height: 24
+            width: Units.iconSizes.small
+            height: width
             color: {
                 if (iconName.indexOf("-symbolic", iconName.length - 9) != -1)
-                    return selected ? __syspal.highlightedText : __syspal.text;
+                    return selected ? Material.textSelectionColor : Material.textColor;
                 return Qt.rgba(0, 0, 0, 0);
             }
             visible: iconName != ""
@@ -62,7 +57,7 @@ EmptyListItem {
 
         Label {
             id: label
-            color: selected ? __syspal.highlightedText : text
+            color: selected ? Material.textSelectionColor : Material.textColor
 
             Layout.fillWidth: true
         }

@@ -25,22 +25,17 @@
  ***************************************************************************/
 
 import QtQuick 2.1
-import QtQuick.Controls 1.0
+import Qt.labs.controls 1.0
+import Qt.labs.controls.material 1.0
 
 EmptyListItem {
-    id: root
-
     property alias text: label.text
-
-    property var __syspal: SystemPalette {
-        colorGroup: SystemPalette.Active
-    }
 
     height: label.paintedHeight
 
     Label {
         id: label
         anchors.fill: parent
-        color: selected ? __syspal.highlightedText : text
+        color: selected ? Material.textColor : Material.textSelectionColor
     }
 }

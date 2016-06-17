@@ -89,6 +89,7 @@ Item {
     function dp(x) {
         // FIXME: This won't work because Units is a singleton and is bound to the first
         // screen that is available during its creation
+        return x * Screen.devicePixelRatio;
         return x * (((Screen.pixelDensity * 25.4) / (Screen.logicalPixelDensity * 25.4)) / Screen.devicePixelRatio);
     }
 

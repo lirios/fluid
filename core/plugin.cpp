@@ -28,14 +28,22 @@
 #include <QtQml/QQmlExtensionPlugin>
 
 #include "standardpaths.h"
+#include "device.h"
 
-static QObject *standardpathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine);
     Q_UNUSED(jsEngine);
 
-    StandardPaths *paths = new StandardPaths();
-    return paths;
+    return new StandardPaths();
+}
+
+static QObject *deviceProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(jsEngine);
+
+    return new Device();
 }
 
 class FluidCorePlugin : public QQmlExtensionPlugin
@@ -52,7 +60,9 @@ void FluidCorePlugin::registerTypes(const char *uri)
 
     // @uri Fluid.Core
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
-                                            standardpathsProvider);
+                                            standardPathsProvider);
+    qmlRegisterSingletonType<Device>(uri, 1, 0, "Device",
+                                     deviceProvider);
 }
 
 #include "plugin.moc"

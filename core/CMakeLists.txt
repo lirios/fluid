@@ -3,15 +3,17 @@ add_definitions(-DQT_PLUGIN)
 set(SOURCES
     plugin.cpp
     standardpaths.cpp
+    device.cpp
 )
 
 add_library(fluidcore SHARED ${SOURCES})
-target_link_libraries(fluidcore Qt5::Qml)
+target_link_libraries(fluidcore Qt5::Gui Qt5::Qml)
 
 set(FILES
     plugins.qmltypes
     qmldir
     Object.qml
+    Utils.qml
 )
 
 install(TARGETS fluidcore LIBRARY

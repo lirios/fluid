@@ -1,13 +1,17 @@
 Fluid
 =====
 
+[![ZenHub.io](https://img.shields.io/badge/supercharged%20by-zenhub.io-blue.svg)](https://zenhub.io)
+
+[![License](https://img.shields.io/badge/license-LGPLv2.1%2B-blue.svg)](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html)
 [![GitHub release](https://img.shields.io/github/release/hawaii-desktop/fluid.svg)](https://github.com/hawaii-desktop/fluid)
+[![Build Status](https://travis-ci.org/hawaii-desktop/fluid.svg?branch=develop)](https://travis-ci.org/hawaii-desktop/fluid)
 [![GitHub issues](https://img.shields.io/github/issues/hawaii-desktop/fluid.svg)](https://github.com/hawaii-desktop/fluid/issues)
-[![IRC Network](https://img.shields.io/badge/irc-freenode-blue.svg "IRC Freenode")](https://webchat.freenode.net/?channels=hawaii-desktop)
+[![Maintained](https://img.shields.io/maintenance/yes/2016.svg)](https://github.com/hawaii-desktop/fluid/commits/develop)
 
-Modules for fluid and dynamic applications development with QtQuick.
+Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications.
 
-## Dependencies
+### Dependencies
 
 Qt >= 5.6.0 with at least the following modules is required:
 
@@ -16,68 +20,28 @@ Qt >= 5.6.0 with at least the following modules is required:
 * [qtquickcontrols](http://code.qt.io/cgit/qt/qtquickcontrols.git)
 * [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
 
-## License
+### Installation
 
-This library is free software; you can redistribute it and/or
+From the root of the repository, run:
+
+```sh
+mkdir build; cd build
+cmake ..
+make
+make install # use sudo if necessary
+```
+
+On the `cmake` line, you can specify additional configuration parameters:
+
+ * `-DCMAKE_INSTALL_PREFIX=/path/to/install` (for example, `/opt/hawaii` or `/usr`)
+ * `-DCMAKE_BUILD_TYPE=<build_type>`, where `<build_type>` is one of:
+   * **Debug:** debug build
+   * **Release:** release build
+   * **RelWithDebInfo:** release build with debugging information
+
+### Licensing
+
+Fluid is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
 version 2.1 of the License, or (at your option) any later version.
-
-## Build and installation
-
-Building Green Island is a piece of cake.
-
-Assuming you are in the source directory, just create a build directory
-and run cmake:
-
-```sh
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/opt/hawaii ..
-```
-
-To do a debug build the last command can be:
-
-```sh
-cmake -DCMAKE_INSTALL_PREFIX=/opt/hawaii -DCMAKE_BUILD_TYPE=Debug ..
-```
-
-To do a release build instead it can be:
-
-```sh
-cmake -DCMAKE_INSTALL_PREFIX=/opt/hawaii -DCMAKE_BUILD_TYPE=Release ..
-```
-
-If not passed, the `CMAKE_INSTALL_PREFIX` parameter defaults to /usr/local.
-You have to specify a path that fits your needs, /opt/hawaii is just an example.
-
-The `CMAKE_BUILD_TYPE` parameter allows the following values:
-
-* **Debug:** debug build
-* **Release:** release build
-* **RelWithDebInfo:** release build with debugging information
-
-Install with:
-
-```sh
-sudo make install
-```
-
-### System-wide installation
-
-Those who want to perform a system-wide installation, such as package
-maintainers, should pass different arguments to cmake:
-
-```sh
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_USE_QT_SYS_PATHS=ON ..
-```
-
-Feel free to choose whatever `CMAKE_BUILD_TYPE` value you desire.
-
-Install with:
-
-```sh
-sudo make install
-```

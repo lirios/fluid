@@ -28,7 +28,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.0
 import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
-import Fluid.Ui 1.0
+import Fluid.UI 1.0
 import Fluid.Controls 1.0
 
 EmptyListItem {

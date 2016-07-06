@@ -1,8 +1,9 @@
-module Fluid.Ui
+module Fluid.UI
 Icon 1.0 Icon.qml
 Loadable 1.0 Loadable.qml
 NoiseBackground 1.0 NoiseBackground.qml
 Showable 1.0 Showable.qml
 SmoothFadeImage 1.0 SmoothFadeImage.qml
 SmoothFadeLoader 1.0 SmoothFadeLoader.qml
+singleton FluidStyle 1.0 FluidStyle.qml
 singleton Units 1.0 Units.qml

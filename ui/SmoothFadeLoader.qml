@@ -28,7 +28,7 @@ import QtQuick 2.0
 
 /*!
     \qmltype SmoothFadeLoader
-    \inqmlmodule Fluid.Ui 1.0
+    \inqmlmodule Fluid.UI 1.0
     \ingroup ui
     \brief Displays an item and smoothly fade when the source is changed.
 
@@ -41,7 +41,7 @@ import QtQuick 2.0
     Example of usage:
     \code
     import QtQuick 2.0
-    import Fluid.Ui 1.0
+    import Fluid.UI 1.0
 
     Item {
         width: 640

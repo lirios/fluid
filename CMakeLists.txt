@@ -55,5 +55,10 @@ add_subdirectory(effects)
 add_subdirectory(tests)
 add_subdirectory(ui)
 
+if(EXISTS ${CMAKE_SOURCE_DIR}/icons)
+    install(DIRECTORY ${CMAKE_SOURCE_DIR}/icons
+            DESTINATION ${QML_INSTALL_DIR}/Fluid/UI)
+endif()
+
 # Display feature summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

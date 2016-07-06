@@ -1,192 +1,178 @@
-/****************************************************************************
- * This file is part of Fluid.
- *
- * Copyright (C) 2013-2016 Pier Luigi Fiorini
- *
- * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *
- * $BEGIN_LICENSE:LGPL2.1+$
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * $END_LICENSE$
- ***************************************************************************/
+ /*
+  * Fluid - QtQuick components for fluid and dynamic applications
+  *
+  * Copyright (C) 2014-2016 Michael Spencer <sonrisesoftware@gmail.com>
+  *               2015 Bogdan Cuza <bogdan.cuza@hotmail.com>
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  */
 
-import QtQuick 2.0
-import QtQuick.Controls 1.0
+import QtQuick 2.4
+import QtQuick.Window 2.2
+import QtGraphicalEffects 1.0
+import QtQuick.Controls.Material 2.0
+import Fluid.Core 1.0
+import Fluid.UI 1.0
 
 /*!
     \qmltype Icon
-    \inqmlmodule Fluid.Ui 1.0
-    \brief Displays an icon from the icon theme or another (local or remote) location.
+    \inqmlmodule Fluid.UI 1.0
+    \brief Displays an icon from the Material Design icon collection, the platform's icon theme,
+    or another (local or remote) location.
 
-    An icon from the icon theme can be specified with the \c iconName property
-    otherwise an icon from a local or remote source can be specified with the
-    \c iconSource property.  Icons can also be colorized, set the \c color
-    property to change all pixels with the \c originalColor color.
-
-    Icon themes are a set of icons referred to by a standard name defined in the
-    \l{http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html}{Freedesktop Icon Naming Specification}
-    to improve consistency between applications.
-
-    Icon themes also respect the
-    \l{http://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html}{Freedesktop Icon Theme Specification}.
-
-    Example of icon from the icon theme:
+    To use an icon from the \l{}{Material Design icon collection}, set the \c name property to the name of the icon in its group in the form of \c group/icon_name. For example:
     \code
     Icon {
-        iconName: "gimp"
-        width: 64
-        height: 64
+        name: "action/settings"
     }
     \endcode
 
-    Example of icon from a local source:
+    This icon will by default use the light icon color from Material Design. To use the dark icon
+    color:
     \code
     Icon {
-        iconSource: "edit-cut.png"
-        width: 16
-        height: 16
+        Material.theme: Material.Dark
+
+        name: "action/settings"
     }
     \endcode
 
-    Example of colorization:
+    In addition to using icons from Material Design, you can also use icons from the platform's
+    \l{http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html}{Freedesktop icon theme}. For example:
+
     \code
     Icon {
-        iconName: "edit-cut-symbolic"
-        width: 16
-        height: 16
-        color: "green"
+        name: "gimp"
     }
     \endcode
-*/
+
+    By default, icons from the Freedesktop icon theme are not colorized unless they include the word "symbolic" in the icon name. For example, "gimp" would be full-colored by "edit-cut-symbolic" would be colored using the set \c color property (based off of \c Material.theme). If you need to colorize an icon manually, you can do so like this:
+
+    \code
+    Icon {
+        name: "gimp"
+        colorize: true
+    }
+    \endcode
+
+    You can also use custom icons like this:
+    \code
+    Icon {
+        source: Qt.resolvedUrl("icons/fun_icon.png")
+    }
+    \endcode
+ */
 Item {
-    id: root
-
-    /*! This property holds the icon name according to the Freedesktop
-        icon naming specification.
-
-        To set icons you either set this property or \c iconSource.
-    */
-    property string iconName
-
-    /*! This property holds the source URL of the icon to display.
-
-        To set icons you either set this property or \c iconSource.
-    */
-    property url iconSource
-
-    /*! Original color of the icon.
-
-        When \c color will be set, this component will render the icon
-        by replacing all pixels of \c originalColor color to \c color.
-
-        This is set to \l #bebebe by default but can be changed
-        to match the original color of the icon.
-    */
-    property alias originalColor: effect.keyColor
-
-    /*! Output color of the icon.
-
-        Colors that were originally of \c originalColor color will be
-        changed to this color.
-
-        Symbolic icons are simplified icons that usually are monochrome.
-        Don't set this property for non-symbolic icons unless you know
-        what you are doing.
-    */
-    property alias color: effect.outputColor
+    id: icon
 
     /*!
-        \qmlproperty enumeration status
+       The color of the icon. Defaults to \c FluidStyle.iconColorLight. For dark backgrounds,
+       set \c Material.theme to Material.Dark or set this to \c FluidStyle.iconColorDark.
+     */
+    property color color: Material.theme == Material.Light ? FluidStyle.iconColorLight
+                                                           : FluidStyle.iconColorDark
 
-        This property holds the status of image loading. It can be one of:
+    /*!
+       The size of the icon. Defaults to 24px.
+     */
+    property real size: 24
 
-        \list
-          \li Image.Null - no image has been set
-          \li Image.Ready - the image has been loaded
-          \li Image.Loading - the image is currently being loaded
-          \li Image.Error - an error occurred while loading the image
-        \endlist
-    */
+    /*!
+       The name of the icon to display.
+
+       \sa source
+     */
+    property string name
+
+    /*!
+       \brief A URL pointing to an image to display as the icon.
+
+       By default, this is a special URL representing the icon named by \ref name from the Material
+       Design icon collection when using the form of "collection/icon_name", or in the case of a
+       single "icon_name", the platform's Freedesktop icon theme will be used.
+
+       By default, icons from the Material Design icons collection will be treated as symbolic icons and colored using the specified \ref color, while icons from the Freedesktop icon theme will
+       not be colorized. To override this, or set the behavior for your own custom icons, use
+       \ref colorize.
+
+       \sa name
+     */
+    property string source: name ? name.indexOf("/") !== -1 ? "icon://" + name
+                                                            : "image://desktoptheme/" + name
+                                 : ""
+
+    /*!
+       \qmlproperty enumeration status
+       \list
+         \li Image.Null - no image has been set
+         \li Image.Ready - the image has been loaded
+         \li Image.Loading - the image is currently being loaded
+         \li Image.Error - an error occurred while loading the image
+       \endlist
+     */
     property alias status: image.status
 
     /*!
-        Specifies whether the image should be cached.
-        The default value is true.
+       Specifies whether the image should be cached.
+       The default value is true.
 
-        Setting cache to false is useful when dealing with large images,
-        to make sure that they aren't cached at the expense of small
-        'ui element' images.
+       Setting cache to false is useful when dealing with large images,
+       to make sure that they aren't cached at the expense of small
+       'ui element' images.
     */
     property alias cache: image.cache
 
-    onIconNameChanged: __priv.determineSource()
-    onIconSourceChanged: __priv.determineSource()
+    /*!
+       \c true if the icon is valid and fully loaded.
+     */
+    readonly property bool valid: status == Image.Ready
 
-    QtObject {
-        id: __priv
+    /*!
+       Set to \c false if you want the icon to use the original image's colors and not be
+       colored using the specified \ref color.
+     */
+    property bool colorize: (icon.source.indexOf(".color.") === -1 &&
+                             icon.source.indexOf("image://desktoptheme/") === -1) ||
+                            icon.source.indexOf("symbolic") !== -1
 
-        function determineSource() {
-            // Icon names have precedence over icon URLs
-            if (root.iconName.indexOf("/") != -1)
-                image.source = root.iconName;
-            else if (root.iconName != "")
-                image.source = "image://desktoptheme/" + root.iconName;
-            else if (root.iconSource != "")
-                image.source = root.iconSource;
-            else
-                image.source = "";
-        }
-    }
+    width: size
+    height: size
 
     Image {
         id: image
+
         anchors.fill: parent
-        sourceSize.width: width
-        sourceSize.height: height
-        cache: true
-        smooth: true
-        visible: !effect.visible
+        visible: !colorize
+
+        source: {
+            if (icon.source.indexOf('icon://') === 0) {
+                var name = icon.source.substring(7)
+
+                if (name)
+                    return Qt.resolvedUrl('icons/%1.svg'.arg(name))
+                else
+                    return ''
+            } else {
+                return icon.source
+            }
+        }
+
+        sourceSize {
+            width: size * Screen.devicePixelRatio
+            height: size * Screen.devicePixelRatio
+        }
     }
 
-    ShaderEffect {
-        property Image source: visible ? image : null
-        property color keyColor: "#bebebe"
-        property color outputColor: Qt.rgba(0, 0, 0, 0)
-        property real sensitivity: 0.05
-        property real smoothing: 0.01
+    ColorOverlay {
+        id: overlay
 
-        id: effect
         anchors.fill: parent
-        fragmentShader: "
-            varying highp vec2 qt_TexCoord0;
-            uniform sampler2D source;
-            uniform highp vec4 keyColor;
-            uniform highp vec4 outputColor;
-            uniform lowp float sensitivity;
-            uniform lowp float smoothing;
-            uniform lowp float qt_Opacity;
-
-            void main() {
-                lowp vec4 sourceColor = texture2D(source, qt_TexCoord0);
-                lowp float blendValue = smoothstep(sensitivity, sensitivity + smoothing,
-                                                   distance(sourceColor.rgb / sourceColor.a, keyColor.rgb));
-                gl_FragColor = mix(outputColor * sourceColor.a, sourceColor, blendValue) * qt_Opacity;
-            }
-        "
-        visible: outputColor != Qt.rgba(0, 0, 0, 0) && image.status == Image.Ready
+        source: image
+        color: Utils.alpha(icon.color, 1)
+        cached: true
+        visible: icon.valid && colorize
+        opacity: icon.color.a
     }
 }

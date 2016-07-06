@@ -1,5 +1,6 @@
 set(FLUID_FILES
     qmldir
+    FluidStyle.qml
     Icon.qml
     Loadable.qml
     NoiseBackground.qml
@@ -10,4 +11,4 @@ set(FLUID_FILES
 )
 
 install(FILES ${FLUID_FILES}
-        DESTINATION ${QML_INSTALL_DIR}/Fluid/Ui)
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/UI)

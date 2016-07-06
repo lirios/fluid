@@ -22,11 +22,19 @@ Qt >= 5.6.0 with at least the following modules is required:
 
 ### Installation
 
+First, if you want to include the Material Design icons used with the `Icon` component, run:
+
+```sh
+./scripts/fetch_icons.sh
+```
+
+This will clone the Google repository holding the icons and copy the SVG icons into the `icons` directory.
+
 From the root of the repository, run:
 
 ```sh
 mkdir build; cd build
-cmake ..
+cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
 make
 make install # use sudo if necessary
 ```

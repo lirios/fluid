@@ -1,23 +1,58 @@
-sudo: required
-dist: trusty
-language: generic
+sudo: false
 
-install:
-  - sudo add-apt-repository -y ppa:beineri/opt-qt561-trusty
-  - sudo add-apt-repository -y ppa:george-edison55/cmake-3.x
-  - sudo apt-get update
-  - sudo apt-get -y install qt56declarative qt56quickcontrols2
+language: cpp
 
+compiler:
+  - gcc
+#  - clang
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+
+cache:
+  directories:
+    - .cmake
+    - .qt
 
 before_script:
-  # Install Extra CMake Modules
-  - git clone git://anongit.kde.org/extra-cmake-modules
-  - pushd extra-cmake-modules
-  - cmake . -DCMAKE_INSTALL_PREFIX=/usr -DLIB_INSTALL_DIR=lib -DLIBEXEC_INSTALL_DIR=lib -DQML_INSTALL_DIR=lib/qt/qml
-  - make
-  - sudo make install
-  - popd
+  # Fetch and install dependencies if cache miss
+  - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-cmake | bash -x
+  - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-qt | bash -x
+  - [ -f .ci/fetch-deps ] && bash -x .ci/fetch-deps
+  - export PATH=`pwd`/.cmake/bin:`pwd`/.qt/5.6/5.6/gcc_64/bin:`pwd`/.glib/bin:$PATH
+  - export LD_LIBRARY_PATH=`pwd`/.qt/5.6/5.6/gcc_64/lib:`pwd`/.glib/lib:$LD_LIBRARY_PATH
+  - export CMAKE_PREFIX_PATH=`pwd`/.qt/5.6/5.6/gcc_64/lib/cmake
+  - export PKG_CONFIG_PATH=`pwd`/.glib/lib/pkgconfig:$PKG_CONFIG_PATH
+  # Setup compilers
+  - export CC=gcc-4.8
+  - export CXX=g++-4.8
+  # xvfb for unit tests
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  # prepare
+  - mkdir build
+  - cd build
+  - cmake ..
 
 script:
-  - source /opt/qt56/bin/qt56-env.sh
-  - cmake . && make && make check
+  - make
+  - make check
+
+notifications:
+  email: false
+  irc:
+    channels:
+    - chat.freenode.net#hawaii-desktop
+    use_notice: true
+    skip_join: true
+    on_success: always
+    on_failure: change
+  slack:
+    secure: EGWF118PTfBj/Oktmr20fc17JTM5gt7/j24k6HkiOI1J8S+sJyxhhtSjV54cgmsaEURJ7zUD/xi2wSSigi82k2F29wpELInfty/+j95vuY+7QO7nyVIINHjKranLUogKai9evHU2cvlNTq6e27pjkDbRO2HNKyzTb+Lb6D3VEOk=
+    on_success: always
+    on_failure: change

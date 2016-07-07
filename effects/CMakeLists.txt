@@ -1,6 +1,7 @@
 set(FILES
     plugins.qmltypes
     qmldir
+    CircleMask.qml
     Vignette.qml
 )
 

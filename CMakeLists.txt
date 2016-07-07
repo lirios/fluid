@@ -53,6 +53,7 @@ add_subdirectory(controls)
 add_subdirectory(core)
 add_subdirectory(effects)
 add_subdirectory(tests)
+add_subdirectory(material)
 add_subdirectory(ui)
 
 if(EXISTS ${CMAKE_SOURCE_DIR}/icons)

@@ -32,6 +32,18 @@ Icon {
             compare(icon.source, 'icon://action/settings')
         }
 
+        function test_source_should_use_file_url_for_file_name() {
+            icon.name = '/path/to/icon.png'
+
+            compare(icon.source, 'file:///path/to/icon.png')
+        }
+
+        function test_source_should_use_file_url_for_file_url() {
+            icon.name = 'file:///path/to/icon.png'
+
+            compare(icon.source, 'file:///path/to/icon.png')
+        }
+
         function test_colorize_should_be_true_for_material_icon() {
             icon.name = 'action/settings'
 

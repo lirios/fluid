@@ -99,9 +99,11 @@ Item {
 
        \sa name
      */
-    property string source: name ? name.indexOf("/") !== -1 ? "icon://" + name
-                                                            : "image://desktoptheme/" + name
-                                 : ""
+    property url source: name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0
+                                ? name
+                                : name.indexOf("/") !== -1 ? "icon://" + name
+                                                           : "image://desktoptheme/" + name
+                                : undefined
 
     /*!
        \qmlproperty enumeration status
@@ -133,9 +135,9 @@ Item {
        Set to \c false if you want the icon to use the original image's colors and not be
        colored using the specified \ref color.
      */
-    property bool colorize: (icon.source.indexOf(".color.") === -1 &&
-                             icon.source.indexOf("image://desktoptheme/") === -1) ||
-                            icon.source.indexOf("symbolic") !== -1
+    property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
+                             String(icon.source).indexOf("image://desktoptheme/") === -1) ||
+                            String(icon.source).indexOf("symbolic") !== -1
 
     width: size
     height: size
@@ -147,8 +149,8 @@ Item {
         visible: !colorize
 
         source: {
-            if (icon.source.indexOf('icon://') === 0) {
-                var name = icon.source.substring(7)
+            if (String(icon.source).indexOf('icon://') === 0) {
+                var name = String(icon.source).substring(7)
 
                 if (name)
                     return Qt.resolvedUrl('icons/%1.svg'.arg(name))

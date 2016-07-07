@@ -10,21 +10,24 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
+import Fluid.Material 1.0
 
-/*!
-   \qmltype BaseListItem
-   \inqmlmodule Fluid.Controls 1.0
-
-   \brief The base class for list items.
-
-   Provides ripple effects, mouse/touch handling and tinting on mouse hover.
- */
 ListItemDelegate {
     id: listItem
 
     background: Rectangle {
-        color: listItem.interactive && (listItem.highlighted || listItem.down)
-                ? Qt.rgba(0,0,0,0.05) : Qt.rgba(0,0,0,0)
+        color: listItem.highlighted ? Qt.rgba(0,0,0,0.05)
+                                    : ripple.containsMouse ? Qt.rgba(0,0,0,0.03)
+                                                           : Qt.rgba(0,0,0,0)
+
+        Ripple {
+            id: ripple
+            width: parent.width
+            height: parent.height
+            enabled: interactive
+
+            control: listItem
+        }
 
         ThinDivider {
             x: dividerInset

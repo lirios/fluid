@@ -1,5 +1,6 @@
 module Fluid.Controls
+
 BaseListItem 1.0 BaseListItem.qml
-EmptyListItem 1.0 EmptyListItem.qml
-Highlight 1.0 HighlightListItem.qml
-StandardListItem 1.0 StandardListItem.qml
+ListItem 1.0 ListItem.qml
+Subheader 1.0 Subheader.qml
+ThinDivider 1.0 ThinDivider.qml

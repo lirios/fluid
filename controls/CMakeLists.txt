@@ -1,10 +1,14 @@
-set(FILES
+set(QML_FILES
     qmldir
     BaseListItem.qml
-    EmptyListItem.qml
-    HighlightListItem.qml
-    StandardListItem.qml
+    ListItem.qml
+    ListItemDelegate.qml
+    Subheader.qml
+    ThinDivider.qml
 )
 
-install(FILES ${FILES}
+install(FILES ${QML_FILES}
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)
+
+install(DIRECTORY +material
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)

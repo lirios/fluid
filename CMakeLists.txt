@@ -46,11 +46,12 @@ endif()
 # Find Qt5
 set(REQUIRED_QT_VERSION 5.6.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
-             Gui Qml Quick QuickTest)
+             Gui Qml Quick QuickTest QuickControls2)
 
 # Subdirectories
 add_subdirectory(controls)
 add_subdirectory(core)
+add_subdirectory(demo)
 add_subdirectory(effects)
 add_subdirectory(tests)
 add_subdirectory(material)

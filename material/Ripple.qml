@@ -58,8 +58,25 @@ MouseArea {
      */
     property int focusWidth: width - 32
 
+    property Item control
+
     clip: true
     hoverEnabled: Device.hoverEnabled
+
+    Connections {
+        target: control
+
+        onReleased: __private.removeLastCircle()
+    }
+
+    onPressed: {
+        __private.createTapCircle(mouse.x, mouse.y)
+
+        if (control)
+            mouse.accepted = false
+    }
+
+    onReleased: __private.removeLastCircle()
 
     QtObject {
         id: __private
@@ -99,10 +116,6 @@ MouseArea {
             return Math.sqrt(distX * distX + distY * distY)
         }
     }
-
-    onPressed: __private.createTapCircle(mouse.x, mouse.y)
-    onCanceled: __private.removeLastCircle()
-    onReleased: __private.removeLastCircle()
 
     Rectangle {
         id: focusBackground

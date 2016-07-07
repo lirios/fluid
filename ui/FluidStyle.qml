@@ -9,6 +9,7 @@
  */
 
 import QtQuick 2.0
+import Fluid.Core 1.0
 
 pragma Singleton
 
@@ -17,4 +18,15 @@ QtObject {
 
     readonly property color iconColorLight: Qt.rgba(0,0,0,0.54)
     readonly property color iconColorDark: Qt.rgba(1,1,1)
+
+    readonly property font subheadingFont: Qt.font({ family: "Roboto",
+                                                     pointSize: Device.isMobile ? 16 : 15 })
+
+    readonly property font body1Font: Qt.font({ family: "Roboto",
+                                                     pointSize: Device.isMobile ? 14 : 13 })
+
+    /* Control fonts that don't fit into the standard font styles */
+
+    readonly property font subheaderFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
+                                                    pointSize: 14 })
 }

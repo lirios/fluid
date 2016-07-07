@@ -27,7 +27,6 @@ before_script:
   - export PATH=`pwd`/.cmake/bin:`pwd`/.qt/5.6/5.6/gcc_64/bin:`pwd`/.glib/bin:$PATH
   - export LD_LIBRARY_PATH=`pwd`/.qt/5.6/5.6/gcc_64/lib:`pwd`/.glib/lib:$LD_LIBRARY_PATH
   - export CMAKE_PREFIX_PATH=`pwd`/.qt/5.6/5.6/gcc_64/lib/cmake
-  - export PKG_CONFIG_PATH=`pwd`/.glib/lib/pkgconfig:$PKG_CONFIG_PATH
   # Setup compilers
   - export CC=gcc-4.8
   - export CXX=g++-4.8

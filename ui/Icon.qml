@@ -99,11 +99,7 @@ Item {
 
        \sa name
      */
-    property url source: name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0
-                                ? name
-                                : name.indexOf("/") !== -1 ? "icon://" + name
-                                                           : "image://desktoptheme/" + name
-                                : ""
+     property url source: Utils.getSourceForIconName(name)
 
     /*!
        \qmlproperty enumeration status

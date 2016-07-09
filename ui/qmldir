@@ -1,7 +1,14 @@
 module Fluid.UI
+Action 1.0 Action.qml
+AppBar 1.0 AppBar.qml
+AppToolBar 1.0 AppToolBar.qml
+FluidWindow 1.0 FluidWindow.qml
 Icon 1.0 Icon.qml
+IconButton 1.0 IconButton.qml
 Loadable 1.0 Loadable.qml
 NoiseBackground 1.0 NoiseBackground.qml
+Page 1.0 Page.qml
+PageStack 1.0 PageStack.qml
 Showable 1.0 Showable.qml
 SmoothFadeImage 1.0 SmoothFadeImage.qml
 SmoothFadeLoader 1.0 SmoothFadeLoader.qml

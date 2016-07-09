@@ -1,9 +1,16 @@
 set(FLUID_FILES
     qmldir
+    Action.qml
+    AppBar.qml
+    AppToolBar.qml
     FluidStyle.qml
+    FluidWindow.qml
     Icon.qml
+    IconButton.qml
     Loadable.qml
     NoiseBackground.qml
+    Page.qml
+    PageStack.qml
     Showable.qml
     SmoothFadeImage.qml
     SmoothFadeLoader.qml

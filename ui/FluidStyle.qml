@@ -23,7 +23,10 @@ QtObject {
                                                      pointSize: Device.isMobile ? 16 : 15 })
 
     readonly property font body1Font: Qt.font({ family: "Roboto",
-                                                     pointSize: Device.isMobile ? 14 : 13 })
+                                                pointSize: Device.isMobile ? 14 : 13 })
+
+    readonly property font titleFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
+                                                pointSize: 20 })
 
     /* Control fonts that don't fit into the standard font styles */
 

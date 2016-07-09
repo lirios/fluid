@@ -56,4 +56,12 @@ QtObject {
 
         return color.a > 0 && a >= 0.3
     }
+
+    function getSourceForIconName(name) {
+        return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0
+                      ? name
+                      : name.indexOf("/") !== -1 ? "icon://" + name
+                                                 : "image://desktoptheme/" + name
+                    : ""
+    }
 }

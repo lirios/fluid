@@ -3,6 +3,7 @@
 
 <qresource>
 	<file>main.qml</file>
+	<file>SubPage.qml</file>
 </qresource>
 
 </RCC>

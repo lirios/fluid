@@ -1,5 +1,5 @@
 /*
- * QML Material - An application framework implementing Material Design.
+ * Fluid - QtQuick components for fluid and dynamic applications
  *
  * Copyright (C) 2014-2016 Michael Spencer <sonrisesoftware@gmail.com>
  *

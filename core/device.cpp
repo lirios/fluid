@@ -73,6 +73,7 @@ QString Device::iconName() const
         case TV:
             return "hardware/tv";
         case Unknown:
+        default:
             return "hardware/computer";
     }
 }

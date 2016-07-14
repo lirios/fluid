@@ -103,7 +103,7 @@ Item {
                                 ? name
                                 : name.indexOf("/") !== -1 ? "icon://" + name
                                                            : "image://desktoptheme/" + name
-                                : undefined
+                                : ""
 
     /*!
        \qmlproperty enumeration status

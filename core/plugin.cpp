@@ -27,16 +27,9 @@
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlExtensionPlugin>
 
-#include "standardpaths.h"
+#include "clipboard.h"
 #include "device.h"
-
-static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(jsEngine);
-
-    return new StandardPaths();
-}
+#include "standardpaths.h"
 
 static QObject *deviceProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -44,6 +37,14 @@ static QObject *deviceProvider(QQmlEngine *engine, QJSEngine *jsEngine)
     Q_UNUSED(jsEngine);
 
     return new Device();
+}
+
+static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(jsEngine);
+
+    return new StandardPaths();
 }
 
 class FluidCorePlugin : public QQmlExtensionPlugin
@@ -59,10 +60,11 @@ void FluidCorePlugin::registerTypes(const char *uri)
     Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
 
     // @uri Fluid.Core
-    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
-                                            standardPathsProvider);
+    qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device",
                                      deviceProvider);
+    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
+                                            standardPathsProvider);
 }
 
 #include "plugin.moc"

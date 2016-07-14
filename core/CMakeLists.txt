@@ -2,8 +2,9 @@ add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
     plugin.cpp
-    standardpaths.cpp
+    clipboard.cpp
     device.cpp
+    standardpaths.cpp
 )
 
 add_library(fluidcore SHARED ${SOURCES})

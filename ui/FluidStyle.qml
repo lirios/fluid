@@ -20,35 +20,35 @@ QtObject {
     readonly property color iconColorDark: Qt.rgba(1,1,1)
 
     readonly property font display4Font: Qt.font({ family: "Roboto", weight: Font.Light,
-                                                   pointSize: 112 })
+                                                   pixelSize: 112 })
 
-    readonly property font display3Font: Qt.font({ family: "Roboto", pointSize: 56 })
+    readonly property font display3Font: Qt.font({ family: "Roboto", pixelSize: 56 })
 
-    readonly property font display2Font: Qt.font({ family: "Roboto", pointSize: 45 })
+    readonly property font display2Font: Qt.font({ family: "Roboto", pixelSize: 45 })
 
-    readonly property font display1Font: Qt.font({ family: "Roboto", pointSize: 34 })
+    readonly property font display1Font: Qt.font({ family: "Roboto", pixelSize: 34 })
 
-    readonly property font headlineFont: Qt.font({ family: "Roboto", pointSize: 24 })
+    readonly property font headlineFont: Qt.font({ family: "Roboto", pixelSize: 24 })
 
     readonly property font titleFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
-                                                pointSize: 20 })
+                                                pixelSize: 20 })
 
     readonly property font subheadingFont: Qt.font({ family: "Roboto",
-                                                     pointSize: Device.isMobile ? 16 : 15 })
+                                                     pixelSize: Device.isMobile ? 16 : 15 })
 
     readonly property font body2Font: Qt.font({ family: "Roboto",
-                                                pointSize: Device.isMobile ? 14 : 13 })
+                                                pixelSize: Device.isMobile ? 14 : 13 })
 
     readonly property font body1Font: Qt.font({ family: "Roboto", weight: Font.DemiBold,
-                                                pointSize: Device.isMobile ? 14 : 13 })
+                                                pixelSize: Device.isMobile ? 14 : 13 })
 
-    readonly property font captionFont: Qt.font({ family: "Roboto", pointSize: 12 })
+    readonly property font captionFont: Qt.font({ family: "Roboto", pixelSize: 12 })
 
     readonly property font buttonFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
-                                                 pointSize: 14, capitalization: Font.AllUppercase })
+                                                 pixelSize: 14, capitalization: Font.AllUppercase })
 
     /* Control fonts that don't fit into the standard font styles */
 
     readonly property font subheaderFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
-                                                    pointSize: 14 })
+                                                    pixelSize: 14 })
 }

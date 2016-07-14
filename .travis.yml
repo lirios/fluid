@@ -23,8 +23,8 @@ before_script:
   # Fetch and install dependencies if cache miss
   - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-cmake | bash -x
   - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-qt | bash -x
-  - export PATH=`pwd`/.cmake/bin:`pwd`/.qt/5.7/5.7/gcc_64/bin:`pwd`/.glib/bin:$PATH
-  - export LD_LIBRARY_PATH=`pwd`/.qt/5.7/5.7/gcc_64/lib:`pwd`/.glib/lib:$LD_LIBRARY_PATH
+  - export PATH=`pwd`/.cmake/bin:`pwd`/.qt/5.7/5.7/gcc_64/bin:$PATH
+  - export LD_LIBRARY_PATH=`pwd`/.qt/5.7/5.7/gcc_64/lib:$LD_LIBRARY_PATH
   - export CMAKE_PREFIX_PATH=`pwd`/.qt/5.7/5.7/gcc_64/lib/cmake
   # Setup compilers
   - export CC=gcc-4.8

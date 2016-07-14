@@ -21,6 +21,8 @@ ItemDelegate {
 
     leftPadding: 16
     rightPadding: 16
+    topPadding: 0
+    bottomPadding: 0
 
     opacity: enabled ? 1 : 0.6
 }

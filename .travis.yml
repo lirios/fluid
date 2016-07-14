@@ -44,14 +44,4 @@ script:
 
 notifications:
   email: false
-  irc:
-    channels:
-    - chat.freenode.net#hawaii-desktop
-    use_notice: true
-    skip_join: true
-    on_success: always
-    on_failure: change
-  slack:
-    secure: EGWF118PTfBj/Oktmr20fc17JTM5gt7/j24k6HkiOI1J8S+sJyxhhtSjV54cgmsaEURJ7zUD/xi2wSSigi82k2F29wpELInfty/+j95vuY+7QO7nyVIINHjKranLUogKai9evHU2cvlNTq6e27pjkDbRO2HNKyzTb+Lb6D3VEOk=
-    on_success: always
-    on_failure: change
+  slack: qmlos:fdUqVmPzqPskEL1UBhqapZ0w

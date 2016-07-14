@@ -1,45 +1,24 @@
-sudo: false
+sudo: required
 
-language: cpp
-
-compiler:
-  - gcc
-#  - clang
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - gcc-4.8
-      - g++-4.8
-
-cache:
-  directories:
-    - .cmake
-    - .qt
-
-before_script:
-  # Fetch and install dependencies if cache miss
-  - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-cmake | bash -x
-  - curl https://raw.githubusercontent.com/hawaii-desktop/repotools/master/ci/fetch-qt | bash -x
-  - export PATH=`pwd`/.cmake/bin:`pwd`/.qt/5.7/5.7/gcc_64/bin:$PATH
-  - export LD_LIBRARY_PATH=`pwd`/.qt/5.7/5.7/gcc_64/lib:$LD_LIBRARY_PATH
-  - export CMAKE_PREFIX_PATH=`pwd`/.qt/5.7/5.7/gcc_64/lib/cmake
-  # Setup compilers
-  - export CC=gcc-4.8
-  - export CXX=g++-4.8
-  # xvfb for unit tests
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  # prepare
-  - mkdir build
-  - cd build
-  - cmake ..
+arch:
+  packages:
+    - qt5-declarative
+    - qt5-quickcontrols2
+    - qt5-graphicaleffects
+    - qt5-svg
+    - cmake
+    - extra-cmake-modules
+    - xorg-server-xvfb
+    - git
+  script:
+    - scripts/fetch_icons.sh
+    - cmake . -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr
+    - make
+    - sudo make install
+    - xvfb-run -a -s "-screen 0 800x600x24" make check
 
 script:
-  - make
-  - make check
+  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
 
 notifications:
   email: false

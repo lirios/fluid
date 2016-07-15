@@ -35,6 +35,6 @@ BaseListItem {
 
         verticalAlignment: Text.AlignVCenter
 
-        color: Material.primaryTextColor
+        color: Material.secondaryTextColor
     }
 }

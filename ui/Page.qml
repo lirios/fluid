@@ -122,6 +122,7 @@ Page {
         id: appBar
 
         title: page.title
+        parent: null
 
         leftAction: Action {
             text: "Back"

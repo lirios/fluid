@@ -7,7 +7,7 @@ FluidWindow {
     visible: true
 
     width: 600
-    height: 450
+    height: 650
 
     title: "Fluid Demo"
 
@@ -16,15 +16,22 @@ FluidWindow {
 
         ListView {
             anchors.fill: parent
-            model: 5
+            model: ListModel {
+                ListElement { title: "Typography"; source: "qrc:/TypographyPage.qml" }
+                ListElement { title: "List Item 1"; source: "qrc:/SubPage.qml" }
+                ListElement { title: "List Item 2"; source: "qrc:/SubPage.qml" }
+                ListElement { title: "List Item 3"; source: "qrc:/SubPage.qml" }
+                ListElement { title: "List Item 4"; source: "qrc:/SubPage.qml" }
+            }
             header: Subheader {
                 text: "Header"
             }
-
             delegate: ListItem {
-                text: "List Item " + (index + 1)
-                onClicked: pageStack.push(Qt.resolvedUrl('SubPage.qml'))
+                text: model.title
+                onClicked: pageStack.push(model.source)
             }
+
+            ScrollIndicator.vertical: ScrollIndicator {}
         }
     }
 }

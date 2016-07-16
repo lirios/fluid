@@ -66,7 +66,10 @@ MouseArea {
     Connections {
         target: control
 
-        onReleased: __private.removeLastCircle()
+        onPressedChanged: {
+            if (!control.pressed)
+                __private.removeLastCircle()
+        }
     }
 
     onPressed: {

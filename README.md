@@ -11,17 +11,17 @@ Fluid
 
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications.
 
-### Dependencies
+## Dependencies
 
 Qt >= 5.7.0 with at least the following modules is required:
 
-* [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
-* [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
-* [qtquickcontrols](http://code.qt.io/cgit/qt/qtquickcontrols.git)
-* [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
-* [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
+ * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
+ * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
+ * [qtquickcontrols](http://code.qt.io/cgit/qt/qtquickcontrols.git)
+ * [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
+ * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
 
-### Installation
+## Installation
 
 First, if you want to include the Material Design icons used with the `Icon` component, run:
 
@@ -48,9 +48,7 @@ On the `cmake` line, you can specify additional configuration parameters:
    * **Release:** release build
    * **RelWithDebInfo:** release build with debugging information
 
-### Licensing
+## Licensing
 
-Fluid is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
+Licensed under the terms of the GNU Lesser General Public License version 2.1 or,
+at your option, any later version.

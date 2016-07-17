@@ -4,6 +4,7 @@ set(FLUID_FILES
     AppBar.qml
     AppToolBar.qml
     BodyLabel.qml
+    CircleImage.qml
     CaptionLabel.qml
     DisplayLabel.qml
     FluidStyle.qml

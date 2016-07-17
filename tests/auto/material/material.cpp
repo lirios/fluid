@@ -9,4 +9,4 @@
  */
 
 #include <QtQuickTest/QtQuickTest>
-QUICK_TEST_MAIN(fluid)
+QUICK_TEST_MAIN(tst_material)

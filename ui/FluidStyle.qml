@@ -36,10 +36,10 @@ QtObject {
     readonly property font subheadingFont: Qt.font({ family: "Roboto",
                                                      pixelSize: Device.isMobile ? 16 : 15 })
 
-    readonly property font body2Font: Qt.font({ family: "Roboto",
+    readonly property font body2Font: Qt.font({ family: "Roboto", weight: Font.DemiBold,
                                                 pixelSize: Device.isMobile ? 14 : 13 })
 
-    readonly property font body1Font: Qt.font({ family: "Roboto", weight: Font.DemiBold,
+    readonly property font body1Font: Qt.font({ family: "Roboto",
                                                 pixelSize: Device.isMobile ? 14 : 13 })
 
     readonly property font captionFont: Qt.font({ family: "Roboto", pixelSize: 12 })

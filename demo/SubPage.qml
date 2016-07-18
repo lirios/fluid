@@ -1,5 +1,5 @@
 import QtQuick.Controls 2.0
-import Fluid.UI 1.0
+import Fluid.Controls 1.0
 
 Page {
     title: "Sub page demo"

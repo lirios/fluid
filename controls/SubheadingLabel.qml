@@ -12,13 +12,13 @@ import QtQuick 2.0
 import QtQuick.Templates 2.0 as T
 
 /*!
-    \qmltype DisplayLabel
-    \inqmlmodule Fluid.UI 1.0
-    \brief Text label with standard font and styling suitable to display text.
+    \qmltype SubheadingLabel
+    \inqmlmodule Fluid.Controls 1.0
+    \brief Text label with standard font and styling suitable to subheading.
 
     \code
-    DisplayLabel {
-        text: qsTr("Display text")
+    SubheadingLabel {
+        text: qsTr("A translatable subheading")
     }
     \endcode
 */
@@ -35,19 +35,11 @@ T.Label {
     */
     property int level: 1
 
-    font.pixelSize: {
-        if (level <= 1)
-            return 30
-        else if (level == 2)
-            return 40
-        else if (level == 3)
-            return 50
-        return 100
-    }
+    font.pixelSize: 14
     color: "#26282a"
     linkColor: "#45a7d7"
     onLevelChanged: {
-        if (level < 1 || level > 4)
-            console.error("DisplayLabel level must be between 1 and 4")
+        if (level < 1 || level > 2)
+            console.error("BodyLabel level must be either 1 or 2")
     }
 }

@@ -12,19 +12,18 @@ import QtQuick 2.0
 import QtQuick.Templates 2.0 as T
 
 /*!
-    \qmltype TitleLabel
-    \inqmlmodule Fluid.UI 1.0
-    \brief Text label with standard font and styling suitable to titles.
+    \qmltype CaptionLabel
+    \inqmlmodule Fluid.Controls 1.0
+    \brief Text label with standard font and styling suitable to captions.
 
     \code
-    Title {
-        text: qsTr("Translatable title")
+    Caption {
+        text: qsTr("A translatable caption")
     }
     \endcode
 */
 T.Label {
-    font.pixelSize: 18
-    font.bold: true
+    font.pixelSize: 10
     color: "#26282a"
     linkColor: "#45a7d7"
 }

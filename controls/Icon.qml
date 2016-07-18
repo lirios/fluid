@@ -14,11 +14,11 @@ import QtQuick.Window 2.2
 import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Core 1.0
-import Fluid.UI 1.0
+import Fluid.Controls 1.0
 
 /*!
     \qmltype Icon
-    \inqmlmodule Fluid.UI 1.0
+    \inqmlmodule Fluid.Controls 1.0
     \brief Displays an icon from the Material Design icon collection, the platform's icon theme,
     or another (local or remote) location.
 

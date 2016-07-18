@@ -55,11 +55,11 @@ add_subdirectory(demo)
 add_subdirectory(effects)
 add_subdirectory(tests)
 add_subdirectory(material)
-add_subdirectory(ui)
 
+# Install icons
 if(EXISTS ${CMAKE_SOURCE_DIR}/icons)
     install(DIRECTORY ${CMAKE_SOURCE_DIR}/icons
-            DESTINATION ${QML_INSTALL_DIR}/Fluid/UI)
+            DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)
 endif()
 
 # Display feature summary

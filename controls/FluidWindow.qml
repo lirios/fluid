@@ -10,11 +10,11 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
-import Fluid.UI 1.0
+import Fluid.Controls 1.0
 
 /*!
    \qmltype FluidWindow
-   \inqmlmodule Fluid.UI 1.0
+   \inqmlmodule Fluid.Controls 1.0
 
    \brief A window that provides features commonly used for Material Design apps.
 
@@ -25,7 +25,7 @@ import Fluid.UI 1.0
 
    \qml
    import QtQuick 2.4
-   import Fluid.UI 1.0
+   import Fluid.Controls 1.0
 
    ApplicationWindow {
        title: "Application Name"

@@ -13,7 +13,7 @@ import Fluid.Core 1.0
 
 /*!
    \qmltype Action
-   \inqmlmodule Fluid.UI 1.0
+   \inqmlmodule Fluid.Controls 1.0
 
    \brief Represents an action shown in an action bar, context menu, or list.
 

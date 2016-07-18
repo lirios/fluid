@@ -10,11 +10,11 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
-import Fluid.UI 1.0
+import Fluid.Controls 1.0
 
 /*!
    \qmltype Page
-   \inqmlmodule Fluid.UI 1.0
+   \inqmlmodule Fluid.Controls 1.0
 
    \brief Represents a page on the navigation page stack.
 
@@ -22,7 +22,7 @@ import Fluid.UI 1.0
 
    \qml
    import QtQuick 2.4
-   import Fluid.UI 1.0
+   import Fluid.Controls 1.0
 
    Page {
        title: "Application Name"

@@ -1,5 +1,6 @@
 set(FLUID_FILES
     qmldir
+    ElevationEffect.qml
     Ripple.qml
 )
 

@@ -133,6 +133,8 @@ ToolBar {
             delegate: IconButton {
                 id: actionButton
 
+                anchors.verticalCenter: parent.verticalCenter
+
                 iconSize: appBar.iconSize
 
                 iconSource: modelData.iconSource

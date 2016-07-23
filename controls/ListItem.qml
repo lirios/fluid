@@ -23,8 +23,10 @@ import Fluid.Controls 1.0
 BaseListItem {
     id: listItem
 
-    implicitHeight: subText != "" ? maximumLineCount == 2 ? 72 : 88
-                                  : secondaryItem.showing ? 72 : 48
+    implicitHeight: Math.max(subText != "" ? maximumLineCount == 2 ? 72 : 88
+                                           : secondaryItem.showing ? 72 : 48,
+                             leftItem.childrenRect.height + Units.smallSpacing,
+                             rightItem.childrenRect.height + Units.smallSpacing)
 
     dividerInset: leftItem.visible ? listItem.height : 0
 
@@ -142,7 +144,7 @@ BaseListItem {
 
             Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: showing ? childrenRect.width : 0
-            Layout.preferredHeight: parent.height
+            Layout.preferredHeight: showing ? childrenRect.height : parent.height
 
             property bool showing: visibleChildren.length > 0
         }

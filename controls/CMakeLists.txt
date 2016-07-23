@@ -37,6 +37,7 @@ set(QML_FILES
     SmoothFadeLoader.qml
     Subheader.qml
     SubheadingLabel.qml
+    TabPage.qml
     ThinDivider.qml
     TitleLabel.qml
     Units.qml

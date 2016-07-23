@@ -4,6 +4,7 @@
         <file>BasicComponents.qml</file>
         <file>CompoundComponents.qml</file>
         <file>MaterialComponents.qml</file>
+        <file>Navigation.qml</file>
         <file>Style.qml</file>
         <file>StyledRectangle.qml</file>
         <file>+material/StyledRectangle.qml</file>
@@ -19,6 +20,7 @@
         <file>Pages/Compound/SubPage.qml</file>
         <file>Pages/Compound/CardPage.qml</file>
         <file>Pages/Compound/InfoBarPage.qml</file>
+        <file>Pages/Navigation/TabNavPage.qml</file>
         <file>Pages/Style/PalettePage.qml</file>
         <file>Pages/Style/PaletteSwatch.qml</file>
         <file>Pages/Style/TypographyPage.qml</file>

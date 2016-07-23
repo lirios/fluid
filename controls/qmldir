@@ -30,6 +30,7 @@ SmoothFadeImage 1.0 SmoothFadeImage.qml
 SmoothFadeLoader 1.0 SmoothFadeLoader.qml
 Subheader 1.0 Subheader.qml
 SubheadingLabel 1.0 SubheadingLabel.qml
+TabPage 1.0 TabPage.qml
 ThinDivider 1.0 ThinDivider.qml
 TitleLabel 1.0 TitleLabel.qml
 singleton FluidStyle 1.0 FluidStyle.qml

@@ -26,11 +26,16 @@
 
 pragma Singleton
 
-import QtQuick 2.5
+import QtQuick 2.4
 import Fluid.Core 1.0
 
 Item {
-    readonly property alias gridUnit: fontMetrics.mSize
+    /*
+        \qmlproperty int gridUnit
+        Fundamental unit of space for sizes depending on the current font.
+        It correspond to the capital letter M width in pixel.
+    */
+    readonly property int gridUnit: textMetrics.height
 
     /*!
         \qmlproperty real smallSpacing
@@ -72,23 +77,14 @@ Item {
         readonly property int enormous: 128
     }
 
-    id: units
-
-    FontMetrics {
-        property real mSize
-
-        id: fontMetrics
-        onFontChanged: updateMSize()
-
-        Component.onCompleted: updateMSize()
-
-        function updateMSize() {
-            mSize = fontMetrics.boundingRect("M").height;
-            if (mSize % 2 != 0)
-                mSize++;
-        }
+    TextMetrics {
+        id: textMetrics
+        text: "M"
     }
 
+    /*!
+        Returns a round size in pixels multiplied by grid unit.
+    */
     function gu(x) {
         return Math.round(x * gridUnit);
     }

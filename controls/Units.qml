@@ -31,8 +31,29 @@ import Fluid.Core 1.0
 
 Item {
     readonly property alias gridUnit: fontMetrics.mSize
-    readonly property alias smallSpacing: fontMetrics.smallSpacing
-    readonly property alias largeSpacing: fontMetrics.mSize
+
+    /*!
+        \qmlproperty real smallSpacing
+        The amount of spacing that should be used around smaller UI
+        elements. It can be used as margin around button box and
+        spacing between buttons.
+    */
+    readonly property real smallSpacing: 8
+
+    /*!
+        \qmlproperty real mediumSpacing
+        The amount of spacing that should be used inside medium UI
+        elements such as padding between title and body text in a dialog box.
+    */
+    readonly property real mediumSpacing: 20
+
+    /*!
+        \qmlproperty real largeSpacing
+        The amount of spacing that should be used inside bigger UI
+        elements such as padding in a dialog box.
+    */
+    readonly property real largeSpacing: 24
+
     readonly property int shortDuration: 100
     readonly property int mediumDuration: 200
     readonly property int longDuration: 400
@@ -55,7 +76,6 @@ Item {
 
     FontMetrics {
         property real mSize
-        property real smallSpacing
 
         id: fontMetrics
         onFontChanged: updateMSize()
@@ -66,8 +86,6 @@ Item {
             mSize = fontMetrics.boundingRect("M").height;
             if (mSize % 2 != 0)
                 mSize++;
-
-            smallSpacing = Math.max(2, mSize / 4)
         }
     }
 

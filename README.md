@@ -3,7 +3,7 @@ Fluid
 
 [![ZenHub.io](https://img.shields.io/badge/supercharged%20by-zenhub.io-blue.svg)](https://zenhub.io)
 
-[![License](https://img.shields.io/badge/license-LGPLv2.1%2B-blue.svg)](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html)
+[![License](https://img.shields.io/badge/license-MPL2%2B-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 [![GitHub release](https://img.shields.io/github/release/qmlos/fluid.svg)](https://github.com/qmlos/fluid)
 [![Build Status](https://travis-ci.org/qmlos/fluid.svg?branch=develop)](https://travis-ci.org/qmlos/fluid)
 [![GitHub issues](https://img.shields.io/github/issues/qmlos/fluid.svg)](https://github.com/qmlos/fluid/issues)
@@ -50,5 +50,4 @@ On the `cmake` line, you can specify additional configuration parameters:
 
 ## Licensing
 
-Licensed under the terms of the GNU Lesser General Public License version 2.1 or,
-at your option, any later version.
+Licensed under the terms of the Mozilla Public License version 2.0.

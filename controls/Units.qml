@@ -36,14 +36,19 @@ Item {
     readonly property int shortDuration: 100
     readonly property int mediumDuration: 200
     readonly property int longDuration: 400
+
+    /*!
+        \qmlproperty object iconSizes
+        Standard icon sizes.
+    */
     readonly property QtObject iconSizes: QtObject {
-        readonly property alias tiny: fontMetrics.tinyIconSize
-        readonly property alias small: fontMetrics.smallIconSize
-        readonly property alias smallMedium: fontMetrics.smallMediumIconSize
-        readonly property alias medium: fontMetrics.mediumIconSize
-        readonly property alias large: fontMetrics.largeIconSize
-        readonly property alias huge: fontMetrics.hugeIconSize
-        readonly property alias enormous: fontMetrics.enormousIconSize
+        readonly property int tiny: 8
+        readonly property int small: 16
+        readonly property int smallMedium: 22
+        readonly property int medium: 32
+        readonly property int large: 48
+        readonly property int huge: 64
+        readonly property int enormous: 128
     }
 
     id: units
@@ -51,13 +56,6 @@ Item {
     FontMetrics {
         property real mSize
         property real smallSpacing
-        property real tinyIconSize
-        property real smallIconSize
-        property real smallMediumIconSize
-        property real mediumIconSize
-        property real largeIconSize
-        property real hugeIconSize
-        property real enormousIconSize
 
         id: fontMetrics
         onFontChanged: updateMSize()
@@ -70,18 +68,6 @@ Item {
                 mSize++;
 
             smallSpacing = Math.max(2, mSize / 4)
-
-            tinyIconSize = calcIconSize(8);
-            smallIconSize = calcIconSize(16);
-            smallMediumIconSize = calcIconSize(22);
-            mediumIconSize = calcIconSize(32);
-            largeIconSize = calcIconSize(48);
-            hugeIconSize = calcIconSize(64);
-            enormousIconSize = calcIconSize(128);
-        }
-
-        function calcIconSize(x) {
-            return x;
         }
     }
 

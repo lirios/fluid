@@ -27,7 +27,6 @@
 pragma Singleton
 
 import QtQuick 2.5
-import QtQuick.Window 2.2
 import Fluid.Core 1.0
 
 Item {
@@ -82,15 +81,8 @@ Item {
         }
 
         function calcIconSize(x) {
-            return units.dp(x);
+            return x;
         }
-    }
-
-    function dp(x) {
-        // FIXME: This won't work because Units is a singleton and is bound to the first
-        // screen that is available during its creation
-        return x * Screen.devicePixelRatio;
-        return x * (((Screen.pixelDensity * 25.4) / (Screen.logicalPixelDensity * 25.4)) / Screen.devicePixelRatio);
     }
 
     function gu(x) {

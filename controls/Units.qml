@@ -59,8 +59,22 @@ Item {
     */
     readonly property real largeSpacing: 24
 
+    /*!
+        \qmlproperty int shortDuration
+        Duration for short animations to make UI events noticeable.
+    */
     readonly property int shortDuration: 100
+
+    /*!
+        \qmlproperty int mediumDuration
+        Duration for medium length animations.
+    */
     readonly property int mediumDuration: 200
+
+    /*!
+        \qmlproperty int longDuration
+        Duration for long animations such as windows opening or closing.
+    */
     readonly property int longDuration: 400
 
     /*!
@@ -89,6 +103,9 @@ Item {
         return Math.round(x * gridUnit);
     }
 
+    /*!
+        Returns the size in pixel closes to the icon size.
+    */
     function roundToIconSize(x) {
         // Find the size closest to icon size
         if (x <= 0)

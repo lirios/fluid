@@ -42,6 +42,7 @@ Item {
             currentIndex: 0
             model: ListModel {
                 ListElement { title: qsTr("ListItem"); source: "qrc:/Pages/Compound/ListItemPage.qml" }
+                ListElement { title: qsTr("Card"); source: "qrc:/Pages/Compound/CardPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

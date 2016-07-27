@@ -32,10 +32,10 @@ FluidWindow {
             anchors.fill: parent
             model: ListModel {
                 ListElement { title: "Typography"; source: "qrc:/TypographyPage.qml" }
+                ListElement { title: "Wave transition"; source: "qrc:/WaveTransition.qml" }
                 ListElement { title: "List Item 1"; source: "qrc:/SubPage.qml" }
                 ListElement { title: "List Item 2"; source: "qrc:/SubPage.qml" }
                 ListElement { title: "List Item 3"; source: "qrc:/SubPage.qml" }
-                ListElement { title: "List Item 4"; source: "qrc:/SubPage.qml" }
             }
             header: Subheader {
                 text: "Header"

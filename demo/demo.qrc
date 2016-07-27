@@ -4,6 +4,7 @@
 <qresource>
 	<file>main.qml</file>
 	<file>TypographyPage.qml</file>
+	<file>WaveTransition.qml</file>
 	<file>SubPage.qml</file>
 </qresource>
 

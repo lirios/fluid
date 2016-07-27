@@ -27,6 +27,7 @@ set(QML_FILES
     ThinDivider.qml
     TitleLabel.qml
     Units.qml
+    Wave.qml
 )
 
 install(FILES ${QML_FILES}

@@ -22,7 +22,7 @@ RectangularGlow {
     property int spreadRadius
 
     // The source item the shadow is being applied to, used for correctly
-    // calculating the corner radious
+    // calculating the corner radius
     property Item source
 
     property bool fullWidth

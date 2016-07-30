@@ -30,8 +30,8 @@ BaseListItem {
 
     implicitHeight: Math.max(subText != "" ? maximumLineCount == 2 ? 72 : 88
                                            : secondaryItem.showing ? secondaryItem.height + Units.smallSpacing * 2 : 48,
-                             leftItem.childrenRect.height + Units.smallSpacing,
-                             rightItem.childrenRect.height + Units.smallSpacing)
+                             leftItem.childrenRect.height + Units.smallSpacing * 2,
+                             rightItem.childrenRect.height + Units.smallSpacing * 2)
 
     dividerInset: leftItem.visible ? listItem.height : 0
 
@@ -147,9 +147,8 @@ BaseListItem {
             id: rightItem
             objectName: "rightItem"
 
-            Layout.alignment: Qt.AlignCenter
             Layout.preferredWidth: showing ? childrenRect.width : 0
-            Layout.preferredHeight: showing ? childrenRect.height : parent.height
+            Layout.preferredHeight: showing ? childrenRect.height + Units.smallSpacing : parent.height
 
             property bool showing: visibleChildren.length > 0
         }

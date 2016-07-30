@@ -13,11 +13,10 @@
  */
 
 import QtQuick 2.4
-import QtQuick.Templates 2.0 as T
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.0
 import Fluid.Core 1.0
 
-T.Label {
+Label {
     property int level: 1
 
     font.pixelSize: {
@@ -42,7 +41,6 @@ T.Label {
         return Text.ProportionalHeight
     }
     font.weight: level >= 4 ? Font.Light : Font.Normal
-    linkColor: Material.accentColor
     onLevelChanged: {
         if (level < 1 || level > 4)
             console.error("DisplayLabel level must be between 1 and 4")

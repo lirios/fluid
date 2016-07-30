@@ -13,11 +13,9 @@
  */
 
 import QtQuick 2.4
-import QtQuick.Templates 2.0 as T
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.0
 
-T.Label {
+Label {
     font.pixelSize: 20
     font.weight: Font.Medium
-    linkColor: Material.accentColor
 }

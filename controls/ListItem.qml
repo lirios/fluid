@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -28,7 +29,7 @@ BaseListItem {
     id: listItem
 
     implicitHeight: Math.max(subText != "" ? maximumLineCount == 2 ? 72 : 88
-                                           : secondaryItem.showing ? 72 : 48,
+                                           : secondaryItem.showing ? secondaryItem.height + Units.smallSpacing * 2 : 48,
                              leftItem.childrenRect.height + Units.smallSpacing,
                              rightItem.childrenRect.height + Units.smallSpacing)
 
@@ -136,7 +137,7 @@ BaseListItem {
                 objectName: "secondaryItem"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: showing ? subLabel.implicitHeight : 0
+                Layout.preferredHeight: showing ? childrenRect.height + Units.smallSpacing : 0
 
                 property bool showing: visibleChildren.length > 0
             }

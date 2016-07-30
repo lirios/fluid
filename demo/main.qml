@@ -15,37 +15,51 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Universal 2.0
+import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0
 
 FluidWindow {
     visible: true
 
-    width: 600
-    height: 650
+    width: 800
+    height: 800
 
-    title: "Fluid Demo"
+    title: qsTr("Fluid Demo")
+
+    Material.primary: Material.LightBlue
+    Material.accent: Material.Blue
+
+    Universal.accent: Universal.Cobalt
 
     initialPage: Page {
-        title: "List demo"
+        header: ToolBar {
+            TabBar {
+                id: bar
+                width: parent.width
 
-        ListView {
+                TabButton {
+                    text: qsTr("Basic components")
+                }
+
+                TabButton {
+                    text: qsTr("Compound components")
+                }
+
+                TabButton {
+                    text: qsTr("Style")
+                }
+            }
+        }
+
+        StackLayout {
             anchors.fill: parent
-            model: ListModel {
-                ListElement { title: "Typography"; source: "qrc:/TypographyPage.qml" }
-                ListElement { title: "Wave transition"; source: "qrc:/WaveTransition.qml" }
-                ListElement { title: "List Item 1"; source: "qrc:/SubPage.qml" }
-                ListElement { title: "List Item 2"; source: "qrc:/SubPage.qml" }
-                ListElement { title: "List Item 3"; source: "qrc:/SubPage.qml" }
-            }
-            header: Subheader {
-                text: "Header"
-            }
-            delegate: ListItem {
-                text: model.title
-                onClicked: pageStack.push(model.source)
-            }
+            currentIndex: bar.currentIndex
 
-            ScrollIndicator.vertical: ScrollIndicator {}
+            BasicComponents {}
+            CompoundComponents {}
+            Style {}
         }
     }
 }

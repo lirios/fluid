@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -22,7 +23,8 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
-    QQuickStyle::setStyle("Material");
+    if (QQuickStyle::name().isEmpty())
+        QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

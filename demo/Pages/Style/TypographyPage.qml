@@ -16,14 +16,13 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import Fluid.Controls 1.0
+import "../.."
 
-Page {
-    title: "Typography"
-
+Item {
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 20
-        spacing: 8
+        anchors.margins: Units.mediumSpacing
+        spacing: Units.smallSpacing
 
         DisplayLabel {
             level: 4

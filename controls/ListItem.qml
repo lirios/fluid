@@ -48,7 +48,7 @@ BaseListItem {
     property alias secondaryItem: secondaryItem.children
 
     contentItem: RowLayout {
-        spacing: 16
+        spacing: Units.smallSpacing * 2
 
         Item {
             id: leftItem
@@ -80,12 +80,12 @@ BaseListItem {
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             Layout.fillWidth: true
 
-            spacing: 3
+            spacing: Units.smallSpacing / 2
 
             RowLayout {
                 Layout.fillWidth: true
 
-                spacing: 8
+                spacing: Units.smallSpacing
 
                 Label {
                     id: label

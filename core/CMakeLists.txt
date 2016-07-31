@@ -4,6 +4,7 @@ set(SOURCES
     plugin.cpp
     clipboard.cpp
     device.cpp
+    qqmlsortfilterproxymodel.cpp
     standardpaths.cpp
 )
 

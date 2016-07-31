@@ -17,6 +17,7 @@
 
 #include "clipboard.h"
 #include "device.h"
+#include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
 
 static QObject *deviceProvider(QQmlEngine *engine, QJSEngine *jsEngine)
@@ -48,7 +49,12 @@ void FluidCorePlugin::registerTypes(const char *uri)
     Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
 
     // @uri Fluid.Core
+
     qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
+
+    qmlRegisterType<QAbstractItemModel>();
+    qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");
+
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device",
                                      deviceProvider);
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",

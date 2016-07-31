@@ -14,6 +14,13 @@
 
 import QtQuick 2.0
 
+/*!
+    \qmltype Loadable
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Loadable component.
+*/
 Item {
     property Component component
     property var showAnimation

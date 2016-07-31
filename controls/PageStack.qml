@@ -17,7 +17,8 @@ import QtQuick.Controls 2.0
 
 /*!
    \qmltype PageStack
-   \inqmlmodule Material
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief Manages the page stack used for navigation.
 */

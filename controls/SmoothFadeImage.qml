@@ -16,8 +16,9 @@ import QtQuick 2.0
 
 /*!
     \qmltype SmoothFadeImage
-    \inqmlmodule Fluid.Controls 1.0
-    \ingroup ui
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
     \brief Displays an image and smoothly fade when the source is changed.
 
     This component can be used in place of an Image when a smooth fade animation

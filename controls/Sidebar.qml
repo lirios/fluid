@@ -20,7 +20,8 @@ import Fluid.Controls 1.0
 
 /*!
    \qmltype Sidebar
-   \inqmlmodule Fluid.Controls 1.0
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief A sidebar component for use in adaptive layouts
 

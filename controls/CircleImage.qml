@@ -16,6 +16,13 @@ import QtQuick 2.4
 import QtGraphicalEffects 1.0
 import Fluid.Effects 1.0
 
+/*!
+    \qmltype CircleImage
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Circular image.
+*/
 Item {
     id: item
 

@@ -16,6 +16,13 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 
+/*!
+    \qmltype IconButton
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Tool button with an \l Icon.
+*/
 ToolButton {
     id: iconButton
 

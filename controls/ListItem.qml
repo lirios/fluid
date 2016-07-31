@@ -21,7 +21,8 @@ import Fluid.Controls 1.0
 
 /*!
    \qmltype BaseListItem
-   \inqmlmodule Fluid.Controls 1.0
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief A standard list item, with one or more lines of text and optional left and right items.
  */

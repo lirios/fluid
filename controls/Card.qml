@@ -17,7 +17,9 @@ import QtQuick.Controls.Material 2.0
 
 /*!
     \qmltype Card
-    \inqmlmodule Fluid.Controls 1.0
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
     \brief Cards display content composed of different elements.
 
     \code

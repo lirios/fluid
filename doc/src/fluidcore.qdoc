@@ -12,25 +12,19 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
-
 /*!
-    \qmltype TitleLabel
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
+    \qmlmodule Fluid.Core 1.0
+    \title Fluid Core QML Types
+    \ingroup fluidcore
 
-    \brief Text label with standard font and styling suitable to titles.
+    \brief Provides basic QML types for Qt applications.
+
+    Basic QML types for Qt applications.
+
+    The Fluid Core QML Types can be imported into your application
+    using the following import statement:
 
     \code
-    Title {
-        text: qsTr("Translatable title")
-    }
+    import Fluid.Core 1.0
     \endcode
 */
-T.Label {
-    font.pixelSize: 18
-    font.bold: true
-    color: "#26282a"
-    linkColor: "#45a7d7"
-}

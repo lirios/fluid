@@ -14,9 +14,24 @@
 
 import QtQuick 2.0
 
+/*!
+    \qmltype Object
+    \inqmlmodule Fluid.Core
+    \ingroup fluidcore
+
+    \brief A QtObject with children.
+
+    The \l Object type is a non-visual element that extends \l QtObject
+    with the ability to hold children objects.
+*/
 QtObject {
     default property alias children: object.__children
 
+    /*!
+        \qmlproperty list<QtObject> Object::children
+
+        Children objects.
+    */
     property list<QtObject> __children: [QtObject {}]
 
     id: object

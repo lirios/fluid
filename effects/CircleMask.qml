@@ -16,6 +16,13 @@
 import QtQuick 2.4
 import QtGraphicalEffects 1.0
 
+/*!
+  \qmltype CircleMask
+  \inqmlmodule Fluid.Effects
+  \ingroup fluideffects
+
+  \brief Circular mask.
+*/
 Item {
     id: item
 

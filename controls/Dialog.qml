@@ -20,6 +20,13 @@ import QtQuick.Layouts 1.0
 import Fluid.Core 1.0
 import Fluid.Controls 1.0
 
+/*!
+    \qmltype Dialog
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Dialog.
+*/
 Popup {
     property alias title: titleLabel.text
     property alias text: textLabel.text

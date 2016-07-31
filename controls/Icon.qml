@@ -22,7 +22,9 @@ import Fluid.Controls 1.0
 
 /*!
     \qmltype Icon
-    \inqmlmodule Fluid.Controls 1.0
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
     \brief Displays an icon from the Material Design icon collection, the platform's icon theme,
     or another (local or remote) location.
 

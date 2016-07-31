@@ -14,6 +14,13 @@
 
 import QtQuick 2.0
 
+/*!
+    \qmltype Showable
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Showtable component.
+*/
 FocusScope {
     property var showAnimation
     property var hideAnimation

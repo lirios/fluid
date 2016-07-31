@@ -1,0 +1,31 @@
+/*
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:MPL2$
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * $END_LICENSE$
+ */
+
+/*!
+    \page index.html
+    \keyword Fluid Reference Documentation
+
+    A collection of cross-platform QtQuick components for building fluid and dynamic applications.
+
+    \section1 QML Modules
+
+    Fluid is comprised of several QML modules.
+
+    \list
+    \li \l[FluidCore]{Fluid Core QML Types}
+    \li \l[FluidControls]{Fluid Controls QML Types}
+    \li \l[FluidEffects]{Fluid Effects QML Types}
+    \li \l[FluidMaterial]{Fluid Material QML Types}
+    \endlist
+*/

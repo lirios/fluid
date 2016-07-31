@@ -22,7 +22,9 @@ import Fluid.Core 1.0
 
 /*!
    \qmltype InfoBar
-   \inqmlmodule Fluid.Controls 1.0
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
    \brief InfoBar provide lightweight feedback about an operation.
 
    \code

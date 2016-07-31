@@ -12,25 +12,14 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
-
 /*!
-    \qmltype TitleLabel
-    \inqmlmodule Fluid.Controls
+    \qmlmodule Fluid.Controls 1.0
+    \title Fluid Controls QML Types
     \ingroup fluidcontrols
 
-    \brief Text label with standard font and styling suitable to titles.
+    \brief Provides additional controls to extend Qt Quick Controls 2.
 
-    \code
-    Title {
-        text: qsTr("Translatable title")
-    }
-    \endcode
+    \section1 References
+
+    Fluid Controls extends \l[QtQuickControls2]{Qt Quick Controls 2}.
 */
-T.Label {
-    font.pixelSize: 18
-    font.bold: true
-    color: "#26282a"
-    linkColor: "#45a7d7"
-}

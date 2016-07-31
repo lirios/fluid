@@ -14,6 +14,13 @@
 
 import QtQuick 2.0
 
+/*!
+  \qmltype Vignette
+  \inqmlmodule Fluid.Effects
+  \ingroup fluideffects
+
+  \brief Vignette effect.
+*/
 Item {
     id: root
 

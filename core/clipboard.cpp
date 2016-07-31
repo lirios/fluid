@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -16,12 +17,26 @@
 
 #include <QGuiApplication>
 
+/*!
+    \qmltype Clipboard
+    \inqmlmodule Fluid.Core
+    \ingroup fluidcore
+
+    \brief Clipboard.
+*/
+
 Clipboard::Clipboard(QObject *parent)
     : QObject(parent)
     , m_clipboard(QGuiApplication::clipboard())
 {
     connect(m_clipboard, &QClipboard::dataChanged, this, &Clipboard::textChanged);
 }
+
+/*!
+    \qmlproperty string Clipboard::text
+
+    This property holds the clipboard text.
+*/
 
 QString Clipboard::text() const
 {

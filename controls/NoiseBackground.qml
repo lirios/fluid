@@ -55,6 +55,13 @@
 
 import QtQuick 2.0
 
+/*!
+    \qmltype NoiseBackground
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Background with noise.
+*/
 ShaderEffect {
     property alias gradient: rect.gradient
     property alias color: rect.color

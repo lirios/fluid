@@ -53,6 +53,17 @@ set(REQUIRED_QT_VERSION "5.7.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
              Gui Qml Quick QuickTest QuickControls2)
 
+# Find QT_INSTALL_DOCS
+get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
+if(NOT QT_INSTALL_DOCS)
+    exec_program(${QMAKE_EXECUTABLE} ARGS "-query QT_INSTALL_DOCS" RETURN_VALUE return_code OUTPUT_VARIABLE QT_INSTALL_DOCS)
+endif()
+
+# Documentation target
+find_program(QDOC_EXECUTABLE qdoc-qt5 qdoc)
+add_custom_target(docs
+                  COMMAND QT_INSTALL_DOCS=${QT_INSTALL_DOCS} QT_VERSION_TAG=5.7 FLUID_VERSION=${PROJECT_VERSION} FLUID_VERSION_TAG=1.0 FLUID_BUILD_DIR=${CMAKE_CURRENT_BINARY_DIR} ${QDOC_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/doc/fluid.qdocconf)
+
 # Subdirectories
 add_subdirectory(controls)
 add_subdirectory(core)

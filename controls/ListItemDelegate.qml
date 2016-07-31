@@ -17,6 +17,13 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import Fluid.Material 1.0
 
+/*!
+    \qmltype ListItemDelegate
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief A delegate for list views.
+*/
 ItemDelegate {
     Layout.fillWidth: true
 

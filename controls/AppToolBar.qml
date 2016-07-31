@@ -17,6 +17,13 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Core 1.0
 
+/*!
+   \qmltype AppToolBar
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
+   \brief Application tool bar.
+ */
 ToolBar {
     id: toolbar
 

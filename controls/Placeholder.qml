@@ -18,6 +18,13 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 
+/*!
+    \qmltype Placeholder
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Placeholder.
+*/
 Item {
     property alias iconName: icon.name
     property alias iconSource: icon.source

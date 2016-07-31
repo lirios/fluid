@@ -16,8 +16,9 @@ import QtQuick 2.0
 
 /*!
     \qmltype SmoothFadeLoader
-    \inqmlmodule Fluid.Controls 1.0
-    \ingroup ui
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
     \brief Displays an item and smoothly fade when the source is changed.
 
     This component loads an item with a Loader and smoothly fade to another item when

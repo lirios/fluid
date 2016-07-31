@@ -17,6 +17,13 @@ import Fluid.Core 1.0
 
 pragma Singleton
 
+/*!
+    \qmltype FluidStyle
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Style.
+*/
 QtObject {
     id: fluidStyle
 

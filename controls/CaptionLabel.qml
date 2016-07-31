@@ -17,7 +17,9 @@ import QtQuick.Templates 2.0 as T
 
 /*!
     \qmltype CaptionLabel
-    \inqmlmodule Fluid.Controls 1.0
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
     \brief Text label with standard font and styling suitable to captions.
 
     \code

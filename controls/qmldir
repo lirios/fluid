@@ -1,4 +1,6 @@
 module Fluid.Controls
+plugin fluidcontrols
+class FluidControlsPlugin
 Action 1.0 Action.qml
 AppBar 1.0 AppBar.qml
 AppToolBar 1.0 AppToolBar.qml

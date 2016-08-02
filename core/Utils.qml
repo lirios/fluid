@@ -65,7 +65,7 @@ QtObject {
         return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0 || name.indexOf("qrc") === 0
                       ? name
                       : name.indexOf("/") !== -1 ? "icon://" + name
-                                                 : "image://desktoptheme/" + name
+                                                 : "image://fluidicontheme/" + name
                     : ""
     }
 }

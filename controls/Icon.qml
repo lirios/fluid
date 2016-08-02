@@ -136,7 +136,7 @@ Item {
        colored using the specified \ref color.
      */
     property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
-                             String(icon.source).indexOf("image://desktoptheme/") === -1) ||
+                             String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
                             String(icon.source).indexOf("symbolic") !== -1
 
     width: size

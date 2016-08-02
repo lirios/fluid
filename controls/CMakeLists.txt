@@ -1,3 +1,11 @@
+set(SOURCES
+    iconthemeimageprovider.cpp
+    plugin.cpp
+)
+
+add_library(fluidcontrols SHARED ${SOURCES})
+target_link_libraries(fluidcontrols Qt5::Gui Qt5::Quick)
+
 set(QML_FILES
     qmldir
     Action.qml
@@ -30,8 +38,9 @@ set(QML_FILES
     Wave.qml
 )
 
+install(TARGETS fluidcontrols LIBRARY
+        DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)
 install(FILES ${QML_FILES}
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)
-
 install(DIRECTORY +material
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)

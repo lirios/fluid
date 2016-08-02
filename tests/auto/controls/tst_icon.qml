@@ -27,7 +27,7 @@ Icon {
         function test_source_should_use_desktop_provider_for_freedesktop_icon() {
             icon.name = 'edit-cut-symbolic'
 
-            compare(icon.source, 'image://desktoptheme/edit-cut-symbolic')
+            compare(icon.source, 'image://fluidicontheme/edit-cut-symbolic')
         }
 
         function test_source_should_use_icon_prefix_for_material_icon() {

@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -18,6 +19,14 @@ import Fluid.Core 1.0
 
 TestCase {
     name: "UtilsTests"
+
+    function test_blendColors() {
+        compare(Utils.blendColors("lightsteelblue", "#10FF0000", 0.5), "#80b5b8d0")
+    }
+
+    function test_luminance() {
+        compare(Utils.luminance("lightsteelblue"), 0.7593254230563821)
+    }
 
     function test_isDarkColor_should_return_true_for_dark_color() {
         compare(Utils.isDarkColor("#455A64"), true)

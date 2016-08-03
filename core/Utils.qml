@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -41,6 +42,21 @@ QtObject {
         color.a = alpha
 
         return color
+    }
+
+    /*!
+      Blend \a color1 and \a color2 together and set alpha to \a a.
+     */
+    function blendColors(color1, color2, a) {
+        return alpha(Qt.tint(color1, color2), a)
+    }
+
+    /*!
+      Calculate luminance of \a color.
+     */
+    function luminance(color) {
+        color = asColor(color)
+        return (color.r * 0.2126) + (color.g * 0.7152) + (color.b * 0.0722)
     }
 
     /*!

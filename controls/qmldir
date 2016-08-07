@@ -7,6 +7,7 @@ AppToolBar 1.0 AppToolBar.qml
 BaseListItem 1.0 BaseListItem.qml
 BodyLabel 1.0 BodyLabel.qml
 CaptionLabel 1.0 CaptionLabel.qml
+Card 1.0 Card.qml
 CircleImage 1.0 CircleImage.qml
 DisplayLabel 1.0 DisplayLabel.qml
 FluidWindow 1.0 FluidWindow.qml

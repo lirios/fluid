@@ -14,6 +14,7 @@ set(QML_FILES
     BaseListItem.qml
     BodyLabel.qml
     CaptionLabel.qml
+    Card.qml
     CircleImage.qml
     DisplayLabel.qml
     FluidStyle.qml

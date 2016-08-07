@@ -101,17 +101,17 @@ Item {
         else if (x < 8)
             return 8;
         else if (x < 16)
-            return 8;
-        else if (x < 22)
             return 16;
-        else if (x < 32)
+        else if (x < 22)
             return 22;
-        else if (x < 48)
+        else if (x < 32)
             return 32;
-        else if (x < 64)
+        else if (x < 48)
             return 48;
-        else if (x < 128)
+        else if (x < 64)
             return 64;
+        else if (x < 128)
+            return 128;
 
         return x;
     }

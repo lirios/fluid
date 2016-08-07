@@ -139,6 +139,8 @@ Item {
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
                             String(icon.source).indexOf("symbolic") !== -1
 
+    readonly property real sourceSize: String(icon.source).indexOf("image://fluidicontheme/") === 0 ? Units.roundToIconSize(size) : size
+
     width: size
     height: size
 
@@ -162,8 +164,8 @@ Item {
         }
 
         sourceSize {
-            width: size * Screen.devicePixelRatio
-            height: size * Screen.devicePixelRatio
+            width: icon.sourceSize * Screen.devicePixelRatio
+            height: icon.sourceSize * Screen.devicePixelRatio
         }
     }
 

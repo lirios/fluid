@@ -23,6 +23,7 @@ set(QML_FILES
     HeadlineLabel.qml
     IconButton.qml
     Icon.qml
+    InfoBar.qml
     ListItemDelegate.qml
     ListItem.qml
     Loadable.qml

@@ -43,6 +43,7 @@ Item {
             model: ListModel {
                 ListElement { title: qsTr("ListItem"); source: "qrc:/Pages/Compound/ListItemPage.qml" }
                 ListElement { title: qsTr("Card"); source: "qrc:/Pages/Compound/CardPage.qml" }
+                ListElement { title: qsTr("InfoBar"); source: "qrc:/Pages/Compound/InfoBarPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

@@ -9,6 +9,123 @@ import QtQuick.tooling 1.2
 Module {
     dependencies: ["QtQuick 2.0"]
     Component {
+        name: "Clipboard"
+        prototype: "QObject"
+        exports: ["Fluid.Core/Clipboard 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "text"; type: "string" }
+        Method {
+            name: "setText"
+            Parameter { name: "text"; type: "string" }
+        }
+        Method { name: "clear" }
+    }
+    Component {
+        name: "Device"
+        prototype: "QObject"
+        exports: ["Fluid.Core/Device 1.0"]
+        isCreatable: false
+        isSingleton: true
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "FormFactor"
+            values: {
+                "Phone": 0,
+                "Phablet": 1,
+                "Tablet": 2,
+                "Computer": 3,
+                "TV": 4,
+                "Unknown": 5
+            }
+        }
+        Property { name: "formFactor"; type: "FormFactor"; isReadonly: true }
+        Property { name: "name"; type: "string"; isReadonly: true }
+        Property { name: "iconName"; type: "string"; isReadonly: true }
+        Property { name: "isPortrait"; type: "bool"; isReadonly: true }
+        Property { name: "isMobile"; type: "bool"; isReadonly: true }
+        Property { name: "hasTouchScreen"; type: "bool"; isReadonly: true }
+        Property { name: "hoverEnabled"; type: "bool"; isReadonly: true }
+        Property { name: "gridUnit"; type: "int"; isReadonly: true }
+        Signal { name: "geometryChanged" }
+    }
+    Component {
+        name: "QAbstractProxyModel"
+        prototype: "QAbstractItemModel"
+        Property { name: "sourceModel"; type: "QAbstractItemModel"; isPointer: true }
+        Method {
+            name: "mapToSource"
+            type: "QModelIndex"
+            Parameter { name: "proxyIndex"; type: "QModelIndex" }
+        }
+        Method {
+            name: "mapFromSource"
+            type: "QModelIndex"
+            Parameter { name: "sourceIndex"; type: "QModelIndex" }
+        }
+        Method {
+            name: "mapSelectionToSource"
+            type: "QItemSelection"
+            Parameter { name: "selection"; type: "QItemSelection" }
+        }
+        Method {
+            name: "mapSelectionFromSource"
+            type: "QItemSelection"
+            Parameter { name: "selection"; type: "QItemSelection" }
+        }
+    }
+    Component {
+        name: "QQmlSortFilterProxyModel"
+        prototype: "QSortFilterProxyModel"
+        exports: ["Fluid.Core/SortFilterProxyModel 1.0"]
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "PatternSyntax"
+            values: {
+                "RegExp": 0,
+                "Wildcard": 1,
+                "FixedString": 2,
+                "RegExp2": 3,
+                "WildcardUnix": 4,
+                "W3CXmlSchema11": 5
+            }
+        }
+        Property { name: "count"; type: "int"; isReadonly: true }
+        Property { name: "filterRoleName"; type: "string" }
+        Property { name: "filterPattern"; type: "string" }
+        Property { name: "filterPatternSyntax"; type: "PatternSyntax" }
+        Property { name: "filterValue"; type: "QVariant" }
+        Property { name: "filterExpression"; type: "QQmlScriptString" }
+        Property { name: "sortRoleName"; type: "string" }
+        Property { name: "sortOrder"; type: "Qt::SortOrder" }
+        Property { name: "sortExpression"; type: "QQmlScriptString" }
+    }
+    Component {
+        name: "QSortFilterProxyModel"
+        prototype: "QAbstractProxyModel"
+        Property { name: "filterRegExp"; type: "QRegExp" }
+        Property { name: "filterKeyColumn"; type: "int" }
+        Property { name: "dynamicSortFilter"; type: "bool" }
+        Property { name: "filterCaseSensitivity"; type: "Qt::CaseSensitivity" }
+        Property { name: "sortCaseSensitivity"; type: "Qt::CaseSensitivity" }
+        Property { name: "isSortLocaleAware"; type: "bool" }
+        Property { name: "sortRole"; type: "int" }
+        Property { name: "filterRole"; type: "int" }
+        Method {
+            name: "setFilterRegExp"
+            Parameter { name: "pattern"; type: "string" }
+        }
+        Method {
+            name: "setFilterWildcard"
+            Parameter { name: "pattern"; type: "string" }
+        }
+        Method {
+            name: "setFilterFixedString"
+            Parameter { name: "pattern"; type: "string" }
+        }
+        Method { name: "clear" }
+        Method { name: "invalidate" }
+    }
+    Component {
         name: "StandardPaths"
         prototype: "QObject"
         exports: ["Fluid.Core/StandardPaths 1.0"]
@@ -48,6 +165,55 @@ Module {
             type: "string"
             Parameter { name: "type"; type: "StandardLocation" }
             Parameter { name: "dirName"; type: "string" }
+        }
+    }
+    Component {
+        prototype: "QObject"
+        name: "Utils 1.0"
+        exports: ["Utils 1.0"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        isCreatable: false
+        isSingleton: true
+        Method {
+            name: "asColor"
+            type: "QVariant"
+            Parameter { name: "color"; type: "QVariant" }
+        }
+        Method {
+            name: "alpha"
+            type: "QVariant"
+            Parameter { name: "color"; type: "QVariant" }
+            Parameter { name: "alpha"; type: "QVariant" }
+        }
+        Method {
+            name: "blendColors"
+            type: "QVariant"
+            Parameter { name: "color1"; type: "QVariant" }
+            Parameter { name: "color2"; type: "QVariant" }
+            Parameter { name: "a"; type: "QVariant" }
+        }
+        Method {
+            name: "luminance"
+            type: "QVariant"
+            Parameter { name: "color"; type: "QVariant" }
+        }
+        Method {
+            name: "lightDark"
+            type: "QVariant"
+            Parameter { name: "background"; type: "QVariant" }
+            Parameter { name: "lightColor"; type: "QVariant" }
+            Parameter { name: "darkColor"; type: "QVariant" }
+        }
+        Method {
+            name: "isDarkColor"
+            type: "QVariant"
+            Parameter { name: "color"; type: "QVariant" }
+        }
+        Method {
+            name: "getSourceForIconName"
+            type: "QVariant"
+            Parameter { name: "name"; type: "QVariant" }
         }
     }
 }

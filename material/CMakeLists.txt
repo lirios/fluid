@@ -1,4 +1,5 @@
 set(FLUID_FILES
+    plugins.qmltypes
     qmldir
     ElevationEffect.qml
     Ripple.qml

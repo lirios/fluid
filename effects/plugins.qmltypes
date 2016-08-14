@@ -7,5 +7,9 @@ import QtQuick.tooling 1.2
 // 'qmlplugindump-qt5 -nonrelocatable Fluid.Effects 1.0'
 
 Module {
-    dependencies: ["QtQuick 2.0"]
+    dependencies: [
+        "QtGraphicalEffects 1.0",
+        "QtQuick 2.4",
+        "QtQuick.Window 2.1"
+    ]
 }

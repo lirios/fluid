@@ -1,4 +1,5 @@
 module Fluid.Material
+typeinfo plugins.qmltypes
 
 ElevationEffect 1.0 ElevationEffect.qml
 Ripple 1.0 Ripple.qml

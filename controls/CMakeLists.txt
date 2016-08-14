@@ -7,6 +7,7 @@ add_library(fluidcontrols SHARED ${SOURCES})
 target_link_libraries(fluidcontrols Qt5::Gui Qt5::Quick)
 
 set(QML_FILES
+    plugins.qmltypes
     qmldir
     Action.qml
     AppBar.qml

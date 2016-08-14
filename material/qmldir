@@ -2,3 +2,4 @@ module Fluid.Material
 
 ElevationEffect 1.0 ElevationEffect.qml
 Ripple 1.0 Ripple.qml
+Wave 1.0 Wave.qml

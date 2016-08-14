@@ -2,6 +2,7 @@ set(FLUID_FILES
     qmldir
     ElevationEffect.qml
     Ripple.qml
+    Wave.qml
 )
 
 install(FILES ${FLUID_FILES}

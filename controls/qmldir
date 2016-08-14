@@ -27,6 +27,5 @@ Subheader 1.0 Subheader.qml
 SubheadingLabel 1.0 SubheadingLabel.qml
 ThinDivider 1.0 ThinDivider.qml
 TitleLabel 1.0 TitleLabel.qml
-Wave 1.0 Wave.qml
 singleton FluidStyle 1.0 FluidStyle.qml
 singleton Units 1.0 Units.qml

@@ -26,8 +26,18 @@ import Fluid.Core 1.0
    \brief InfoBar provide lightweight feedback about an operation.
 
    \code
-   Snackbar {
-       text: qsTr("Message sent")
+   Page {
+       title: qsTr("Send a message")
+
+       Button {
+           anchors.centerIn: parent
+           text: qsTr("Send Message")
+           onClicked: infoBar.open(qsTr("Message sent"))
+       }
+
+       InfoBar {
+           id: infoBar
+       }
    }
    \endcode
 */

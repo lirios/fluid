@@ -55,4 +55,7 @@ QtObject {
 
     readonly property font subheaderFont: Qt.font({ family: "Roboto", weight: Font.DemiBold,
                                                     pixelSize: 14 })
+
+    readonly property font dialogFont: Qt.font({ family: "Roboto",
+                                                 pixelSize: Device.isMobile ? 18 : 17 })
 }

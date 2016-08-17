@@ -1,6 +1,7 @@
 set(FLUID_FILES
     plugins.qmltypes
     qmldir
+    ActionButton.qml
     ElevationEffect.qml
     Ripple.qml
     Wave.qml

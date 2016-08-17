@@ -1,6 +1,7 @@
 module Fluid.Material
 typeinfo plugins.qmltypes
 
+ActionButton 1.0 ActionButton.qml
 ElevationEffect 1.0 ElevationEffect.qml
 Ripple 1.0 Ripple.qml
 Wave 1.0 Wave.qml

@@ -85,6 +85,7 @@ BaseListItem {
             RowLayout {
                 Layout.fillWidth: true
 
+                visible: label.visible || valueLabel.visible
                 spacing: Units.smallSpacing
 
                 Label {
@@ -99,6 +100,7 @@ BaseListItem {
                     font: FluidStyle.subheadingFont
                     color: listItem.highlighted ? Material.primaryColor
                                                 : Material.primaryTextColor
+                    visible: text != ""
                 }
 
                 Label {
@@ -146,9 +148,8 @@ BaseListItem {
         Item {
             id: rightItem
             objectName: "rightItem"
-
             Layout.preferredWidth: showing ? childrenRect.width : 0
-            Layout.preferredHeight: showing ? childrenRect.height + Units.smallSpacing : parent.height
+            Layout.preferredHeight: parent.height
 
             property bool showing: visibleChildren.length > 0
         }

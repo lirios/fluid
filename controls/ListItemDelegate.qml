@@ -13,10 +13,13 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import Fluid.Material 1.0
 
 ItemDelegate {
+    Layout.fillWidth: true
+
     property int dividerInset: 0
     property bool showDivider: false
     property bool interactive: true

@@ -31,6 +31,7 @@ set(QML_FILES
     NoiseBackground.qml
     Page.qml
     PageStack.qml
+    Placeholder.qml
     Showable.qml
     SmoothFadeImage.qml
     SmoothFadeLoader.qml

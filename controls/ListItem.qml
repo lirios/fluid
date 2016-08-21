@@ -88,7 +88,7 @@ BaseListItem {
                 visible: label.visible || valueLabel.visible
                 spacing: Units.smallSpacing
 
-                Label {
+                SubheadingLabel {
                     id: label
                     objectName: "textLabel"
 
@@ -97,13 +97,12 @@ BaseListItem {
 
                     text: listItem.text
                     elide: Text.ElideRight
-                    font: FluidStyle.subheadingFont
                     color: listItem.highlighted ? Material.primaryColor
                                                 : Material.primaryTextColor
                     visible: text != ""
                 }
 
-                Label {
+                BodyLabel {
                     id: valueLabel
                     objectName: "valueLabel"
 
@@ -112,13 +111,12 @@ BaseListItem {
 
                     color: Material.secondaryTextColor
                     elide: Text.ElideRight
-                    font: FluidStyle.body1Font
 
                     visible: text != ""
                 }
             }
 
-            Label {
+            BodyLabel {
                 id: subLabel
                 objectName: "subTextLabel"
 
@@ -128,7 +126,6 @@ BaseListItem {
                 color: Material.secondaryTextColor
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
-                font: FluidStyle.body1Font
 
                 visible: text != "" && !contentItem.showing
                 maximumLineCount: listItem.maximumLineCount - 1

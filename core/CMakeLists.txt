@@ -16,6 +16,7 @@ set(FILES
     qmldir
     Object.qml
     Utils.qml
+    dateutils.js
 )
 
 install(TARGETS fluidcore LIBRARY

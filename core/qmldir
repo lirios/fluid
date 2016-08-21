@@ -4,4 +4,5 @@ class FluidCorePlugin
 typeinfo plugins.qmltypes
 
 Object 1.0 Object.qml
+DateUtils 1.0 dateutils.js
 singleton Utils 1.0 Utils.qml

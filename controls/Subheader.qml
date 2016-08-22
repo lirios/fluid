@@ -26,7 +26,7 @@ import Fluid.Controls 1.0
 BaseListItem {
     id: listItem
 
-    height: 48
+    implicitHeight: 48
     interactive: false
 
     property alias textColor: label.color

@@ -78,7 +78,7 @@ BaseListItem {
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
             Layout.fillWidth: true
 
-            spacing: Units.smallSpacing / 2
+            spacing: 0
 
             RowLayout {
                 Layout.fillWidth: true

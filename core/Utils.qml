@@ -84,4 +84,10 @@ QtObject {
                                                  : "image://fluidicontheme/" + name
                     : ""
     }
+
+    function scale(percent, start, end) {
+        var diff = end - start
+
+        return start + percent * diff
+    }
 }

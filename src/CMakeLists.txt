@@ -1,3 +1,4 @@
+include(GenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
@@ -21,3 +22,57 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/FluidConfig.cmake"
         COMPONENT Devel)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid/fluidversion.h
         DESTINATION ${FLUID_INCLUDEDIR}/fluid COMPONENT Devel)
+
+###################################
+
+add_definitions(-DQT_NO_KEYWORDS)
+
+set(SOURCES
+    dateutils.cpp
+)
+
+add_library(Fluid SHARED ${SOURCES})
+
+target_link_libraries(Fluid
+    PUBLIC
+        Qt5::Core
+)
+
+##################################################
+
+generate_export_header(Fluid EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid_export.h)
+
+target_include_directories(Fluid INTERFACE "$<INSTALL_INTERFACE:${FLUID_INCLUDEDIR}>")
+
+set_target_properties(Fluid PROPERTIES
+                      VERSION ${PROJECT_VERSION}
+                      SOVERSION ${PROJECT_SOVERSION})
+
+ecm_generate_headers(Fluid_CamelCase_HEADERS
+  HEADER_NAMES
+    DateUtils
+  REQUIRED_HEADERS
+    Fluid_HEADERS
+  OUTPUT_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}/Fluid
+)
+install(FILES ${Fluid_CamelCase_HEADERS}
+        DESTINATION ${FLUID_INCLUDEDIR}
+        COMPONENT Devel)
+
+install(TARGETS Fluid EXPORT FluidTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(
+    FILES
+      ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid_export.h
+      ${Fluid_HEADERS}
+      dateutils.h
+    DESTINATION
+      ${FLUID_INCLUDEDIR}
+    COMPONENT
+      Devel
+)
+
+install(EXPORT FluidTargets
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    FILE FluidTargets.cmake NAMESPACE Fluid::)

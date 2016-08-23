@@ -12,13 +12,22 @@
  * $END_LICENSE$
  */
 
-#include <QtQml/qqml.h>
 #include <QtQml/QQmlExtensionPlugin>
+#include <QtQml/qqml.h>
 
 #include "clipboard.h"
 #include "device.h"
+#include "qmldateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
+
+static QObject *dateUtilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(jsEngine);
+
+    return new DateUtils();
+}
 
 static QObject *deviceProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -55,10 +64,9 @@ void FluidCorePlugin::registerTypes(const char *uri)
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");
 
-    qmlRegisterSingletonType<Device>(uri, 1, 0, "Device",
-                                     deviceProvider);
-    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths",
-                                            standardPathsProvider);
+    qmlRegisterSingletonType<DateUtils>(uri, 1, 0, "DateUtils", dateUtilsProvider);
+    qmlRegisterSingletonType<Device>(uri, 1, 0, "Device", deviceProvider);
+    qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths", standardPathsProvider);
 }
 
 #include "plugin.moc"

@@ -29,6 +29,8 @@ Popup {
     property string positiveButtonText: qsTr("Ok")
     property string negativeButtonText: qsTr("Cancel")
 
+    default property alias dialogContent: dialogContentItem.data
+
     property bool __triggered
 
     padding: 0
@@ -42,26 +44,39 @@ Popup {
     signal canceled
 
     onOpened: __triggered = false
+
+    onAccepted: {
+        __triggered = true
+        close()
+    }
+
+    onRejected: {
+        __triggered = true
+        close()
+    }
+
     onClosed: {
         if (!__triggered)
             canceled()
     }
 
     ColumnLayout {
-        width: Math.max(implicitWidth, Device.isMobile ? 280 : 300)
+        width: parent.width
         spacing: 0
 
-        Item {
+        Rectangle {
             Layout.fillWidth: true
-
-            implicitWidth: column.implicitWidth + 48
-            implicitHeight: column.implicitHeight + 48
+            Layout.preferredWidth: column.implicitWidth + 48
+            Layout.preferredHeight: column.implicitHeight + 48
+            Layout.minimumWidth: Device.isMobile ? 280 : 300
 
             ColumnLayout {
                 id: column
 
                 anchors.centerIn: parent
                 spacing: 0
+
+                width: parent.width - 48
 
                 TitleLabel {
                     id: titleLabel
@@ -73,9 +88,9 @@ Popup {
                 }
 
                 Item {
-                    width: parent.width
-                    height: 20
-                    visible: titleLabel.visible
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 20
+                    visible: titleLabel.visible && textLabel.visible
                 }
 
                 Label {
@@ -88,13 +103,25 @@ Popup {
                     color: Material.secondaryTextColor
                     visible: text != ""
                 }
+
+                Item {
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 20
+                    visible: textLabel.visible
+                }
+
+                Item {
+                    id: dialogContentItem
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: childrenRect.height
+                }
             }
         }
 
         RowLayout {
             Layout.alignment: Qt.AlignRight
+            Layout.preferredHeight: 52
 
-            height: 52
             spacing: 0
 
             Button {
@@ -106,11 +133,7 @@ Popup {
                 text: negativeButtonText
                 flat: true
 
-                onClicked: {
-                    __triggered = true
-                    close()
-                    rejected()
-                }
+                onClicked: rejected()
             }
 
             Item {
@@ -126,11 +149,7 @@ Popup {
                 text: positiveButtonText
                 flat: true
 
-                onClicked: {
-                    __triggered = true
-                    close()
-                    accepted()
-                }
+                onClicked: accepted()
             }
 
             Item {

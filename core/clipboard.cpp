@@ -16,7 +16,9 @@
 
 #include <QGuiApplication>
 
-Clipboard::Clipboard(QObject *parent) : QObject(parent), m_clipboard(QGuiApplication::clipboard())
+Clipboard::Clipboard(QObject *parent)
+    : QObject(parent)
+    , m_clipboard(QGuiApplication::clipboard())
 {
     connect(m_clipboard, &QClipboard::dataChanged, this, &Clipboard::textChanged);
 }

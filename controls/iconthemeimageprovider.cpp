@@ -21,7 +21,8 @@ IconThemeImageProvider::IconThemeImageProvider()
 {
 }
 
-QPixmap IconThemeImageProvider::requestPixmap(const QString &id, QSize *realSize, const QSize &requestedSize)
+QPixmap IconThemeImageProvider::requestPixmap(const QString &id, QSize *realSize,
+                                              const QSize &requestedSize)
 {
     // Sanitize requested size
     QSize size(requestedSize);

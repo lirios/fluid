@@ -15,12 +15,11 @@
 #include "device.h"
 
 Device::Device(QObject *parent)
-        : QObject(parent)
+    : QObject(parent)
 {
     m_screen = qGuiApp->primaryScreen();
 
-    connect(qGuiApp, &QGuiApplication::primaryScreenChanged,
-            this, &Device::screenChanged);
+    connect(qGuiApp, &QGuiApplication::primaryScreenChanged, this, &Device::screenChanged);
 }
 
 Device::FormFactor Device::formFactor() const
@@ -46,39 +45,39 @@ Device::FormFactor Device::formFactor() const
 QString Device::name() const
 {
     switch (formFactor()) {
-        case Phone:
-            return tr("phone");
-        case Phablet:
-            return tr("phablet");
-        case Tablet:
-            return tr("tablet");
-        case Computer:
-            return tr("computer");
-        case TV:
-            return tr("TV");
-        case Unknown:
-            return tr("device");
-        default:
-            return tr("unknown");
+    case Phone:
+        return tr("phone");
+    case Phablet:
+        return tr("phablet");
+    case Tablet:
+        return tr("tablet");
+    case Computer:
+        return tr("computer");
+    case TV:
+        return tr("TV");
+    case Unknown:
+        return tr("device");
+    default:
+        return tr("unknown");
     }
 }
 
 QString Device::iconName() const
 {
     switch (formFactor()) {
-        case Phone:
-            return "hardware/smartphone";
-        case Phablet:
-            return "hardware/tablet";
-        case Tablet:
-            return "hardware/tablet";
-        case Computer:
-            return "hardware/desktop_windows";
-        case TV:
-            return "hardware/tv";
-        case Unknown:
-        default:
-            return "hardware/computer";
+    case Phone:
+        return "hardware/smartphone";
+    case Phablet:
+        return "hardware/tablet";
+    case Tablet:
+        return "hardware/tablet";
+    case Computer:
+        return "hardware/desktop_windows";
+    case TV:
+        return "hardware/tv";
+    case Unknown:
+    default:
+        return "hardware/computer";
     }
 }
 
@@ -94,7 +93,7 @@ bool Device::hasTouchScreen() const
     return true;
 #else
     const auto devices = QTouchDevice::devices();
-    foreach(const QTouchDevice *dev, devices) {
+    foreach (const QTouchDevice *dev, devices) {
         if (dev->type() == QTouchDevice::TouchScreen)
             return true;
     }
@@ -104,7 +103,8 @@ bool Device::hasTouchScreen() const
 
 bool Device::isMobile() const
 {
-#if defined(Q_OS_IOS) || defined(Q_OS_ANDROID) || defined(Q_OS_BLACKBERRY) || defined(Q_OS_QNX) || defined(Q_OS_WINRT)
+#if defined(Q_OS_IOS) || defined(Q_OS_ANDROID) || defined(Q_OS_BLACKBERRY) || defined(Q_OS_QNX)    \
+    || defined(Q_OS_WINRT)
     return true;
 #else
     if (qEnvironmentVariableIsSet("QT_QUICK_CONTROLS_MOBILE")) {
@@ -146,6 +146,7 @@ void Device::screenChanged()
 
 float Device::calculateDiagonal() const
 {
-    return sqrt(pow((m_screen->physicalSize().width()), 2) +
-                pow((m_screen->physicalSize().height()), 2)) * 0.039370;
+    return sqrt(pow((m_screen->physicalSize().width()), 2)
+                + pow((m_screen->physicalSize().height()), 2))
+        * 0.039370;
 }

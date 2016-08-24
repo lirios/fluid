@@ -22,7 +22,8 @@
 #include <QScreen>
 #include <QTouchDevice>
 
-class Device : public QObject {
+class Device : public QObject
+{
     Q_OBJECT
 
     Q_PROPERTY(FormFactor formFactor READ formFactor NOTIFY geometryChanged)
@@ -37,14 +38,7 @@ class Device : public QObject {
     Q_PROPERTY(int gridUnit READ gridUnit NOTIFY geometryChanged)
 
 public:
-    enum FormFactor {
-        Phone,
-        Phablet,
-        Tablet,
-        Computer,
-        TV,
-        Unknown
-    };
+    enum FormFactor { Phone, Phablet, Tablet, Computer, TV, Unknown };
     Q_ENUM(FormFactor)
 
     Device(QObject *parent = nullptr);

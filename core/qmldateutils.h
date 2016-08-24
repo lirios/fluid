@@ -8,20 +8,10 @@ class DateUtils : public QObject
     Q_OBJECT
 
 public:
-    enum DurationFormat
-    {
-        Long,
-        Short
-    };
+    enum DurationFormat { Long, Short };
     Q_ENUM(DurationFormat)
 
-    enum DurationType
-    {
-        Seconds,
-        Minutes,
-        Hours,
-        Any
-    };
+    enum DurationType { Seconds, Minutes, Hours, Any };
     Q_ENUM(DurationType)
 
     DateUtils(QObject *parent = nullptr);

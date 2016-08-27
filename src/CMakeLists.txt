@@ -54,9 +54,9 @@ ecm_generate_headers(Fluid_CamelCase_HEADERS
   REQUIRED_HEADERS
     Fluid_HEADERS
   PREFIX
-    fluid
+    Fluid
   OUTPUT_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/Fluid/Fluid
+    ${CMAKE_CURRENT_BINARY_DIR}/Fluid
 )
 install(FILES ${Fluid_CamelCase_HEADERS}
         DESTINATION ${FLUID_INCLUDEDIR}/Fluid

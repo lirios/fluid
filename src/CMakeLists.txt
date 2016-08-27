@@ -40,7 +40,7 @@ target_link_libraries(Fluid
 
 ##################################################
 
-generate_export_header(Fluid EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid_export.h)
+generate_export_header(Fluid EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid/fluid_export.h)
 
 target_include_directories(Fluid INTERFACE "$<INSTALL_INTERFACE:${FLUID_INCLUDEDIR}>")
 
@@ -53,26 +53,27 @@ ecm_generate_headers(Fluid_CamelCase_HEADERS
     DateUtils
   REQUIRED_HEADERS
     Fluid_HEADERS
+  PREFIX
+    fluid
   OUTPUT_DIR
-    ${CMAKE_CURRENT_BINARY_DIR}/Fluid
+    ${CMAKE_CURRENT_BINARY_DIR}/Fluid/Fluid
 )
 install(FILES ${Fluid_CamelCase_HEADERS}
-        DESTINATION ${FLUID_INCLUDEDIR}
+        DESTINATION ${FLUID_INCLUDEDIR}/Fluid
         COMPONENT Devel)
 
 install(TARGETS Fluid EXPORT FluidTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
     FILES
-      ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid_export.h
-      ${Fluid_HEADERS}
+      ${CMAKE_CURRENT_BINARY_DIR}/Fluid/fluid/fluid_export.h
       dateutils.h
     DESTINATION
-      ${FLUID_INCLUDEDIR}
+      ${FLUID_INCLUDEDIR}/fluid
     COMPONENT
       Devel
 )
 
 install(EXPORT FluidTargets
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-    FILE FluidTargets.cmake NAMESPACE Fluid::)
+        FILE FluidTargets.cmake NAMESPACE Fluid::)

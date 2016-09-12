@@ -20,7 +20,6 @@
 class StandardPaths : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(StandardLocation)
 public:
     enum StandardLocation {
         DesktopLocation,
@@ -41,6 +40,7 @@ public:
         GenericCacheLocation,
         GenericConfigLocation
     };
+    Q_ENUM(StandardLocation)
 
     StandardPaths(QObject *parent = 0);
 

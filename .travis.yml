@@ -1,8 +1,8 @@
 language: c
 
 compiler:
-  - clang
   - gcc
+  - clang
 
 sudo: required
 
@@ -12,10 +12,8 @@ arch:
     - qt5-quickcontrols2
     - qt5-graphicaleffects
     - qt5-svg
-    - cmake
     - extra-cmake-modules
     - xorg-server-xvfb
-    - git
     - clang
     - clazy-git
   script:
@@ -25,9 +23,18 @@ arch:
     - make
     - sudo make install
     - xvfb-run -a -s "-screen 0 800x600x24" make check
+    - ./.travis/bintray.sh
 
 script:
   - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
+
+deploy:
+  on: develop
+  provider: bintray
+  file: build/bintray.json
+  user: plfiorini
+  key:
+    secure: kFusF4NrGIoARvwKbHL+VjIx3UIRskxOYpRf+mESuAbI5MEEYnQ0nw+XYbqhyZNIG31Yd5/WzyaXPUR1ZlHtzrybUfoh5dpXilaMLcwyZVlOumfWWgTvzfrPaGPN0txKaI1eAyfkecbTsCqXdRlu7Kog8HD0qDHTXjVYDoQwDVliSd3jUhxNaNBcQ3l6aUV0h4wjTDNk1EL3e0714ytx8kmrVCERXHFrn7MMSJauy3ftngOjsIt8cg7d+OrvN7SA+nOeb0WJ/xmyGcuGyZ8qcdmzfcxqMfzw3886kivtte4TObg5EkZjKfoLJ2idGxlefVvB0Imt1lz47FBaNATMOD1X7SQ8tuPwVo+Mud0TMH8uUz42MgJygmc5V05zxRehWTlZWLihbdvG4J4gEEOtfnSI/WOS1oSei9BdTGeNr3gWLsq9KIZx1MJjknLAEOBtSzRORuQcJ9rgBpmZo1wuNBR0N9tKBmtfqPyZqwFLwP+Y/LJDKVjxfM0G6/BU3TqI6D9LOe2hfvcBIVjvo3SfOhD4MXOM5UE1VX0FLYibxt8fy9k4uh3HwVmvQjWnxSLuNSqLe8LTf4L+q2xMrzgxG5nw/8mbxXT/eySygnCpNCu3znacK7UWdi5avhYT+pCB4ecz7OCwMRkPXWTvKUaLM/l+BrcBduq1cQ0VD3XNByU=
 
 notifications:
   email: false

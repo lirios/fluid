@@ -21,9 +21,9 @@ arch:
     #- clazy-git
   script:
     - scripts/fetch_icons.sh
-    - if [ "$CC" = "gcc" ]; then cmake . -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_LIBDIR=lib; fi
-    #- if [ "$CC" = "clang" ]; then env CLAZY_CHECKS="level1" cmake . -DCMAKE_CXX_COMPILER=clazy -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_LIBDIR=lib; fi
-    - if [ "$CC" = "clang" ]; then cmake . -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr -DKDE_INSTALL_LIBDIR=lib; fi
+    - if [ "$CC" = "gcc" ]; then cmake . -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr; fi
+    #- if [ "$CC" = "clang" ]; then env CLAZY_CHECKS="level1" cmake . -DCMAKE_CXX_COMPILER=clazy -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr; fi
+    - if [ "$CC" = "clang" ]; then cmake . -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr; fi
     - make
     - sudo make install
     - xvfb-run -a -s "-screen 0 800x600x24" make check
@@ -33,12 +33,15 @@ script:
   - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
 
 deploy:
-  on: develop
   provider: bintray
-  file: build/bintray.json
-  user: plfiorini
+  on:
+    branch: develop
+    condition: "$CC = gcc"
+  file: cibuild/bintray.json
+  user:
+    secure: ABQ0Vh69XIJ38UOTGQOmnJ/zr1E0zNK6bDkqJ+ioujqBE8pvZuppdb9DyPmqscUgJWLQy8C7qfRMXMkkBUdecqV7LAFplO08yMxXmSNCq2gYi7l8jY6WCp+dyno+8tO7P7zO/8Vgae99c2MNkCVw8FpN7vFC3l5QLBUuEuSgCWYInW4aXkQnTkKNPN5hiMb7pJ7c1WMo6YKydkKs6yL4ACUkTzoR8iuTLqIAvi2w9UMzIUE16FGOHHUSZZI0UwExhSPTmH30pLddKexvdip6AyROGPDSqgh1zh9mIpYyz6BRWoTPR8LCpAFE2soTF2t0XdkRoQeZS6+zXJdU3AdJnEj1y2n9zxR3CSl+MfeJCz24yAJ+2shLyl+LZwhert7z45GC5CNrFsxliA7wMCuP3AeBEwCYaTgNcB5mQWK7+nyQuEZ43v/ffQiZUziEPOsHpxdggPN4TQ/KLSwC9eSKyh7dvlvupfd5p509d06239gXVNwDU45H3in2XKv9WQQIBXLW48IoY7YQFDvKCsAuNNn1fJLMLhg4MUqSYWSCYGjGn3nHBm9IJ0Y176dzN7c+2kP+Vm6x9PhWR6ZDpRVh4ygh+TKVNTVpzQ2bD/J+vWcGTf1KP4GJOLPWe7S0BsXNWry1jGz8v+9IDDPMVf9bFRSBZNSGD/qU8FCsS6nVXOU=
   key:
-    secure: kFusF4NrGIoARvwKbHL+VjIx3UIRskxOYpRf+mESuAbI5MEEYnQ0nw+XYbqhyZNIG31Yd5/WzyaXPUR1ZlHtzrybUfoh5dpXilaMLcwyZVlOumfWWgTvzfrPaGPN0txKaI1eAyfkecbTsCqXdRlu7Kog8HD0qDHTXjVYDoQwDVliSd3jUhxNaNBcQ3l6aUV0h4wjTDNk1EL3e0714ytx8kmrVCERXHFrn7MMSJauy3ftngOjsIt8cg7d+OrvN7SA+nOeb0WJ/xmyGcuGyZ8qcdmzfcxqMfzw3886kivtte4TObg5EkZjKfoLJ2idGxlefVvB0Imt1lz47FBaNATMOD1X7SQ8tuPwVo+Mud0TMH8uUz42MgJygmc5V05zxRehWTlZWLihbdvG4J4gEEOtfnSI/WOS1oSei9BdTGeNr3gWLsq9KIZx1MJjknLAEOBtSzRORuQcJ9rgBpmZo1wuNBR0N9tKBmtfqPyZqwFLwP+Y/LJDKVjxfM0G6/BU3TqI6D9LOe2hfvcBIVjvo3SfOhD4MXOM5UE1VX0FLYibxt8fy9k4uh3HwVmvQjWnxSLuNSqLe8LTf4L+q2xMrzgxG5nw/8mbxXT/eySygnCpNCu3znacK7UWdi5avhYT+pCB4ecz7OCwMRkPXWTvKUaLM/l+BrcBduq1cQ0VD3XNByU=
+    secure: x5L7Cc9ncaXhjLjGi/+0P1Yjzo5yPTPqB47odKvnvHVG91n7LR0tCY8pKMAITSlnKqxlV6q/jlr5Ur8JzY0hwwi1KaM7t80cjWn9feE79DsA2Tpdxks2eRLQs1kXoqepa+tpuxOCysrYL5KMw/ly3vnnnkeXleb05bdadZLxdf54BK+6pA8djwKoVAba4lQDBL4RrdN7yQYB5ZBdGHFO6BScaVR1xuykOalfSQsQWAQqENbnOSFpxkdxYt0FUsP2N0UwqZ7kbX7XtdRKCfubnRJ9YoNh4kbImRLKbosl1NX8+MAwbudnKa6AV3P+LxQZA6cU1T8JIu6W54A7pXJYnf2bOezSy4ifzE0L+4rgbrIQVL9AUcWpK8gDkdpPJ6B6gwWW8+VP+wDCnzXEk9DXBlOLCGeHBaDOJAeOkCC2NJ64hC0bQfILO79KKYkpQTTf1uepngeie7y50CmOq4CaxAX1rQcPz2GlZlp5XIOZX5ZV5GABxORCn4zANrs7hmhY44ooky6KltiA35vgFxJGfqkgSUWWFqHvEPwDN2anRLjlY+trMN3YRMBCnhL3WCtHjiJ5sUW6drUcBfzcoJxGY7JF31q8N7y0ZhdXNc5P6GC/f62ggHDnk9lklOb4DlEqh+npREk+o89TUU/RkXNPuLBpNiq3UwCrDlKbpoULhgs=
 
 notifications:
   email: false

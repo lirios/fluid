@@ -39,14 +39,40 @@ if [ ! -f .travis.yml ]; then
 fi
 
 curdir=$(dirname `readlink -f $0`)
-builddir=$curdir/../build
-artifactsdir=$curdir/../artifacts
+builddir=$curdir/../cibuild
+arch=$(uname -m)
+gitreponame=$(basename `git rev-parse --show-toplevel`)
 gitrev=$(git log -1 --format="%h")
 gitdate=$(date -d @$(git log -1 --format="%at") +%Y-%m-%dT%H:%M:%S%z)
+pkgver=$(git log -1 --format="%cd" --date=short | tr -d '-').$(git log -1 --format="%h")
 version="${_gitdate}.${_gitver}"
 today=$(date +"%Y-%m-%d")
 
+# Restrict Bintray deployment to certain branches
+if [ $TRAVIS_BRANCH != "master" -a $TRAVIS_BRANCH != "develop" ]; then
+    exit 0
+fi
+
+# Deploy only once (useful if CI builds for multiple compilers)
+if [ -f $builddir/done ]; then
+    exit 0
+fi
+
 mkdir -p $builddir || exit $?
-cat $curdir/bintray.json | sed -e "s,@GITREV@,$gitrev,g" -e "s,@GITDATE@,$gitdate,g" -e "s,@TODAY@,$today,g" > $builddir/bintray.json || exit $?
-sudo make install DESTDIR=$artifactsdir || exit $?
-tar -cJf $builddir/fluid-${CC}.tar.xz -C $artifactsdir . || exit $?
+cat $curdir/bintray.json.in | \
+sed -e "s,@GITREV@,$gitrev,g" \
+    -e "s,@GITDATE@,$gitdate,g" \
+    -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
+    -e "s,@PKGVER@,$pkgver,g" \
+    -e "s,@ARCH@,$arch,g" \
+    -e "s,@TODAY@,$today,g" \
+    > $builddir/bintray.json || exit $?
+cat $curdir/PKGBUILD.in | \
+sed -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
+    > $builddir/PKGBUILD
+pushd $builddir >/dev/null
+makepkg || exit $?
+repo-add ${gitreponame}.db.tar.gz *.pkg.tar.xz || exit $?
+popd >/dev/null
+
+touch $builddir/done

@@ -54,13 +54,14 @@ curl="curl -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
       -H Content-Type:application/json \
       -H Accept:application/json"
 
-# Restrict Bintray deployment to certain branches
-if [ $TRAVIS_BRANCH != "master" -a $TRAVIS_BRANCH != "develop" ]; then
+# Restrict Bintray deployment to certain branches and a compile
+# in order to create artifacts only once
+if [ $TRAVIS_BRANCH != "develop" ]; then
+    echo "Will not make artifacts for branch $TRAVIS_BRANCH"
     exit 0
 fi
-
-# Deploy only once (useful if CI builds for multiple compilers)
-if [ -f $builddir/done ]; then
+if [ $CC != "gcc" ]; then
+    echo "Will not make artifacts on $CC builds"
     exit 0
 fi
 
@@ -97,6 +98,4 @@ function make_package() {
     popd >/dev/null
 
     remove_versions
-
-    touch $builddir/done
 }

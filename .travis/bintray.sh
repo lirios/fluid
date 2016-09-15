@@ -99,3 +99,5 @@ function make_package() {
 
     remove_versions
 }
+
+make_package

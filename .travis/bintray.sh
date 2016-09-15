@@ -105,6 +105,7 @@ function make_package() {
         > $builddir/bintray.json || exit $?
     cat $curdir/PKGBUILD.in | \
     sed -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
+        -e "s,@PKGVER@,$pkgver,g" \
         > $builddir/PKGBUILD
     pushd $builddir >/dev/null
     makepkg || exit $?

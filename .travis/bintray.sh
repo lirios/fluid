@@ -48,6 +48,12 @@ pkgver=$(git log -1 --format="%cd" --date=short | tr -d '-').$(git log -1 --form
 version="${_gitdate}.${_gitver}"
 today=$(date +"%Y-%m-%d")
 
+api="https://api.bintray.com"
+package_url="${api}/packages/${BINTRAY_REPO_OWNER}/archlinux-${TRAVIS_BRANCH}/${gitreponame}"
+curl="curl -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
+      -H Content-Type:application/json \
+      -H Accept:application/json"
+
 # Restrict Bintray deployment to certain branches
 if [ $TRAVIS_BRANCH != "master" -a $TRAVIS_BRANCH != "develop" ]; then
     exit 0
@@ -58,21 +64,39 @@ if [ -f $builddir/done ]; then
     exit 0
 fi
 
-mkdir -p $builddir || exit $?
-cat $curdir/bintray.json.in | \
-sed -e "s,@GITREV@,$gitrev,g" \
-    -e "s,@GITDATE@,$gitdate,g" \
-    -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
-    -e "s,@PKGVER@,$pkgver,g" \
-    -e "s,@ARCH@,$arch,g" \
-    -e "s,@TODAY@,$today,g" \
-    > $builddir/bintray.json || exit $?
-cat $curdir/PKGBUILD.in | \
-sed -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
-    > $builddir/PKGBUILD
-pushd $builddir >/dev/null
-makepkg || exit $?
-repo-add ${gitreponame}.db.tar.gz *.pkg.tar.xz || exit $?
-popd >/dev/null
+function remove_versions() {
+    readarray -t versions < <( \
+    curl -X GET "${package_url}" \
+        | sed -nr 's|.*"versions":\["([^]]*)"\].*|\1|p' \
+        | sed 's|","|\n|g' )
+    for ((i=0;i<${#versions[@]};i++)); do
+        delete_version "${versions[$i]}" || exit $?
+    done
+}
 
-touch $builddir/done
+function delete_version() {
+    ${CURL} -X DELETE "${package_url}/versions/$1"
+}
+
+function make_package() {
+    mkdir -p $builddir || exit $?
+    cat $curdir/bintray.json.in | \
+    sed -e "s,@GITREV@,$gitrev,g" \
+        -e "s,@GITDATE@,$gitdate,g" \
+        -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
+        -e "s,@PKGVER@,$pkgver,g" \
+        -e "s,@ARCH@,$arch,g" \
+        -e "s,@TODAY@,$today,g" \
+        > $builddir/bintray.json || exit $?
+    cat $curdir/PKGBUILD.in | \
+    sed -e "s,@GITBRANCH@,$TRAVIS_BRANCH,g" \
+        > $builddir/PKGBUILD
+    pushd $builddir >/dev/null
+    makepkg || exit $?
+    repo-add ${gitreponame}.db.tar.gz *.pkg.tar.xz || exit $?
+    popd >/dev/null
+
+    remove_versions
+
+    touch $builddir/done
+}

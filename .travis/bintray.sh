@@ -33,6 +33,14 @@
 # $END_LICENSE$
 #
 
+function check_availability() {
+    which $1 >/dev/null
+    if [ ! $? -eq 0 ]; then
+        echo "$1 is missing, please install it"
+        exit 1
+    fi
+}
+
 # Restrict Bintray deployment to certain branches and a compile
 # in order to create artifacts only once
 if [ $TRAVIS_BRANCH != "develop" ]; then
@@ -49,6 +57,11 @@ if [ ! -f .travis.yml ]; then
     echo "Please run bintray.sh from the source code directory!"
     exit 1
 fi
+
+# Check programs availability
+check_availability curl
+check_availability makepkg
+check_availability repo-add
 
 curdir=$(dirname `readlink -f $0`)
 builddir=$curdir/../cibuild
@@ -77,7 +90,7 @@ function remove_versions() {
 }
 
 function delete_version() {
-    ${CURL} -X DELETE "${package_url}/versions/$1"
+    ${curl} -X DELETE "${package_url}/versions/$1"
 }
 
 function make_package() {

@@ -33,6 +33,18 @@
 # $END_LICENSE$
 #
 
+# Restrict Bintray deployment to certain branches and a compile
+# in order to create artifacts only once
+if [ $TRAVIS_BRANCH != "develop" ]; then
+    echo "Will not make artifacts for branch $TRAVIS_BRANCH"
+    exit 0
+fi
+if [ $CC != "gcc" ]; then
+    echo "Will not make artifacts on $CC builds"
+    exit 0
+fi
+
+# Check if we are called from the right path
 if [ ! -f .travis.yml ]; then
     echo "Please run bintray.sh from the source code directory!"
     exit 1
@@ -53,17 +65,6 @@ package_url="${api}/packages/${BINTRAY_REPO_OWNER}/archlinux-${TRAVIS_BRANCH}/${
 curl="curl -u${BINTRAY_USER}:${BINTRAY_API_KEY} \
       -H Content-Type:application/json \
       -H Accept:application/json"
-
-# Restrict Bintray deployment to certain branches and a compile
-# in order to create artifacts only once
-if [ $TRAVIS_BRANCH != "develop" ]; then
-    echo "Will not make artifacts for branch $TRAVIS_BRANCH"
-    exit 0
-fi
-if [ $CC != "gcc" ]; then
-    echo "Will not make artifacts on $CC builds"
-    exit 0
-fi
 
 function remove_versions() {
     readarray -t versions < <( \

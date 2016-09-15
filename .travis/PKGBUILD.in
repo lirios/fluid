@@ -1,7 +1,7 @@
 # Maintainer: Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 
 pkgname=fluid-git
-pkgver=20160719.4bc8253
+pkgver=@PKGVER@
 pkgrel=1
 pkgdesc="Components for Qt Quick applications"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')

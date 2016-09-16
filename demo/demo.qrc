@@ -17,8 +17,8 @@
         <file>Pages/Basic/SwitchPage.qml</file>
         <file>Pages/Compound/ListItemPage.qml</file>
         <file>Pages/Compound/SubPage.qml</file>
-	<file>Pages/Compound/CardPage.qml</file>
-	<file>Pages/Compound/InfoBarPage.qml</file>
+        <file>Pages/Compound/CardPage.qml</file>
+        <file>Pages/Compound/InfoBarPage.qml</file>
         <file>Pages/Style/PalettePage.qml</file>
         <file>Pages/Style/PaletteSwatch.qml</file>
         <file>Pages/Style/TypographyPage.qml</file>

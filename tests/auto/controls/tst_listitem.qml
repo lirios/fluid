@@ -16,15 +16,20 @@ import QtQuick 2.4
 import QtTest 1.0
 import Fluid.Controls 1.0
 
-ListItem {
-    id: listItem
+Item {
+    width: 400
+    height: 400
 
-    width: 200
+    ListItem {
+        id: listItem
 
-    SignalSpy {
-        id: clickedSpy
-        target: listItem
-        signalName: "clicked"
+        width: 200
+
+        SignalSpy {
+            id: clickedSpy
+            target: listItem
+            signalName: "clicked"
+        }
     }
 
     TestCase {

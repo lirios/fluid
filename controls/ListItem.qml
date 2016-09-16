@@ -29,7 +29,7 @@ BaseListItem {
     id: listItem
 
     implicitHeight: Math.max(subText != "" ? maximumLineCount == 2 ? 72 : 88
-                                           : secondaryItem.showing ? secondaryItem.height + Units.smallSpacing * 2 : 48,
+                                           : secondaryItem.showing ? secondaryItem.childrenRect.height + Units.smallSpacing * 2 : 48,
                              leftItem.childrenRect.height + Units.smallSpacing * 2,
                              rightItem.childrenRect.height + Units.smallSpacing * 2)
 

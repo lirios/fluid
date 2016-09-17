@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -13,7 +14,6 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.0
@@ -37,8 +37,8 @@ Popup {
     padding: 0
     modal: true
 
-    x: (Window.width - width)/2
-    y: (Window.height - height)/2
+    x: (parent.width - width)/2
+    y: (parent.height - height)/2
 
     signal accepted
     signal rejected

@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -12,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.5
 import Fluid.Core 1.0
 
 /*!
@@ -24,7 +25,7 @@ import Fluid.Core 1.0
    One of the most common uses of actions is displaying actions in the action bar of a page
    using the \l Page::actions property. See the example for \l Page for more details.
  */
-QtObject {
+Object {
     id: action
 
     /*!
@@ -46,6 +47,14 @@ QtObject {
     property url iconSource: Utils.getSourceForIconName(iconName)
 
     /*!
+       \qmlproperty keysequence shortcut
+
+       This property holds the shortcut bound to the action.
+       The keysequence can be a string or a standard key.
+     */
+    property alias shortcut: shortcutItem.sequence
+
+    /*!
        The text displayed for the action.
      */
     property string text
@@ -61,4 +70,9 @@ QtObject {
     property bool visible: true
 
     signal triggered(var source)
+
+    Shortcut {
+        id: shortcutItem
+        onActivated: action.triggered(shortcutItem)
+    }
 }

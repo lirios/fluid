@@ -26,6 +26,7 @@ Page 1.0 Page.qml
 PageStack 1.0 PageStack.qml
 Placeholder 1.0 Placeholder.qml
 Showable 1.0 Showable.qml
+Sidebar 1.0 Sidebar.qml
 SmoothFadeImage 1.0 SmoothFadeImage.qml
 SmoothFadeLoader 1.0 SmoothFadeLoader.qml
 Subheader 1.0 Subheader.qml

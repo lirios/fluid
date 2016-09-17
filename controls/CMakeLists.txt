@@ -33,6 +33,7 @@ set(QML_FILES
     PageStack.qml
     Placeholder.qml
     Showable.qml
+    Sidebar.qml
     SmoothFadeImage.qml
     SmoothFadeLoader.qml
     Subheader.qml

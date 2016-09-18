@@ -63,8 +63,8 @@ add_subdirectory(tests)
 add_subdirectory(material)
 
 # Install icons
-if(EXISTS ${CMAKE_SOURCE_DIR}/icons)
-    install(DIRECTORY ${CMAKE_SOURCE_DIR}/icons
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/icons")
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/icons"
             DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)
 endif()
 

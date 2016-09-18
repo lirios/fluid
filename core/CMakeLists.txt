@@ -1,6 +1,6 @@
 include_directories(
-    ${CMAKE_BINARY_DIR}/src
-    ${CMAKE_BINARY_DIR}/src/Fluid
+    "${CMAKE_CURRENT_BINARY_DIR}/../src"
+    "${CMAKE_CURRENT_BINARY_DIR}/../src/Fluid"
 )
 
 add_definitions(-DQT_PLUGIN)

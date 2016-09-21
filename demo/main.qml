@@ -52,6 +52,10 @@ FluidWindow {
                 }
 
                 TabButton {
+                    text: qsTr("Navigation")
+                }
+
+                TabButton {
                     text: qsTr("Style")
                 }
             }
@@ -64,6 +68,7 @@ FluidWindow {
             BasicComponents {}
             CompoundComponents {}
             MaterialComponents {}
+            Navigation {}
             Style {}
         }
     }

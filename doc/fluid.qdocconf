@@ -7,7 +7,7 @@ version                 = $FLUID_VERSION
 qhp.projects            = Fluid
 
 qhp.Fluid.file          = fluid.qhp
-qhp.Fluid.namespace     = org.qmlos.fluid.$FLUID_VERSION_TAG
+qhp.Fluid.namespace     = io.liri.fluid.$FLUID_VERSION_TAG
 qhp.Fluid.virtualFolder = fluid
 qhp.Fluid.indexTitle    = Fluid $FLUID_VERSION Reference Documentation
 qhp.Fluid.indexRoot     =

@@ -2,11 +2,11 @@
   "package": {
     "name": "fluid",
     "repo": "archlinux-@GITBRANCH@",
-    "subject": "qmlos",
+    "subject": "liri",
     "desc": "A collection of cross-platform QtQuick components for building fluid and dynamic applications",
-    "website_url": "https://github.com/qmlos",
-    "issue_tracker_url": "https://github.com/qmlos/fluid",
-    "vcs_url": "https://github.com/qmlos/fluid",
+    "website_url": "https://github.com/lirios",
+    "issue_tracker_url": "https://github.com/lirios/fluid",
+    "vcs_url": "https://github.com/lirios/fluid",
     "licenses": ["MPL-2.0"],
     "labels": ["qt", "qml", "quick", "controls", "material"]
   },

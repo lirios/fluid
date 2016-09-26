@@ -5,16 +5,16 @@ pkgver=@PKGVER@
 pkgrel=1
 pkgdesc="Components for Qt Quick applications"
 arch=('i686' 'x86_64' 'armv6h' 'armv7h')
-url='https://github.com/qmlos'
+url='https://github.com/lirios'
 license=('MPL2')
 depends=('qt5-quickcontrols2' 'qt5-graphicaleffects' 'qt5-svg')
 makedepends=('git' 'extra-cmake-modules')
 conflicts=('fluid')
 replaces=('fluid')
 provides=('fluid')
-groups=('qmlos-git')
+groups=('liri-git')
 
-_gitroot="git://github.com/qmlos/fluid.git"
+_gitroot="git://github.com/lirios/fluid.git"
 _gitbranch=@GITBRANCH@
 _gitname=$pkgname
 source=(${_gitname}::${_gitroot}#branch=${_gitbranch})

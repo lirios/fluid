@@ -51,4 +51,4 @@ deploy:
 
 notifications:
   email: false
-  slack: qmlos:fdUqVmPzqPskEL1UBhqapZ0w
+  slack: lirios:fdUqVmPzqPskEL1UBhqapZ0w

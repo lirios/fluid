@@ -18,6 +18,6 @@ navigation.homepage = "Fluid $FLUID_VERSION"
 
 #sourcedirs += includes
 
-url = http://doc.qmlos.io/sdk
+url = http://doc.liri.io/sdk
 
 buildversion = "Fluid $FLUID_VERSION Reference Documentation"

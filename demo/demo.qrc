@@ -4,6 +4,7 @@
         <file>BasicComponents.qml</file>
         <file>CompoundComponents.qml</file>
         <file>MaterialComponents.qml</file>
+        <file>NavigationComponents.qml</file>
         <file>Style.qml</file>
         <file>StyledRectangle.qml</file>
         <file>+material/StyledRectangle.qml</file>
@@ -24,5 +25,6 @@
         <file>Pages/Style/TypographyPage.qml</file>
         <file>Pages/Material/ActionButtonPage.qml</file>
         <file>Pages/Material/WavePage.qml</file>
+        <file>Pages/Navigation/NavDrawerPage.qml</file>
     </qresource>
 </RCC>

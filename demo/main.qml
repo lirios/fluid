@@ -21,9 +21,11 @@ import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0
 
 FluidWindow {
+    id: window
+
     visible: true
 
-    width: 800
+    width: 1024
     height: 800
 
     title: qsTr("Fluid Demo")
@@ -32,6 +34,42 @@ FluidWindow {
     Material.accent: Material.Blue
 
     Universal.accent: Universal.Cobalt
+
+    NavigationDrawer {
+        id: navDrawer
+
+        //width: Math.min(window.width, window.height) / 3 * 2
+        height: window.height
+
+        topContent: [
+            Rectangle {
+                color: Material.primary
+                height: 48
+
+                Label {
+                    anchors.centerIn: parent
+                    text: qsTr("Top Content")
+                }
+
+                Layout.fillWidth: true
+            }
+        ]
+
+        actions: [
+            Action {
+                text: qsTr("Action 1")
+                onTriggered: console.log("action1 triggered")
+            },
+            Action {
+                text: qsTr("Action 2")
+                onTriggered: console.log("action2 triggered")
+            },
+            Action {
+                text: qsTr("Action 3")
+                onTriggered: console.log("action3 triggered")
+            }
+        ]
+    }
 
     initialPage: Page {
         header: ToolBar {
@@ -52,6 +90,10 @@ FluidWindow {
                 }
 
                 TabButton {
+                    text: qsTr("Navigation components")
+                }
+
+                TabButton {
                     text: qsTr("Style")
                 }
             }
@@ -64,6 +106,7 @@ FluidWindow {
             BasicComponents {}
             CompoundComponents {}
             MaterialComponents {}
+            NavigationComponents {}
             Style {}
         }
     }

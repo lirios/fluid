@@ -4,7 +4,7 @@
     "repo": "archlinux-@GITBRANCH@",
     "subject": "liri",
     "desc": "A collection of cross-platform QtQuick components for building fluid and dynamic applications",
-    "website_url": "https://github.com/lirios",
+    "website_url": "http://liri.io",
     "issue_tracker_url": "https://github.com/lirios/fluid",
     "vcs_url": "https://github.com/lirios/fluid",
     "licenses": ["MPL-2.0"],

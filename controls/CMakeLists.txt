@@ -3,9 +3,6 @@ set(SOURCES
     plugin.cpp
 )
 
-add_library(fluidcontrols SHARED ${SOURCES})
-target_link_libraries(fluidcontrols Qt5::Gui Qt5::Quick)
-
 set(QML_FILES
     plugins.qmltypes
     qmldir
@@ -42,6 +39,9 @@ set(QML_FILES
     TitleLabel.qml
     Units.qml
 )
+
+add_library(fluidcontrols SHARED ${SOURCES} ${QML_FILES})
+target_link_libraries(fluidcontrols Qt5::Gui Qt5::Quick)
 
 install(TARGETS fluidcontrols LIBRARY
         DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls)

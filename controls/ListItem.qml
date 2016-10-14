@@ -86,7 +86,7 @@ BaseListItem {
             RowLayout {
                 Layout.fillWidth: true
 
-                visible: label.visible || valueLabel.visible
+                visible: label.text != "" || valueLabel.text != ""
                 spacing: Units.smallSpacing
 
                 SubheadingLabel {

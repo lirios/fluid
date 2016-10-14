@@ -1,6 +1,10 @@
 #pragma once
 
-#include <Fluid/DateUtils>
+#ifdef FLUID_LOCAL
+    #include "../src/dateutils.h"
+#else
+    #include <Fluid/DateUtils>
+#endif
 #include <QtCore/QObject>
 
 class DateUtils : public QObject

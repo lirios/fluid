@@ -1,0 +1,5 @@
+module Fluid.Core
+typeinfo plugins.qmltypes
+
+Object 1.0 Object.qml
+singleton Utils 1.0 Utils.qml

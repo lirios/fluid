@@ -1,6 +1,10 @@
 #pragma once
 
-#include <Fluid/fluid/fluid_export.h>
+#ifdef FLUID_LOCAL
+    #define FLUID_EXPORT
+#else
+    #include <Fluid/fluid/fluid_export.h>
+#endif
 #include <QtCore/QObject>
 
 namespace Fluid {

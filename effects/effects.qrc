@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/Fluid/Effects">
+        <file>BoxShadow.qml</file>
+        <file>CircleMask.qml</file>
+        <file>plugins.qmltypes</file>
+        <file>qmldir</file>
+        <file>Vignette.qml</file>
+    </qresource>
+</RCC>

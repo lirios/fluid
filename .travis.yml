@@ -33,9 +33,7 @@ arch:
     - make
     - sudo make install
     - xvfb-run -a -s "-screen 0 800x600x24" make check
-    - curl -s https://raw.githubusercontent.com/lirios/repotools/develop/travis/bintray.sh > .travis/bintray.sh
-    - chmod 755 .travis/bintray.sh
-    - if [ "$CC" = "gcc" -a "$TRAVIS_BRANCH" = "develop" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then ./.travis/bintray.sh; fi
+    - ./.travis/bintray-wrapper.sh
 
 script:
   - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"

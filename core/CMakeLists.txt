@@ -21,6 +21,7 @@ set(FILES
     plugins.qmltypes
     qmldir
     Object.qml
+    PlatformExtensions.qml
     Utils.qml
 )
 

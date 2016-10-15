@@ -14,6 +14,8 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import Fluid.Core 1.0
 import Fluid.Controls 1.0
 
 /*!
@@ -52,6 +54,14 @@ import Fluid.Controls 1.0
 ApplicationWindow {
     id: window
 
+    /*!
+       \qmlproperty color decorationColor
+
+       The color of the status bar or window decorations, if the current
+       platform supports it.
+     */
+    property alias decorationColor: platformExtensions.decorationColor
+
     property alias appBar: appBar
 
     /*!
@@ -81,5 +91,11 @@ ApplicationWindow {
         onPushed: appBar.push(page)
         onPopped: appBar.pop(page)
         onReplaced: appBar.replace(page)
+    }
+
+    PlatformExtensions {
+        id: platformExtensions
+        window: window
+        decorationColor: Material.shade(window.Material.primaryColor, Material.Shade700)
     }
 }

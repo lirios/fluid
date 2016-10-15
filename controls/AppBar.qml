@@ -83,9 +83,13 @@ ToolBar {
      */
     property alias title: titleLabel.text
 
+    property alias tabs: tabBar.contentData
+
+    property alias currentTabIndex: tabBar.currentIndex
+
     property AppToolBar toolbar
 
-    height: Device.gridUnit
+    height: Device.gridUnit + (tabBar.visible ? tabBar.height : 0)
 
     IconButton {
         id: leftButton
@@ -154,5 +158,12 @@ ToolBar {
                 onClicked: modelData.triggered(actionButton)
             }
         }
+    }
+
+    TabBar {
+        id: tabBar
+        width: parent.width
+        y: actionsRow.height
+        visible: contentChildren.count > 0
     }
 }

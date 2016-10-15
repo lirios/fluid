@@ -19,7 +19,9 @@ import QtQuick.Controls.Universal 2.0
 import Fluid.Controls 1.0
 import "Pages/Compound"
 
-Item {
+Tab {
+    title: qsTr("Compound Components")
+
     Pane {
         id: listPane
         anchors {

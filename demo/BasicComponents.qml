@@ -19,7 +19,7 @@ import QtQuick.Controls.Universal 2.0
 import Fluid.Controls 1.0
 import "Pages/Basic"
 
-Page {
+Tab {
     title: qsTr("Basic Components")
 
     Pane {

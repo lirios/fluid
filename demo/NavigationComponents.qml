@@ -19,7 +19,9 @@ import QtQuick.Controls.Universal 2.0
 import Fluid.Controls 1.0
 import "Pages/Navigation"
 
-Item {
+Tab {
+    title: qsTr("Nagitation Components")
+
     Pane {
         id: listPane
         anchors {

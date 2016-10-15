@@ -71,43 +71,13 @@ FluidWindow {
         ]
     }
 
-    initialPage: Page {
-        header: ToolBar {
-            TabBar {
-                id: bar
-                width: parent.width
+    initialPage: TabbedPage {
+        title: window.title
 
-                TabButton {
-                    text: qsTr("Basic components")
-                }
-
-                TabButton {
-                    text: qsTr("Compound components")
-                }
-
-                TabButton {
-                    text: qsTr("Material components")
-                }
-
-                TabButton {
-                    text: qsTr("Navigation components")
-                }
-
-                TabButton {
-                    text: qsTr("Style")
-                }
-            }
-        }
-
-        StackLayout {
-            anchors.fill: parent
-            currentIndex: bar.currentIndex
-
-            BasicComponents {}
-            CompoundComponents {}
-            MaterialComponents {}
-            NavigationComponents {}
-            Style {}
-        }
+        BasicComponents {}
+        CompoundComponents {}
+        MaterialComponents {}
+        NavigationComponents {}
+        Style {}
     }
 }

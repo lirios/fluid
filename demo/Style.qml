@@ -19,7 +19,9 @@ import QtQuick.Controls.Universal 2.0
 import Fluid.Controls 1.0
 import "Pages/Style"
 
-Item {
+Tab {
+    title: qsTr("Style")
+
     Pane {
         id: listPane
         anchors {

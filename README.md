@@ -21,7 +21,7 @@ Qt >= 5.7.0 with at least the following modules is required:
  * [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
 
-## Installation
+## System-wide installation
 
 First, if you want to include the Material Design icons used with the `Icon` component, run:
 
@@ -47,6 +47,23 @@ On the `cmake` line, you can specify additional configuration parameters:
    * **Debug:** debug build
    * **Release:** release build
    * **RelWithDebInfo:** release build with debugging information
+   
+### Per-project installation using QMake
+   
+Firs, clone this repository.
+
+In your project file, include the fluid.pri file:  
+  `include(path/to/fluid.pri)`
+
+Then, in your `main.cpp` file or wherever you set up a `QQmlApplicationEngine`:
+* add this include directive :  
+  `#include "iconthemeimageprovider.h"`  
+* add the resources files to your `QQmlApplicationEngine` import paths :  
+  `engine.addImportPath(engine.addImportPath(QStringLiteral("qrc:/"))`
+* register fluid's IconThemeImageProvider to the engine :  
+  `engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());`
+* and after that you can load your qml file:  
+  `engine.load(QUrl(QStringLiteral("qrc:/main.qml")));`
 
 ## Licensing
 

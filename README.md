@@ -52,6 +52,8 @@ On the `cmake` line, you can specify additional configuration parameters:
 
 First, clone this repository.
 
+Run the icon script located here : `fluid/scripts/fetch_icons.sh`
+
 In your project file, include the fluid.pri file:  
   `include(path/to/fluid.pri)`
 

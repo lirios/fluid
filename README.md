@@ -47,10 +47,10 @@ On the `cmake` line, you can specify additional configuration parameters:
    * **Debug:** debug build
    * **Release:** release build
    * **RelWithDebInfo:** release build with debugging information
-   
-### Per-project installation using QMake
-   
-Firs, clone this repository.
+
+## Per-project installation using QMake
+
+First, clone this repository.
 
 In your project file, include the fluid.pri file:  
   `include(path/to/fluid.pri)`

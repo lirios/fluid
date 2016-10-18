@@ -5,5 +5,6 @@ file(GLOB_RECURSE QML_SOURCES
 add_executable(fluid-demo ${SOURCES} ${QML_SOURCES})
 target_link_libraries(fluid-demo Qt5::Gui Qt5::Qml Qt5::QuickControls2)
 
-install(TARGETS fluid-demo RUNTIME
-        DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS fluid-demo
+        BUNDLE DESTINATION .
+        RUNTIME DESTINATION ${BIN_INSTALL_DIR})

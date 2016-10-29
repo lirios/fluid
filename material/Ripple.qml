@@ -85,6 +85,7 @@ MouseArea {
     }
 
     onReleased: __private.removeLastCircle()
+    onCanceled: __private.removeLastCircle()
 
     QtObject {
         id: __private

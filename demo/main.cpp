@@ -16,6 +16,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +28,9 @@ int main(int argc, char *argv[])
         QQuickStyle::setStyle("Material");
 
     QQmlApplicationEngine engine;
+#ifdef FLUID_LOCAL
+    engine.addImportPath(QStringLiteral("qrc:/"));
+#endif
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();

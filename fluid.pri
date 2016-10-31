@@ -5,4 +5,4 @@ include(controls/controls.pri)
 include(effects/effects.pri)
 include(material/material.pri)
 
-RESOURCES += $$PWD/scripts/icons.qrc
+RESOURCES += $$PWD/icons/icons.qrc

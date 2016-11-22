@@ -17,6 +17,7 @@
 
 #include "clipboard.h"
 #include "device.h"
+#include "iconsimageprovider.h"
 #include "qmldateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
@@ -50,8 +51,16 @@ class FluidCorePlugin : public QQmlExtensionPlugin
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 public:
+    void initializeEngine(QQmlEngine *engine, const char *uri);
     void registerTypes(const char *uri);
 };
+
+void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+{
+    Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Core"));
+
+    engine->addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
+}
 
 void FluidCorePlugin::registerTypes(const char *uri)
 {

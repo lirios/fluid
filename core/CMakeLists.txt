@@ -10,12 +10,13 @@ set(SOURCES
     clipboard.cpp
     qmldateutils.cpp
     device.cpp
+    iconsimageprovider.cpp
     qqmlsortfilterproxymodel.cpp
     standardpaths.cpp
 )
 
 add_library(fluidcore SHARED ${SOURCES})
-target_link_libraries(fluidcore Qt5::Gui Qt5::Qml Fluid)
+target_link_libraries(fluidcore Qt5::Gui Qt5::Quick Fluid)
 
 set(FILES
     plugins.qmltypes

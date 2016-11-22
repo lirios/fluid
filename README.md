@@ -66,7 +66,8 @@ Then, in your `main.cpp` file or wherever you set up a `QQmlApplicationEngine`:
 `#include "iconthemeimageprovider.h"`  
 * add the resources files to your `QQmlApplicationEngine` import paths :  
 `engine.addImportPath(QStringLiteral("qrc:/"));`
-* register fluid's IconThemeImageProvider to the engine :  
+* register fluid's image providers to the engine :
+`engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());`
 `engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());`
 * and after that you can load your qml file:  
 `engine.load(QUrl(QStringLiteral("qrc:/main.qml")));`

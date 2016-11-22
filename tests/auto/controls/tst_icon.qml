@@ -33,7 +33,7 @@ Icon {
         function test_source_should_use_icon_prefix_for_material_icon() {
             icon.name = 'action/settings'
 
-            compare(icon.source, 'icon://action/settings')
+            compare(icon.source, 'image://fluidicons/action/settings')
         }
 
         function test_source_should_use_file_url_for_file_name() {

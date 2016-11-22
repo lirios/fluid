@@ -152,18 +152,7 @@ Item {
         anchors.fill: parent
         visible: !colorize
 
-        source: {
-            if (String(icon.source).indexOf('icon://') === 0) {
-                var name = String(icon.source).substring(7)
-
-                if (name)
-                    return Qt.resolvedUrl('icons/%1.svg'.arg(name))
-                else
-                    return ''
-            } else {
-                return icon.source
-            }
-        }
+        source: icon.source
 
         sourceSize {
             width: icon.sourceSize * Screen.devicePixelRatio

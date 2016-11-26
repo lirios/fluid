@@ -13,18 +13,19 @@
  */
 
 #include <QtCore/QDir>
-#include <QtGui/QIcon>
+#include <QtSvg/QSvgRenderer>
+#include <QtGui/QPainter>
 #include <QtQml/QQmlEngine>
 
 #include "iconsimageprovider.h"
 
 IconsImageProvider::IconsImageProvider()
-    : QQuickImageProvider(QQuickImageProvider::Pixmap)
+    : QQuickImageProvider(QQuickImageProvider::Image)
 {
 }
 
-QPixmap IconsImageProvider::requestPixmap(const QString &id, QSize *realSize,
-                                          const QSize &requestedSize)
+QImage IconsImageProvider::requestImage(const QString &id, QSize *realSize,
+                                        const QSize &requestedSize)
 {
     // Sanitize requested size
     QSize size(requestedSize);
@@ -38,7 +39,12 @@ QPixmap IconsImageProvider::requestPixmap(const QString &id, QSize *realSize,
         *realSize = size;
 
 #ifdef FLUID_LOCAL
-    return QPixmap(QLatin1String("qrc:/Fluid/Controls/") + id).scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QSvgRenderer renderer(QLatin1String("qrc:/Fluid/Controls/") + id + QLatin1String(".svg"));
+    QImage image(size, QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    renderer.render(&painter);
+    return image;
 #else
     const QString targetPath = QStringLiteral("Fluid/Controls/icons");
     const QStringList importPaths = QQmlEngine().importPathList();
@@ -47,10 +53,15 @@ QPixmap IconsImageProvider::requestPixmap(const QString &id, QSize *realSize,
         QDir dir(importPath);
         if (dir.exists(targetPath)) {
             QDir targetDir(dir.absoluteFilePath(targetPath));
-            return QPixmap(targetDir.absoluteFilePath(id)).scaled(size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            QSvgRenderer renderer(targetDir.absoluteFilePath(id + QLatin1String(".svg")));
+            QImage image(size, QImage::Format_ARGB32);
+            image.fill(Qt::transparent);
+            QPainter painter(&image);
+            renderer.render(&painter);
+            return image;
         }
     }
 
-    return QPixmap();
+    return QImage();
 #endif
 }

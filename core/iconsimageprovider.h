@@ -21,5 +21,5 @@ class IconsImageProvider : public QQuickImageProvider
 public:
     IconsImageProvider();
 
-    QPixmap requestPixmap(const QString &id, QSize *realSize, const QSize &requestedSize);
+    QImage requestImage(const QString &id, QSize *realSize, const QSize &requestedSize);
 };

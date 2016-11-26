@@ -16,7 +16,7 @@ set(SOURCES
 )
 
 add_library(fluidcore SHARED ${SOURCES})
-target_link_libraries(fluidcore Qt5::Gui Qt5::Quick Fluid)
+target_link_libraries(fluidcore Qt5::Svg Qt5::Gui Qt5::Quick Fluid)
 
 set(FILES
     plugins.qmltypes

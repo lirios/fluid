@@ -51,7 +51,7 @@ endif()
 # Find Qt5
 set(REQUIRED_QT_VERSION "5.7.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
-             Gui Qml Quick QuickTest QuickControls2)
+             Svg Gui Qml Quick QuickTest QuickControls2)
 
 # Find QT_INSTALL_DOCS
 get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)

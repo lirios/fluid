@@ -17,9 +17,9 @@ Qt >= 5.7.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
- * [qtquickcontrols](http://code.qt.io/cgit/qt/qtquickcontrols.git)
  * [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
+ * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
 
 ## System-wide installation
 

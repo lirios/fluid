@@ -21,6 +21,48 @@ Module {
         Method { name: "clear" }
     }
     Component {
+        name: "DateUtils"
+        prototype: "QObject"
+        exports: ["Fluid.Core/DateUtils 1.0"]
+        isCreatable: false
+        isSingleton: true
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "DurationFormat"
+            values: {
+                "Long": 0,
+                "Short": 1
+            }
+        }
+        Enum {
+            name: "DurationType"
+            values: {
+                "Seconds": 0,
+                "Minutes": 1,
+                "Hours": 2,
+                "Any": 3
+            }
+        }
+        Method {
+            name: "formatDuration"
+            type: "string"
+            Parameter { name: "duration"; type: "qlonglong" }
+            Parameter { name: "format"; type: "DurationFormat" }
+            Parameter { name: "type"; type: "DurationType" }
+        }
+        Method {
+            name: "formatDuration"
+            type: "string"
+            Parameter { name: "duration"; type: "qlonglong" }
+            Parameter { name: "format"; type: "DurationFormat" }
+        }
+        Method {
+            name: "formatDuration"
+            type: "string"
+            Parameter { name: "duration"; type: "qlonglong" }
+        }
+    }
+    Component {
         name: "Device"
         prototype: "QObject"
         exports: ["Fluid.Core/Device 1.0"]
@@ -214,6 +256,13 @@ Module {
             name: "getSourceForIconName"
             type: "QVariant"
             Parameter { name: "name"; type: "QVariant" }
+        }
+        Method {
+            name: "scale"
+            type: "QVariant"
+            Parameter { name: "percent"; type: "QVariant" }
+            Parameter { name: "start"; type: "QVariant" }
+            Parameter { name: "end"; type: "QVariant" }
         }
     }
 }

@@ -1,6 +1,7 @@
 HEADERS += \
     $$PWD/clipboard.h \
     $$PWD/device.h \
+    $$PWD/iconsimageprovider.h \
     $$PWD/qmldateutils.h \
     $$PWD/qqmlsortfilterproxymodel.h \
     $$PWD/standardpaths.h
@@ -8,6 +9,7 @@ HEADERS += \
 SOURCES += \
     $$PWD/clipboard.cpp \
     $$PWD/device.cpp \
+    $$PWD/iconsimageprovider.cpp \
     $$PWD/plugin.cpp \
     $$PWD/qmldateutils.cpp \
     $$PWD/qqmlsortfilterproxymodel.cpp \

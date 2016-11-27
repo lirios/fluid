@@ -14,9 +14,9 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
-Page {
+FluidControls.Page {
     id: page
 
     default property alias contents: swipeView.contentChildren
@@ -48,5 +48,10 @@ Page {
         currentIndex: appBar.currentTabIndex
 
         onCurrentIndexChanged: appBar.currentTabIndex = currentIndex
+    }
+
+    function addTab(tab) {
+        // TODO: Instantiate tab if it's a component
+        appBar.currentTabIndex = swipeView.count - 1
     }
 }

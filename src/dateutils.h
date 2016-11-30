@@ -23,6 +23,7 @@
 #include <QtCore/QObject>
 
 namespace Fluid {
+
 class FLUID_EXPORT DateUtils : public QObject
 {
     Q_OBJECT
@@ -37,4 +38,5 @@ public:
     static QString formatDuration(qlonglong duration, DurationFormat format = Short,
                                   DurationType type = Any);
 };
-}
+
+} // namespace Fluid

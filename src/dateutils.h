@@ -21,6 +21,7 @@
     #include <Fluid/fluid/fluid_export.h>
 #endif
 #include <QtCore/QObject>
+#include <QtCore/QDateTime>
 
 namespace Fluid {
 
@@ -37,6 +38,7 @@ public:
 
     static QString formatDuration(qlonglong duration, DurationFormat format = Short,
                                   DurationType type = Any);
+    static QString friendlyTime(const QDateTime &time, bool standalone);
 };
 
 } // namespace Fluid

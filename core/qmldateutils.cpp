@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -25,4 +26,9 @@ QString DateUtils::formatDuration(qlonglong duration, DurationFormat format,
     return Fluid::DateUtils::formatDuration(duration,
                                             static_cast<Fluid::DateUtils::DurationFormat>(format),
                                             static_cast<Fluid::DateUtils::DurationType>(type));
+}
+
+QString DateUtils::friendlyTime(const QDateTime &time, bool standalone) const
+{
+    return Fluid::DateUtils::friendlyTime(time, standalone);
 }

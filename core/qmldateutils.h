@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -37,4 +38,5 @@ public:
     Q_INVOKABLE QString formatDuration(qlonglong duration,
                                        DurationFormat format = DurationFormat::Short,
                                        DurationType type = DurationType::Any) const;
+    Q_INVOKABLE QString friendlyTime(const QDateTime &time, bool standalone) const;
 };

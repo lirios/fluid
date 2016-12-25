@@ -1,0 +1,47 @@
+include(../../doc/defaults.qdocconf)
+
+project                 = FluidCore
+description             = Fluid Core Reference Documentation
+version                 = $FLUID_VERSION
+
+qhp.projects            = FluidCore
+
+qhp.Fluid.file          = fluidcore.qhp
+qhp.Fluid.namespace     = io.liri.fluidcore.$FLUID_VERSION_TAG
+qhp.Fluid.virtualFolder = fluidcore
+qhp.Fluid.indexTitle    = Fluid Core
+qhp.Fluid.indexRoot     =
+
+qhp.Fluid.filterAttributes                  = fluidcore $FLUID_VERSION qtrefdoc
+qhp.Fluid.customFilters.Qt.name             = FluidCore $FLUID_VERSION
+qhp.Fluid.customFilters.Qt.filterAttributes = fluidcore $FLUID_VERSION
+
+qhp.Fluid.subprojects = qmltypes classes examples
+qhp.Fluid.subprojects.qmltypes.title = QML Types
+qhp.Fluid.subprojects.qmltypes.indexTitle = Fluid Core QML Types
+qhp.Fluid.subprojects.qmltypes.selectors = qmlclass
+qhp.Fluid.subprojects.qmltypes.sortPages = true
+qhp.Fluid.subprojects.classes.title = C++ Classes
+qhp.Fluid.subprojects.classes.indexTitle = Fluid Core C++ Classes
+qhp.Fluid.subprojects.classes.selectors = class fake:headerfile
+qhp.Fluid.subprojects.classes.sortPages = true
+qhp.Fluid.subprojects.examples.title = Examples
+qhp.Fluid.subprojects.examples.indexTitle = Fluid Core Examples
+qhp.Fluid.subprojects.examples.selectors = fake:example
+
+# Specify the install path under QT_INSTALL_EXAMPLES
+# Note: paths passed to \example command must contain the parent directory, e.g.
+# \example controls/tabs
+#exampledirs += snippets
+
+#examplesinstallpath = fluid
+
+headerdirs += .
+
+sourcedirs += . src
+
+imagedirs += images
+
+navigation.landingpage  = "Fluid Core"
+navigation.qmltypespage = "Fluid Core QML Types"
+navigation.cppclassespage = "Fluid Core C++ Classes"

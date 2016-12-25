@@ -1,41 +1,43 @@
-/****************************************************************************
+/*
  * This file is part of Fluid.
  *
- * Copyright (C) 2013-2016 Pier Luigi Fiorini
+ * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
- * Author(s):
- *    Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * $BEGIN_LICENSE:MPL2$
  *
- * $BEGIN_LICENSE:LGPL2.1+$
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  *
  * $END_LICENSE$
- ***************************************************************************/
+ */
 
-import QtQuick 2.1
-import Qt.labs.controls 1.0
-import Qt.labs.controls.material 1.0
+import QtQuick 2.4
+import QtQuick.Controls 2.0
 
-EmptyListItem {
-    property alias text: label.text
+/*!
+   \qmltype BaseListItem
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
-    height: label.paintedHeight
+   \brief The base class for list items.
 
-    Label {
-        id: label
-        anchors.fill: parent
-        color: selected ? Material.textColor : Material.textSelectionColor
+   Provides ripple effects, mouse/touch handling and tinting on mouse hover.
+ */
+ListItemDelegate {
+    id: listItem
+
+    background: Rectangle {
+        color: listItem.interactive && (listItem.highlighted || listItem.down)
+                ? Qt.rgba(0,0,0,0.05) : Qt.rgba(0,0,0,0)
+
+        ThinDivider {
+            x: dividerInset
+            y: parent.height - height
+
+            width: parent.width - x
+
+            visible: showDivider
+        }
     }
 }

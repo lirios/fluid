@@ -1,0 +1,59 @@
+include(defaults.qdocconf)
+
+project                 = Fluid
+description             = Fluid Reference Documentation
+version                 = $FLUID_VERSION
+
+qhp.projects            = Fluid
+
+qhp.Fluid.file          = fluid.qhp
+qhp.Fluid.namespace     = io.liri.fluid.$FLUID_VERSION_TAG
+qhp.Fluid.virtualFolder = fluid
+qhp.Fluid.indexTitle    = Fluid $FLUID_VERSION Reference Documentation
+qhp.Fluid.indexRoot     =
+
+qhp.Fluid.filterAttributes                  = fluid $FLUID_VERSION qtrefdoc
+qhp.Fluid.customFilters.Qt.name             = Fluid $FLUID_VERSION
+qhp.Fluid.customFilters.Qt.filterAttributes = fluid $FLUID_VERSION
+
+qhp.Fluid.subprojects = fluidcore fluidcontrols fluideffects fluidmaterial
+qhp.Fluid.subproject.fluidcore.title = Fluid Core
+qhp.Fluid.subproject.fluidcore.indexTitle = Fluid Core QML Types
+qhp.Fluid.subprojects.fluidcore.selectors = qmlclass
+qhp.Fluid.subprojects.fluidcore.sortPages = true
+qhp.Fluid.subproject.fluidcontrols.title = Fluid Controls
+qhp.Fluid.subproject.fluidcontrols.indexTitle = Fluid Controls QML Types
+qhp.Fluid.subprojects.fluidcontrols.selectors = qmlclass
+qhp.Fluid.subprojects.fluidcontrols.sortPages = true
+qhp.Fluid.subproject.fluideffects.title = Fluid Controls
+qhp.Fluid.subproject.fluideffects.indexTitle = Fluid Effects QML Types
+qhp.Fluid.subprojects.fluideffects.selectors = qmlclass
+qhp.Fluid.subprojects.fluideffects.sortPages = true
+qhp.Fluid.subproject.fluidmaterial.title = Fluid Controls
+qhp.Fluid.subproject.fluidmaterial.indexTitle = Fluid Controls QML Types
+qhp.Fluid.subprojects.fluidmaterial.selectors = qmlclass
+qhp.Fluid.subprojects.fluidmaterial.sortPages = true
+
+indexes += $QT_INSTALL_DOCS/qtcore/qtcore.index
+indexes += $QT_INSTALL_DOCS/qtgui/qtgui.index
+indexes += $QT_INSTALL_DOCS/qtqml/qtqml.index
+indexes += $QT_INSTALL_DOCS/qtquick/qtquick.index
+indexes += $QT_INSTALL_DOCS/qtquickcontrols2/qtquickcontrols2.index
+
+depends += qtcore qtgui qtqml qtquick qtquickcontrols2
+
+# Specify the install path under QT_INSTALL_EXAMPLES
+# Note: paths passed to \example command must contain the parent directory, e.g.
+# \example controls/tabs
+#exampledirs += snippets
+
+#examplesinstallpath = fluid
+
+sourcedirs += ../core ../controls ../effects ../material src
+
+headerdirs += ../core ../controls ../effects ../material src
+
+imagedirs += images
+
+navigation.landingpage  = "Fluid"
+navigation.homepage = "Fluid Documentation"

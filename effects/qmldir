@@ -1,3 +1,6 @@
 module Fluid.Effects
 typeinfo plugins.qmltypes
+
+BoxShadow 1.0 BoxShadow.qml
+CircleMask 1.0 CircleMask.qml
 Vignette 1.0 Vignette.qml

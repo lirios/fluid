@@ -18,86 +18,96 @@ import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0
 import "../.."
 
-ColumnLayout {
-    Repeater {
-        model: 2
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-        StyledRectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: grid.width + 80
-            Layout.minimumHeight: grid.height + 80
+    ScrollBar.vertical: ScrollBar {}
 
-            GridLayout {
-                id: grid
-                anchors.centerIn: parent
-                columns: 2
-                rows: 4
+    ColumnLayout {
+        id: layout
+        anchors.fill: parent
 
-                // Row 1
+        Repeater {
+            model: 2
 
-                TitleLabel {
-                    text: qsTr("Enabled")
+            StyledRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: grid.width + 80
+                Layout.minimumHeight: grid.height + 80
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                GridLayout {
+                    id: grid
+                    anchors.centerIn: parent
+                    columns: 2
+                    rows: 4
 
-                TitleLabel {
-                    text: qsTr("Disabled")
+                    // Row 1
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    TitleLabel {
+                        text: qsTr("Enabled")
 
-                // Row 2
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Button {
-                    text: qsTr("Button")
-                }
+                    TitleLabel {
+                        text: qsTr("Disabled")
 
-                Button {
-                    text: qsTr("Button")
-                    enabled: false
-                }
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                // Row 3
+                    // Row 2
 
-                Button {
-                    text: qsTr("Checked")
-                    checkable: false
-                    checked: true
-                }
+                    Button {
+                        text: qsTr("Button")
+                    }
 
-                Button {
-                    text: qsTr("Checked")
-                    checkable: false
-                    checked: true
-                    enabled: false
-                }
+                    Button {
+                        text: qsTr("Button")
+                        enabled: false
+                    }
 
-                // Row 4
+                    // Row 3
 
-                Button {
-                    text: qsTr("Flat")
-                    flat: true
-                }
+                    Button {
+                        text: qsTr("Checked")
+                        checkable: false
+                        checked: true
+                    }
 
-                Button {
-                    text: qsTr("Flat")
-                    flat: true
-                    enabled: false
-                }
+                    Button {
+                        text: qsTr("Checked")
+                        checkable: false
+                        checked: true
+                        enabled: false
+                    }
 
-                // Row 5
+                    // Row 4
 
-                Button {
-                    text: qsTr("Highlighted")
-                    highlighted: true
-                }
+                    Button {
+                        text: qsTr("Flat")
+                        flat: true
+                    }
 
-                Button {
-                    text: qsTr("Highlighted")
-                    highlighted: true
-                    enabled: false
+                    Button {
+                        text: qsTr("Flat")
+                        flat: true
+                        enabled: false
+                    }
+
+                    // Row 5
+
+                    Button {
+                        text: qsTr("Highlighted")
+                        highlighted: true
+                    }
+
+                    Button {
+                        text: qsTr("Highlighted")
+                        highlighted: true
+                        enabled: false
+                    }
                 }
             }
         }

@@ -18,41 +18,49 @@ import QtQuick.Controls.Material 2.0
 import Fluid.Material 1.0
 import "../.."
 
-Page {
-    title: qsTr("Action button")
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-    Repeater {
-        model: 2
+    ScrollBar.vertical: ScrollBar {}
 
-        StyledRectangle {
-            y: height * index
-            width: parent.width
-            height: parent.height / 2
+    Column {
+        id: layout
+        anchors.fill: parent
 
-            Column {
-                anchors.centerIn: parent
+        Repeater {
+            model: 2
 
-                ActionButton {
-                    iconName: "device/airplanemode_active"
-                }
+            StyledRectangle {
+                //y: height * index
+                width: parent.width
+                height: parent.height / 2
 
-                ActionButton {
-                    iconName: "navigation/check"
+                Column {
+                    anchors.centerIn: parent
 
-                    Material.elevation: 1
-                }
+                    ActionButton {
+                        iconName: "device/airplanemode_active"
+                    }
 
-                ActionButton {
-                    iconName: "device/airplanemode_active"
+                    ActionButton {
+                        iconName: "navigation/check"
 
-                    Material.background: Material.primaryColor
-                }
+                        Material.elevation: 1
+                    }
 
-                ActionButton {
-                    iconName: "navigation/check"
+                    ActionButton {
+                        iconName: "device/airplanemode_active"
 
-                    Material.elevation: 1
-                    Material.background: Material.primaryColor
+                        Material.background: Material.primaryColor
+                    }
+
+                    ActionButton {
+                        iconName: "navigation/check"
+
+                        Material.elevation: 1
+                        Material.background: Material.primaryColor
+                    }
                 }
             }
         }

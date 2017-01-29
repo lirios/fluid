@@ -18,123 +18,133 @@ import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0
 import "../.."
 
-ColumnLayout {
-    Repeater {
-        model: 2
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-        StyledRectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: grid.width + 80
-            Layout.minimumHeight: grid.height + 80
+    ScrollBar.vertical: ScrollBar {}
 
-            GridLayout {
-                id: grid
-                anchors.centerIn: parent
-                columns: 3
-                rows: 3
+    ColumnLayout {
+        id: layout
+        anchors.fill: parent
 
-                // Row 1
+        Repeater {
+            model: 2
 
-                Item {
-                    width: 1
-                    height: 1
-                }
+            StyledRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: grid.width + 80
+                Layout.minimumHeight: grid.height + 80
 
-                TitleLabel {
-                    text: qsTr("Enabled")
+                GridLayout {
+                    id: grid
+                    anchors.centerIn: parent
+                    columns: 3
+                    rows: 3
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    // Row 1
 
-                TitleLabel {
-                    text: qsTr("Disabled")
+                    Item {
+                        width: 1
+                        height: 1
+                    }
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    TitleLabel {
+                        text: qsTr("Enabled")
 
-                // Row 2
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Label {
-                    text: qsTr("Horizontal / Single")
-                }
+                    TitleLabel {
+                        text: qsTr("Disabled")
 
-                Slider {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                }
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Slider {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                    enabled: false
-                }
+                    // Row 2
 
-                // Row 3
+                    Label {
+                        text: qsTr("Horizontal / Single")
+                    }
 
-                Label {
-                    text: qsTr("Horizontal / Range")
-                }
+                    Slider {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                    }
 
-                RangeSlider {
-                    from: 0.0
-                    to: 1.0
-                    first.value: 0.4
-                    second.value: 0.6
-                }
+                    Slider {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                        enabled: false
+                    }
 
-                RangeSlider {
-                    from: 0.0
-                    to: 1.0
-                    first.value: 0.4
-                    second.value: 0.6
-                    enabled: false
-                }
+                    // Row 3
 
-                // Row 4
+                    Label {
+                        text: qsTr("Horizontal / Range")
+                    }
 
-                Label {
-                    text: qsTr("Vertical / Single")
-                }
+                    RangeSlider {
+                        from: 0.0
+                        to: 1.0
+                        first.value: 0.4
+                        second.value: 0.6
+                    }
 
-                Slider {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                    orientation: Qt.Vertical
-                }
+                    RangeSlider {
+                        from: 0.0
+                        to: 1.0
+                        first.value: 0.4
+                        second.value: 0.6
+                        enabled: false
+                    }
 
-                Slider {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                    enabled: false
-                    orientation: Qt.Vertical
-                }
+                    // Row 4
 
-                // Row 5
+                    Label {
+                        text: qsTr("Vertical / Single")
+                    }
 
-                Label {
-                    text: qsTr("Vertical / Range")
-                }
+                    Slider {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                        orientation: Qt.Vertical
+                    }
 
-                RangeSlider {
-                    from: 0.0
-                    to: 1.0
-                    first.value: 0.4
-                    second.value: 0.6
-                    orientation: Qt.Vertical
-                }
+                    Slider {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                        enabled: false
+                        orientation: Qt.Vertical
+                    }
 
-                RangeSlider {
-                    from: 0.0
-                    to: 1.0
-                    first.value: 0.4
-                    second.value: 0.6
-                    enabled: false
-                    orientation: Qt.Vertical
+                    // Row 5
+
+                    Label {
+                        text: qsTr("Vertical / Range")
+                    }
+
+                    RangeSlider {
+                        from: 0.0
+                        to: 1.0
+                        first.value: 0.4
+                        second.value: 0.6
+                        orientation: Qt.Vertical
+                    }
+
+                    RangeSlider {
+                        from: 0.0
+                        to: 1.0
+                        first.value: 0.4
+                        second.value: 0.6
+                        enabled: false
+                        orientation: Qt.Vertical
+                    }
                 }
             }
         }

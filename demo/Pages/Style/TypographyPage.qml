@@ -18,8 +18,14 @@ import QtQuick.Controls 2.0
 import Fluid.Controls 1.0
 import "../.."
 
-Item {
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
+
+    ScrollBar.vertical: ScrollBar {}
+
     ColumnLayout {
+        id: layout
         anchors.fill: parent
         anchors.margins: Units.mediumSpacing
         spacing: Units.smallSpacing

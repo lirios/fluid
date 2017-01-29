@@ -18,71 +18,81 @@ import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0
 import "../.."
 
-ColumnLayout {
-    Repeater {
-        model: 2
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-        StyledRectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: grid.width + 80
-            Layout.minimumHeight: grid.height + 80
+    ScrollBar.vertical: ScrollBar {}
 
-            GridLayout {
-                id: grid
-                anchors.centerIn: parent
-                columns: 3
-                rows: 3
+    ColumnLayout {
+        id: layout
+        anchors.fill: parent
 
-                // Row 1
+        Repeater {
+            model: 2
 
-                Item {
-                    width: 1
-                    height: 1
-                }
+            StyledRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: grid.width + 80
+                Layout.minimumHeight: grid.height + 80
 
-                TitleLabel {
-                    text: qsTr("Enabled")
+                GridLayout {
+                    id: grid
+                    anchors.centerIn: parent
+                    columns: 3
+                    rows: 3
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    // Row 1
 
-                TitleLabel {
-                    text: qsTr("Disabled")
+                    Item {
+                        width: 1
+                        height: 1
+                    }
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    TitleLabel {
+                        text: qsTr("Enabled")
 
-                // Row 2
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Label {
-                    text: qsTr("On")
-                }
+                    TitleLabel {
+                        text: qsTr("Disabled")
 
-                Switch {
-                    checked: true
-                    text: qsTr("Switch")
-                }
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Switch {
-                    checked: true
-                    enabled: false
-                    text: qsTr("Switch")
-                }
+                    // Row 2
 
-                // Row 3
+                    Label {
+                        text: qsTr("On")
+                    }
 
-                Label {
-                    text: qsTr("Off")
-                }
+                    Switch {
+                        checked: true
+                        text: qsTr("Switch")
+                    }
 
-                Switch {
-                    text: qsTr("Switch")
-                }
+                    Switch {
+                        checked: true
+                        enabled: false
+                        text: qsTr("Switch")
+                    }
 
-                Switch {
-                    text: qsTr("Switch")
-                    enabled: false
+                    // Row 3
+
+                    Label {
+                        text: qsTr("Off")
+                    }
+
+                    Switch {
+                        text: qsTr("Switch")
+                    }
+
+                    Switch {
+                        text: qsTr("Switch")
+                        enabled: false
+                    }
                 }
             }
         }

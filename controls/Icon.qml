@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  * Copyright (C) 2015 Bogdan Cuza <bogdan.cuza@hotmail.com>
  *
  * $BEGIN_LICENSE:MPL2$

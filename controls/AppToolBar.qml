@@ -34,8 +34,6 @@ ToolBar {
     property Page page
     property int maxActionCount: 3
 
-    height: page ? page.appBar.height : 0
-
     function pop(page) {
         stack.pop(page.appBar)
 

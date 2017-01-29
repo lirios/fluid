@@ -124,11 +124,10 @@ Page {
         return StackView.view.push({item: component, properties: properties});
     }
 
-    FluidControls.AppBar {
+    header: FluidControls.AppBar {
         id: appBar
 
         title: page.title
-        parent: null
 
         leftAction: FluidControls.Action {
             text: "Back"

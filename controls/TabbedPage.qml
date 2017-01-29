@@ -75,7 +75,7 @@ FluidControls.Page {
     }
 
     function addTab(tab) {
-        // TODO: Instantiate tab if it's a component
-        appBar.currentTabIndex = swipeView.count - 1
+        swipeView.addItem(tab);
+        appBar.currentTabIndex = swipeView.count - 1;
     }
 }

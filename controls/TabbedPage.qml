@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -38,7 +39,30 @@ FluidControls.Page {
         delegate: TabButton {
             text: modelData.title
 
-            // TODO: Add icon and optional close button
+            FluidControls.Icon {
+                id: tabIcon
+
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: FluidControls.Units.smallSpacing
+
+                name: modelData.iconName
+                source: modelData.iconSource
+                visible: status == Image.Ready
+            }
+
+            FluidControls.IconButton {
+                id: tabCloseButton
+
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.rightMargin: FluidControls.Units.smallSpacing
+
+                iconName: "navigation/close"
+                visible: modelData.canRemove
+
+                onClicked: swipeView.removeItem(swipeView.currentIndex)
+            }
         }
     }
 

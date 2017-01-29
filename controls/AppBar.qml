@@ -164,6 +164,6 @@ ToolBar {
         id: tabBar
         width: parent.width
         y: actionsRow.height
-        visible: contentChildren.count > 0
+        visible: count > 0
     }
 }

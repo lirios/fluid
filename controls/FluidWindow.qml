@@ -16,7 +16,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
    \qmltype FluidWindow
@@ -32,9 +32,9 @@ import Fluid.Controls 1.0
 
    \qml
    import QtQuick 2.4
-   import Fluid.Controls 1.0
+   import Fluid.Controls 1.0 as FluidControls
 
-   ApplicationWindow {
+   FluidControls.ApplicationWindow {
        title: "Application Name"
 
        initialPage: page
@@ -78,11 +78,11 @@ ApplicationWindow {
      */
     property alias pageStack: pageStack
 
-    header: AppToolBar {
+    header: FluidControls.AppToolBar {
         id: appBar
     }
 
-    PageStack {
+    FluidControls.PageStack {
         id: pageStack
 
         width: parent.width

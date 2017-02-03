@@ -89,7 +89,7 @@ ToolBar {
 
     property AppToolBar toolbar
 
-    height: Device.gridUnit + (tabBar.visible ? tabBar.height : 0)
+    height: Device.gridUnit
 
     IconButton {
         id: leftButton
@@ -162,8 +162,13 @@ ToolBar {
 
     TabBar {
         id: tabBar
-        width: parent.width
-        y: actionsRow.height
+
+        anchors {
+            left: parent.left
+            top: actionsRow.bottom
+            right: parent.right
+        }
+
         visible: count > 0
     }
 }

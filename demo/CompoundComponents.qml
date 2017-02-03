@@ -20,7 +20,7 @@ import Fluid.Controls 1.0
 import "Pages/Compound"
 
 Tab {
-    title: qsTr("Compound Components")
+    title: qsTr("Compound")
 
     Pane {
         id: listPane

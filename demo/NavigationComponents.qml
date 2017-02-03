@@ -20,7 +20,7 @@ import Fluid.Controls 1.0
 import "Pages/Navigation"
 
 Tab {
-    title: qsTr("Navigation Components")
+    title: qsTr("Navigation")
 
     Pane {
         id: listPane

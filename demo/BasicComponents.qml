@@ -20,7 +20,7 @@ import Fluid.Controls 1.0
 import "Pages/Basic"
 
 Tab {
-    title: qsTr("Basic Components")
+    title: qsTr("Basic")
 
     Pane {
         id: listPane

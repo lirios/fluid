@@ -15,6 +15,7 @@ set(QML_FILES
     Card.qml
     CircleImage.qml
     Dialog.qml
+    DialogLabel.qml
     DisplayLabel.qml
     FluidStyle.qml
     FluidWindow.qml
@@ -47,6 +48,7 @@ set(MATERIAL_FILES
     +material/BaseListItem.qml
     +material/BodyLabel.qml
     +material/CaptionLabel.qml
+    +material/DialogLabel.qml
     +material/DisplayLabel.qml
     +material/HeadlineLabel.qml
     +material/SubheadingLabel.qml

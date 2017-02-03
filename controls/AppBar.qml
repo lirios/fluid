@@ -18,6 +18,7 @@ import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.0
 import Fluid.Core 1.0
 import Fluid.Controls 1.0
+import Fluid.Material 1.0 as FluidMaterial
 
 /*!
    \qmltype AppBar
@@ -29,7 +30,7 @@ import Fluid.Controls 1.0
 ToolBar {
     id: appBar
 
-    Material.elevation: toolbar ? 0 : elevation
+    Material.elevation: toolbar && !tabBar.visible ? 0 : elevation
     Material.theme: toolbar ? toolbar.Material.theme : Material.Light
 
     /*!
@@ -89,85 +90,105 @@ ToolBar {
 
     property AppToolBar toolbar
 
-    height: Device.gridUnit
+    implicitHeight: background.implicitHeight
 
-    IconButton {
-        id: leftButton
+    background: Rectangle {
+        color: appBar.Material.toolBarColor
+        height: implicitHeight
+        implicitHeight: Device.gridUnit + (tabBar.visible ? tabBar.implicitHeight : 0)
 
-        property bool showing: leftAction && leftAction.visible
-        property int margin: (width - 24)/2
-
-        anchors {
-            verticalCenter: actionsRow.verticalCenter
-            left: parent.left
-            leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
+        layer.enabled: appBar.Material.elevation > 0
+        layer.effect: FluidMaterial.ElevationEffect {
+            elevation: appBar.Material.elevation
+            fullWidth: true
         }
 
-        iconSize: appBar.iconSize
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: 0
 
-        iconSource: leftAction ? leftAction.iconSource : ""
-        visible: leftAction && leftAction.visible
-        enabled: leftAction && leftAction.enabled
-        onClicked: {
-            if (leftAction)
-                leftAction.triggered(leftButton)
-        }
-    }
+            RowLayout {
+                spacing: 0
 
-    TitleLabel {
-        id: titleLabel
+                Layout.preferredHeight: Device.gridUnit
+                Layout.fillWidth: true
 
-        anchors {
-            verticalCenter: actionsRow.verticalCenter
-            left: parent.left
-            right: actionsRow.left
-            leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
-            rightMargin: 16
-        }
+                IconButton {
+                    id: leftButton
 
-        textFormat: Text.PlainText
-        color: Material.primaryTextColor
-        elide: Text.ElideRight
-    }
+                    property bool showing: leftAction && leftAction.visible
+                    property int margin: (width - 24)/2
 
-    Row {
-        id: actionsRow
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                    Layout.leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
 
-        anchors {
-            right: parent.right
-            rightMargin: 16 - leftButton.margin
-        }
+                    iconSize: appBar.iconSize
 
-        height: appBar.height
+                    iconSource: leftAction ? leftAction.iconSource : ""
+                    visible: leftAction && leftAction.visible
+                    enabled: leftAction && leftAction.enabled
+                    onClicked: {
+                        if (leftAction)
+                            leftAction.triggered(leftButton)
+                    }
+                }
 
-        spacing: 24 - 2 * leftButton.margin
+                TitleLabel {
+                    id: titleLabel
 
-        Repeater {
-            model: appBar.actions
-            delegate: IconButton {
-                id: actionButton
+                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+                    Layout.leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
+                    Layout.rightMargin: 16
 
-                anchors.verticalCenter: parent.verticalCenter
+                    textFormat: Text.PlainText
+                    color: Material.primaryTextColor
+                    elide: Text.ElideRight
+                }
 
-                iconSize: appBar.iconSize
+                Item {
+                    Layout.fillWidth: true
+                }
 
-                iconSource: modelData.iconSource
-                visible: modelData.visible
-                enabled: modelData.enabled
-                onClicked: modelData.triggered(actionButton)
+                Row {
+                    id: actionsRow
+
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    Layout.rightMargin: 16 - leftButton.margin
+                    Layout.preferredHeight: Device.gridUnit
+
+                    spacing: 24 - 2 * leftButton.margin
+
+                    Repeater {
+                        model: appBar.actions
+                        delegate: IconButton {
+                            id: actionButton
+
+                            anchors.verticalCenter: parent.verticalCenter
+
+                            iconSize: appBar.iconSize
+
+                            iconSource: modelData.iconSource
+                            visible: modelData.visible
+                            enabled: modelData.enabled
+                            onClicked: modelData.triggered(actionButton)
+                        }
+                    }
+                }
+            }
+
+            TabBar {
+                id: tabBar
+
+                property bool fixed: true
+                property bool centered: false
+
+                Material.accent: appBar.Material.foreground
+
+                Layout.alignment: centered ? Qt.AlignHCenter : Qt.AlignLeft
+                Layout.leftMargin: centered ? 0 : leftKeyline - 12
+
+                visible: count > 0
             }
         }
-    }
-
-    TabBar {
-        id: tabBar
-
-        anchors {
-            left: parent.left
-            top: actionsRow.bottom
-            right: parent.right
-        }
-
-        visible: count > 0
     }
 }

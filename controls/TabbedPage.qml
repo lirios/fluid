@@ -16,6 +16,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 FluidControls.Page {
@@ -39,12 +40,13 @@ FluidControls.Page {
         model: swipeView.contentChildren
         delegate: TabButton {
             text: modelData.title
+            width: parent.fixed ? parent.width / parent.count : implicitWidth
 
             // Active color
             Material.accent: appBar.Material.foreground
 
-            // Inactive color
-            Material.foreground: Qt.rgba(255, 255, 255, 0.7)
+            // Unfocused color
+            Material.foreground: FluidCore.Utils.alpha(appBar.Material.foreground, 0.7)
 
             FluidControls.Icon {
                 id: tabIcon

@@ -114,7 +114,7 @@ ToolBar {
         }
     }
 
-    Label {
+    TitleLabel {
         id: titleLabel
 
         anchors {
@@ -126,7 +126,6 @@ ToolBar {
         }
 
         textFormat: Text.PlainText
-        font: FluidStyle.titleFont
         color: Material.primaryTextColor
         elide: Text.ElideRight
     }

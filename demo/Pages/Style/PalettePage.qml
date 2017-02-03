@@ -32,7 +32,15 @@ Flickable {
     GridLayout {
         id: grid
 
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+            topMargin: Units.largeSpacing
+        }
+
+        width: parent.width * 0.8
+
         columns: width / 300
         rowSpacing: Units.smallSpacing
         columnSpacing: Units.smallSpacing

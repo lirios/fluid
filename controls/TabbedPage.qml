@@ -40,8 +40,11 @@ FluidControls.Page {
         delegate: TabButton {
             text: modelData.title
 
-            Material.foreground: appBar.Material.accentColor
+            // Active color
             Material.accent: appBar.Material.foreground
+
+            // Inactive color
+            Material.foreground: Qt.rgba(255, 255, 255, 0.7)
 
             FluidControls.Icon {
                 id: tabIcon

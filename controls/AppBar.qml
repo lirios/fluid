@@ -165,6 +165,9 @@ ToolBar {
                         delegate: FluidControls.IconButton {
                             id: actionButton
 
+                            ToolTip.visible: ToolTip.text !== "" && hovered && !overflowMenu.visible
+                            ToolTip.text: appBar.actions[index].tooltip
+
                             anchors.verticalCenter: parent.verticalCenter
 
                             iconSize: appBar.iconSize

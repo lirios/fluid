@@ -74,6 +74,24 @@ FluidWindow {
     initialPage: TabbedPage {
         title: window.title
 
+        actions: [
+            Action {
+                text: qsTr("Dummy error")
+                iconName: "alert/warning"
+                onTriggered: console.log("Dummy error")
+            },
+            Action {
+                text: qsTr("Colors")
+                iconName: "image/color_lens"
+                onTriggered: console.log("Colors")
+            },
+            Action {
+                text: qsTr("Settings")
+                iconName: "action/settings"
+                onTriggered: console.log("Settings clicked")
+            }
+        ]
+
         BasicComponents {}
         CompoundComponents {}
         MaterialComponents {}

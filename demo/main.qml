@@ -83,16 +83,19 @@ FluidWindow {
             Action {
                 text: qsTr("Dummy error")
                 iconName: "alert/warning"
+                tooltip: qsTr("Show a dummy error")
                 onTriggered: console.log("Dummy error")
             },
             Action {
                 text: qsTr("Colors")
                 iconName: "image/color_lens"
+                tooltip: qsTr("Pick a color")
                 onTriggered: console.log("Colors")
             },
             Action {
                 text: qsTr("Settings")
                 iconName: "action/settings"
+                tooltip: qsTr("Settings")
                 onTriggered: console.log("Settings clicked")
             }
         ]

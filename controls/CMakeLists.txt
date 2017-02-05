@@ -26,6 +26,7 @@ set(QML_FILES
     ListItemDelegate.qml
     ListItem.qml
     Loadable.qml
+    MenuItem.qml
     NavigationDrawer.qml
     NoiseBackground.qml
     Page.qml

@@ -22,6 +22,7 @@ InfoBar 1.0 InfoBar.qml
 ListItemDelegate 1.0 ListItemDelegate.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml
+MenuItem 1.0 MenuItem.qml
 NavigationDrawer 1.0 NavigationDrawer.qml
 NoiseBackground 1.0 NoiseBackground.qml
 Page 1.0 Page.qml

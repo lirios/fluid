@@ -77,6 +77,8 @@ FluidWindow {
     initialPage: TabbedPage {
         title: window.title
 
+        appBar.maxActionCount: 1
+
         actions: [
             Action {
                 text: qsTr("Dummy error")

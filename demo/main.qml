@@ -58,14 +58,17 @@ FluidWindow {
         actions: [
             Action {
                 text: qsTr("Action 1")
+                iconName: "action/info"
                 onTriggered: console.log("action1 triggered")
             },
             Action {
                 text: qsTr("Action 2")
+                iconName: "action/info"
                 onTriggered: console.log("action2 triggered")
             },
             Action {
                 text: qsTr("Action 3")
+                iconName: "action/info"
                 onTriggered: console.log("action3 triggered")
             }
         ]

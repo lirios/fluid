@@ -56,7 +56,6 @@ ToolBar {
     StackView {
         id: stack
 
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
     }
 }

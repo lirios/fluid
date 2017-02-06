@@ -85,8 +85,7 @@ ApplicationWindow {
     FluidControls.PageStack {
         id: pageStack
 
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
 
         onPushed: appBar.push(page)
         onPopped: appBar.pop(page)

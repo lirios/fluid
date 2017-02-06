@@ -190,13 +190,15 @@ ToolBar {
 
                         onClicked: overflowMenu.open()
 
+                        visible: appBar.actions.length > appBar.maxActionCount
+
                         Menu {
                             id: overflowMenu
 
                             y: overflowButton.height
 
                             Instantiator {
-                                model: appBar.actions.length - appBar.maxActionCount
+                                model: appBar.actions.length > appBar.maxActionCount ? appBar.actions.length - appBar.maxActionCount : 0
                                 delegate: FluidControls.MenuItem {
                                     id: overflowMenuItem
 

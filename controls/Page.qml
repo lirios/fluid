@@ -124,12 +124,13 @@ Page {
         return StackView.view.push({item: component, properties: properties});
     }
 
-    header: FluidControls.AppBar {
+    FluidControls.AppBar {
         id: appBar
 
         title: page.title
+        parent: null
 
-        leftAction: FluidControls.Action {
+        leftAction: Action {
             text: "Back"
             iconName: "navigation/arrow_back"
             onTriggered: page.pop()

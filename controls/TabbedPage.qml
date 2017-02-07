@@ -26,51 +26,82 @@ FluidControls.Page {
 
     property alias count: swipeView.count
 
-    readonly property int currentIndex: appBar.currentTabIndex
+    readonly property int currentIndex: __private.currentTabIndex
 
     /*!
        The currently selected tab.
      */
     readonly property Tab selectedTab: count > 0
-            ? swipeView.contentChildren[currentIndex] : null
+                                       ? swipeView.contentChildren[currentIndex] : null
 
     onCurrentIndexChanged: swipeView.currentIndex = currentIndex
 
-    appBar.tabs: Repeater {
-        model: swipeView.contentChildren
-        delegate: TabButton {
-            text: modelData.title
-            width: parent.fixed ? parent.width / parent.count : implicitWidth
+    QtObject {
+        id: __private
 
-            // Active color
-            Material.accent: appBar.Material.foreground
+        property alias currentTabIndex: tabBar.currentIndex
+    }
 
-            // Unfocused color
-            Material.foreground: FluidCore.Utils.alpha(appBar.Material.foreground, 0.7)
+    appBar.elevation: 0
 
-            FluidControls.Icon {
-                id: tabIcon
+    header: ToolBar {
+        visible: tabBar.count > 0
 
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: FluidControls.Units.smallSpacing
+        Material.elevation: 2
 
-                name: modelData.iconName
-                source: modelData.iconSource
-                visible: status == Image.Ready
+        TabBar {
+            id: tabBar
+
+            property bool fixed: true
+            property bool centered: false
+
+            anchors {
+                top: centered ? undefined : parent.top
+                left: centered ? undefined : parent.left
+                leftMargin: centered ? 0 : appBar ? appBar.leftKeyline - 12 : 0
+                horizontalCenter: centered ? parent.horizontalCenter : undefined
             }
 
-            FluidControls.IconButton {
-                id: tabCloseButton
+            Material.accent: appBar.Material.foreground
+            Material.background: "transparent"
 
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.rightMargin: FluidControls.Units.smallSpacing
+            Repeater {
+                model: swipeView.contentChildren
+                delegate: TabButton {
+                    text: modelData.title
+                    width: parent.fixed ? parent.width / parent.count : implicitWidth
 
-                iconName: "navigation/close"
-                visible: modelData.canRemove
+                    // Active color
+                    Material.accent: appBar.Material.foreground
 
-                onClicked: swipeView.removeItem(swipeView.currentIndex)
+                    // Unfocused color
+                    Material.foreground: FluidCore.Utils.alpha(appBar.Material.foreground, 0.7)
+
+                    FluidControls.Icon {
+                        id: tabIcon
+
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.leftMargin: FluidControls.Units.smallSpacing
+
+                        name: modelData.iconName
+                        source: modelData.iconSource
+                        visible: status == Image.Ready
+                    }
+
+                    FluidControls.IconButton {
+                        id: tabCloseButton
+
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.rightMargin: FluidControls.Units.smallSpacing
+
+                        iconName: "navigation/close"
+                        visible: modelData.canRemove
+
+                        onClicked: swipeView.removeItem(swipeView.currentIndex)
+                    }
+                }
             }
         }
     }
@@ -78,13 +109,13 @@ FluidControls.Page {
     SwipeView {
         id: swipeView
         anchors.fill: parent
-        currentIndex: appBar.currentTabIndex
+        currentIndex: __private.currentTabIndex
 
-        onCurrentIndexChanged: appBar.currentTabIndex = currentIndex
+        onCurrentIndexChanged: __private.currentTabIndex = currentIndex
     }
 
     function addTab(tab) {
         swipeView.addItem(tab);
-        appBar.currentTabIndex = swipeView.count - 1;
+        __private.currentTabIndex = swipeView.count - 1;
     }
 }

@@ -32,7 +32,7 @@ import Fluid.Material 1.0 as FluidMaterial
 ToolBar {
     id: appBar
 
-    Material.elevation: toolbar && !tabBar.visible ? 0 : elevation
+    Material.elevation: toolbar ? 0 : elevation
     Material.theme: toolbar ? toolbar.Material.theme : Material.Light
 
     /*!
@@ -86,152 +86,116 @@ ToolBar {
      */
     property alias title: titleLabel.text
 
-    property alias tabs: tabBar.contentData
-
-    property alias currentTabIndex: tabBar.currentIndex
-
     property AppToolBar toolbar
 
-    implicitHeight: background.implicitHeight
+    implicitHeight: Device.gridUnit
 
-    background: Rectangle {
-        color: appBar.Material.toolBarColor
-        height: implicitHeight
-        implicitHeight: Device.gridUnit + (tabBar.visible ? tabBar.implicitHeight : 0)
+    IconButton {
+        id: leftButton
 
-        layer.enabled: appBar.Material.elevation > 0
-        layer.effect: FluidMaterial.ElevationEffect {
-            elevation: appBar.Material.elevation
-            fullWidth: true
+        property bool showing: leftAction && leftAction.visible
+        property int margin: (width - 24)/2
+
+        anchors {
+            verticalCenter: actionsRow.verticalCenter
+            left: parent.left
+            leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
         }
 
-        ColumnLayout {
-            anchors.fill: parent
-            spacing: 0
+        iconSize: appBar.iconSize
 
-            RowLayout {
-                spacing: 0
+        iconSource: leftAction ? leftAction.iconSource : ""
+        visible: leftAction && leftAction.visible
+        enabled: leftAction && leftAction.enabled
+        onClicked: {
+            if (leftAction)
+                leftAction.triggered(leftButton)
+        }
+    }
 
-                Layout.preferredHeight: Device.gridUnit
-                Layout.fillWidth: true
+    FluidControls.TitleLabel {
+        id: titleLabel
 
-                FluidControls.IconButton {
-                    id: leftButton
+        anchors {
+            verticalCenter: actionsRow.verticalCenter
+            left: parent.left
+            right: actionsRow.left
+            leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
+            rightMargin: 16
+        }
 
-                    property bool showing: leftAction && leftAction.visible
-                    property int margin: (width - 24)/2
+        textFormat: Text.PlainText
+        color: Material.primaryTextColor
+        elide: Text.ElideRight
+    }
 
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                    Layout.leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
+    Row {
+        id: actionsRow
 
-                    iconSize: appBar.iconSize
+        anchors {
+            right: parent.right
+            rightMargin: 16 - leftButton.margin
+        }
 
-                    iconSource: leftAction ? leftAction.iconSource : ""
-                    visible: leftAction && leftAction.visible
-                    enabled: leftAction && leftAction.enabled
-                    onClicked: {
-                        if (leftAction)
-                            leftAction.triggered(leftButton)
-                    }
-                }
+        height: appBar.height
 
-                FluidControls.TitleLabel {
-                    id: titleLabel
+        spacing: 24 - 2 * leftButton.margin
 
-                    Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                    Layout.leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
-                    Layout.rightMargin: 16
+        Repeater {
+            model: appBar.actions.length > appBar.maxActionCount ? appBar.maxActionCount : appBar.actions.length
+            delegate: FluidControls.IconButton {
+                id: actionButton
 
-                    textFormat: Text.PlainText
-                    color: Material.primaryTextColor
-                    elide: Text.ElideRight
-                }
+                ToolTip.visible: ToolTip.text !== "" && hovered && !overflowMenu.visible
+                ToolTip.text: appBar.actions[index].tooltip
 
-                Item {
-                    Layout.fillWidth: true
-                }
+                anchors.verticalCenter: parent.verticalCenter
 
-                Row {
-                    id: actionsRow
+                iconSize: appBar.iconSize
+                iconSource: appBar.actions[index].iconSource
 
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                    Layout.rightMargin: 16 - leftButton.margin
-                    Layout.preferredHeight: Device.gridUnit
+                visible: appBar.actions[index].visible
+                enabled: appBar.actions[index].enabled
 
-                    spacing: 24 - 2 * leftButton.margin
-
-                    Repeater {
-                        model: appBar.actions.length > appBar.maxActionCount ? appBar.maxActionCount : appBar.actions.length
-                        delegate: FluidControls.IconButton {
-                            id: actionButton
-
-                            ToolTip.visible: ToolTip.text !== "" && hovered && !overflowMenu.visible
-                            ToolTip.text: appBar.actions[index].tooltip
-
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            iconSize: appBar.iconSize
-                            iconSource: appBar.actions[index].iconSource
-
-                            visible: appBar.actions[index].visible
-                            enabled: appBar.actions[index].enabled
-
-                            onClicked: appBar.actions[index].triggered(actionButton)
-                        }
-                    }
-
-                    FluidControls.IconButton {
-                        id: overflowButton
-
-                        anchors.verticalCenter: parent.verticalCenter
-
-                        iconSize: appBar.iconSize
-                        iconName: "navigation/more_vert"
-
-                        onClicked: overflowMenu.open()
-
-                        visible: appBar.actions.length > appBar.maxActionCount
-
-                        Menu {
-                            id: overflowMenu
-
-                            y: overflowButton.height
-
-                            Instantiator {
-                                model: appBar.actions.length > appBar.maxActionCount ? appBar.actions.length - appBar.maxActionCount : 0
-                                delegate: FluidControls.MenuItem {
-                                    id: overflowMenuItem
-
-                                    iconSource: appBar.actions[index].iconSource
-                                    iconSize: appBar.iconSize
-
-                                    text: appBar.actions[index + appBar.maxActionCount].text
-
-                                    enabled: appBar.actions[index + appBar.maxActionCount].enabled
-                                    visible: appBar.actions[index + appBar.maxActionCount].visible
-
-                                    onTriggered: appBar.actions[index + appBar.maxActionCount].triggered(overflowMenuItem)
-                                }
-                                onObjectAdded: overflowMenu.addItem(object)
-                                onObjectRemoved: overflowMenu.removeItem(index)
-                            }
-                        }
-                    }
-                }
+                onClicked: appBar.actions[index].triggered(actionButton)
             }
+        }
 
-            TabBar {
-                id: tabBar
+        FluidControls.IconButton {
+            id: overflowButton
 
-                property bool fixed: true
-                property bool centered: false
+            anchors.verticalCenter: parent.verticalCenter
 
-                Material.accent: appBar.Material.foreground
+            iconSize: appBar.iconSize
+            iconName: "navigation/more_vert"
 
-                Layout.alignment: centered ? Qt.AlignHCenter : Qt.AlignLeft
-                Layout.leftMargin: centered ? 0 : leftKeyline - 12
+            onClicked: overflowMenu.open()
 
-                visible: count > 0
+            visible: appBar.actions.length > appBar.maxActionCount
+
+            Menu {
+                id: overflowMenu
+
+                y: overflowButton.height
+
+                Instantiator {
+                    model: appBar.actions.length > appBar.maxActionCount ? appBar.actions.length - appBar.maxActionCount : 0
+                    delegate: FluidControls.MenuItem {
+                        id: overflowMenuItem
+
+                        iconSource: appBar.actions[index].iconSource
+                        iconSize: appBar.iconSize
+
+                        text: appBar.actions[index + appBar.maxActionCount].text
+
+                        enabled: appBar.actions[index + appBar.maxActionCount].enabled
+                        visible: appBar.actions[index + appBar.maxActionCount].visible
+
+                        onTriggered: appBar.actions[index + appBar.maxActionCount].triggered(overflowMenuItem)
+                    }
+                    onObjectAdded: overflowMenu.addItem(object)
+                    onObjectRemoved: overflowMenu.removeItem(index)
+                }
             }
         }
     }

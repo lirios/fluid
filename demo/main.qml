@@ -30,6 +30,8 @@ FluidWindow {
 
     title: qsTr("Fluid Demo")
 
+    appBar.maxActionCount: 1
+
     Material.primary: Material.LightBlue
     Material.accent: Material.Blue
 
@@ -76,8 +78,6 @@ FluidWindow {
 
     initialPage: TabbedPage {
         title: window.title
-
-        appBar.maxActionCount: 1
 
         actions: [
             Action {

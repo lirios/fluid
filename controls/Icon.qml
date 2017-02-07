@@ -74,11 +74,9 @@ Item {
     id: icon
 
     /*!
-       The color of the icon. Defaults to \c FluidStyle.iconColorLight. For dark backgrounds,
-       set \c Material.theme to Material.Dark or set this to \c FluidStyle.iconColorDark.
+       The color of the icon. Defaults to \c Material.iconColor.
      */
-    property color color: Material.theme == Material.Light ? FluidStyle.iconColorLight
-                                                           : FluidStyle.iconColorDark
+    property color color: Material.iconColor
 
     /*!
        The size of the icon. Defaults to 24px.

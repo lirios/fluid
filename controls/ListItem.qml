@@ -71,9 +71,7 @@ BaseListItem {
                 }
 
                 visible: icon.valid
-                color: listItem.highlighted ? Material.primaryColor
-                        : Material.theme == Material.Light ? FluidStyle.iconColorLight
-                                                           : FluidStyle.iconColorDark
+                color: listItem.highlighted ? Material.primaryColor : enabled ? Material.iconColor : Material.iconDisabledColor
             }
         }
 

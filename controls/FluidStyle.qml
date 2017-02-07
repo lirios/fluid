@@ -27,9 +27,6 @@ pragma Singleton
 QtObject {
     id: fluidStyle
 
-    readonly property color iconColorLight: Qt.rgba(0,0,0,0.54)
-    readonly property color iconColorDark: Qt.rgba(1,1,1)
-
     readonly property font display4Font: Qt.font({ family: "Roboto", weight: Font.Light,
                                                    pixelSize: 112 })
 

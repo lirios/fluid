@@ -20,7 +20,6 @@ import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.0
 import Fluid.Core 1.0
 import Fluid.Controls 1.0 as FluidControls
-import Fluid.Material 1.0 as FluidMaterial
 
 /*!
    \qmltype AppBar

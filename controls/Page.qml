@@ -131,7 +131,7 @@ Page {
         parent: null
 
         leftAction: Action {
-            text: "Back"
+            text: qsTr("Back")
             tooltip: qsTr("Go back")
             iconName: "navigation/arrow_back"
             onTriggered: page.pop()

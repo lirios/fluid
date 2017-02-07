@@ -96,6 +96,9 @@ ToolBar {
         property bool showing: leftAction && leftAction.visible
         property int margin: (width - 24)/2
 
+        ToolTip.visible: ToolTip.text != "" && hovered
+        ToolTip.text: leftAction ? leftAction.tooltip : ""
+
         anchors {
             verticalCenter: actionsRow.verticalCenter
             left: parent.left

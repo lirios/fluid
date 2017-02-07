@@ -99,7 +99,7 @@ FluidControls.Page {
                         iconName: "navigation/close"
                         visible: modelData.canRemove
 
-                        onClicked: swipeView.removeItem(swipeView.currentIndex)
+                        onClicked: swipeView.removeItem(index)
                     }
                 }
             }

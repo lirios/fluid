@@ -32,6 +32,11 @@ Item {
             }
             height: 200
             source: "https://www.nps.gov/yose/planyourvisit/images/glacier-point-people-960web.jpg"
+
+            BusyIndicator {
+                anchors.centerIn: parent
+                visible: picture.status !== Image.Ready
+            }
         }
 
         Column {

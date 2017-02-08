@@ -101,6 +101,7 @@ FluidWindow {
         ]
 
         BasicComponents {}
+        LayoutComponents {}
         CompoundComponents {}
         MaterialComponents {}
         NavigationComponents {}

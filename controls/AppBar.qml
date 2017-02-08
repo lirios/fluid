@@ -185,7 +185,7 @@ ToolBar {
                     delegate: FluidControls.MenuItem {
                         id: overflowMenuItem
 
-                        iconSource: appBar.actions[index].iconSource
+                        iconSource: appBar.actions[index + appBar.maxActionCount].iconSource
                         iconSize: appBar.iconSize
 
                         text: appBar.actions[index + appBar.maxActionCount].text

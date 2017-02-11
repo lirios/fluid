@@ -7,6 +7,7 @@ set(QML_FILES
     plugins.qmltypes
     qmldir
     Action.qml
+    AlertDialog.qml
     AppBar.qml
     AppToolBar.qml
     BaseListItem.qml

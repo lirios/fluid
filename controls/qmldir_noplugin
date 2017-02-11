@@ -2,6 +2,7 @@ module Fluid.Controls
 typeinfo plugins.qmltypes
 
 Action 1.0 Action.qml
+AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
 AppToolBar 1.0 AppToolBar.qml
 BaseListItem 1.0 BaseListItem.qml

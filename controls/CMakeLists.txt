@@ -23,6 +23,7 @@ set(QML_FILES
     IconButton.qml
     Icon.qml
     InfoBar.qml
+    InputDialog.qml
     ListItemDelegate.qml
     ListItem.qml
     Loadable.qml

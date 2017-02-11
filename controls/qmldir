@@ -19,6 +19,7 @@ HeadlineLabel 1.0 HeadlineLabel.qml
 IconButton 1.0 IconButton.qml
 Icon 1.0 Icon.qml
 InfoBar 1.0 InfoBar.qml
+InputDialog 1.0 InputDialog.qml
 ListItemDelegate 1.0 ListItemDelegate.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml

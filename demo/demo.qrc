@@ -16,6 +16,7 @@
         <file>Pages/Basic/RadioButtonPage.qml</file>
         <file>Pages/Basic/SliderPage.qml</file>
         <file>Pages/Basic/SwitchPage.qml</file>
+        <file>Pages/Compound/DialogsPage.qml</file>
         <file>Pages/Compound/ListItemPage.qml</file>
         <file>Pages/Compound/SubPage.qml</file>
         <file>Pages/Compound/CardPage.qml</file>

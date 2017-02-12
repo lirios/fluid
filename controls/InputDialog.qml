@@ -13,6 +13,7 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.1
 import Fluid.Controls 1.0 as FluidControls
 
@@ -34,12 +35,38 @@ Dialog {
     */
     property alias textField: textField
 
+    /*
+        \qmlproperty string InputDialog::text
+
+        Dialog text.
+    */
+    property alias text: dialogLabel.text
+
     focus: true
     modal: true
+    standardButtons: Dialog.Ok | Dialog.Cancel
 
-    TextField {
-        id: textField
-        focus: true
-        onAccepted: dialog.accept()
+    ColumnLayout {
+        anchors {
+            left: parent.left
+            top: parent.top
+        }
+        width: parent.width
+
+        FluidControls.DialogLabel {
+            id: dialogLabel
+            wrapMode: Text.Wrap
+            visible: text !== ""
+
+            Layout.fillWidth: true
+        }
+
+        TextField {
+            id: textField
+            focus: true
+            onAccepted: dialog.accept()
+
+            Layout.fillWidth: true
+        }
     }
 }

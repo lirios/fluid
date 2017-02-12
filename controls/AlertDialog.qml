@@ -30,12 +30,30 @@ import Fluid.Controls 1.0 as FluidControls
     by either asking a question or making a statement related to the action buttons.
 */
 Dialog {
+    default property alias content: dialogContent.data
+
     property alias text: dialogLabel.text
+
+    x: (parent.width - width) / 2
+    y: (parent.height - height) / 2
 
     focus: true
     modal: true
 
-    FluidControls.DialogLabel {
-        id: dialogLabel
+    Column {
+        id: dialogContent
+        anchors {
+            left: parent.left
+            top: parent.top
+        }
+        spacing: FluidControls.Units.smallSpacing
+        width: parent.width
+
+        FluidControls.DialogLabel {
+            id: dialogLabel
+            wrapMode: Text.Wrap
+            width: parent.width
+            visible: text !== ""
+        }
     }
 }

@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/Fluid/Controls">
         <file>Action.qml</file>
+        <file>AlertDialog.qml</file>
         <file>AppBar.qml</file>
         <file>AppToolBar.qml</file>
         <file>BaseListItem.qml</file>
@@ -8,7 +9,7 @@
         <file>CaptionLabel.qml</file>
         <file>Card.qml</file>
         <file>CircleImage.qml</file>
-        <file>Dialog.qml</file>
+        <file>DialogLabel.qml</file>
         <file>DisplayLabel.qml</file>
         <file>FluidStyle.qml</file>
         <file>FluidWindow.qml</file>
@@ -16,9 +17,11 @@
         <file>Icon.qml</file>
         <file>IconButton.qml</file>
         <file>InfoBar.qml</file>
+        <file>InputDialog.qml</file>
         <file>ListItem.qml</file>
         <file>ListItemDelegate.qml</file>
         <file>Loadable.qml</file>
+        <file>MenuItem.qml</file>
         <file>NavigationDrawer.qml</file>
         <file>NoiseBackground.qml</file>
         <file>Page.qml</file>
@@ -30,12 +33,15 @@
         <file>SmoothFadeLoader.qml</file>
         <file>Subheader.qml</file>
         <file>SubheadingLabel.qml</file>
+        <file>Tab.qml</file>
+        <file>TabbedPage.qml</file>
         <file>ThinDivider.qml</file>
         <file>TitleLabel.qml</file>
         <file>Units.qml</file>
         <file>+material/BaseListItem.qml</file>
         <file>+material/BodyLabel.qml</file>
         <file>+material/CaptionLabel.qml</file>
+        <file>+material/DialogLabel.qml</file>
         <file>+material/DisplayLabel.qml</file>
         <file>+material/HeadlineLabel.qml</file>
         <file>+material/SubheadingLabel.qml</file>

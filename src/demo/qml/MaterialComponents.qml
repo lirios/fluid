@@ -44,6 +44,7 @@ Tab {
             currentIndex: 0
             model: ListModel {
                 ListElement { title: qsTr("ActionButton"); source: "qrc:/qml/Pages/Material/ActionButtonPage.qml" }
+                ListElement { title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Material/BottomSheetPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

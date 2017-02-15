@@ -28,6 +28,7 @@
         <file>qml/Pages/Layouts/AutomaticGridPage.qml</file>
         <file>qml/Pages/Layouts/ColumnFlowPage.qml</file>
         <file>qml/Pages/Material/ActionButtonPage.qml</file>
+        <file>qml/Pages/Material/BottomSheetPage.qml</file>
         <file>qml/Pages/Material/WavePage.qml</file>
         <file>qml/Pages/Navigation/NavDrawerPage.qml</file>
     </qresource>

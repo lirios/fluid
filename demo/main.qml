@@ -20,7 +20,7 @@ import QtQuick.Controls.Universal 2.0
 import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0
 
-FluidWindow {
+ApplicationWindow {
     id: window
 
     visible: true

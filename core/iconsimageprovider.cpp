@@ -39,7 +39,7 @@ QImage IconsImageProvider::requestImage(const QString &id, QSize *realSize,
         *realSize = size;
 
 #ifdef FLUID_LOCAL
-    QSvgRenderer renderer(QLatin1String("qrc:/Fluid/Controls/") + id + QLatin1String(".svg"));
+    QSvgRenderer renderer(QLatin1String(":/Fluid/Controls/") + id + QLatin1String(".svg"));
     QImage image(size, QImage::Format_ARGB32);
     image.fill(Qt::transparent);
     QPainter painter(&image);

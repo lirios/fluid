@@ -1,0 +1,7 @@
+load(liri_deployment)
+load(qml_plugin)
+
+!use_qt_paths {
+    target.path = $$LIRI_INSTALL_QMLDIR/$$TARGETPATH
+    qmldir.path = $$target.path
+}

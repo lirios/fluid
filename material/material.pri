@@ -1,2 +1,0 @@
-RESOURCES += \
-    $$PWD/material.qrc

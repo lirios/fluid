@@ -1,10 +1,10 @@
 DEFINES += FLUID_LOCAL
 
-include(src/src.pri)
-include(core/core.pri)
-include(controls/controls.pri)
-include(layouts/layouts.pri)
-include(effects/effects.pri)
-include(material/material.pri)
+include(src/fluid/fluid.pri)
+include(src/imports/core/core.pri)
+include(src/imports/controls/controls.pri)
+include(src/imports/layouts/layouts.pri)
+include(src/imports/effects/effects.pri)
+include(src/imports/material/material.pri)
 
 RESOURCES += $$PWD/icons/icons.qrc

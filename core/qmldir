@@ -1,8 +1,0 @@
-module Fluid.Core
-plugin fluidcore
-class FluidCorePlugin
-typeinfo plugins.qmltypes
-
-Object 1.0 Object.qml
-PlatformExtensions 1.0 PlatformExtensions.qml
-singleton Utils 1.0 Utils.qml

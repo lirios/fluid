@@ -13,19 +13,14 @@
  */
 
 /*!
-    \page index.html
-    \keyword Fluid Reference Documentation
+    \page fluidcontrols-index.html
+    \title Fluid Controls
 
-    A collection of cross-platform QtQuick components for building fluid and dynamic applications.
+    \brief Provides a set of UI controls based on Qt Quick Controls 2.
 
-    \section1 QML Modules
-
-    Fluid is comprised of several QML modules.
+    \section1 Reference
 
     \list
-      \li \l{Fluid Core}
-      \li \l{Fluid Controls}
-      \li \l{Fluid Effects}
-      \li \l{Fluid Material}
+      \li \l{Fluid Controls QML Types}{QML Types}
     \endlist
 */

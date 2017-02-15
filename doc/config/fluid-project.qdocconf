@@ -1,0 +1,54 @@
+include($QT_INSTALL_DOCS/global/macros.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-cpp-defines.qdocconf)
+include($QT_INSTALL_DOCS/global/compat.qdocconf)
+include($QT_INSTALL_DOCS/global/fileextensions.qdocconf)
+
+project = Fluid
+description = Fluid Reference Documentation
+
+depends = qtcore qtgui qtdoc qtqml qtquick qtquickcontrols2
+headerdirs += ../../src/fluid
+sourcedirs += \
+    ../src \
+    ../../src/fluid \
+    ../../src/imports/controls \
+    ../../src/imports/core \
+    ../../src/imports/effects \
+    ../../src/imports/layouts \
+    ../../src/imports/material
+sources.fileextensions = "*.qml *.qdoc *.cpp *.js"
+headers.fileextensions = "*.h"
+imagedirs = ../images
+exampledirs = ..
+
+include(macros.qdocconf)
+
+qhp.projects = Fluid
+
+qhp.Fluid.file = fluid.qhp
+qhp.Fluid.namespace = io.liri.Fluid.$FLUID_VERSION_TAG
+qhp.Fluid.virtualFolder = fluid
+qhp.Fluid.indexTitle = Fluid
+qhp.Fluid.filterAttributes = Fluid $FLUID_VERSION
+qhp.Fluid.customFilters.Fluid.name = Fluid $FLUID_VERSION
+qhp.Fluid.customFilters.Fluid.filterAttributes = Fluid $FLUID_VERSION
+qhp.Fluid.indexRoot =
+
+qhp.Fluid.subprojects = classes qmltypes
+
+qhp.Fluid.subprojects.classes.title = C++ CLasses
+qhp.Fluid.subprojects.classes.indexTitle = Fluid Classes and Namespaces
+qhp.Fluid.subprojects.classes.selector = module:Fluid
+qhp.Fluid.subprojects.classes.sortPages = true
+
+qhp.Fluid.subprojects.qmltypes.title = QML Types
+qhp.Fluid.subprojects.qmltypes.indexTitle = Fluid QML Types
+qhp.Fluid.subprojects.qmltypes.selector = qmlclass
+qhp.Fluid.subprojects.qmltypes.sortPages = true
+
+# Doxygen compatibility commands
+macro.see                       = "\\sa"
+macro.function                  = "\\fn"
+
+navigation.homepage = Fluid Reference Documentation
+buildversion = Fluid $FLUID_VERSION

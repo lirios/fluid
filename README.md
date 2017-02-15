@@ -31,6 +31,34 @@ First, if you want to include the Material Design icons used with the `Icon` com
 
 This will clone the Google repository holding the icons and copy the SVG icons into the `icons` directory.
 
+### Build with QMake
+
+This will be the only build system in the next version, so you are encouraged
+to test it and report any issue.
+
+From the root of the repository, run:
+
+```sh
+mkdir build; cd build
+qmake ..
+make
+make install # use sudo if necessary
+```
+
+On the `qmake` line, you can specify additional configuration parameters:
+
+ * `LIRI_INSTALL_PREFIX=/path/to/install` (for example `/opt/liri` or `/usr`)
+ * `CONFIG+=debug` if you want a debug build
+
+### Build with CMake
+
+If you decide to build with CMake you will need the following modules installed:
+
+ * [CMake >= 3.0](https://cmake.org/)
+ * [ECM >= 1.7.0](http://quickgit.kde.org/?p=extra-cmake-modules.git)
+
+This build system is now deprecated and will be removed in the next version.
+
 From the root of the repository, run:
 
 ```sh

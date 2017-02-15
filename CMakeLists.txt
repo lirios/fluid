@@ -65,14 +65,8 @@ add_custom_target(docs
                   COMMAND QT_INSTALL_DOCS=${QT_INSTALL_DOCS} QT_VERSION_TAG=5.7 FLUID_VERSION=${PROJECT_VERSION} FLUID_VERSION_TAG=1.0 FLUID_BUILD_DIR=${CMAKE_CURRENT_BINARY_DIR} ${QDOC_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/doc/fluid.qdocconf)
 
 # Subdirectories
-add_subdirectory(controls)
-add_subdirectory(core)
-add_subdirectory(demo)
-add_subdirectory(effects)
-add_subdirectory(layouts)
 add_subdirectory(src)
 add_subdirectory(tests)
-add_subdirectory(material)
 
 # Install icons
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/icons")

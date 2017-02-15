@@ -1,0 +1,37 @@
+/*
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:MPL2$
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * $END_LICENSE$
+ */
+
+/*!
+    \qmlmodule Fluid.Controls 1.0
+    \title Fluid Controls QML Types
+    \ingroup qmlmodules
+
+    \brief Provides QML types for user interfaces.
+
+    \l{Fluid Controls} provides QML types for creating user interfaces.
+
+    Fluid Controls QML types can be imported into your application
+    using the following import statement in your .qml file:
+
+    \badcode
+    import Fluid.Controls 1.0 as FluidControls
+    \endcode
+
+    \section1
+    \generatelist {qmltypesbymodule Fluid.Controls}
+    \noautolist
+
+    For more information on the Fluid Controls module, see the
+    \l{Fluid Controls} module documentation.
+*/

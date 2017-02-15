@@ -1,0 +1,6 @@
+load(liri_deployment)
+load(qt_app)
+
+!use_qt_paths {
+    target.path = $$LIRI_INSTALL_BINDIR
+}

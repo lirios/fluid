@@ -1,0 +1,19 @@
+load(liri_deployment)
+load(qt_module)
+load(qt_module_headers)
+
+# Use our CMake config creation
+CONFIG -= create_cmake
+#CONFIG += liri_create_cmake
+
+!use_qt_paths {
+    QT_MODULE_INCLUDE_BASE = $$LIRI_INSTALL_INCLUDEDIR
+    QMAKE_PKGCONFIG_INCDIR = $$[LIRI_INSTALL_INCLUDEDIR/raw]
+
+    class_headers.path = $$LIRI_INSTALL_INCLUDEDIR/$$MODULE_INCNAME
+    targ_headers.path = $$LIRI_INSTALL_INCLUDEDIR/$$MODULE_INCNAME
+    private_headers.path = $$LIRI_INSTALL_INCLUDEDIR/$$MODULE_INCNAME/$$VERSION/$$MODULE_INCNAME/private
+    qpa_headers.path = $$LIRI_INSTALL_INCLUDEDIR/$$MODULE_INCNAME/$$VERSION/$$MODULE_INCNAME/qpa
+
+    target.path = $$LIRI_INSTALL_LIBDIR
+}

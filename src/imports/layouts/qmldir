@@ -1,0 +1,5 @@
+module Fluid.Layouts
+typeinfo plugins.qmltypes
+
+AutomaticGrid 1.0 AutomaticGrid.qml
+ColumnFlow 1.0 ColumnFlow.qml

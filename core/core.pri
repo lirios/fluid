@@ -18,4 +18,6 @@ SOURCES += \
 RESOURCES += \
     $$PWD/core.qrc
 
+INCLUDEPATH += $$PWD
+
 QT += svg

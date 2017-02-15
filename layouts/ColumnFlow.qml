@@ -56,6 +56,7 @@ Item {
     property alias model: repeater.model
     property alias delegate: repeater.delegate
     property int contentHeight: 0
+    property bool repeaterCompleted: false
 
     height: contentHeight
 

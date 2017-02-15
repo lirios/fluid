@@ -6,6 +6,7 @@ typeinfo plugins.qmltypes
 Action 1.0 Action.qml
 AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
+ApplicationWindow 1.0 ApplicationWindow.qml
 AppToolBar 1.0 AppToolBar.qml
 BaseListItem 1.0 BaseListItem.qml
 BodyLabel 1.0 BodyLabel.qml

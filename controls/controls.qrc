@@ -3,6 +3,7 @@
         <file>Action.qml</file>
         <file>AlertDialog.qml</file>
         <file>AppBar.qml</file>
+        <file>ApplicationWindow.qml</file>
         <file>AppToolBar.qml</file>
         <file>BaseListItem.qml</file>
         <file>BodyLabel.qml</file>

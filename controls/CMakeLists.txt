@@ -9,6 +9,7 @@ set(QML_FILES
     Action.qml
     AlertDialog.qml
     AppBar.qml
+    ApplicationWindow.qml
     AppToolBar.qml
     BaseListItem.qml
     BodyLabel.qml

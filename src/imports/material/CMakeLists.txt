@@ -2,6 +2,9 @@ set(FLUID_FILES
     plugins.qmltypes
     qmldir
     ActionButton.qml
+    BottomSheet.qml
+    BottomSheetList.qml
+    BottomSheetGrid.qml
     ElevationEffect.qml
     Ripple.qml
     Wave.qml

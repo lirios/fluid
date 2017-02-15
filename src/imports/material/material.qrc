@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/Fluid/Material">
         <file>ActionButton.qml</file>
+        <file>BottomSheet.qml</file>
+        <file>BottomSheetList.qml</file>
+        <file>BottomSheetGrid.qml</file>
         <file>ElevationEffect.qml</file>
         <file>plugins.qmltypes</file>
         <file>qmldir</file>

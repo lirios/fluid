@@ -79,6 +79,11 @@ ApplicationWindow {
     initialPage: TabbedPage {
         title: window.title
 
+        leftAction: Action {
+            iconName: "navigation/menu"
+            onTriggered: navDrawer.open()
+        }
+
         actions: [
             Action {
                 text: qsTr("Dummy error")

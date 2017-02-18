@@ -61,9 +61,11 @@ Object {
     property string text
 
     /*!
-       The tooltip displayed for the action.
+       The tool tip displayed for the action.
      */
-    property string tooltip
+    property string toolTip
+
+    property string tooltip: toolTip
 
     /*!
        Set to \c false to hide the action in the UI.

@@ -96,7 +96,8 @@ ToolBar {
         property bool showing: leftAction && leftAction.visible
         property int margin: (width - 24)/2
 
-        ToolTip.visible: ToolTip.text != "" && hovered
+        ToolTip.visible: ToolTip.text != "" && (Device.isMobile ? pressed : hovered)
+        ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
         ToolTip.text: leftAction ? leftAction.tooltip : ""
 
         anchors {
@@ -150,7 +151,8 @@ ToolBar {
             delegate: FluidControls.IconButton {
                 id: actionButton
 
-                ToolTip.visible: ToolTip.text !== "" && hovered && !overflowMenu.visible
+                ToolTip.visible: ToolTip.text !== "" && !overflowMenu.visible && (Device.isMobile ? pressed : hovered)
+                ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
                 ToolTip.text: appBar.actions[index].tooltip
 
                 anchors.verticalCenter: parent.verticalCenter

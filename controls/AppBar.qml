@@ -75,6 +75,7 @@ ToolBar {
        into a drop-down menu. When using an action bar with a page, this inherits
        from the global \l Toolbar::maxActionCount. If you are using an action bar
        for custom purposes outside of a toolbar, this defaults to \c 3.
+       Set to \c 0 if you don't want to overflow actions.
      */
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3
 
@@ -144,7 +145,8 @@ ToolBar {
         spacing: 24 - 2 * leftButton.margin
 
         Repeater {
-            model: appBar.actions.length > appBar.maxActionCount ? appBar.maxActionCount : appBar.actions.length
+            model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+                   ? appBar.maxActionCount : appBar.actions.length
             delegate: FluidControls.IconButton {
                 id: actionButton
 
@@ -173,7 +175,7 @@ ToolBar {
 
             onClicked: overflowMenu.open()
 
-            visible: appBar.actions.length > appBar.maxActionCount
+            visible: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
 
             Menu {
                 id: overflowMenu
@@ -181,7 +183,8 @@ ToolBar {
                 y: overflowButton.height
 
                 Instantiator {
-                    model: appBar.actions.length > appBar.maxActionCount ? appBar.actions.length - appBar.maxActionCount : 0
+                    model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+                           ? appBar.actions.length - appBar.maxActionCount : 0
                     delegate: FluidControls.MenuItem {
                         id: overflowMenuItem
 

@@ -58,19 +58,30 @@ Run the icon script located here:
 ./scripts/fetch_icons.sh
 ```
 
-In your project file, include the fluid.pri file:  
-  `include(path/to/fluid.pri)`
+In your project file, include the `fluid.pri` file:  
+```qmake
+include(path/to/fluid.pri)
+```
 
 Then, in your `main.cpp` file or wherever you set up a `QQmlApplicationEngine`:
-* add this include directive :  
-`#include "iconthemeimageprovider.h"`  
-* add the resources files to your `QQmlApplicationEngine` import paths :  
-`engine.addImportPath(QStringLiteral("qrc:/"));`
-* register fluid's image providers to the engine :
-`engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());`
-`engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());`
+* add this include directive:
+```cpp
+#include "iconsimageprovider.h"
+#include "iconthemeimageprovider.h"
+```
+* add the resources files to your `QQmlApplicationEngine` import paths:
+```cpp
+engine.addImportPath(QLatin1String("qrc:/"));
+```
+* register fluid's image providers to the engine:
+```cpp
+engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
+engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
+```
 * and after that you can load your qml file:  
-`engine.load(QUrl(QStringLiteral("qrc:/main.qml")));`
+```cpp
+engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+```
 
 ## Licensing
 

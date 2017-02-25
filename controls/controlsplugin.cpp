@@ -16,7 +16,7 @@
 
 #include "iconthemeimageprovider.h"
 
-class FluidCorePlugin : public QQmlExtensionPlugin
+class FluidControlsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
@@ -25,18 +25,18 @@ public:
     void registerTypes(const char *uri);
 };
 
-void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
+void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Controls"));
 
     engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 }
 
-void FluidCorePlugin::registerTypes(const char *uri)
+void FluidControlsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Controls"));
 
     // @uri Fluid.Controls
 }
 
-#include "plugin.moc"
+#include "controlsplugin.moc"

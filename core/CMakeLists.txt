@@ -6,7 +6,7 @@ include_directories(
 add_definitions(-DQT_PLUGIN)
 
 set(SOURCES
-    plugin.cpp
+    coreplugin.cpp
     clipboard.cpp
     qmldateutils.cpp
     device.cpp

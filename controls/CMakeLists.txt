@@ -1,6 +1,6 @@
 set(SOURCES
     iconthemeimageprovider.cpp
-    plugin.cpp
+    controlsplugin.cpp
 )
 
 set(QML_FILES

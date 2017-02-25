@@ -87,4 +87,4 @@ static void registerFluidCoreTypes() {
 Q_COREAPP_STARTUP_FUNCTION(registerFluidCoreTypes)
 #endif
 
-#include "plugin.moc"
+#include "coreplugin.moc"

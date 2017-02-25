@@ -10,10 +10,10 @@ SOURCES += \
     $$PWD/clipboard.cpp \
     $$PWD/device.cpp \
     $$PWD/iconsimageprovider.cpp \
-    $$PWD/plugin.cpp \
     $$PWD/qmldateutils.cpp \
     $$PWD/qqmlsortfilterproxymodel.cpp \
-    $$PWD/standardpaths.cpp
+    $$PWD/standardpaths.cpp \
+    $$PWD/coreplugin.cpp
 
 RESOURCES += \
     $$PWD/core.qrc

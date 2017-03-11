@@ -2,3 +2,4 @@ build/
 material-design-icons/
 icons/
 *.user
+*.qmlc

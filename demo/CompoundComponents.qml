@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -20,7 +20,7 @@ import Fluid.Controls 1.0
 import "Pages/Compound"
 
 Tab {
-    title: qsTr("Compound Components")
+    title: qsTr("Compound")
 
     Pane {
         id: listPane
@@ -46,6 +46,7 @@ Tab {
                 ListElement { title: qsTr("ListItem"); source: "qrc:/Pages/Compound/ListItemPage.qml" }
                 ListElement { title: qsTr("Card"); source: "qrc:/Pages/Compound/CardPage.qml" }
                 ListElement { title: qsTr("InfoBar"); source: "qrc:/Pages/Compound/InfoBarPage.qml" }
+                ListElement { title: qsTr("Dialogs"); source: "qrc:/Pages/Compound/DialogsPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

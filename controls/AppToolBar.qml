@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -34,8 +34,6 @@ ToolBar {
     property Page page
     property int maxActionCount: 3
 
-    height: page ? page.appBar.height : 0
-
     function pop(page) {
         stack.pop(page.appBar)
 
@@ -58,7 +56,6 @@ ToolBar {
     StackView {
         id: stack
 
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
     }
 }

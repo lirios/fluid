@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -18,96 +18,106 @@ import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0
 import "../.."
 
-ColumnLayout {
-    Repeater {
-        model: 2
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-        StyledRectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumWidth: grid.width + 80
-            Layout.minimumHeight: grid.height + 80
+    ScrollBar.vertical: ScrollBar {}
 
-            GridLayout {
-                id: grid
-                anchors.centerIn: parent
-                columns: 3
+    ColumnLayout {
+        id: layout
+        anchors.fill: parent
 
-                // Row 1
+        Repeater {
+            model: 2
 
-                Item {
-                    width: 1
-                    height: 1
-                }
+            StyledRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: grid.width + 80
+                Layout.minimumHeight: grid.height + 80
 
-                TitleLabel {
-                    text: qsTr("Determinate")
+                GridLayout {
+                    id: grid
+                    anchors.centerIn: parent
+                    columns: 3
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    // Row 1
 
-                TitleLabel {
-                    text: qsTr("Indeterminate")
+                    Item {
+                        width: 1
+                        height: 1
+                    }
 
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                    TitleLabel {
+                        text: qsTr("Determinate")
 
-                // Row 2
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                Label {
-                    text: qsTr("Static")
-                }
+                    TitleLabel {
+                        text: qsTr("Indeterminate")
 
-                ProgressBar {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                    indeterminate: false
-                }
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                ProgressBar {
-                    from: 0.0
-                    to: 1.0
-                    value: 0.5
-                    indeterminate: true
-                }
+                    // Row 2
 
-                // Row 3
+                    Label {
+                        text: qsTr("Static")
+                    }
 
-                Label {
-                    text: qsTr("Animated")
-                }
+                    ProgressBar {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                        indeterminate: false
+                    }
 
-                ProgressBar {
-                    from: 0.0
-                    to: 1.0
-                    indeterminate: false
+                    ProgressBar {
+                        from: 0.0
+                        to: 1.0
+                        value: 0.5
+                        indeterminate: true
+                    }
 
-                    SequentialAnimation on value {
-                        running: true
-                        loops: NumberAnimation.Infinite
+                    // Row 3
 
-                        NumberAnimation {
-                            from: 0.0
-                            to: 1.0
-                            duration: 3000
+                    Label {
+                        text: qsTr("Animated")
+                    }
+
+                    ProgressBar {
+                        from: 0.0
+                        to: 1.0
+                        indeterminate: false
+
+                        SequentialAnimation on value {
+                            running: true
+                            loops: NumberAnimation.Infinite
+
+                            NumberAnimation {
+                                from: 0.0
+                                to: 1.0
+                                duration: 3000
+                            }
                         }
                     }
-                }
 
-                ProgressBar {
-                    from: 0.0
-                    to: 1.0
-                    indeterminate: true
+                    ProgressBar {
+                        from: 0.0
+                        to: 1.0
+                        indeterminate: true
 
-                    SequentialAnimation on value {
-                        running: true
-                        loops: NumberAnimation.Infinite
+                        SequentialAnimation on value {
+                            running: true
+                            loops: NumberAnimation.Infinite
 
-                        NumberAnimation {
-                            from: 0.0
-                            to: 1.0
-                            duration: 3000
+                            NumberAnimation {
+                                from: 0.0
+                                to: 1.0
+                                duration: 3000
+                            }
                         }
                     }
                 }

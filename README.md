@@ -3,7 +3,7 @@ Fluid
 
 [![ZenHub.io](https://img.shields.io/badge/supercharged%20by-zenhub.io-blue.svg)](https://zenhub.io)
 
-[![License](https://img.shields.io/badge/license-MPL2%2B-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
+[![License](https://img.shields.io/badge/license-MPL2-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 [![GitHub release](https://img.shields.io/github/release/lirios/fluid.svg)](https://github.com/lirios/fluid)
 [![Build Status](https://travis-ci.org/lirios/fluid.svg?branch=master)](https://travis-ci.org/lirios/fluid)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/fluid.svg)](https://github.com/lirios/fluid/issues)
@@ -13,7 +13,7 @@ Fluid is a collection of cross-platform QtQuick components for building fluid an
 
 ## Dependencies
 
-Qt >= 5.7.0 with at least the following modules is required:
+Qt >= 5.8.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
@@ -58,19 +58,30 @@ Run the icon script located here:
 ./scripts/fetch_icons.sh
 ```
 
-In your project file, include the fluid.pri file:  
-  `include(path/to/fluid.pri)`
+In your project file, include the `fluid.pri` file:  
+```qmake
+include(path/to/fluid.pri)
+```
 
 Then, in your `main.cpp` file or wherever you set up a `QQmlApplicationEngine`:
-* add this include directive :  
-`#include "iconthemeimageprovider.h"`  
-* add the resources files to your `QQmlApplicationEngine` import paths :  
-`engine.addImportPath(QStringLiteral("qrc:/"));`
-* register fluid's image providers to the engine :
-`engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());`
-`engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());`
+* add this include directive:
+```cpp
+#include "iconsimageprovider.h"
+#include "iconthemeimageprovider.h"
+```
+* add the resources files to your `QQmlApplicationEngine` import paths:
+```cpp
+engine.addImportPath(QLatin1String("qrc:/"));
+```
+* register fluid's image providers to the engine:
+```cpp
+engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
+engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
+```
 * and after that you can load your qml file:  
-`engine.load(QUrl(QStringLiteral("qrc:/main.qml")));`
+```cpp
+engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+```
 
 ## Licensing
 

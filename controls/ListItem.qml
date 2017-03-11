@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -71,9 +71,7 @@ BaseListItem {
                 }
 
                 visible: icon.valid
-                color: listItem.highlighted ? Material.primaryColor
-                        : Material.theme == Material.Light ? FluidStyle.iconColorLight
-                                                           : FluidStyle.iconColorDark
+                color: listItem.highlighted ? Material.primaryColor : enabled ? Material.iconColor : Material.iconDisabledColor
             }
         }
 

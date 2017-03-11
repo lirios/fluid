@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -20,7 +20,7 @@ import Fluid.Controls 1.0
 import "Pages/Material"
 
 Tab {
-    title: qsTr("Material Components")
+    title: qsTr("Material")
 
     Pane {
         id: listPane

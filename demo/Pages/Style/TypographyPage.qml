@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -18,8 +18,14 @@ import QtQuick.Controls 2.0
 import Fluid.Controls 1.0
 import "../.."
 
-Item {
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
+
+    ScrollBar.vertical: ScrollBar {}
+
     ColumnLayout {
+        id: layout
         anchors.fill: parent
         anchors.margins: Units.mediumSpacing
         spacing: Units.smallSpacing

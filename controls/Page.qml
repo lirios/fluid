@@ -1,7 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -14,7 +15,7 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
    \qmltype Page
@@ -27,13 +28,13 @@ import Fluid.Controls 1.0
 
    \qml
    import QtQuick 2.4
-   import Fluid.Controls 1.0
+   import Fluid.Controls 1.0 as FluidControls
 
-   Page {
+   FluidControls.Page {
        title: "Application Name"
 
        actions: [
-           Action {
+           FluidControls.Action {
                name: "Print"
 
                // Icon name from the Google Material Design icon pack
@@ -123,14 +124,15 @@ Page {
         return StackView.view.push({item: component, properties: properties});
     }
 
-    AppBar {
+    FluidControls.AppBar {
         id: appBar
 
         title: page.title
         parent: null
 
         leftAction: Action {
-            text: "Back"
+            text: qsTr("Back")
+            tooltip: qsTr("Go back")
             iconName: "navigation/arrow_back"
             onTriggered: page.pop()
             visible: page.canGoBack

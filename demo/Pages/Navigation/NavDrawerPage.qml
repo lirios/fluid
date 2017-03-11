@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,13 +12,12 @@
  * $END_LICENSE$
  */
 
+import QtQuick 2.0
 import QtQuick.Controls 2.0
 import Fluid.Controls 1.0
 import "../.."
 
-Page {
-    title: qsTr("Navigation drawer")
-
+Item {
     Button {
         anchors.centerIn: parent
         text: qsTr("Open")

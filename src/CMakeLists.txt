@@ -77,3 +77,9 @@ install(
 install(EXPORT FluidTargets
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         FILE FluidTargets.cmake NAMESPACE Fluid::)
+
+##################################################
+
+include(ECMGeneratePriFile)
+ecm_generate_pri_file(BASE_NAME Fluid LIB_NAME Fluid DEPS "core" FILENAME_VAR PRI_FILENAME)
+install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})

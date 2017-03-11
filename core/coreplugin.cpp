@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -87,4 +87,4 @@ static void registerFluidCoreTypes() {
 Q_COREAPP_STARTUP_FUNCTION(registerFluidCoreTypes)
 #endif
 
-#include "plugin.moc"
+#include "coreplugin.moc"

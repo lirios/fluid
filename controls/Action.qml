@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -61,9 +61,11 @@ Object {
     property string text
 
     /*!
-       The tooltip displayed for the action.
+       The tool tip displayed for the action.
      */
-    property string tooltip
+    property string toolTip
+
+    property string tooltip: toolTip
 
     /*!
        Set to \c false to hide the action in the UI.

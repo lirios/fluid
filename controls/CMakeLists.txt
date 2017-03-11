@@ -1,20 +1,22 @@
 set(SOURCES
     iconthemeimageprovider.cpp
-    plugin.cpp
+    controlsplugin.cpp
 )
 
 set(QML_FILES
     plugins.qmltypes
     qmldir
     Action.qml
+    AlertDialog.qml
     AppBar.qml
+    ApplicationWindow.qml
     AppToolBar.qml
     BaseListItem.qml
     BodyLabel.qml
     CaptionLabel.qml
     Card.qml
     CircleImage.qml
-    Dialog.qml
+    DialogLabel.qml
     DisplayLabel.qml
     FluidStyle.qml
     FluidWindow.qml
@@ -22,9 +24,11 @@ set(QML_FILES
     IconButton.qml
     Icon.qml
     InfoBar.qml
+    InputDialog.qml
     ListItemDelegate.qml
     ListItem.qml
     Loadable.qml
+    MenuItem.qml
     NavigationDrawer.qml
     NoiseBackground.qml
     Page.qml
@@ -47,6 +51,7 @@ set(MATERIAL_FILES
     +material/BaseListItem.qml
     +material/BodyLabel.qml
     +material/CaptionLabel.qml
+    +material/DialogLabel.qml
     +material/DisplayLabel.qml
     +material/HeadlineLabel.qml
     +material/SubheadingLabel.qml

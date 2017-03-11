@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -16,10 +16,9 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import Fluid.Controls 1.0
 
-Page {
-    title: qsTr("Cards")
-
+Item {
     Card {
+        id: card
         anchors.centerIn: parent
         width: 400
         height: 400
@@ -33,6 +32,11 @@ Page {
             }
             height: 200
             source: "https://www.nps.gov/yose/planyourvisit/images/glacier-point-people-960web.jpg"
+
+            BusyIndicator {
+                anchors.centerIn: parent
+                visible: picture.status !== Image.Ready
+            }
         }
 
         Column {

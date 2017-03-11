@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -70,14 +70,14 @@ Icon {
             icon.Material.theme = Material.Light
 
             // Colors must be converted to strings for compare to work
-            compare(String(icon.color), String(FluidStyle.iconColorLight))
+            compare(String(icon.color), String(Material.iconColor))
         }
 
         function test_color_should_be_dark_icon_color_for_dark_theme() {
             icon.Material.theme = Material.Dark
 
             // Colors must be converted to strings for compare to work
-            compare(String(icon.color), String(FluidStyle.iconColorDark))
+            compare(String(icon.color), String(Material.iconColor))
         }
     }
 }

@@ -1,7 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,12 +13,13 @@
  * $END_LICENSE$
  */
 
+import QtQml 2.2
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.0
 import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
    \qmltype AppBar
@@ -73,6 +75,7 @@ ToolBar {
        into a drop-down menu. When using an action bar with a page, this inherits
        from the global \l Toolbar::maxActionCount. If you are using an action bar
        for custom purposes outside of a toolbar, this defaults to \c 3.
+       Set to \c 0 if you don't want to overflow actions.
      */
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3
 
@@ -83,19 +86,19 @@ ToolBar {
      */
     property alias title: titleLabel.text
 
-    property alias tabs: tabBar.contentData
-
-    property alias currentTabIndex: tabBar.currentIndex
-
     property AppToolBar toolbar
 
-    height: Device.gridUnit + (tabBar.visible ? tabBar.height : 0)
+    implicitHeight: Device.gridUnit
 
     IconButton {
         id: leftButton
 
         property bool showing: leftAction && leftAction.visible
         property int margin: (width - 24)/2
+
+        ToolTip.visible: ToolTip.text != "" && (Device.isMobile ? pressed : hovered)
+        ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+        ToolTip.text: leftAction ? leftAction.tooltip : ""
 
         anchors {
             verticalCenter: actionsRow.verticalCenter
@@ -114,7 +117,7 @@ ToolBar {
         }
     }
 
-    Label {
+    FluidControls.TitleLabel {
         id: titleLabel
 
         anchors {
@@ -126,7 +129,6 @@ ToolBar {
         }
 
         textFormat: Text.PlainText
-        font: FluidStyle.titleFont
         color: Material.primaryTextColor
         elide: Text.ElideRight
     }
@@ -144,26 +146,64 @@ ToolBar {
         spacing: 24 - 2 * leftButton.margin
 
         Repeater {
-            model: appBar.actions
-            delegate: IconButton {
+            model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+                   ? appBar.maxActionCount : appBar.actions.length
+            delegate: FluidControls.IconButton {
                 id: actionButton
+
+                ToolTip.visible: ToolTip.text !== "" && !overflowMenu.visible && (Device.isMobile ? pressed : hovered)
+                ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+                ToolTip.text: appBar.actions[index].tooltip
 
                 anchors.verticalCenter: parent.verticalCenter
 
                 iconSize: appBar.iconSize
+                iconSource: appBar.actions[index].iconSource
 
-                iconSource: modelData.iconSource
-                visible: modelData.visible
-                enabled: modelData.enabled
-                onClicked: modelData.triggered(actionButton)
+                visible: appBar.actions[index].visible
+                enabled: appBar.actions[index].enabled
+
+                onClicked: appBar.actions[index].triggered(actionButton)
             }
         }
-    }
 
-    TabBar {
-        id: tabBar
-        width: parent.width
-        y: actionsRow.height
-        visible: contentChildren.count > 0
+        FluidControls.IconButton {
+            id: overflowButton
+
+            anchors.verticalCenter: parent.verticalCenter
+
+            iconSize: appBar.iconSize
+            iconName: "navigation/more_vert"
+
+            onClicked: overflowMenu.open()
+
+            visible: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+
+            Menu {
+                id: overflowMenu
+
+                y: overflowButton.height
+
+                Instantiator {
+                    model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+                           ? appBar.actions.length - appBar.maxActionCount : 0
+                    delegate: FluidControls.MenuItem {
+                        id: overflowMenuItem
+
+                        iconSource: appBar.actions[index + appBar.maxActionCount].iconSource
+                        iconSize: appBar.iconSize
+
+                        text: appBar.actions[index + appBar.maxActionCount].text
+
+                        enabled: appBar.actions[index + appBar.maxActionCount].enabled
+                        visible: appBar.actions[index + appBar.maxActionCount].visible
+
+                        onTriggered: appBar.actions[index + appBar.maxActionCount].triggered(overflowMenuItem)
+                    }
+                    onObjectAdded: overflowMenu.addItem(object)
+                    onObjectRemoved: overflowMenu.removeItem(index)
+                }
+            }
+        }
     }
 }

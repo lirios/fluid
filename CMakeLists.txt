@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(APPLE_SUPPRESS_X11_WARNING ON)
 
 # Set version
-set(PROJECT_VERSION "0.9.0")
+set(PROJECT_VERSION "0.10.0")
 set(PROJECT_VERSION_MAJOR 0)
 set(PROJECT_SOVERSION 0)
 
@@ -49,7 +49,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # Find Qt5
-set(REQUIRED_QT_VERSION "5.7.0")
+set(REQUIRED_QT_VERSION "5.8.0")
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED COMPONENTS
              Svg Gui Qml Quick QuickTest QuickControls2)
 
@@ -69,6 +69,7 @@ add_subdirectory(controls)
 add_subdirectory(core)
 add_subdirectory(demo)
 add_subdirectory(effects)
+add_subdirectory(layouts)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(material)

@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -17,17 +17,27 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import "../.."
 
-ColumnLayout {
-    Repeater {
-        model: 2
+Flickable {
+    clip: true
+    contentHeight: Math.max(layout.implicitHeight, height)
 
-        StyledRectangle {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+    ScrollBar.vertical: ScrollBar {}
 
-            BusyIndicator {
-                anchors.centerIn: parent
-                running: true
+    ColumnLayout {
+        id: layout
+        anchors.fill: parent
+
+        Repeater {
+            model: 2
+
+            StyledRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                BusyIndicator {
+                    anchors.centerIn: parent
+                    running: true
+                }
             }
         }
     }

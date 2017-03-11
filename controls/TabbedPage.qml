@@ -69,6 +69,10 @@ FluidControls.Page {
                 model: swipeView.contentChildren
                 delegate: TabButton {
                     text: modelData.title
+                    implicitWidth: Math.max(background ? background.implicitWidth : 0,
+                                                         contentItem.implicitWidth +
+                                                         (tabCloseButton.visible ? tabCloseButton.width : 0) +
+                                                         leftPadding + rightPadding)
                     width: parent.fixed ? parent.width / parent.count : implicitWidth
 
                     // Active color
@@ -94,9 +98,10 @@ FluidControls.Page {
 
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.rightMargin: FluidControls.Units.smallSpacing
+                        anchors.rightMargin: -rightPadding
 
                         iconName: "navigation/close"
+                        iconColor: contentItem.color
                         visible: modelData.canRemove
 
                         onClicked: swipeView.removeItem(index)

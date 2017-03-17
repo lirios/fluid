@@ -72,3 +72,11 @@ icons.files += $$FLUID_SOURCE_TREE/icons/editor
 icons.files += $$FLUID_SOURCE_TREE/icons/hardware
 icons.files += $$FLUID_SOURCE_TREE/icons/navigation
 INSTALLS += icons
+
+android {
+    qmlfiles2build.files = $$QML_FILES
+    qmlfiles2build.path = $$DESTDIR
+    icons2build.files = $$icons.files
+    icons2build.path = $$DESTDIR/icons
+    COPIES += qmlfiles2build icons2build
+}

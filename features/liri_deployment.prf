@@ -56,3 +56,7 @@ linux {
     DEFINES += DATADIR=\\\"$$LIRI_INSTALL_DATADIR\\\"
     DEFINES += LIBEXECDIR=\\\"$$LIRI_INSTALL_LIBEXECDIR\\\"
 }
+
+android {
+    CONFIG += use_qt_paths
+}

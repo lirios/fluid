@@ -35,8 +35,23 @@
 
 test $# -eq 1 || { echo "Usage: $(basename $0) <tag>" >&2; exit 1; }
 
+workdir=$(dirname `readlink -f $0`)
+
 tag=$1
 version=${tag#v}
 prefix=fluid-${version}
 
-git archive --format=tar --prefix=$prefix/ $tag | xz -9 > ${prefix}.tar.xz
+rm -f ${prefix}.tar ${prefix}.tar.xz
+
+${workdir}/fetch_icons.sh || exit $?
+
+{
+    git archive --format=tar --prefix=$prefix/ $tag > ${prefix}.tar
+    mkdir $prefix
+    cp -R icons $prefix
+    tar --append --file=${prefix}.tar $prefix
+    rm -rf $prefix
+    xz -9 ${prefix}.tar
+} || {
+    rm -f ${prefix}.tar ${prefix}.tar.xz
+}

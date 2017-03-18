@@ -23,9 +23,10 @@
     Fluid is comprised of several QML modules.
 
     \list
-      \li \l{Fluid Core}
-      \li \l{Fluid Controls}
-      \li \l{Fluid Effects}
-      \li \l{Fluid Material}
+      \li \l{Fluid Core QML Types}{Fluid Core}
+      \li \l{Fluid Controls QML Types}{Fluid Controls}
+      \li \l{Fluid Effects QML Types}{Fluid Effects}
+      \li \l{Fluid Layouts QML Types}{Fluid Layouts}
+      \li \l{Fluid Material QML Types}{Fluid Material}
     \endlist
 */

@@ -23,7 +23,10 @@ import QtQuick.Controls.Material 2.0
     \brief Cards display content composed of different elements.
 
     \code
-    Card {
+    import QtQuick 2.4
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.Card {
         anchors.centerIn: parent
         width: 400
         height: 400
@@ -49,11 +52,11 @@ import QtQuick.Controls.Material 2.0
             }
             spacing: Units.smallSpacing * 2
 
-            TitleLabel {
+            FluidControls.TitleLabel {
                 text: qsTr("Yosemite National Park")
             }
 
-            BodyLabel {
+            FluidControls.BodyLabel {
                 text: qsTr("First protected in 1864, Yosemite National Park " +
                            "is best known for its waterfalls, but within its " +
                            "nearly 1,200 square miles, you can find deep " +

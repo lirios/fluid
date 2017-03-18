@@ -13,22 +13,22 @@
  */
 
 /*!
-    \qmlmodule Fluid.Controls 1.0
-    \title Fluid Controls QML Types
+    \qmlmodule Fluid.Effects 1.0
+    \title Fluid Effects QML Types
     \ingroup qmlmodules
 
-    \brief Provides QML types for user interfaces.
+    \brief Provides effects for Qt applications.
 
-    \l{Fluid Controls} provides QML types for creating user interfaces.
+    \l{Fluid Effects} provides effects to improve user interfaces.
 
-    Fluid Controls QML types can be imported into your application
+    Fluid Effects QML types can be imported into your application
     using the following import statement in your .qml file:
 
     \badcode
-    import Fluid.Controls 1.0 as FluidControls
+    import Fluid.Effects 1.0 as FluidEffects
     \endcode
 
     \section1
-    \generatelist {qmltypesbymodule Fluid.Controls}
+    \generatelist {qmltypesbymodule Fluid.Effects}
     \noautolist
 */

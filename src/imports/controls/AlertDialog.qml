@@ -17,7 +17,7 @@ import QtQuick.Controls 2.1
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
-    \qmltype Dialog
+    \qmltype AlertDialog
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
@@ -28,10 +28,40 @@ import Fluid.Controls 1.0 as FluidControls
 
     Most alert don't need a title and they summarize a decision in a sentence or two
     by either asking a question or making a statement related to the action buttons.
+
+   Here is a short example of usage:
+
+   \qml
+   import QtQuick 2.4
+   import QtQuick.Controls 2.1
+   import Fluid.Controls 1.0 as FluidControls
+
+   Item {
+       FluidControls.AlertDialog {
+           id: alertDialog
+           title: "Use FooBar's localization service?"
+           text: "Let FooBar help apps determine the location. " +
+                 "This means sending anonymous location data to FooBar, " +
+                 "even when no apps are running."
+       }
+
+       Button {
+           anchors.centerIn: parent
+           text: "Click me"
+           onClicked: alertDialog.open()
+       }
+   }
+   \endqml
 */
 Dialog {
+    /*!
+        \internal
+    */
     default property alias content: dialogContent.data
 
+    /*!
+        Informative text to display.
+    */
     property alias text: dialogLabel.text
 
     x: (parent.width - width) / 2

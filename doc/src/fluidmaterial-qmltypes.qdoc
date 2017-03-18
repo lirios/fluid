@@ -13,22 +13,22 @@
  */
 
 /*!
-    \qmlmodule Fluid.Controls 1.0
-    \title Fluid Controls QML Types
+    \qmlmodule Fluid.Material 1.0
+    \title Fluid Material QML Types
     \ingroup qmlmodules
 
-    \brief Provides QML types for user interfaces.
+    \brief Provides QML types specific to Material Design.
 
-    \l{Fluid Controls} provides QML types for creating user interfaces.
+    \l{Fluid Material} provides QML types for creating Material Design user interfaces.
 
-    Fluid Controls QML types can be imported into your application
+    Fluid Material QML types can be imported into your application
     using the following import statement in your .qml file:
 
     \badcode
-    import Fluid.Controls 1.0 as FluidControls
+    import Fluid.Material 1.0 as FluidMaterial
     \endcode
 
     \section1
-    \generatelist {qmltypesbymodule Fluid.Controls}
+    \generatelist {qmltypesbymodule Fluid.Material}
     \noautolist
 */

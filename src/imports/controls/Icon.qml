@@ -93,13 +93,13 @@ Item {
     /*!
        \brief A URL pointing to an image to display as the icon.
 
-       By default, this is a special URL representing the icon named by \ref name from the Material
+       By default, this is a special URL representing the icon named by \l name from the Material
        Design icon collection when using the form of "collection/icon_name", or in the case of a
        single "icon_name", the platform's Freedesktop icon theme will be used.
 
-       By default, icons from the Material Design icons collection will be treated as symbolic icons and colored using the specified \ref color, while icons from the Freedesktop icon theme will
+       By default, icons from the Material Design icons collection will be treated as symbolic icons and colored using the specified \l color, while icons from the Freedesktop icon theme will
        not be colorized. To override this, or set the behavior for your own custom icons, use
-       \ref colorize.
+       \l colorize.
 
        \sa name
      */

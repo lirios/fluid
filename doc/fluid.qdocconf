@@ -1,4 +1,48 @@
 include(config/fluid-project.qdocconf)
 include($QT_INSTALL_DOCS/global/qt-html-templates-offline.qdocconf)
 
-sourcedirs += /home/plfiorini/git/liri/fluid/src/imports
+HTML.nonavigationbar = "false"
+
+HTML.navigationseparator = ""
+
+HTML.stylesheets = template/style/offline.css
+
+HTML.headerstyles = \
+    "<!-- begin headerstyles -->\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"https://code.getmdl.io/1.3.0/material.red-orange.min.css\">\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\">\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"style/offline.css\">\n" \
+    "  <script defer type=\"text/javascript\" src=\"https://code.getmdl.io/1.3.0/material.min.js\"></script>\n" \
+    "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n" \
+    "<!-- end headerstyles -->\n" \
+
+HTML.endheader = \
+    "</head>\n"
+
+HTML.postheader = \
+    "<!-- begin postheader -->\n" \
+    "<!-- end postheader -->\n" \
+
+HTML.postpostheader = \
+    "<!-- begin postpostheader -->\n" \
+    "<body class=\"mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base\">\n" \
+    "  <div class=\"liri-layout mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n" \
+    "    <header class=\"mdl-layout__header mdl-layout__header--scroll\">\n" \
+    "    </header>\n" \
+    "    <div class=\"liri-ribbon mdl-color--primary\"></div>\n" \
+    "    <main class=\"liri-main mdl-layout__content\">\n" \
+    "      <div class="liri-container mdl-grid">\n" \
+    "        <div class=\"mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone\"></div>\n" \
+    "        <div class=\"liri-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col pt32\">\n" \
+    "          <a name=\"top\"></a>\n" \
+    "          <div class=\"container\">\n" \
+    "<!-- end postpostheader -->\n" \
+
+HTML.footer = \
+    "<!-- begin footer -->\n" \
+    "          </div>\n" \
+    "        </div>\n" \
+    "      </div>\n" \
+    "    </main>\n" \
+    "  </div>\n" \
+    "<!-- end footer -->\n" \

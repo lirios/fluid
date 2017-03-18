@@ -47,7 +47,7 @@ ${workdir}/fetch_icons.sh || exit $?
 
 {
     git archive --format=tar --prefix=$prefix/ $tag > ${prefix}.tar
-    mkdir $prefix
+    mkdir -p $prefix/.git
     cp -R icons $prefix
     tar --append --file=${prefix}.tar $prefix
     rm -rf $prefix

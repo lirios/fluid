@@ -34,14 +34,18 @@ TEMPLATE = subdirs
 
 SUBDIRS += src tests
 
-OTHER_FILES += \
-    $$PWD/AUTHORS.md \
-    $$PWD/LICENSE.MPL2 \
-    $$PWD/README.md \
+prf.files = \
     $$PWD/features/liri_deployment.prf \
     $$PWD/features/liri_qml_module.prf \
     $$PWD/features/liri_qml_plugin.prf \
     $$PWD/features/liri_qt_app.prf \
     $$PWD/features/liri_qt_module.prf
+prf.path = $$[QT_HOST_DATA]/mkspecs/features
+INSTALLS += prf
+
+OTHER_FILES += \
+    $$PWD/AUTHORS.md \
+    $$PWD/LICENSE.MPL2 \
+    $$PWD/README.md
 
 include(doc/doc.pri)

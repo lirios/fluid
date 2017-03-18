@@ -2,7 +2,6 @@ TEMPLATE = app
 TARGET = fluid-demo
 
 QT += gui qml quick quickcontrols2
-CONFIG += c++11
 
 SOURCES += main.cpp
 RESOURCES += demo.qrc

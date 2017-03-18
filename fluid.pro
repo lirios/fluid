@@ -26,8 +26,12 @@ defineTest(minQtVersion) {
     error("Use at least Qt 5.8.0.")
 }
 
-!exists(material-design-icons/README.md) {
-    error("A git submodule is missing. Run 'git submodule update --init' in $${PWD}.")
+exists(.git) {
+    !exists(icons/icons.qrc) {
+        !exists(material-design-icons/README.md) {
+            error("A git submodule is missing. Run 'git submodule update --init' in $${PWD}.")
+        }
+    }
 }
 
 TEMPLATE = subdirs

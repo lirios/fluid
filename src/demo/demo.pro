@@ -1,3 +1,5 @@
+load(liri_deployment)
+
 TEMPLATE = app
 TARGET = fluid-demo
 
@@ -17,7 +19,8 @@ OTHER_FILES += \
     $$files(qml/Pages/Material/*.qml) \
     $$files(qml/Pages/Navigation/*.qml)
 
-load(liri_qt_app)
+target.path = $$LIRI_INSTALL_BINDIR
+INSTALLS += target
 
 android {
     DISTFILES += \

@@ -27,7 +27,7 @@ QString DateUtils::formatDuration(qlonglong duration, DurationFormat format, Dur
 
     if (type == Any || type == Seconds) {
         if (format == Short)
-            string = QStringLiteral("%1").arg(seconds, 2, 10, QChar('0'));
+            string = QStringLiteral("%1").arg(seconds, 2, 10, QLatin1Char('0'));
         else
             string = QStringLiteral("%1s").arg(seconds);
     }
@@ -35,9 +35,9 @@ QString DateUtils::formatDuration(qlonglong duration, DurationFormat format, Dur
     if (type == Seconds || type == Minutes || (type == Any && (minutes >= 1 || hours >= 1))) {
         if (format == Short) {
             if (string.length() > 0)
-                string = QStringLiteral("%1:%2").arg(minutes, 2, 10, QChar('0')).arg(string);
+                string = QStringLiteral("%1:%2").arg(minutes, 2, 10, QLatin1Char('0')).arg(string);
             else
-                string = QStringLiteral("%1").arg(minutes, 2, 10, QChar('0'));
+                string = QStringLiteral("%1").arg(minutes, 2, 10, QLatin1Char('0'));
         } else {
             string = QStringLiteral("%1m %2").arg(minutes).arg(string);
         }
@@ -62,7 +62,7 @@ QString DateUtils::friendlyTime(const QDateTime &time, bool standalone)
     QDateTime now = QDateTime::currentDateTime();
     qint64 minutes = qRound64(time.secsTo(now) / 60.0f);
     if (minutes < 1)
-        return standalone ? tr("Now") : "now";
+        return standalone ? tr("Now") : tr("now");
     else if (minutes == 1)
         return tr("1 minute ago");
     else if (minutes < 60)

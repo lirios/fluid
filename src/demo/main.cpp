@@ -25,13 +25,13 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     if (QQuickStyle::name().isEmpty())
-        QQuickStyle::setStyle("Material");
+        QQuickStyle::setStyle(QLatin1String("Material"));
 
     QQmlApplicationEngine engine;
 #ifdef FLUID_LOCAL
-    engine.addImportPath(QStringLiteral("qrc:/qml"));
+    engine.addImportPath(QLatin1String("qrc:/qml"));
 #endif
-    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+    engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
 
     return app.exec();
 }

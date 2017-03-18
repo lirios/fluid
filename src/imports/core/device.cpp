@@ -66,18 +66,18 @@ QString Device::iconName() const
 {
     switch (formFactor()) {
     case Phone:
-        return "hardware/smartphone";
+        return QLatin1String("hardware/smartphone");
     case Phablet:
-        return "hardware/tablet";
+        return QLatin1String("hardware/tablet");
     case Tablet:
-        return "hardware/tablet";
+        return QLatin1String("hardware/tablet");
     case Computer:
-        return "hardware/desktop_windows";
+        return QLatin1String("hardware/desktop_windows");
     case TV:
-        return "hardware/tv";
+        return QLatin1String("hardware/tv");
     case Unknown:
     default:
-        return "hardware/computer";
+        return QLatin1String("hardware/computer");
     }
 }
 

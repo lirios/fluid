@@ -36,7 +36,7 @@ QPixmap IconThemeImageProvider::requestPixmap(const QString &id, QSize *realSize
         *realSize = size;
 
     // Is it a path?
-    if (id.startsWith('/'))
+    if (id.startsWith(QLatin1Char('/')))
         return QPixmap(id).scaled(size);
 
     // Return icon from theme or fallback to a generic icon

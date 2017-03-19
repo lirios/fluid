@@ -5,50 +5,8 @@ IMPORT_VERSION = 1.0
 QT += qml quick
 
 QML_FILES += \
-    Action.qml \
-    AlertDialog.qml \
-    AppBar.qml \
-    ApplicationWindow.qml \
-    AppToolBar.qml \
-    BaseListItem.qml \
-    BodyLabel.qml \
-    CaptionLabel.qml \
-    Card.qml \
-    CircleImage.qml \
-    DialogLabel.qml \
-    DisplayLabel.qml \
-    FluidStyle.qml \
-    FluidWindow.qml \
-    HeadlineLabel.qml \
-    IconButton.qml \
-    Icon.qml \
-    InfoBar.qml \
-    InputDialog.qml \
-    ListItemDelegate.qml \
-    ListItem.qml \
-    Loadable.qml \
-    MenuItem.qml \
-    NavigationDrawer.qml \
-    NoiseBackground.qml \
-    Page.qml \
-    PageStack.qml \
-    Placeholder.qml \
-    Showable.qml \
-    Sidebar.qml \
-    SmoothFadeImage.qml \
-    SmoothFadeLoader.qml \
-    Subheader.qml \
-    SubheadingLabel.qml \
-    Tab.qml \
-    TabbedPage.qml \
-    ThinDivider.qml \
-    TitleLabel.qml \
-    Units.qml \
-    +material/BaseListItem.qml \
-    +material/BodyLabel.qml \
-    +material/CaptionLabel.qml \
-    +material/DialogLabel.qml \
-    +material/DisplayLabel.qml
+    $$files(*.qml) \
+    $$files(+material/*.qml)
 
 include(controls.pri)
 

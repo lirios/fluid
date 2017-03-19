@@ -5,9 +5,7 @@ IMPORT_VERSION = 1.0
 QT += qml quick Fluid
 
 QML_FILES += \
-    Object.qml \
-    PlatformExtensions.qml \
-    Utils.qml
+    $$files(*.qml)
 
 include(core.pri)
 

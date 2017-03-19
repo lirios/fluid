@@ -17,6 +17,15 @@
 
 using namespace Fluid;
 
+QString DateUtils::formattedDate(const QDate &date)
+{
+    if (date == QDate::currentDate())
+        return tr("Today (%1)").arg(dayOfWeek(date));
+    else if (date == QDate::currentDate().addDays(1))
+        return tr("Tomorrow (%1)").arg(dayOfWeek(date));
+    return date.toString(Qt::DefaultLocaleShortDate);
+}
+
 QString DateUtils::formatDuration(qlonglong duration, DurationFormat format, DurationType type)
 {
     int hours = duration / (1000 * 60 * 60);
@@ -77,6 +86,11 @@ QString DateUtils::friendlyTime(const QDateTime &time, bool standalone)
         return tr("1 day ago");
     else if (days <= 10)
         return tr("%1 days ago").arg(days);
-    QString string = time.toString();
+    QString string = time.toString(Qt::DefaultLocaleShortDate);
     return standalone ? string : tr("on %1").arg(string);
+}
+
+QString DateUtils::dayOfWeek(const QDate &date)
+{
+    return date.toString(QLatin1String("dddd"));
 }

@@ -3,4 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS += \
     controls \
     core \
-    material
+    fluid \
+    material \
+    fluid

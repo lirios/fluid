@@ -33,9 +33,11 @@ public:
     enum DurationType { Seconds, Minutes, Hours, Any };
     Q_ENUM(DurationType)
 
+    static QString formattedDate(const QDate &date);
     static QString formatDuration(qlonglong duration, DurationFormat format = Short,
                                   DurationType type = Any);
     static QString friendlyTime(const QDateTime &time, bool standalone);
+    static QString dayOfWeek(const QDate &date);
 };
 
 } // namespace Fluid

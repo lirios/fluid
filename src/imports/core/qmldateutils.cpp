@@ -20,6 +20,11 @@ DateUtils::DateUtils(QObject *parent)
 {
 }
 
+QString DateUtils::formattedDate(const QDate &date) const
+{
+    return Fluid::DateUtils::formattedDate(date);
+}
+
 QString DateUtils::formatDuration(qlonglong duration, DurationFormat format,
                                   DurationType type) const
 {
@@ -31,4 +36,9 @@ QString DateUtils::formatDuration(qlonglong duration, DurationFormat format,
 QString DateUtils::friendlyTime(const QDateTime &time, bool standalone) const
 {
     return Fluid::DateUtils::friendlyTime(time, standalone);
+}
+
+QString DateUtils::dayOfWeek(const QDate &date) const
+{
+    return Fluid::DateUtils::dayOfWeek(date);
 }

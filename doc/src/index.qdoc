@@ -16,9 +16,13 @@
     \page index.html
     \keyword Fluid Reference Documentation
 
-    A collection of cross-platform QtQuick components for building fluid and dynamic applications.
+    Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications.
 
-    \section1 QML Modules
+    \section2 Prerequisites
+
+    Fluid controls are based on \l{QtQuick Controls 2}.
+
+    \section2 QML Modules
 
     Fluid is comprised of several QML modules.
 

@@ -1,22 +1,58 @@
 include(config/fluid-project.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-html-templates-online.qdocconf)
+
+HTML.nonavigationbar = "true"
+
+HTML.navigationseparator = ""
+
+HTML.stylesheets = \
+    template/style/base.css \
+    template/style/liri.css
+
+HTML.headerstyles = \
+    "<!-- begin headerstyles -->\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"https://code.getmdl.io/1.3.0/material.light_blue-blue.min.css\">\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en\">\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"style/base.css\">\n" \
+    "  <link rel=\"stylesheet\" type=\"text/css\" href=\"style/liri.css\">\n" \
+    "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n" \
+    "<!-- end headerstyles -->\n" \
+
+HTML.headerscripts = \
+    "  <script defer type=\"text/javascript\" src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>\n" \
+    "  <script defer type=\"text/javascript\" src=\"https://code.getmdl.io/1.3.0/material.min.js\"></script>\n" \
+
+HTML.endheader = \
+    "</head>\n"
+
+HTML.postheader = \
+    "<!-- begin postheader -->\n" \
+    "<div style=\"display: none;\">\n" \
+    "<!-- end postheader -->\n" \
+
+HTML.postpostheader = \
+    "<!-- begin postpostheader -->\n" \
+    "</div>\n" \
+    "<body class=\"mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base\">\n" \
+    "  <div class=\"liri-layout mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n" \
+    "    <header class=\"mdl-layout__header mdl-layout__header--scroll\">\n" \
+    "    </header>\n" \
+    "    <div class=\"liri-ribbon mdl-color--primary\"></div>\n" \
+    "    <main class=\"liri-main mdl-layout__content\">\n" \
+    "      <div class="liri-container mdl-grid">\n" \
+    "        <div class=\"mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone\"></div>\n" \
+    "        <div class=\"liri-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col pt32\">\n" \
+    "          <a name=\"top\"></a>\n" \
+    "          <div class=\"container\">\n" \
+    "<!-- end postpostheader -->\n" \
+
+HTML.prologue = ""
 
 HTML.footer = \
+    "<!-- begin footer -->\n" \
+    "          </div>\n" \
     "        </div>\n" \
-    "       </div>\n" \
-    "   </div>\n" \
-    "   </div>\n" \
-    "</div>\n" \
-    "<div class=\"footer\">\n" \
-    "   <p>\n" \
-    "   <acronym title=\"Copyright\">&copy;</acronym> 2017 Liri.\n" \
-    "   Documentation contributions included herein are the copyrights of\n" \
-    "   their respective owners.<br>" \
-    "   The documentation provided herein is licensed under the terms of the" \
-    "   <a href=\"http://www.gnu.org/licenses/fdl.html\">GNU Free Documentation" \
-    "   License version 1.3</a> as published by the Free Software Foundation.<br>" \
-    "   Qt and respective logos are trademarks of The Qt Company Ltd. " \
-    "   in Finland and/or other countries worldwide. All other trademarks are property\n" \
-    "   of their respective owners. </p>\n" \
-    "</div>\n" \
-
-include($QT_INSTALL_DOCS/global/qt-html-templates-online.qdocconf)
+    "      </div>\n" \
+    "    </main>\n" \
+    "  </div>\n" \
+    "<!-- end footer -->\n" \

@@ -1,0 +1,138 @@
+/*** Font ***/
+
+@font-face {
+  font-family: 'liri';
+  src:  url('https://liri.io/fonts/liri/liri.eot?eue1d8');
+  src:  url('https://liri.io/fonts/liri/liri.eot?eue1d8#iefix') format('embedded-opentype'),
+    url('https://liri.io/fonts/liri/liri.ttf?eue1d8') format('truetype'),
+    url('https://liri.io/fonts/liri/liri.woff?eue1d8') format('woff'),
+    url('https://liri.io/fonts/liri/liri.svg?eue1d8#liri') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+i.icon-liri {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'liri' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-liri:before {
+  content: "\e900";
+}
+
+/*** Tags ***/
+
+code {
+    color: red;
+}
+
+/*** Layout ***/
+
+.liri-ribbon {
+    width: 100%;
+    height: 40vh;
+    background-color: antiquewhite;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.liri-main {
+    margin-top: -35vh;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+
+.liri-container {
+    max-width: 1600px;
+    width: calc(100% - 16px);
+    margin: 0 auto;
+}
+
+.liri-content {
+    border-radius: 2px;
+    padding: 80px 56px;
+    margin-bottom: 80px;
+}
+
+.liri-layout.is-small-screen .liri-content {
+    padding: 40px 28px;
+}
+
+.liri-content h3 {
+    margin-top: 48px;
+}
+
+.liri-bird {
+    font-size: 24px;
+    opacity: 1;
+    margin: 0 24px;
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .liri-bird {
+        display: inline-block;
+    }
+
+    .mdl-layout__drawer-button {
+        /* Hide the Hamburger button but will leave an unused space */
+        display: none;
+    }
+    .mdl-layout__header-row {
+        /* so important to make sure the Hamburger button didn't leave an unused space */
+        padding-left: 24px !important;
+    }
+}
+
+/*** Misc ***/
+
+.pointer {
+    cursor: pointer;
+}
+
+.no-padding-top {
+    padding-top: 0;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0;
+}
+
+.primary-text {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.secondary-text {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+/*** TOC ***/
+
+ul.toc {
+    border-left: solid 3px #c0ebf1;
+    padding-left: 20px;
+    line-height: 28px;
+
+    li {
+        font-size: 16px;
+        list-style: none;
+
+        a {
+            font-weight: 400;
+            color: #00bcd4;
+            text-decoration: none;
+        }
+    }
+}

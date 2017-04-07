@@ -26,12 +26,6 @@ HTML.endheader = \
 
 HTML.postheader = \
     "<!-- begin postheader -->\n" \
-    "<ul class=\"navigationbar\">\n" \
-    "<!-- end postheader -->\n" \
-
-HTML.postpostheader = \
-    "<!-- begin postpostheader -->\n" \
-    "</ul>\n" \
     "<body class=\"mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base\">\n" \
     "  <div class=\"liri-layout mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n" \
     "    <header class=\"mdl-layout__header mdl-layout__header--scroll\">\n" \
@@ -49,6 +43,12 @@ HTML.postpostheader = \
     "        <div class=\"liri-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col pt32\">\n" \
     "          <a name=\"top\"></a>\n" \
     "          <div class=\"container\">\n" \
+    "            <ul class=\"navigationbar\">\n" \
+    "<!-- end postheader -->\n" \
+
+HTML.postpostheader = \
+    "<!-- begin postpostheader -->\n" \
+    "            </ul>\n" \
     "<!-- end postpostheader -->\n" \
 
 HTML.prologue = ""

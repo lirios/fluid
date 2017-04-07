@@ -39,6 +39,7 @@ TEMPLATE = subdirs
 SUBDIRS += src tests
 
 prf.files = \
+    $$PWD/features/liri_create_cmake.prf \
     $$PWD/features/liri_deployment.prf \
     $$PWD/features/liri_qml_module.prf \
     $$PWD/features/liri_qml_plugin.prf \
@@ -46,6 +47,14 @@ prf.files = \
     $$PWD/features/liri_qt_module.prf
 prf.path = $$[QT_HOST_DATA]/mkspecs/features
 INSTALLS += prf
+
+prf_data_cmake.files = \
+    $$PWD/features/data/cmake/liri_ExtraSourceIncludes.cmake.in \
+    $$PWD/features/data/cmake/liri_Qt5BasicConfig.cmake.in \
+    $$PWD/features/data/cmake/liri_Qt5ConfigVersion.cmake.in \
+    $$PWD/features/data/cmake/liri_Qt5PluginTarget.cmake.in
+prf_data_cmake.path = $$[QT_HOST_DATA]/mkspecs/features/data/cmake
+INSTALLS += prf_data_cmake
 
 OTHER_FILES += \
     $$PWD/AUTHORS.md \

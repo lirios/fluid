@@ -2,9 +2,7 @@ load(liri_deployment)
 load(qt_module)
 load(qt_module_headers)
 
-# Use our CMake config creation
 CONFIG -= create_cmake
-#CONFIG += liri_create_cmake
 
 !use_qt_paths {
     QT_MODULE_INCLUDE_BASE = $$LIRI_INSTALL_INCLUDEDIR

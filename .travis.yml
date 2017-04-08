@@ -48,7 +48,7 @@ script:
 deploy:
   provider: bintray
   on:
-    branch: master
+    branch: develop
     condition: "$CC = gcc"
   file: cibuild/bintray.json
   user:

@@ -16,7 +16,7 @@
 #pragma once
 
 #ifdef FLUID_LOCAL
-    #include "../src/dateutils.h"
+    #include "../fluid/dateutils.h"
 #else
     #include <Fluid/DateUtils>
 #endif

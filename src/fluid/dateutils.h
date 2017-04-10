@@ -18,7 +18,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
 
-#include <Fluid/fluidglobal.h>
+#ifdef FLUID_LOCAL
+#  include "fluidglobal.h"
+#else
+#  include <Fluid/fluidglobal.h>
+#endif
 
 namespace Fluid {
 

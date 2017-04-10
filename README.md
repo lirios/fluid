@@ -40,7 +40,7 @@ From the root of the repository, run:
 
 ```sh
 mkdir build; cd build
-qmake ..
+qmake ../fluid.pro
 make
 make install # use sudo if necessary
 ```

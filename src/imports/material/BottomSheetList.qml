@@ -15,7 +15,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 2.0
-import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls 1.0
 
 /*!
     \qmltype BottomSheetAction
@@ -38,7 +38,7 @@ BottomSheet {
     /*!
         Actions to display in the bottom sheet.
     */
-    property list<FluidControls.Action> actions
+    property list<Action> actions
 
     height: Math.min(implicitHeight, maxHeight)
     implicitHeight: listViewContainer.implicitHeight + (header.visible ? header.height : 0)
@@ -50,7 +50,7 @@ BottomSheet {
 
         anchors.fill: parent
 
-        FluidControls.Subheader {
+        Subheader {
             id: header
             text: title
             visible: title !== ""
@@ -93,7 +93,7 @@ BottomSheet {
                         delegate: Column {
                             width: parent.width
 
-                            FluidControls.ListItem {
+                            ListItem {
                                 id: listItem
 
                                 text: modelData.text
@@ -108,7 +108,7 @@ BottomSheet {
                                 }
                             }
 
-                            FluidControls.ThinDivider {
+                            ThinDivider {
                                 visible: modelData.hasDividerAfter
                             }
                         }

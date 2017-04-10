@@ -16,7 +16,7 @@ import QtQuick 2.1
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Templates 2.0 as T
-import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls 1.0
 import Fluid.Layouts 1.0 as FluidLayouts
 
 /*!
@@ -40,7 +40,7 @@ BottomSheet {
     /*!
         Actions to display in the bottom sheet.
     */
-    property list<FluidControls.Action> actions
+    property list<Action> actions
 
     /*
         Number of columns.
@@ -62,7 +62,7 @@ BottomSheet {
 
         anchors.fill: parent
 
-        FluidControls.Subheader {
+        Subheader {
             id: header
             text: title
             visible: title !== ""
@@ -137,7 +137,7 @@ BottomSheet {
                                 implicitWidth: grid.cellWidth
                                 implicitHeight: grid.cellHeight
 
-                                FluidControls.Icon {
+                                Icon {
                                     id: icon
 
                                     anchors.top: parent.top

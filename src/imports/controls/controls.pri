@@ -1,5 +1,6 @@
 HEADERS += \
-    $$PWD/iconthemeimageprovider.h
+    $$PWD/iconthemeimageprovider.h \
+    $$PWD/controlsplugin.h
 
 SOURCES += \
     $$PWD/iconthemeimageprovider.cpp \

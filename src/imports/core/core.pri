@@ -6,7 +6,8 @@ HEADERS += \
     $$PWD/iconsimageprovider.h \
     $$PWD/qmldateutils.h \
     $$PWD/qqmlsortfilterproxymodel.h \
-    $$PWD/standardpaths.h
+    $$PWD/standardpaths.h \
+    $$PWD/coreplugin.h
 
 SOURCES += \
     $$PWD/clipboard.cpp \
@@ -21,4 +22,8 @@ INCLUDEPATH += $$PWD
 
 contains(DEFINES, FLUID_LOCAL) {
     RESOURCES += $$PWD/core.qrc
+    SOURCES += \
+        $$PWD/registerplugins.cpp
+    HEADERS += \
+        $$PWD/registerplugins.h
 }

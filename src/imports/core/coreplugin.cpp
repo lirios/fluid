@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-#include <QtQml/QQmlExtensionPlugin>
 #include <QtQml/qqml.h>
 
+#include "coreplugin.h"
 #include "clipboard.h"
 #include "device.h"
 #include "iconsimageprovider.h"
@@ -46,15 +46,6 @@ static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
     return new StandardPaths();
 }
 
-class FluidCorePlugin : public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-public:
-    void initializeEngine(QQmlEngine *engine, const char *uri);
-    void registerTypes(const char *uri);
-};
-
 void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Core"));
@@ -77,14 +68,3 @@ void FluidCorePlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device", deviceProvider);
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths", standardPathsProvider);
 }
-
-#ifdef FLUID_LOCAL
-static void registerFluidCoreTypes() {
-    FluidCorePlugin fluidCore;
-    fluidCore.registerTypes("Fluid.Core");
-}
-
-Q_COREAPP_STARTUP_FUNCTION(registerFluidCoreTypes)
-#endif
-
-#include "coreplugin.moc"

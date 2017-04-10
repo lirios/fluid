@@ -12,18 +12,8 @@
  * $END_LICENSE$
  */
 
-#include <QtQml>
-
+#include "controlsplugin.h"
 #include "iconthemeimageprovider.h"
-
-class FluidControlsPlugin : public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-public:
-    void initializeEngine(QQmlEngine *engine, const char *uri);
-    void registerTypes(const char *uri);
-};
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -38,5 +28,3 @@ void FluidControlsPlugin::registerTypes(const char *uri)
 
     // @uri Fluid.Controls
 }
-
-#include "controlsplugin.moc"

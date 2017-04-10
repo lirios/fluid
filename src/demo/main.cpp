@@ -18,6 +18,11 @@
 #include <QQuickStyle>
 #include <QQmlContext>
 
+#ifdef FLUID_LOCAL
+#  include "../imports/core/iconsimageprovider.h"
+#  include "../imports/controls/iconthemeimageprovider.h"
+#endif
+
 int main(int argc, char *argv[])
 {
     QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -29,7 +34,9 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 #ifdef FLUID_LOCAL
-    engine.addImportPath(QLatin1String("qrc:/qml"));
+    engine.addImportPath(QLatin1String("qrc:/"));
+    engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
+    engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 #endif
     engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
 

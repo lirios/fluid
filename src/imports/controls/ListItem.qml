@@ -30,7 +30,7 @@ BaseListItem {
     id: listItem
 
     implicitHeight: Math.max(subText != "" ? maximumLineCount == 2 ? 72 : 88
-                                           : secondaryItem.showing ? secondaryItem.childrenRect.height + Units.smallSpacing * 2 : 48,
+                                           : secondaryItem.showing ? secondaryItem.childrenRect.height + (label.visible ? Units.largeSpacing * 2 : Units.smallSpacing * 2) : 48,
                              leftItem.childrenRect.height + Units.smallSpacing * 2,
                              rightItem.childrenRect.height + Units.smallSpacing * 2)
 
@@ -96,7 +96,7 @@ BaseListItem {
                     Layout.fillWidth: true
 
                     // XXX: Hack to vertically center the label
-                    Layout.topMargin: subLabel.visible ? 0 : leftItem.height / 4
+                    Layout.topMargin: subLabel.visible ? 0 : ((listItem.height - height) / 2) - Units.smallSpacing
 
                     text: listItem.text
                     elide: Text.ElideRight
@@ -140,7 +140,7 @@ BaseListItem {
                 objectName: "secondaryItem"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: showing ? childrenRect.height + Units.smallSpacing : 0
+                Layout.preferredHeight: showing ? childrenRect.height + (label.visible ? Units.smallSpacing : Units.largeSpacing) : 0
 
                 property bool showing: visibleChildren.length > 0
             }

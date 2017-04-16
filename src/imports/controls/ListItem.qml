@@ -16,7 +16,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.2
 import Fluid.Controls 1.0
 
 /*!
@@ -83,6 +83,7 @@ BaseListItem {
 
             RowLayout {
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
 
                 visible: label.text != "" || valueLabel.text != ""
                 spacing: Units.smallSpacing
@@ -93,6 +94,9 @@ BaseListItem {
 
                     Layout.alignment: Qt.AlignVCenter
                     Layout.fillWidth: true
+
+                    // XXX: Hack to vertically center the label
+                    Layout.topMargin: subLabel.visible ? 0 : leftItem.height / 4
 
                     text: listItem.text
                     elide: Text.ElideRight
@@ -107,6 +111,7 @@ BaseListItem {
 
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: visible ? implicitWidth : 0
+                    Layout.preferredHeight: visible ? implicitHeight : 0
 
                     color: Material.secondaryTextColor
                     elide: Text.ElideRight
@@ -120,14 +125,14 @@ BaseListItem {
                 objectName: "subTextLabel"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: implicitHeight * maximumLineCount/lineCount
+                Layout.preferredHeight: visible ? implicitHeight * maximumLineCount/lineCount : 0
 
                 color: Material.secondaryTextColor
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
 
                 visible: text != "" && !contentItem.showing
-                maximumLineCount: listItem.maximumLineCount - 1
+                maximumLineCount: visible ? listItem.maximumLineCount - 1 : 0
             }
 
             Item {

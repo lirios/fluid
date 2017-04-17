@@ -21,6 +21,28 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
 
+## Run the demo without installation
+
+Fluid provides a project that statically builds the demo program and doesn't require any
+installation.
+
+Open up `fluid-demo.pro` with QtCreator, hit build and run to see the demo in action.
+
+Alternatively you can build it yourself from the terminal:
+
+```sh
+./scripts/fetch_icons.sh
+mkdir build; cd build
+qmake ../fluid-demo.pro
+make
+```
+
+And run:
+
+```sh
+./fluid-demo
+```
+
 ## System-wide installation
 
 First, if you want to include the Material Design icons used with the `Icon` component, run:
@@ -79,7 +101,51 @@ On the `cmake` line, you can specify additional configuration parameters:
    * **Release:** release build
    * **RelWithDebInfo:** release build with debugging information
 
+### Notes on installation
+
+A system-wide installation with `LIRI_INSTALL_PREFIX=/usr` is usually performed
+by Linux distro packages.
+
+In order to avoid potential conflicts we recommend installing under `/opt/liri`,
+but this requires setting some environment variables up.
+
+First build and install:
+
+```sh
+mkdir build; cd build
+qmake LIRI_INSTALL_PREFIX=/opt/liri ../fluid.pro
+make
+sudo make install
+```
+
+Then create a file with the environment variables as `~/lenv` with the following contents:
+
+```sh
+LIRIDIR=/opt/liri
+
+export LD_LIBRARY_PATH=$LIRIDIR/lib:$LD_LIBRARY_PATH
+export XDG_DATA_DIRS=$LIRIDIR/share:/usr/local/share:/usr/share:~/.local/share:~/.local/share/flatpak/exports/share
+export XDG_CONFIG_DIRS=$LIRIDIR/etc/xdg:/etc/xdg
+export QT_PLUGIN_PATH=$LIRIDIR/lib/plugins
+export QML2_IMPORT_PATH=$LIRIDIR/lib/qml:$QML2_IMPORT_PATH
+export PATH=$LIRIDIR/bin:$PATH
+```
+
+Source the file (we are assuming a bash shell here):
+
+```sh
+source ~/lenv
+```
+
+And run `fluid-demo` to test:
+
+```sh
+fluid-demo
+```
+
 ## Per-project installation using QMake
+
+You can embed Fluid in your project and build it along your app.
 
 First, clone this repository.
 

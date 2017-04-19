@@ -45,6 +45,7 @@ Tab {
             model: ListModel {
                 ListElement { title: qsTr("ActionButton"); source: "qrc:/qml/Pages/Material/ActionButtonPage.qml" }
                 ListElement { title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Material/BottomSheetPage.qml" }
+                ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Material/WavePage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

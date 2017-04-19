@@ -24,7 +24,7 @@ Rectangle {
     id: wave
 
     property bool opened
-    property real size
+    property real size: 0
     property real initialX
     property real initialY
     property real abstractWidth: parent.width

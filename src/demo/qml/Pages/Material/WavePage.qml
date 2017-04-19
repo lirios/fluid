@@ -22,9 +22,6 @@ import "../.."
 Item {
     Wave {
         id: wave
-        initialX: parent.width - size
-        initialY: parent.height - size
-        size: 48
         color: Material.accentColor
     }
 

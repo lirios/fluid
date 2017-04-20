@@ -29,10 +29,10 @@ arch:
     #- clazy-git
   script:
     - scripts/fetch_icons.sh
-    - if [ "$CC" = "gcc" ]; then mkdir build-cmake && cd build-cmake && cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr && make && cd ..; fi
-    - if [ "$CC" = "gcc" ]; then mkdir build && cd build && qmake -spec linux-g++ CONFIG+=use_qt_paths ../fluid.pro && make && cd ..; fi
-    #- if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths QMAKE_CXX="clazy" ../fluid.pro && make && cd ..; fi
-    - if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths ../fluid.pro && make && cd ..; fi
+    - if [ "$CC" = "gcc" ]; then mkdir build-cmake && cd build-cmake && cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr && make -j$(nproc) && cd ..; fi
+    - if [ "$CC" = "gcc" ]; then mkdir build && cd build && qmake -spec linux-g++ CONFIG+=use_qt_paths ../fluid.pro && make -j$(nproc) && cd ..; fi
+    #- if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths QMAKE_CXX="clazy" ../fluid.pro && make -j$(nproc) && cd ..; fi
+    - if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths ../fluid.pro && make -j$(nproc) && cd ..; fi
     - cd build && make html_docs_fluid && cd ..
     - cd build && sudo make install && cd ..
     - cd build && xvfb-run -a -s "-screen 0 800x600x24" make check && cd ..

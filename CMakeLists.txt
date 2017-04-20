@@ -58,6 +58,9 @@ get_target_property(QMAKE_EXECUTABLE Qt5::qmake LOCATION)
 if(NOT QT_INSTALL_DOCS)
     exec_program(${QMAKE_EXECUTABLE} ARGS "-query QT_INSTALL_DOCS" RETURN_VALUE return_code OUTPUT_VARIABLE QT_INSTALL_DOCS)
 endif()
+if(NOT QT_HOST_DATA)
+    exec_program(${QMAKE_EXECUTABLE} ARGS "-query QT_HOST_DATA" RETURN_VALUE return_code OUTPUT_VARIABLE QT_HOST_DATA)
+endif()
 
 # Documentation target
 find_program(QDOC_EXECUTABLE qdoc-qt5 qdoc)
@@ -74,6 +77,24 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/icons")
             DESTINATION ${QML_INSTALL_DIR}/Fluid/Controls
             PATTERN "icons/icons.qrc" EXCLUDE)
 endif()
+
+# Install qmake features
+set(features_SOURCES
+    features/liri_create_cmake.prf
+    features/liri_deployment.prf
+    features/liri_qml_module.prf
+    features/liri_qml_plugin.prf
+    features/liri_qt_app.prf
+    features/liri_qt_module.prf
+)
+install(FILES ${features_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features)
+set(features_cmake_SOURCES
+    features/data/cmake/liri_ExtraSourceIncludes.cmake.in
+    features/data/cmake/liri_Qt5BasicConfig.cmake.in
+    features/data/cmake/liri_Qt5ConfigVersion.cmake.in
+    features/data/cmake/liri_Qt5PluginTarget.cmake.in
+)
+install(FILES ${features_cmake_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features/data/cmake)
 
 # Display feature summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

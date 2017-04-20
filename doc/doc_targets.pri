@@ -11,6 +11,7 @@
 # DOC_HTML_INSTALLDIR - path were to install the directory of html files
 # DOC_QCH_OUTDIR      - path where to generated the qch files
 # DOC_QCH_INSTALLDIR  - path where to install the qch files
+# DOC_TARGET_PREFIX   - prefix for generated target names
 #
 # Example for QDOC_ENV:
 # ver.name = VERSION
@@ -35,47 +36,50 @@ DOC_INDEXES += -indexdir $$shell_quote($$[QT_INSTALL_DOCS])
 for (index_path, DOC_INDEX_PATHS): \
     DOC_INDEXES += -indexdir $$shell_quote($$index_path)
 
+DTP = $$DOC_TARGET_PREFIX
 for (doc_file, DOC_FILES) {
     !exists($$doc_file): error("Cannot find documentation specification file $$doc_file")
     DOC_TARGET = $$replace(doc_file, ^(.*/)?(.*)\\.qdocconf$, \\2)
     DOC_TARGETDIR = $$DOC_TARGET
     DOC_OUTPUTDIR = $${DOCS_BASE_OUTDIR}/$${DOC_TARGETDIR}$${DOC_OUTDIR_POSTFIX}
 
-    html_docs_$${DOC_TARGET}.commands = $$QDOC -outputdir $$shell_quote($$DOC_OUTPUTDIR) $$doc_file $$DOC_INDEXES
-    QMAKE_EXTRA_TARGETS += html_docs_$${DOC_TARGET}
+    $${DTP}html_docs_$${DOC_TARGET}.commands = $$QDOC -outputdir $$shell_quote($$DOC_OUTPUTDIR) $$doc_file $$DOC_INDEXES
+    QMAKE_EXTRA_TARGETS += $${DTP}html_docs_$${DOC_TARGET}
 
-    !isEmpty(html_docs.commands): html_docs.commands += &&
-    html_docs.commands += $$eval(html_docs_$${DOC_TARGET}.commands)
+    !isEmpty($${DTP}html_docs.commands): $${DTP}html_docs.commands += &&
+    $${DTP}html_docs.commands += $$eval($${DTP}html_docs_$${DOC_TARGET}.commands)
 
-    inst_html_docs.files += $$DOC_OUTPUTDIR
+    $${DTP}inst_html_docs.files += $$DOC_OUTPUTDIR
 
     !build_online_docs {
-        qch_docs_$${DOC_TARGET}.commands = $$QHELPGENERATOR $$shell_quote($$DOC_OUTPUTDIR/$${DOC_TARGET}.qhp) -o $$shell_quote($$DOC_QCH_OUTDIR/$${DOC_TARGET}.qch)
-        qch_docs_$${DOC_TARGET}.depends = html_docs_$${DOC_TARGET}
-        QMAKE_EXTRA_TARGETS += qch_docs_$${DOC_TARGET}
+        $${DTP}qch_docs_$${DOC_TARGET}.commands = $$QHELPGENERATOR $$shell_quote($$DOC_OUTPUTDIR/$${DOC_TARGET}.qhp) -o $$shell_quote($$DOC_QCH_OUTDIR/$${DOC_TARGET}.qch)
+        $${DTP}qch_docs_$${DOC_TARGET}.depends = $${DTP}html_docs_$${DOC_TARGET}
+        QMAKE_EXTRA_TARGETS += $${DTP}qch_docs_$${DOC_TARGET}
 
-        !isEmpty(qch_docs.commands): qch_docs.commands += &&
-        qch_docs.commands += $$eval(qch_docs_$${DOC_TARGET}.commands)
+        !isEmpty($${DTP}qch_docs.commands): $${DTP}qch_docs.commands += &&
+        $${DTP}qch_docs.commands += $$eval($${DTP}qch_docs_$${DOC_TARGET}.commands)
 
-        inst_qch_docs.files += $$DOC_QCH_OUTDIR/$${DOC_TARGET}.qch
+        $${DTP}inst_qch_docs.files += $$DOC_QCH_OUTDIR/$${DOC_TARGET}.qch
     }
 }
 
 !build_online_docs {
-    qch_docs.depends = html_docs
-    inst_qch_docs.path = $$DOC_QCH_INSTALLDIR
-    inst_qch_docs.CONFIG += no_check_exist no_default_install no_build
-    install_docs.depends = install_inst_qch_docs
-    docs.depends = qch_docs
-    INSTALLS += inst_qch_docs
-    QMAKE_EXTRA_TARGETS += qch_docs install_docs
+    $${DTP}qch_docs.depends = $${DTP}html_docs
+    $${DTP}inst_qch_docs.path = $$DOC_QCH_INSTALLDIR
+    $${DTP}inst_qch_docs.CONFIG += no_check_exist no_default_install no_build
+    install_$${DTP}docs.depends = install_$${DTP}inst_qch_docs
+    $${DTP}docs.depends = $${DTP}qch_docs
+    INSTALLS += $${DTP}inst_qch_docs
+    QMAKE_EXTRA_TARGETS += $${DTP}qch_docs install_$${DTP}docs
 } else {
-    docs.depends = html_docs
+    $${DTP}docs.depends = $${DTP}html_docs
 }
 
-inst_html_docs.path = $$DOC_HTML_INSTALLDIR
-inst_html_docs.CONFIG += no_check_exist no_default_install directory
-INSTALLS += inst_html_docs
-install_docs.depends += install_inst_html_docs
+$${DTP}inst_html_docs.path = $$DOC_HTML_INSTALLDIR
+$${DTP}inst_html_docs.CONFIG += no_check_exist no_default_install directory
+INSTALLS += $${DTP}inst_html_docs
+install_$${DTP}docs.depends += install_$${DTP}inst_html_docs
 
-QMAKE_EXTRA_TARGETS += html_docs docs
+QMAKE_EXTRA_TARGETS += $${DTP}html_docs $${DTP}docs
+
+unset(DTP)

@@ -20,7 +20,7 @@ class FluidCorePlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
 #ifndef FLUID_LOCAL
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+    Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
 #endif
 public:
     void initializeEngine(QQmlEngine *engine, const char *uri);

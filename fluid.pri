@@ -1,4 +1,4 @@
-DEFINES += FLUID_LOCAL
+DEFINES += FLUID_LOCAL FLUID_STATIC
 
 include(src/fluid/fluid.pri)
 include(src/imports/core/core.pri)

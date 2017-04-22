@@ -7,6 +7,7 @@ QRC_FILE=$TARGET_DIR/icons.qrc
 CATEGORIES=(action av communication device file image maps notification social toggle alert content editor hardware navigation)
 
 git submodule update --init
+git config status.submodulesummary false
 
 mkdir -p $TARGET_DIR
 

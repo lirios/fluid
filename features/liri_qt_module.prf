@@ -1,6 +1,5 @@
 load(liri_deployment)
 load(qt_module)
-load(qt_module_headers)
 
 CONFIG -= create_cmake
 
@@ -14,4 +13,6 @@ CONFIG -= create_cmake
     qpa_headers.path = $$LIRI_INSTALL_INCLUDEDIR/$$MODULE_INCNAME/$$VERSION/$$MODULE_INCNAME/qpa
 
     target.path = $$LIRI_INSTALL_LIBDIR
+
+    CONFIG += liri_qt_module_pris
 }

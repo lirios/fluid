@@ -86,6 +86,8 @@ set(features_SOURCES
     features/liri_qml_plugin.prf
     features/liri_qt_app.prf
     features/liri_qt_module.prf
+    features/liri_qt_module_pris.prf
+    features/liri_qt_plugin.prf
 )
 install(FILES ${features_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features)
 set(features_cmake_SOURCES

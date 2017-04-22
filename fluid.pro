@@ -44,7 +44,8 @@ prf.files = \
     $$PWD/features/liri_qml_module.prf \
     $$PWD/features/liri_qml_plugin.prf \
     $$PWD/features/liri_qt_app.prf \
-    $$PWD/features/liri_qt_module.prf
+    $$PWD/features/liri_qt_module.prf \
+    $$PWD/features/liri_qt_plugin.prf
 prf.path = $$[QT_HOST_DATA]/mkspecs/features
 INSTALLS += prf
 

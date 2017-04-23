@@ -4,6 +4,12 @@ IMPORT_VERSION = 1.0
 
 QT += qml quick
 
+HEADERS += \
+    $$PWD/materialplugin.h
+
+SOURCES += \
+    $$PWD/materialplugin.cpp
+
 QML_FILES += \
     $$files(*.qml)
 

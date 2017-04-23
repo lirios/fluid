@@ -48,14 +48,14 @@ static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 
 void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
-    Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Core"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Core"));
 
     engine->addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
 }
 
 void FluidCorePlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(QByteArray("Fluid.Core") == QByteArray(uri));
+    Q_ASSERT(QLatin1String("Fluid.Core") == QLatin1String(uri));
 
     // @uri Fluid.Core
 

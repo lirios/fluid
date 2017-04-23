@@ -17,14 +17,14 @@
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
-    Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Controls"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
 
     engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
 }
 
 void FluidControlsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(QByteArray(uri) == QByteArrayLiteral("Fluid.Controls"));
+    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
 
     // @uri Fluid.Controls
 }

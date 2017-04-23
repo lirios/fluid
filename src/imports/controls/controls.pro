@@ -31,10 +31,10 @@ icons.files += $$FLUID_SOURCE_TREE/icons/hardware
 icons.files += $$FLUID_SOURCE_TREE/icons/navigation
 INSTALLS += icons
 
-android {
-    qmlfiles2build.files = $$QML_FILES
-    qmlfiles2build.path = $$DESTDIR
-    icons2build.files = $$icons.files
-    icons2build.path = $$DESTDIR/icons
-    COPIES += qmlfiles2build icons2build
-}
+# Copy all files to the build directory so that QtCreator will recognize
+# the QML module and the demo will run without installation
+qmlfiles2build.files = $$QML_FILES
+qmlfiles2build.path = $$DESTDIR
+icons2build.files = $$icons.files
+icons2build.path = $$DESTDIR/icons
+COPIES += qmlfiles2build icons2build

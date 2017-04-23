@@ -12,8 +12,8 @@ include(core.pri)
 CONFIG += no_cxx_module
 load(liri_qml_plugin)
 
-android {
-    qmlfiles2build.files = $$QML_FILES
-    qmlfiles2build.path = $$DESTDIR
-    COPIES += qmlfiles2build
-}
+# Copy all files to the build directory so that QtCreator will recognize
+# the QML module and the demo will run without installation
+qmlfiles2build.files = $$QML_FILES
+qmlfiles2build.path = $$DESTDIR
+COPIES += qmlfiles2build

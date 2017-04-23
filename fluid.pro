@@ -37,6 +37,9 @@ exists(.git) {
 TEMPLATE = subdirs
 
 SUBDIRS += src tests
+CONFIG += ordered
+
+tests.depends = src
 
 prf.files = \
     $$PWD/features/liri_create_cmake.prf \

@@ -1,14 +1,16 @@
 #!/bin/bash
 
+GIT_URL=https://github.com/google/material-design-icons.git
 GIT_DIR=material-design-icons
 TARGET_DIR=icons
 QRC_FILE=$TARGET_DIR/icons.qrc
 
+rm -rf $GIT_DIR
+git clone $GIT_URL
+
 CATEGORIES=(action av communication device file image maps notification social toggle alert content editor hardware navigation)
 
-git submodule update --init
-git config status.submodulesummary false
-
+rm -rf $TARGET_DIR
 mkdir -p $TARGET_DIR
 
 echo "<RCC>
@@ -33,3 +35,5 @@ done
 echo "    </qresource>
 </RCC>
 " >> $QRC_FILE
+
+rm -rf $GIT_DIR

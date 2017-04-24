@@ -31,7 +31,6 @@ Open up `fluid-demo.pro` with QtCreator, hit build and run to see the demo in ac
 Alternatively you can build it yourself from the terminal:
 
 ```sh
-./scripts/fetch_icons.sh
 mkdir build; cd build
 qmake ../fluid-demo.pro
 make
@@ -44,14 +43,6 @@ And run:
 ```
 
 ## System-wide installation
-
-First, if you want to include the Material Design icons used with the `Icon` component, run:
-
-```sh
-./scripts/fetch_icons.sh
-```
-
-This will clone the Google repository holding the icons and copy the SVG icons into the `icons` directory.
 
 ### Build with QMake
 
@@ -148,12 +139,6 @@ fluid-demo
 You can embed Fluid in your project and build it along your app.
 
 First, clone this repository.
-
-Run the icon script located here:
-
-```sh
-./scripts/fetch_icons.sh
-```
 
 In your project file, include the `fluid.pri` file:  
 ```qmake

@@ -21,5 +21,8 @@ Remember to update this file before any release is made, also make sure
 a .mailmap file is maintained if committer names and email addresses
 change over time.
 
- * Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Pier Luigi Fiorini <pierluigi.fiorini@liri.io>
  * Michael Spencer <sonrisesoftware@gmail.com>
+ * oKcerG <oKcerG@users.noreply.github.com>
+ * Magnus Groß <magnus-gross@users.noreply.github.com>
+ * SushiTee <weichel.sascha@gmail.com>

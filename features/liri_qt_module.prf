@@ -14,5 +14,5 @@ CONFIG -= create_cmake
 
     target.path = $$LIRI_INSTALL_LIBDIR
 
-    CONFIG += liri_qt_module_pris
+    #CONFIG += liri_qt_module_pris
 }

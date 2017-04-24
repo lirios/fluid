@@ -165,6 +165,17 @@ engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvi
 engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 ```
 
+## Documentation
+
+Build the HTML documentation from the `build` directory created earlied:
+
+```sh
+cd build
+make html_docs_fluid
+```
+
+Then open up `doc/fluid/html/index.html` with a browser.
+
 ## Licensing
 
 Licensed under the terms of the Mozilla Public License version 2.0.

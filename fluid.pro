@@ -26,6 +26,9 @@ defineTest(minQtVersion) {
     error("Use at least Qt 5.8.0.")
 }
 
+!exists(features/liri_deployment.prf): \
+    error("Git submodule missing. Run \'git submodule update --init\' in $${PWD}.")
+
 TEMPLATE = subdirs
 
 SUBDIRS += src tests

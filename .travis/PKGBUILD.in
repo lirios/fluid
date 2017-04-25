@@ -8,7 +8,7 @@ arch=('i686' 'x86_64' 'armv6h' 'armv7h')
 url='https://github.com/lirios'
 license=('MPL2')
 depends=('qt5-quickcontrols2' 'qt5-graphicaleffects' 'qt5-svg')
-makedepends=('git' 'extra-cmake-modules')
+makedepends=('git')
 conflicts=('fluid')
 replaces=('fluid')
 provides=('fluid')
@@ -27,21 +27,18 @@ pkgver() {
 
 prepare() {
 	mkdir -p build
+	pushd ${_gitname} && git submodule update --init && popd
 }
 
 build() {
 	cd build
-	cmake ../${_gitname} \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DLIB_INSTALL_DIR=lib \
-		-DLIBEXEC_INSTALL_DIR=lib \
-		-DQML_INSTALL_DIR=lib/qt/qml \
-		-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-		-DCMAKE_BUILD_TYPE=RelWithDebInfo
+	qmake \
+		CONFIG+=use_qt_paths \
+		../${_gitname}/fluid.pro
 	make
 }
 
 package() {
 	cd build
-	make DESTDIR="${pkgdir}" install
+	make INSTALL_ROOT="${pkgdir}" install
 }

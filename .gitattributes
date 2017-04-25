@@ -1,6 +1,7 @@
-/.gitignore export-ignore
-/.gitattributes export-ignore
-/.gitmodules export-ignore
-/.travis export-ignore
-/.travis.yml export-ignore
-/scripts/make-release-archive.sh export-ignore
+.tag export-subst
+.gitignore export-ignore
+.gitattributes export-ignore
+.gitmodules export-ignore
+.travis export-ignore
+.travis.yml export-ignore
+scripts/make-release-archive.sh export-ignore

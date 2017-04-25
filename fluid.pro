@@ -21,10 +21,8 @@ defineTest(minQtVersion) {
     return(false)
 }
 
-!minQtVersion(5, 8, 0) {
-    message("Cannot build Fluid with Qt version $${QT_VERSION}.")
-    error("Use at least Qt 5.8.0.")
-}
+!minQtVersion(5, 8, 0): \
+    error("QtAccountsService requires at least Qt 5.8.0, but $${QT_VERSION} was detected.")
 
 !exists(features/liri_deployment.prf): \
     error("Git submodule missing. Run \'git submodule update --init\' in $${PWD}.")

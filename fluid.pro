@@ -36,25 +36,27 @@ CONFIG += ordered
 
 tests.depends = src
 
-prf.files = \
-    $$PWD/features/liri_create_cmake.prf \
-    $$PWD/features/liri_deployment.prf \
-    $$PWD/features/liri_qml_module.prf \
-    $$PWD/features/liri_qml_plugin.prf \
-    $$PWD/features/liri_qt_app.prf \
-    $$PWD/features/liri_qt_module.prf \
-    $$PWD/features/liri_qt_module_pris.prf \
-    $$PWD/features/liri_qt_plugin.prf
-prf.path = $$[QT_HOST_DATA]/mkspecs/features
-INSTALLS += prf
-
-prf_data_cmake.files = \
-    $$PWD/features/data/cmake/liri_ExtraSourceIncludes.cmake.in \
-    $$PWD/features/data/cmake/liri_Qt5BasicConfig.cmake.in \
-    $$PWD/features/data/cmake/liri_Qt5ConfigVersion.cmake.in \
-    $$PWD/features/data/cmake/liri_Qt5PluginTarget.cmake.in
-prf_data_cmake.path = $$[QT_HOST_DATA]/mkspecs/features/data/cmake
-INSTALLS += prf_data_cmake
+# We do not install features anymore, just rely on submodules
+# to avoid a Fluid dependency on modules where it doesn't make sense
+#prf.files = \
+#    $$PWD/features/liri_create_cmake.prf \
+#    $$PWD/features/liri_deployment.prf \
+#    $$PWD/features/liri_qml_module.prf \
+#    $$PWD/features/liri_qml_plugin.prf \
+#    $$PWD/features/liri_qt_app.prf \
+#    $$PWD/features/liri_qt_module.prf \
+#    $$PWD/features/liri_qt_module_pris.prf \
+#    $$PWD/features/liri_qt_plugin.prf
+#prf.path = $$[QT_HOST_DATA]/mkspecs/features
+#INSTALLS += prf
+#
+#prf_data_cmake.files = \
+#    $$PWD/features/data/cmake/liri_ExtraSourceIncludes.cmake.in \
+#    $$PWD/features/data/cmake/liri_Qt5BasicConfig.cmake.in \
+#    $$PWD/features/data/cmake/liri_Qt5ConfigVersion.cmake.in \
+#    $$PWD/features/data/cmake/liri_Qt5PluginTarget.cmake.in
+#prf_data_cmake.path = $$[QT_HOST_DATA]/mkspecs/features/data/cmake
+#INSTALLS += prf_data_cmake
 
 OTHER_FILES += \
     $$PWD/AUTHORS.md \

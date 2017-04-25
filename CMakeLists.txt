@@ -79,24 +79,26 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/icons")
 endif()
 
 # Install qmake features
-set(features_SOURCES
-    features/liri_create_cmake.prf
-    features/liri_deployment.prf
-    features/liri_qml_module.prf
-    features/liri_qml_plugin.prf
-    features/liri_qt_app.prf
-    features/liri_qt_module.prf
-    features/liri_qt_module_pris.prf
-    features/liri_qt_plugin.prf
-)
-install(FILES ${features_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features)
-set(features_cmake_SOURCES
-    features/data/cmake/liri_ExtraSourceIncludes.cmake.in
-    features/data/cmake/liri_Qt5BasicConfig.cmake.in
-    features/data/cmake/liri_Qt5ConfigVersion.cmake.in
-    features/data/cmake/liri_Qt5PluginTarget.cmake.in
-)
-install(FILES ${features_cmake_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features/data/cmake)
+# We do not install features anymore, just rely on submodules
+# to avoid a Fluid dependency on modules where it doesn't make sense
+#set(features_SOURCES
+#    features/liri_create_cmake.prf
+#    features/liri_deployment.prf
+#    features/liri_qml_module.prf
+#    features/liri_qml_plugin.prf
+#    features/liri_qt_app.prf
+#    features/liri_qt_module.prf
+#    features/liri_qt_module_pris.prf
+#    features/liri_qt_plugin.prf
+#)
+#install(FILES ${features_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features)
+#set(features_cmake_SOURCES
+#    features/data/cmake/liri_ExtraSourceIncludes.cmake.in
+#    features/data/cmake/liri_Qt5BasicConfig.cmake.in
+#    features/data/cmake/liri_Qt5ConfigVersion.cmake.in
+#    features/data/cmake/liri_Qt5PluginTarget.cmake.in
+#)
+#install(FILES ${features_cmake_SOURCES} DESTINATION ${QT_HOST_DATA}/mkspecs/features/data/cmake)
 
 # Display feature summary
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

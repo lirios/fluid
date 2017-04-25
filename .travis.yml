@@ -28,7 +28,6 @@ arch:
     - clang
     #- clazy-git
   script:
-    - scripts/fetch_icons.sh
     - if [ "$CC" = "gcc" ]; then mkdir build-cmake && cd build-cmake && cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr && make -j$(nproc) && cd ..; fi
     - if [ "$CC" = "gcc" ]; then mkdir build && cd build && qmake -spec linux-g++ CONFIG+=use_qt_paths ../fluid.pro && make -j$(nproc) && cd ..; fi
     #- if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths QMAKE_CXX="clazy" ../fluid.pro && make -j$(nproc) && cd ..; fi

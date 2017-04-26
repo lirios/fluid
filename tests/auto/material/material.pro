@@ -7,3 +7,5 @@ QT += testlib quickcontrols2
 
 SOURCES += \
     $$PWD/material.cpp
+
+IMPORTPATH = $$FLUID_BUILD_DIR/qml

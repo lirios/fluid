@@ -7,3 +7,5 @@ QT += testlib
 
 SOURCES += \
     $$PWD/controls.cpp
+
+IMPORTPATH = $$FLUID_BUILD_DIR/qml

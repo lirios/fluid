@@ -22,7 +22,7 @@ defineTest(minQtVersion) {
 }
 
 !minQtVersion(5, 8, 0): \
-    error("QtAccountsService requires at least Qt 5.8.0, but $${QT_VERSION} was detected.")
+    error("Fluid requires at least Qt 5.8.0, but $${QT_VERSION} was detected.")
 
 !exists(features/liri_deployment.prf): \
     error("Git submodule missing. Run \'git submodule update --init\' in $${PWD}.")

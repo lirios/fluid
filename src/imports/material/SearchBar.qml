@@ -110,7 +110,6 @@ Flickable {
         }
         Wave {
             id: searchWave
-            clip: true
             color: waveColor
             Card {
                 id: searchCard

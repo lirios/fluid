@@ -51,6 +51,7 @@ Rectangle {
     radius: size/2
     x: initialX - size/2
     y: initialY - size/2
+    clip: true
 
     states: State {
         name: "opened"

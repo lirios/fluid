@@ -24,7 +24,6 @@ Item {
         id: wave
         color: Material.accentColor
     }
-
     Button {
         anchors.centerIn: parent
         text: qsTr("Toggle")

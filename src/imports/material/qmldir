@@ -7,4 +7,5 @@ BottomSheetList 1.0 BottomSheetList.qml
 BottomSheetGrid 1.0 BottomSheetGrid.qml
 ElevationEffect 1.0 ElevationEffect.qml
 Ripple 1.0 Ripple.qml
+SearchBar 1.0 SearchBar.qml
 Wave 1.0 Wave.qml

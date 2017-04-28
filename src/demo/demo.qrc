@@ -33,5 +33,6 @@
         <file>qml/Pages/Material/WavePage.qml</file>
         <file>qml/Pages/Navigation/NavDrawerPage.qml</file>
         <file>qml/Pages/Compound/OverlayPage.qml</file>
+        <file>qml/Pages/Material/Search.qml</file>
     </qresource>
 </RCC>

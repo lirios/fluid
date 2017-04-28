@@ -8,6 +8,7 @@
         <file>plugins.qmltypes</file>
         <file>qmldir</file>
         <file>Ripple.qml</file>
+        <file>SearchBar.qml</file>
         <file>Wave.qml</file>
     </qresource>
 </RCC>

@@ -6,6 +6,7 @@ Project {
     readonly property string version: "0.10.0"
 
     references: [
+        "doc/doc.qbs",
         "icons/icons.qbs",
         "src/fluid/fluid.qbs",
         "src/imports/core/core.qbs",

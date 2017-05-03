@@ -2,7 +2,6 @@ import qbs 1.0
 
 LiriModule {
     name: "libFluid"
-
     targetName: "Fluid"
     version: "0.0.0"
 
@@ -20,6 +19,8 @@ LiriModule {
     create_pkgconfig.description: "Collection of QtQuick components"
     create_pkgconfig.version: project.version
     create_pkgconfig.dependencies: ["Qt5Core"]
+
+    create_cmake.version: project.version
 
     files: ["*.cpp"]
 

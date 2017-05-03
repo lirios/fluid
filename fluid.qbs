@@ -5,6 +5,10 @@ Project {
 
     readonly property string version: "0.10.0"
 
+    minimumQbsVersion: "1.7"
+
+    qbsSearchPaths: "qbs-shared"
+
     references: [
         "doc/doc.qbs",
         "icons/icons.qbs",
@@ -17,8 +21,6 @@ Project {
         "src/demo/demo.qbs",
         "tests/auto/auto.qbs"
     ]
-
-    minimumQbsVersion: "1.7"
 
     Product {
         name: "qmake project files for fluid"

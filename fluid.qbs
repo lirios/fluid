@@ -5,6 +5,9 @@ Project {
 
     readonly property string version: "0.10.0"
 
+    property stringList autotestArguments: []
+    property stringList autotestWrapper: []
+
     minimumQbsVersion: "1.7"
 
     qbsSearchPaths: "qbs-shared"
@@ -21,4 +24,10 @@ Project {
         "src/demo/demo.qbs",
         "tests/auto/auto.qbs"
     ]
+
+    AutotestRunner {
+        name: "fluid-autotest"
+        arguments: project.autotestArguments
+        wrapper: project.autotestWrapper
+    }
 }

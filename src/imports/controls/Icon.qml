@@ -133,7 +133,7 @@ Item {
 
     /*!
        Set to \c false if you want the icon to use the original image's colors and not be
-       colored using the specified \ref color.
+       colored using the specified \c color.
      */
     property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||

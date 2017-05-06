@@ -69,6 +69,10 @@ Object {
     */
     property string toolTip
 
+    /*!
+        The tool tip displayed for the action.
+        This property is obsolete and will be removed in the next version.
+    */
     property string tooltip: toolTip
 
     /*!

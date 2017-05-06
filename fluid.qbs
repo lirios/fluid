@@ -21,9 +21,4 @@ Project {
         "src/demo/demo.qbs",
         "tests/auto/auto.qbs"
     ]
-
-    Product {
-        name: "qmake project files for fluid"
-        files: ["**/*.pr[io]"]
-    }
 }

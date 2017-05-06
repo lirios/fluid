@@ -8,7 +8,7 @@ Project {
     property stringList autotestArguments: []
     property stringList autotestWrapper: []
 
-    minimumQbsVersion: "1.7"
+    minimumQbsVersion: "1.6"
 
     qbsSearchPaths: "qbs-shared"
 

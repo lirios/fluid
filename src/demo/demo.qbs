@@ -9,18 +9,13 @@ QtGuiApplication {
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }
 
-    cpp.cxxLanguageVersion: "c++11"
-    cpp.visibility: "minimal"
     cpp.defines: [
         "FLUID_VERSION=" + project.version,
         "QT_NO_CAST_FROM_ASCII",
         "QT_NO_CAST_TO_ASCII"
     ]
 
-    files: [
-        "main.cpp",
-        "demo.qrc"
-    ]
+    files: ["*.cpp", "*.qrc"]
 
     Group {
         name: "QML Files"

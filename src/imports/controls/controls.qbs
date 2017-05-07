@@ -27,10 +27,4 @@ LiriDynamicLibrary {
         qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls"
         fileTagsFilter: ["dynamiclibrary", "qml"]
     }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons"
-        fileTagsFilter: ["icons"]
-    }
 }

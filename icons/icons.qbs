@@ -3,108 +3,125 @@ import qbs 1.0
 Product {
     name: "Icons"
 
+    Depends { name: "lirideployment" }
+
     Group {
+        name: "action"
         files: ["action/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/action"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "alert"
         files: ["alert/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/alert"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "av"
         files: ["av/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/av"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "communication"
         files: ["communication/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/communication"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "content"
         files: ["content/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/content"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "device"
         files: ["device/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/device"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "editor"
         files: ["editor/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/editor"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "file"
         files: ["file/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/file"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "hardware"
         files: ["hardware/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/hardware"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "image"
         files: ["image/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/image"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "maps"
         files: ["maps/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/maps"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "navigation"
         files: ["navigation/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/navigation"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "notification"
         files: ["notification/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/notification"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "social"
         files: ["social/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/social"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 
     Group {
+        name: "toggle"
         files: ["toggle/*.svg"]
         fileTags: ["icons"]
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Controls/icons/toggle"
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/icons/" + name
     }
 }

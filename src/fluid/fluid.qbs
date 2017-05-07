@@ -1,7 +1,7 @@
 import qbs 1.0
 
 LiriModule {
-    name: "libFluid"
+    name: "Fluid"
     targetName: "Fluid"
     version: "0.0.0"
 

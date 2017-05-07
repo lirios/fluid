@@ -6,7 +6,7 @@ DynamicLibrary {
 
     Depends { name: "cpp" }
     Depends { name: "Qt"; submodules: ["svg", "gui", "qml", "quick"] }
-    Depends { name: "libFluid" }
+    Depends { name: "Fluid" }
 
     cpp.cxxLanguageVersion: "c++11"
     cpp.visibility: "minimal"

@@ -42,7 +42,8 @@ arch:
     - qbs-setup-toolchains --detect
     - qbs-setup-qt /usr/bin/qmake-qt5 qt5
     - qbs config profiles.qt5.baseProfile ${CC}
-    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs -d qbs-build -j $(nproc) -p fluid-autotest profile:qt5
+    #- eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs -d qbs-build -j $(nproc) -p fluid-autotest profile:qt5
+    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs -d qbs-build -j $(nproc) profile:qt5
     # Build CI package
     - ./.travis/bintray-wrapper.sh
 

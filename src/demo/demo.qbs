@@ -1,12 +1,12 @@
 import qbs 1.0
 
 QtGuiApplication {
+    readonly property stringList qmlImportPaths: [project.buildDirectory + "/install-root/" + lirideployment.qmlDir]
+
     name: "Demo"
     targetName: "fluid-demo"
 
-    readonly property stringList qmlImportPaths: [project.buildDirectory + "/install-root/qml/"]
-
-    Depends { name: "cpp" }
+    Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }
 
     cpp.cxxLanguageVersion: "c++11"
@@ -40,7 +40,7 @@ QtGuiApplication {
 
     Group {
         qbs.install: true
-        qbs.installDir: "bin"
+        qbs.installDir: lirideployment.binDir
         fileTagsFilter: product.type
     }
 }

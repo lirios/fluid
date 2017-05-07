@@ -12,6 +12,7 @@ LiriDynamicLibrary {
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
     files: ["*.cpp", "*.h"]
+    excludeFiles: ["registerplugins.cpp"]
 
     Group {
         name: "QML Files"

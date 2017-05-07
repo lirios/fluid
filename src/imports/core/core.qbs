@@ -1,50 +1,17 @@
 import qbs 1.0
 
-DynamicLibrary {
+LiriDynamicLibrary {
     name: "Fluid.Core"
     targetName: "fluidcore"
 
+    Depends { name: "lirideployment" }
     Depends { name: "cpp" }
     Depends { name: "Qt"; submodules: ["svg", "gui", "qml", "quick"] }
     Depends { name: "Fluid" }
 
-    cpp.cxxLanguageVersion: "c++11"
-    cpp.visibility: "minimal"
-    cpp.defines: [
-        "FLUID_VERSION=" + project.version,
-        "QT_NO_CAST_FROM_ASCII",
-        "QT_NO_CAST_TO_ASCII"
-    ]
+    cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    Group {
-        name: "Sources"
-        files: [
-            "clipboard.cpp",
-            "device.cpp",
-            "iconsimageprovider.cpp",
-            "qmldateutils.cpp",
-            "qqmlsortfilterproxymodel.cpp",
-            "standardpaths.cpp",
-            "coreplugin.cpp"
-        ]
-        fileTags: ["cpp"]
-        overrideTags: false
-    }
-
-    Group {
-        name: "Headers"
-        files: [
-            "clipboard.h",
-            "device.h",
-            "iconsimageprovider.h",
-            "qmldateutils.h",
-            "qqmlsortfilterproxymodel.h",
-            "standardpaths.h",
-            "coreplugin.h"
-        ]
-        fileTags: ["hpp"]
-        overrideTags: false
-    }
+    files: ["*.cpp", "*.h"]
 
     Group {
         name: "QML Files"
@@ -58,13 +25,7 @@ DynamicLibrary {
 
     Group {
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Core"
-        fileTagsFilter: ["dynamiclibrary"]
-    }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: "qml/Fluid/Core"
-        fileTagsFilter: ["qml"]
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Core"
+        fileTagsFilter: ["dynamiclibrary", "qml"]
     }
 }

@@ -1,37 +1,16 @@
 import qbs 1.0
 
-DynamicLibrary {
+LiriDynamicLibrary {
     name: "Fluid.Layouts"
     targetName: "fluidlayouts"
 
+    Depends { name: "lirideployment" }
     Depends { name: "cpp" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick"] }
 
-    cpp.cxxLanguageVersion: "c++11"
-    cpp.visibility: "minimal"
-    cpp.defines: [
-        "FLUID_VERSION=" + project.version,
-        "QT_NO_CAST_FROM_ASCII",
-        "QT_NO_CAST_TO_ASCII"
-    ]
+    cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    Group {
-        name: "Sources"
-        files: [
-            "layoutsplugin.cpp"
-        ]
-        fileTags: ["cpp"]
-        overrideTags: false
-    }
-
-    Group {
-        name: "Headers"
-        files: [
-            "layoutsplugin.h"
-        ]
-        fileTags: ["hpp"]
-        overrideTags: false
-    }
+    files: ["*.cpp", "*.h"]
 
     Group {
         name: "QML Files"
@@ -45,13 +24,7 @@ DynamicLibrary {
 
     Group {
         qbs.install: true
-        qbs.installDir: "qml/Fluid/Layouts"
-        fileTagsFilter: ["dynamiclibrary"]
-    }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: "qml/Fluid/Layouts"
-        fileTagsFilter: ["qml"]
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Layouts"
+        fileTagsFilter: ["dynamiclibrary", "qml"]
     }
 }

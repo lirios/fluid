@@ -2,9 +2,9 @@ import qbs 1.0
 
 QtApplication {
     name: "tst_fluid_core"
-    type: ["application", "autotest"]
+    type: base.concat(["autotest"])
 
     Depends { name: "Qt"; submodules: ["gui", "testlib", "qmltest"] }
 
-    files: [ "core.cpp" ]
+    files: ["*.cpp"]
 }

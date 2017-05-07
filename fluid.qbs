@@ -5,6 +5,7 @@ Project {
 
     readonly property string version: "0.10.0"
 
+    property bool autotestEnabled: false
     property stringList autotestArguments: []
     property stringList autotestWrapper: []
 
@@ -28,6 +29,7 @@ Project {
     ]
 
     AutotestRunner {
+        builtByDefault: autotestEnabled
         name: "fluid-autotest"
         arguments: project.autotestArguments
         wrapper: project.autotestWrapper

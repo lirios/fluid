@@ -23,8 +23,20 @@ LiriDynamicLibrary {
     }
 
     Group {
+        name: "QML Files (Material)"
+        files: ["+material/*.qml"]
+        fileTags: ["qml.material"]
+    }
+
+    Group {
         qbs.install: true
         qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls"
         fileTagsFilter: ["dynamiclibrary", "qml"]
+    }
+
+    Group {
+        qbs.install: true
+        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/+material"
+        fileTagsFilter: ["qml.material"]
     }
 }

@@ -22,7 +22,9 @@ Project {
         "src/imports/layouts/layouts.qbs",
         "src/imports/material/material.qbs",
         "src/demo/demo.qbs",
-        "tests/auto/auto.qbs"
+        "tests/controls/controls.qbs",
+        "tests/core/core.qbs",
+        "tests/material/material.qbs",
     ]
 
     AutotestRunner {

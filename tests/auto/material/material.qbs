@@ -6,5 +6,7 @@ QtApplication {
 
     Depends { name: "Qt"; submodules: ["gui", "testlib", "qmltest"] }
 
+    cpp.defines: base.concat(['QUICK_TEST_SOURCE_DIR="' + product.sourceDirectory + '"'])
+
     files: ["*.cpp"]
 }

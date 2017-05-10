@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>images/balloon.jpg</file>
         <file>qml/main.qml</file>
         <file>qml/BasicComponents.qml</file>
         <file>qml/CompoundComponents.qml</file>
@@ -31,5 +32,6 @@
         <file>qml/Pages/Material/BottomSheetPage.qml</file>
         <file>qml/Pages/Material/WavePage.qml</file>
         <file>qml/Pages/Navigation/NavDrawerPage.qml</file>
+        <file>qml/Pages/Compound/OverlayPage.qml</file>
     </qresource>
 </RCC>

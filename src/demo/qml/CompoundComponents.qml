@@ -47,6 +47,7 @@ Tab {
                 ListElement { title: qsTr("Card"); source: "qrc:/qml/Pages/Compound/CardPage.qml" }
                 ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Compound/InfoBarPage.qml" }
                 ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Compound/DialogsPage.qml" }
+                ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Compound/OverlayPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

@@ -31,6 +31,7 @@ set(QML_FILES
     MenuItem.qml
     NavigationDrawer.qml
     NoiseBackground.qml
+    OverlayView.qml
     Page.qml
     PageStack.qml
     Placeholder.qml

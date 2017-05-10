@@ -25,6 +25,7 @@
         <file>MenuItem.qml</file>
         <file>NavigationDrawer.qml</file>
         <file>NoiseBackground.qml</file>
+        <file>OverlayView.qml</file>
         <file>Page.qml</file>
         <file>PageStack.qml</file>
         <file>Placeholder.qml</file>

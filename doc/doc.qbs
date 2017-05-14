@@ -1,13 +1,14 @@
 import qbs 1.0
 
 Product {
-    name: "Documentation"
-
     property string versionTag: project.version.replace(/\.|-/g, "")
 
+    name: "Documentation"
+    condition: qbsbuildconfig.withDocumentation
     builtByDefault: true
     type: "qch"
 
+    Depends { name: "qbsbuildconfig" }
     Depends { name: "Qt.core" }
 
     Qt.core.qdocEnvironment: [

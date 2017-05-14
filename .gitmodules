@@ -3,6 +3,6 @@
 	url = git://github.com/lirios/qmake-features
 	branch = master
 [submodule "qbs-shared"]
-	path = qbs-shared
+	path = qbs/shared
 	url = git://github.com/lirios/qbs-shared
 	branch = master

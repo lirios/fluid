@@ -28,7 +28,8 @@ import Fluid.Controls 1.0
     \brief Displays an icon from the Material Design icon collection, the platform's icon theme,
     or another (local or remote) location.
 
-    To use an icon from the \l{}{Material Design icon collection}, set the \c name property to the name of the icon in its group in the form of \c group/icon_name. For example:
+    To use an icon from the \l{https://materialdesignicons.com/}{Material Design icon collection},
+    set the \c name property to the name of the icon in its group in the form of \c group/icon_name. For example:
     \code
     Icon {
         name: "action/settings"

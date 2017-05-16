@@ -19,7 +19,7 @@
 
     \brief Provides QML types for layouts.
 
-    \l{Fluid Layouts} provides QML types for layouts.
+    Fluid Layouts provides QML types for layouts.
 
     Fluid Layouts QML types can be imported into your application
     using the following import statement in your .qml file:

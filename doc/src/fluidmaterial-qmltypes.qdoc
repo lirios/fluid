@@ -19,7 +19,7 @@
 
     \brief Provides QML types specific to Material Design.
 
-    \l{Fluid Material} provides QML types for creating Material Design user interfaces.
+    Fluid Material provides QML types for creating Material Design user interfaces.
 
     Fluid Material QML types can be imported into your application
     using the following import statement in your .qml file:

@@ -68,12 +68,15 @@ ToolBar {
      */
     property int iconSize: Device.gridUnit <= 48 ? 20 : 24
 
+    /*!
+       Keyline to align contents to the left to be visually appealing.
+     */
     property alias leftKeyline: titleLabel.x
 
     /*!
        The maximum number of actions that can be displayed before they spill over
        into a drop-down menu. When using an action bar with a page, this inherits
-       from the global \l Toolbar::maxActionCount. If you are using an action bar
+       from the global \l AppToolBar::maxActionCount. If you are using an action bar
        for custom purposes outside of a toolbar, this defaults to \c 3.
        Set to \c 0 if you don't want to overflow actions.
      */

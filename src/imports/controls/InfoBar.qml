@@ -25,7 +25,7 @@ import Fluid.Core 1.0
    \inqmlmodule Fluid.Controls
    \ingroup fluidcontrols
 
-   \brief InfoBar provide lightweight feedback about an operation.
+   \brief InfoBar provides a lightweight feedback about an operation.
 
    \code
    Page {
@@ -46,13 +46,43 @@ import Fluid.Core 1.0
 Rectangle {
     id: infoBar
 
+    /*!
+       Button text. Empty by default.
+       The button will not be visible if the text is empty.
+     */
     property string buttonText
+
+    /*!
+       Button color.
+     */
     property color buttonColor: Material.accentColor
+
+    /*!
+       Text to display.
+     */
     property string text
+
+    /*!
+       Whether the bar is open or not.
+     */
     property bool opened
+
+    /*!
+       Amount of time (in ms) to keep the notification visible.
+       The default is 2s.
+     */
     property int duration: 2000
+
+    /*!
+       Whether the bar should take full screen width.
+       The default depends on the device: full width only on phones and tablets.
+     */
     property bool fullWidth: Device.type === Device.phone || Device.type === Device.phablet
 
+    /*!
+       This signal is emitted when the button is clicked.
+       The handler is \c onClicked.
+     */
     signal clicked
 
     function open(text) {

@@ -20,7 +20,7 @@
 
     \section2 Prerequisites
 
-    Fluid controls are based on \l{QtQuick Controls 2}.
+    Fluid controls are based on \l{Qt Quick Controls 2}.
 
     \section2 QML Modules
 

@@ -19,7 +19,7 @@ import QtQuick 2.0
     \inqmlmodule Fluid.Core
     \ingroup fluidcore
 
-    \brief A QtObject with children.
+    \brief A \l QtObject with children.
 
     The \l Object type is a non-visual element that extends \l QtObject
     with the ability to hold children objects.

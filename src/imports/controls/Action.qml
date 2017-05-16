@@ -43,7 +43,7 @@ Object {
     /*!
         A URL pointing to an image to display as the icon. By default, this is
         a special URL representing the icon named by \l iconName from the Material Design
-        icon collection. The icon will be colorized using the specificed \l color,
+        icon collection. The icon will be colorized using the specificed color,
         unless you put ".color." in the filename, for example, "app-icon.color.svg".
 
         \sa iconName

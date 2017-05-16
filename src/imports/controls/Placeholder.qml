@@ -23,12 +23,24 @@ import Fluid.Controls 1.0
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
-    \brief Placeholder.
+    \brief Shows a placeholder icon and text.
 */
 Item {
+    /*!
+       Name of the icon from the \l{https://materialdesignicons.com/}{Material Design icon collection}.
+     */
     property alias iconName: icon.name
+
     property alias iconSource: icon.source
+
+    /*!
+       Text.
+     */
     property alias text: textLabel.text
+
+    /*!
+       Sub text.
+     */
     property alias subText: subTextLabel.text
 
     ColumnLayout {

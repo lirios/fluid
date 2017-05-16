@@ -7,7 +7,11 @@ HTML.navigationseparator = ""
 
 HTML.stylesheets = \
     template/style/base.css \
-    template/style/liri.css
+    template/style/liri.css \
+    template/style/liri.eot \
+    template/style/liri.svg \
+    template/style/liri.ttf \
+    template/style/liri.woff
 
 HTML.headerstyles = \
     "<!-- begin headerstyles -->\n" \

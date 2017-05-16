@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'liri';
-  src:  url('https://liri.io/fonts/liri/liri.eot?eue1d8');
-  src:  url('https://liri.io/fonts/liri/liri.eot?eue1d8#iefix') format('embedded-opentype'),
-    url('https://liri.io/fonts/liri/liri.ttf?eue1d8') format('truetype'),
-    url('https://liri.io/fonts/liri/liri.woff?eue1d8') format('woff'),
-    url('https://liri.io/fonts/liri/liri.svg?eue1d8#liri') format('svg');
+  src: url('liri.eot?eue1d8');
+  src: url('liri.eot?eue1d8#iefix') format('embedded-opentype'),
+       url('liri.ttf?eue1d8') format('truetype'),
+       url('liri.woff?eue1d8') format('woff'),
+       url('liri.svg?eue1d8#liri') format('svg');
   font-weight: normal;
   font-style: normal;
 }

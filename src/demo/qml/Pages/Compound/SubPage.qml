@@ -21,6 +21,7 @@ Page {
     actions: [
         Action {
             iconName: "action/settings"
+            toolTip: qsTr("Settings")
         }
     ]
 

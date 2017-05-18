@@ -36,10 +36,13 @@ import Fluid.Controls 1.0 as FluidControls
 
    FluidControls.ApplicationWindow {
        title: "Application Name"
+       width: 1024
+       height: 800
+       visible: true
 
        initialPage: page
 
-       Page {
+       FluidControls.Page {
            id: page
            title: "Page Title"
 

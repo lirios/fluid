@@ -9,6 +9,7 @@ Product {
     type: "qch"
 
     Depends { name: "qbsbuildconfig" }
+    Depends { name: "lirideployment" }
     Depends { name: "Qt.core" }
 
     Qt.core.qdocEnvironment: [
@@ -38,13 +39,13 @@ Product {
     Group {
         fileTagsFilter: ["qdoc-output"]
         qbs.install: true
-        qbs.installDir: "share/doc/fluid/html"
+        qbs.installDir: lirideployment.docDir + "/fluid/html"
         qbs.installSourceBase: Qt.core.qdocOutputDir
     }
 
     Group {
         fileTagsFilter: ["qch"]
         qbs.install: false
-        qbs.installDir: "share/doc/fluid/html"
+        qbs.installDir: lirideployment.docDir + "/fluid/html"
     }
 }

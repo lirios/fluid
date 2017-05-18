@@ -48,9 +48,10 @@ ToolBar {
     }
 
     function replace(page) {
-        toolbar.page = page
-
         stack.replace(page.appBar)
+
+        page.appBar.toolbar = toolbar
+        toolbar.page = page
     }
 
     StackView {

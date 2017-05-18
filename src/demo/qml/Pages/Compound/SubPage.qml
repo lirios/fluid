@@ -13,13 +13,13 @@
  */
 
 import QtQuick.Controls 2.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
-Page {
+FluidControls.Page {
     title: "Sub page demo"
 
     actions: [
-        Action {
+        FluidControls.Action {
             iconName: "action/settings"
             toolTip: qsTr("Settings")
         }

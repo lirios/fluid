@@ -50,11 +50,11 @@ import Fluid.Controls 1.0
             ]
 
             actions: [
-                Action {
+                FluidControls.Action {
                     text: "Action 1"
                 },
-                Action {
-                    text: "Action 1"
+                FluidControls.Action {
+                    text: "Action 2"
                 }
             ]
         }
@@ -103,34 +103,6 @@ Drawer {
         \qmlproperty list<QtObject> actions
 
         List of actions to be displayed by the drawer.
-
-        \code
-        import QtQuick.Window 2.2
-        import Fluid.Controls 2.0 as FluidControls
-
-        Window {
-            id: window
-            width: 400
-            height: 400
-            visible: true
-
-            Button {
-                text: "Open"
-                onClicked: drawer.open()
-            }
-
-            FluidControls.NavigationDrawer {
-                actions: [
-                    Action {
-                        text: "Action 1"
-                    },
-                    Action {
-                        text: "Action 1"
-                    }
-                ]
-            }
-        }
-        \endcode
     */
     property list<QtObject> actions
 

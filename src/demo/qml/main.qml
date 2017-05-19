@@ -30,7 +30,7 @@ ApplicationWindow {
 
     title: qsTr("Fluid Demo")
 
-    appBar.maxActionCount: 1
+    appBar.maxActionCount: 3
 
     Material.primary: Material.LightBlue
     Material.accent: Material.Blue
@@ -113,7 +113,22 @@ ApplicationWindow {
                 text: qsTr("Settings")
                 iconName: "action/settings"
                 tooltip: qsTr("Settings")
+                hoverAnimation: true
                 onTriggered: console.log("Settings clicked")
+            },
+            Action {
+                text: qsTr("This should not be visible")
+                iconName: "alert/warning"
+                visible: false
+            },
+            Action {
+                text: qsTr("Language")
+                iconName: "action/language"
+                enabled: false
+            },
+            Action {
+                text: qsTr("Accounts")
+                iconName: "action/account_circle"
             }
         ]
 

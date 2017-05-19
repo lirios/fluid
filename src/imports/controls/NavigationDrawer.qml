@@ -156,6 +156,7 @@ Drawer {
                     dividerInset: 0
                     visible: modelData.visible
                     onClicked: modelData.triggered(drawer)
+                    enabled: modelData.enabled
                 }
 
                 visible: count > 0

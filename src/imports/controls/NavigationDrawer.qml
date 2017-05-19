@@ -152,6 +152,9 @@ Drawer {
                 delegate: ListItem {
                     iconName: modelData.iconName
                     text: modelData.text
+                    showDivider: modelData.hasDividerAfter
+                    dividerInset: 0
+                    visible: modelData.visible
                     onClicked: modelData.triggered(drawer)
                 }
 

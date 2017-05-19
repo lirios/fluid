@@ -15,6 +15,7 @@
 
 import QtQuick 2.4
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -124,11 +125,15 @@ Page {
         return StackView.view.push({item: component, properties: properties});
     }
 
+    header: null
+    footer: null
+
     FluidControls.AppBar {
         id: appBar
 
+        Material.elevation: 0
+
         title: page.title
-        parent: null
 
         leftAction: Action {
             text: qsTr("Back")

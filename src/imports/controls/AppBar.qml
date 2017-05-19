@@ -114,6 +114,7 @@ ToolBar {
         iconSource: leftAction ? leftAction.iconSource : ""
         visible: leftAction && leftAction.visible
         enabled: leftAction && leftAction.enabled
+        hoverAnimation: leftAction && leftAction.hoverAnimation
         onClicked: {
             if (leftAction)
                 leftAction.triggered(leftButton)
@@ -165,6 +166,7 @@ ToolBar {
 
                 visible: appBar.actions[index].visible
                 enabled: appBar.actions[index].enabled
+                hoverAnimation: appBar.actions[index].hoverAnimation
 
                 onClicked: appBar.actions[index].triggered(actionButton)
             }

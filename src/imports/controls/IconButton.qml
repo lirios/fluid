@@ -31,9 +31,16 @@ ToolButton {
     property alias iconSize: icon.size
     property alias iconColor: icon.color
 
+    property bool hoverAnimation: false
+
     indicator: Icon {
         id: icon
 
         anchors.centerIn: parent
+        rotation: iconButton.hoverAnimation && iconButton.hovered ? 90 : 0
+
+        Behavior on rotation {
+            NumberAnimation { duration: 200 }
+        }
     }
 }

@@ -66,12 +66,24 @@ ApplicationWindow {
             Action {
                 text: qsTr("Action 2")
                 iconName: "action/info"
+                hasDividerAfter: true
                 onTriggered: console.log("action2 triggered")
             },
             Action {
                 text: qsTr("Action 3")
                 iconName: "action/info"
                 onTriggered: console.log("action3 triggered")
+            },
+            Action {
+                text: qsTr("Action 4")
+                iconName: "action/info"
+                onTriggered: console.log("action4 triggered")
+            },
+            Action {
+                text: qsTr("Action 5")
+                iconName: "action/info"
+                visible: false
+                onTriggered: console.log("action5 triggered")
             }
         ]
     }

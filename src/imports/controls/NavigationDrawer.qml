@@ -181,6 +181,7 @@ Drawer {
                     iconName: modelData.iconName
                     text: modelData.text
                     onClicked: modelData.triggered(drawer)
+                    enabled: modelData.enabled
                 }
 
                 visible: count > 0

@@ -30,7 +30,7 @@ ApplicationWindow {
 
     title: qsTr("Fluid Demo")
 
-    appBar.maxActionCount: 1
+    appBar.maxActionCount: 3
 
     Material.primary: Material.LightBlue
     Material.accent: Material.Blue
@@ -66,12 +66,24 @@ ApplicationWindow {
             Action {
                 text: qsTr("Action 2")
                 iconName: "action/info"
+                hasDividerAfter: true
                 onTriggered: console.log("action2 triggered")
             },
             Action {
                 text: qsTr("Action 3")
                 iconName: "action/info"
                 onTriggered: console.log("action3 triggered")
+            },
+            Action {
+                text: qsTr("Action 4")
+                iconName: "action/info"
+                onTriggered: console.log("action4 triggered")
+            },
+            Action {
+                text: qsTr("Action 5")
+                iconName: "action/info"
+                visible: false
+                onTriggered: console.log("action5 triggered")
             }
         ]
     }
@@ -101,7 +113,22 @@ ApplicationWindow {
                 text: qsTr("Settings")
                 iconName: "action/settings"
                 tooltip: qsTr("Settings")
+                hoverAnimation: true
                 onTriggered: console.log("Settings clicked")
+            },
+            Action {
+                text: qsTr("This should not be visible")
+                iconName: "alert/warning"
+                visible: false
+            },
+            Action {
+                text: qsTr("Language")
+                iconName: "action/language"
+                enabled: false
+            },
+            Action {
+                text: qsTr("Accounts")
+                iconName: "action/account_circle"
             }
         ]
 

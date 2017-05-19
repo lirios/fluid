@@ -88,6 +88,13 @@ Object {
     property bool hasDividerAfter: false
 
     /*!
+        Set to \c true to rotate the icon 90 degrees on mouseover.
+
+        This property is \c false by default.
+     */
+    property bool hoverAnimation: false
+
+    /*!
         Emitted when a button or menu item bound to this action have been activated.
         Includes the object that triggered the even, if relevant.
 

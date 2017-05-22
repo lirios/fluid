@@ -21,25 +21,31 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
 
+## Build system
+
+Qbs is a new build system that is much easier to use compared to qmake or CMake.
+
+If you want to learn more, please read the [Qbs manual](http://doc.qt.io/qbs/index.html),
+especially the [setup guide](http://doc.qt.io/qbs/configuring.html) and how to install artifacts
+from the [installation guide](http://doc.qt.io/qbs/installing-files.html).
+
 ## Run the demo without installation
 
-Fluid provides a project that statically builds the demo program and doesn't require any
-installation.
-
-Open up `fluid-demo.pro` with QtCreator, hit build and run to see the demo in action.
+Open up `fluid.qbs` with QtCreator, hit build and run to see the demo in action.
 
 Alternatively you can build it yourself from the terminal:
 
 ```sh
-mkdir build; cd build
-qmake ../fluid-demo.pro
-make
+qbs setup-toolchains --type gcc /usr/bin/g++ gcc
+qbs setup-qt /usr/bin/qmake-qt5 qt5
+qbs config profiles.qt5.baseProfile gcc
+qbs -d build profile:qt5
 ```
 
 And run:
 
 ```sh
-./fluid-demo
+qbs run --no-build -d build --products Demo
 ```
 
 ## System-wide installation

@@ -5,6 +5,8 @@ Project {
 
     readonly property string version: "0.10.0"
 
+    property bool documentationEnabled: true
+    property bool demoEnabled: true
     property bool autotestEnabled: false
     property stringList autotestArguments: []
     property stringList autotestWrapper: []
@@ -14,7 +16,6 @@ Project {
     qbsSearchPaths: ["qbs/shared", "qbs/local"]
 
     references: [
-        "doc/doc.qbs",
         "icons/icons.qbs",
         "src/fluid/fluid.qbs",
         "src/imports/core/core.qbs",
@@ -22,11 +23,26 @@ Project {
         "src/imports/effects/effects.qbs",
         "src/imports/layouts/layouts.qbs",
         "src/imports/material/material.qbs",
-        "src/demo/demo.qbs",
         "tests/auto/controls/controls.qbs",
         "tests/auto/core/core.qbs",
         "tests/auto/material/material.qbs",
     ]
+
+    SubProject {
+        filePath: "doc/doc.qbs"
+
+        Properties {
+            condition: documentationEnabled
+        }
+    }
+
+    SubProject {
+        filePath: "src/demo/demo.qbs"
+
+        Properties {
+            condition: demoEnabled
+        }
+    }
 
     AutotestRunner {
         builtByDefault: autotestEnabled

@@ -21,7 +21,7 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
 
-## Build system
+## Build
 
 Qbs is a new build system that is much easier to use compared to qmake or CMake.
 
@@ -29,11 +29,12 @@ If you want to learn more, please read the [Qbs manual](http://doc.qt.io/qbs/ind
 especially the [setup guide](http://doc.qt.io/qbs/configuring.html) and how to install artifacts
 from the [installation guide](http://doc.qt.io/qbs/installing-files.html).
 
-## Run the demo without installation
-
 Open up `fluid.qbs` with QtCreator, hit build and run to see the demo in action.
 
-Alternatively you can build it yourself from the terminal:
+Alternatively you can build it yourself from the terminal.
+We strongly advise against manual builds, unless you have previous experience.
+
+From the root of the repository, run:
 
 ```sh
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
@@ -42,7 +43,7 @@ qbs config profiles.qt5.baseProfile gcc
 qbs -d build profile:qt5
 ```
 
-And run:
+Run the demo with:
 
 ```sh
 qbs run --no-build -d build --products Demo

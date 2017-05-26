@@ -50,4 +50,21 @@ Project {
         arguments: project.autotestArguments
         wrapper: project.autotestWrapper
     }
+
+    InstallPackage {
+        name: "fluid-artifacts"
+        targetName: name
+        builtByDefault: false
+
+        archiver.type: "tar"
+        archiver.outputDirectory: project.buildDirectory
+
+        Depends { name: "Fluid" }
+        Depends { name: "fluidcontrolsplugin" }
+        Depends { name: "fluidcoreplugin" }
+        Depends { name: "fluideffectsplugin" }
+        Depends { name: "fluidlayoutsplugin" }
+        Depends { name: "fluidmaterialplugin" }
+        Depends { name: "Icons" }
+    }
 }

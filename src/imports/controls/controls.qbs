@@ -1,7 +1,7 @@
 import qbs 1.0
 
 LiriDynamicLibrary {
-    name: "Fluid.Controls"
+    name: "fluidcontrolsplugin"
     targetName: "fluidcontrolsplugin"
 
     Depends { name: "lirideployment" }

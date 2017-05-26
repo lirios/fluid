@@ -1,7 +1,7 @@
 import qbs 1.0
 
 LiriDynamicLibrary {
-    name: "Fluid.Material"
+    name: "fluidmaterialplugin"
     targetName: "fluidmaterialplugin"
 
     Depends { name: "lirideployment" }

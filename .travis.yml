@@ -1,19 +1,22 @@
 language: c
 
 compiler:
-  - gcc
   - clang
+  - gcc
 
 sudo: required
 
+services:
+  - docker
+
 env:
   global:
-    # BINTRAY_USER
-    - secure: "vEoMBcWLvExapeJ7644Qa5j8zQcIRvSmZawrDWciQAVv47ckjS4CzeKxfniwYuVcMY+G8mk+NANM/cvEYhBuBx1YLRz7qR9WkLtIGs5ZN/Tqna8bEYDx4fz/grsaPIO0zSCOlFy4gjW4OTZc0Pi6h82UNkbu4VruCA0+KHRMeLbqP2SnhLTlKibofp3YgFLK+MpBjQ9m99rfkRlVWSdY6dscST3s5ROreTepoaP1Q4XzG1eRp2aLSqKurWnDdFdXZhInHeWxWwZ5lRPcCj29+oYgU8cvxA/D2DuDfPlM92XzqTTqD9tTztnz0klN/tQaXECaFZYu5/BC/o71FmWtYzuc7SScggFU1XLmEPdsYy8B/bDyvP+QueiwO/i3ZnEiSLccuN7fkEi2qCHLjpcMRJb/A6NKcgkyFHN65ncqcvG3xrk7mcCAMiupkpx0MVskiYI0HD3g/2auIEjDcqKbOGYV1mRwGhWwV51qfDYsAtSQcn5JaTN3ioFjfPpSI4swevAfOdBp1vhkFXvYQHDEWtyaQWQkiZN/D2osO3VoTgXMUF68I2BNskUVXqU/X18f3xzcv3PXsUCTWAY8tQ7iDt93UQyC/rtqnxUhKJqcnM2ri7GGk2yK/GHyjUonf9GO5mucPyAWzkPP13T6gj1Y/XH76wFBurdP89FUidyiVVE="
-    # BINTRAY_API_KEY
-    - secure: "Z4721k6LWdc7/UDVkBSVxr1G2nRWJu1817jCpuE+6pub65WhGqBB20xwI3jsp/J2U2iX3RUgLiJTCRPuQnLoxaDRXY1WZa2qXLumgGcYwgwgCLQgBIvV5OWwPgBpSl40f7w1c8qfEVTeFt4X51fwZR+2WSNzCn9dHZFICHwweasNXMe/1/nnopvZmTmnAICLTTGM3QL8TgrqnAevNtR9/ILGli6YewFmpPBiy/nV5SIPlay4s0gtpr4WOACHbCjyi2dY+OMgln+zcrV2Xe75b/G9G+JbjmQj2wb3MviQhQ9EXGhxcRZTmpgLmZ4VXuFizsl1ssfte7p8JEHdwJi1nnGkjuP0xcmfc/t8y3u/QFQbPd0K/xgQhrHVlVytDGgrwZdfGoHV43E5v338E6vPd0R4PaZbKKwvEfze3T+X04wrnMm2SgtVQnr4l0WBwYEsOLP+MdFyfHsXs74MMg+1VQcz6gnD7YPOPqftds0ZaEltIn6VOZqt72K06t544jjFv1fIxA0bWDFBgIECfF6dGRykaw/Jo/29VoUT9K4dfMX/V9LMxy1x3p/ltW1U0VryqUCzj/QqSJw82rEYkMMvQYq8x+eBdlYjbAZZhRGvMHYa+1uHwiKbyRyQQZlc+r8b1/usI9B2E4y12dPPGmHBW8gbRHfoGCX5m3aBkaqUpeE="
-    # BINTRAY_REPO_OWNER
-    - secure: "fHxkvRKupN+jmbncPeNIVxvAxmHpZskJ89jJoDM3Fdmheq08+BPCLVUaDX3C1Ux4ETCONKKFwiQ152M30TczU95OXCfs9N3Uo631CL0AFH0vavBPDtAdZyOdljS+gkFMRCT/NFxdTgaju128jYVqumJw6fSVke8Edh43cDURhhpD6Xr6qm45620Iua3/Vieu/IBzoCISV4RgBxSgPOBew8diIk9nVqk4nSeU9aP110lJ5ExhI++G7sRaZvlMTkHdti5Wcg2/MXy883IVAacieOALRmdBuW1lv1lgEkV6KZ0cjmiG8B0XuvkWCgx05wbY4FWnAZlU6mkuTUPo4Sg2JhtGUr1ejAHe3TF1g05s2JBiP8oX2vdflh5Immyi0afpdzJGxinrEXY39QBmfK8Donkn78Flz7NdLQz882bdQsQ3MnFGHG8FOqMdJWAAUxpn7L5SCgShH/GpspFnvONWKmJybsRAdMZTHJL7d4pwYgo854vo43p9RDGSZX/jdQ6Gb874rNUdtfWXZLWpaq4jH/jigC+WGG4r78kNIMoylRRqINfg2F7jjR4Z/rieePZ7d0IUeD4+a0XFriYuix415FPpRcogB4cpXmDn6ZQTCfd4QDBxILlv6phHMcTOvrwgBMd40OCtewkXrODIKqC6xaeWf99/8sJti5ZUZK5DiuA="
+    # FTP_USER
+    - secure: "0ye9KRdOWOvKtXHZwAyxwgTkGrz5nmThQXxGMbLV1HzfmnJTsm/A38HuIaUlZt4bNVC20oDX2XJ7xZNZsj20eH3K7jREAJV8wCGp35OLEdDhMaDFt21PnsruhZAGdvGVT6m0vCBxJ6WF4m08Y/nY9pG74u2xm9gcEwg74zykV705rvS+HVOssf9n0B8nFCF0HdKnNmAK41qxKKaGxZ2x06kobyQTtmAZpu+sEzRdjQsXx2oyDyYISybUiqc3KqLjrzfRa0oNGxXvZbQqk/1BdihVTkC55jl6zPUnmSpMRDmvt+vX6Wi7qr2JucguxokSDBCAsC7rJqYOrga4Wb1m58r+OkhVfjGs8rWHqBpdQb2WEjpxsHfjN5ofn320/non9moJspMon5PkSd6UnJB5NymUjYKubBti370K3k/24YXYVoSg5/29Ol6GUzXpoV8QeNe97At8wsSXwJNKhSN6OqPWVUZpnF4yHxJsYIVIKqkXzKV/xgPQgyaw3+88gfljoxgWgnRxO3CTftrgNsLovwfRvz+ae3VfphXAVa0NDbiotyJPF8eUaLA8JqToF42nhAvMB4VE4UmnAfUXtN0qLL2cCXyvFCuj9c3XfRXXxAk2pVgNAuc62RnOBAUpoSz6DMozYzwCfdU4JlR5kNX2ugYYdhpku8BixLlk1+zgqcA="
+    # FTP_PASSWORD
+    - secure: "pyQugd8ZXVTSLPuLAnLhFRz9A5JODhLQfWMHqeGPElgisEMSXcwjh1QEYQbwqk/9o1y33L5nM1Q3LzSEdMG2T+jeXKnDq9+Oyl/gt8Y9F9wMuHX3VJsWm07j420ogIzJnoZipYGuhh0i7mZNHHoS13DJC7UiGLvtspbRhR+fX9KcZgpxhYqaJxjZxzFzV9Nj2vRn0VgOaphdctRy0bIMJBBuZ4+uG3roeme2Uz7NDdlP1Fr0S9/7pKF/93NvEYHAioaXOTlPMrjVspT2WIkujbCNK08kJbPNphK20X78e3VL5YufTlALxVY4c+vpOVNyaKl4+/0QdsZ8dy+orT/CSyCJiSdpYAmJEMlZHQQaa44pI8m1sN1LR1Cvv6MbhXtXme2zZKUP7doLyt9A5tbtdnl+SXlN6V8++J83sgIB7O4v/UXYLpmd1IL7G+cgH6g8ckjcLqQWPWfhJEix1hNwzPR6GFjo39KyftnBM4jp00bjzIFkIdOD9cW461NqIjCeiyCiBF/bmNtZ3Y3M9i8MG/KvxBKtcTmam1m+HRvUKkDslEahDjhHzYr/h952UIllhy2CJvviG+h5/WbxxnKKUtd+xaFhYgZZrv6K7gA9tAUwW02v27oHzOjBvaLHaoKHv2lTAgchIgxPn+YjScAUQv3qkD9Wk9oF6xEIPLe8c0w="
+    # FTP_URL
+    - secure: "Kh/Gq5WiAfED6+2+xjni1jnEPWbpDpHTiTMDkUF1RLnTUBmyTKiC1Nvmf6nUNFb3YsH3FeoDvxHsoznKxBrQVOBhfpedGqum465wkt0KBn+5crty0tYfSf2VZ86tN3oYMP7bJy1MKcFL2rq7cXUnWp98bv/GNlITu7yuIUTOXoOybxSUTFPgRLivzl8Apy1lmgcpFB7Cw0N1p6C/eWyJFix5MFpoF2ejO/ozKQGVptKXgTJMAEgQbcpn71E3Dh95ui3oxv1K9FzonqtPn4cag0msBZdJIvX9UdBEGpWcpADP2Q7g+Vdv5c5UF4zgFUYugeUtmQkIKK66/G4JtZ0+iYTA8Z7NBjkP0ToYpgXKAujuZf0CZf6Buj/3W/HBnsbxTYoUpUwtGHWIoYYeN/LFmT/JgW+B6M4KJLuyWQkmc7uysLScPuJ35FVvEaVdrxJ3myjEa45uoTAKAfI4Hk5J6ocbX9MvBR/76OKwukHZT9LjKwY+fGmi5Cc4hVhkJ7qpsBCnyBZ9ZN/jiwrAywXmTYYHyVEjulRrOUTrOcrI+zeydm866KPnzVU4bcLFPIWYzUGL0ksK14t9iR8gGmAJd2bi0koMh9Fb5bZUjGFKceLR4RWOfeNL6ViDSepvj8xWEEwlu5//Z9Y7mPpZHOpIiyr7+XdRDUVdQcpE9CdDfn4="
 
 arch:
   packages:
@@ -26,40 +29,30 @@ arch:
     - qt5-tools
     - extra-cmake-modules
     - xorg-server-xvfb
-    - clang
     #- clazy-git
   script:
-    # cmake build
-    - if [ "$CC" = "gcc" ]; then mkdir build-cmake && cd build-cmake && cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON -DCMAKE_INSTALL_PREFIX=/usr && make -j$(nproc) && cd ..; fi
-    # qmake build
-    - if [ "$CC" = "gcc" ]; then mkdir build && cd build && qmake -spec linux-g++ CONFIG+=use_qt_paths ../fluid.pro && make -j$(nproc) && cd ..; fi
-    #- if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths QMAKE_CXX="clazy" ../fluid.pro && make -j$(nproc) && cd ..; fi
-    - if [ "$CC" = "clang" ]; then mkdir build && cd build && qmake -spec linux-clang CONFIG+=use_qt_paths ../fluid.pro && make -j$(nproc) && cd ..; fi
-    - cd build && make html_docs_fluid && cd ..
-    - cd build && sudo make install && cd ..
-    - cd build && xvfb-run -a -s "-screen 0 800x600x24" make check && cd ..
-    # qbs build
     - qbs-setup-toolchains --detect
     - qbs-setup-qt /usr/bin/qmake-qt5 qt5
     - qbs config profiles.qt5.baseProfile ${CC}
-    #- eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs -d qbs-build -j $(nproc) -p fluid-autotest profile:qt5
-    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs -d qbs-build -j $(nproc) profile:qt5
-    # Build CI package
-    - ./.travis/bintray-wrapper.sh
+    #- eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs build -d build -j $(nproc) -p fluid-autotest profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr
+    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs build -d build -j $(nproc) -p fluid-artifacts profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr
 
 script:
-  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
+  - "curl -s https://raw.githubusercontent.com/lirios/repotools/develop/travis/docker-travis.sh | bash"
 
 deploy:
-  provider: bintray
-  on:
-    branch: develop
-    condition: "$CC = gcc"
-  file: cibuild/bintray.json
-  user:
-    secure: "ABQ0Vh69XIJ38UOTGQOmnJ/zr1E0zNK6bDkqJ+ioujqBE8pvZuppdb9DyPmqscUgJWLQy8C7qfRMXMkkBUdecqV7LAFplO08yMxXmSNCq2gYi7l8jY6WCp+dyno+8tO7P7zO/8Vgae99c2MNkCVw8FpN7vFC3l5QLBUuEuSgCWYInW4aXkQnTkKNPN5hiMb7pJ7c1WMo6YKydkKs6yL4ACUkTzoR8iuTLqIAvi2w9UMzIUE16FGOHHUSZZI0UwExhSPTmH30pLddKexvdip6AyROGPDSqgh1zh9mIpYyz6BRWoTPR8LCpAFE2soTF2t0XdkRoQeZS6+zXJdU3AdJnEj1y2n9zxR3CSl+MfeJCz24yAJ+2shLyl+LZwhert7z45GC5CNrFsxliA7wMCuP3AeBEwCYaTgNcB5mQWK7+nyQuEZ43v/ffQiZUziEPOsHpxdggPN4TQ/KLSwC9eSKyh7dvlvupfd5p509d06239gXVNwDU45H3in2XKv9WQQIBXLW48IoY7YQFDvKCsAuNNn1fJLMLhg4MUqSYWSCYGjGn3nHBm9IJ0Y176dzN7c+2kP+Vm6x9PhWR6ZDpRVh4ygh+TKVNTVpzQ2bD/J+vWcGTf1KP4GJOLPWe7S0BsXNWry1jGz8v+9IDDPMVf9bFRSBZNSGD/qU8FCsS6nVXOU="
-  key:
-    secure: "x5L7Cc9ncaXhjLjGi/+0P1Yjzo5yPTPqB47odKvnvHVG91n7LR0tCY8pKMAITSlnKqxlV6q/jlr5Ur8JzY0hwwi1KaM7t80cjWn9feE79DsA2Tpdxks2eRLQs1kXoqepa+tpuxOCysrYL5KMw/ly3vnnnkeXleb05bdadZLxdf54BK+6pA8djwKoVAba4lQDBL4RrdN7yQYB5ZBdGHFO6BScaVR1xuykOalfSQsQWAQqENbnOSFpxkdxYt0FUsP2N0UwqZ7kbX7XtdRKCfubnRJ9YoNh4kbImRLKbosl1NX8+MAwbudnKa6AV3P+LxQZA6cU1T8JIu6W54A7pXJYnf2bOezSy4ifzE0L+4rgbrIQVL9AUcWpK8gDkdpPJ6B6gwWW8+VP+wDCnzXEk9DXBlOLCGeHBaDOJAeOkCC2NJ64hC0bQfILO79KKYkpQTTf1uepngeie7y50CmOq4CaxAX1rQcPz2GlZlp5XIOZX5ZV5GABxORCn4zANrs7hmhY44ooky6KltiA35vgFxJGfqkgSUWWFqHvEPwDN2anRLjlY+trMN3YRMBCnhL3WCtHjiJ5sUW6drUcBfzcoJxGY7JF31q8N7y0ZhdXNc5P6GC/f62ggHDnk9lklOb4DlEqh+npREk+o89TUU/RkXNPuLBpNiq3UwCrDlKbpoULhgs="
+  - provider: script
+    script: curl --ftp-create-dirs -T build/default/fluid-artifacts.tar.gz -u $FTP_USER:$FTP_PASSWORD $FTP_URL/artifacts/master/fluid-artifacts.tar.gz
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: "$CC = gcc"
+  - provider: script
+    script: curl --ftp-create-dirs -T build/default/fluid-artifacts.tar.gz -u $FTP_USER:$FTP_PASSWORD $FTP_URL/artifacts/develop/fluid-artifacts.tar.gz
+    skip_cleanup: true
+    on:
+      branch: develop
+      condition: "$CC = gcc"
 
 notifications:
   email: false

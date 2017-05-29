@@ -1,7 +1,7 @@
 import qbs 1.0
 
 LiriDynamicLibrary {
-    name: "Fluid.Layouts"
+    name: "fluidlayoutsplugin"
     targetName: "fluidlayoutsplugin"
 
     Depends { name: "lirideployment" }

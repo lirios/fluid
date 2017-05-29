@@ -2,7 +2,7 @@ import qbs 1.0
 import qbs.FileInfo
 
 QtGuiApplication {
-    readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, lirideployment.qmlDir)]
+    readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
     name: "Demo"
     targetName: "fluid-demo"

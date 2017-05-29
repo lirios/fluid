@@ -58,12 +58,14 @@ FluidControls.Page {
             anchors {
                 top: centered ? undefined : parent.top
                 left: centered ? undefined : parent.left
+                right: centered ? undefined : parent.right
                 leftMargin: centered ? 0 : appBar ? appBar.leftKeyline - 12 : 0
                 horizontalCenter: centered ? parent.horizontalCenter : undefined
             }
 
             Material.accent: appBar.Material.foreground
             Material.background: "transparent"
+            
 
             Repeater {
                 model: swipeView.contentChildren

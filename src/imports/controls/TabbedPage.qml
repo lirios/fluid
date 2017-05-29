@@ -72,6 +72,7 @@ FluidControls.Page {
                     text: modelData.title
                     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                                                          contentItem.implicitWidth +
+                                                         (tabIcon.visible ? tabIcon.width : 0) +
                                                          (tabCloseButton.visible ? tabCloseButton.width : 0) +
                                                          leftPadding + rightPadding)
                     width: parent.fixed ? parent.width / parent.count : implicitWidth
@@ -87,11 +88,11 @@ FluidControls.Page {
 
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.leftMargin: FluidControls.Units.smallSpacing
 
                         name: modelData.iconName
                         source: modelData.iconSource
                         visible: status == Image.Ready
+                        color: contentItem.color
                     }
 
                     FluidControls.IconButton {

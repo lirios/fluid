@@ -41,7 +41,7 @@ Flickable {
                     id: grid
                     anchors.centerIn: parent
                     columns: 2
-                    rows: 4
+                    rows: 6
 
                     // Row 1
 
@@ -105,6 +105,21 @@ Flickable {
 
                     Button {
                         text: qsTr("Highlighted")
+                        highlighted: true
+                        enabled: false
+                    }
+
+                    // Row 6
+
+                    Button {
+                        text: qsTr("Flat Highlighted")
+                        flat: true
+                        highlighted: true
+                    }
+
+                    Button {
+                        text: qsTr("Flat Highlighted")
+                        flat: true
                         highlighted: true
                         enabled: false
                     }

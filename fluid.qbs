@@ -1,4 +1,5 @@
 import qbs 1.0
+import qbs.FileInfo
 
 Project {
     name: "Fluid"
@@ -45,10 +46,22 @@ Project {
     }
 
     AutotestRunner {
+        Depends { name: "lirideployment" }
+        Depends { name: "fluidcontrolsplugin" }
+        Depends { name: "fluidcoreplugin" }
+        Depends { name: "fluideffectsplugin" }
+        Depends { name: "fluidlayoutsplugin" }
+        Depends { name: "fluidmaterialplugin" }
+
         builtByDefault: autotestEnabled
         name: "fluid-autotest"
         arguments: project.autotestArguments
         wrapper: project.autotestWrapper
+        environment: {
+            var env = base;
+            env.push("QML2_IMPORT_PATH=" + FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir));
+            return env;
+        }
     }
 
     InstallPackage {

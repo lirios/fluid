@@ -13,7 +13,6 @@
         <file>DialogLabel.qml</file>
         <file>DisplayLabel.qml</file>
         <file>FluidStyle.qml</file>
-        <file>FluidWindow.qml</file>
         <file>HeadlineLabel.qml</file>
         <file>Icon.qml</file>
         <file>IconButton.qml</file>

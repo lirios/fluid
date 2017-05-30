@@ -19,7 +19,6 @@ set(QML_FILES
     DialogLabel.qml
     DisplayLabel.qml
     FluidStyle.qml
-    FluidWindow.qml
     HeadlineLabel.qml
     IconButton.qml
     Icon.qml

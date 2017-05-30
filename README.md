@@ -45,7 +45,12 @@ qbs config profiles.qt5.baseProfile gcc
 qbs -d build profile:qt5
 ```
 
-Run the demo with:
+You can also specify the following options:
+
+ * `project.withDemo:false`: Do not build the demo app.
+ * `project.withDocumentation:false`: Do not build the documentation.
+
+Run the demo with (unless `project.withDemo:false`):
 
 ```sh
 qbs run --no-build -d build --products Demo

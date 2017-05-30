@@ -4,11 +4,10 @@ Product {
     property string versionTag: project.version.replace(/\.|-/g, "")
 
     name: "Documentation"
-    condition: qbsbuildconfig.withDocumentation
+    condition: project.withDocumentation
     builtByDefault: true
     type: "qch"
 
-    Depends { name: "qbsbuildconfig" }
     Depends { name: "lirideployment" }
     Depends { name: "Qt.core" }
 

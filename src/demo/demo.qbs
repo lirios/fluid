@@ -6,6 +6,7 @@ QtGuiApplication {
 
     name: "Demo"
     targetName: "fluid-demo"
+    condition: project.withDemo
 
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }

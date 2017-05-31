@@ -15,7 +15,6 @@ Card 1.0 Card.qml
 CircleImage 1.0 CircleImage.qml
 DialogLabel 1.0 DialogLabel.qml
 DisplayLabel 1.0 DisplayLabel.qml
-FluidWindow 1.0 FluidWindow.qml
 HeadlineLabel 1.0 HeadlineLabel.qml
 IconButton 1.0 IconButton.qml
 Icon 1.0 Icon.qml

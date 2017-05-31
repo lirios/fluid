@@ -146,7 +146,7 @@ Drawer {
             ListView {
                 currentIndex: -1
                 spacing: 0
-								clip: true
+                clip: true
 
                 model: drawer.actions
 

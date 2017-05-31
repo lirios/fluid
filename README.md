@@ -11,6 +11,8 @@ Fluid
 
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications.
 
+![Desktop](.github/demo.png)
+
 ## Dependencies
 
 Qt >= 5.8.0 with at least the following modules is required:

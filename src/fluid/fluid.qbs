@@ -16,11 +16,19 @@ LiriModule {
         "dateutils.h": "DateUtils",
     })
 
-    create_pkgconfig.description: "Collection of QtQuick components"
-    create_pkgconfig.version: project.version
-    create_pkgconfig.dependencies: ["Qt5Core"]
+    Properties {
+        condition: create_pkgconfig.condition
 
-    create_cmake.version: project.version
+        create_pkgconfig.description: "Collection of QtQuick components"
+        create_pkgconfig.version: project.version
+        create_pkgconfig.dependencies: ["Qt5Core"]
+    }
+
+    Properties {
+        condition: create_cmake.condition
+
+        create_cmake.version: project.version
+    }
 
     files: ["*.cpp"]
 

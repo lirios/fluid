@@ -1,6 +1,6 @@
 import qbs 1.0
 
-QtApplication {
+QtGuiApplication {
     name: "tst_fluid_controls"
     condition: project.autotestEnabled
     type: base.concat(["autotest"])

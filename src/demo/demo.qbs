@@ -7,9 +7,11 @@ QtGuiApplication {
     name: "Demo"
     targetName: "fluid-demo"
     condition: project.withDemo
+    consoleApplication: false
 
     Depends { name: "lirideployment" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }
+    Depends { name: "bundle"; condition: qbs.targetOS.contains("macos"); required: false }
 
     cpp.defines: [
         "FLUID_VERSION=" + project.version,
@@ -37,7 +39,7 @@ QtGuiApplication {
 
     Group {
         qbs.install: true
-        qbs.installDir: lirideployment.binDir
-        fileTagsFilter: product.type
+        qbs.installDir: bundle.isBundle ? "Applications" : lirideployment.binDir
+        fileTagsFilter: bundle.isBundle ? ["bundle.content"] : ["application"]
     }
 }

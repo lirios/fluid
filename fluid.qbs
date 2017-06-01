@@ -13,11 +13,14 @@ Project {
     property bool withDocumentation: true
     property bool withDemo: true
 
+    property bool deploymentEnabled: false
+
     minimumQbsVersion: "1.6"
 
     qbsSearchPaths: ["qbs/shared"]
 
     references: [
+        "dist/win.qbs",
         "doc/doc.qbs",
         "icons/icons.qbs",
         "src/demo/demo.qbs",

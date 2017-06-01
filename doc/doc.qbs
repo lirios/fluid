@@ -38,13 +38,13 @@ Product {
     Group {
         fileTagsFilter: ["qdoc-output"]
         qbs.install: true
-        qbs.installDir: lirideployment.docDir + "/fluid/html"
+        qbs.installDir: qbs.targetOS.contains("linux") ? lirideployment.docDir + "/fluid/html" : "Docs"
         qbs.installSourceBase: Qt.core.qdocOutputDir
     }
 
     Group {
         fileTagsFilter: ["qch"]
         qbs.install: false
-        qbs.installDir: lirideployment.docDir + "/fluid/html"
+        qbs.installDir: qbs.targetOS.contains("linux") ? lirideployment.docDir + "/fluid/html" : "Docs"
     }
 }

@@ -1,10 +1,9 @@
 Fluid
 =====
 
-# Authors
+# Maintainers
 
  * Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Michael Spencer <sonrisesoftware@gmail.com>
 
 This is the list of contributors to this code base.
 
@@ -23,6 +22,8 @@ change over time.
 
  * Pier Luigi Fiorini <pierluigi.fiorini@liri.io>
  * Michael Spencer <sonrisesoftware@gmail.com>
+ * Rajesh Kumar Mallah <mallah.rajesh@gmail.com>
+ * Magnus Groß <magnus.gross@rwth-aachen.de>
  * oKcerG <oKcerG@users.noreply.github.com>
- * Magnus Groß <magnus-gross@users.noreply.github.com>
  * SushiTee <weichel.sascha@gmail.com>
+ * Tim Süberkrüb <dev@timsueberkrueb.io>

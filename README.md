@@ -81,32 +81,6 @@ On the `qmake` line, you can specify additional configuration parameters:
 Use `make distclean` from inside your `build` directory to clean up.
 You need to do this before rerunning `qmake` with different options.
 
-### Build with CMake
-
-If you decide to build with CMake you will need the following modules installed:
-
- * [CMake >= 3.0](https://cmake.org/)
- * [ECM >= 1.7.0](http://quickgit.kde.org/?p=extra-cmake-modules.git)
-
-This build system is now deprecated and will be removed in the next version.
-
-From the root of the repository, run:
-
-```sh
-mkdir build; cd build
-cmake .. -DKDE_INSTALL_USE_QT_SYS_PATHS=ON
-make
-make install # use sudo if necessary
-```
-
-On the `cmake` line, you can specify additional configuration parameters:
-
- * `-DCMAKE_INSTALL_PREFIX=/path/to/install` (for example, `/opt/liri` or `/usr`)
- * `-DCMAKE_BUILD_TYPE=<build_type>`, where `<build_type>` is one of:
-   * **Debug:** debug build
-   * **Release:** release build
-   * **RelWithDebInfo:** release build with debugging information
-
 ### Notes on installation
 
 A system-wide installation with `LIRI_INSTALL_PREFIX=/usr` is usually performed

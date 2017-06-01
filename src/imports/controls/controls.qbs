@@ -8,6 +8,10 @@ LiriDynamicLibrary {
     Depends { name: "cpp" }
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick"] }
 
+    Depends { name: "fluidcoreplugin" }
+    Depends { name: "fluidmaterialplugin" }
+    Depends { name: "Icons" }
+
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
     files: ["*.cpp", "*.h"]

@@ -53,7 +53,7 @@ You can also specify the following options:
 Run the demo with (unless `project.withDemo:false`):
 
 ```sh
-qbs run --no-build -d build --products Demo
+qbs run --no-build -d build --products fluid-demo
 ```
 
 ## System-wide installation

@@ -23,7 +23,7 @@ Product {
     Depends { name: "lirideployment" }
     Depends { name: "archiver" }
     Depends { name: "Qt.core" }
-    Depends { name: "Demo" }
+    Depends { name: "fluid-demo" }
     Depends { name: "Fluid" }
     Depends { name: "fluidcontrolsplugin" }
     Depends { name: "fluidcoreplugin" }

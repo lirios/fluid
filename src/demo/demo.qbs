@@ -4,7 +4,7 @@ import qbs.FileInfo
 QtGuiApplication {
     readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
-    name: "Demo"
+    name: "fluid-demo"
     targetName: "fluid-demo"
     condition: project.withDemo
     consoleApplication: false

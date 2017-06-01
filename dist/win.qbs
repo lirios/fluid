@@ -13,7 +13,7 @@ Product {
     // List of path prefixes to be excluded from the generated archive
     property stringList excludedPathPrefixes: []
 
-    name: "Deployment (Windows)"
+    name: "Fluid Deployment (Windows)"
     condition: qbs.targetOS.contains("windows")
     builtByDefault: project.deploymentEnabled
     type: ["archiver.archive"]

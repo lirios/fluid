@@ -125,6 +125,14 @@ Page {
         return StackView.view.push({item: component, properties: properties});
     }
 
+    Keys.onReleased: {
+        // catches the Android back button event and pops the page, if it isn't the top page
+        if (event.key === Qt.Key_Back && StackView.view.depth > 1) {
+            pop(event, false);
+            event.accepted = true;
+        }
+    }
+
     header: null
     footer: null
 

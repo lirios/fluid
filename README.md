@@ -39,6 +39,7 @@ We strongly advise against manual builds, unless you have previous experience.
 From the root of the repository, run:
 
 ```sh
+git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
 qbs setup-qt /usr/bin/qmake-qt5 qt5
 qbs config profiles.qt5.baseProfile gcc

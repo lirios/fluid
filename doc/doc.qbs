@@ -3,7 +3,7 @@ import qbs 1.0
 Product {
     property string versionTag: project.version.replace(/\.|-/g, "")
 
-    name: "Documentation"
+    name: "fluid-doc"
     condition: project.withDocumentation
     builtByDefault: true
     type: "qch"

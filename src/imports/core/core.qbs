@@ -1,32 +1,14 @@
 import qbs 1.0
 
-LiriDynamicLibrary {
+LiriQmlPlugin {
     name: "fluidcoreplugin"
-    targetName: "fluidcoreplugin"
+    pluginPath: "Fluid/Core"
 
-    Depends { name: "lirideployment" }
-    Depends { name: "cpp" }
-    Depends { name: "Qt"; submodules: ["svg", "gui", "qml", "quick"] }
+    Depends { name: "Qt"; submodules: ["svg", "gui"] }
     Depends { name: "Fluid" }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h"]
+    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
     excludeFiles: ["registerplugins.cpp"]
-
-    Group {
-        name: "QML Files"
-        files: [
-            "*.qml",
-            "qmldir",
-            "plugins.qmltypes"
-        ]
-        fileTags: ["qml"]
-    }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Core"
-        fileTagsFilter: ["dynamiclibrary", "qml"]
-    }
 }

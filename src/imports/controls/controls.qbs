@@ -1,30 +1,16 @@
 import qbs 1.0
+import qbs.FileInfo
 
-LiriDynamicLibrary {
+LiriQmlPlugin {
     name: "fluidcontrolsplugin"
-    targetName: "fluidcontrolsplugin"
-
-    Depends { name: "lirideployment" }
-    Depends { name: "cpp" }
-    Depends { name: "Qt"; submodules: ["gui", "qml", "quick"] }
+    pluginPath: "Fluid/Controls"
 
     Depends { name: "fluidcoreplugin" }
     Depends { name: "fluidmaterialplugin" }
-    Depends { name: "Icons" }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h"]
-
-    Group {
-        name: "QML Files"
-        files: [
-            "*.qml",
-            "qmldir",
-            "plugins.qmltypes"
-        ]
-        fileTags: ["qml"]
-    }
+    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
 
     Group {
         name: "QML Files (Material)"
@@ -33,14 +19,17 @@ LiriDynamicLibrary {
     }
 
     Group {
+        name: "Icons"
+        files: "**/*.svg"
+        prefix: qbs.installSourceBase
         qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls"
-        fileTagsFilter: ["dynamiclibrary", "qml"]
+        qbs.installSourceBase: "../../../icons/"
+        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath, "icons")
     }
 
     Group {
         qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Controls/+material"
+        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath, "+material")
         fileTagsFilter: ["qml.material"]
     }
 }

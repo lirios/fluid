@@ -1,54 +1,52 @@
 import qbs 1.0
+import "../../qbs/shared/imports/LiriUtils.js" as LiriUtils
 
-LiriModule {
+LiriModuleProject {
+    id: root
+
     name: "Fluid"
-    targetName: "Fluid"
-    version: "0.0.0"
+    moduleName: "Fluid"
+    description: "Collection of QtQuick components"
 
-    Depends { name: "Qt"; submodules: "core"; versionAtLeast: "5.8" }
-
-    cpp.defines: base.concat([
-        "FLUID_VERSION=" + project.version,
-        "QT_BUILD_FLUID_LIB"
-    ])
-
-    create_headers.headersMap: ({
-        "dateutils.h": "DateUtils",
+    resolvedProperties: ({
+        Depends: [{ name: LiriUtils.quote("Qt.core") }]
     })
 
-    Properties {
-        condition: create_pkgconfig.condition
+    pkgConfigDependencies: ["Qt5Core"]
 
-        create_pkgconfig.description: "Collection of QtQuick components"
-        create_pkgconfig.version: project.version
-        create_pkgconfig.dependencies: ["Qt5Core"]
+    cmakeDependencies: ({ "Qt5Core": "5.8.0" })
+    cmakeLinkLibraries: ["Qt5::Core"]
+
+    LiriHeaders {
+        name: root.headersName
+        sync.module: root.moduleName
+
+        Group {
+            name: "Headers"
+            files: "**/*.h"
+            fileTags: ["hpp_syncable"]
+        }
     }
 
-    Properties {
-        condition: create_cmake.condition
+    LiriModule {
+        name: root.moduleName
+        targetName: root.targetName
+        version: "0.0.0"
 
-        create_cmake.version: project.version
-    }
-
-    files: ["*.cpp"]
-
-    Group {
-        name: "Headers"
-        files: ["*.h"]
-        excludeFiles: ["*_p.h"]
-        fileTags: ["public_headers"]
-    }
-
-    Group {
-        name: "Private Headers"
-        files: ["*_p.h"]
-        fileTags: ["private_headers"]
-    }
-
-    Export {
-        Depends { name: "cpp" }
+        Depends { name: root.headersName }
         Depends { name: "Qt"; submodules: "core"; versionAtLeast: "5.8" }
 
-        cpp.includePaths: product.generatedHeadersDir
+        cpp.defines: base.concat([
+            "FLUID_VERSION=" + project.version,
+            "QT_BUILD_FLUID_LIB"
+        ])
+
+        files: ["*.cpp", "*.h"]
+
+        Export {
+            Depends { name: "cpp" }
+            Depends { name: root.headersName }
+            Depends { name: "Qt"; submodules: "core"; versionAtLeast: "5.8" }
+        }
     }
 }

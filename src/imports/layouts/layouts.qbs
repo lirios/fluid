@@ -1,30 +1,10 @@
 import qbs 1.0
 
-LiriDynamicLibrary {
+LiriQmlPlugin {
     name: "fluidlayoutsplugin"
-    targetName: "fluidlayoutsplugin"
-
-    Depends { name: "lirideployment" }
-    Depends { name: "cpp" }
-    Depends { name: "Qt"; submodules: ["gui", "qml", "quick"] }
+    pluginPath: "Fluid/Layouts"
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h"]
-
-    Group {
-        name: "QML Files"
-        files: [
-            "*.qml",
-            "qmldir",
-            "plugins.qmltypes"
-        ]
-        fileTags: ["qml"]
-    }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Layouts"
-        fileTagsFilter: ["dynamiclibrary", "qml"]
-    }
+    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
 }

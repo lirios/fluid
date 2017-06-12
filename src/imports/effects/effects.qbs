@@ -1,30 +1,10 @@
 import qbs 1.0
 
-LiriDynamicLibrary {
+LiriQmlPlugin {
     name: "fluideffectsplugin"
-    targetName: "fluideffectsplugin"
-
-    Depends { name: "lirideployment" }
-    Depends { name: "cpp" }
-    Depends { name: "Qt"; submodules: ["gui", "qml", "quick"] }
+    pluginPath: "Fluid/Effects"
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h"]
-
-    Group {
-        name: "QML Files"
-        files: [
-            "*.qml",
-            "qmldir",
-            "plugins.qmltypes"
-        ]
-        fileTags: ["qml"]
-    }
-
-    Group {
-        qbs.install: true
-        qbs.installDir: lirideployment.qmlDir + "/Fluid/Effects"
-        fileTagsFilter: ["dynamiclibrary", "qml"]
-    }
+    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
 }

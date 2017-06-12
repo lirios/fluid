@@ -13,7 +13,7 @@ Product {
     // List of path prefixes to be excluded from the generated archive
     property stringList excludedPathPrefixes: []
 
-    name: "Fluid Deployment (Windows)"
+    name: "fluid-windows"
     condition: qbs.targetOS.contains("windows")
     builtByDefault: project.deploymentEnabled
     type: ["archiver.archive"]
@@ -30,7 +30,6 @@ Product {
     Depends { name: "fluideffectsplugin" }
     Depends { name: "fluidlayoutsplugin" }
     Depends { name: "fluidmaterialplugin" }
-    Depends { name: "Icons" }
 
     archiver.type: "7zip"
     archiver.workingDirectory: qbs.installRoot

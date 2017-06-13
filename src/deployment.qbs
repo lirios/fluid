@@ -16,9 +16,9 @@ Project {
         archiver.outputDirectory: project.buildDirectory
 
         Depends { name: "Fluid" }
-        Depends { name: "Fluid-cmake" }
-        Depends { name: "Fluid-pkgconfig" }
-        Depends { name: "Fluid-qbs" }
+        Depends { name: "Fluid-cmake"; required: false }
+        Depends { name: "Fluid-pkgconfig"; required: false }
+        Depends { name: "Fluid-qbs"; required: false }
         Depends { name: "fluidcontrolsplugin" }
         Depends { name: "fluidcoreplugin" }
         Depends { name: "fluideffectsplugin" }

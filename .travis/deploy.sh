@@ -38,4 +38,4 @@ openssl aes-256-cbc -K $encrypted_a841ddf051d0_key -iv $encrypted_a841ddf051d0_i
 eval "$(ssh-agent -s)"
 chmod 600 /tmp/github_deploy_key_fluid
 ssh-add /tmp/github_deploy_key_fluid
-rsync -crvz --rsh="ssh" --delete-after --delete-excluded build/default/install-root/share/doc/fluid/html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH
+rsync -crvz --rsh="ssh" --delete-after --delete-excluded build/default/fluid-doc.*/qdoc_html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH

@@ -38,7 +38,7 @@ arch:
     - qbs-setup-toolchains --detect
     - qbs-setup-qt /usr/bin/qmake-qt5 qt5
     - qbs config profiles.qt5.baseProfile ${CC}
-    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs build -d build -j $(nproc) --all-products profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr
+    - eval `dbus-launch --sh-syntax` && xvfb-run -a -s "-screen 0 800x600x24" qbs build -d build -j $(nproc) --all-products profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr projects.Fluid.autotestEnabled:true
 
 script:
   - "curl -s https://raw.githubusercontent.com/lirios/repotools/develop/travis/docker-travis.sh | bash"

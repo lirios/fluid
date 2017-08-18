@@ -1,5 +1,5 @@
 import qbs 1.0
-import "../../qbs/shared/imports/LiriUtils.js" as LiriUtils
+import LiriUtils
 
 LiriModuleProject {
     id: root

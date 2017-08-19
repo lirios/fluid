@@ -28,32 +28,38 @@ pragma Singleton
 */
 QtObject {
     /*!
+        \qmlmethod color Utils::asColor(color color)
+
         Make sure we have a real \l color object to work with (versus a string like "#ccc")
     */
     function asColor(color) {
-        return Qt.darker(color, 1)
+        return Qt.darker(color, 1);
     }
 
     /*!
+        \qmlmethod color Utils::alpha(color color, real alpha)
+
         A utility method for changing the alpha on colors. Returns a new object, and does not
         modify the original color at all.
     */
     function alpha(color, alpha) {
-        color = asColor(color)
-
-        color.a = alpha
-
-        return color
+        color = asColor(color);
+        color.a = alpha;
+        return color;
     }
 
     /*!
+        \qmlmethod color Utils::blendColors(color color1, color color2, real alpha)
+
         Blend \a color1 and \a color2 together and set alpha to \a a.
     */
     function blendColors(color1, color2, a) {
-        return alpha(Qt.tint(color1, color2), a)
+        return alpha(Qt.tint(color1, color2), a);
     }
 
     /*!
+        \qmlmethod real Utils::luminance(color color)
+
         Calculate luminance of \a color.
     */
     function luminance(color) {
@@ -62,6 +68,8 @@ QtObject {
     }
 
     /*!
+        \qmlmethod bool Utils::lightDark(color background, color lightColor, color darkColor)
+
         Select a color depending on whether \a background color is light or dark.
         Returns \a lightColor if \a background is a light color, otherwise
         returns \a darkColor.
@@ -71,17 +79,19 @@ QtObject {
     }
 
     /*!
+        \qmlmethod bool Utils::isDarkColor(color color)
+
         Returns \c true if \a color is dark and should have light content on top.
     */
     function isDarkColor(color) {
-        color = asColor(color)
-
-        var a = 1 - (0.299 * color.r + 0.587 * color.g + 0.114 * color.b)
-
-        return color.a > 0 && a >= 0.3
+        color = asColor(color);
+        var a = 1 - (0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
+        return color.a > 0 && a >= 0.3;
     }
 
     /*!
+        \qmlmethod string Utils::getSourceForIconName(string name)
+
         Returns a source suitable for an \l Image from an icon name.
         If \a name is an URL it will be returned verbatim, instead if it
         contains a slash character an icon relative to Fluid icons/ directory
@@ -92,15 +102,16 @@ QtObject {
                       ? name
                       : name.indexOf("/") !== -1 ? "image://fluidicons/" + name
                                                  : "image://fluidicontheme/" + name
-                    : ""
+                    : "";
     }
 
     /*!
+        \qmlmethod real Utils::scale(real percent, real start, real end)
+
         Scale \a percent in the range between \a start and \a end.
     */
     function scale(percent, start, end) {
-        var diff = end - start
-
-        return start + percent * diff
+        var diff = end - start;
+        return start + percent * diff;
     }
 }

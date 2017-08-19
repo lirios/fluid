@@ -37,18 +37,22 @@ Clipboard::Clipboard(QObject *parent)
 
     This property holds the clipboard text.
 */
-
 QString Clipboard::text() const
 {
     return m_clipboard->text();
 }
 
-void Clipboard::clear()
-{
-    m_clipboard->clear();
-}
-
 void Clipboard::setText(const QString &text)
 {
     m_clipboard->setText(text);
+}
+
+/*!
+    \qmlmethod void Clipboard::clear()
+
+    Clear the global clipboard contents.
+*/
+void Clipboard::clear()
+{
+    m_clipboard->clear();
 }

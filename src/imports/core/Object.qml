@@ -23,16 +23,27 @@ import QtQuick 2.0
 
     The \l Object type is a non-visual element that extends \l QtObject
     with the ability to hold children objects.
+
+   \qml
+   import QtQuick 2.4
+   import Fluid.Core 1.0 as FluidCore
+
+   FluidCore.Object {
+       QtObject {}
+       QtObject {}
+   }
+   \endqml
 */
 QtObject {
+    id: object
+
+    /*!
+        \internal
+    */
     default property alias children: object.__children
 
     /*!
-        \qmlproperty list<QtObject> Object::children
-
-        Children objects.
+        \internal
     */
     property list<QtObject> __children: [QtObject {}]
-
-    id: object
 }

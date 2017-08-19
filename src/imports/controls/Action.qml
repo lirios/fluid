@@ -25,7 +25,11 @@ import Fluid.Core 1.0
 
    One of the most common uses of actions is displaying actions in the action bar of a page
    using the \l Page::actions property. See the example for \l Page for more details.
- */
+
+   Actions may contain \l text, an \l iconName, a \l toolTip and a \l shortcut.
+
+   \snippet fluidcontrols-action.qml action
+*/
 Object {
     id: action
 

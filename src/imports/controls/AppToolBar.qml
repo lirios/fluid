@@ -31,27 +31,48 @@ ToolBar {
     Material.background: Material.primaryColor
     Material.theme: Utils.lightDark(Material.background, Material.Light, Material.Dark)
 
+    /*!
+        \internal
+     */
     property Page page
+
+    /*!
+        \qmlproperty int maxActionCount
+
+        Maximum actions to be available on this tool bar.
+     */
     property int maxActionCount: 3
 
+    /*!
+        \qmlmethod void AppToolBar::pop(Page page)
+
+        Pop the \l AppBar that belongs to \a page from the stack.
+     */
     function pop(page) {
-        stack.pop(page.appBar, StackView.PopTransition)
-
-        toolbar.page = page
+        stack.pop(page.appBar, StackView.PopTransition);
+        toolbar.page = page;
     }
 
+    /*!
+        \qmlmethod void AppToolBar::push(Page page)
+
+        Push the \l AppBar that belongs to \a page to the stack.
+     */
     function push(page) {
-        stack.push(page.appBar, {}, StackView.PushTransition)
-
-        page.appBar.toolbar = toolbar
-        toolbar.page = page
+        stack.push(page.appBar, {}, StackView.PushTransition);
+        page.appBar.toolbar = toolbar;
+        toolbar.page = page;
     }
 
-    function replace(page) {
-        stack.replace(page.appBar, {}, StackView.ReplaceTransition)
+    /*!
+        \qmlmethod void AppToolBar::replace(Page page)
 
-        page.appBar.toolbar = toolbar
-        toolbar.page = page
+        Replace current \l AppBar with the one that belongs to \a page.
+     */
+    function replace(page) {
+        stack.replace(page.appBar, {}, StackView.ReplaceTransition);
+        page.appBar.toolbar = toolbar;
+        toolbar.page = page;
     }
 
     StackView {

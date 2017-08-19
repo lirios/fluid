@@ -23,7 +23,7 @@ sourcedirs += \
 sources.fileextensions = "*.qml *.qdoc *.cpp *.js"
 headers.fileextensions = "*.h"
 imagedirs = ../images
-exampledirs = ..
+exampledirs = .. ../snippets
 
 include(macros.qdocconf)
 

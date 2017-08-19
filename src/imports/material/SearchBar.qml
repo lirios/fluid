@@ -22,9 +22,10 @@ import Fluid.Material 1.0
 /*!
   \qmltype SearchBar
   \inqmlmodule Fluid.Material
+  \ingroup fluidmaterial
+
   \brief Provides a searchbar, that supports autocompletion and displays search results using cards.
 */
-
 Flickable {
     id: searchBar
 

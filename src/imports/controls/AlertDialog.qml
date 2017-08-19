@@ -31,27 +31,7 @@ import Fluid.Controls 1.0 as FluidControls
 
    Here is a short example of usage:
 
-   \qml
-   import QtQuick 2.4
-   import QtQuick.Controls 2.1
-   import Fluid.Controls 1.0 as FluidControls
-
-   Item {
-       FluidControls.AlertDialog {
-           id: alertDialog
-           title: "Use FooBar's localization service?"
-           text: "Let FooBar help apps determine the location. " +
-                 "This means sending anonymous location data to FooBar, " +
-                 "even when no apps are running."
-       }
-
-       Button {
-           anchors.centerIn: parent
-           text: "Click me"
-           onClicked: alertDialog.open()
-       }
-   }
-   \endqml
+   \snippet fluidcontrols-alertdialog.qml file
 */
 Dialog {
     /*!

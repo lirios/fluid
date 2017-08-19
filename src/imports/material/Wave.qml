@@ -17,7 +17,9 @@ import QtQuick 2.4
 
 /*!
    \qmltype Wave
-   \inqmlmodule Fluid.Material 1.0
+   \inqmlmodule Fluid.Material
+   \ingroup fluidmaterial
+
    \brief Provides a wave animation for transitioning between views of content.
  */
 Rectangle {

@@ -41,7 +41,7 @@ ToolBar {
        on the page stack. However, you can customize this, for example, to show
        a navigation drawer at the root of your app.
 
-       When using an action bar in a page, set the \l Page::backAction instead of
+       When using an action bar in a page, set the \l Page::leftAction instead of
        directly setting this property.
      */
     property Action leftAction
@@ -89,6 +89,9 @@ ToolBar {
      */
     property alias title: titleLabel.text
 
+    /*!
+        Tool bar.
+     */
     property AppToolBar toolbar
 
     implicitHeight: Device.gridUnit

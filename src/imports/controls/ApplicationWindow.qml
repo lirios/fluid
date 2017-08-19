@@ -65,6 +65,11 @@ ApplicationWindow {
      */
     property alias decorationColor: platformExtensions.decorationColor
 
+    /*!
+        \qmlproperty AppToolBar appBar
+
+        The tool bar for this application.
+     */
     property alias appBar: appBar
 
     /*!

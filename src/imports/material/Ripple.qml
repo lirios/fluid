@@ -19,7 +19,9 @@ import Fluid.Effects 1.0
 
 /*!
    \qmltype Ripple
-   \inqmlmodule Fluid.UI 1.0
+   \inqmlmodule Fluid.Material
+   \ingroup fluidmaterial
+
    \brief Represents a Material Design ripple ink animation used in various touchable components.
 
    This component is useful for including in Material Design-specific components, which should be implemented using the +material file selector. Eventually this should be upstreamed to QtQuick

@@ -15,6 +15,15 @@
 import QtQuick 2.4
 import Fluid.Core 1.0
 
+/*!
+   \qmltype Tab
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
+   \brief Tab for tabbed pages.
+
+   Tab of a \l TabbedPage.
+ */
 Item {
     id: tab
 
@@ -24,8 +33,7 @@ Item {
     property string title
 
     /*!
-       The icon displayed for this tab. This can be a Material Design icon or an icon from
-       FontAwesome. See \l Icon from more details.
+       The icon displayed for this tab. See \l Icon from more details.
      */
 	property string iconName
 
@@ -41,7 +49,7 @@ Item {
     property string iconSource: Utils.getSourceForIconName(iconName)
 
     /*!
-     * Controls whether a close button will be shown for this tab.
+        Controls whether a close button will be shown for this tab.
      */
     property bool canRemove: false
 }

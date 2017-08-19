@@ -23,6 +23,7 @@ import QtGraphicalEffects 1.0
 /*!
    \qmltype ActionButton
    \inqmlmodule Fluid.Material
+   \ingroup fluidmaterial
 
    \brief A floating action button.
 

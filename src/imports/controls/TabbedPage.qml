@@ -19,13 +19,58 @@ import QtQuick.Controls.Material 2.0
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
+/*!
+   \qmltype TabbedPage
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
+   \brief Page with tabs.
+
+   \qml
+   import QtQuick 2.4
+   import Fluid.Controls 1.0 as FluidControls
+
+   FluidControls.ApplicationWindow {
+       title: "Application Name"
+       width: 1024
+       height: 800
+       visible: true
+
+       initialPage: FluidControls.TabbedPage {
+           FluidControls.Tab {
+               title: "Tab 1"
+
+               Label {
+                   anchors.centerIn: parent
+                   text: "Hello World!"
+               }
+           }
+
+           FluidControls.Tab {
+               title: "Tab 2"
+
+               Label {
+                   anchors.centerIn: parent
+                   text: "Hello World!"
+               }
+           }
+       }
+   }
+   \endqml
+ */
 FluidControls.Page {
     id: page
 
+    /*!
+        \internal
+     */
     default property alias contents: swipeView.contentChildren
 
     property alias count: swipeView.count
 
+    /*!
+        Index of the currently selected tab.
+     */
     readonly property int currentIndex: __private.currentTabIndex
 
     /*!
@@ -121,6 +166,11 @@ FluidControls.Page {
         onCurrentIndexChanged: __private.currentTabIndex = currentIndex
     }
 
+    /*!
+        \qmlmethod void TabbedPage::addTab(Tab tab)
+
+        Add a tab programmatically to the page.
+     */
     function addTab(tab) {
         swipeView.addItem(tab);
         __private.currentTabIndex = swipeView.count - 1;

@@ -40,5 +40,4 @@ Tab 1.0 Tab.qml
 TabbedPage 1.0 TabbedPage.qml
 ThinDivider 1.0 ThinDivider.qml
 TitleLabel 1.0 TitleLabel.qml
-singleton FluidStyle 1.0 FluidStyle.qml
 singleton Units 1.0 Units.qml

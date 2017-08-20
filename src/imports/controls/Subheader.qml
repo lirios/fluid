@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -35,7 +36,8 @@ BaseListItem {
     contentItem: Label {
         id: label
 
-        font: FluidStyle.subheaderFont
+        font.weight: Font.DemiBold
+        font.pixelSize: 14
         text: listItem.text
 
         verticalAlignment: Text.AlignVCenter

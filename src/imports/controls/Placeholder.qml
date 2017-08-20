@@ -55,18 +55,16 @@ Item {
             Layout.alignment: Qt.AlignHCenter
         }
 
-        Label {
+        TitleLabel {
             id: textLabel
-            font: FluidStyle.titleFont
             color: Material.secondaryTextColor
             horizontalAlignment: Qt.AlignHCenter
 
             Layout.fillWidth: true
         }
 
-        Label {
+        SubheadingLabel {
             id: subTextLabel
-            font: FluidStyle.subheadingFont
             color: Material.secondaryTextColor
             horizontalAlignment: Qt.AlignHCenter
             wrapMode: Text.Wrap

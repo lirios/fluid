@@ -104,7 +104,7 @@ ToolBar {
 
         ToolTip.visible: ToolTip.text != "" && (Device.isMobile ? pressed : hovered)
         ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-        ToolTip.text: leftAction ? leftAction.tooltip : ""
+        ToolTip.text: leftAction ? leftAction.toolTip : ""
 
         anchors {
             verticalCenter: actionsRow.verticalCenter
@@ -160,7 +160,7 @@ ToolBar {
 
                 ToolTip.visible: ToolTip.text !== "" && !overflowMenu.visible && (Device.isMobile ? pressed : hovered)
                 ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-                ToolTip.text: appBar.actions[index].tooltip
+                ToolTip.text: appBar.actions[index].toolTip
 
                 anchors.verticalCenter: parent.verticalCenter
 

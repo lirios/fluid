@@ -145,7 +145,7 @@ Page {
 
         leftAction: Action {
             text: qsTr("Back")
-            tooltip: qsTr("Go back")
+            toolTip: qsTr("Go back")
             iconName: "navigation/arrow_back"
             onTriggered: page.pop()
             visible: page.canGoBack

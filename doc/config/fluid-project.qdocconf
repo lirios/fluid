@@ -8,7 +8,8 @@ description = Fluid Reference Documentation
 indexes += \
     $QT_INSTALL_DOCS/qtqml/qtqml.index \
     $QT_INSTALL_DOCS/qtquick/qtquick.index \
-    $QT_INSTALL_DOCS/qtquickcontrols2/qtquickcontrols2.index
+    $QT_INSTALL_DOCS/qtquickcontrols2/qtquickcontrols2.index \
+    $QT_INSTALL_DOCS/qtgraphicaleffects/qtgraphicaleffects.index
 
 depends = qtcore qtgui qtdoc qtqml qtquick qtquickcontrols2
 headerdirs += ../../src/fluid

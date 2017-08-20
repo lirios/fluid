@@ -25,7 +25,7 @@ import Fluid.Controls 1.0 as FluidControls
 
    \brief A window that provides features commonly used for Material Design apps.
 
-   This is normally what you should use as your root component. It provides a \l Toolbar and
+   This is normally what you should use as your root component. It provides a \l ToolBar and
    \l PageStack to provide access to standard features used by Material Design applications.
 
    Here is a short working example of an application:

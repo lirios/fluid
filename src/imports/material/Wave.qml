@@ -14,6 +14,7 @@
  */
 
 import QtQuick 2.4
+import QtGraphicalEffects 1.0
 
 /*!
    \qmltype Wave
@@ -22,7 +23,8 @@ import QtQuick 2.4
 
    \brief Provides a wave animation for transitioning between views of content.
  */
-Rectangle {
+
+Item {
     id: wave
 
     property bool opened
@@ -48,12 +50,20 @@ Rectangle {
         wave.opened = false;
     }
 
-    width: size
-    height: size
-    radius: size/2
-    x: initialX - size/2
-    y: initialY - size/2
-    clip: true
+    layer.enabled: true
+    layer.effect: OpacityMask {
+        maskSource: Item {
+            width: wave.width
+            height: wave.height
+            Rectangle {
+                x: initialX - size/2
+                y: initialY - size/2
+                width: size
+                height: size
+                radius: size/2
+            }
+        }
+    }
 
     states: State {
         name: "opened"

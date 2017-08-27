@@ -100,7 +100,6 @@ Flickable {
 
     Item {
         anchors.fill: parent
-        clip: true
         IconButton {
             id: openSearchButton
             iconName: "action/search"
@@ -109,13 +108,19 @@ Flickable {
             anchors.margins: 8
             onClicked: open()
         }
+
         Wave {
             id: searchWave
-            color: waveColor
+            anchors.fill: parent
+            Rectangle {
+                anchors.fill: parent
+                color: waveColor
+            }
             Card {
                 id: searchCard
-                x: searchWave.size/2 - width
-                y: searchWave.size/2 + openSearchButton.height/2 - height/2
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.margins: Units.smallSpacing
                 width: cardWidth
                 height: openSearchButton.height
                 IconButton {

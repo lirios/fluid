@@ -22,7 +22,11 @@ import "../.."
 Item {
     Wave {
         id: wave
-        color: Material.accentColor
+        anchors.fill: parent
+        Rectangle {
+            anchors.fill: parent
+            color: Material.accentColor
+        }
     }
     Button {
         anchors.centerIn: parent

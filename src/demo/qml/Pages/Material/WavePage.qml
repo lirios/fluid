@@ -32,10 +32,10 @@ Item {
         anchors.centerIn: parent
         text: qsTr("Toggle")
         onClicked: {
-            if (wave.opened)
-                wave.close(parent.width - wave.size, parent.height - wave.size)
+            if (wave.open)
+                wave.closeWave(parent.width - wave.size, parent.height - wave.size)
             else
-                wave.open(0, 0)
+                wave.openWave(0, 0)
         }
     }
 }

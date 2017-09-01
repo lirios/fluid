@@ -82,7 +82,7 @@ Flickable {
       Opens the search bar
     */
     function open() {
-        searchWave.open(openSearchButton.x, openSearchButton.y);
+        searchWave.openWave(openSearchButton.x, openSearchButton.y);
         searchTextField.forceActiveFocus();
     }
 
@@ -90,7 +90,7 @@ Flickable {
       Closes the search bar
     */
     function close() {
-        searchWave.close(searchWave.initialX, searchWave.initialY);
+        searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
     }
@@ -128,7 +128,7 @@ Flickable {
                     iconName: "navigation/arrow_back"
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    rotation: searchWave.opened ? 0 : 180
+                    rotation: searchWave.open ? 0 : 180
                     onClicked: close()
                     Behavior on rotation {
                         NumberAnimation {

@@ -28,9 +28,9 @@ Item {
     id: wave
 
     /*!
-      \c True, iif the wave is opened
+      Whether wave is open.
     */
-    property bool opened
+    property bool open
     /*!
       The current size of the wave
     */
@@ -52,33 +52,33 @@ Item {
     */
     property real abstractHeight: parent.height
     /*!
-      The diameter of the completely opened wave
+      The diameter of the completely open wave
     */
     property real diameter: 2 * Math.sqrt(Math.pow(Math.max(initialX, abstractWidth - initialX), 2)
             + Math.pow(Math.max(initialY, abstractHeight - initialY), 2))
 
     /*!
       This signal is emitted, when the wave has finished opening or closing.
-      \a opened defines, whether the wave was opened or closed
+      \a open defines, whether the wave was being opened or closed
     */
-    signal finished(bool opened)
+    signal finished(bool open)
 
     /*!
       Opens the wave centering the wave at (\a x, \a y)
     */
-    function open(x, y) {
+    function openWave(x, y) {
         wave.initialX = x || parent.width/2;
         wave.initialY = y || parent.height/2;
-        wave.opened = true;
+        wave.open = true;
     }
 
     /*!
       Closes the wave centering the wave at (\a x, \a y)
     */
-    function close(x, y) {
+    function closeWave(x, y) {
         wave.initialX = x || parent.width/2;
         wave.initialY = y || parent.height/2;
-        wave.opened = false;
+        wave.open = false;
     }
 
     layer.enabled: true
@@ -97,8 +97,8 @@ Item {
     }
 
     states: State {
-        name: "opened"
-        when: wave.opened
+        name: "open"
+        when: wave.open
 
         PropertyChanges {
             target: wave
@@ -108,7 +108,7 @@ Item {
 
     transitions: Transition {
         from: ""
-        to: "opened"
+        to: "open"
         reversible: true
 
         SequentialAnimation {
@@ -117,7 +117,7 @@ Item {
                 easing.type: Easing.OutCubic
             }
             ScriptAction {
-                script: wave.finished(wave.opened)
+                script: wave.finished(wave.open)
             }
         }
     }

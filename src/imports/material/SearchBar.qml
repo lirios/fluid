@@ -61,7 +61,7 @@ Flickable {
     /*!
       The width of the search card. By default the search bar centers in the parent with a margin of 64 each side
     */
-    property int cardWidth: searchBar.width - 128
+    property int cardWidth: searchBar.width - Units.largeSpacing
 
     /*!
       The viewable area of the suggestions list until it begins scrolling.
@@ -72,6 +72,11 @@ Flickable {
       The background color of the expanded search bar.
     */
     property color waveColor: Material.accentColor
+
+    /*!
+      Whether the SearchBar is persistent or expandable
+    */
+    property bool persistent: false
 
     /*!
       Is emitted, when the user searches for a query. The \a query parameter contains the search query as string. Use this signal to provide search results.
@@ -112,6 +117,8 @@ Flickable {
         Wave {
             id: searchWave
             anchors.fill: parent
+            size: persistent ? diameter : 0
+            visible: persistent
             Rectangle {
                 anchors.fill: parent
                 color: waveColor
@@ -125,11 +132,17 @@ Flickable {
                 height: openSearchButton.height
                 IconButton {
                     id: dismissSearchButton
-                    iconName: "navigation/arrow_back"
+                    iconName: persistent ? "action/search" : "navigation/arrow_back"
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    rotation: searchWave.open ? 0 : 180
-                    onClicked: close()
+                    rotation: persistent ? 0 : searchWave.open ? 0 : 180
+                    onClicked: {
+                        if (persistent)
+                            search(searchTextField.text);
+                        else
+                            close();
+                    }
+
                     Behavior on rotation {
                         NumberAnimation {
                             easing.type: Easing.InOutCubic
@@ -144,7 +157,10 @@ Flickable {
                     anchors.right: resetSearchButton.left
                     font.pixelSize: parent.height/2
                     Keys.onReturnPressed: search(text)
-                    Keys.onEscapePressed: close()
+                    Keys.onEscapePressed: {
+                        if (!persistent)
+                            close();
+                    }
                     Keys.onDownPressed: suggestionsListView.forceActiveFocus()
                     onTextChanged: {
                         searchResults.clear();

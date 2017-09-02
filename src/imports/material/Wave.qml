@@ -112,6 +112,9 @@ Item {
         reversible: true
 
         SequentialAnimation {
+            ScriptAction {
+                script: wave.visible = wave.open;
+            }
             NumberAnimation {
                 property: "size"
                 easing.type: Easing.OutCubic

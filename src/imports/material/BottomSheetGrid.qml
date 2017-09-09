@@ -113,11 +113,8 @@ BottomSheet {
                     Repeater {
                         model: actions
 
-                        delegate: T.AbstractButton {
+                        delegate: ItemDelegate {
                             id: item
-
-                            width: grid.cellWidth
-                            height: grid.cellHeight
 
                             enabled: modelData.enabled
                             visible: modelData.visible
@@ -127,15 +124,11 @@ BottomSheet {
                                 modelData.triggered(item);
                             }
 
-                            background: Ripple {
-                                width: parent.width
-                                height: parent.height
-                                control: item
-                            }
+                            background.implicitWidth: grid.cellWidth
+                            background.implicitHeight: grid.cellHeight
 
                             contentItem: Item {
-                                implicitWidth: grid.cellWidth
-                                implicitHeight: grid.cellHeight
+                                anchors.fill: parent
 
                                 Icon {
                                     id: icon
@@ -151,8 +144,11 @@ BottomSheet {
 
                                 Label {
                                     anchors.top: icon.bottom
+                                    anchors.left: parent.left
                                     anchors.topMargin: 8
-                                    width: parent.width
+                                    anchors.leftMargin: 8
+                                    anchors.rightMargin: 8
+                                    width: grid.cellWidth - anchors.leftMargin - anchors.rightMargin
 
                                     text: modelData.text
                                     elide: Text.ElideRight

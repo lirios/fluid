@@ -21,16 +21,51 @@ import QtQuick.Controls.Material 2.0
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
-    \brief Tool button with an \l Icon.
+    \brief \l ToolButton with an \l Icon.
 */
 ToolButton {
     id: iconButton
 
+    /*!
+        \qmlproperty string iconName
+
+        Icon name.
+
+        \sa Icon::name
+    */
     property alias iconName: icon.name
+
+    /*!
+        \qmlproperty url iconSource
+
+        Icon source URL.
+
+        \sa Icon::source
+    */
     property alias iconSource: icon.source
+
+    /*!
+        \qmlproperty size iconSize
+
+        Icon width and height.
+
+        \sa Icon::size
+    */
     property alias iconSize: icon.size
+
+    /*!
+        \qmlproperty color iconColor
+
+        Icon color.
+
+        \sa Icon::color
+    */
     property alias iconColor: icon.color
 
+    /*!
+        Specify whether the icon should be rotated 90 degrees when the mouse hovers.
+        Default is \c false.
+    */
     property bool hoverAnimation: false
 
     indicator: Icon {

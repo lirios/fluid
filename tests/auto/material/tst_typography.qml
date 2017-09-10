@@ -60,10 +60,6 @@ TestCase {
         var displayLabel = displayLabelComponent.createObject(testCase)
         verify(displayLabel)
 
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
-
         displayLabel.level = 1
         compare(displayLabel.font.pixelSize, 34)
         compare(displayLabel.font.weight, Font.Normal)
@@ -81,10 +77,6 @@ TestCase {
     function test_body_label() {
         var bodyLabel = bodyLabelComponent.createObject(testCase)
         verify(bodyLabel)
-
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
 
         bodyLabel.level = 1
         if (Device.isMobile)
@@ -107,20 +99,12 @@ TestCase {
         var captionLabel = captionLabelComponent.createObject(testCase)
         verify(captionLabel)
 
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
-
         compare(captionLabel.font.pixelSize, 12)
     }
 
     function test_headline_label() {
         var headlineLabel = headlineLabelComponent.createObject(testCase)
         verify(headlineLabel)
-
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
 
         compare(headlineLabel.font.pixelSize, 24)
         compare(headlineLabel.lineHeight, 32.0)
@@ -130,10 +114,6 @@ TestCase {
     function test_subheading_label() {
         var subheadingLabel = subheadingLabelComponent.createObject(testCase)
         verify(subheadingLabel)
-
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
 
         subheadingLabel.level = 1
         if (Device.isMobile)
@@ -155,10 +135,6 @@ TestCase {
     function test_title_label() {
         var titleLabel = titleLabelComponent.createObject(testCase)
         verify(titleLabel)
-
-        // FIXME: We can't apparently access +material from tests,
-        // hence these test will fail
-        return
 
         compare(titleLabel.font.pixelSize, 20)
         compare(titleLabel.font.weight, Font.Medium)

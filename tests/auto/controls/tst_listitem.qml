@@ -109,7 +109,7 @@ Item {
             compare(listItemWithSubtext2.implicitHeight, 88)
 
             var secondaryItem = findChild(listItemWithSecondaryItem, "secondaryItem")
-            compare(listItemWithSecondaryItem.implicitHeight, secondaryItem.childrenRect.height + Units.smallSpacing * 2)
+            compare(listItemWithSecondaryItem.implicitHeight, 64)
 
             compare(listItemWithoutSecondaryItem.implicitHeight, 48)
 
@@ -117,7 +117,7 @@ Item {
             compare(listItemWithLeftItem.implicitHeight, 48)
 
             var rightItem = findChild(listItemWithRightItem, "rightItem")
-            compare(listItemWithRightItem.implicitHeight, rightItem.childrenRect.height + Units.smallSpacing * 2)
+            compare(listItemWithRightItem.implicitHeight, 56)
         }
     }
 }

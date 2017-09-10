@@ -186,7 +186,7 @@ ItemDelegate {
                 objectName: "secondaryItem"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: showing ? childrenRect.height + (label.visible ? Units.smallSpacing : Units.largeSpacing) : 0
+                Layout.preferredHeight: showing ? childrenRect.height + (label.visible ? FluidControls.Units.smallSpacing : FluidControls.Units.largeSpacing) : 0
             }
         }
 

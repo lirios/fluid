@@ -14,9 +14,9 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
-import Fluid.Controls 1.0
 
 /*!
    \qmltype Subheader
@@ -25,13 +25,20 @@ import Fluid.Controls 1.0
 
    \brief Subheaders are special list tiles that delineate distinct sections of a list or grid list.
  */
-BaseListItem {
+ItemDelegate {
     id: listItem
 
-    implicitHeight: 48
-    interactive: false
-
     property alias textColor: label.color
+
+    width: parent ? parent.width : undefined
+    hoverEnabled: false
+    opacity: enabled ? 1.0 : 0.6
+
+    Layout.fillWidth: true
+
+    background: Item {
+        implicitHeight: 48
+    }
 
     contentItem: Label {
         id: label

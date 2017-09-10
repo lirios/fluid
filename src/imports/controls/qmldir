@@ -8,7 +8,6 @@ AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
 AppToolBar 1.0 AppToolBar.qml
-BaseListItem 1.0 BaseListItem.qml
 BodyLabel 1.0 BodyLabel.qml
 CaptionLabel 1.0 CaptionLabel.qml
 Card 1.0 Card.qml
@@ -20,7 +19,6 @@ IconButton 1.0 IconButton.qml
 Icon 1.0 Icon.qml
 InfoBar 1.0 InfoBar.qml
 InputDialog 1.0 InputDialog.qml
-ListItemDelegate 1.0 ListItemDelegate.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml
 MenuItem 1.0 MenuItem.qml

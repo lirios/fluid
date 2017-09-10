@@ -13,6 +13,7 @@
  */
 
 import QtQuick 2.4
+import QtQuick.Controls.Material 2.0
 
 /*!
    \qmltype ThinDivider
@@ -22,7 +23,7 @@ import QtQuick 2.4
    \brief A 1px high divider for use in lists and other columns of content.
  */
 Rectangle {
-    color: "#999"
+    color: Material.dividerColor
     width: parent.width
     height: 1
 }

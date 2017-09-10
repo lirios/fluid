@@ -13,7 +13,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
 
 /*!
     \qmltype DisplayLabel
@@ -22,13 +22,15 @@ import QtQuick.Templates 2.0 as T
 
     \brief Text label with standard font and styling suitable to display text.
 
+    Text label for the Material Design display text style.
+
     \code
     DisplayLabel {
         text: qsTr("Display text")
     }
     \endcode
 */
-T.Label {
+Label {
     /*!
         \qmlproperty int level
 
@@ -43,17 +45,29 @@ T.Label {
 
     font.pixelSize: {
         if (level <= 1)
-            return 30
+            return 34;
         else if (level == 2)
-            return 40
+            return 45;
         else if (level == 3)
-            return 50
-        return 100
+            return 56;
+        return 112;
     }
-    color: "#26282a"
-    linkColor: "#45a7d7"
+    lineHeight: {
+        if (level <= 1)
+            return 40.0;
+        else if (level == 2)
+            return 48.0;
+        return 1.0;
+    }
+    lineHeightMode: {
+        if (level <= 2)
+            return Text.FixedHeight;
+        return Text.ProportionalHeight;
+    }
+    font.weight: level >= 4 ? Font.Light : Font.Normal
+
     onLevelChanged: {
         if (level < 1 || level > 4)
-            console.error("DisplayLabel level must be between 1 and 4")
+            console.error("DisplayLabel level must be between 1 and 4");
     }
 }

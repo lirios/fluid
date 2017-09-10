@@ -13,7 +13,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
 
 /*!
    \qmltype HeadlineLabel
@@ -22,14 +22,16 @@ import QtQuick.Templates 2.0 as T
 
    \brief Text label with standard font and styling suitable to headlines.
 
+   Text label for the Material Design headline text style.
+
    \code
    HeadlineLabel {
        text: qsTr("A translatable headline")
    }
    \endcode
 */
-T.Label {
-   font.pixelSize: 22
-   color: "#26282a"
-   linkColor: "#45a7d7"
+Label {
+    font.pixelSize: 24
+    lineHeight: 32.0
+    lineHeightMode: Text.FixedHeight
 }

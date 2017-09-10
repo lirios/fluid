@@ -13,7 +13,9 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import Fluid.Core 1.0 as FluidCore
 
 /*!
    \qmltype DialogLabel
@@ -21,6 +23,8 @@ import QtQuick.Templates 2.0 as T
    \ingroup fluidcontrols
 
    \brief Text label with standard font and styling suitable to message box text.
+
+   Text label for the Material Design dialog text style.
 
    \code
    import QtQuick 2.0
@@ -31,8 +35,7 @@ import QtQuick.Templates 2.0 as T
    }
    \endcode
 */
-T.Label {
-   font.pixelSize: 18
-   color: "#909090"
-   linkColor: "#45a7d7"
+Label {
+    font.pixelSize: FluidCore.Device.isMobile ? 18 : 17
+    color: Material.secondaryTextColor
 }

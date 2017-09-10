@@ -13,7 +13,8 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
+import Fluid.Core 1.0 as FluidCore
 
 /*!
     \qmltype BodyLabel
@@ -22,13 +23,15 @@ import QtQuick.Templates 2.0 as T
 
     \brief Text label with standard font and styling suitable to body text.
 
+    Text label for the Material Design body text style.
+
     \code
     BodyLabel {
         text: qsTr("Body text")
     }
     \endcode
 */
-T.Label {
+Label {
     /*!
         \qmlproperty int level
 
@@ -41,11 +44,13 @@ T.Label {
     */
     property int level: 1
 
-    font.pixelSize: 14
-    color: "#26282a"
-    linkColor: "#45a7d7"
+    font.pixelSize: FluidCore.Device.isMobile ? 14 : 13
+    font.weight: level == 1 ? Font.Normal : Font.Medium
+    lineHeight: level <= 1 ? 20.0 : 24.0
+    lineHeightMode: Text.FixedHeight
+
     onLevelChanged: {
         if (level < 1 || level > 2)
-            console.error("BodyLabel level must be either 1 or 2")
+            console.error("BodyLabel level must be either 1 or 2");
     }
 }

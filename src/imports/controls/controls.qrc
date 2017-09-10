@@ -36,14 +36,6 @@
         <file>ThinDivider.qml</file>
         <file>TitleLabel.qml</file>
         <file>Units.qml</file>
-        <file>+material/BodyLabel.qml</file>
-        <file>+material/CaptionLabel.qml</file>
-        <file>+material/DialogLabel.qml</file>
-        <file>+material/DisplayLabel.qml</file>
-        <file>+material/HeadlineLabel.qml</file>
-        <file>+material/SubheadingLabel.qml</file>
-        <file>+material/ThinDivider.qml</file>
-        <file>+material/TitleLabel.qml</file>
         <file alias="qmldir">qmldir_noplugin</file>
     </qresource>
 </RCC>

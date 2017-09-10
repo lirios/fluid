@@ -13,7 +13,8 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
+import Fluid.Core 1.0 as FluidCore
 
 /*!
     \qmltype SubheadingLabel
@@ -22,13 +23,15 @@ import QtQuick.Templates 2.0 as T
 
     \brief Text label with standard font and styling suitable to subheading.
 
+    Text label for the Material Design subheading text style.
+
     \code
     SubheadingLabel {
         text: qsTr("A translatable subheading")
     }
     \endcode
 */
-T.Label {
+Label {
     /*!
         \qmlproperty int level
 
@@ -41,11 +44,12 @@ T.Label {
     */
     property int level: 1
 
-    font.pixelSize: 14
-    color: "#26282a"
-    linkColor: "#45a7d7"
+    font.pixelSize: FluidCore.Device.isMobile ? 16 : 15
+    lineHeight: level <= 1 ? 24.0 : 28.0
+    lineHeightMode: Text.FixedHeight
+
     onLevelChanged: {
         if (level < 1 || level > 2)
-            console.error("BodyLabel level must be either 1 or 2")
+            console.error("BodyLabel level must be either 1 or 2");
     }
 }

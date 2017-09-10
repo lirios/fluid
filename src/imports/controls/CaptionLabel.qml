@@ -13,7 +13,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Templates 2.0 as T
+import QtQuick.Controls 2.0
 
 /*!
     \qmltype CaptionLabel
@@ -22,14 +22,14 @@ import QtQuick.Templates 2.0 as T
 
     \brief Text label with standard font and styling suitable to captions.
 
+    Text label for the Material Design caption text style.
+
     \code
     Caption {
         text: qsTr("A translatable caption")
     }
     \endcode
 */
-T.Label {
-    font.pixelSize: 10
-    color: "#26282a"
-    linkColor: "#45a7d7"
+Label {
+    font.pixelSize: 12
 }

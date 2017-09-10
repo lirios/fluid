@@ -26,8 +26,11 @@ import Fluid.Core 1.0 as FluidCore
     Text label for the Material Design body text style.
 
     \code
-    BodyLabel {
-        text: qsTr("Body text")
+    import QtQuick 2.0
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.BodyLabel {
+        text: "Text to display"
     }
     \endcode
 */

@@ -26,8 +26,11 @@ import Fluid.Core 1.0 as FluidCore
     Text label for the Material Design subheading text style.
 
     \code
-    SubheadingLabel {
-        text: qsTr("A translatable subheading")
+    import QtQuick 2.0
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.SubheadingLabel {
+        text: "Text to display"
     }
     \endcode
 */

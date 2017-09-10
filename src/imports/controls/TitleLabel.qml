@@ -25,8 +25,11 @@ import QtQuick.Controls 2.0
     Text label for the Material Design title text style.
 
     \code
-    Title {
-        text: qsTr("Translatable title")
+    import QtQuick 2.0
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.TitleLabel {
+        text: "Text to display"
     }
     \endcode
 */

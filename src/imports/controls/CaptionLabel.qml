@@ -25,8 +25,11 @@ import QtQuick.Controls 2.0
     Text label for the Material Design caption text style.
 
     \code
-    Caption {
-        text: qsTr("A translatable caption")
+    import QtQuick 2.0
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.CaptionLabel {
+        text: "Text to display"
     }
     \endcode
 */

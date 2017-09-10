@@ -25,8 +25,11 @@ import QtQuick.Controls 2.0
     Text label for the Material Design display text style.
 
     \code
-    DisplayLabel {
-        text: qsTr("Display text")
+    import QtQuick 2.0
+    import Fluid.Controls 1.0 as FluidControls
+
+    FluidControls.DisplayLabel {
+        text: "Text to display"
     }
     \endcode
 */

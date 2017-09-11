@@ -5,8 +5,7 @@ IMPORT_VERSION = 1.0
 QT += qml quick
 
 QML_FILES += \
-    $$files(*.qml) \
-    $$files(+material/*.qml)
+    $$files(*.qml)
 
 include(controls.pri)
 

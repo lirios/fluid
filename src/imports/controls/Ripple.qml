@@ -19,8 +19,8 @@ import Fluid.Effects 1.0
 
 /*!
    \qmltype Ripple
-   \inqmlmodule Fluid.Material
-   \ingroup fluidmaterial
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief Represents a Material Design ripple ink animation used in various touchable components.
 

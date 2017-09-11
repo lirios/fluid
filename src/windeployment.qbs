@@ -29,7 +29,6 @@ Product {
     Depends { name: "fluidcoreplugin" }
     Depends { name: "fluideffectsplugin" }
     Depends { name: "fluidlayoutsplugin" }
-    Depends { name: "fluidmaterialplugin" }
 
     archiver.type: "7zip"
     archiver.workingDirectory: qbs.installRoot

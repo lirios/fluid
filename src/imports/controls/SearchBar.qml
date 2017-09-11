@@ -17,12 +17,11 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.1
 import Fluid.Controls 1.0
-import Fluid.Material 1.0
 
 /*!
   \qmltype SearchBar
-  \inqmlmodule Fluid.Material
-  \ingroup fluidmaterial
+  \inqmlmodule Fluid.Controls
+  \ingroup fluidcontrols
 
   \brief Provides a searchbar, that supports autocompletion and displays search results using cards.
 */

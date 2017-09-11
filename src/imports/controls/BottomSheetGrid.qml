@@ -21,8 +21,8 @@ import Fluid.Layouts 1.0 as FluidLayouts
 
 /*!
     \qmltype BottomSheetGrid
-    \inqmlmodule Fluid.Material
-    \ingroup fluidmaterial
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
 
     \brief A sheet of paper with actions and an optional title that slides up from the bottom.
 

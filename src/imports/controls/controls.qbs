@@ -6,7 +6,6 @@ LiriQmlPlugin {
     pluginPath: "Fluid/Controls"
 
     Depends { name: "fluidcoreplugin" }
-    Depends { name: "fluidmaterialplugin" }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 

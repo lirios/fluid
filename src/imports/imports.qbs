@@ -8,6 +8,5 @@ Project {
         "controls/controls.qbs",
         "effects/effects.qbs",
         "layouts/layouts.qbs",
-        "material/material.qbs",
     ]
 }

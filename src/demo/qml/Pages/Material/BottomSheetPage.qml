@@ -16,7 +16,6 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
-import Fluid.Material 1.0 as FluidMaterial
 
 Item {
     Column {
@@ -43,7 +42,7 @@ Item {
         }
     }
 
-    FluidMaterial.BottomSheetList {
+    FluidControls.BottomSheetList {
         id: listBottomSheet
         title: qsTr("Save As")
         actions: [
@@ -74,7 +73,7 @@ Item {
         ]
     }
 
-    FluidMaterial.BottomSheetList {
+    FluidControls.BottomSheetList {
         id: longListBottomSheet
         title: qsTr("Save As")
         actions: [
@@ -146,7 +145,7 @@ Item {
         ]
     }
 
-    FluidMaterial.BottomSheetGrid {
+    FluidControls.BottomSheetGrid {
         id: gridBottomSheet
         actions: [
             FluidControls.Action {
@@ -256,7 +255,7 @@ Item {
         ]
     }
 
-    FluidMaterial.BottomSheet {
+    FluidControls.BottomSheet {
         id: customBottomSheet
 
         Column {

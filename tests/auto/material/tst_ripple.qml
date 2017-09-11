@@ -14,7 +14,7 @@
 
 import QtQuick 2.4
 import QtTest 1.0
-import Fluid.Material 1.0
+import Fluid.Controls 1.0
 
 Ripple {
     id: ripple

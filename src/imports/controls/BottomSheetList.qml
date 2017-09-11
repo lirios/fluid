@@ -19,8 +19,8 @@ import Fluid.Controls 1.0
 
 /*!
     \qmltype BottomSheetAction
-    \inqmlmodule Fluid.Material
-    \ingroup fluidmaterial
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
 
     \brief A sheet of paper with actions and an optional title that slides up from the bottom.
 

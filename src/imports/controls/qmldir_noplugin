@@ -1,12 +1,16 @@
 module Fluid.Controls
 typeinfo plugins.qmltypes
 
+ActionButton 1.0 ActionButton.qml
 Action 1.0 Action.qml
 AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
 AppToolBar 1.0 AppToolBar.qml
 BodyLabel 1.0 BodyLabel.qml
+BottomSheet 1.0 BottomSheet.qml
+BottomSheetList 1.0 BottomSheetList.qml
+BottomSheetGrid 1.0 BottomSheetGrid.qml
 CaptionLabel 1.0 CaptionLabel.qml
 Card 1.0 Card.qml
 CircleImage 1.0 CircleImage.qml
@@ -26,6 +30,8 @@ OverlayView 1.0 OverlayView.qml
 Page 1.0 Page.qml
 PageStack 1.0 PageStack.qml
 Placeholder 1.0 Placeholder.qml
+Ripple 1.0 Ripple.qml
+SearchBar 1.0 SearchBar.qml
 Showable 1.0 Showable.qml
 Sidebar 1.0 Sidebar.qml
 SmoothFadeImage 1.0 SmoothFadeImage.qml
@@ -37,3 +43,4 @@ TabbedPage 1.0 TabbedPage.qml
 ThinDivider 1.0 ThinDivider.qml
 TitleLabel 1.0 TitleLabel.qml
 singleton Units 1.0 Units.qml
+Wave 1.0 Wave.qml

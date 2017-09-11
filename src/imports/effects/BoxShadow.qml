@@ -22,7 +22,7 @@ import QtGraphicalEffects 1.0
 
   \brief A implementation of CSS's box-shadow.
 
-  A implementation of CSS's box-shadow, used by ElevationEffect for a Material Design
+  A implementation of CSS's box-shadow, used by Elevation for a Material Design
   elevation shadow effect.
 */
 RectangularGlow {

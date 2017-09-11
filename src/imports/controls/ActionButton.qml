@@ -22,8 +22,8 @@ import QtGraphicalEffects 1.0
 
 /*!
    \qmltype ActionButton
-   \inqmlmodule Fluid.Material
-   \ingroup fluidmaterial
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief A floating action button.
 

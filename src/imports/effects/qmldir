@@ -3,4 +3,5 @@ typeinfo plugins.qmltypes
 
 BoxShadow 1.0 BoxShadow.qml
 CircleMask 1.0 CircleMask.qml
+Elevation 1.0 Elevation.qml
 Vignette 1.0 Vignette.qml

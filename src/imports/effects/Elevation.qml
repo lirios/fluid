@@ -16,9 +16,9 @@ import QtQuick 2.6
 import Fluid.Effects 1.0
 
 /*!
-   \qmltype ElevationEffect
-   \inqmlmodule Fluid.Material
-   \ingroup fluidmaterial
+   \qmltype Elevation
+   \inqmlmodule Fluid.Effects
+   \ingroup fluideffects
 
    \brief Material Design elevation effect.
 

@@ -19,8 +19,7 @@ sourcedirs += \
     ../../src/imports/controls \
     ../../src/imports/core \
     ../../src/imports/effects \
-    ../../src/imports/layouts \
-    ../../src/imports/material
+    ../../src/imports/layouts
 sources.fileextensions = "*.qml *.qdoc *.cpp *.js"
 headers.fileextensions = "*.h"
 imagedirs = ../images

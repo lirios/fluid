@@ -16,7 +16,6 @@ Project {
         Depends { name: "fluidcoreplugin" }
         Depends { name: "fluideffectsplugin" }
         Depends { name: "fluidlayoutsplugin" }
-        Depends { name: "fluidmaterialplugin" }
 
         builtByDefault: project.autotestEnabled
         name: "fluid-autotest"

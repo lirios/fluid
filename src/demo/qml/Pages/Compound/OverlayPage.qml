@@ -15,7 +15,6 @@
 import QtQuick 2.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
-import Fluid.Material 1.0 as FluidMaterial
 
 Item {
     Image {
@@ -24,7 +23,7 @@ Item {
         width: 400
         height: 250
 
-        FluidMaterial.Ripple {
+        FluidControls.Ripple {
             anchors.fill: parent
             onClicked: overlayView.open()
         }
@@ -40,7 +39,7 @@ Item {
             anchors.fill: parent
             source: Qt.resolvedUrl("qrc:/images/balloon.jpg")
 
-            FluidMaterial.Ripple {
+            FluidControls.Ripple {
                 anchors.fill: parent
                 onClicked: overlayView.close()
             }

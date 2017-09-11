@@ -1,11 +1,15 @@
 <RCC>
     <qresource prefix="/Fluid/Controls">
+        <file>ActionButton.qml</file>
         <file>Action.qml</file>
         <file>AlertDialog.qml</file>
         <file>AppBar.qml</file>
         <file>ApplicationWindow.qml</file>
         <file>AppToolBar.qml</file>
         <file>BodyLabel.qml</file>
+        <file>BottomSheet.qml</file>
+        <file>BottomSheetList.qml</file>
+        <file>BottomSheetGrid.qml</file>
         <file>CaptionLabel.qml</file>
         <file>Card.qml</file>
         <file>CircleImage.qml</file>
@@ -25,6 +29,8 @@
         <file>Page.qml</file>
         <file>PageStack.qml</file>
         <file>Placeholder.qml</file>
+        <file>Ripple.qml</file>
+        <file>SearchBar.qml</file>
         <file>Showable.qml</file>
         <file>Sidebar.qml</file>
         <file>SmoothFadeImage.qml</file>
@@ -37,5 +43,6 @@
         <file>TitleLabel.qml</file>
         <file>Units.qml</file>
         <file alias="qmldir">qmldir_noplugin</file>
+        <file>Wave.qml</file>
     </qresource>
 </RCC>

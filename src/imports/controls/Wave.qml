@@ -18,8 +18,8 @@ import QtGraphicalEffects 1.0
 
 /*!
    \qmltype Wave
-   \inqmlmodule Fluid.Material
-   \ingroup fluidmaterial
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
 
    \brief Provides a wave animation for transitioning between views of content.
  */

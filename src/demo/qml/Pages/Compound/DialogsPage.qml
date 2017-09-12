@@ -36,6 +36,10 @@ Item {
             onClicked: datePickerPopup.show()
         }
 
+        Button {
+            text: qsTr("TimePicker")
+            onClicked: timePickerPopup.show()
+        }
     }
 
     FluidControls.AlertDialog {
@@ -94,6 +98,34 @@ Item {
                 flat: true
                 onClicked: datepicker.selectedDate = new Date()
             }
+        }
+    }
+
+    Popup {
+
+        function show() {
+            timepicker.show("HOUR")
+            timePickerPopup.open()
+        }
+
+        id: timePickerPopup
+        modal: true
+        dim: false
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+        Component.onCompleted: {
+            var p = parent;
+            while(p.parent != undefined)
+                p = p.parent;
+            parent = p;
+        }
+
+        FluidControls.TimePicker {
+            id: timepicker
+            onAccepted: timePickerPopup.close()
+            onRejected: timePickerPopup.close()
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         }
     }
 }

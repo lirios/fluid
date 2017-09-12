@@ -46,6 +46,8 @@ SubheadingLabel 1.0 SubheadingLabel.qml
 Tab 1.0 Tab.qml
 TabbedPage 1.0 TabbedPage.qml
 ThinDivider 1.0 ThinDivider.qml
+TimePicker 1.0 TimePicker.qml
+TimeSelector 1.0 TimeSelector.qml
 TitleLabel 1.0 TitleLabel.qml
 singleton Units 1.0 Units.qml
 Wave 1.0 Wave.qml

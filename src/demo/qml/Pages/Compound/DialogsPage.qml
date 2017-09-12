@@ -15,6 +15,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.1
 import Fluid.Controls 1.0 as FluidControls
+import QtQuick.Controls.Material 2.0
 
 Item {
     Column {
@@ -29,6 +30,12 @@ Item {
             text: qsTr("Input")
             onClicked: input.open()
         }
+
+        Button {
+            text: qsTr("DatePicker")
+            onClicked: datePickerPopup.show()
+        }
+
     }
 
     FluidControls.AlertDialog {
@@ -52,5 +59,41 @@ Item {
         text: qsTr("We need to know in what year you were born in order to verify your age.")
         textField.inputMask: "9999"
         textField.placeholderText: qsTr("Type a 4 digits number")
+    }
+
+    Popup {
+
+        function show() {
+            datepicker.show("MONTH")
+            datePickerPopup.open()
+        }
+
+        id: datePickerPopup
+        modal: true
+        dim: false
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+        Component.onCompleted: {
+            var p = parent;
+            while(p.parent != undefined)
+                p = p.parent;
+            parent = p;
+        }
+
+        FluidControls.DatePicker {
+            id: datepicker
+            onAccepted: datePickerPopup.close()
+            onRejected: datePickerPopup.close()
+
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Now"
+                flat: true
+                onClicked: datepicker.selectedDate = new Date()
+            }
+        }
     }
 }

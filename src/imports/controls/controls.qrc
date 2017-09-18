@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/Fluid/Controls">
-        <file>ActionButton.qml</file>
         <file>Action.qml</file>
         <file>AlertDialog.qml</file>
         <file>AppBar.qml</file>
@@ -15,6 +14,7 @@
         <file>CircleImage.qml</file>
         <file>DialogLabel.qml</file>
         <file>DisplayLabel.qml</file>
+        <file>FloatingActionButton.qml</file>
         <file>HeadlineLabel.qml</file>
         <file>Icon.qml</file>
         <file>IconButton.qml</file>

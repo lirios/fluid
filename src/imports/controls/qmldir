@@ -3,7 +3,6 @@ plugin fluidcontrolsplugin
 class FluidControlsPlugin
 typeinfo plugins.qmltypes
 
-ActionButton 1.0 ActionButton.qml
 Action 1.0 Action.qml
 AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
@@ -18,6 +17,7 @@ Card 1.0 Card.qml
 CircleImage 1.0 CircleImage.qml
 DialogLabel 1.0 DialogLabel.qml
 DisplayLabel 1.0 DisplayLabel.qml
+FloatingActionButton 1.0 FloatingActionButton.qml
 HeadlineLabel 1.0 HeadlineLabel.qml
 IconButton 1.0 IconButton.qml
 Icon 1.0 Icon.qml

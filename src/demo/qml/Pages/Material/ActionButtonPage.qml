@@ -15,7 +15,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
 Flickable {
@@ -39,27 +39,26 @@ Flickable {
                 Column {
                     anchors.centerIn: parent
 
-                    ActionButton {
-                        iconName: "device/airplanemode_active"
+                    FluidControls.FloatingActionButton {
+                        icon.name: "device/airplanemode_active"
+                        mini: false
                     }
 
-                    ActionButton {
-                        iconName: "navigation/check"
-
-                        Material.elevation: 1
+                    FluidControls.FloatingActionButton {
+                        icon.name: "navigation/check"
+                        highlighted: true
+                        mini: false
                     }
 
-                    ActionButton {
-                        iconName: "device/airplanemode_active"
-
-                        Material.background: Material.primaryColor
+                    FluidControls.FloatingActionButton {
+                        icon.name: "device/airplanemode_active"
+                        mini: true
                     }
 
-                    ActionButton {
-                        iconName: "navigation/check"
-
-                        Material.elevation: 1
-                        Material.background: Material.primaryColor
+                    FluidControls.FloatingActionButton {
+                        icon.name: "navigation/check"
+                        highlighted: true
+                        mini: true
                     }
                 }
             }

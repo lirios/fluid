@@ -96,7 +96,7 @@ ItemDelegate {
         Item {
             id: leftItem
 
-            property bool showing: visibleChildren.length > 0
+            readonly property bool showing: visibleChildren.length > 0
 
             objectName: "leftItem"
 
@@ -181,7 +181,7 @@ ItemDelegate {
             Item {
                 id: secondaryItem
 
-                property bool showing: visibleChildren.length > 0
+                readonly property bool showing: visibleChildren.length > 0
 
                 objectName: "secondaryItem"
 
@@ -193,7 +193,7 @@ ItemDelegate {
         Item {
             id: rightItem
 
-            property bool showing: visibleChildren.length > 0
+            readonly property bool showing: visibleChildren.length > 0
 
             objectName: "rightItem"
 

@@ -30,7 +30,7 @@ import Fluid.Controls 1.0 as FluidControls
 ItemDelegate {
     id: listItem
 
-    property int dividerInset: leftItem.visible ? listItem.height : 0
+    property int dividerInset: leftItem.showing ? listItem.height : 0
     property alias showDivider: divider.visible
 
     property int maximumLineCount: 2

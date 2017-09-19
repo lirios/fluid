@@ -9,9 +9,12 @@ Fluid
 [![GitHub issues](https://img.shields.io/github/issues/lirios/fluid.svg)](https://github.com/lirios/fluid/issues)
 [![Maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/lirios/fluid/commits/develop)
 
-Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications.
+Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications,
+using the [Material Design](https://material.io/guidelines/) guidelines.
 
 ![Desktop](.github/demo.png)
+
+Online documentation is available at [liri.io](https://liri.io/docs/sdk/fluid/develop/).
 
 ## Dependencies
 

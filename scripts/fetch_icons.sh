@@ -28,6 +28,7 @@ for CATEGORY in ${CATEGORIES[*]}; do
         ICON=$(basename $FILE)
         NEW_NAME=$(echo $ICON | sed -E 's/ic_(.*)_48px.svg/\1.svg/')
         cp $FILE $TARGET_DIR/$CATEGORY/$NEW_NAME
+        chmod 644 $TARGET_DIR/$CATEGORY/$NEW_NAME
         echo "        <file>$CATEGORY/$NEW_NAME</file>" >> $QRC_FILE
     done
 done

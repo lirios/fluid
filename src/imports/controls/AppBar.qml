@@ -190,7 +190,8 @@ ToolBar {
             Menu {
                 id: overflowMenu
 
-                y: overflowButton.height
+                y: parent.topPadding
+                transformOrigin: Menu.TopRight
 
                 Instantiator {
                     model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0

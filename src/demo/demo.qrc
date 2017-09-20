@@ -34,5 +34,7 @@
         <file>qml/Pages/Navigation/NavDrawerPage.qml</file>
         <file>qml/Pages/Compound/OverlayPage.qml</file>
         <file>qml/Pages/Material/Search.qml</file>
+        <file>qml/Pages/Style/IconsPage.qml</file>
+        <file>qml/icons.txt</file>
     </qresource>
 </RCC>

@@ -98,7 +98,7 @@ Picker {
                 text: selectedDate.getFullYear()
                 level: 2
                 color: "white"
-                opacity: 0.7
+                opacity: yearSelector.visible ? 1 : 0.7
                 font.pixelSize: 16
 
                 MouseArea {
@@ -114,6 +114,7 @@ Picker {
                 font.pixelSize: 30
                 color: "white"
                 wrapMode: Text.Wrap
+                opacity: dateSelector.visible ? 1 : 0.7
 
                 MouseArea {
                     anchors.fill: parent

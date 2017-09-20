@@ -67,7 +67,7 @@ FluidControls.Card {
     signal rejected()
 
     width: orientation === Qt.LandscapeOrientation ? 500 : 340
-    height: orientation === Qt.LandscapeOrientation ? 350 : 440
+    height: orientation === Qt.LandscapeOrientation ? 350 : 470
 
     Control {
         id: picker

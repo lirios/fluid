@@ -73,16 +73,15 @@ Item {
         width: parent.width
         height: parent.height
         wrap: false
-        visibleItemCount: 5
+        visibleItemCount: 7
         model: calcModel(minDate, maxDate)
         delegate: FluidControls.SubheadingLabel {            
             text: modelData
-            color: Material.primaryTextColor
+            color: Tumbler.tumbler.currentIndex === index ? Material.accent : Material.primaryTextColor
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            opacity: 1.0 - Math.abs(Tumbler.displacement) / (Tumbler.tumbler.visibleItemCount / 2)
+            verticalAlignment: Text.AlignVCenter            
             font.bold: Tumbler.tumbler.currentIndex === index
-            font.pixelSize: Tumbler.tumbler.currentIndex === index ? 24 : (20 - 2 * Math.abs(Tumbler.displacement))
+            font.pixelSize: Tumbler.tumbler.currentIndex === index ? 24 : 16
         }
         onCurrentIndexChanged: {
             if(selectedDate.getFullYear() !== model[currentIndex]) {                

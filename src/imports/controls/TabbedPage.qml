@@ -165,4 +165,14 @@ FluidControls.Page {
         swipeView.addItem(tab);
         tabBar.setCurrentIndex(swipeView.count - 1);
     }
+
+    /*!
+        \qmlmethod void TabbedPage::removeTab(int index)
+
+        Remove the tab with \l index programmatically.
+    */
+    function removeTab(index) {
+        swipeView.removeItem(index);
+        tabBar.decrementCurrentIndex();
+    }
 }

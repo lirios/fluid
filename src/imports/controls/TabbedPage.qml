@@ -71,21 +71,13 @@ FluidControls.Page {
     /*!
         Index of the currently selected tab.
      */
-    readonly property int currentIndex: __private.currentTabIndex
+    property alias currentIndex: swipeView.currentIndex
 
     /*!
        The currently selected tab.
      */
     readonly property Tab selectedTab: count > 0
                                        ? swipeView.contentChildren[currentIndex] : null
-
-    onCurrentIndexChanged: swipeView.currentIndex = currentIndex
-
-    QtObject {
-        id: __private
-
-        property alias currentTabIndex: tabBar.currentIndex
-    }
 
     appBar.elevation: 0
 
@@ -107,6 +99,8 @@ FluidControls.Page {
                 leftMargin: centered ? 0 : appBar ? appBar.leftKeyline - 12 : 0
                 horizontalCenter: centered ? parent.horizontalCenter : undefined
             }
+
+            currentIndex: swipeView.currentIndex
 
             Material.accent: appBar.Material.foreground
             Material.background: "transparent"
@@ -161,9 +155,6 @@ FluidControls.Page {
     SwipeView {
         id: swipeView
         anchors.fill: parent
-        currentIndex: __private.currentTabIndex
-
-        onCurrentIndexChanged: __private.currentTabIndex = currentIndex
     }
 
     /*!
@@ -173,6 +164,6 @@ FluidControls.Page {
      */
     function addTab(tab) {
         swipeView.addItem(tab);
-        __private.currentTabIndex = swipeView.count - 1;
+        swipeView.setCurrentIndex(swipeView.count - 1);
     }
 }

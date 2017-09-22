@@ -35,29 +35,68 @@ Flickable {
                 width: parent.width
                 height: parent.height / 2
 
-                Column {
+                Row {
                     anchors.centerIn: parent
+                    spacing: 64
 
-                    FluidControls.FloatingActionButton {
-                        iconName: "device/airplanemode_active"
-                        mini: false
+                    Column {
+                        FluidControls.TitleLabel {
+                            text: qsTr("Enabled")
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "device/airplanemode_active"
+                            mini: false
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "navigation/check"
+                            highlighted: true
+                            mini: false
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "device/airplanemode_active"
+                            mini: true
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "navigation/check"
+                            highlighted: true
+                            mini: true
+                        }
                     }
 
-                    FluidControls.FloatingActionButton {
-                        iconName: "navigation/check"
-                        highlighted: true
-                        mini: false
-                    }
+                    Column {
+                        FluidControls.TitleLabel {
+                            text: qsTr("Disabled")
+                        }
 
-                    FluidControls.FloatingActionButton {
-                        iconName: "device/airplanemode_active"
-                        mini: true
-                    }
+                        FluidControls.FloatingActionButton {
+                            iconName: "device/airplanemode_active"
+                            mini: false
+                            enabled: false
+                        }
 
-                    FluidControls.FloatingActionButton {
-                        iconName: "navigation/check"
-                        highlighted: true
-                        mini: true
+                        FluidControls.FloatingActionButton {
+                            iconName: "navigation/check"
+                            highlighted: true
+                            mini: false
+                            enabled: false
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "device/airplanemode_active"
+                            mini: true
+                            enabled: false
+                        }
+
+                        FluidControls.FloatingActionButton {
+                            iconName: "navigation/check"
+                            highlighted: true
+                            mini: true
+                            enabled: false
+                        }
                     }
                 }
             }

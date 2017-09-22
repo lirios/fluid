@@ -62,10 +62,29 @@ qbs run --no-build -d build --products fluid-demo
 
 ## System-wide installation
 
+We assume that your distro installs QtQuick modules in `/usr/lib/qt/qml`
+like `Arch Linux` does, please change the paths for your Linux distro.
+
+The same goes for other operating systems.
+
+From the root of the repository, run:
+
+```sh
+git submodule update --init --recursive
+qbs setup-toolchains --type gcc /usr/bin/g++ gcc
+qbs setup-qt /usr/bin/qmake-qt5 qt5
+qbs config profiles.qt5.baseProfile gcc
+qbs build --no-install -d build profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr modules.lirideployment.qmlDir:lib/qt/qml
+sudo qbs install -d build --no-build -v --install-root / profile:qt5
+```
+
+Please note that a system-wide installation is discouraged in most cases
+because there's a risk to "pollute" your system with libraries not
+managed by a package manager.
+
 ### Build with QMake
 
-This will be the only build system in the next version, so you are encouraged
-to test it and report any issue.
+**QMake builds are deprecated and will be removed in Fluid 0.11.**
 
 From the root of the repository, run:
 
@@ -85,7 +104,7 @@ On the `qmake` line, you can specify additional configuration parameters:
 Use `make distclean` from inside your `build` directory to clean up.
 You need to do this before rerunning `qmake` with different options.
 
-### Notes on installation
+#### Notes on installation
 
 A system-wide installation with `LIRI_INSTALL_PREFIX=/usr` is usually performed
 by Linux distro packages.

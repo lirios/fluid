@@ -16,6 +16,7 @@ import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
+import QtGraphicalEffects 1.0
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Effects 1.0 as FluidEffects
@@ -90,9 +91,22 @@ RoundButton {
                                 : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor
         radius: control.radius
 
-        layer.enabled: control.enabled && control.Material.buttonColor.a > 0
-        layer.effect: FluidEffects.Elevation {
-            elevation: control.Material.elevation
+        RectangularGlow {
+            anchors.centerIn: parent
+            anchors.verticalCenterOffset: control.Material.elevation === 1 ? 1.5 : 1
+
+            width: parent.width
+            height: parent.height
+
+            z: -1
+
+            visible: control.enabled && control.Material.buttonColor.a > 0
+
+            glowRadius: control.Material.elevation === 1 ? 0.75 : 0.3
+            opacity: control.Material.elevation === 1 ? 0.6 : 0.3
+            spread: control.Material.elevation === 1 ? 0.7 : 0.85
+            color: "black"
+            cornerRadius: height/2
         }
 
         FluidControls.Ripple {

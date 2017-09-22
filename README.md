@@ -12,9 +12,9 @@ Fluid
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications,
 using the [Material Design](https://material.io/guidelines/) guidelines.
 
-![Desktop](.github/demo.png)
-
 Online documentation is available at [liri.io](https://liri.io/docs/sdk/fluid/develop/).
+
+![Desktop](.github/demo.png)
 
 ## Dependencies
 

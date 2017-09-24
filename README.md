@@ -65,6 +65,13 @@ Run the demo with (unless `project.withDemo:false`):
 qbs run --no-build -d build --products fluid-demo
 ```
 
+### Documentation
+
+The HTML documentation is built if `project.withDocumentation:true` is passed
+to qbs and it is localed inside `<install root>/share/doc/fluid/html`.
+
+Open `<install root>/share/doc/fluid/html/index.html` with a browser to read it.
+
 ## Installation
 
 You can either install system-wide or per-project installation which
@@ -192,17 +199,6 @@ engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvi
 ```cpp
 engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 ```
-
-## Documentation
-
-Build the HTML documentation from the `build` directory created earlied:
-
-```sh
-cd build
-make html_docs_fluid
-```
-
-Then open up `doc/fluid/html/index.html` with a browser.
 
 ## Licensing
 

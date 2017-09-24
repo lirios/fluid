@@ -4,4 +4,3 @@
 .gitmodules export-ignore
 .travis export-ignore
 .travis.yml export-ignore
-scripts/make-release-archive.sh export-ignore

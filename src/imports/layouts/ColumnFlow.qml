@@ -56,7 +56,7 @@ Item {
     property alias model: repeater.model
     property alias delegate: repeater.delegate
     property int contentHeight: 0
-    property bool repeaterCompleted: false
+    readonly property alias repeaterCompleted: __private.repeaterCompleted
 
     height: contentHeight
 
@@ -154,7 +154,7 @@ Item {
         model: columnFlow.model
 
         Component.onCompleted: {
-            columnFlow.repeaterCompleted = true;
+            __private.repeaterCompleted = true;
             columnFlow.reEvalColumns();
         }
     }

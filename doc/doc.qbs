@@ -9,7 +9,7 @@ Product {
     type: "qch"
 
     Depends { name: "lirideployment" }
-    Depends { name: "Qt.core" }
+    Depends { name: "Qt.core"; versionAtLeast: project.minimumQtVersion }
 
     Qt.core.qdocEnvironment: [
         "FLUID_VERSION=" + project.version,

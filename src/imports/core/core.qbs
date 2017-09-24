@@ -4,7 +4,7 @@ LiriQmlPlugin {
     name: "fluidcoreplugin"
     pluginPath: "Fluid/Core"
 
-    Depends { name: "Qt"; submodules: ["svg", "gui"] }
+    Depends { name: "Qt"; submodules: ["svg", "gui"]; versionAtLeast: project.minimumQtVersion }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 

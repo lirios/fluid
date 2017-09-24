@@ -10,7 +10,7 @@ QtGuiApplication {
     consoleApplication: false
 
     Depends { name: "lirideployment" }
-    Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }
+    Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: project.minimumQtVersion }
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos"); required: false }
 
     Depends { name: "fluidcontrolsplugin" }

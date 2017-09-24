@@ -57,6 +57,7 @@ You can also append the following options to the last line:
 
  * `project.withDemo:false`: Do not build the demo app.
  * `project.withDocumentation:false`: Do not build the documentation.
+ * `project.useStaticAnalyzer:true` to enable the Clang static analyzer.
 
 Run the demo with (unless `project.withDemo:false`):
 

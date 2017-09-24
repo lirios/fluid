@@ -38,14 +38,6 @@ QImage IconsImageProvider::requestImage(const QString &id, QSize *realSize,
     if (realSize)
         *realSize = size;
 
-#ifdef FLUID_LOCAL
-    QSvgRenderer renderer(QLatin1String(":/Fluid/Controls/") + id + QLatin1String(".svg"));
-    QImage image(size, QImage::Format_ARGB32);
-    image.fill(Qt::transparent);
-    QPainter painter(&image);
-    renderer.render(&painter);
-    return image;
-#else
     const QString targetPath = QStringLiteral("Fluid/Controls/icons");
     const QStringList importPaths = QQmlEngine().importPathList();
 
@@ -63,5 +55,4 @@ QImage IconsImageProvider::requestImage(const QString &id, QSize *realSize,
     }
 
     return QImage();
-#endif
 }

@@ -1,20 +1,11 @@
-TARGET = fluidlayoutsplugin
 TARGETPATH = Fluid/Layouts
 IMPORT_VERSION = 1.0
 
-QT += qml quick
-
-HEADERS += \
-    $$PWD/layoutsplugin.h
-
-SOURCES += \
-    $$PWD/layoutsplugin.cpp
-
 QML_FILES += \
+    plugins.qmltypes \
     $$files(*.qml)
 
-CONFIG += no_cxx_module
-load(liri_qml_plugin)
+load(qml_module)
 
 # Copy all files to the build directory so that QtCreator will recognize
 # the QML module and the demo will run without installation

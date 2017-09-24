@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/Fluid/Core">
-        <file>Object.qml</file>
-        <file>PlatformExtensions.qml</file>
-        <file>Utils.qml</file>
-        <file alias="qmldir">qmldir_noplugin</file>
-    </qresource>
-</RCC>

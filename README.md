@@ -113,32 +113,8 @@ managed by a package manager.
 
 You can embed Fluid in your project and build it along your app.
 
-First, clone this repository.
-
-In your project file, include the `fluid.pri` file:  
-```qmake
-include(path/to/fluid.pri)
-```
-
-Then, in your `main.cpp` file or wherever you set up a `QQmlApplicationEngine`:
-* add this include directive:
-```cpp
-#include "iconsimageprovider.h"
-#include "iconthemeimageprovider.h"
-```
-* add the resources files to your `QQmlApplicationEngine` import paths:
-```cpp
-engine.addImportPath(QLatin1String("qrc:/"));
-```
-* register fluid's image providers to the engine:
-```cpp
-engine.addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
-engine.addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
-```
-* and after that you can load your qml file:  
-```cpp
-engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-```
+We have an example with qmake in `examples/perproject/minimalqmake`
+and another one for qbs in `examples/perproject/minimalqbs`.
 
 ## Licensing
 

@@ -49,7 +49,7 @@ qbs config profiles.qt5.baseProfile gcc
 qbs -d build profile:qt5
 ```
 
-You can also specify the following options:
+You can also append the following options to the last line:
 
  * `project.withDemo:false`: Do not build the demo app.
  * `project.withDocumentation:false`: Do not build the documentation.
@@ -59,6 +59,17 @@ Run the demo with (unless `project.withDemo:false`):
 ```sh
 qbs run --no-build -d build --products fluid-demo
 ```
+
+## Installation
+
+You can either install system-wide or per-project installation which
+is essentially embedding Fluid in your project.
+
+System-wide installations are usually performed by packagers who want
+to redistribute Fluid in their Linux distro.
+
+Per-project installation is most useful for mobile developers that
+want to build Fluid alongside their project.
 
 ## System-wide installation
 

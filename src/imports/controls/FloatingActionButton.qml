@@ -61,6 +61,8 @@ RoundButton {
     */
     property bool mini: Screen.width < 460
 
+    Material.elevation: 1
+
     contentItem: Item {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth

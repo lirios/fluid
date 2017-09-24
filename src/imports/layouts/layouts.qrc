@@ -1,7 +1,0 @@
-<RCC>
-    <qresource prefix="/Fluid/Layouts">
-        <file>AutomaticGrid.qml</file>
-        <file>ColumnFlow.qml</file>
-        <file alias="qmldir">qmldir_noplugin</file>
-    </qresource>
-</RCC>

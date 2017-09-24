@@ -1,10 +1,23 @@
 import qbs 1.0
+import qbs.FileInfo
 
-LiriQmlPlugin {
+Product {
+    property string pluginPath: "Fluid/Layouts"
+
     name: "fluidlayoutsplugin"
-    pluginPath: "Fluid/Layouts"
 
-    cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
+    Depends { name: "lirideployment" }
 
-    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
+    files: ["qmldir", "*.qml", "*.qmltypes"]
+
+    FileTagger {
+        patterns: ["qmldir", "*.qml", "*.qmltypes"]
+        fileTags: ["qml"]
+    }
+
+    Group {
+        qbs.install: true
+        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath)
+        fileTagsFilter: ["qml"]
+    }
 }

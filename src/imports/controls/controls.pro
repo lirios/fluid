@@ -4,30 +4,38 @@ IMPORT_VERSION = 1.0
 
 QT += qml quick
 
+HEADERS += \
+    $$PWD/iconthemeimageprovider.h \
+    $$PWD/controlsplugin.h
+
+SOURCES += \
+    $$PWD/iconthemeimageprovider.cpp \
+    $$PWD/controlsplugin.cpp
+
 QML_FILES += \
     $$files(*.qml)
 
-include(controls.pri)
+INCLUDEPATH += $$PWD
 
 CONFIG += no_cxx_module
-load(liri_qml_plugin)
+load(qml_plugin)
 
 icons.path = $$target.path/icons
-icons.files += $$FLUID_SOURCE_TREE/icons/action
-icons.files += $$FLUID_SOURCE_TREE/icons/av
-icons.files += $$FLUID_SOURCE_TREE/icons/communication
-icons.files += $$FLUID_SOURCE_TREE/icons/device
-icons.files += $$FLUID_SOURCE_TREE/icons/file
-icons.files += $$FLUID_SOURCE_TREE/icons/image
-icons.files += $$FLUID_SOURCE_TREE/icons/maps
-icons.files += $$FLUID_SOURCE_TREE/icons/notification
-icons.files += $$FLUID_SOURCE_TREE/icons/social
-icons.files += $$FLUID_SOURCE_TREE/icons/toggle
-icons.files += $$FLUID_SOURCE_TREE/icons/alert
-icons.files += $$FLUID_SOURCE_TREE/icons/content
-icons.files += $$FLUID_SOURCE_TREE/icons/editor
-icons.files += $$FLUID_SOURCE_TREE/icons/hardware
-icons.files += $$FLUID_SOURCE_TREE/icons/navigation
+icons.files += $$PWD/../../../icons/action
+icons.files += $$PWD/../../../icons/av
+icons.files += $$PWD/../../../icons/communication
+icons.files += $$PWD/../../../icons/device
+icons.files += $$PWD/../../../icons/file
+icons.files += $$PWD/../../../icons/image
+icons.files += $$PWD/../../../icons/maps
+icons.files += $$PWD/../../../icons/notification
+icons.files += $$PWD/../../../icons/social
+icons.files += $$PWD/../../../icons/toggle
+icons.files += $$PWD/../../../icons/alert
+icons.files += $$PWD/../../../icons/content
+icons.files += $$PWD/../../../icons/editor
+icons.files += $$PWD/../../../icons/hardware
+icons.files += $$PWD/../../../icons/navigation
 INSTALLS += icons
 
 # Copy all files to the build directory so that QtCreator will recognize

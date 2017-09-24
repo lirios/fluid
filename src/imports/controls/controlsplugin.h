@@ -19,9 +19,7 @@
 class FluidControlsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
-#ifndef FLUID_LOCAL
     Q_PLUGIN_METADATA(IID QQmlExtensionInterface_iid)
-#endif
 public:
     void initializeEngine(QQmlEngine *engine, const char *uri);
     void registerTypes(const char *uri);

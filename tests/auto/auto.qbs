@@ -17,6 +17,7 @@ Project {
         Depends { name: "fluideffectsplugin" }
         Depends { name: "fluidlayoutsplugin" }
 
+        condition: !qbs.targetOS.contains("android")
         builtByDefault: project.autotestEnabled
         name: "fluid-autotest"
         arguments: project.autotestArguments

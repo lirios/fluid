@@ -2,7 +2,7 @@ import qbs 1.0
 
 QtGuiApplication {
     name: "tst_fluid_core"
-    condition: project.autotestEnabled
+    condition: project.autotestEnabled && !qbs.targetOS.contains("android")
     type: base.concat(["autotest"])
 
     Depends { name: "Qt"; submodules: ["gui", "testlib", "qmltest"] }

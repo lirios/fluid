@@ -40,6 +40,9 @@ Open up `fluid.qbs` with QtCreator, hit build and run to see the demo in action.
 Alternatively you can build it yourself from the terminal.
 We strongly advise against manual builds, unless you have previous experience.
 
+**Qbs does not currently support Android builds**, please use per-project installation
+if you are building a mobile app.
+
 From the root of the repository, run:
 
 ```sh

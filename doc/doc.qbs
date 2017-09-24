@@ -4,7 +4,7 @@ Product {
     property string versionTag: project.version.replace(/\.|-/g, "")
 
     name: "fluid-doc"
-    condition: project.withDocumentation
+    condition: project.withDocumentation && !qbs.targetOS.contains("android")
     builtByDefault: true
     type: "qch"
 

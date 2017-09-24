@@ -13,6 +13,15 @@ QtGuiApplication {
     Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: "5.8" }
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos"); required: false }
 
+    Depends { name: "Fluid" }
+    Depends { name: "Fluid-cmake"; required: false }
+    Depends { name: "Fluid-pkgconfig"; required: false }
+    Depends { name: "Fluid-qbs"; required: false }
+    Depends { name: "fluidcontrolsplugin" }
+    Depends { name: "fluidcoreplugin" }
+    Depends { name: "fluideffectsplugin" }
+    Depends { name: "fluidlayoutsplugin" }
+
     cpp.defines: [
         "FLUID_VERSION=" + project.version,
         "QT_NO_CAST_FROM_ASCII",

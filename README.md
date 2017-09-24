@@ -25,6 +25,7 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtquickcontrols2](http://code.qt.io/cgit/qt/qtquickcontrols2.git)
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
+ * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
 
 ## Build
 

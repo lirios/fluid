@@ -9,4 +9,8 @@ AndroidApk {
     sourceSetDir: "../demo/android"
 
     Depends { name: "fluid-demo" }
+    Depends { name: "fluidcontrolsplugin" }
+    Depends { name: "fluidcoreplugin" }
+    Depends { name: "fluideffectsplugin" }
+    Depends { name: "fluidlayoutsplugin" }
 }

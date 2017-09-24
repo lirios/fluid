@@ -23,7 +23,12 @@ Product {
     Depends { name: "lirideployment" }
     Depends { name: "archiver" }
     Depends { name: "Qt.core" }
+
     Depends { name: "fluid-demo" }
+    Depends { name: "fluidcontrolsplugin" }
+    Depends { name: "fluidcoreplugin" }
+    Depends { name: "fluideffectsplugin" }
+    Depends { name: "fluidlayoutsplugin" }
 
     archiver.type: "7zip"
     archiver.workingDirectory: qbs.installRoot

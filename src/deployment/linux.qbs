@@ -9,4 +9,8 @@ InstallPackage {
     archiver.outputDirectory: project.buildDirectory
 
     Depends { name: "fluid-demo" }
+    Depends { name: "fluidcontrolsplugin" }
+    Depends { name: "fluidcoreplugin" }
+    Depends { name: "fluideffectsplugin" }
+    Depends { name: "fluidlayoutsplugin" }
 }

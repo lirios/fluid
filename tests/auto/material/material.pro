@@ -5,9 +5,6 @@ osx:CONFIG -= app_bundle
 
 QT += testlib quickcontrols2
 
-# Use the library from the build directory
-QT += Fluid
-
 SOURCES += \
     $$PWD/material.cpp
 

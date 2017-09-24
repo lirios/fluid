@@ -15,12 +15,9 @@
 
 #pragma once
 
-#ifdef FLUID_LOCAL
-    #include "../fluid/dateutils.h"
-#else
-    #include <Fluid/DateUtils>
-#endif
-#include <QtCore/QObject>
+#include <QObject>
+#include <QDate>
+#include <QDateTime>
 
 class DateUtils : public QObject
 {

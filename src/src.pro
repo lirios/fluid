@@ -1,6 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS += demo fluid imports
+SUBDIRS += demo imports
 
-imports.depends = fluid
 demo.depends = imports

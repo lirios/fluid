@@ -2,7 +2,7 @@ TARGET = fluidcoreplugin
 TARGETPATH = Fluid/Core
 IMPORT_VERSION = 1.0
 
-QT += qml quick Fluid
+QT += qml quick
 
 QML_FILES += \
     $$files(*.qml)

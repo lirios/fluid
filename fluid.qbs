@@ -23,7 +23,6 @@ Project {
     references: [
         "doc/doc.qbs",
         "src/demo/demo.qbs",
-        "src/fluid/fluid.qbs",
         "src/imports/imports.qbs",
         "src/deployment/deployment.qbs",
         "tests/auto/auto.qbs",

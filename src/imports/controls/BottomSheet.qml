@@ -26,6 +26,9 @@ import Fluid.Controls 1.0 as FluidControls
 
     A sheet of paper that slides up from the bottom edge of the screen and presents
     a set of clear and simple actions.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/bottom-sheets.html}{Material Design guidelines}.
 */
 Drawer {
     id: bottomSheet
@@ -36,6 +39,8 @@ Drawer {
     default property alias content: containerPane.data
 
     /*!
+        \qmlproperty int maxHeight
+
         Maximum height of the bottom sheet.
 
         By default it's set to the height of the \c ApplicationWindow

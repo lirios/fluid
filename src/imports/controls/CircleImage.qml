@@ -38,6 +38,12 @@ Item {
 
     /*!
         \qmlproperty enumeration status
+        \list
+            \li Image.Null - no image has been set
+            \li Image.Ready - the image has been loaded
+            \li Image.Loading - the image is currently being loaded
+            \li Image.Error - an error occurred while loading the image
+        \endlist
 
         Status of the image loading.
 

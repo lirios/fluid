@@ -26,6 +26,11 @@ import QtGraphicalEffects 1.0
 Item {
     id: item
 
+    /*!
+        \qmlproperty variant source
+
+        This property defines the source item that is going to be masked.
+    */
     property alias source: mask.source
 
     Rectangle {

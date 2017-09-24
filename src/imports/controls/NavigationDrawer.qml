@@ -61,7 +61,6 @@ import Fluid.Controls 1.0
     }
     \endcode
 */
-
 Drawer {
     id: drawer
 

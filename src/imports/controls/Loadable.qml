@@ -22,10 +22,39 @@ import QtQuick 2.0
     \brief Loadable component.
 */
 Item {
+    /*!
+        \qmlproperty Component component
+
+        Component to load.
+    */
     property Component component
+
+    /*!
+        \qmlproperty Animation showAnimation
+
+        Animation to play when the component is shown.
+    */
     property var showAnimation
+
+    /*!
+        \qmlproperty Animation hideAnimation
+
+        Animation to play when the component is hidden.
+    */
     property var hideAnimation
+
+    /*!
+        \qmlproperty bool asynchronous
+
+        Whether the component is loaded asynchronously or not.
+    */
     property alias asynchronous: loader.asynchronous
+
+    /*!
+        \qmlproperty Item item
+
+        Item created after \l Loadable::component is loaded.
+    */
     property alias item: loader.item
 
     id: root
@@ -59,10 +88,20 @@ Item {
         }
     }
 
+    /*!
+        \qmlmethod void Loadable::show()
+
+        Show the component.
+    */
     function show() {
         loader.sourceComponent = root.component;
     }
 
+    /*!
+        \qmlmethod void Loadable::hide()
+
+        Hide the component.
+    */
     function hide() {
         if (loader.item && loader.item.hide != undefined)
             loader.item.hide();

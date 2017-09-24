@@ -49,6 +49,9 @@ import Fluid.Controls 1.0
 Pane {
     id: sidebar
 
+    /*!
+        \internal
+    */
     default property alias contents: contents.data
 
     /*!

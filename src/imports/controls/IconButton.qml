@@ -63,6 +63,8 @@ ToolButton {
     property alias iconColor: icon.color
 
     /*!
+        \qmlproperty bool hoverAnimation
+
         Specify whether the icon should be rotated 90 degrees when the mouse hovers.
         Default is \c false.
     */

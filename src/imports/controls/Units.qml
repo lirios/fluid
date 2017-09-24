@@ -25,8 +25,9 @@ import Fluid.Core 1.0
     \brief Units.
 */
 Item {
-    /*
+    /*!
         \qmlproperty int gridUnit
+
         Fundamental unit of space for sizes depending on the current font.
         It correspond to the capital letter M width in pixel.
     */
@@ -34,6 +35,7 @@ Item {
 
     /*!
         \qmlproperty real smallSpacing
+
         The amount of spacing that should be used around smaller UI
         elements. It can be used as margin around button box and
         spacing between buttons.
@@ -42,6 +44,7 @@ Item {
 
     /*!
         \qmlproperty real mediumSpacing
+
         The amount of spacing that should be used inside medium UI
         elements such as padding between title and body text in a dialog box.
     */
@@ -49,6 +52,7 @@ Item {
 
     /*!
         \qmlproperty real largeSpacing
+
         The amount of spacing that should be used inside bigger UI
         elements such as padding in a dialog box.
     */
@@ -56,18 +60,21 @@ Item {
 
     /*!
         \qmlproperty int shortDuration
+
         Duration for short animations to make UI events noticeable.
     */
     readonly property int shortDuration: 100
 
     /*!
         \qmlproperty int mediumDuration
+
         Duration for medium length animations.
     */
     readonly property int mediumDuration: 200
 
     /*!
         \qmlproperty int longDuration
+
         Duration for long animations such as windows opening or closing.
     */
     readonly property int longDuration: 400
@@ -92,6 +99,8 @@ Item {
     }
 
     /*!
+        \qmlmethod int Units::gu(real size)
+
         Returns a round size in pixels multiplied by grid unit.
     */
     function gu(x) {
@@ -99,6 +108,8 @@ Item {
     }
 
     /*!
+        \qmlmethod int Units::roundToIconSize(real size)
+
         Returns the size in pixel closes to the icon size.
     */
     function roundToIconSize(x) {

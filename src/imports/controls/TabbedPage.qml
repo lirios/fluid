@@ -66,16 +66,25 @@ FluidControls.Page {
      */
     default property alias contents: swipeView.contentChildren
 
+    /*!
+        \qmlproperty int count
+
+        Number of tabs.
+    */
     property alias count: swipeView.count
 
     /*!
+        \qmlproperty int currentIndex
+
         Index of the currently selected tab.
-     */
+    */
     property alias currentIndex: swipeView.currentIndex
 
     /*!
-       The currently selected tab.
-     */
+        \qmlproperty Tab selectedTab
+
+        The currently selected tab.
+    */
     readonly property Tab selectedTab: count > 0
                                        ? swipeView.contentChildren[currentIndex] : null
 
@@ -169,7 +178,7 @@ FluidControls.Page {
     /*!
         \qmlmethod void TabbedPage::removeTab(int index)
 
-        Remove the tab with \l index programmatically.
+        Remove the tab with \a index programmatically.
     */
     function removeTab(index) {
         swipeView.removeItem(index);

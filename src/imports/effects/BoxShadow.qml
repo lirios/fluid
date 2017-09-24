@@ -26,17 +26,54 @@ import QtGraphicalEffects 1.0
   elevation shadow effect.
 */
 RectangularGlow {
-    // The 4 properties from CSS box-shadow, plus the inherited color property
+    /*!
+        \qmlproperty int offsetX
+
+        Position of the horizontal shadow.
+    */
     property int offsetX
+
+    /*!
+        \qmlproperty int offsetY
+
+        Position of the vertical shadow.
+    */
     property int offsetY
+
+    /*!
+        \qmlproperty int blurRadius
+
+        Blur distance.
+    */
     property int blurRadius
+
+    /*!
+        \qmlproperty int spreadRadius
+
+        Size of shadow.
+    */
     property int spreadRadius
 
-    // The source item the shadow is being applied to, used for correctly
-    // calculating the corner radius
+    /*!
+        \qmlproperty Item source
+
+        The source item the shadow is being applied to, used for correctly
+        calculating the corner radius.
+    */
     property Item source
 
+    /*!
+        \qmlproperty bool fullWidth
+
+        Whether the shadow width is calculated based on the parent width.
+    */
     property bool fullWidth
+
+    /*!
+        \qmlproperty bool fullHeight
+
+        Whether the shadow height is calculated based on the parent height.
+    */
     property bool fullHeight
 
     x: (parent.width - width)/2 + offsetX

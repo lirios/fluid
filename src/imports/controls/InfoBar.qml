@@ -47,44 +47,63 @@ Rectangle {
     id: infoBar
 
     /*!
-       Button text. Empty by default.
-       The button will not be visible if the text is empty.
-     */
+        \qmlproperty string buttonText
+
+        Button text. Empty by default.
+        The button will not be visible if the text is empty.
+    */
     property string buttonText
 
     /*!
-       Button color.
-     */
+        \qmlproperty color buttonColor
+
+        Button color.
+    */
     property color buttonColor: Material.accentColor
 
     /*!
-       Text to display.
-     */
+        \qmlproperty string text
+
+        Text to display.
+    */
     property string text
 
     /*!
-       Whether the bar is open or not.
-     */
+        \qmlproperty bool opened
+
+        Whether the bar is open or not.
+    */
     property bool opened
 
     /*!
-       Amount of time (in ms) to keep the notification visible.
-       The default is 2s.
-     */
+        \qmlproperty int duration
+
+        Amount of time (in ms) to keep the notification visible.
+        The default is 2s.
+    */
     property int duration: 2000
 
     /*!
-       Whether the bar should take full screen width.
-       The default depends on the device: full width only on phones and tablets.
-     */
+        \qmlproperty bool fullWidth
+
+        Whether the bar should take full screen width.
+        The default depends on the device: full width only on phones and tablets.
+    */
     property bool fullWidth: Device.type === Device.phone || Device.type === Device.phablet
 
     /*!
-       This signal is emitted when the button is clicked.
-       The handler is \c onClicked.
-     */
-    signal clicked
+        \qmlsignal clicked()
 
+        This signal is emitted when the button is clicked.
+        The handler is \c onClicked.
+    */
+    signal clicked()
+
+    /*!
+        \qmlmethod void InfoBar::open(string text)
+
+        Open the bar with the specified \a text.
+    */
     function open(text) {
         infoBar.text = text
         opened = true

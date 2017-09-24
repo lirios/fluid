@@ -23,13 +23,46 @@ import Fluid.Controls 1.0 as FluidControls
     \ingroup fluidcontrols
 
     \brief Menu item with an \l Icon.
+
+    This component will be deprecated as soon as Qt 5.10 is released.
 */
 MenuItem {
     id: control
 
+    /*!
+        \qmlproperty string iconName
+
+        Icon name.
+
+        \sa Icon::name
+    */
     property alias iconName: icon.name
+
+    /*!
+        \qmlproperty url iconSource
+
+        Icon source URL.
+
+        \sa Icon::source
+    */
     property alias iconSource: icon.source
+
+    /*!
+        \qmlproperty size iconSize
+
+        Icon size.
+
+        \sa Icon::size
+    */
     property alias iconSize: icon.size
+
+    /*!
+        \qmlproperty color iconColor
+
+        Icon color.
+
+        \sa Icon::color
+    */
     property alias iconColor: icon.color
 
     contentItem: Item {

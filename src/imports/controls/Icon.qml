@@ -75,61 +75,73 @@ Item {
     id: icon
 
     /*!
-       The color of the icon. Defaults to \c Material.iconColor.
-     */
+        \qmlproperty color color
+
+        The color of the icon. Defaults to \c Material.iconColor.
+    */
     property color color: Material.iconColor
 
     /*!
-       The size of the icon. Defaults to 24px.
-     */
+        \qmlproperty real size
+
+        The size of the icon. Defaults to 24px.
+    */
     property real size: 24
 
     /*!
-       The name of the icon to display.
+        \qmlproperty string name
 
-       \sa source
-     */
+        The name of the icon to display.
+
+        \sa source
+    */
     property string name
 
     /*!
-       \brief A URL pointing to an image to display as the icon.
+        \qmlproperty url source
 
-       By default, this is a special URL representing the icon named by \l name from the Material
-       Design icon collection when using the form of "collection/icon_name", or in the case of a
-       single "icon_name", the platform's Freedesktop icon theme will be used.
+        \brief A URL pointing to an image to display as the icon.
 
-       By default, icons from the Material Design icons collection will be treated as symbolic icons and colored using the specified \l color, while icons from the Freedesktop icon theme will
-       not be colorized. To override this, or set the behavior for your own custom icons, use
-       \l colorize.
+        By default, this is a special URL representing the icon named by \l name from the Material
+        Design icon collection when using the form of "collection/icon_name", or in the case of a
+        single "icon_name", the platform's Freedesktop icon theme will be used.
 
-       \sa name
+        By default, icons from the Material Design icons collection will be treated as symbolic icons and colored using the specified \l color, while icons from the Freedesktop icon theme will
+        not be colorized. To override this, or set the behavior for your own custom icons, use
+        \l colorize.
+
+        \sa name
      */
      property url source: Utils.getSourceForIconName(name)
 
     /*!
-       \qmlproperty enumeration status
-       \list
-         \li Image.Null - no image has been set
-         \li Image.Ready - the image has been loaded
-         \li Image.Loading - the image is currently being loaded
-         \li Image.Error - an error occurred while loading the image
-       \endlist
-     */
+        \qmlproperty enumeration status
+        \list
+            \li Image.Null - no image has been set
+            \li Image.Ready - the image has been loaded
+            \li Image.Loading - the image is currently being loaded
+            \li Image.Error - an error occurred while loading the image
+        \endlist
+    */
     property alias status: image.status
 
     /*!
-       Specifies whether the image should be cached.
-       The default value is true.
+        \qmlproperty bool cache
 
-       Setting cache to false is useful when dealing with large images,
-       to make sure that they aren't cached at the expense of small
-       'ui element' images.
+        Specifies whether the image should be cached.
+        The default value is true.
+
+        Setting cache to false is useful when dealing with large images,
+        to make sure that they aren't cached at the expense of small
+        'ui element' images.
     */
     property alias cache: image.cache
 
     /*!
-       \c true if the icon is valid and fully loaded.
-     */
+        \qmlproperty bool valid
+
+        \c true if the icon is valid and fully loaded.
+    */
     readonly property bool valid: status == Image.Ready
 
     /*!
@@ -140,6 +152,11 @@ Item {
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
                             String(icon.source).indexOf("symbolic") !== -1
 
+    /*!
+        \qmlproperty real sourceSize
+
+        Source image size.
+    */
     readonly property real sourceSize: String(icon.source).indexOf("image://fluidicontheme/") === 0 ? Units.roundToIconSize(size) : size
 
     width: size

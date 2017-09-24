@@ -30,19 +30,83 @@ import Fluid.Controls 1.0 as FluidControls
 ItemDelegate {
     id: listItem
 
+    /*!
+        \qmlproperty int dividerInset
+
+        How many pixels the divider is from the left border.
+        This property is set to the \l leftItem width by default.
+
+        \sa ListItem::showDivider
+        \sa ListItem::leftItem
+    */
     property int dividerInset: leftItem.showing ? listItem.height : 0
+
+    /*!
+        \qmlproperty bool showDivider
+
+        This property holds whether the divider is shown or not.
+        Default value is \c false.
+    */
     property alias showDivider: divider.visible
 
+    /*!
+        \qmlproperty int maximumLineCount
+
+        Maximum number of text lines allowed to show.
+    */
     property int maximumLineCount: 2
 
+    /*!
+        \qmlproperty string subText
+
+        Text to display below \l text.
+    */
     property alias subText: subLabel.text
+
+    /*!
+        \qmlproperty string valueText
+
+        Value text.
+    */
     property alias valueText: valueLabel.text
 
+    /*!
+        \qmlproperty string iconName
+
+        Icon name.
+
+        \sa Icon::name
+    */
     property alias iconName: icon.name
+
+    /*!
+        \qmlproperty url iconSource
+
+        Icon source URL.
+
+        \sa Icon::source
+    */
     property alias iconSource: icon.source
 
+    /*!
+        \qmlproperty Item leftItem
+
+        Item to show on the left.
+    */
     property alias leftItem: leftItem.children
+
+    /*!
+        \qmlproperty Item rightItem
+
+        Item to show on the right.
+    */
     property alias rightItem: rightItem.children
+
+    /*!
+        \qmlproperty Item secondaryItem
+
+        Secondary item.
+    */
     property alias secondaryItem: secondaryItem.children
 
     leftPadding: FluidControls.Units.smallSpacing * 2

@@ -25,8 +25,25 @@ import QtQuick.Controls 2.0
 StackView {
     id: stackView
 
+    /*!
+        \qmlsignal pushed(Item page)
+
+        This signal is emitted when an item is pushed to the stack.
+    */
     signal pushed(Item page)
+
+    /*!
+        \qmlsignal popped(Item page)
+
+        This signal is emitted when an item is popped from the stack.
+    */
     signal popped(Item page)
+
+    /*!
+        \qmlsignal replaced(Item page)
+
+        This signal is emitted when an item is replaced in the stack.
+    */
     signal replaced(Item page)
 
     property int __lastDepth: 0

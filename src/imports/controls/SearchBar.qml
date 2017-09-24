@@ -29,14 +29,19 @@ Flickable {
     id: searchBar
 
     /*!
-      The current search text in the search bar typed in so far.
+        \qmlproperty string searchText
+
+        The current search text in the search bar typed in so far.
     */
     property alias searchText: searchTextField.text
 
     /*!
-      The suggestions to display.
-      \sa textRole
-      \sa suggestionDelegate
+        \qmlproperty any model
+
+        The suggestions to display.
+
+        \sa SearchBar::suggestionTextRole
+        \sa SearchBar::suggestionDelegate
     */
     property alias searchSuggestions: suggestionsListView.model
 

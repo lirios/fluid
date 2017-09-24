@@ -28,6 +28,11 @@ import QtQuick.Controls.Material 2.0
 ItemDelegate {
     id: listItem
 
+    /*!
+        \qmlproperty color textColor
+
+        Text color.
+    */
     property alias textColor: label.color
 
     width: parent ? parent.width : undefined

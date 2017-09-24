@@ -27,20 +27,35 @@ import Fluid.Controls 1.0
 */
 Item {
     /*!
-       Name of the icon from the \l{https://materialdesignicons.com/}{Material Design icon collection}.
-     */
+        \qmlproperty string iconName
+
+        Name of the icon from the \l{https://materialdesignicons.com/}{Material Design icon collection}.
+
+        \sa Icon::name
+    */
     property alias iconName: icon.name
 
+    /*!
+        \qmlproperty url iconSource
+
+        Icon source URL.
+
+        \sa Icon::source
+    */
     property alias iconSource: icon.source
 
     /*!
-       Text.
-     */
+        \qmlproperty string text
+
+        Text.
+    */
     property alias text: textLabel.text
 
     /*!
-       Sub text.
-     */
+        \qmlproperty string subText
+
+        Sub text.
+    */
     property alias subText: subTextLabel.text
 
     ColumnLayout {

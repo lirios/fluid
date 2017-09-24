@@ -34,17 +34,23 @@ Object {
     id: action
 
     /*!
+        \qmlproperty bool enabled
+
         Set to \c false to disable the action in the UI.
      */
     property bool enabled: true
 
     /*!
+        \qmlproperty string iconName
+
         Icon name from the \l{http://google.github.io/material-design-icons/}{Material Design icon collection} or the
         \l{http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html}{freedesktop icon naming specification}.
     */
     property string iconName
 
     /*!
+        \qmlproperty url iconSource
+
         A URL pointing to an image to display as the icon. By default, this is
         a special URL representing the icon named by \l iconName from the Material Design
         icon collection. The icon will be colorized using the specificed color,
@@ -64,21 +70,31 @@ Object {
     property alias shortcut: shortcutItem.sequence
 
     /*!
+        \qmlproperty string text
+
         The text displayed for the action.
     */
     property string text
 
     /*!
+        \qmlproperty string toolTip
+
         The tool tip displayed for the action.
     */
     property string toolTip
 
     /*!
+        \qmlproperty bool visible
+
         Set to \c false to hide the action in the UI.
+
+        This property is \c true by default.
     */
     property bool visible: true
 
     /*!
+        \qmlproperty bool hasDividerAfter
+
         Set to \c true to display a divider after the control bound to this action.
 
         This property is \c false by default.
@@ -86,6 +102,8 @@ Object {
     property bool hasDividerAfter: false
 
     /*!
+        \qmlproperty bool hoverAnimation
+
         Set to \c true to rotate the icon 90 degrees on mouseover.
 
         This property is \c false by default.
@@ -93,6 +111,8 @@ Object {
     property bool hoverAnimation: false
 
     /*!
+        \qmlsignal triggered(var source)
+
         Emitted when a button or menu item bound to this action have been activated.
         Includes the object that triggered the even, if relevant.
 

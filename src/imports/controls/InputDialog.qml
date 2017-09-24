@@ -26,17 +26,22 @@ import Fluid.Controls 1.0 as FluidControls
 
     The dialog is automatically accepted when the Return or Enter key is pressed
     and the input in an acceptable state.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/dialogs.html}{Material Design guidelines}.
 */
 Dialog {
     id: dialog
 
-    /*
+    /*!
+        \qmlproperty TextField textField
+
         Text field.
     */
     property alias textField: textField
 
-    /*
-        \qmlproperty string InputDialog::text
+    /*!
+        \qmlproperty string text
 
         Dialog text.
     */

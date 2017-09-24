@@ -48,7 +48,7 @@ import Fluid.Controls 1.0 as FluidControls
 Page {
     id: page
 
-    /*
+    /*!
       \qmlproperty ActionBar actionBar
 
       The action bar for this page. Use it as a group property to customize
@@ -78,25 +78,31 @@ Page {
     property bool canGoBack: false
 
     /*!
-       This signal is emitted when the back action is triggered or back key is released.
+        \qmlsignal void goBack(var event)
 
-       By default, the page will be popped from the page stack. To change the default
-       behavior, for example to show a confirmation dialog, listen for this signal using
-       \c onGoBack and set \c event.accepted to \c true. To dismiss the page from your
-       dialog without triggering this signal and re-showing the dialog, call
-       \c page.forcePop().
-     */
+        This signal is emitted when the back action is triggered or back key is released.
+
+        By default, the page will be popped from the page stack. To change the default
+        behavior, for example to show a confirmation dialog, listen for this signal using
+        \c onGoBack and set \c event.accepted to \c true. To dismiss the page from your
+        dialog without triggering this signal and re-showing the dialog, call
+        \c page.forcePop().
+    */
     signal goBack(var event)
 
     /*!
-       Pop this page from the page stack. This does nothing if this page is not
-       the current page on the page stack.
+        \qmlmethod void Page::pop(event event, bool force)
 
-       Use \c force to avoid calling the \l goBack signal. This is useful if you
-       use the \l goBack signal to show a confirmation dialog, and want to close
-       the page from your dialog without showing the dialog again. You can also
-       use \c forcePop() as a shortcut to this behavior.
-     */
+        Pop this page from the page stack. This does nothing if this page is not
+        the current page on the page stack.
+
+        Use \c force to avoid calling the \l goBack signal. This is useful if you
+        use the \l goBack signal to show a confirmation dialog, and want to close
+        the page from your dialog without showing the dialog again. You can also
+        use \l Page::forcePop() as a shortcut to this behavior.
+
+        \sa Page::forcePop()
+    */
     function pop(event, force) {
         if (StackView.view.currentItem !== page)
             return false
@@ -114,13 +120,22 @@ Page {
         }
     }
 
+    /*!
+        \qmlmethod void Page::forcePop()
+
+        Force a pop from the page stack.
+    */
     function forcePop() {
         pop(null, true)
     }
 
     /*!
-       Push the specified component onto the page stack.
-     */
+        \qmlmethod void Page::push(Component component, object properties)
+
+        Push the specified component onto the page stack.
+
+        \sa StackView::push()
+    */
     function push(component, properties) {
         return StackView.view.push({item: component, properties: properties});
     }

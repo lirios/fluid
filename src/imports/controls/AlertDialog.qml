@@ -32,6 +32,9 @@ import Fluid.Controls 1.0 as FluidControls
    Here is a short example of usage:
 
    \snippet fluidcontrols-alertdialog.qml file
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/dialogs.html}{Material Design guidelines}.
 */
 Dialog {
     /*!
@@ -40,6 +43,8 @@ Dialog {
     default property alias content: dialogContent.data
 
     /*!
+        \qmlproperty string text
+
         Informative text to display.
     */
     property alias text: dialogLabel.text

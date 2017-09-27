@@ -87,9 +87,25 @@ FluidControls.Page {
     */
     readonly property alias selectedTab: swipeView.currentItem
 
+    /*!
+        \qmlproperty ToolBar tabBar
+
+        Tool bar that contains tabs.
+    */
+    readonly property alias tabBar: tabToolBar
+
+    /*!
+        \qmlproperty TabBar tabs
+
+        Tab bar.
+    */
+    readonly property alias tabs: tabBar
+
     appBar.elevation: 0
 
     header: ToolBar {
+        id: tabToolBar
+
         visible: tabBar.count > 0
 
         Material.elevation: 2

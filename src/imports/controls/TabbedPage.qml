@@ -81,12 +81,11 @@ FluidControls.Page {
     property alias currentIndex: swipeView.currentIndex
 
     /*!
-        \qmlproperty Tab selectedTab
+        \qmlproperty Item selectedTab
 
         The currently selected tab.
     */
-    readonly property Tab selectedTab: count > 0
-                                       ? swipeView.contentChildren[currentIndex] : null
+    readonly property alias selectedTab: swipeView.currentItem
 
     appBar.elevation: 0
 

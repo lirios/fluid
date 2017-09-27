@@ -133,6 +133,7 @@ ToolBar {
         visible: leftAction && leftAction.visible
         enabled: leftAction && leftAction.enabled
         hoverAnimation: leftAction && leftAction.hoverAnimation
+        focusPolicy: Qt.TabFocus
         onClicked: {
             if (leftAction)
                 leftAction.triggered(leftButton)
@@ -185,6 +186,7 @@ ToolBar {
                 visible: appBar.actions[index].visible
                 enabled: appBar.actions[index].enabled
                 hoverAnimation: appBar.actions[index].hoverAnimation
+                focusPolicy: Qt.TabFocus
 
                 onClicked: appBar.actions[index].triggered(actionButton)
             }
@@ -201,6 +203,7 @@ ToolBar {
             onClicked: overflowMenu.open()
 
             visible: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
+            focusPolicy: Qt.TabFocus
 
             Menu {
                 id: overflowMenu

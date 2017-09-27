@@ -109,6 +109,8 @@ FluidControls.Page {
                 horizontalCenter: centered ? parent.horizontalCenter : undefined
             }
 
+            currentIndex: swipeView.currentIndex
+
             Material.accent: appBar.Material.foreground
             Material.background: "transparent"
 
@@ -172,7 +174,7 @@ FluidControls.Page {
      */
     function addTab(tab) {
         swipeView.addItem(tab);
-        tabBar.setCurrentIndex(swipeView.count - 1);
+        swipeView.setCurrentIndex(swipeView.count - 1);
     }
 
     /*!
@@ -182,6 +184,6 @@ FluidControls.Page {
     */
     function removeTab(index) {
         swipeView.removeItem(index);
-        tabBar.decrementCurrentIndex();
+        swipeView.decrementCurrentIndex();
     }
 }

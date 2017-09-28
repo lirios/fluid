@@ -78,7 +78,7 @@ FluidControls.Page {
 
         Index of the currently selected tab.
     */
-    property alias currentIndex: swipeView.currentIndex
+    readonly property alias currentIndex: swipeView.currentIndex
 
     /*!
         \qmlproperty Item selectedTab
@@ -199,6 +199,37 @@ FluidControls.Page {
     */
     function removeTab(index) {
         swipeView.removeItem(index);
+        swipeView.decrementCurrentIndex();
+    }
+
+    /*!
+        \qmlmethod void TabbedPage::setCurrentIndex(int index)
+
+        Select the tab that correspond to \a index.
+    */
+    function setCurrentIndex(index) {
+        swipeView.setCurrentIndex(index);
+    }
+
+    /*!
+        \qmlmethod void TabbedPage::incrementCurrentIndex()
+
+        Increment current index.
+
+        \sa currentIndex
+    */
+    function incrementCurrentIndex() {
+        swipeView.incrementCurrentIndex();
+    }
+
+    /*!
+        \qmlmethod void TabbedPage::decrementCurrentIndex()
+
+        Decrement current index.
+
+        \sa currentIndex
+    */
+    function decrementCurrentIndex() {
         swipeView.decrementCurrentIndex();
     }
 }

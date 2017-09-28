@@ -205,7 +205,7 @@ FluidControls.Page {
     }
 
     /*!
-        \qmlmethod void TabbedPage::getTab(int index)
+        \qmlmethod Tab TabbedPage::getTab(int index)
 
         Return the tab with \a index.
     */

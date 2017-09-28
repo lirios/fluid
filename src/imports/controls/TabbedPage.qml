@@ -171,7 +171,7 @@ FluidControls.Page {
                         iconColor: contentItem.color
                         visible: delegateData.canRemove
 
-                        onClicked: swipeView.removeItem(index)
+                        onClicked: page.removeTab(index)
                     }
                 }
             }

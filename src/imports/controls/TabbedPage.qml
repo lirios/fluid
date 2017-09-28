@@ -130,9 +130,11 @@ FluidControls.Page {
             Material.background: "transparent"
 
             Repeater {
-                model: swipeView.contentChildren
+                model: swipeView.contentChildren.length
                 delegate: TabButton {
-                    text: modelData.title
+                    property var delegateData: swipeView.contentChildren[index]
+
+                    text: delegateData.title
                     implicitWidth: Math.max(background ? background.implicitWidth : 0,
                                                          contentItem.implicitWidth +
                                                          (tabIcon.visible ? tabIcon.width : 0) +
@@ -152,8 +154,8 @@ FluidControls.Page {
                         anchors.left: parent.left
                         anchors.verticalCenter: parent.verticalCenter
 
-                        name: modelData.iconName
-                        source: modelData.iconSource
+                        name: delegateData.iconName
+                        source: delegateData.iconSource
                         visible: status == Image.Ready
                         color: contentItem.color
                     }
@@ -167,7 +169,7 @@ FluidControls.Page {
 
                         iconName: "navigation/close"
                         iconColor: contentItem.color
-                        visible: modelData.canRemove
+                        visible: delegateData.canRemove
 
                         onClicked: swipeView.removeItem(index)
                     }

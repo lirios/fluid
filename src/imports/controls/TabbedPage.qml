@@ -71,7 +71,7 @@ FluidControls.Page {
 
         Number of tabs.
     */
-    property alias count: swipeView.count
+    readonly property alias count: swipeView.count
 
     /*!
         \qmlproperty int currentIndex

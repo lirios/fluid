@@ -205,6 +205,15 @@ FluidControls.Page {
     }
 
     /*!
+        \qmlmethod void TabbedPage::getTab(int index)
+
+        Return the tab with \a index.
+    */
+    function getTab(index) {
+        return swipeView.itemAt(index);
+    }
+
+    /*!
         \qmlmethod void TabbedPage::setCurrentIndex(int index)
 
         Select the tab that correspond to \a index.

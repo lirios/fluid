@@ -63,7 +63,15 @@ ApplicationWindow {
        The color of the status bar or window decorations, if the current
        platform supports it.
      */
-    property alias decorationColor: platformExtensions.decorationColor
+    property alias decorationColor: windowDecoration.color
+
+    /*!
+        \qmlproperty Theme decorationTheme
+
+        Theme of the status bar or window decoration, if the current
+        platform supports it.
+    */
+    property alias decorationTheme: windowDecoration.theme
 
     /*!
         \qmlproperty AppToolBar appBar
@@ -100,9 +108,9 @@ ApplicationWindow {
         onReplaced: appBar.replace(page)
     }
 
-    FluidCore.PlatformExtensions {
-        id: platformExtensions
+    FluidCore.WindowDecoration {
+        id: windowDecoration
         window: window
-        decorationColor: Material.shade(window.Material.primaryColor, Material.Shade700)
+        color: Material.shade(window.Material.primaryColor, Material.Shade700)
     }
 }

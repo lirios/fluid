@@ -28,6 +28,7 @@ arch:
     - qt5-declarative
     - qt5-quickcontrols2
     - qt5-graphicaleffects
+    - qt5-wayland
     - qt5-svg
     - qt5-doc
     - qt5-tools

@@ -5,6 +5,12 @@ LiriQmlPlugin {
     pluginPath: "Fluid/Core"
 
     Depends { name: "Qt"; submodules: ["svg", "gui"]; versionAtLeast: project.minimumQtVersion }
+    Depends {
+        condition: qbs.targetOS.contains("linux")
+        name: "Qt"
+        submodules: ["waylandclient", "waylandclient-private"]
+        versionAtLeast: project.minimumQtVersion
+    }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 

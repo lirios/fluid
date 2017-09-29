@@ -27,6 +27,10 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
  * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
 
+Only for Linux builds:
+
+ * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git)
+
 ## Build
 
 Qbs is a new build system that is much easier to use compared to qmake or CMake.

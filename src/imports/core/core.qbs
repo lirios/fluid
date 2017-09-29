@@ -10,6 +10,7 @@ LiriQmlPlugin {
         name: "Qt"
         submodules: ["waylandclient", "waylandclient-private"]
         versionAtLeast: project.minimumQtVersion
+        required: false
     }
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])

@@ -27,9 +27,9 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
  * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
 
-Only for Linux builds:
+Optionally for Linux builds:
 
- * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git)
+ * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git) (for window decoration color)
 
 ## Build
 

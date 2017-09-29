@@ -15,9 +15,9 @@
 #include <QGuiApplication>
 #include <QPlatformSurfaceEvent>
 #include <QTimer>
-#include <qpa/qplatformwindow.h>
 
 #ifdef QT_WAYLANDCLIENT_LIB
+#include <qpa/qplatformwindow.h>
 #include <QtWaylandClient/private/qwaylandwindow_p.h>
 #include <QtWaylandClient/private/qwaylandabstractdecoration_p.h>
 #endif

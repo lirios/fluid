@@ -4,7 +4,7 @@ Project {
     name: "Deployment"
 
     references: [
-        "android.qbs",
+        //"android.qbs",
         "windows.qbs",
         "linux.qbs",
     ]

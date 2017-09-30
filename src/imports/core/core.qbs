@@ -18,5 +18,4 @@ LiriQmlPlugin {
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
     files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
-    excludeFiles: ["registerplugins.cpp"]
 }

@@ -5,6 +5,7 @@ Project {
     name: "Demo"
 
     QtGuiApplication {
+        readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
         readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
         name: "fluid-demo"
@@ -14,7 +15,6 @@ Project {
 
         Depends { name: "lirideployment" }
         Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: project.minimumQtVersion }
-        Depends { name: "bundle"; condition: qbs.targetOS.contains("macos"); required: false }
         Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
         Properties {
@@ -55,8 +55,14 @@ Project {
 
         Group {
             qbs.install: true
-            qbs.installDir: bundle.isBundle ? "Applications" : lirideployment.binDir
-            fileTagsFilter: bundle.isBundle ? ["bundle.content"] : ["application"]
+            qbs.installDir: {
+                if (qbs.targetOS.contains("linux"))
+                    return lirideployment.binDir;
+                else
+                    return "";
+            }
+            qbs.installSourceBase: isBundle ? product.buildDirectory : ""
+            fileTagsFilter: isBundle ? ["bundle.content"] : ["application"]
         }
     }
 

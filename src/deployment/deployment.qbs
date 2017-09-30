@@ -5,7 +5,6 @@ Project {
     condition: project.deploymentEnabled
 
     references: [
-        //"android.qbs",
         "windows.qbs",
         "linux.qbs",
     ]

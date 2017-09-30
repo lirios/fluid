@@ -6,6 +6,13 @@ LiriQmlPlugin {
     pluginPath: "Fluid/Controls"
 
     Depends { name: "fluidcoreplugin" }
+    Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
+
+    Properties {
+        condition: qbs.targetOS.contains("android")
+        architectures: !qbs.architecture ? ["x86", "armv7a"] : undefined
+        Android.ndk.appStl: "gnustl_shared"
+    }
 
     bundle.isBundle: false
 

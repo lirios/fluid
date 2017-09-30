@@ -7,6 +7,8 @@ LiriQmlPlugin {
 
     Depends { name: "fluidcoreplugin" }
 
+    bundle.isBundle: false
+
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
     files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]

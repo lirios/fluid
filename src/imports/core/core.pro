@@ -4,7 +4,7 @@ IMPORT_VERSION = 1.0
 
 QT += qml quick svg
 
-linux {
+linux:!android {
     QT += waylandclient waylandclient-private
 }
 

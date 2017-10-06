@@ -19,7 +19,7 @@ Project {
 
     property bool deploymentEnabled: false
 
-    minimumQbsVersion: "1.6"
+    minimumQbsVersion: "1.9.0"
 
     qbsSearchPaths: ["qbs/shared"]
 

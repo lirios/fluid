@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -11,6 +12,8 @@
  *
  * $END_LICENSE$
  */
+
+#include <QtMath>
 
 #include "device.h"
 
@@ -24,9 +27,9 @@ Device::Device(QObject *parent)
 
 Device::FormFactor Device::formFactor() const
 {
-    float diagonal = calculateDiagonal();
+    qreal diagonal = calculateDiagonal();
 
-    if (diagonal >= 3.5 && diagonal < 5) {
+    if (diagonal >= 3.5 && diagonal < 5.0) {
         // iPhone 1st generation to phablet
         return Device::Phone;
     } else if (diagonal >= 5 && diagonal < 6.5) {
@@ -144,9 +147,9 @@ void Device::screenChanged()
     emit geometryChanged();
 }
 
-float Device::calculateDiagonal() const
+qreal Device::calculateDiagonal() const
 {
-    return sqrt(pow((m_screen->physicalSize().width()), 2)
-                + pow((m_screen->physicalSize().height()), 2))
-        * 0.039370;
+    return qSqrt(qPow((m_screen->physicalSize().width()), 2) +
+                 qPow((m_screen->physicalSize().height()), 2))
+            * 0.039370;
 }

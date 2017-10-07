@@ -61,7 +61,7 @@ private Q_SLOTS:
     void screenChanged();
 
 private:
-    float calculateDiagonal() const;
+    qreal calculateDiagonal() const;
 
     QScreen *m_screen;
 };

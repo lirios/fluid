@@ -24,6 +24,9 @@ import Fluid.Controls 1.0
     \ingroup fluidcontrols
 
     \brief Shows a placeholder icon and text.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/patterns/empty-states.html#empty-states-avoiding-completely-empty-states}{Material Design guidelines}.
 */
 Item {
     /*!

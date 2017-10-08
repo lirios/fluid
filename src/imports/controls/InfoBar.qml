@@ -42,6 +42,9 @@ import Fluid.Core 1.0
        }
    }
    \endcode
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/snackbars-toasts.html}{Material Design guidelines}.
 */
 Rectangle {
     id: infoBar

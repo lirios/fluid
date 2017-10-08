@@ -24,6 +24,9 @@ import QtQuick.Controls.Material 2.0
    \ingroup fluidcontrols
 
    \brief Subheaders are special list tiles that delineate distinct sections of a list or grid list.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/subheaders.html}{Material Design guidelines}.
  */
 ItemDelegate {
     id: listItem

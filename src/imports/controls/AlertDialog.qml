@@ -29,9 +29,7 @@ import Fluid.Controls 1.0 as FluidControls
     Most alert don't need a title and they summarize a decision in a sentence or two
     by either asking a question or making a statement related to the action buttons.
 
-   Here is a short example of usage:
-
-   \snippet fluidcontrols-alertdialog.qml file
+    \snippet fluidcontrols-alertdialog.qml file
 
     For more information you can read the
     \l{https://material.io/guidelines/components/dialogs.html}{Material Design guidelines}.

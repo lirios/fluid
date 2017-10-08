@@ -26,6 +26,9 @@ import Fluid.Effects 1.0
 
    This component is useful for including in Material Design-specific components, which should be implemented using the +material file selector. Eventually this should be upstreamed to QtQuick
    Controls 2.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/motion/material-motion.html#material-motion-how-does-material-move}{Material Design guidelines}.
  */
 MouseArea {
     id: ripple

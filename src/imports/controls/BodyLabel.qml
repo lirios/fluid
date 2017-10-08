@@ -25,14 +25,10 @@ import Fluid.Core 1.0 as FluidCore
 
     Text label for the Material Design body text style.
 
-    \code
-    import QtQuick 2.0
-    import Fluid.Controls 1.0 as FluidControls
+    \snippet fluidcontrols-bodylabel.qml file
 
-    FluidControls.BodyLabel {
-        text: "Text to display"
-    }
-    \endcode
+    For more information you can read the
+    \l{https://material.io/guidelines/style/typography.html}{Material Design guidelines}.
 */
 Label {
     /*!

@@ -45,6 +45,9 @@ import Fluid.Controls 1.0
        }
    }
    \endcode
+
+    For more information you can read the
+    \l{https://material.io/guidelines/patterns/navigation-drawer.html}{Material Design guidelines}.
  */
 Pane {
     id: sidebar

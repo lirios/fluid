@@ -27,6 +27,9 @@ import Fluid.Controls 1.0 as FluidControls
    \ingroup fluidcontrols
 
    \brief Application tool bar.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/layout/structure.html#structure-app-bar}{Material Design guidelines}.
  */
 ToolBar {
     id: appBar

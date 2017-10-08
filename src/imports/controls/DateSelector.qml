@@ -50,8 +50,10 @@ import QtQuick.Controls.Material 2.1
             }
         }
     }
-
     \endcode
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
 Item {
     id: dateSelector

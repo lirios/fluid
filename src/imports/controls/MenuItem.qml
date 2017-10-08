@@ -25,6 +25,9 @@ import Fluid.Controls 1.0 as FluidControls
     \brief Menu item with an \l Icon.
 
     This component will be deprecated as soon as Qt 5.10 is released.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/menus.html#menus-menu-items}{Material Design guidelines}.
 */
 MenuItem {
     id: control

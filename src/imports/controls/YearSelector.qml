@@ -45,8 +45,10 @@ import Fluid.Controls 1.0 as FluidControls
             }
         }
     }
-
     \endcode
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
 Item {
     id: yearSelector

@@ -33,6 +33,8 @@ import Fluid.Effects 1.0 as FluidEffects
 
     It is a push button with rounded corners and an icon in the center.
 
+    \snippet fluidcontrols-fab.qml file
+
     For more information you can read the
     \l{https://material.io/guidelines/components/buttons-floating-action-button.html}{Material Design guidelines}.
 */

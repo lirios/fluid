@@ -25,7 +25,7 @@ import Fluid.Controls 1.0
 
   \brief Provides a searchbar, that supports autocompletion and displays search results using cards.
 */
-Flickable {
+Item {
     id: searchBar
 
     /*!
@@ -81,6 +81,11 @@ Flickable {
       Whether the SearchBar is persistent or expandable
     */
     property bool persistent: false
+
+    /*!
+      The model containing the search results
+    */
+    property var searchResults: ListModel {}
 
     /*!
       Is emitted, when the user searches for a query. The \a query parameter contains the search query as string. Use this signal to provide search results.
@@ -203,7 +208,7 @@ Flickable {
     }
     ListView {
         id: suggestionsListView
-        visible: searchResults.count === 0
+        visible: searchResults.count === 0 && searchSuggestions.count !== 0
         anchors.top: parent.bottom
         x: searchCard.x
         width: cardWidth

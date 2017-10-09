@@ -20,9 +20,6 @@ import Fluid.Controls 1.0 as FluidControls
 Item {
     FluidControls.SearchBar {
         id: searchbar
-        ListModel {
-            id: searchResults
-        }
         onSearchTextChanged: {
             if ("fluid".startsWith(searchText)) {
                 searchSuggestions.append({text: "fluid"});
@@ -42,12 +39,12 @@ Item {
     }
     ListView {
         id: resultsListView
-        visible: searchResults.count != 0
+        visible: searchbar.searchResults.count !== 0
         anchors.top: searchbar.bottom
         x: searchbar.x
         width: parent.width
         height: parent.height
-        model: searchResults
+        model: searchbar.searchResults
         clip: true
         delegate: Item {
             width: parent.width

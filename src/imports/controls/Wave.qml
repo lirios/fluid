@@ -32,7 +32,7 @@ Item {
     /*!
       Whether wave is open.
     */
-    property bool open
+    property bool open: false
     /*!
       The current size of the wave
     */
@@ -83,6 +83,7 @@ Item {
         wave.open = false;
     }
 
+    visible: open
     layer.enabled: true
     layer.effect: OpacityMask {
         maskSource: Item {

@@ -5,13 +5,6 @@ LiriQmlPlugin {
     pluginPath: "Fluid/Core"
 
     Depends { name: "Qt"; submodules: ["svg", "gui"]; versionAtLeast: project.minimumQtVersion }
-    Depends {
-        condition: qbs.targetOS.contains("linux")
-        name: "Qt"
-        submodules: ["waylandclient", "waylandclient-private"]
-        versionAtLeast: project.minimumQtVersion
-        required: false
-    }
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
     Properties {

@@ -4,10 +4,6 @@ IMPORT_VERSION = 1.0
 
 QT += qml quick svg
 
-linux:!android {
-    QT += waylandclient waylandclient-private
-}
-
 HEADERS += \
     $$PWD/clipboard.h \
     $$PWD/device.h \

@@ -16,12 +16,6 @@
 #include <QPlatformSurfaceEvent>
 #include <QTimer>
 
-#ifdef QT_WAYLANDCLIENT_LIB
-#include <qpa/qplatformwindow.h>
-#include <QtWaylandClient/private/qwaylandwindow_p.h>
-#include <QtWaylandClient/private/qwaylandabstractdecoration_p.h>
-#endif
-
 #include "windowdecoration.h"
 
 WindowDecoration::WindowDecoration(QObject *parent)
@@ -117,27 +111,16 @@ void WindowDecoration::updateDecorationColor()
     if (!platformWindow)
         return;
 
-#ifdef QT_WAYLANDCLIENT_LIB
+#ifdef Q_OS_LINUX
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
-        QtWaylandClient::QWaylandWindow *waylandWindow = static_cast<QtWaylandClient::QWaylandWindow *>(m_window->handle());
-        if (!waylandWindow)
-            return;
-
-        QtWaylandClient::QWaylandAbstractDecoration *decoration = waylandWindow->decoration();
-        if (!decoration) {
-            // The decoration was not already created, wait a little bit
-            QTimer::singleShot(10, this, &WindowDecoration::updateDecorationColor);
-            return;
-        }
-
         // Calculate text color automatically based on the decoration color
         const qreal alpha = 1.0 - (0.299 * m_color.redF() + 0.587 * m_color.greenF() + 0.114 * m_color.blueF());
         const bool isDark = m_color.alphaF() > 0.0 && alpha >= 0.3;
         const QColor textColor = isDark ? QColor(255, 255, 255, 255) : QColor(0, 0, 0, 221);
 
-        decoration->setProperty("backgroundColor", m_color);
-        decoration->setProperty("textColor", textColor);
-        decoration->setProperty("iconColor", textColor);
+        // Set properties
+        m_window->setProperty("__material_decoration_backgroundColor", m_color);
+        m_window->setProperty("__material_decoration_foregroundColor", textColor);
     }
 #endif
 }

@@ -226,6 +226,22 @@ Module {
         }
     }
     Component {
+        name: "WindowDecoration"
+        prototype: "QObject"
+        exports: ["Fluid.Core/WindowDecoration 1.0"]
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "Theme"
+            values: {
+                "Light": 0,
+                "Dark": 1
+            }
+        }
+        Property { name: "window"; type: "QWindow"; isPointer: true }
+        Property { name: "theme"; type: "Theme" }
+        Property { name: "color"; type: "QColor" }
+    }
+    Component {
         prototype: "QObject"
         name: "Utils 1.0"
         exports: ["Utils 1.0"]

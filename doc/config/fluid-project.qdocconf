@@ -12,10 +12,9 @@ indexes += \
     $QT_INSTALL_DOCS/qtgraphicaleffects/qtgraphicaleffects.index
 
 depends = qtcore qtgui qtdoc qtqml qtquick qtquickcontrols2
-headerdirs += ../../src/fluid
+headerdirs += ../../src
 sourcedirs += \
     ../src \
-    ../../src/fluid \
     ../../src/imports/controls \
     ../../src/imports/core \
     ../../src/imports/effects \

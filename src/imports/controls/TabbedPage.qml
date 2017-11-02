@@ -126,4 +126,8 @@ FluidControls.Page {
         swipeView.addItem(tab);
         __private.currentTabIndex = swipeView.count - 1;
     }
+
+    function focusTab(index) {
+        __private.currentTabIndex = index ;
+    }
 }

@@ -178,7 +178,7 @@ Item {
                 }
                 Label {
                     text: searchPlaceHolder
-                    visible: searchTextField.text === ""
+                    visible: searchTextField.displayText === ""
                     anchors.fill: searchTextField
                     font.pixelSize: searchTextField.font.pixelSize
                     color: Material.color(Material.Grey, Material.Shade400)
@@ -186,7 +186,7 @@ Item {
 
                 IconButton {
                     id: resetSearchButton
-                    opacity: searchTextField.text !== ""
+                    opacity: searchTextField.displayText !== ""
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right

@@ -72,6 +72,18 @@ ToolBar {
     property int elevation: 2
 
     /*!
+       A list of widgets to show in the Appbar. These widgets will be shown
+       in the same row as the action items which are anchored to the right 
+       , there is no provision of overflowing hence take care to show a limited 
+       number of widgets only.
+
+       When used with a page, the headerwidgets will be set to the page's \l Page::headerwidgets
+       property, so set that instead of changing this directly.
+     */
+
+    property list<Component> headerwidgets
+
+    /*!
        \internal
        The size of the left icon and the action icons.
     */
@@ -170,6 +182,16 @@ ToolBar {
         height: appBar.height
 
         spacing: 24 - 2 * leftButton.margin
+
+        Repeater {
+                model: appBar.headerwidgets.length
+
+                delegate: Loader {
+                   id: widgetItem
+                   sourceComponent: appBar.headerwidgets[index]
+                   anchors.verticalCenter: parent.verticalCenter
+                }
+        }
 
         Repeater {
             model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0

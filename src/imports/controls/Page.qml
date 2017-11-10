@@ -63,6 +63,11 @@ Page {
     property alias actions: appBar.actions
 
     /*!
+       The page's headerwidgets shown in the appbar bar.
+     */
+    property alias headerwidgets: appBar.headerwidgets
+
+    /*!
        The action shown to the left of the title in the action bar. By default,
        this is a back button which shows when there is a page behind the current
        page in the page stack. However, you can replace it with your own action,

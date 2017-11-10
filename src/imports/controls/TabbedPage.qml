@@ -128,6 +128,7 @@ FluidControls.Page {
 
             Material.accent: appBar.Material.foreground
             Material.background: "transparent"
+            
 
             Repeater {
                 model: swipeView.contentChildren.length
@@ -242,5 +243,9 @@ FluidControls.Page {
     */
     function decrementCurrentIndex() {
         swipeView.decrementCurrentIndex();
+    }
+
+    function focusTab(index) {
+        __private.currentTabIndex = index ;
     }
 }

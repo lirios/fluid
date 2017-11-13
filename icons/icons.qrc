@@ -207,6 +207,18 @@
         <file>action/watch_later.svg</file>
         <file>action/work.svg</file>
         <file>action/youtube_searched_for.svg</file>
+        <file>action/camera_enhance.svg</file>
+        <file>action/eject.svg</file>
+        <file>action/gif.svg</file>
+        <file>action/help_outline.svg</file>
+        <file>action/offline_pin.svg</file>
+        <file>action/reorder.svg</file>
+        <file>action/zoom_in.svg</file>
+        <file>action/zoom_out.svg</file>
+        <file>alert/add_alert.svg</file>
+        <file>alert/error.svg</file>
+        <file>alert/error_outline.svg</file>
+        <file>alert/warning.svg</file>
         <file>av/add_to_queue.svg</file>
         <file>av/airplay.svg</file>
         <file>av/album.svg</file>
@@ -286,6 +298,8 @@
         <file>av/volume_up.svg</file>
         <file>av/web.svg</file>
         <file>av/web_asset.svg</file>
+        <file>av/hd.svg</file>
+        <file>av/sort_by_alpha.svg</file>
         <file>communication/business.svg</file>
         <file>communication/call.svg</file>
         <file>communication/call_end.svg</file>
@@ -332,6 +346,51 @@
         <file>communication/textsms.svg</file>
         <file>communication/voicemail.svg</file>
         <file>communication/vpn_key.svg</file>
+        <file>communication/phonelink_erase.svg</file>
+        <file>communication/phonelink_lock.svg</file>
+        <file>communication/phonelink_ring.svg</file>
+        <file>communication/phonelink_setup.svg</file>
+        <file>content/add.svg</file>
+        <file>content/add_box.svg</file>
+        <file>content/add_circle.svg</file>
+        <file>content/add_circle_outline.svg</file>
+        <file>content/archive.svg</file>
+        <file>content/backspace.svg</file>
+        <file>content/block.svg</file>
+        <file>content/clear.svg</file>
+        <file>content/content_copy.svg</file>
+        <file>content/content_cut.svg</file>
+        <file>content/content_paste.svg</file>
+        <file>content/create.svg</file>
+        <file>content/delete_sweep.svg</file>
+        <file>content/drafts.svg</file>
+        <file>content/filter_list.svg</file>
+        <file>content/flag.svg</file>
+        <file>content/forward.svg</file>
+        <file>content/gesture.svg</file>
+        <file>content/inbox.svg</file>
+        <file>content/link.svg</file>
+        <file>content/low_priority.svg</file>
+        <file>content/mail.svg</file>
+        <file>content/markunread.svg</file>
+        <file>content/move_to_inbox.svg</file>
+        <file>content/next_week.svg</file>
+        <file>content/redo.svg</file>
+        <file>content/remove.svg</file>
+        <file>content/remove_circle.svg</file>
+        <file>content/remove_circle_outline.svg</file>
+        <file>content/reply.svg</file>
+        <file>content/reply_all.svg</file>
+        <file>content/report.svg</file>
+        <file>content/save.svg</file>
+        <file>content/select_all.svg</file>
+        <file>content/send.svg</file>
+        <file>content/sort.svg</file>
+        <file>content/text_format.svg</file>
+        <file>content/unarchive.svg</file>
+        <file>content/undo.svg</file>
+        <file>content/weekend.svg</file>
+        <file>content/font_download.svg</file>
         <file>device/access_alarm.svg</file>
         <file>device/access_alarms.svg</file>
         <file>device/access_time.svg</file>
@@ -411,6 +470,85 @@
         <file>device/widgets.svg</file>
         <file>device/wifi_lock.svg</file>
         <file>device/wifi_tethering.svg</file>
+        <file>device/signal_wifi_statusbar_1_bar.svg</file>
+        <file>device/signal_wifi_statusbar_2_bar.svg</file>
+        <file>device/signal_wifi_statusbar_3_bar.svg</file>
+        <file>device/signal_wifi_statusbar_4_bar.svg</file>
+        <file>device/signal_wifi_statusbar_connected_no_internet_1.svg</file>
+        <file>device/signal_wifi_statusbar_connected_no_internet_2.svg</file>
+        <file>device/signal_wifi_statusbar_connected_no_internet.svg</file>
+        <file>device/signal_wifi_statusbar_connected_no_internet_3.svg</file>
+        <file>device/signal_wifi_statusbar_connected_no_internet_4.svg</file>
+        <file>device/signal_wifi_statusbar_not_connected.svg</file>
+        <file>device/signal_wifi_statusbar_null.svg</file>
+        <file>editor/attach_file.svg</file>
+        <file>editor/attach_money.svg</file>
+        <file>editor/border_all.svg</file>
+        <file>editor/border_bottom.svg</file>
+        <file>editor/border_clear.svg</file>
+        <file>editor/border_color.svg</file>
+        <file>editor/border_horizontal.svg</file>
+        <file>editor/border_inner.svg</file>
+        <file>editor/border_left.svg</file>
+        <file>editor/border_outer.svg</file>
+        <file>editor/border_right.svg</file>
+        <file>editor/border_style.svg</file>
+        <file>editor/border_top.svg</file>
+        <file>editor/border_vertical.svg</file>
+        <file>editor/bubble_chart.svg</file>
+        <file>editor/drag_handle.svg</file>
+        <file>editor/format_align_center.svg</file>
+        <file>editor/format_align_justify.svg</file>
+        <file>editor/format_align_left.svg</file>
+        <file>editor/format_align_right.svg</file>
+        <file>editor/format_bold.svg</file>
+        <file>editor/format_clear.svg</file>
+        <file>editor/format_color_fill.svg</file>
+        <file>editor/format_color_reset.svg</file>
+        <file>editor/format_color_text.svg</file>
+        <file>editor/format_indent_decrease.svg</file>
+        <file>editor/format_indent_increase.svg</file>
+        <file>editor/format_italic.svg</file>
+        <file>editor/format_line_spacing.svg</file>
+        <file>editor/format_list_bulleted.svg</file>
+        <file>editor/format_list_numbered.svg</file>
+        <file>editor/format_paint.svg</file>
+        <file>editor/format_quote.svg</file>
+        <file>editor/format_shapes.svg</file>
+        <file>editor/format_size.svg</file>
+        <file>editor/format_strikethrough.svg</file>
+        <file>editor/format_textdirection_l_to_r.svg</file>
+        <file>editor/format_textdirection_r_to_l.svg</file>
+        <file>editor/format_underlined.svg</file>
+        <file>editor/functions.svg</file>
+        <file>editor/highlight.svg</file>
+        <file>editor/insert_chart.svg</file>
+        <file>editor/insert_comment.svg</file>
+        <file>editor/insert_drive_file.svg</file>
+        <file>editor/insert_emoticon.svg</file>
+        <file>editor/insert_invitation.svg</file>
+        <file>editor/insert_link.svg</file>
+        <file>editor/insert_photo.svg</file>
+        <file>editor/linear_scale.svg</file>
+        <file>editor/merge_type.svg</file>
+        <file>editor/mode_comment.svg</file>
+        <file>editor/mode_edit.svg</file>
+        <file>editor/monetization_on.svg</file>
+        <file>editor/multiline_chart.svg</file>
+        <file>editor/pie_chart.svg</file>
+        <file>editor/pie_chart_outlined.svg</file>
+        <file>editor/publish.svg</file>
+        <file>editor/short_text.svg</file>
+        <file>editor/show_chart.svg</file>
+        <file>editor/space_bar.svg</file>
+        <file>editor/strikethrough_s.svg</file>
+        <file>editor/text_fields.svg</file>
+        <file>editor/title.svg</file>
+        <file>editor/vertical_align_bottom.svg</file>
+        <file>editor/vertical_align_center.svg</file>
+        <file>editor/vertical_align_top.svg</file>
+        <file>editor/wrap_text.svg</file>
+        <file>editor/money_off.svg</file>
         <file>file/attachment.svg</file>
         <file>file/cloud.svg</file>
         <file>file/cloud_circle.svg</file>
@@ -425,6 +563,54 @@
         <file>file/folder.svg</file>
         <file>file/folder_open.svg</file>
         <file>file/folder_shared.svg</file>
+        <file>hardware/cast.svg</file>
+        <file>hardware/cast_connected.svg</file>
+        <file>hardware/computer.svg</file>
+        <file>hardware/desktop_mac.svg</file>
+        <file>hardware/desktop_windows.svg</file>
+        <file>hardware/developer_board.svg</file>
+        <file>hardware/devices_other.svg</file>
+        <file>hardware/dock.svg</file>
+        <file>hardware/gamepad.svg</file>
+        <file>hardware/headset.svg</file>
+        <file>hardware/headset_mic.svg</file>
+        <file>hardware/keyboard.svg</file>
+        <file>hardware/keyboard_arrow_down.svg</file>
+        <file>hardware/keyboard_arrow_left.svg</file>
+        <file>hardware/keyboard_arrow_right.svg</file>
+        <file>hardware/keyboard_arrow_up.svg</file>
+        <file>hardware/keyboard_backspace.svg</file>
+        <file>hardware/keyboard_capslock.svg</file>
+        <file>hardware/keyboard_hide.svg</file>
+        <file>hardware/keyboard_return.svg</file>
+        <file>hardware/keyboard_tab.svg</file>
+        <file>hardware/keyboard_voice.svg</file>
+        <file>hardware/laptop.svg</file>
+        <file>hardware/laptop_chromebook.svg</file>
+        <file>hardware/laptop_mac.svg</file>
+        <file>hardware/laptop_windows.svg</file>
+        <file>hardware/memory.svg</file>
+        <file>hardware/mouse.svg</file>
+        <file>hardware/phone_android.svg</file>
+        <file>hardware/phone_iphone.svg</file>
+        <file>hardware/phonelink.svg</file>
+        <file>hardware/phonelink_off.svg</file>
+        <file>hardware/power_input.svg</file>
+        <file>hardware/router.svg</file>
+        <file>hardware/scanner.svg</file>
+        <file>hardware/security.svg</file>
+        <file>hardware/sim_card.svg</file>
+        <file>hardware/smartphone.svg</file>
+        <file>hardware/speaker.svg</file>
+        <file>hardware/speaker_group.svg</file>
+        <file>hardware/tablet.svg</file>
+        <file>hardware/tablet_android.svg</file>
+        <file>hardware/tablet_mac.svg</file>
+        <file>hardware/toys.svg</file>
+        <file>hardware/tv.svg</file>
+        <file>hardware/videogame_asset.svg</file>
+        <file>hardware/watch.svg</file>
+        <file>hardware/device_hub.svg</file>
         <file>image/add_a_photo.svg</file>
         <file>image/add_to_photos.svg</file>
         <file>image/adjust.svg</file>
@@ -575,6 +761,11 @@
         <file>image/wb_incandescent.svg</file>
         <file>image/wb_iridescent.svg</file>
         <file>image/wb_sunny.svg</file>
+        <file>image/collections_bookmark.svg</file>
+        <file>image/photo_size_select_actual.svg</file>
+        <file>image/photo_size_select_large.svg</file>
+        <file>image/photo_size_select_small.svg</file>
+        <file>image/vignette.svg</file>
         <file>maps/add_location.svg</file>
         <file>maps/beenhere.svg</file>
         <file>maps/directions.svg</file>
@@ -643,6 +834,33 @@
         <file>maps/tram.svg</file>
         <file>maps/transfer_within_a_station.svg</file>
         <file>maps/zoom_out_map.svg</file>
+        <file>navigation/apps.svg</file>
+        <file>navigation/arrow_back.svg</file>
+        <file>navigation/arrow_downward.svg</file>
+        <file>navigation/arrow_drop_down.svg</file>
+        <file>navigation/arrow_drop_down_circle.svg</file>
+        <file>navigation/arrow_drop_up.svg</file>
+        <file>navigation/arrow_forward.svg</file>
+        <file>navigation/arrow_upward.svg</file>
+        <file>navigation/cancel.svg</file>
+        <file>navigation/check.svg</file>
+        <file>navigation/chevron_left.svg</file>
+        <file>navigation/chevron_right.svg</file>
+        <file>navigation/close.svg</file>
+        <file>navigation/expand_less.svg</file>
+        <file>navigation/expand_more.svg</file>
+        <file>navigation/first_page.svg</file>
+        <file>navigation/fullscreen.svg</file>
+        <file>navigation/fullscreen_exit.svg</file>
+        <file>navigation/last_page.svg</file>
+        <file>navigation/menu.svg</file>
+        <file>navigation/more_horiz.svg</file>
+        <file>navigation/more_vert.svg</file>
+        <file>navigation/refresh.svg</file>
+        <file>navigation/subdirectory_arrow_left.svg</file>
+        <file>navigation/subdirectory_arrow_right.svg</file>
+        <file>navigation/unfold_less.svg</file>
+        <file>navigation/unfold_more.svg</file>
         <file>notification/adb.svg</file>
         <file>notification/airline_seat_flat.svg</file>
         <file>notification/airline_seat_flat_angled.svg</file>
@@ -697,6 +915,25 @@
         <file>notification/vpn_lock.svg</file>
         <file>notification/wc.svg</file>
         <file>notification/wifi.svg</file>
+        <file>places/ac_unit.svg</file>
+        <file>places/airport_shuttle.svg</file>
+        <file>places/all_inclusive.svg</file>
+        <file>places/beach_access.svg</file>
+        <file>places/business_center.svg</file>
+        <file>places/casino.svg</file>
+        <file>places/child_care.svg</file>
+        <file>places/child_friendly.svg</file>
+        <file>places/fitness_center.svg</file>
+        <file>places/free_breakfast.svg</file>
+        <file>places/golf_course.svg</file>
+        <file>places/hot_tub.svg</file>
+        <file>places/kitchen.svg</file>
+        <file>places/pool.svg</file>
+        <file>places/room_service.svg</file>
+        <file>places/rv_hookup.svg</file>
+        <file>places/smoke_free.svg</file>
+        <file>places/smoking_rooms.svg</file>
+        <file>places/spa.svg</file>
         <file>social/cake.svg</file>
         <file>social/domain.svg</file>
         <file>social/group.svg</file>
@@ -732,191 +969,9 @@
         <file>toggle/radio_button_checked.svg</file>
         <file>toggle/radio_button_unchecked.svg</file>
         <file>toggle/star_half.svg</file>
-        <file>alert/add_alert.svg</file>
-        <file>alert/error.svg</file>
-        <file>alert/error_outline.svg</file>
-        <file>alert/warning.svg</file>
-        <file>content/add.svg</file>
-        <file>content/add_box.svg</file>
-        <file>content/add_circle.svg</file>
-        <file>content/add_circle_outline.svg</file>
-        <file>content/archive.svg</file>
-        <file>content/backspace.svg</file>
-        <file>content/block.svg</file>
-        <file>content/clear.svg</file>
-        <file>content/content_copy.svg</file>
-        <file>content/content_cut.svg</file>
-        <file>content/content_paste.svg</file>
-        <file>content/create.svg</file>
-        <file>content/delete_sweep.svg</file>
-        <file>content/drafts.svg</file>
-        <file>content/filter_list.svg</file>
-        <file>content/flag.svg</file>
-        <file>content/forward.svg</file>
-        <file>content/gesture.svg</file>
-        <file>content/inbox.svg</file>
-        <file>content/link.svg</file>
-        <file>content/low_priority.svg</file>
-        <file>content/mail.svg</file>
-        <file>content/markunread.svg</file>
-        <file>content/move_to_inbox.svg</file>
-        <file>content/next_week.svg</file>
-        <file>content/redo.svg</file>
-        <file>content/remove.svg</file>
-        <file>content/remove_circle.svg</file>
-        <file>content/remove_circle_outline.svg</file>
-        <file>content/reply.svg</file>
-        <file>content/reply_all.svg</file>
-        <file>content/report.svg</file>
-        <file>content/save.svg</file>
-        <file>content/select_all.svg</file>
-        <file>content/send.svg</file>
-        <file>content/sort.svg</file>
-        <file>content/text_format.svg</file>
-        <file>content/unarchive.svg</file>
-        <file>content/undo.svg</file>
-        <file>content/weekend.svg</file>
-        <file>editor/attach_file.svg</file>
-        <file>editor/attach_money.svg</file>
-        <file>editor/border_all.svg</file>
-        <file>editor/border_bottom.svg</file>
-        <file>editor/border_clear.svg</file>
-        <file>editor/border_color.svg</file>
-        <file>editor/border_horizontal.svg</file>
-        <file>editor/border_inner.svg</file>
-        <file>editor/border_left.svg</file>
-        <file>editor/border_outer.svg</file>
-        <file>editor/border_right.svg</file>
-        <file>editor/border_style.svg</file>
-        <file>editor/border_top.svg</file>
-        <file>editor/border_vertical.svg</file>
-        <file>editor/bubble_chart.svg</file>
-        <file>editor/drag_handle.svg</file>
-        <file>editor/format_align_center.svg</file>
-        <file>editor/format_align_justify.svg</file>
-        <file>editor/format_align_left.svg</file>
-        <file>editor/format_align_right.svg</file>
-        <file>editor/format_bold.svg</file>
-        <file>editor/format_clear.svg</file>
-        <file>editor/format_color_fill.svg</file>
-        <file>editor/format_color_reset.svg</file>
-        <file>editor/format_color_text.svg</file>
-        <file>editor/format_indent_decrease.svg</file>
-        <file>editor/format_indent_increase.svg</file>
-        <file>editor/format_italic.svg</file>
-        <file>editor/format_line_spacing.svg</file>
-        <file>editor/format_list_bulleted.svg</file>
-        <file>editor/format_list_numbered.svg</file>
-        <file>editor/format_paint.svg</file>
-        <file>editor/format_quote.svg</file>
-        <file>editor/format_shapes.svg</file>
-        <file>editor/format_size.svg</file>
-        <file>editor/format_strikethrough.svg</file>
-        <file>editor/format_textdirection_l_to_r.svg</file>
-        <file>editor/format_textdirection_r_to_l.svg</file>
-        <file>editor/format_underlined.svg</file>
-        <file>editor/functions.svg</file>
-        <file>editor/highlight.svg</file>
-        <file>editor/insert_chart.svg</file>
-        <file>editor/insert_comment.svg</file>
-        <file>editor/insert_drive_file.svg</file>
-        <file>editor/insert_emoticon.svg</file>
-        <file>editor/insert_invitation.svg</file>
-        <file>editor/insert_link.svg</file>
-        <file>editor/insert_photo.svg</file>
-        <file>editor/linear_scale.svg</file>
-        <file>editor/merge_type.svg</file>
-        <file>editor/mode_comment.svg</file>
-        <file>editor/mode_edit.svg</file>
-        <file>editor/monetization_on.svg</file>
-        <file>editor/multiline_chart.svg</file>
-        <file>editor/pie_chart.svg</file>
-        <file>editor/pie_chart_outlined.svg</file>
-        <file>editor/publish.svg</file>
-        <file>editor/short_text.svg</file>
-        <file>editor/show_chart.svg</file>
-        <file>editor/space_bar.svg</file>
-        <file>editor/strikethrough_s.svg</file>
-        <file>editor/text_fields.svg</file>
-        <file>editor/title.svg</file>
-        <file>editor/vertical_align_bottom.svg</file>
-        <file>editor/vertical_align_center.svg</file>
-        <file>editor/vertical_align_top.svg</file>
-        <file>editor/wrap_text.svg</file>
-        <file>hardware/cast.svg</file>
-        <file>hardware/cast_connected.svg</file>
-        <file>hardware/computer.svg</file>
-        <file>hardware/desktop_mac.svg</file>
-        <file>hardware/desktop_windows.svg</file>
-        <file>hardware/developer_board.svg</file>
-        <file>hardware/devices_other.svg</file>
-        <file>hardware/dock.svg</file>
-        <file>hardware/gamepad.svg</file>
-        <file>hardware/headset.svg</file>
-        <file>hardware/headset_mic.svg</file>
-        <file>hardware/keyboard.svg</file>
-        <file>hardware/keyboard_arrow_down.svg</file>
-        <file>hardware/keyboard_arrow_left.svg</file>
-        <file>hardware/keyboard_arrow_right.svg</file>
-        <file>hardware/keyboard_arrow_up.svg</file>
-        <file>hardware/keyboard_backspace.svg</file>
-        <file>hardware/keyboard_capslock.svg</file>
-        <file>hardware/keyboard_hide.svg</file>
-        <file>hardware/keyboard_return.svg</file>
-        <file>hardware/keyboard_tab.svg</file>
-        <file>hardware/keyboard_voice.svg</file>
-        <file>hardware/laptop.svg</file>
-        <file>hardware/laptop_chromebook.svg</file>
-        <file>hardware/laptop_mac.svg</file>
-        <file>hardware/laptop_windows.svg</file>
-        <file>hardware/memory.svg</file>
-        <file>hardware/mouse.svg</file>
-        <file>hardware/phone_android.svg</file>
-        <file>hardware/phone_iphone.svg</file>
-        <file>hardware/phonelink.svg</file>
-        <file>hardware/phonelink_off.svg</file>
-        <file>hardware/power_input.svg</file>
-        <file>hardware/router.svg</file>
-        <file>hardware/scanner.svg</file>
-        <file>hardware/security.svg</file>
-        <file>hardware/sim_card.svg</file>
-        <file>hardware/smartphone.svg</file>
-        <file>hardware/speaker.svg</file>
-        <file>hardware/speaker_group.svg</file>
-        <file>hardware/tablet.svg</file>
-        <file>hardware/tablet_android.svg</file>
-        <file>hardware/tablet_mac.svg</file>
-        <file>hardware/toys.svg</file>
-        <file>hardware/tv.svg</file>
-        <file>hardware/videogame_asset.svg</file>
-        <file>hardware/watch.svg</file>
-        <file>navigation/apps.svg</file>
-        <file>navigation/arrow_back.svg</file>
-        <file>navigation/arrow_downward.svg</file>
-        <file>navigation/arrow_drop_down.svg</file>
-        <file>navigation/arrow_drop_down_circle.svg</file>
-        <file>navigation/arrow_drop_up.svg</file>
-        <file>navigation/arrow_forward.svg</file>
-        <file>navigation/arrow_upward.svg</file>
-        <file>navigation/cancel.svg</file>
-        <file>navigation/check.svg</file>
-        <file>navigation/chevron_left.svg</file>
-        <file>navigation/chevron_right.svg</file>
-        <file>navigation/close.svg</file>
-        <file>navigation/expand_less.svg</file>
-        <file>navigation/expand_more.svg</file>
-        <file>navigation/first_page.svg</file>
-        <file>navigation/fullscreen.svg</file>
-        <file>navigation/fullscreen_exit.svg</file>
-        <file>navigation/last_page.svg</file>
-        <file>navigation/menu.svg</file>
-        <file>navigation/more_horiz.svg</file>
-        <file>navigation/more_vert.svg</file>
-        <file>navigation/refresh.svg</file>
-        <file>navigation/subdirectory_arrow_left.svg</file>
-        <file>navigation/subdirectory_arrow_right.svg</file>
-        <file>navigation/unfold_less.svg</file>
-        <file>navigation/unfold_more.svg</file>
+        <file>toggle/indeterminate_check_box.svg</file>
+        <file>toggle/star.svg</file>
+        <file>toggle/star_border.svg</file>
     </qresource>
 </RCC>
 

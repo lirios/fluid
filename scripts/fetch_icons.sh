@@ -8,7 +8,7 @@ QRC_FILE=$TARGET_DIR/icons.qrc
 rm -rf $GIT_DIR
 git clone $GIT_URL
 
-CATEGORIES=(action av communication device file image maps notification social toggle alert content editor hardware navigation)
+CATEGORIES=$(ls -1 -d  $GIT_DIR/*/drawable-mdpi | awk -F/ '{ print $2 }')
 
 rm -rf $TARGET_DIR
 mkdir -p $TARGET_DIR

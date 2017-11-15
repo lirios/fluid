@@ -57,8 +57,6 @@ Item {
     property var maxDate: new Date(2150, 11, 31)
     property var selectedDate: new Date()
 
-    onSelectedDateChanged: yearTumbler.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
-
     Tumbler {
         id: yearTumbler
 
@@ -77,19 +75,27 @@ Item {
         wrap: false
         visibleItemCount: 7
         model: calcModel(minDate, maxDate)
-        delegate: FluidControls.SubheadingLabel {            
+        currentIndex: selectedDate.getFullYear() - minDate.getFullYear()
+        delegate: FluidControls.SubheadingLabel {
             text: modelData
             color: Tumbler.tumbler.currentIndex === index ? Material.accent : Material.primaryTextColor
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter            
+            verticalAlignment: Text.AlignVCenter
             font.bold: Tumbler.tumbler.currentIndex === index
             font.pixelSize: Tumbler.tumbler.currentIndex === index ? 24 : 16
         }
         onCurrentIndexChanged: {
-            if(selectedDate.getFullYear() !== model[currentIndex]) {                
+            if(selectedDate.getFullYear() !== model[currentIndex]) {
                 selectedDate.setFullYear(model[currentIndex])
                 selectedDate = new Date(selectedDate.getTime())
             }
         }
+    }
+
+    Component.onCompleted: {
+        yearSelector.onSelectedDateChanged.connect(function() {
+            yearTumbler.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
+        });
+        yearTumbler.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
     }
 }

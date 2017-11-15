@@ -75,17 +75,14 @@ Picker {
         case "YEAR":
             dateSelector.visible = false;
             yearSelector.visible = true;
+            yearSelector.selectedDate = datePicker.selectedDate
             break;
         case "MONTH":
             dateSelector.visible = true;
             yearSelector.visible = false;
+            dateSelector.selectedDate = datePicker.selectedDate
             break;
         }
-    }
-
-    onSelectedDateChanged: {
-        dateSelector.selectedDate = datePicker.selectedDate
-        yearSelector.selectedDate = datePicker.selectedDate
     }
 
     header: Item {

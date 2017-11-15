@@ -56,33 +56,42 @@ Item {
     property var minDate: new Date(1976, 0, 1)
     property var maxDate: new Date(2150, 11, 31)
     property var selectedDate: new Date()
+    property var __model: []
+    property int visibleItemCount: 7
 
-    Tumbler {
-        id: yearTumbler
-
-        function calcModel(startDate, endDate) {
-            var model = [];
-            if(startDate < endDate) {
-                for(var i=startDate.getFullYear(); i < endDate.getFullYear(); i++) {
-                    model.push(i);
-                }
+    function calcModel(startDate, endDate) {
+        var model = []
+        if(startDate < endDate) {
+            for(var i=startDate.getFullYear(); i < endDate.getFullYear(); i++) {
+                model.push(i);
             }
-            return model;
         }
+        __model = model;
+    }
 
+    onMinDateChanged: calcModel(minDate, maxDate)
+    onMaxDateChanged: calcModel(minDate, maxDate)
+
+    ListView {
+        id: listView
         width: parent.width
         height: parent.height
-        wrap: false
-        visibleItemCount: 7
-        model: calcModel(minDate, maxDate)
+        clip: true
+        model: __model
         currentIndex: selectedDate.getFullYear() - minDate.getFullYear()
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        highlightMoveDuration: 0
+        preferredHighlightBegin: height / 2 - height / yearSelector.visibleItemCount / 2
+        preferredHighlightEnd: height / 2 + height / yearSelector.visibleItemCount / 2
         delegate: FluidControls.SubheadingLabel {
             text: modelData
-            color: Tumbler.tumbler.currentIndex === index ? Material.accent : Material.primaryTextColor
+            color: ListView.view.currentIndex === index ? Material.accent : Material.primaryTextColor
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            font.bold: Tumbler.tumbler.currentIndex === index
-            font.pixelSize: Tumbler.tumbler.currentIndex === index ? 24 : 16
+            font.bold: ListView.view.currentIndex === index
+            font.pixelSize: ListView.view.currentIndex === index ? 24 : 16
+            height: listView.height / yearSelector.visibleItemCount
+            width: parent.width
         }
         onCurrentIndexChanged: {
             if(selectedDate.getFullYear() !== model[currentIndex]) {
@@ -91,11 +100,11 @@ Item {
             }
         }
     }
-
     Component.onCompleted: {
+        calcModel(minDate, maxDate)
         yearSelector.onSelectedDateChanged.connect(function() {
-            yearTumbler.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
+            listView.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
         });
-        yearTumbler.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
+        listView.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
     }
 }

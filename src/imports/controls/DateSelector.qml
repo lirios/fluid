@@ -123,20 +123,13 @@ Item {
                 snapMode: ListView.SnapOneItem
                 orientation: ListView.Horizontal
                 highlightRangeMode: ListView.StrictlyEnforceRange
-                highlightMoveDuration: 200
+                highlightMoveDuration: 0
                 Component.onCompleted: currentIndex = listView.model.indexOf(selectedDate)
 
                 model: CalendarModel {
                     id: calendarModel
                     from: minDate
                     to: maxDate
-                }
-
-                move: Transition {
-                    NumberAnimation { properties: "x,y"; duration: 1 }
-                }
-                moveDisplaced: Transition {
-                    NumberAnimation { properties: "x,y"; duration: 10 }
                 }
 
                 delegate: GridLayout {

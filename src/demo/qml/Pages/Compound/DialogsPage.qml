@@ -66,7 +66,6 @@ Item {
     }
 
     Popup {
-
         function show() {
             datepicker.show("MONTH")
             datePickerPopup.open()
@@ -74,16 +73,9 @@ Item {
 
         id: datePickerPopup
         modal: true
-        dim: false
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
         padding: 0
-        Component.onCompleted: {
-            var p = parent;
-            while(p.parent != undefined)
-                p = p.parent;
-            parent = p;
-        }
 
         FluidControls.DatePicker {
             id: datepicker
@@ -102,7 +94,6 @@ Item {
     }
 
     Popup {
-
         function show() {
             timepicker.show("HOUR")
             timePickerPopup.open()
@@ -110,16 +101,9 @@ Item {
 
         id: timePickerPopup
         modal: true
-        dim: false
         x: (parent.width - width) / 2
         y: (parent.height - height) / 2
         padding: 0
-        Component.onCompleted: {
-            var p = parent;
-            while(p.parent != undefined)
-                p = p.parent;
-            parent = p;
-        }
 
         FluidControls.TimePicker {
             id: timepicker

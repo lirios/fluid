@@ -32,13 +32,23 @@ Item {
         }
 
         Button {
-            text: qsTr("DatePicker")
+            text: qsTr("DatePicker (Landscape)")
             onClicked: datePickerPopup.show()
         }
 
         Button {
-            text: qsTr("TimePicker")
+            text: qsTr("TimePicker (Landscape)")
             onClicked: timePickerPopup.show()
+        }
+
+        Button {
+            text: qsTr("DatePicker (Portrait)")
+            onClicked: datePickerPopup2.show()
+        }
+
+        Button {
+            text: qsTr("TimePicker (Portrait)")
+            onClicked: timePickerPopup2.show()
         }
     }
 
@@ -109,6 +119,56 @@ Item {
             id: timepicker
             onAccepted: timePickerPopup.close()
             onRejected: timePickerPopup.close()
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        }
+    }
+
+    Popup {
+        function show() {
+            datepicker2.show("MONTH")
+            datePickerPopup2.open()
+        }
+
+        id: datePickerPopup2
+        modal: true
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+
+        FluidControls.DatePicker {
+            id: datepicker2
+            orientation: Qt.PortraitOrientation
+            onAccepted: datePickerPopup2.close()
+            onRejected: datePickerPopup2.close()
+
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Now"
+                flat: true
+                onClicked: datepicker2.selectedDate = new Date()
+            }
+        }
+    }
+
+    Popup {
+        function show() {
+            timepicker2.show("HOUR")
+            timePickerPopup2.open()
+        }
+
+        id: timePickerPopup2
+        modal: true
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+
+        FluidControls.TimePicker {
+            id: timepicker2
+            orientation: Qt.PortraitOrientation
+            onAccepted: timePickerPopup2.close()
+            onRejected: timePickerPopup2.close()
             standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         }
     }

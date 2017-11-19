@@ -89,6 +89,7 @@ Item {
 
         FluidControls.DatePicker {
             id: datepicker
+            orientation: Qt.LandscapeOrientation
             onAccepted: datePickerPopup.close()
             onRejected: datePickerPopup.close()
 
@@ -117,6 +118,7 @@ Item {
 
         FluidControls.TimePicker {
             id: timepicker
+            orientation: Qt.LandscapeOrientation
             onAccepted: timePickerPopup.close()
             onRejected: timePickerPopup.close()
             standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel

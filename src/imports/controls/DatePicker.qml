@@ -70,6 +70,10 @@ Picker {
     property var minDate: new Date(1976, 0, 1)
     property var maxDate: new Date(2150, 11, 31)
 
+    onSelectedDateChanged: {
+        dateSelector.selectedDate = selectedDate
+    }
+
     function show(type) {
         switch(type) {
         case "YEAR":

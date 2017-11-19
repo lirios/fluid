@@ -14,6 +14,7 @@
 
 import QtQml 2.2
 import QtQuick 2.3
+import QtQuick.Window 2.2
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.0
@@ -58,7 +59,7 @@ import Fluid.Controls 1.0 as FluidControls
 FluidControls.Card {
     id: pickerDialog
 
-    property int orientation: Qt.LandscapeOrientation
+    property int orientation: Screen.primaryOrientation
     readonly property int footerHeight: 50
     property alias header: header.data
     property alias selector: selectorContainer.data

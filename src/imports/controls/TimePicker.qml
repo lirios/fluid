@@ -59,8 +59,6 @@ Picker {
         timeSelector.selectMode(type)
     }
 
-    orientation: Qt.PortraitOrientation
-
     onSelectedDateChanged: {
         timeSelector.selectedDate = selectedDate
     }

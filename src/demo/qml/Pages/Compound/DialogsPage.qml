@@ -42,6 +42,11 @@ Item {
         }
 
         Button {
+            text: qsTr("DateTimePicker (Landscape)")
+            onClicked: dateTimePickerPopup.show()
+        }
+
+        Button {
             text: qsTr("DatePicker (Portrait)")
             onClicked: datePickerPopup2.show()
         }
@@ -49,6 +54,11 @@ Item {
         Button {
             text: qsTr("TimePicker (Portrait)")
             onClicked: timePickerPopup2.show()
+        }
+
+        Button {
+            text: qsTr("DateTimePicker (Portrait)")
+            onClicked: dateTimePickerPopup2.show()
         }
     }
 
@@ -172,6 +182,63 @@ Item {
             onAccepted: timePickerPopup2.close()
             onRejected: timePickerPopup2.close()
             standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        }
+    }
+
+    Popup {
+        function show() {
+            datetimepicker.show("MONTH")
+            dateTimePickerPopup.open()
+        }
+
+        id: dateTimePickerPopup
+        modal: true
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+
+        FluidControls.DateTimePicker {
+            id: datetimepicker
+            onAccepted: dateTimePickerPopup.close()
+            onRejected: dateTimePickerPopup.close()
+
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Now"
+                flat: true
+                onClicked: datetimepicker.selectedDate = new Date()
+            }
+        }
+    }
+
+    Popup {
+        function show() {
+            datetimepicker2.show("MONTH")
+            dateTimePickerPopup2.open()
+        }
+
+        id: dateTimePickerPopup2
+        modal: true
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        padding: 0
+
+        FluidControls.DateTimePicker {
+            id: datetimepicker2
+            orientation: Qt.PortraitOrientation
+            onAccepted: dateTimePickerPopup2.close()
+            onRejected: dateTimePickerPopup2.close()
+
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: "Now"
+                flat: true
+                onClicked: datetimepicker2.selectedDate = new Date()
+            }
         }
     }
 }

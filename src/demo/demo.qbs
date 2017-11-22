@@ -29,7 +29,7 @@ Project {
             "QT_NO_CAST_TO_ASCII"
         ]
 
-        files: ["*.cpp", "*.qrc"]
+        files: ["*.cpp", "*.h", "*.qrc"]
 
         Group {
             name: "QML Files"

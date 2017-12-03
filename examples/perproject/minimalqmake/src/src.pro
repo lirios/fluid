@@ -8,6 +8,9 @@ SOURCES += main.cpp
 
 RESOURCES += qml.qrc
 
+INCLUDEPATH +=  ../fluid/src/imports/controls
+INCLUDEPATH +=  ../fluid/src/imports/core
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH = $$OUT_PWD/../fluid/qml
 

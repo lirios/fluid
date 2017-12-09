@@ -83,6 +83,11 @@ Item {
     property bool persistent: false
 
     /*!
+      Whether the SearchBar is currently open
+    */
+    property bool isopen: false
+
+    /*!
       The model containing the search results
     */
     property var searchResults: ListModel {}
@@ -98,6 +103,7 @@ Item {
     function open() {
         searchWave.openWave(openSearchButton.x, openSearchButton.y);
         searchTextField.forceActiveFocus();
+        isopen = true;
     }
 
     /*!
@@ -107,6 +113,8 @@ Item {
         searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
+        isopen = false;
+        searchTextField.focus = false;
     }
 
     anchors {left: parent.left; right: parent.right; top: parent.top}
@@ -175,6 +183,7 @@ Item {
                         searchResults.clear();
                         searchSuggestions.clear();
                     }
+                    inputMethodHints: Qt.ImhNoPredictiveText
                 }
                 Label {
                     text: searchPlaceHolder

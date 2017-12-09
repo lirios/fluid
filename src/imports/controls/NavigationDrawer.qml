@@ -108,6 +108,13 @@ Drawer {
     */
     property list<QtObject> actions
 
+    /*!
+            \qmlproperty Component menuItemDelegate
+
+            The delegate for item that constitute a menu item.
+        */
+    property  alias menuItemDelegate : navDrawerListView.delegate
+
     width: {
         switch (Device.formFactor) {
         case Device.Phone:
@@ -146,6 +153,7 @@ Drawer {
             }
 
             ListView {
+                id: navDrawerListView
                 currentIndex: -1
                 spacing: 0
                 clip: true

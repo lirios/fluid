@@ -23,6 +23,11 @@ Project {
             Android.ndk.appStl: "gnustl_shared"
         }
 
+        Properties {
+            condition: qbs.targetOS.contains("osx")
+            cpp.linkerFlags: ["-lstdc++"]
+        }
+
         cpp.defines: [
             "FLUID_VERSION=" + project.version,
             "QT_NO_CAST_FROM_ASCII",

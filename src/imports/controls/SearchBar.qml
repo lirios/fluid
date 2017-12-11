@@ -83,6 +83,11 @@ Item {
     property bool persistent: false
 
     /*!
+      Whether the SearchBar is currently open
+    */
+    readonly property alias expanded: searchWave.open
+
+    /*!
       The model containing the search results
     */
     property var searchResults: ListModel {}
@@ -104,9 +109,14 @@ Item {
       Closes the search bar
     */
     function close() {
+
+        if (persistent)
+            return;
+
         searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
+        searchTextField.focus = false;
     }
 
     anchors {left: parent.left; right: parent.right; top: parent.top}
@@ -175,6 +185,7 @@ Item {
                         searchResults.clear();
                         searchSuggestions.clear();
                     }
+                    inputMethodHints: Qt.ImhNoPredictiveText
                 }
                 Label {
                     text: searchPlaceHolder

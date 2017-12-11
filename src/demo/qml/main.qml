@@ -134,9 +134,7 @@ ApplicationWindow {
 
         BasicComponents {}
         LayoutComponents {}
-        CompoundComponents {}
-        MaterialComponents {}
-        NavigationComponents {}
+        Controls {}
         Style {}
     }
 }

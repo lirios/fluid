@@ -5,7 +5,6 @@ LiriQmlPlugin {
     name: "fluidcontrolsplugin"
     pluginPath: "Fluid/Controls"
 
-    Depends { name: "fluidcoreplugin" }
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
     Properties {

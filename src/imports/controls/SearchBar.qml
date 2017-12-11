@@ -85,7 +85,7 @@ Item {
     /*!
       Whether the SearchBar is currently open
     */
-    property bool isopen: false
+    property bool expanded: persistent ? true : false
 
     /*!
       The model containing the search results
@@ -103,17 +103,21 @@ Item {
     function open() {
         searchWave.openWave(openSearchButton.x, openSearchButton.y);
         searchTextField.forceActiveFocus();
-        isopen = true;
+        expanded = true;
     }
 
     /*!
       Closes the search bar
     */
     function close() {
+
+        if (persistent)
+            return;
+
         searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
-        isopen = false;
+        expanded = false;
         searchTextField.focus = false;
     }
 

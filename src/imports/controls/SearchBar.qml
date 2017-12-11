@@ -85,7 +85,7 @@ Item {
     /*!
       Whether the SearchBar is currently open
     */
-    property bool expanded: persistent ? true : false
+    readonly property alias expanded: searchWave.open
 
     /*!
       The model containing the search results
@@ -103,7 +103,6 @@ Item {
     function open() {
         searchWave.openWave(openSearchButton.x, openSearchButton.y);
         searchTextField.forceActiveFocus();
-        expanded = true;
     }
 
     /*!
@@ -117,7 +116,6 @@ Item {
         searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
-        expanded = false;
         searchTextField.focus = false;
     }
 

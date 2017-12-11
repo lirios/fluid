@@ -109,11 +109,11 @@ Drawer {
     property list<QtObject> actions
 
     /*!
-            \qmlproperty Component menuItemDelegate
+        \qmlproperty Component delegate
 
-            The delegate for item that constitute a menu item.
-        */
-    property  alias menuItemDelegate : navDrawerListView.delegate
+        The delegate for item that constitute a menu item.
+    */
+    property  alias delegate : navDrawerListView.delegate
 
     width: {
         switch (Device.formFactor) {

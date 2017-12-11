@@ -61,8 +61,8 @@ Project {
                 else
                     return "";
             }
-            qbs.installSourceBase: isBundle ? product.buildDirectory : ""
-            fileTagsFilter: isBundle ? ["bundle.content"] : ["application"]
+            qbs.installSourceBase: destinationDirectory
+            fileTagsFilter: isBundle ? ["bundle.content"] : product.type
         }
     }
 

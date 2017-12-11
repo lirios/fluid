@@ -29,20 +29,16 @@ Project {
             "QT_NO_CAST_TO_ASCII"
         ]
 
-        files: ["*.cpp", "*.h", "*.qrc"]
+        Qt.core.resourcePrefix: "/"
+        Qt.core.resourceSourceBase: sourceDirectory
+
+        files: ["*.cpp", "*.h"]
 
         Group {
-            name: "QML Files"
-            files: [
-                "qml/*.qml",
-                "qml/+material/*.qml",
-                "qml/+universal/*.qml",
-                "qml/Pages/Basic/*.qml",
-                "qml/Pages/Controls/*.qml",
-                "qml/Pages/Style/*.qml",
-                "qml/Pages/Layouts/*.qml",
-            ]
-            fileTags: ["qml"]
+            name: "Resource Data"
+            prefix: "qml/"
+            files: ["**"]
+            fileTags: ["qt.core.resource_data"]
         }
 
         Group {

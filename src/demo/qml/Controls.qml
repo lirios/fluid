@@ -17,10 +17,10 @@ import QtQuick.Controls 2.0
 import QtQuick.Controls.Material 2.0
 import QtQuick.Controls.Universal 2.0
 import Fluid.Controls 1.0
-import "Pages/Compound"
+import "Pages/Controls"
 
 Tab {
-    title: qsTr("Compound")
+    title: qsTr("Controls")
 
     Pane {
         id: listPane
@@ -43,11 +43,16 @@ Tab {
             anchors.fill: parent
             currentIndex: 0
             model: ListModel {
-                ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Compound/ListItemPage.qml" }
-                ListElement { title: qsTr("Card"); source: "qrc:/qml/Pages/Compound/CardPage.qml" }
-                ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Compound/InfoBarPage.qml" }
-                ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Compound/DialogsPage.qml" }
-                ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Compound/OverlayPage.qml" }
+                ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
+                ListElement { title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
+                ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Controls/InfoBarPage.qml" }
+                ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
+                ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
+                ListElement { title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
+                ListElement { title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Controls/BottomSheetPage.qml" }
+                ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
+                ListElement { title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                ListElement { title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

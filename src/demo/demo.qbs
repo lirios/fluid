@@ -38,11 +38,9 @@ Project {
                 "qml/+material/*.qml",
                 "qml/+universal/*.qml",
                 "qml/Pages/Basic/*.qml",
-                "qml/Pages/Compound/*.qml",
+                "qml/Pages/Controls/*.qml",
                 "qml/Pages/Style/*.qml",
                 "qml/Pages/Layouts/*.qml",
-                "qml/Pages/Material/*.qml",
-                "qml/Pages/Navigation/*.qml"
             ]
             fileTags: ["qml"]
         }

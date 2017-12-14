@@ -9,7 +9,7 @@ Project {
 
     readonly property string minimumQtVersion: "5.8.0"
 
-    property bool useSystemQbsShared: true
+    property bool useSystemQbsShared: false
 
     property bool useStaticAnalyzer: false
 

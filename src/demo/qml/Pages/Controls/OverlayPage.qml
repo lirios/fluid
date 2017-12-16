@@ -52,10 +52,13 @@ Item {
 
             Repeater {
                 model: ["content/add", "image/edit", "action/delete"]
-                delegate: FluidControls.IconButton {
+                delegate: FluidControls.ToolButton {
                     anchors.verticalCenter: parent.verticalCenter
-                    iconName: modelData
-                    iconColor: Material.iconColor
+
+                    icon {
+                        name: modelData
+                        color: Material.iconColor
+                    }
 
                     Material.theme: Material.Dark
                 }

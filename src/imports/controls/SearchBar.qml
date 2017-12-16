@@ -16,7 +16,7 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.1
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
   \qmltype SearchBar
@@ -124,16 +124,19 @@ Item {
 
     Item {
         anchors.fill: parent
-        IconButton {
+        FluidControls.ToolButton {
             id: openSearchButton
-            iconName: "action/search"
+
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.margins: 8
+
+            icon.name: "action/search"
+
             onClicked: open()
         }
 
-        Wave {
+        FluidControls.Wave {
             id: searchWave
             anchors.fill: parent
             size: persistent ? diameter : 0
@@ -142,16 +145,16 @@ Item {
                 anchors.fill: parent
                 color: waveColor
             }
-            Card {
+            FluidControls.Card {
                 id: searchCard
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.margins: Units.smallSpacing
                 width: cardWidth
                 height: openSearchButton.height
-                IconButton {
+                FluidControls.ToolButton {
                     id: dismissSearchButton
-                    iconName: persistent ? "action/search" : "navigation/arrow_back"
+                    icon.name: persistent ? "action/search" : "navigation/arrow_back"
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     rotation: persistent ? 0 : searchWave.open ? 0 : 180
@@ -195,13 +198,13 @@ Item {
                     color: Material.color(Material.Grey, Material.Shade400)
                 }
 
-                IconButton {
+                FluidControls.ToolButton {
                     id: resetSearchButton
                     opacity: searchTextField.displayText !== ""
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
-                    iconName: "navigation/close"
+                    icon.name: "navigation/close"
                     rotation: opacity*90
                     onClicked: {
                         searchTextField.clear();

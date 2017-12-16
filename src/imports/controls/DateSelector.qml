@@ -80,14 +80,13 @@ Item {
             height: navigatorHeight
             width: parent.width
 
-            FluidControls.IconButton {
+            FluidControls.ToolButton {
                 id: prevMonthButton
 
                 anchors.top: parent.top
                 anchors.left: parent.left
 
-                iconName: "navigation/chevron_left"
-                iconColor: "black"
+                icon.name: "navigation/chevron_left"
 
                 onClicked: listView.currentIndex--;
             }
@@ -98,15 +97,14 @@ Item {
                 text: dateSelector.locale.standaloneMonthName(listView.currentItem.currentModel.month) + " " + listView.currentItem.currentModel.year
             }
 
-            FluidControls.IconButton {
+            FluidControls.ToolButton {
                 id: nextMonthButton
 
                 anchors.top: parent.top
                 anchors.right: parent.right
                 anchors.rightMargin: 16
 
-                iconName: "navigation/chevron_right"
-                iconColor: "black"
+                icon.name: "navigation/chevron_right"
 
                 onClicked: listView.currentIndex++;
             }

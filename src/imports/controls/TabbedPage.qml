@@ -160,15 +160,16 @@ FluidControls.Page {
                         color: contentItem.color
                     }
 
-                    FluidControls.IconButton {
+                    FluidControls.ToolButton {
                         id: tabCloseButton
 
                         anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.rightMargin: -rightPadding
 
-                        iconName: "navigation/close"
-                        iconColor: contentItem.color
+                        icon.name: "navigation/close"
+                        icon.color: contentItem.color
+
                         visible: delegateData.canRemove
 
                         onClicked: page.removeTab(index)

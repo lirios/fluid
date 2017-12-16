@@ -28,7 +28,6 @@ InfoBar 1.0 InfoBar.qml
 InputDialog 1.0 InputDialog.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml
-MenuItem 1.0 MenuItem.qml
 NavigationDrawer 1.0 NavigationDrawer.qml
 NoiseBackground 1.0 NoiseBackground.qml
 OverlayView 1.0 OverlayView.qml
@@ -50,6 +49,7 @@ ThinDivider 1.0 ThinDivider.qml
 TimePicker 1.0 TimePicker.qml
 TimeSelector 1.0 TimeSelector.qml
 TitleLabel 1.0 TitleLabel.qml
+ToolButton 1.0 ToolButton.qml
 singleton Units 1.0 Units.qml
 Wave 1.0 Wave.qml
 YearSelector 1.0 YearSelector.qml

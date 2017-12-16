@@ -13,7 +13,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.5
+import QtQuick 2.10
+import QtQuick.Controls 2.3 as QQC2
 import Fluid.Core 1.0
 
 /*!
@@ -30,15 +31,8 @@ import Fluid.Core 1.0
 
    \snippet fluidcontrols-action.qml action
 */
-Object {
+QQC2.Action {
     id: action
-
-    /*!
-        \qmlproperty bool enabled
-
-        Set to \c false to disable the action in the UI.
-     */
-    property bool enabled: true
 
     /*!
         \qmlproperty string iconName
@@ -61,20 +55,10 @@ Object {
     */
     property url iconSource: Utils.getSourceForIconName(iconName)
 
-    /*!
-        \qmlproperty keysequence shortcut
-
-        This property holds the shortcut bound to the action.
-        The keysequence can be a string or a standard key.
-    */
-    property alias shortcut: shortcutItem.sequence
-
-    /*!
-        \qmlproperty string text
-
-        The text displayed for the action.
-    */
-    property string text
+    icon {
+        name: iconName
+        source: iconSource
+    }
 
     /*!
         \qmlproperty string toolTip
@@ -109,19 +93,4 @@ Object {
         This property is \c false by default.
      */
     property bool hoverAnimation: false
-
-    /*!
-        \qmlsignal triggered(var source)
-
-        Emitted when a button or menu item bound to this action have been activated.
-        Includes the object that triggered the even, if relevant.
-
-        The corresponding handler is \c onTriggered.
-    */
-    signal triggered(var source)
-
-    Shortcut {
-        id: shortcutItem
-        onActivated: action.triggered(shortcutItem)
-    }
 }

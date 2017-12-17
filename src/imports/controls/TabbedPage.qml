@@ -170,6 +170,7 @@ FluidControls.Page {
                         icon.name: "navigation/close"
                         icon.color: contentItem.color
 
+                        focus: Qt.NoFocus
                         visible: delegateData.canRemove
 
                         onClicked: page.removeTab(index)

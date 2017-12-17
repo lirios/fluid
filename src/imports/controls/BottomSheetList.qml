@@ -106,8 +106,8 @@ BottomSheet {
                                 id: listItem
 
                                 text: modelData.text
-                                iconName: modelData.iconName
-                                iconSource: modelData.iconSource
+                                icon.name: modelData.icon.name
+                                icon.source: modelData.icon.source
                                 enabled: modelData.enabled
                                 visible: modelData.visible
 

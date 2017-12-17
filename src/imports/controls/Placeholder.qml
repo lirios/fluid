@@ -1,6 +1,7 @@
 /*
  * This file is part of Fluid.
  *
+ * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -12,10 +13,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.2
+import QtQuick 2.10
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.3
+import QtQuick.Controls.impl 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0
 
 /*!
@@ -28,24 +30,11 @@ import Fluid.Controls 1.0
     For more information you can read the
     \l{https://material.io/guidelines/patterns/empty-states.html#empty-states-avoiding-completely-empty-states}{Material Design guidelines}.
 */
-Item {
-    /*!
-        \qmlproperty string iconName
+Control {
+    id: control
 
-        Name of the icon from the \l{https://materialdesignicons.com/}{Material Design icon collection}.
-
-        \sa Icon::name
-    */
-    property alias iconName: icon.name
-
-    /*!
-        \qmlproperty url iconSource
-
-        Icon source URL.
-
-        \sa Icon::source
-    */
-    property alias iconSource: icon.source
+    icon.width: 96
+    icon.height: 96
 
     /*!
         \qmlproperty string text
@@ -66,9 +55,15 @@ Item {
         
         width: parent.width - 2 * Units.mediumSpacing
 
-        Icon {
-            id: icon
-            size: 96
+        IconLabel {
+            id: iconLabel
+
+            spacing: control.spacing
+            mirrored: control.mirrored
+            display: IconLabel.IconOnly
+
+            icon: control.icon
+            color: control.icon.color
 
             Layout.alignment: Qt.AlignHCenter
         }

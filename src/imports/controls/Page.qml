@@ -39,7 +39,7 @@ import Fluid.Controls 1.0 as FluidControls
                name: "Print"
 
                // Icon name from the Google Material Design icon pack
-               iconName: "action/print"
+               icon.name: "action/print"
            }
        ]
    }
@@ -158,12 +158,14 @@ Page {
 
         title: page.title
 
-        leftAction: Action {
+        leftAction: FluidControls.Action {
+            icon.name: "navigation/arrow_back"
+
             text: qsTr("Back")
             toolTip: qsTr("Go back")
-            iconName: "navigation/arrow_back"
-            onTriggered: page.pop()
             visible: page.canGoBack
+
+            onTriggered: page.pop()
         }
     }
 }

@@ -12,9 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3 as QQC2
+import QtQuick.Controls.impl 2.3 as QQCImpl2
+import QtQuick.Controls.Material 2.3
 import QtQuick.Templates 2.0 as T
 import Fluid.Controls 1.0
 import Fluid.Layouts 1.0 as FluidLayouts
@@ -108,7 +109,7 @@ BottomSheet {
                 contentWidth: width
                 contentHeight: grid.height
 
-                ScrollIndicator.vertical: ScrollIndicator {}
+                QQC2.ScrollIndicator.vertical: QQC2.ScrollIndicator {}
 
                 Grid {
                     id: grid
@@ -126,8 +127,11 @@ BottomSheet {
                     Repeater {
                         model: actions
 
-                        delegate: ItemDelegate {
+                        delegate: QQC2.ItemDelegate {
                             id: item
+
+                            icon.width: 48
+                            icon.height: 48
 
                             enabled: modelData.enabled
                             visible: modelData.visible
@@ -140,33 +144,15 @@ BottomSheet {
                             background.implicitWidth: grid.cellWidth
                             background.implicitHeight: grid.cellHeight
 
-                            contentItem: Item {
-                                anchors.fill: parent
+                            contentItem: QQCImpl2.IconLabel {
+                                spacing: item.spacing
+                                mirrored: item.mirrored
+                                display: QQCImpl2.IconLabel.TextUnderIcon
 
-                                Icon {
-                                    id: icon
-
-                                    anchors.top: parent.top
-                                    anchors.topMargin: 8
-                                    anchors.horizontalCenter: parent.horizontalCenter
-
-                                    name: modelData.iconName
-                                    source: modelData.iconSource
-                                    size: 48
-                                }
-
-                                Label {
-                                    anchors.top: icon.bottom
-                                    anchors.left: parent.left
-                                    anchors.topMargin: 8
-                                    anchors.leftMargin: 8
-                                    anchors.rightMargin: 8
-                                    width: grid.cellWidth - anchors.leftMargin - anchors.rightMargin
-
-                                    text: modelData.text
-                                    elide: Text.ElideRight
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
+                                icon: modelData.icon
+                                text: modelData.text
+                                font: item.font
+                                color: item.icon.color
                             }
                         }
                     }

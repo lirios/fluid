@@ -161,7 +161,7 @@ Drawer {
                 model: drawer.actions
 
                 delegate: ListItem {
-                    iconName: modelData.iconName
+                    icon.name: modelData.icon.name
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0

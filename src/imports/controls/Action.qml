@@ -27,38 +27,12 @@ import Fluid.Core 1.0
    One of the most common uses of actions is displaying actions in the action bar of a page
    using the \l Page::actions property. See the example for \l Page for more details.
 
-   Actions may contain \l text, an \l iconName, a \l toolTip and a \l shortcut.
+   Actions may contain \l text, an \l icon, a \l toolTip and a \l shortcut.
 
    \snippet fluidcontrols-action.qml action
 */
 QQC2.Action {
     id: action
-
-    /*!
-        \qmlproperty string iconName
-
-        Icon name from the \l{http://google.github.io/material-design-icons/}{Material Design icon collection} or the
-        \l{http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html}{freedesktop icon naming specification}.
-    */
-    property string iconName
-
-    /*!
-        \qmlproperty url iconSource
-
-        A URL pointing to an image to display as the icon. By default, this is
-        a special URL representing the icon named by \l iconName from the Material Design
-        icon collection. The icon will be colorized using the specificed color,
-        unless you put ".color." in the filename, for example, "app-icon.color.svg".
-
-        \sa iconName
-        \sa Icon
-    */
-    property url iconSource: Utils.getSourceForIconName(iconName)
-
-    icon {
-        name: iconName
-        source: iconSource
-    }
 
     /*!
         \qmlproperty string toolTip

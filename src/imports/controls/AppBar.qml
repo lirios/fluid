@@ -133,8 +133,8 @@ QQC2.ToolBar {
         icon {
             width: appBar.__iconSize
             height: appBar.__iconSize
-            name: leftAction ? leftAction.iconName : ""
-            source: leftAction ? leftAction.iconSource : ""
+            name: leftAction ? leftAction.icon.name : ""
+            source: leftAction ? leftAction.icon.source : ""
         }
 
         visible: leftAction && leftAction.visible
@@ -234,8 +234,8 @@ QQC2.ToolBar {
                         icon {
                             width: appBar.__iconSize
                             height: appBar.__iconSize
-                            name: appBar.actions[index + appBar.maxActionCount].iconName
-                            source: appBar.actions[index + appBar.maxActionCount].iconSource
+                            name: appBar.actions[index + appBar.maxActionCount].icon.name
+                            source: appBar.actions[index + appBar.maxActionCount].icon.source
                         }
 
                         text: appBar.actions[index + appBar.maxActionCount].text

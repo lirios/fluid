@@ -13,10 +13,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.3
+import QtQuick.Controls.impl 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
@@ -69,24 +70,6 @@ ItemDelegate {
         Value text.
     */
     property alias valueText: valueLabel.text
-
-    /*!
-        \qmlproperty string iconName
-
-        Icon name.
-
-        \sa Icon::name
-    */
-    property alias iconName: icon.name
-
-    /*!
-        \qmlproperty url iconSource
-
-        Icon source URL.
-
-        \sa Icon::source
-    */
-    property alias iconSource: icon.source
 
     /*!
         \qmlproperty Item leftItem
@@ -168,8 +151,7 @@ ItemDelegate {
             Layout.preferredHeight: width
             Layout.alignment: Qt.AlignCenter
 
-            FluidControls.Icon {
-                id: icon
+            IconLabel {
                 objectName: "icon"
 
                 anchors {
@@ -177,8 +159,13 @@ ItemDelegate {
                     left: parent.left
                 }
 
-                visible: icon.valid
+                spacing: 16
+                mirrored: listItem.mirrored
+                display: IconLabel.IconOnly
+
+                icon: listItem.icon
                 color: listItem.highlighted ? Material.primaryColor : enabled ? Material.iconColor : Material.iconDisabledColor
+                visible: listItem.icon.name !== ""
             }
         }
 

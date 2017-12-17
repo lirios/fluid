@@ -23,7 +23,7 @@ Item {
     FluidControls.Action {
         id: copyAction
         text: qsTr("&Copy")
-        iconName: "content/content_copy"
+        icon.name: "content/content_copy"
         shortcut: StandardKey.Copy
         onTriggered: window.activeFocusItem.copy()
     }

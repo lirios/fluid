@@ -33,27 +33,27 @@ Item {
         actions: [
             FluidControls.Action {
                 text: qsTr("Folder")
-                iconName: "file/folder"
+                icon.name: "file/folder"
             },
             FluidControls.Action {
                 text: qsTr("New Folder")
-                iconName: "file/create_new_folder"
+                icon.name: "file/create_new_folder"
             },
             FluidControls.Action {
                 text: qsTr("Shared Folder")
-                iconName: "file/folder_shared"
+                icon.name: "file/folder_shared"
             },
             FluidControls.Action {
                 text: qsTr("Cloud")
-                iconName: "file/cloud"
+                icon.name: "file/cloud"
             },
             FluidControls.Action {
                 text: qsTr("Email Attachment")
-                iconName: "file/attachment"
+                icon.name: "file/attachment"
             },
             FluidControls.Action {
                 text: qsTr("Upload")
-                iconName: "file/file_upload"
+                icon.name: "file/file_upload"
             }
         ]
     }

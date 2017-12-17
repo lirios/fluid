@@ -20,7 +20,7 @@ FluidControls.Page {
 
     actions: [
         FluidControls.Action {
-            iconName: "action/settings"
+            icon.name: "action/settings"
             toolTip: qsTr("Settings")
             hoverAnimation: true
         }

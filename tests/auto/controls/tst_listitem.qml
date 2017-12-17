@@ -63,7 +63,7 @@ Item {
         ListItem {
             id: listItemWithLeftItem
 
-            iconName: "action/settings"
+            icon.name: "action/settings"
         }
 
         ListItem {
@@ -85,12 +85,12 @@ Item {
         name: "ListItemTests"
         when: windowShown
 
-        function test_leftItem_shows_when_iconName_is_set() {
+        function test_leftItem_shows_when_icon_name_is_set() {
             var leftItem = findChild(listItem, "leftItem")
 
             compare(leftItem.showing, false)
 
-            listItem.iconName = "action/settings"
+            listItem.icon.name = "action/settings"
 
             compare(leftItem.showing, true)
         }

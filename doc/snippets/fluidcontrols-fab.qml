@@ -22,7 +22,7 @@ import Fluid.Controls 1.0 as FluidControls
 Item {
     FluidControls.FloatingActionButton {
         anchors.centerIn: parent
-        iconName: "device/airplanemode_active"
+        icon.name: "device/airplanemode_active"
         mini: false
     }
 }

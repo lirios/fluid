@@ -13,9 +13,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick 2.10
+import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.3
+import QtQuick.Controls.impl 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
@@ -132,14 +134,15 @@ FluidControls.Page {
             Repeater {
                 model: swipeView.contentChildren.length
                 delegate: TabButton {
+                    id: tabButton
+
                     property var delegateData: swipeView.contentChildren[index]
 
+                    icon.name: delegateData.icon.name
+                    icon.source: delegateData.icon.source
+
                     text: delegateData.title
-                    implicitWidth: Math.max(background ? background.implicitWidth : 0,
-                                                         contentItem.implicitWidth +
-                                                         (tabIcon.visible ? tabIcon.width : 0) +
-                                                         (tabCloseButton.visible ? tabCloseButton.width : 0) +
-                                                         leftPadding + rightPadding)
+
                     width: parent.fixed ? parent.width / parent.count : implicitWidth
 
                     // Active color
@@ -148,32 +151,37 @@ FluidControls.Page {
                     // Unfocused color
                     Material.foreground: FluidCore.Utils.alpha(appBar.Material.foreground, 0.7)
 
-                    FluidControls.Icon {
-                        id: tabIcon
+                    contentItem: RowLayout {
+                        IconLabel {
+                            id: tabIcon
 
-                        anchors.left: parent.left
-                        anchors.verticalCenter: parent.verticalCenter
+                            spacing: tabButton.spacing
+                            mirrored: tabButton.mirrored
+                            display: tabButton.display
 
-                        name: delegateData.iconName
-                        source: delegateData.iconSource
-                        visible: status == Image.Ready
-                        color: contentItem.color
-                    }
+                            icon: tabButton.icon
+                            text: tabButton.text
+                            font: tabButton.font
+                            color: tabButton.icon.color
 
-                    FluidControls.ToolButton {
-                        id: tabCloseButton
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                        }
 
-                        anchors.right: parent.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.rightMargin: -rightPadding
+                        FluidControls.ToolButton {
+                            id: tabCloseButton
 
-                        icon.name: "navigation/close"
-                        icon.color: contentItem.color
+                            icon.width: 16
+                            icon.height: 16
+                            icon.name: "navigation/close"
 
-                        focus: Qt.NoFocus
-                        visible: delegateData.canRemove
+                            focus: Qt.NoFocus
+                            visible: delegateData.canRemove
 
-                        onClicked: page.removeTab(index)
+                            onClicked: page.removeTab(index)
+
+                            Layout.alignment: Qt.AlignVCenter
+                        }
                     }
                 }
             }

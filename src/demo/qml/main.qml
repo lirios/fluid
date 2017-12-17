@@ -60,28 +60,28 @@ ApplicationWindow {
         actions: [
             Action {
                 text: qsTr("Action 1")
-                iconName: "action/info"
+                icon.name: "action/info"
                 onTriggered: console.log("action1 triggered")
             },
             Action {
                 text: qsTr("Action 2")
-                iconName: "action/info"
+                icon.name: "action/info"
                 hasDividerAfter: true
                 onTriggered: console.log("action2 triggered")
             },
             Action {
                 text: qsTr("Action 3")
-                iconName: "action/info"
+                icon.name: "action/info"
                 onTriggered: console.log("action3 triggered")
             },
             Action {
                 text: qsTr("Action 4")
-                iconName: "action/info"
+                icon.name: "action/info"
                 onTriggered: console.log("action4 triggered")
             },
             Action {
                 text: qsTr("Action 5")
-                iconName: "action/info"
+                icon.name: "action/info"
                 visible: false
                 onTriggered: console.log("action5 triggered")
             }
@@ -92,43 +92,43 @@ ApplicationWindow {
         title: window.title
 
         leftAction: Action {
-            iconName: "navigation/menu"
+            icon.name: "navigation/menu"
             onTriggered: navDrawer.open()
         }
 
         actions: [
             Action {
                 text: qsTr("Dummy error")
-                iconName: "alert/warning"
+                icon.name: "alert/warning"
                 toolTip: qsTr("Show a dummy error")
                 onTriggered: console.log("Dummy error")
             },
             Action {
                 text: qsTr("Colors")
-                iconName: "image/color_lens"
+                icon.name: "image/color_lens"
                 toolTip: qsTr("Pick a color")
                 onTriggered: console.log("Colors")
             },
             Action {
                 text: qsTr("Settings")
-                iconName: "action/settings"
+                icon.name: "action/settings"
                 toolTip: qsTr("Settings")
                 hoverAnimation: true
                 onTriggered: console.log("Settings clicked")
             },
             Action {
                 text: qsTr("This should not be visible")
-                iconName: "alert/warning"
+                icon.name: "alert/warning"
                 visible: false
             },
             Action {
                 text: qsTr("Language")
-                iconName: "action/language"
+                icon.name: "action/language"
                 enabled: false
             },
             Action {
                 text: qsTr("Accounts")
-                iconName: "action/account_circle"
+                icon.name: "action/account_circle"
             }
         ]
 

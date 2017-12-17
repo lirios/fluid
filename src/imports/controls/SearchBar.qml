@@ -245,7 +245,7 @@ Item {
             }
             Keys.onReturnPressed: autoComplete();
             onClicked: autoComplete();
-            iconName: "action/search"
+            icon.name: "action/search"
         }
     }
 }

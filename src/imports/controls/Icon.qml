@@ -112,7 +112,11 @@ Item {
 
         \sa name
      */
-     property url source: Utils.getSourceForIconName(name)
+     property url source: {
+        return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0 || name.indexOf("qrc") === 0
+                      ? name : "image://fluidicontheme/" + name
+                    : "";
+    }
 
     /*!
         \qmlproperty enumeration status
@@ -150,7 +154,9 @@ Item {
      */
     property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
-                            String(icon.source).indexOf("symbolic") !== -1
+                            String(icon.source).indexOf("symbolic") !== -1 ||
+                            (String(icon.source).indexOf("image://fluidicontheme/") !== -1 &&
+                             icon.name.indexOf("/") !== -1)
 
     /*!
         \qmlproperty real sourceSize

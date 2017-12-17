@@ -90,22 +90,6 @@ QtObject {
     }
 
     /*!
-        \qmlmethod string Utils::getSourceForIconName(string name)
-
-        Returns a source suitable for an \l Image from an icon name.
-        If \a name is an URL it will be returned verbatim, instead if it
-        contains a slash character an icon relative to Fluid icons/ directory
-        will be returned, otherwise an image://fluidicontheme/\a name URL.
-    */
-    function getSourceForIconName(name) {
-        return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0 || name.indexOf("qrc") === 0
-                      ? name
-                      : name.indexOf("/") !== -1 ? "image://fluidicons/" + name
-                                                 : "image://fluidicontheme/" + name
-                    : "";
-    }
-
-    /*!
         \qmlmethod real Utils::scale(real percent, real start, real end)
 
         Scale \a percent in the range between \a start and \a end.

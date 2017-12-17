@@ -20,14 +20,5 @@ LiriQmlPlugin {
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
-
-    Group {
-        name: "Icons"
-        files: "**/*.svg"
-        prefix: qbs.installSourceBase
-        qbs.install: true
-        qbs.installSourceBase: "../../../icons/"
-        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath, "icons")
-    }
+    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes", "*.qrc"]
 }

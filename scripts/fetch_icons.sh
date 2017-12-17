@@ -2,8 +2,9 @@
 
 GIT_URL=https://github.com/google/material-design-icons.git
 GIT_DIR=material-design-icons
-TARGET_DIR=icons
-QRC_FILE=$TARGET_DIR/icons.qrc
+TARGET_DIR=src/imports/controls/icons/fluid/scalable
+QRC_FILE=src/imports/controls/icons.qrc
+THEME_FILE=src/imports/controls/icons/fluid/index.theme
 TXT_FILE=src/demo/qml/icons.txt
 
 function copy_icon()
@@ -15,7 +16,7 @@ function copy_icon()
         if [ ! -f $TARGET_DIR/$CATEGORY/$NEW_NAME ]; then
             cp $FILE $TARGET_DIR/$CATEGORY/$NEW_NAME
             chmod 644 $TARGET_DIR/$CATEGORY/$NEW_NAME
-            echo "        <file>$CATEGORY/$NEW_NAME</file>" >> $QRC_FILE
+            echo "        <file>icons/fluid/scalable/$CATEGORY/$NEW_NAME</file>" >> $QRC_FILE
             echo -e "\t$BASE_NAME" >> $TXT_FILE
         fi
     done
@@ -31,8 +32,24 @@ mkdir -p $TARGET_DIR
 
 > $TXT_FILE
 
-echo "<RCC>
-    <qresource prefix=\"/Fluid/Controls/\">" > $QRC_FILE
+cat > $THEME_FILE <<EOF
+[Icon Theme]
+Name=Fluid
+Comment=Material Design Icon Theme
+Directories=scalable
+
+[scalable]
+Size=16
+MinSize=16
+MaxSize=1024
+Type=Scalable
+EOF
+
+cat > $QRC_FILE <<EOF
+<RCC>
+    <qresource prefix="/Fluid/Controls/">
+        <file>icons/fluid/index.theme</file>
+EOF
 for CATEGORY in ${CATEGORIES[*]}; do
     echo "$CATEGORY" >> $TXT_FILE
 
@@ -48,9 +65,9 @@ for CATEGORY in ${CATEGORIES[*]}; do
     ICONS=$(ls $GIT_DIR/$CATEGORY/svg/production/*24px*)
     copy_icon
 done
-
-echo "    </qresource>
+cat >> $QRC_FILE <<EOF
+    </qresource>
 </RCC>
-" >> $QRC_FILE
+EOF
 
 rm -rf $GIT_DIR

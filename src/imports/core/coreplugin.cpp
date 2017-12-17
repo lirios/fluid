@@ -17,7 +17,6 @@
 #include "coreplugin.h"
 #include "clipboard.h"
 #include "device.h"
-#include "iconsimageprovider.h"
 #include "qmldateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
@@ -45,13 +44,6 @@ static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
     Q_UNUSED(jsEngine);
 
     return new StandardPaths();
-}
-
-void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Core"));
-
-    engine->addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
 }
 
 void FluidCorePlugin::registerTypes(const char *uri)

@@ -41,8 +41,7 @@ Project {
 
         Group {
             name: "Resource Data"
-            prefix: "qml/"
-            files: ["**"]
+            files: ["images/**", "qml/**"]
             fileTags: ["qt.core.resource_data"]
         }
 

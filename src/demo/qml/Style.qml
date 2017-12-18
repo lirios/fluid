@@ -45,7 +45,8 @@ Tab {
             model: ListModel {
                 ListElement { title: qsTr("Palette"); source: "qrc:/qml/Pages/Style/PalettePage.qml" }
                 ListElement { title: qsTr("Typography"); source: "qrc:/qml/Pages/Style/TypographyPage.qml" }
-                ListElement { title: qsTr("Icons"); source: "qrc:/qml/Pages/Style/IconsPage.qml" }
+                ListElement { title: qsTr("System Icons"); source: "qrc:/qml/Pages/Style/SystemIconsPage.qml" }
+                ListElement { title: qsTr("Material Icons"); source: "qrc:/qml/Pages/Style/IconsPage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

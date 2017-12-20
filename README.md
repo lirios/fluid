@@ -14,6 +14,11 @@ using the [Material Design](https://material.io/guidelines/) guidelines.
 
 Online documentation is available at [liri.io](https://liri.io/docs/sdk/fluid/develop/).
 
+We develop using the [git flow](https://danielkummer.github.io/git-flow-cheatsheet/) method
+this means that the `develop` branch contains code that is being developed and might break
+from time to time. If you want to check out a stable version just install one of the
+releases or clone the `master` branch that has the latest released version.
+
 ![Desktop](.github/demo.png)
 
 ## Dependencies
@@ -26,10 +31,6 @@ Qt >= 5.10.0 with at least the following modules is required:
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
  * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
-
-Optionally for Linux builds:
-
- * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git) (for window decoration color)
 
 ## Build
 
@@ -101,7 +102,7 @@ git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
 qbs setup-qt /usr/bin/qmake-qt5 qt5
 qbs config profiles.qt5.baseProfile gcc
-qbs build --no-install -d build profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr modules.lirideployment.qmlDir:lib/qt/qml
+qbs build --no-install -d build profile:qt5 modules.qbs.installRoot:/ modules.qbs.installPrefix:usr modules.lirideployment.qmlDir:lib/qt/qml
 sudo qbs install -d build --no-build -v --install-root / profile:qt5
 ```
 

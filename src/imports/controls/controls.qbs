@@ -20,5 +20,13 @@ LiriQmlPlugin {
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes", "*.qrc"]
+    Group {
+        name: "QML"
+        files: ["qmldir", "*.qml", "*.qmltypes"]
+    }
+
+    Group {
+        name: "Sources"
+        files: ["*.cpp", "*.h", "*.qrc"]
+    }
 }

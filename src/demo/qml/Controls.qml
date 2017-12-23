@@ -52,6 +52,9 @@ Tab {
                 ListElement { title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Controls/BottomSheetPage.qml" }
                 ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
                 ListElement { title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                ListElement { title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
+                ListElement { title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
+                ListElement { title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
                 ListElement { title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
             }
             header: Subheader {

@@ -92,6 +92,10 @@ ItemDelegate {
     */
     property alias secondaryItem: secondaryItem.children
 
+    icon.width: 24
+    icon.height: 24
+    icon.color: listItem.highlighted ? listItem.Material.primaryColor : enabled ? listItem.Material.iconColor : listItem.Material.iconDisabledColor
+
     leftPadding: FluidControls.Units.smallSpacing * 2
     rightPadding: FluidControls.Units.smallSpacing * 2
     topPadding: 0
@@ -164,7 +168,7 @@ ItemDelegate {
                 display: IconLabel.IconOnly
 
                 icon: listItem.icon
-                color: listItem.highlighted ? Material.primaryColor : enabled ? Material.iconColor : Material.iconDisabledColor
+                color: listItem.enabled ? listItem.Material.foreground : listItem.Material.hintTextColor
                 visible: listItem.icon.name !== ""
             }
         }

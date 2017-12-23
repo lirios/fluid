@@ -22,54 +22,39 @@ Item {
 
         Button {
             text: qsTr("Landscape")
-            onClicked: timePickerPopup.show()
+            onClicked: timePickerDialogLandscape.open()
         }
 
         Button {
             text: qsTr("Portrait")
-            onClicked: timePickerPopup2.show()
+            onClicked: timePickerDialogPortrait.open()
+        }
+
+        FluidControls.DisplayLabel {
+            id: timeLabel
+            level: 2
+            text: qsTr("n.a.")
+        }
+
+        Switch {
+            id: prefer24HourSwitch
+            text: qsTr("24 hour clock")
         }
     }
 
-    Popup {
-        function show() {
-            timepicker.show("HOUR")
-            timePickerPopup.open()
-        }
-
-        id: timePickerPopup
-        modal: true
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        padding: 0
-
-        FluidControls.TimePicker {
-            id: timepicker
-            orientation: Qt.LandscapeOrientation
-            onAccepted: timePickerPopup.close()
-            onRejected: timePickerPopup.close()
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        }
+    FluidControls.TimePickerDialog {
+        id: timePickerDialogLandscape
+        orientation: Qt.LandscapeOrientation
+        prefer24Hour: prefer24HourSwitch.checked
+        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 
-    Popup {
-        function show() {
-            timepicker2.show("HOUR")
-            timePickerPopup2.open()
-        }
-
-        id: timePickerPopup2
-        modal: true
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        padding: 0
-
-        FluidControls.TimePicker {
-            id: timepicker2
-            orientation: Qt.PortraitOrientation
-            onAccepted: timePickerPopup2.close()
-            onRejected: timePickerPopup2.close()
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        }
+    FluidControls.TimePickerDialog {
+        id: timePickerDialogPortrait
+        orientation: Qt.PortraitOrientation
+        prefer24Hour: prefer24HourSwitch.checked
+        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 }

@@ -46,6 +46,7 @@ Tab 1.0 Tab.qml
 TabbedPage 1.0 TabbedPage.qml
 ThinDivider 1.0 ThinDivider.qml
 TimePicker 1.0 TimePicker.qml
+TimePickerDialog 1.0 TimePickerDialog.qml
 TimeSelector 1.0 TimeSelector.qml
 TitleLabel 1.0 TitleLabel.qml
 ToolButton 1.0 ToolButton.qml

@@ -33,8 +33,11 @@ import Fluid.Controls 1.0
 Control {
     id: control
 
+    property alias icon: iconLabel.icon
+
     icon.width: 96
     icon.height: 96
+    icon.color: Material.secondaryTextColor
 
     /*!
         \qmlproperty string text
@@ -62,7 +65,6 @@ Control {
             mirrored: control.mirrored
             display: IconLabel.IconOnly
 
-            icon: control.icon
             color: control.icon.color
 
             Layout.alignment: Qt.AlignHCenter

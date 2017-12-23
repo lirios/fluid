@@ -53,11 +53,7 @@ Picker {
 
     property var selectedDate: new Date()
 
-    property alias prefer24hView: timeSelector.prefer24hView
-
-    function show(type) {
-        timeSelector.selectMode(type)
-    }
+    property alias prefer24Hour: timeSelector.prefer24Hour
 
     onSelectedDateChanged: {
         timeSelector.selectedDate = selectedDate
@@ -82,10 +78,10 @@ Picker {
                     color: "white"
                     font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 40
                     anchors.verticalCenter: parent.verticalCenter
-                    opacity: timeSelector.currentSelector === "HOUR" ? 1 : 0.7
+                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: timeSelector.selectMode("HOUR")
+                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
                     }
                 }
 
@@ -99,10 +95,10 @@ Picker {
                     text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
                     color: "white"
                     font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 40
-                    opacity: timeSelector.currentSelector === "MINUTE" ? 1 : 0.7
+                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: timeSelector.selectMode("MINUTE")
+                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
                     }
                 }
 
@@ -116,10 +112,10 @@ Picker {
                     text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
                     color: "white"
                     font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 40
-                    opacity: timeSelector.currentSelector === "SECOND" ? 1 : 0.7
+                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: timeSelector.selectMode("SECOND")
+                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
                     }
                 }
             }
@@ -128,43 +124,43 @@ Picker {
                 Layout.column: orientation === Qt.LandscapeOrientation ? 1 : 2
                 Layout.row: orientation === Qt.LandscapeOrientation ? 2 : 1
 
-                visible: !timeSelector.prefer24hView
+                visible: !timeSelector.prefer24Hour
                 anchors.horizontalCenter: orientation === Qt.LandscapeOrientation ? parent.horizontalCenter : undefined
                 Label {
                     text: "AM"
                     color: "white"
                     font.pixelSize: 18
-                    opacity: timeSelector.timeMode === "AM" ? 1 : 0.7
+                    opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
                     horizontalAlignment: Text.AlignHCenter
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: timeSelector.timeMode = "AM"
+                        onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
                     }
                 }
                 Label {
                     text: "PM"
                     color: "white"
-                    opacity: timeSelector.timeMode === "PM" ? 1 : 0.7
+                    opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
                     font.pixelSize: 18
                     horizontalAlignment: Text.AlignHCenter
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: timeSelector.timeMode = "PM"
+                        onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
                     }
                 }
             }
         }
     }
 
-    selector: TimeSelector {
+    selector: FluidControls.TimeSelector {
         id: timeSelector
         anchors.fill: parent
         anchors.topMargin: 10
         anchors.bottomMargin: 10
 
         onSelectedDateChanged: {
-            if(timePicker.selectedDate != selectedDate)
-                timePicker.selectedDate = selectedDate
+            if (timePicker.selectedDate != selectedDate)
+                timePicker.selectedDate = selectedDate;
         }
     }
 }

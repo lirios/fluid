@@ -63,7 +63,7 @@ Picker {
 
     property bool dayOfWeekRowVisible: true
     property bool weekNumberVisible: true
-    property alias prefer24hView: timeSelector.prefer24hView
+    property alias prefer24hView: timeSelector.prefer24Hour
     property var selectedDate: new Date()
     property var minDate: new Date(1976, 0, 1)
     property var maxDate: new Date(2150, 11, 31)
@@ -89,21 +89,21 @@ Picker {
             dateSelector.visible = false;
             timeSelector.visible = true;
             yearSelector.visible = false;
-            timeSelector.selectMode("HOUR")
+            timeSelector.mode = FluidControls.TimeSelector.Hour;
             timeSelector.selectedDate = dateTimePicker.selectedDate
             break;
         case "MINUTE":
             dateSelector.visible = false;
             timeSelector.visible = true;
             yearSelector.visible = false;
-            timeSelector.selectMode("MINUTE")
+            timeSelector.mode = FluidControls.TimeSelector.Minute;
             timeSelector.selectedDate = dateTimePicker.selectedDate
             break;
         case "SECOND":
             dateSelector.visible = false;
             timeSelector.visible = true;
             yearSelector.visible = false;
-            timeSelector.selectMode("SECOND")
+            timeSelector.mode = FluidControls.TimeSelector.Second;
             timeSelector.selectedDate = dateTimePicker.selectedDate
             break;
         }
@@ -218,28 +218,28 @@ Picker {
                     Layout.column: orientation === Qt.LandscapeOrientation ? 1 : 2
                     Layout.row: orientation === Qt.LandscapeOrientation ? 2 : 1
                     Layout.alignment: orientation === Qt.LandscapeOrientation ? Qt.AlignHCenter : Qt.AlignBottom
-                    visible: !timeSelector.prefer24hView
+                    visible: !timeSelector.prefer24Hour
 
                     Label {
                         text: "AM"
                         color: "white"
                         font.pixelSize: 18
-                        opacity: timeSelector.timeMode === "AM" ? 1 : 0.7
+                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
                         horizontalAlignment: Text.AlignHCenter
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.timeMode = "AM"
+                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
                         }
                     }
                     Label {
                         text: "PM"
                         color: "white"
-                        opacity: timeSelector.timeMode === "PM" ? 1 : 0.7
+                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignHCenter
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.timeMode = "PM"
+                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
                         }
                     }
                 }

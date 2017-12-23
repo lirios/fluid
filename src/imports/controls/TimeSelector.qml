@@ -16,6 +16,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype TimeSelector
@@ -48,77 +49,40 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
-Item {
+FluidTemplates.TimeSelector {
     id: timeSelector
 
-    property alias currentSelector: circle.mode
-    property bool prefer24hView: true
-    property string timeMode: "AM"
+    property int currentSelector: mode
+    property bool prefer24Hour: true
     property var selectedDate: new Date()
 
-    function selectMode(mode) {
-        switch(mode) {
-        case "HOUR":
-            innerPathView.visible = prefer24hView;
-            setModeValues(0, prefer24hView ? 23 : 11, 12, mode, 1, 1)
-            var model=[12];
-            for(var i=1; i<12; i++)
-                model.push(i);
-            outerPathView.model = model;
-
-            if(prefer24hView) {
-                model=[0];
-                for(var i=13; i<24; i++)
-                    model.push(i);
-                innerPathView.model = model;
-            }
+    onModeChanged: {
+        switch (mode) {
+        case FluidTemplates.TimeSelector.Hour:
             circle.selectedValue = selectedDate.getHours();
             break;
-
-        case "MINUTE":
-            innerPathView.visible = false;
-            setModeValues(0, 59, 60, mode, 1, 5)
-            var model=[];
-            for(var i=0; i<60; i++)
-                model.push(i);
-            outerPathView.model = model;
+        case FluidTemplates.TimeSelector.Minute:
             circle.selectedValue = selectedDate.getMinutes();
             break;
-
-        case "SECOND":
-            innerPathView.visible = false;
-            setModeValues(0, 59, 60, mode, 1, 5)
-            var model=[];
-            for(var i=0; i<60; i++)
-                model.push(i);
-            outerPathView.model = model;
+        case FluidTemplates.TimeSelector.Second:
             circle.selectedValue = selectedDate.getSeconds();
             break;
         }
     }
 
-    function setModeValues(min, max, valuesAtRing, mode, steps, labelStep) {
-        circle.minValue = min;
-        circle.maxValue = max;
-        circle.valuesAtRing = valuesAtRing;
-        circle.mode = mode;
-        circle.steps = steps;
-        circle.labelSteps = labelStep;
-    }
-
-    onSelectedDateChanged: selectMode(circle.mode)
-    Component.onCompleted: selectMode("HOUR")
-
-
-    Rectangle {
+    circle: Rectangle {
         id: circle
-        property int minValue: 0
-        property int maxValue: 0
-        property int steps: 1
-        property int labelSteps: 1
-        property int valuesAtRing: 12
 
-        property string mode: "HOUR"
+        property int minValue: 0
+        property int maxValue: {
+            if (timeSelector.mode === FluidTemplates.TimeSelector.Hour)
+                return prefer24Hour ? 23 : 11;
+            return 59;
+        }
+        property int steps: 1
+        property int labelSteps: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? 1 : 5
+        property int valuesAtRing: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? 12 : 60
+        property int selectedValue: 0
 
         function getValue(x, y) {
             var distance = Math.sqrt((x * x) + (y * y));
@@ -139,8 +103,6 @@ Item {
             value += valuesAtRing * ring;
             return minValue + (value % ((maxValue - minValue) + 1));
         }
-
-        property int selectedValue: 0
 
         anchors.centerIn: parent
         width: Math.min(parent.width, parent.height)
@@ -165,24 +127,27 @@ Item {
             rotation: (360 / circle.valuesAtRing) * circle.selectedValue
             x: circle.width / 2 - width / 2
             y: {
-                var selValue = circle.selectedValue === 0 && !prefer24hView ? 12 : circle.selectedValue
-                if(outerPathView.model.indexOf(selValue) > -1)
+                var selValue = circle.selectedValue === 0 && !prefer24Hour ? 12 : circle.selectedValue
+                if (outerPathView.model.indexOf(selValue) > -1)
                     return outerPathView.pathPadding
                 else
                     return innerPathView.pathPadding
             }
-
             antialiasing: true
             transformOrigin: Item.Bottom
         }
 
         PathView {
             id: outerPathView
+
             property real pathPadding: 21
+            property var twelveModel: [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            property var sixtyModel: []
 
             anchors.fill: parent
             anchors.margins: 0
             interactive: false
+            model: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? twelveModel : sixtyModel
             delegate: pathDelegate
             path: Path {
                 startX: circle.width / 2
@@ -202,16 +167,24 @@ Item {
                     useLargeArc: false
                 }
             }
+
+            Component.onCompleted: {
+                for (var i = 0; i < 60; i++)
+                    sixtyModel.push(i);
+            }
         }
 
 
         PathView {
             id: innerPathView
+
             property real pathPadding: 65
-            visible: false
+
+            visible: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? prefer24Hour : false
             anchors.fill: parent
             anchors.margins: 0
             interactive: false
+            model: timeSelector.mode === FluidTemplates.TimeSelector.Hour && prefer24Hour ? [0, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] : []
             delegate: pathDelegate
             path: Path {
                 startX: circle.width / 2
@@ -235,10 +208,11 @@ Item {
 
         Component {
             id: pathDelegate
+
             Rectangle {
                 function isSelected(value) {
-                    if(currentSelector === "HOUR") {
-                        if(circle.selectedValue === 0 && !prefer24hView) {
+                    if(currentSelector === FluidTemplates.TimeSelector.HourMode) {
+                        if(circle.selectedValue === 0 && !prefer24Hour) {
                             return value === 12
                         }
                     }
@@ -249,6 +223,7 @@ Item {
                 height: width
                 radius: width / 2
                 color: isSelected(modelData) ? Material.accent : "transparent"
+
                 Label {
                     id: label
                     text: modelData
@@ -269,22 +244,22 @@ Item {
             anchors.margins: 0
             hoverEnabled: true
             onPositionChanged: {
-                circle.selectedValue = circle.getValue(mouse.x - circle.width/2, mouse.y - circle.width/2)
+                circle.selectedValue = circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2);
             }
             onClicked: {
                 var newDate = new Date(selectedDate.getTime());
-                switch(circle.mode) {
-                case "HOUR":
-                    newDate.setHours(circle.getValue(mouse.x - circle.width/2, mouse.y - circle.width/2) + (timeMode === "PM" ? 12 : 0));
-                    selectMode("MINUTE");
+                switch (timeSelector.mode) {
+                case FluidTemplates.TimeSelector.Hour:
+                    newDate.setHours(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2) + (timeMode === FluidTemplates.TimeSelector.PM ? 12 : 0));
+                    timeSelector.mode = FluidTemplates.TimeSelector.Minute;
                     break;
-                case "MINUTE":
-                    newDate.setMinutes(circle.getValue(mouse.x - circle.width/2, mouse.y - circle.width/2));
-                    selectMode("SECOND");
+                case FluidTemplates.TimeSelector.Minute:
+                    newDate.setMinutes(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
+                    timeSelector.mode = FluidTemplates.TimeSelector.Second;
                     break;
-                case "SECOND":
-                    newDate.setSeconds(circle.getValue(mouse.x - circle.width/2, mouse.y - circle.width/2));
-                    selectMode("HOUR");
+                case FluidTemplates.TimeSelector.Second:
+                    newDate.setSeconds(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
+                    timeSelector.mode = FluidTemplates.TimeSelector.Hour;
                     break;
                 }
                 selectedDate = newDate;

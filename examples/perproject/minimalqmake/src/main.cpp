@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
-                         QDir::separator() + QLatin1String("fluid") + QLatin1String("qml"));
+                         QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("qml"));
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 

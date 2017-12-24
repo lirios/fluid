@@ -137,11 +137,10 @@ FluidControls.Picker {
             id: dateSelector
             width: parent.width
             height: parent.height
-            orientation: datePicker.orientation
             dayOfWeekRowVisible: datePicker.dayOfWeekRowVisible
             weekNumberVisible: datePicker.weekNumberVisible
-            minDate: datePicker.minDate
-            maxDate: datePicker.maxDate
+            from: datePicker.minDate
+            to: datePicker.maxDate
             visible: true
             locale: datePicker.locale
             onSelectedDateChanged: {

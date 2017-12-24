@@ -1,6 +1,6 @@
 module Fluid.Controls
 plugin fluidcontrolsplugin
-class FluidControlsPlugin
+classname FluidControlsPlugin
 typeinfo plugins.qmltypes
 
 Action 1.0 Action.qml

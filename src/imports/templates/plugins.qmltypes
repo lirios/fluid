@@ -9,6 +9,23 @@ import QtQuick.tooling 1.2
 Module {
     dependencies: ["QtQuick 2.8"]
     Component {
+        name: "Picker"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["Fluid.Templates/Picker 1.0"]
+        exportMetaObjectRevisions: [0]
+        Enum {
+            name: "Orientation"
+            values: {
+                "Landscape": 0,
+                "Portrait": 1
+            }
+        }
+        Property { name: "locale"; type: "QLocale" }
+        Property { name: "orientation"; type: "Orientation" }
+        Property { name: "background"; type: "QQuickItem"; isPointer: true }
+    }
+    Component {
         name: "TimeSelector"
         defaultProperty: "data"
         prototype: "QQuickItem"

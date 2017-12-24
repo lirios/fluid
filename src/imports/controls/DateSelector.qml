@@ -61,7 +61,7 @@ Item {
     property alias currentItem: listView.currentItem
 
     property int navigatorHeight: 50
-    property int orientation: Qt.LandscapeOrientation
+    property int orientation: FluidControls.Picker.Landscape
     property bool dayOfWeekRowVisible: true
     property bool weekNumberVisible: true
     property var selectedDate: new Date()

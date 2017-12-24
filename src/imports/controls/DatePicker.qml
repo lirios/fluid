@@ -61,7 +61,7 @@ import Qt.labs.calendar 1.0
     For more information you can read the
     \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
-Picker {
+FluidControls.Picker {
     id: datePicker
 
     property bool dayOfWeekRowVisible: true

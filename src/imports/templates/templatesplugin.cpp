@@ -14,11 +14,13 @@
 
 #include "templatesplugin.h"
 
+#include "picker.h"
 #include "timeselector.h"
 
 void FluidTemplatesPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Templates"));
 
+    qmlRegisterType<Picker>(uri, 1, 0, "Picker");
     qmlRegisterType<TimeSelector>(uri, 1, 0, "TimeSelector");
 }

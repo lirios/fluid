@@ -58,7 +58,7 @@ import Qt.labs.calendar 1.0
     }
 
     \endcode*/
-Picker {
+FluidControls.Picker {
     id: dateTimePicker
 
     property bool dayOfWeekRowVisible: true
@@ -116,13 +116,13 @@ Picker {
 
         GridLayout {
             anchors.fill: parent
-            columns: orientation === Qt.LandscapeOrientation ? 1 : 2
-            rows: orientation === Qt.LandscapeOrientation ? 2 : 1
+            columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+            rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
 
             ColumnLayout {
                 Layout.column: 1
                 Layout.row: 1
-                Layout.alignment: orientation === Qt.LandscapeOrientation ? Qt.AlignTop : Qt.AlignBottom
+                Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom
                 Layout.fillHeight: false
 
                 FluidControls.BodyLabel {
@@ -156,23 +156,25 @@ Picker {
             }
 
             GridLayout {
-                Layout.row: orientation === Qt.LandscapeOrientation ? 2 : 1
-                Layout.column: orientation === Qt.LandscapeOrientation ? 1 : 2
-                Layout.alignment: orientation === Qt.LandscapeOrientation ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
+                Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
+                Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
 
-                columns: orientation === Qt.LandscapeOrientation ? 1 : 2
-                rows: orientation === Qt.LandscapeOrientation ? 2 : 1
+                columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
 
                 Row {
                     Layout.column: 1
                     Layout.row: 1
                     Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+
                     Label {
                         text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
                         color: "white"
-                        font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 25
+                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
                         anchors.verticalCenter: parent.verticalCenter
                         opacity: __mode === "HOUR" ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: dateTimePicker.show("HOUR")
@@ -182,14 +184,15 @@ Picker {
                     Label {
                         text: ":"
                         color: "white"
-                        font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 25
+                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
                     }
 
                     Label {
                         text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
                         color: "white"
-                        font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 25
+                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
                         opacity: __mode === "MINUTE" ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: dateTimePicker.show("MINUTE")
@@ -199,14 +202,15 @@ Picker {
                     Label {
                         text: ":"
                         color: "white"
-                        font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 25
+                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
                     }
 
                     Label {
                         text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
                         color: "white"
-                        font.pixelSize: orientation === Qt.LandscapeOrientation ? 30 : 25
+                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
                         opacity: __mode === "SECOND" ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: dateTimePicker.show("SECOND")
@@ -215,9 +219,9 @@ Picker {
                 }
 
                 Column {
-                    Layout.column: orientation === Qt.LandscapeOrientation ? 1 : 2
-                    Layout.row: orientation === Qt.LandscapeOrientation ? 2 : 1
-                    Layout.alignment: orientation === Qt.LandscapeOrientation ? Qt.AlignHCenter : Qt.AlignBottom
+                    Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                    Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
+                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignHCenter : Qt.AlignBottom
                     visible: !timeSelector.prefer24Hour
 
                     Label {
@@ -226,17 +230,20 @@ Picker {
                         font.pixelSize: 18
                         opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
                         horizontalAlignment: Text.AlignHCenter
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
                         }
                     }
+
                     Label {
                         text: "PM"
                         color: "white"
                         opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignHCenter
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
@@ -252,7 +259,7 @@ Picker {
         width: parent.width
         height: parent.height
 
-        DateSelector {
+        FluidControls.DateSelector {
             id: dateSelector
             width: parent.width
             height: parent.height
@@ -274,7 +281,7 @@ Picker {
             }
         }
 
-        YearSelector {
+        FluidControls.YearSelector {
             id: yearSelector
             anchors.fill: parent
             minDate: dateTimePicker.minDate
@@ -286,7 +293,7 @@ Picker {
             }
         }
 
-        TimeSelector {
+        FluidControls.TimeSelector {
                 id: timeSelector
                 anchors.fill: parent
                 anchors.topMargin: 10

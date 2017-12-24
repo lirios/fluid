@@ -19,6 +19,7 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype Picker
@@ -56,10 +57,9 @@ import Fluid.Controls 1.0 as FluidControls
     \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 
 */
-FluidControls.Card {
-    id: pickerDialog
+FluidTemplates.Picker {
+    id: picker
 
-    property int orientation: Screen.primaryOrientation
     readonly property int footerHeight: 50
     property alias header: header.data
     property alias selector: selectorContainer.data
@@ -70,63 +70,71 @@ FluidControls.Card {
     signal accepted(var date)
     signal rejected()
 
-    width: orientation === Qt.LandscapeOrientation ? 500 : 340
-    height: orientation === Qt.LandscapeOrientation ? 350 : 470
+    implicitWidth: background.implicitWidth
+    implicitHeight: background.implicitHeight
 
-    Control {
-        id: picker
-        implicitWidth: parent.width
-        implicitHeight: parent.height
+    background: FluidControls.Card {
+        implicitWidth: picker.orientation === FluidTemplates.Picker.Landscape ? 500 : 340
+        implicitHeight: picker.orientation === FluidTemplates.Picker.Landscape ? 350 : 470
 
-        GridLayout {
-            id: content
-            anchors.fill: parent
-            columns: orientation === Qt.LandscapeOrientation ? 2 : 1
-            rows: orientation === Qt.LandscapeOrientation ? 2 : 3
-            anchors.margins: 0
-            columnSpacing: 0
-            rowSpacing: 0
+        locale: picker.locale
 
-            Rectangle {
-                id: header
-                Layout.column: 1
-                Layout.row: 1
-                Layout.rowSpan: orientation === Qt.LandscapeOrientation ? 2 : 1
-                width: orientation === Qt.LandscapeOrientation ? parent.width / 3 : parent.width
-                height: orientation === Qt.LandscapeOrientation ? parent.height : 96
-                color: Material.accentColor
-            }
+        Control {
+            id: control
 
-            Item {
-                id: selectorContainer
-                Layout.row: pickerDialog.orientation === Qt.LandscapeOrientation ? 1 : 2
-                Layout.column: pickerDialog.orientation === Qt.LandscapeOrientation ? 2 : 1
-                Layout.leftMargin: 5
-                Layout.rightMargin: 5
-                width: (pickerDialog.orientation === Qt.LandscapeOrientation ? picker.implicitWidth - header.width : picker.implicitWidth) - 10
-                height: picker.implicitHeight - (pickerDialog.orientation === Qt.LandscapeOrientation ? 0 : header.height) - footer.height
-            }
+            implicitWidth: parent.width
+            implicitHeight: parent.height
 
-            Item {
-                id: footer
-                Layout.row: orientation === Qt.LandscapeOrientation ? 2 : 3
-                Layout.column: orientation === Qt.LandscapeOrientation ? 2 : 1
-                height: footerHeight
-                width: orientation === Qt.LandscapeOrientation ? (parent.width / 3) * 2 : parent.width
+            GridLayout {
+                id: content
+                anchors.fill: parent
+                columns: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
+                rows: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 3
+                anchors.margins: 0
+                columnSpacing: 0
+                rowSpacing: 0
 
-                DialogButtonBox {
-                    id: buttonBox
-                    padding: 0
-                    anchors.fill: parent
-                    anchors.leftMargin: 10
-                    anchors.rightMargin: 10
-                    anchors.verticalCenter: parent.verticalCenter
-                    background: Rectangle {
+                Rectangle {
+                    id: header
+                    Layout.column: 1
+                    Layout.row: 1
+                    Layout.rowSpan: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
+                    width: picker.orientation === FluidTemplates.Picker.Landscape ? parent.width / 3 : parent.width
+                    height: picker.orientation === FluidTemplates.Picker.Landscape ? parent.height : 96
+                    color: picker.Material.accentColor
+                }
+
+                Item {
+                    id: selectorContainer
+                    Layout.row: picker.orientation === FluidTemplates.Picker.Landscape ? 1 : 2
+                    Layout.column: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
+                    Layout.leftMargin: 5
+                    Layout.rightMargin: 5
+                    width: (picker.orientation === FluidTemplates.Picker.Landscape ? control.implicitWidth - header.width : control.implicitWidth) - 10
+                    height: control.implicitHeight - (picker.orientation === FluidTemplates.Picker.Landscape ? 0 : header.height) - footer.height
+                }
+
+                Item {
+                    id: footer
+                    Layout.row: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 3
+                    Layout.column: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
+                    height: footerHeight
+                    width: picker.orientation === FluidTemplates.Picker.Landscape ? (parent.width / 3) * 2 : parent.width
+
+                    DialogButtonBox {
+                        id: buttonBox
+                        padding: 0
                         anchors.fill: parent
-                        color: Material.background
+                        anchors.leftMargin: 10
+                        anchors.rightMargin: 10
+                        anchors.verticalCenter: parent.verticalCenter
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: picker.Material.background
+                        }
+                        onAccepted: picker.accepted(selectedDate)
+                        onRejected: picker.rejected()
                     }
-                    onAccepted: pickerDialog.accepted(selectedDate)
-                    onRejected: pickerDialog.rejected()
                 }
             }
         }

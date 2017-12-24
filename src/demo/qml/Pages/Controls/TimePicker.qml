@@ -44,7 +44,7 @@ Item {
 
     FluidControls.TimePickerDialog {
         id: timePickerDialogLandscape
-        orientation: Qt.LandscapeOrientation
+        orientation: FluidControls.TimePicker.Landscape
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")
@@ -52,7 +52,7 @@ Item {
 
     FluidControls.TimePickerDialog {
         id: timePickerDialogPortrait
-        orientation: Qt.PortraitOrientation
+        orientation: FluidControls.TimePicker.Portrait
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")

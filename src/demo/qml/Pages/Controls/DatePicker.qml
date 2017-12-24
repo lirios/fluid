@@ -45,7 +45,7 @@ Item {
 
         FluidControls.DatePicker {
             id: datepicker
-            orientation: Qt.LandscapeOrientation
+            orientation: FluidControls.DatePicker.Landscape
             onAccepted: datePickerPopup.close()
             onRejected: datePickerPopup.close()
 
@@ -74,7 +74,7 @@ Item {
 
         FluidControls.DatePicker {
             id: datepicker2
-            orientation: Qt.PortraitOrientation
+            orientation: FluidControls.DatePicker.Portrait
             onAccepted: datePickerPopup2.close()
             onRejected: datePickerPopup2.close()
 

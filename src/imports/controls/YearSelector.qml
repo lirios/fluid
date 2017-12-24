@@ -16,13 +16,14 @@ import QtQuick 2.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype YearSelector
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
-    \brief Tumbler to select a year between minDate and maxDate
+    \brief Tumbler to select a year between \a from and \a to
 
     The YearSelector is used to select a year between minDate and maxDate.
     It's part of the DatePicker but can be used also standalone.
@@ -37,8 +38,8 @@ import Fluid.Controls 1.0 as FluidControls
 
         FluidControls.YearSelector {
             anchors.fill: parent
-            minDate: new Date(1976, 0, 1)
-            maxDate: new Date(2150, 11, 31)
+            from: new Date(1976, 0, 1)
+            to: new Date(2150, 11, 31)
 
             onSelectedDateChanged: {
                 console.log(selectedDate)
@@ -50,61 +51,42 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
-Item {
-    id: yearSelector
+FluidTemplates.YearSelector {
+    id: control
 
-    property var minDate: new Date(1976, 0, 1)
-    property var maxDate: new Date(2150, 11, 31)
-    property var selectedDate: new Date()
-    property var __model: []
-    property int visibleItemCount: 7
+    onSelectedDateChanged: control.contentItem.currentIndex = selectedDate.getFullYear() - from.getFullYear()
 
-    function calcModel(startDate, endDate) {
-        var model = []
-        if(startDate < endDate) {
-            for(var i=startDate.getFullYear(); i < endDate.getFullYear(); i++) {
-                model.push(i);
-            }
-        }
-        __model = model;
+    delegate: FluidControls.SubheadingLabel {
+        text: model.year
+        color: ListView.view.currentIndex === index ? control.Material.accent : control.Material.primaryTextColor
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font.bold: ListView.view.currentIndex === index
+        font.pixelSize: ListView.view.currentIndex === index ? 24 : 16
+        width: parent.width
+        height: control.contentItem.height / control.visibleItemCount
     }
 
-    onMinDateChanged: calcModel(minDate, maxDate)
-    onMaxDateChanged: calcModel(minDate, maxDate)
-
-    ListView {
-        id: listView
+    contentItem: ListView {
         width: parent.width
         height: parent.height
         clip: true
-        model: __model
-        currentIndex: selectedDate.getFullYear() - minDate.getFullYear()
+        model: control.model
+        delegate: control.delegate
         highlightRangeMode: ListView.StrictlyEnforceRange
         highlightMoveDuration: 0
-        preferredHighlightBegin: height / 2 - height / yearSelector.visibleItemCount / 2
-        preferredHighlightEnd: height / 2 + height / yearSelector.visibleItemCount / 2
-        delegate: FluidControls.SubheadingLabel {
-            text: modelData
-            color: ListView.view.currentIndex === index ? Material.accent : Material.primaryTextColor
-            horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.bold: ListView.view.currentIndex === index
-            font.pixelSize: ListView.view.currentIndex === index ? 24 : 16
-            height: listView.height / yearSelector.visibleItemCount
-            width: parent.width
-        }
+        preferredHighlightBegin: height / 2 - height / control.visibleItemCount / 2
+        preferredHighlightEnd: height / 2 + height / control.visibleItemCount / 2
         onCurrentIndexChanged: {
-            if(selectedDate.getFullYear() !== model[currentIndex]) {
-                selectedDate.setFullYear(model[currentIndex])
-                selectedDate = new Date(selectedDate.getTime())
+            var year = model.get(currentIndex);
+
+            if (selectedDate.getFullYear() !== year) {
+                var month = control.selectedDate.getMonth();
+                var day = control.selectedDate.getDay();
+                control.selectedDate = new Date(year, month, day);
             }
         }
-    }
-    Component.onCompleted: {
-        calcModel(minDate, maxDate)
-        yearSelector.onSelectedDateChanged.connect(function() {
-            listView.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
-        });
-        listView.currentIndex = selectedDate.getFullYear() - minDate.getFullYear()
+
+        Component.onCompleted: currentIndex = selectedDate.getFullYear() - from.getFullYear()
     }
 }

@@ -284,8 +284,8 @@ FluidControls.Picker {
         FluidControls.YearSelector {
             id: yearSelector
             anchors.fill: parent
-            minDate: dateTimePicker.minDate
-            maxDate: dateTimePicker.maxDate
+            from: dateTimePicker.minDate
+            to: dateTimePicker.maxDate
             visible: false
             onSelectedDateChanged: {
                 if(dateTimePicker.selectedDate != selectedDate)

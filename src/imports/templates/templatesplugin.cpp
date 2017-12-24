@@ -16,6 +16,8 @@
 
 #include "picker.h"
 #include "timeselector.h"
+#include "yearmodel.h"
+#include "yearselector.h"
 
 void FluidTemplatesPlugin::registerTypes(const char *uri)
 {
@@ -23,4 +25,7 @@ void FluidTemplatesPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<Picker>(uri, 1, 0, "Picker");
     qmlRegisterType<TimeSelector>(uri, 1, 0, "TimeSelector");
+    qmlRegisterType<YearSelector>(uri, 1, 0, "YearSelector");
+
+    qmlRegisterUncreatableType<YearModel>(uri, 1, 0, "YearModel", QLatin1String("Cannot instantiate YearModel"));
 }

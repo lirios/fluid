@@ -17,8 +17,8 @@
 DateSelector::DateSelector(QQuickItem *parent)
     : QQuickItem(parent)
     , m_contentItem(new QQuickItem(this))
-    , m_from(QDate::fromString(QLatin1String("1976-01-01"), QLatin1String("yyyy-MM-dd")))
-    , m_to(QDate::fromString(QLatin1String("2150-12-31"), QLatin1String("yyyy-MM-dd")))
+    , m_from(1, 1, 1)
+    , m_to(275759, 9, 25)
     , m_selectedDate(QDate::currentDate())
 {
     m_contentItem->setParentItem(this);
@@ -138,7 +138,7 @@ void DateSelector::setFrom(const QDate &date)
 
 void DateSelector::resetFrom()
 {
-    setFrom(QDate::fromString(QLatin1String("1976-01-01"), QLatin1String("yyyy-MM-dd")));
+    setFrom(QDate(1, 1, 1));
 }
 
 QDate DateSelector::to() const
@@ -157,7 +157,7 @@ void DateSelector::setTo(const QDate &date)
 
 void DateSelector::resetTo()
 {
-    setTo(QDate::fromString(QLatin1String("2150-12-31"), QLatin1String("yyyy-MM-dd")));
+    setTo(QDate(275759, 9, 25));
 }
 
 QDate DateSelector::selectedDate() const

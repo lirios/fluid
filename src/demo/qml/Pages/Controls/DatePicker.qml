@@ -29,6 +29,12 @@ Item {
             text: qsTr("Portrait")
             onClicked: datePickerDialogPortrait.open()
         }
+
+        FluidControls.DisplayLabel {
+            id: dateLabel
+            level: 2
+            text: qsTr("n.a.")
+        }
     }
 
     FluidControls.DatePickerDialog {
@@ -42,6 +48,7 @@ Item {
             flat: true
             onClicked: datePickerDialogLandscape.selectedDate = new Date()
         }
+        onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
     }
 
     FluidControls.DatePickerDialog {
@@ -55,5 +62,6 @@ Item {
             flat: true
             onClicked: datePickerDialogPortrait.selectedDate = new Date()
         }
+        onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
     }
 }

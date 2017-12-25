@@ -29,11 +29,23 @@ Item {
             text: qsTr("Portrait")
             onClicked: dateTimePickerDialogPortrait.open()
         }
+
+        FluidControls.DisplayLabel {
+            id: dateTimeLabel
+            level: 2
+            text: qsTr("n.a.")
+        }
+
+        Switch {
+            id: prefer24HourSwitch
+            text: qsTr("24 hour clock")
+        }
     }
 
     FluidControls.DateTimePickerDialog {
         id: dateTimePickerDialogLandscape
         orientation: FluidControls.DateTimePicker.Landscape
+        prefer24hView: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5
@@ -42,11 +54,13 @@ Item {
             flat: true
             onClicked: dateTimePickerDialogLandscape.selectedDate = new Date()
         }
+        onAccepted: dateTimeLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap")
     }
 
     FluidControls.DateTimePickerDialog {
         id: dateTimePickerDialogPortrait
         orientation: FluidControls.DateTimePicker.Portrait
+        prefer24hView: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5
@@ -55,5 +69,6 @@ Item {
             flat: true
             onClicked: dateTimePickerDialogPortrait.selectedDate = new Date()
         }
+        onAccepted: dateTimeLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd  hh:mm ap")
     }
 }

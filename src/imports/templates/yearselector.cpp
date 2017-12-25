@@ -18,8 +18,8 @@
 YearSelector::YearSelector(QQuickItem *parent)
     : QQuickItem(parent)
     , m_model(new YearModel(this))
-    , m_from(QDate::fromString(QLatin1String("1976-01-01"), QLatin1String("yyyy-MM-dd")))
-    , m_to(QDate::fromString(QLatin1String("2150-12-31"), QLatin1String("yyyy-MM-dd")))
+    , m_from(1, 1, 1)
+    , m_to(275759, 9, 25)
     , m_selectedDate(QDate::currentDate())
 {
     m_model->setFrom(m_from);
@@ -108,7 +108,7 @@ void YearSelector::setFrom(const QDate &date)
 
 void YearSelector::resetFrom()
 {
-    setFrom(QDate::fromString(QLatin1String("1976-01-01"), QLatin1String("yyyy-MM-dd")));
+    setFrom(QDate(1, 1, 1));
 }
 
 QDate YearSelector::to() const
@@ -132,7 +132,7 @@ void YearSelector::setTo(const QDate &date)
 
 void YearSelector::resetTo()
 {
-    setTo(QDate::fromString(QLatin1String("2150-12-31"), QLatin1String("yyyy-MM-dd")));
+    setTo(QDate(275759, 9, 25));
 }
 
 QDate YearSelector::selectedDate() const

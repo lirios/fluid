@@ -22,70 +22,38 @@ Item {
 
         Button {
             text: qsTr("Landscape")
-            onClicked: datePickerPopup.show()
+            onClicked: datePickerDialogLandscape.open()
         }
 
         Button {
             text: qsTr("Portrait")
-            onClicked: datePickerPopup2.show()
+            onClicked: datePickerDialogPortrait.open()
         }
     }
 
-    Popup {
-        function show() {
-            datepicker.show("MONTH")
-            datePickerPopup.open()
-        }
-
-        id: datePickerPopup
-        modal: true
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        padding: 0
-
-        FluidControls.DatePicker {
-            id: datepicker
-            orientation: FluidControls.DatePicker.Landscape
-            onAccepted: datePickerPopup.close()
-            onRejected: datePickerPopup.close()
-
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-            standardButtonsContainer: Button {
-                height: parent.height - 5
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Now"
-                flat: true
-                onClicked: datepicker.selectedDate = new Date()
-            }
+    FluidControls.DatePickerDialog {
+        id: datePickerDialogLandscape
+        orientation: FluidControls.DatePicker.Landscape
+        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        standardButtonsContainer: Button {
+            height: parent.height - 5
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Today")
+            flat: true
+            onClicked: datePickerDialogLandscape.selectedDate = new Date()
         }
     }
 
-    Popup {
-        function show() {
-            datepicker2.show("MONTH")
-            datePickerPopup2.open()
-        }
-
-        id: datePickerPopup2
-        modal: true
-        x: (parent.width - width) / 2
-        y: (parent.height - height) / 2
-        padding: 0
-
-        FluidControls.DatePicker {
-            id: datepicker2
-            orientation: FluidControls.DatePicker.Portrait
-            onAccepted: datePickerPopup2.close()
-            onRejected: datePickerPopup2.close()
-
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-            standardButtonsContainer: Button {
-                height: parent.height - 5
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Now"
-                flat: true
-                onClicked: datepicker2.selectedDate = new Date()
-            }
+    FluidControls.DatePickerDialog {
+        id: datePickerDialogPortrait
+        orientation: FluidControls.DatePicker.Portrait
+        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        standardButtonsContainer: Button {
+            height: parent.height - 5
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Today")
+            flat: true
+            onClicked: datePickerDialogPortrait.selectedDate = new Date()
         }
     }
 }

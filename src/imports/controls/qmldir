@@ -16,6 +16,7 @@ CaptionLabel 1.0 CaptionLabel.qml
 Card 1.0 Card.qml
 CircleImage 1.0 CircleImage.qml
 DatePicker 1.0 DatePicker.qml
+DatePickerDialog 1.0 DatePickerDialog.qml
 DateTimePicker 1.0 DateTimePicker.qml
 DateSelector 1.0 DateSelector.qml
 DialogLabel 1.0 DialogLabel.qml

@@ -135,6 +135,7 @@ QQC2.ToolBar {
             height: appBar.__iconSize
             name: leftAction ? leftAction.icon.name : ""
             source: leftAction ? leftAction.icon.source : ""
+            color: leftAction ? leftAction.icon.color : ""
         }
 
         visible: leftAction && leftAction.visible
@@ -192,6 +193,7 @@ QQC2.ToolBar {
                     height: appBar.__iconSize
                     name: appBar.actions[index].icon.name
                     source: appBar.actions[index].icon.source
+                    color: appBar.actions[index].icon.color
                 }
 
                 visible: appBar.actions[index].visible
@@ -236,6 +238,7 @@ QQC2.ToolBar {
                             height: appBar.__iconSize
                             name: appBar.actions[index + appBar.maxActionCount].icon.name
                             source: appBar.actions[index + appBar.maxActionCount].icon.source
+                            color: appBar.actions[index + appBar.maxActionCount].icon.color
                         }
 
                         text: appBar.actions[index + appBar.maxActionCount].text

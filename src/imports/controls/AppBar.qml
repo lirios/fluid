@@ -135,7 +135,13 @@ QQC2.ToolBar {
             height: appBar.__iconSize
             name: leftAction ? leftAction.icon.name : ""
             source: leftAction ? leftAction.icon.source : ""
-            color: leftAction ? leftAction.icon.color : ""
+        }
+
+        Binding {
+            target: leftButton
+            property: "icon.color"
+            value: leftAction.icon.color
+            when: leftAction && leftAction.icon.color.a > 0
         }
 
         visible: leftAction && leftAction.visible

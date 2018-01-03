@@ -35,10 +35,6 @@ Control {
 
     property alias icon: iconLabel.icon
 
-    icon.width: 96
-    icon.height: 96
-    icon.color: Material.secondaryTextColor
-
     /*!
         \qmlproperty string text
 
@@ -65,7 +61,9 @@ Control {
             mirrored: control.mirrored
             display: IconLabel.IconOnly
 
-            color: control.icon.color
+            icon.width: 96
+            icon.height: 96
+            icon.color: Material.iconColor
 
             Layout.alignment: Qt.AlignHCenter
         }

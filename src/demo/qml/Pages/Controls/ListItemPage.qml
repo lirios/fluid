@@ -21,11 +21,11 @@ Page {
     ListView {
         anchors.fill: parent
         model: ListModel {
-            ListElement { title: "List Item 1"; source: "qrc:/qml/Pages/Compound/SubPage.qml" }
-            ListElement { title: "List Item 2"; source: "qrc:/qml/Pages/Compound/SubPage.qml" }
-            ListElement { title: "List Item 3"; source: "qrc:/qml/Pages/Compound/SubPage.qml" }
-            ListElement { title: "List Item 4"; source: "qrc:/qml/Pages/Compound/SubPage.qml" }
-            ListElement { title: "List Item 5"; source: "qrc:/qml/Pages/Compound/SubPage.qml" }
+            ListElement { title: "List Item 1"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
+            ListElement { title: "List Item 2"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
+            ListElement { title: "List Item 3"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
+            ListElement { title: "List Item 4"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
+            ListElement { title: "List Item 5"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
         }
         header: Subheader {
             text: "Header"

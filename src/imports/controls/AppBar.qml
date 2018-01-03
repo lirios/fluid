@@ -222,7 +222,8 @@ QQC2.ToolBar {
             QQC2.Menu {
                 id: overflowMenu
 
-                y: parent.topPadding
+                x: -width + overflowButton.width - overflowButton.rightPadding
+                y: overflowButton.topPadding
                 transformOrigin: QQC2.Menu.TopRight
 
                 Instantiator {

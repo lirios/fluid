@@ -56,6 +56,7 @@ Tab {
                 ListElement { title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
                 ListElement { title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
                 ListElement { title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
+                ListElement { title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/Placeholder.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")

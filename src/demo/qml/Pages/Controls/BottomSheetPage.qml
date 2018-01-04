@@ -69,6 +69,11 @@ Item {
             FluidControls.Action {
                 text: qsTr("Upload")
                 icon.name: "file/file_upload"
+            },
+            FluidControls.Action {
+                text: qsTr("Warning (Disabled)")
+                icon.name: "alert/warning"
+                enabled: false
             }
         ]
     }
@@ -100,6 +105,11 @@ Item {
             FluidControls.Action {
                 text: qsTr("Upload")
                 icon.name: "file/file_upload"
+            },
+            FluidControls.Action {
+                text: qsTr("Warning (Disabled)")
+                icon.name: "alert/warning"
+                enabled: false
                 hasDividerAfter: true
             },
             FluidControls.Action {
@@ -171,6 +181,11 @@ Item {
             FluidControls.Action {
                 text: qsTr("Upload")
                 icon.name: "file/file_upload"
+            },
+            FluidControls.Action {
+                text: qsTr("Warning (Disabled)")
+                icon.name: "alert/warning"
+                enabled: false
             },
             FluidControls.Action {
                 text: qsTr("Placeholder 1")

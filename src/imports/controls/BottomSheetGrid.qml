@@ -121,7 +121,7 @@ BottomSheet {
 
                     spacing: 16
 
-                    columns: Math.floor((width - leftMargin - rightMargin) / (cellWidth + spacing))
+                    columns: Math.floor(width - listView.leftMargin - listView.rightMargin) / (cellWidth + spacing * 2)
                     rows: Math.ceil(actions.length / columns)
 
                     Repeater {
@@ -154,6 +154,9 @@ BottomSheet {
                             background.implicitHeight: grid.cellHeight
 
                             contentItem: QQCImpl2.IconLabel {
+                                width: grid.cellWidth
+                                height: grid.cellHeight
+
                                 spacing: item.spacing
                                 mirrored: item.mirrored
                                 display: QQCImpl2.IconLabel.TextUnderIcon

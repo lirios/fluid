@@ -69,9 +69,6 @@ Dialog {
         footer: DialogButtonBox {
             id: buttonBox
             padding: 0
-            anchors.fill: parent
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10
             standardButtons: dialog.standardButtons
             onAccepted: dialog.accept()
             onRejected: dialog.reject()

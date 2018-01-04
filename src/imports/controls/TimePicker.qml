@@ -59,98 +59,102 @@ FluidControls.Picker {
         timeSelector.selectedDate = selectedDate
     }
 
-    header: Item {
-        anchors.fill: parent
-        anchors.margins: 16
+    header: Rectangle {
+        color: timePicker.Material.accentColor
 
-        GridLayout {
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.centerIn: parent
+        Item {
+            anchors.fill: parent
+            anchors.margins: 16
 
-            columns: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
-            rows: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
+            GridLayout {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.centerIn: parent
 
-            Row {
-                Layout.column: 1
-                Layout.row: 1
+                columns: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
+                rows: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
 
-                Label {
-                    text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
-                    color: "white"
-                    font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
-                    anchors.verticalCenter: parent.verticalCenter
-                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
+                Row {
+                    Layout.column: 1
+                    Layout.row: 1
+
+                    Label {
+                        text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
+                        color: "white"
+                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        anchors.verticalCenter: parent.verticalCenter
+                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
+                        }
+                    }
+
+                    Label {
+                        text: ":"
+                        color: "white"
+                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                    }
+
+                    Label {
+                        text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
+                        color: "white"
+                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
+                        }
+                    }
+
+                    Label {
+                        text: ":"
+                        color: "white"
+                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                    }
+
+                    Label {
+                        text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
+                        color: "white"
+                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
+                        }
                     }
                 }
 
-                Label {
-                    text: ":"
-                    color: "white"
-                    font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
-                }
+                Column {
+                    Layout.column: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
+                    Layout.row: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
 
-                Label {
-                    text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
-                    color: "white"
-                    font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
-                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
+                    visible: !timeSelector.prefer24Hour
+                    anchors.horizontalCenter: orientation === FluidControls.Picker.Landscape ? parent.horizontalCenter : undefined
+
+                    Label {
+                        text: "AM"
+                        color: "white"
+                        font.pixelSize: 18
+                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
+                        horizontalAlignment: Text.AlignHCenter
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
+                        }
                     }
-                }
 
-                Label {
-                    text: ":"
-                    color: "white"
-                    font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
-                }
+                    Label {
+                        text: "PM"
+                        color: "white"
+                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
+                        font.pixelSize: 18
+                        horizontalAlignment: Text.AlignHCenter
 
-                Label {
-                    text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
-                    color: "white"
-                    font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
-                    opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
-                    }
-                }
-            }
-
-            Column {
-                Layout.column: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
-                Layout.row: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
-
-                visible: !timeSelector.prefer24Hour
-                anchors.horizontalCenter: orientation === FluidControls.Picker.Landscape ? parent.horizontalCenter : undefined
-
-                Label {
-                    text: "AM"
-                    color: "white"
-                    font.pixelSize: 18
-                    opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
-                    horizontalAlignment: Text.AlignHCenter
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
-                    }
-                }
-
-                Label {
-                    text: "PM"
-                    color: "white"
-                    opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
-                    font.pixelSize: 18
-                    horizontalAlignment: Text.AlignHCenter
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
+                        }
                     }
                 }
             }
@@ -159,9 +163,6 @@ FluidControls.Picker {
 
     selector: FluidControls.TimeSelector {
         id: timeSelector
-        anchors.fill: parent
-        anchors.topMargin: 10
-        anchors.bottomMargin: 10
 
         onSelectedDateChanged: {
             if (timePicker.selectedDate != selectedDate)

@@ -89,13 +89,12 @@ FluidControls.Picker {
         }
     }
 
-    header: Item {
-        id: header
-        anchors.fill: parent
-        anchors.margins: 16
+    header: Rectangle {
+        color: datePicker.Material.accentColor
 
         ColumnLayout {
             anchors.fill: parent
+            anchors.margins: 16
             spacing: 0
 
             FluidControls.BodyLabel {
@@ -129,10 +128,6 @@ FluidControls.Picker {
     }
 
     selector: Item {
-        id: selectorContainer
-        width: parent.width
-        height: parent.height
-
         FluidControls.DateSelector {
             id: dateSelector
             width: parent.width

@@ -60,9 +60,7 @@ import Fluid.Templates 1.0 as FluidTemplates
 FluidTemplates.Picker {
     id: picker
 
-    property alias header: header.data
-    property alias selector: selectorContainer.data
-    property alias footer: footer.data
+    property bool __footerIsVisible: footer && footer.children.length > 0
 
     signal accepted(var date)
     signal rejected()
@@ -70,58 +68,12 @@ FluidTemplates.Picker {
     implicitWidth: background.implicitWidth
     implicitHeight: background.implicitHeight
 
-    background: FluidControls.Card {
+    background: Pane {
         implicitWidth: picker.orientation === FluidTemplates.Picker.Landscape ? 500 : 340
         implicitHeight: picker.orientation === FluidTemplates.Picker.Landscape ? 350 : 470
 
         locale: picker.locale
 
-        Material.elevation: footer.children.length > 0 ? 0 : 1
-
-        Control {
-            id: control
-
-            implicitWidth: parent.width
-            implicitHeight: parent.height
-
-            GridLayout {
-                id: content
-                anchors.fill: parent
-                columns: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
-                rows: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 3
-                anchors.margins: 0
-                columnSpacing: 0
-                rowSpacing: 0
-
-                Rectangle {
-                    id: header
-                    Layout.column: 1
-                    Layout.row: 1
-                    Layout.rowSpan: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
-                    width: picker.orientation === FluidTemplates.Picker.Landscape ? parent.width / 3 : parent.width
-                    height: picker.orientation === FluidTemplates.Picker.Landscape ? parent.height : 96
-                    color: picker.Material.accentColor
-                }
-
-                Item {
-                    id: selectorContainer
-                    Layout.row: picker.orientation === FluidTemplates.Picker.Landscape ? 1 : 2
-                    Layout.column: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
-                    Layout.leftMargin: 5
-                    Layout.rightMargin: 5
-                    width: (picker.orientation === FluidTemplates.Picker.Landscape ? control.implicitWidth - header.width : control.implicitWidth) - 10
-                    height: control.implicitHeight - (picker.orientation === FluidTemplates.Picker.Landscape ? 0 : header.height) - footer.height
-                }
-
-                Item {
-                    id: footer
-                    Layout.row: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 3
-                    Layout.column: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
-                    width: picker.orientation === FluidTemplates.Picker.Landscape ? (parent.width / 3) * 2 : parent.width
-                    height: children.length > 0 ? 50 : 0
-                    visible: children.length > 0
-                }
-            }
-        }
+        Material.elevation: __footerIsVisible ? 0 : 1
     }
 }

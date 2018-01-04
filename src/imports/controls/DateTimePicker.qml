@@ -109,144 +109,147 @@ FluidControls.Picker {
         }
     }
 
-    header: Item {
-        id: header
-        anchors.fill: parent
-        anchors.margins: 16
+    header: Rectangle {
+        color: dateTimePicker.Material.accentColor
 
-        GridLayout {
+        Item {
             anchors.fill: parent
-            columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-            rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
-
-            ColumnLayout {
-                Layout.column: 1
-                Layout.row: 1
-                Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom
-                Layout.fillHeight: false
-
-                FluidControls.BodyLabel {
-                    text: selectedDate.getFullYear()
-                    level: 2
-                    color: "white"
-                    opacity: __mode === "YEAR" ? 1 : 0.7
-                    font.pixelSize: 16
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: dateTimePicker.show("YEAR")
-                    }
-                }
-
-                Label {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    text: selectedDate.toLocaleString(dateTimePicker.locale, "ddd, MMM dd")
-                    font.pixelSize: 30
-                    color: "white"
-                    wrapMode: Text.Wrap
-                    opacity: __mode === "MONTH" ? 1 : 0.7
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: dateTimePicker.show("MONTH")
-                    }
-                }
-
-            }
+            anchors.margins: 16
 
             GridLayout {
-                Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
-                Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-                Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
-
+                anchors.fill: parent
                 columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
                 rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
 
-                Row {
+                ColumnLayout {
                     Layout.column: 1
                     Layout.row: 1
-                    Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom
+                    Layout.fillHeight: false
 
-                    Label {
-                        text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
+                    FluidControls.BodyLabel {
+                        text: selectedDate.getFullYear()
+                        level: 2
                         color: "white"
-                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                        anchors.verticalCenter: parent.verticalCenter
-                        opacity: __mode === "HOUR" ? 1 : 0.7
+                        opacity: __mode === "YEAR" ? 1 : 0.7
+                        font.pixelSize: 16
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: dateTimePicker.show("HOUR")
+                            onClicked: dateTimePicker.show("YEAR")
                         }
                     }
 
                     Label {
-                        text: ":"
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        text: selectedDate.toLocaleString(dateTimePicker.locale, "ddd, MMM dd")
+                        font.pixelSize: 30
                         color: "white"
-                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                    }
-
-                    Label {
-                        text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
-                        color: "white"
-                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                        opacity: __mode === "MINUTE" ? 1 : 0.7
+                        wrapMode: Text.Wrap
+                        opacity: __mode === "MONTH" ? 1 : 0.7
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: dateTimePicker.show("MINUTE")
+                            onClicked: dateTimePicker.show("MONTH")
                         }
                     }
 
-                    Label {
-                        text: ":"
-                        color: "white"
-                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                    }
-
-                    Label {
-                        text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
-                        color: "white"
-                        font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                        opacity: __mode === "SECOND" ? 1 : 0.7
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: dateTimePicker.show("SECOND")
-                        }
-                    }
                 }
 
-                Column {
-                    Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                GridLayout {
                     Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
-                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignHCenter : Qt.AlignBottom
-                    visible: !timeSelector.prefer24Hour
+                    Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
 
-                    Label {
-                        text: "AM"
-                        color: "white"
-                        font.pixelSize: 18
-                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
-                        horizontalAlignment: Text.AlignHCenter
+                    columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                    rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
+                    Row {
+                        Layout.column: 1
+                        Layout.row: 1
+                        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+
+                        Label {
+                            text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
+                            color: "white"
+                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            anchors.verticalCenter: parent.verticalCenter
+                            opacity: __mode === "HOUR" ? 1 : 0.7
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: dateTimePicker.show("HOUR")
+                            }
+                        }
+
+                        Label {
+                            text: ":"
+                            color: "white"
+                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                        }
+
+                        Label {
+                            text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
+                            color: "white"
+                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            opacity: __mode === "MINUTE" ? 1 : 0.7
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: dateTimePicker.show("MINUTE")
+                            }
+                        }
+
+                        Label {
+                            text: ":"
+                            color: "white"
+                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                        }
+
+                        Label {
+                            text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
+                            color: "white"
+                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            opacity: __mode === "SECOND" ? 1 : 0.7
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: dateTimePicker.show("SECOND")
+                            }
                         }
                     }
 
-                    Label {
-                        text: "PM"
-                        color: "white"
-                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
-                        font.pixelSize: 18
-                        horizontalAlignment: Text.AlignHCenter
+                    Column {
+                        Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
+                        Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
+                        Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignHCenter : Qt.AlignBottom
+                        visible: !timeSelector.prefer24Hour
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
+                        Label {
+                            text: "AM"
+                            color: "white"
+                            font.pixelSize: 18
+                            opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
+                            horizontalAlignment: Text.AlignHCenter
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
+                            }
+                        }
+
+                        Label {
+                            text: "PM"
+                            color: "white"
+                            opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
+                            font.pixelSize: 18
+                            horizontalAlignment: Text.AlignHCenter
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
+                            }
                         }
                     }
                 }
@@ -255,10 +258,6 @@ FluidControls.Picker {
     }
 
     selector: Item {
-        id: selectorContainer
-        width: parent.width
-        height: parent.height
-
         FluidControls.DateSelector {
             id: dateSelector
             width: parent.width
@@ -293,17 +292,17 @@ FluidControls.Picker {
         }
 
         FluidControls.TimeSelector {
-                id: timeSelector
-                anchors.fill: parent
-                anchors.topMargin: 10
-                anchors.bottomMargin: 10
-                visible: false
+            id: timeSelector
+            anchors.fill: parent
+            anchors.topMargin: 10
+            anchors.bottomMargin: 10
+            visible: false
 
-                onSelectedDateChanged: {
-                    if(dateTimePicker.selectedDate != selectedDate)
-                        dateTimePicker.selectedDate = selectedDate
-                }
-       }
+            onSelectedDateChanged: {
+                if(dateTimePicker.selectedDate != selectedDate)
+                    dateTimePicker.selectedDate = selectedDate
+            }
+        }
     }
 
     onSelectedDateChanged: {

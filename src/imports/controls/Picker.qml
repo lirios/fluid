@@ -60,12 +60,9 @@ import Fluid.Templates 1.0 as FluidTemplates
 FluidTemplates.Picker {
     id: picker
 
-    readonly property int footerHeight: 50
     property alias header: header.data
     property alias selector: selectorContainer.data
     property alias footer: footer.data
-    property alias standardButtons: buttonBox.standardButtons
-    property alias standardButtonsContainer: buttonBox.data
 
     signal accepted(var date)
     signal rejected()
@@ -78,6 +75,8 @@ FluidTemplates.Picker {
         implicitHeight: picker.orientation === FluidTemplates.Picker.Landscape ? 350 : 470
 
         locale: picker.locale
+
+        Material.elevation: footer.children.length > 0 ? 0 : 1
 
         Control {
             id: control
@@ -118,23 +117,9 @@ FluidTemplates.Picker {
                     id: footer
                     Layout.row: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 3
                     Layout.column: picker.orientation === FluidTemplates.Picker.Landscape ? 2 : 1
-                    height: footerHeight
                     width: picker.orientation === FluidTemplates.Picker.Landscape ? (parent.width / 3) * 2 : parent.width
-
-                    DialogButtonBox {
-                        id: buttonBox
-                        padding: 0
-                        anchors.fill: parent
-                        anchors.leftMargin: 10
-                        anchors.rightMargin: 10
-                        anchors.verticalCenter: parent.verticalCenter
-                        background: Rectangle {
-                            anchors.fill: parent
-                            color: picker.Material.background
-                        }
-                        onAccepted: picker.accepted(selectedDate)
-                        onRejected: picker.rejected()
-                    }
+                    height: children.length > 0 ? 50 : 0
+                    visible: children.length > 0
                 }
             }
         }

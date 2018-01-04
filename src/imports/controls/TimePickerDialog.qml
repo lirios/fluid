@@ -51,6 +51,7 @@ Dialog {
     property alias prefer24Hour: timePicker.prefer24Hour
     property alias orientation: timePicker.orientation
     property alias selectedDate: timePicker.selectedDate
+    property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
@@ -65,8 +66,15 @@ Dialog {
 
     FluidControls.TimePicker {
         id: timePicker
-        standardButtons: dialog.standardButtons
-        onAccepted: dialog.accept()
-        onRejected: dialog.reject()
+        footer: DialogButtonBox {
+            id: buttonBox
+            padding: 0
+            anchors.fill: parent
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
+            standardButtons: dialog.standardButtons
+            onAccepted: dialog.accept()
+            onRejected: dialog.reject()
+        }
     }
 }

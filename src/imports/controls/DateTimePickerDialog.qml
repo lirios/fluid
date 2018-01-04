@@ -55,7 +55,7 @@ Dialog {
     property alias selectedDate: dateTimePicker.selectedDate
     property alias minDate: dateTimePicker.minDate
     property alias maxDate: dateTimePicker.maxDate
-    property alias standardButtonsContainer: dateTimePicker.standardButtonsContainer
+    property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2
     y: (parent.height - height) / 2
@@ -70,8 +70,15 @@ Dialog {
 
     FluidControls.DateTimePicker {
         id: dateTimePicker
-        standardButtons: dialog.standardButtons
-        onAccepted: dialog.accept()
-        onRejected: dialog.reject()
+        footer: DialogButtonBox {
+            id: buttonBox
+            padding: 0
+            anchors.fill: parent
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
+            standardButtons: dialog.standardButtons
+            onAccepted: dialog.accept()
+            onRejected: dialog.reject()
+        }
     }
 }

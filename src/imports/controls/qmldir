@@ -34,7 +34,6 @@ NoiseBackground 1.0 NoiseBackground.qml
 OverlayView 1.0 OverlayView.qml
 Page 1.0 Page.qml
 PageStack 1.0 PageStack.qml
-Picker 1.0 Picker.qml
 Placeholder 1.0 Placeholder.qml
 Ripple 1.0 Ripple.qml
 SearchBar 1.0 SearchBar.qml

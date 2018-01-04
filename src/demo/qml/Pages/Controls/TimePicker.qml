@@ -55,7 +55,7 @@ ScrollView {
         orientation: FluidControls.TimePicker.Landscape
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")
+        onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 
     FluidControls.TimePickerDialog {
@@ -63,6 +63,6 @@ ScrollView {
         orientation: FluidControls.TimePicker.Portrait
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        onAccepted: timeLabel.text = selectedDate.toLocaleTimeString(Qt.locale(), "hh:mm ap")
+        onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 }

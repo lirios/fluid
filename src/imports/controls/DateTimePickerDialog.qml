@@ -51,10 +51,10 @@ Dialog {
     property alias orientation: dateTimePicker.orientation
     property alias dayOfWeekRowVisible: dateTimePicker.dayOfWeekRowVisible
     property alias weekNumberVisible: dateTimePicker.weekNumberVisible
-    property alias prefer24hView: dateTimePicker.prefer24hView
-    property alias selectedDate: dateTimePicker.selectedDate
-    property alias minDate: dateTimePicker.minDate
-    property alias maxDate: dateTimePicker.maxDate
+    property alias prefer24Hour: dateTimePicker.prefer24Hour
+    property alias selectedDateTime: dateTimePicker.selectedDateTime
+    property alias from: dateTimePicker.from
+    property alias to: dateTimePicker.to
     property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2

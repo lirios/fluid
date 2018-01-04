@@ -53,19 +53,17 @@ FluidTemplates.TimeSelector {
     id: timeSelector
 
     property int currentSelector: mode
-    property bool prefer24Hour: true
-    property var selectedDate: new Date()
 
     onModeChanged: {
         switch (mode) {
         case FluidTemplates.TimeSelector.Hour:
-            circle.selectedValue = selectedDate.getHours();
+            circle.selectedValue = selectedTime.getHours();
             break;
         case FluidTemplates.TimeSelector.Minute:
-            circle.selectedValue = selectedDate.getMinutes();
+            circle.selectedValue = selectedTime.getMinutes();
             break;
         case FluidTemplates.TimeSelector.Second:
-            circle.selectedValue = selectedDate.getSeconds();
+            circle.selectedValue = selectedTime.getSeconds();
             break;
         }
     }
@@ -247,22 +245,22 @@ FluidTemplates.TimeSelector {
                 circle.selectedValue = circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2);
             }
             onClicked: {
-                var newDate = new Date(selectedDate.getTime());
+                var newTime = new Date(selectedTime.getTime());
                 switch (timeSelector.mode) {
                 case FluidTemplates.TimeSelector.Hour:
-                    newDate.setHours(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2) + (timeMode === FluidTemplates.TimeSelector.PM ? 12 : 0));
+                    newTime.setHours(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2) + (timeMode === FluidTemplates.TimeSelector.PM ? 12 : 0));
                     timeSelector.mode = FluidTemplates.TimeSelector.Minute;
                     break;
                 case FluidTemplates.TimeSelector.Minute:
-                    newDate.setMinutes(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
+                    newTime.setMinutes(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
                     timeSelector.mode = FluidTemplates.TimeSelector.Second;
                     break;
                 case FluidTemplates.TimeSelector.Second:
-                    newDate.setSeconds(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
+                    newTime.setSeconds(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
                     timeSelector.mode = FluidTemplates.TimeSelector.Hour;
                     break;
                 }
-                selectedDate = newDate;
+                selectedTime = newTime;
             }
         }
     }

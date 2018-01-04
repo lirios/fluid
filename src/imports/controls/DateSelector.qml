@@ -208,7 +208,7 @@ FluidTemplates.DateSelector {
                         MouseArea {
                             anchors.fill: parent
                             enabled: model.month === grid.month
-                            onClicked: selectedDate = model.date
+                            onClicked: control.selectedDate = model.date
                         }
 
                         function isEqual(date) {

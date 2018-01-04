@@ -20,10 +20,11 @@ YearSelector::YearSelector(QQuickItem *parent)
     , m_model(new YearModel(this))
     , m_from(1, 1, 1)
     , m_to(275759, 9, 25)
-    , m_selectedDate(QDate::currentDate())
+    , m_selectedYear(QDate::currentDate().year())
 {
     m_model->setFrom(m_from);
     m_model->setTo(m_to);
+    m_model->reset();
 }
 
 YearModel *YearSelector::model() const
@@ -135,16 +136,16 @@ void YearSelector::resetTo()
     setTo(QDate(275759, 9, 25));
 }
 
-QDate YearSelector::selectedDate() const
+int YearSelector::selectedYear() const
 {
-    return m_selectedDate;
+    return m_selectedYear;
 }
 
-void YearSelector::setSelectedDate(const QDate &date)
+void YearSelector::setSelectedYear(int year)
 {
-    if (m_selectedDate == date)
+    if (m_selectedYear == year)
         return;
 
-    m_selectedDate = date;
-    Q_EMIT selectedDateChanged();
+    m_selectedYear = year;
+    Q_EMIT selectedYearChanged();
 }

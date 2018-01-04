@@ -16,6 +16,7 @@
 
 TimeSelector::TimeSelector(QQuickItem *parent)
     : QQuickItem(parent)
+    , m_selectedTime(QTime::currentTime())
 {
 }
 
@@ -47,6 +48,20 @@ void TimeSelector::setTimeMode(TimeSelector::TimeMode timeMode)
     Q_EMIT timeModeChanged();
 }
 
+bool TimeSelector::prefer24Hour() const
+{
+    return m_prefer24Hour;
+}
+
+void TimeSelector::setPrefer24Hour(bool value)
+{
+    if (m_prefer24Hour == value)
+        return;
+
+    m_prefer24Hour = value;
+    Q_EMIT prefer24HourChanged();
+}
+
 QQuickItem *TimeSelector::circle() const
 {
     return m_circle;
@@ -63,4 +78,18 @@ void TimeSelector::setCircle(QQuickItem *circle)
     m_circle = circle;
     m_circle->setParentItem(this);
     Q_EMIT circleChanged();
+}
+
+QTime TimeSelector::selectedTime() const
+{
+    return m_selectedTime;
+}
+
+void TimeSelector::setSelectedTime(const QTime &time)
+{
+    if (m_selectedTime == time)
+        return;
+
+    m_selectedTime = time;
+    Q_EMIT selectedTimeChanged();
 }

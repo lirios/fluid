@@ -18,15 +18,16 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
-    \qmltype TimePicker
+    \qmltype picker
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
     \brief Picker to select time
 
-    A standalone timepicker component to select a time
+    A standalone picker component to select a time
 
     \code
     import QtQuick 2.0
@@ -36,7 +37,7 @@ import Fluid.Controls 1.0 as FluidControls
         width: 600
         height: 600
 
-        FluidControls.TimePicker {
+        FluidControls.picker {
             onAccepted: {
                 console.log(date)
             }
@@ -48,19 +49,41 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
 */
-FluidControls.Picker {
-    id: timePicker
+FluidTemplates.TimePicker {
+    id: picker
 
-    property var selectedDate: new Date()
+    /*!
+        \internal
+    */
+    readonly property bool __isLandscape : picker.orientation === FluidTemplates.TimePicker.Landscape
 
-    property alias prefer24Hour: timeSelector.prefer24Hour
+    /*!
+        \internal
+    */
+    readonly property bool __footerIsVisible: footer && footer.children.length > 0
 
-    onSelectedDateChanged: {
-        timeSelector.selectedDate = selectedDate
+    onSelectedTimeChanged: {
+        timeSelector.selectedTime = selectedTime;
+    }
+
+    Component.onCompleted: {
+        timeSelector.selectedTime = picker.selectedTime;
+    }
+
+    implicitWidth: background.implicitWidth
+    implicitHeight: background.implicitHeight
+
+    background: Pane {
+        implicitWidth: __isLandscape ? 500 : 340
+        implicitHeight: __isLandscape ? 350 : 470
+
+        locale: picker.locale
+
+        Material.elevation: __footerIsVisible ? 0 : 1
     }
 
     header: Rectangle {
-        color: timePicker.Material.accentColor
+        color: picker.Material.accentColor
 
         Item {
             anchors.fill: parent
@@ -70,19 +93,20 @@ FluidControls.Picker {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.centerIn: parent
 
-                columns: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
-                rows: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
+                columns: __isLandscape ? 1 : 2
+                rows: __isLandscape ? 2 : 1
 
                 Row {
                     Layout.column: 1
                     Layout.row: 1
 
                     Label {
-                        text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
+                        text: timeSelector.selectedTime.getHours() < 10 ? "0" + timeSelector.selectedTime.getHours() : timeSelector.selectedTime.getHours()
                         color: "white"
-                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        font.pixelSize: __isLandscape ? 30 : 40
                         anchors.verticalCenter: parent.verticalCenter
                         opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
@@ -92,14 +116,15 @@ FluidControls.Picker {
                     Label {
                         text: ":"
                         color: "white"
-                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        font.pixelSize: __isLandscape ? 30 : 40
                     }
 
                     Label {
-                        text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
+                        text: timeSelector.selectedTime.getMinutes() < 10 ? "0" + timeSelector.selectedTime.getMinutes() : timeSelector.selectedTime.getMinutes()
                         color: "white"
-                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        font.pixelSize: __isLandscape ? 30 : 40
                         opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
@@ -109,14 +134,15 @@ FluidControls.Picker {
                     Label {
                         text: ":"
                         color: "white"
-                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        font.pixelSize: __isLandscape ? 30 : 40
                     }
 
                     Label {
-                        text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
+                        text: timeSelector.selectedTime.getSeconds() < 10 ? "0" + timeSelector.selectedTime.getSeconds() : timeSelector.selectedTime.getSeconds()
                         color: "white"
-                        font.pixelSize: timePicker.orientation === FluidControls.Picker.Landscape ? 30 : 40
+                        font.pixelSize: __isLandscape ? 30 : 40
                         opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
+
                         MouseArea {
                             anchors.fill: parent
                             onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
@@ -125,11 +151,11 @@ FluidControls.Picker {
                 }
 
                 Column {
-                    Layout.column: timePicker.orientation === FluidControls.Picker.Landscape ? 1 : 2
-                    Layout.row: timePicker.orientation === FluidControls.Picker.Landscape ? 2 : 1
+                    Layout.column: __isLandscape ? 1 : 2
+                    Layout.row: __isLandscape ? 2 : 1
 
                     visible: !timeSelector.prefer24Hour
-                    anchors.horizontalCenter: orientation === FluidControls.Picker.Landscape ? parent.horizontalCenter : undefined
+                    anchors.horizontalCenter: __isLandscape ? parent.horizontalCenter : undefined
 
                     Label {
                         text: "AM"
@@ -163,10 +189,11 @@ FluidControls.Picker {
 
     selector: FluidControls.TimeSelector {
         id: timeSelector
-
-        onSelectedDateChanged: {
-            if (timePicker.selectedDate != selectedDate)
-                timePicker.selectedDate = selectedDate;
+        prefer24Hour: picker.prefer24Hour
+        mode: FluidControls.TimeSelector.Hour
+        onSelectedTimeChanged: {
+            if (picker.selectedTime !== selectedTime)
+                picker.selectedTime = selectedTime;
         }
     }
 }

@@ -50,7 +50,7 @@ Dialog {
 
     property alias prefer24Hour: timePicker.prefer24Hour
     property alias orientation: timePicker.orientation
-    property alias selectedDate: timePicker.selectedDate
+    property alias selectedTime: timePicker.selectedTime
     property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2

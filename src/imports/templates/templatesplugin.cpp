@@ -14,8 +14,10 @@
 
 #include "templatesplugin.h"
 
+#include "datepicker.h"
 #include "dateselector.h"
-#include "picker.h"
+#include "datetimepicker.h"
+#include "timepicker.h"
 #include "timeselector.h"
 #include "yearmodel.h"
 #include "yearselector.h"
@@ -24,8 +26,10 @@ void FluidTemplatesPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Templates"));
 
-    qmlRegisterType<Picker>(uri, 1, 0, "Picker");
+    qmlRegisterType<DatePicker>(uri, 1, 0, "DatePicker");
     qmlRegisterType<DateSelector>(uri, 1, 0, "DateSelector");
+    qmlRegisterType<DateTimePicker>(uri, 1, 0, "DateTimePicker");
+    qmlRegisterType<TimePicker>(uri, 1, 0, "TimePicker");
     qmlRegisterType<TimeSelector>(uri, 1, 0, "TimeSelector");
     qmlRegisterType<YearSelector>(uri, 1, 0, "YearSelector");
 

@@ -54,8 +54,6 @@ import Fluid.Templates 1.0 as FluidTemplates
 FluidTemplates.YearSelector {
     id: control
 
-    onSelectedDateChanged: control.contentItem.currentIndex = selectedDate.getFullYear() - from.getFullYear()
-
     delegate: FluidControls.SubheadingLabel {
         text: model.year
         color: ListView.view.currentIndex === index ? control.Material.accent : control.Material.primaryTextColor
@@ -73,20 +71,15 @@ FluidTemplates.YearSelector {
         clip: true
         model: control.model
         delegate: control.delegate
+        currentIndex: control.selectedYear - control.from.getFullYear()
         highlightRangeMode: ListView.StrictlyEnforceRange
         highlightMoveDuration: 0
         preferredHighlightBegin: height / 2 - height / control.visibleItemCount / 2
         preferredHighlightEnd: height / 2 + height / control.visibleItemCount / 2
         onCurrentIndexChanged: {
             var year = model.get(currentIndex);
-
-            if (selectedDate.getFullYear() !== year) {
-                var month = control.selectedDate.getMonth();
-                var day = control.selectedDate.getDay();
-                control.selectedDate = new Date(year, month, day);
-            }
+            if (control.selectedYear !== year)
+                control.selectedYear = year;
         }
-
-        Component.onCompleted: currentIndex = selectedDate.getFullYear() - from.getFullYear()
     }
 }

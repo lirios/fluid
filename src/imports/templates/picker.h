@@ -63,6 +63,8 @@ Q_SIGNALS:
     void headerChanged();
     void selectorChanged();
     void footerChanged();
+    void accepted(const QDate &date);
+    void rejected();
 
 protected:
     void componentComplete() override;

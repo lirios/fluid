@@ -30,7 +30,7 @@ class YearSelector : public QQuickItem
     Q_PROPERTY(int visibleItemCount READ visibleItemCount WRITE setVisibleItemCount RESET resetVisibleItemCount NOTIFY visibleItemCountChanged FINAL)
     Q_PROPERTY(QDate from READ from WRITE setFrom RESET resetFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo RESET resetTo NOTIFY toChanged FINAL)
-    Q_PROPERTY(QDate selectedDate READ selectedDate WRITE setSelectedDate NOTIFY selectedDateChanged FINAL)
+    Q_PROPERTY(int selectedYear READ selectedYear WRITE setSelectedYear NOTIFY selectedYearChanged FINAL)
     Q_DISABLE_COPY(YearSelector)
 public:
     explicit YearSelector(QQuickItem *parent = nullptr);
@@ -57,8 +57,8 @@ public:
     void setTo(const QDate &date);
     void resetTo();
 
-    QDate selectedDate() const;
-    void setSelectedDate(const QDate &date);
+    int selectedYear() const;
+    void setSelectedYear(int year);
 
 Q_SIGNALS:
     void modelChanged();
@@ -68,7 +68,7 @@ Q_SIGNALS:
     void visibleItemCountChanged();
     void fromChanged();
     void toChanged();
-    void selectedDateChanged();
+    void selectedYearChanged();
 
 private:
     YearModel *m_model = nullptr;
@@ -77,7 +77,7 @@ private:
     QQuickItem *m_contentItem = nullptr;
     QQmlComponent *m_delegate = nullptr;
     int m_visibleItemCount = 7;
-    QDate m_selectedDate;
+    int m_selectedYear;
 };
 
 QML_DECLARE_TYPE(YearSelector)

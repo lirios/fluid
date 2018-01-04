@@ -52,8 +52,8 @@ Dialog {
     property alias dayOfWeekRowVisible: datePicker.dayOfWeekRowVisible
     property alias weekNumberVisible: datePicker.weekNumberVisible
     property alias selectedDate: datePicker.selectedDate
-    property alias minDate: datePicker.minDate
-    property alias maxDate: datePicker.maxDate
+    property alias from: datePicker.from
+    property alias to: datePicker.to
     property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2

@@ -18,16 +18,17 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.0
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 import Qt.labs.calendar 1.0
 
 /*!
-    \qmltype DateTimePicker
+    \qmltype picker
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
     \brief Picker to select a datetime
 
-    A standalone DateTimePicker component to select a datetime
+    A standalone picker component to select a datetime
 
     \code
     import QtQuick 2.0
@@ -37,8 +38,8 @@ import Qt.labs.calendar 1.0
         width: 600
         height: 600
 
-        FluidControls.DateTimePicker {
-            id: dateTimePicker
+        FluidControls.picker {
+            id: picker
             standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
             standardButtonsContainer: Button {
                 height: parent.height - 5
@@ -48,7 +49,7 @@ import Qt.labs.calendar 1.0
                 Material.foreground: Material.accent
                 flat: true
                 onClicked: {
-                    dateTimePicker.selectedDate = new Date()
+                    picker.selectedDate = new Date()
                 }
             }
             onAccepted: {
@@ -58,59 +59,56 @@ import Qt.labs.calendar 1.0
     }
 
     \endcode*/
-FluidControls.Picker {
-    id: dateTimePicker
+FluidTemplates.DateTimePicker {
+    id: picker
 
-    property bool dayOfWeekRowVisible: true
-    property bool weekNumberVisible: true
-    property alias prefer24hView: timeSelector.prefer24Hour
-    property var selectedDate: new Date()
-    property var minDate: new Date(1976, 0, 1)
-    property var maxDate: new Date(2150, 11, 31)
+    /*!
+        \internal
+    */
+    readonly property bool __isLandscape : picker.orientation === FluidTemplates.DateTimePicker.Landscape
 
-    property string __mode: "MONTH"
+    /*!
+        \internal
+    */
+    readonly property bool __footerIsVisible: footer && footer.children.length > 0
 
-    function show(type) {
-        __mode = type;
-        switch(type) {
-        case "YEAR":
-            dateSelector.visible = false;
-            timeSelector.visible = false;
-            yearSelector.visible = true;
-            yearSelector.selectedDate = dateTimePicker.selectedDate
+    onSelectedDateTimeChanged: {
+        switch(mode) {
+        case FluidTemplates.DateTimePicker.Year:
+            if (yearSelector.selectedYear !== picker.selectedDateTime.getFullYear())
+                yearSelector.selectedYear = picker.selectedDateTime.getFullYear();
             break;
-        case "MONTH":
-            dateSelector.visible = true;
-            timeSelector.visible = false;
-            yearSelector.visible = false;
-            dateSelector.selectedDate = dateTimePicker.selectedDate
+        case FluidTemplates.DateTimePicker.Month:
+            if (dateSelector.selectedDate.getTime() !== picker.selectedDateTime.getTime())
+                dateSelector.selectedDate = picker.selectedDateTime;
             break;
-        case "HOUR":
-            dateSelector.visible = false;
-            timeSelector.visible = true;
-            yearSelector.visible = false;
-            timeSelector.mode = FluidControls.TimeSelector.Hour;
-            timeSelector.selectedDate = dateTimePicker.selectedDate
-            break;
-        case "MINUTE":
-            dateSelector.visible = false;
-            timeSelector.visible = true;
-            yearSelector.visible = false;
-            timeSelector.mode = FluidControls.TimeSelector.Minute;
-            timeSelector.selectedDate = dateTimePicker.selectedDate
-            break;
-        case "SECOND":
-            dateSelector.visible = false;
-            timeSelector.visible = true;
-            yearSelector.visible = false;
-            timeSelector.mode = FluidControls.TimeSelector.Second;
-            timeSelector.selectedDate = dateTimePicker.selectedDate
+        default:
+            if (timeSelector.selectedTime.getTime() !== picker.selectedDateTime.getTime())
+                timeSelector.selectedTime = picker.selectedDateTime;
             break;
         }
     }
 
+    Component.onCompleted: {
+        dateSelector.selectedDate = picker.selectedDateTime;
+        yearSelector.selectedYear = picker.selectedDateTime.getFullYear();
+        timeSelector.selectedTime = picker.selectedDateTime;
+    }
+
+    implicitWidth: background.implicitWidth
+    implicitHeight: background.implicitHeight
+
+    background: Pane {
+        implicitWidth: __isLandscape ? 500 : 340
+        implicitHeight: __isLandscape ? 350 : 470
+
+        locale: picker.locale
+
+        Material.elevation: __footerIsVisible ? 0 : 1
+    }
+
     header: Rectangle {
-        color: dateTimePicker.Material.accentColor
+        color: picker.Material.accentColor
 
         Item {
             anchors.fill: parent
@@ -118,52 +116,52 @@ FluidControls.Picker {
 
             GridLayout {
                 anchors.fill: parent
-                columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-                rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
+                columns: __isLandscape ? 1 : 2
+                rows: __isLandscape ? 2 : 1
 
                 ColumnLayout {
                     Layout.column: 1
                     Layout.row: 1
-                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom
+                    Layout.alignment: __isLandscape ? Qt.AlignTop : Qt.AlignBottom
                     Layout.fillHeight: false
 
                     FluidControls.BodyLabel {
-                        text: selectedDate.getFullYear()
+                        text: yearSelector.selectedYear
                         level: 2
                         color: "white"
-                        opacity: __mode === "YEAR" ? 1 : 0.7
+                        opacity: yearSelector.visible ? 1 : 0.7
                         font.pixelSize: 16
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: dateTimePicker.show("YEAR")
+                            onClicked: picker.mode = FluidTemplates.DateTimePicker.Year
                         }
                     }
 
                     Label {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        text: selectedDate.toLocaleString(dateTimePicker.locale, "ddd, MMM dd")
+                        text: dateSelector.selectedDate.toLocaleString(picker.locale, "ddd, MMM dd")
                         font.pixelSize: 30
                         color: "white"
                         wrapMode: Text.Wrap
-                        opacity: __mode === "MONTH" ? 1 : 0.7
+                        opacity: dateSelector.visible ? 1 : 0.7
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: dateTimePicker.show("MONTH")
+                            onClicked: picker.mode = FluidTemplates.DateTimePicker.Month
                         }
                     }
 
                 }
 
                 GridLayout {
-                    Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
-                    Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-                    Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
+                    Layout.row: __isLandscape ? 2 : 1
+                    Layout.column: __isLandscape ? 1 : 2
+                    Layout.alignment: __isLandscape ? Qt.AlignTop : Qt.AlignBottom | Qt.AlignRight
 
-                    columns: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-                    rows: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
+                    columns: __isLandscape ? 1 : 2
+                    rows: __isLandscape ? 2 : 1
 
                     Row {
                         Layout.column: 1
@@ -171,59 +169,59 @@ FluidControls.Picker {
                         Layout.alignment: Qt.AlignBottom | Qt.AlignRight
 
                         Label {
-                            text: selectedDate.getHours() < 10 ? "0" + selectedDate.getHours() : selectedDate.getHours()
+                            text: timeSelector.selectedTime.getHours() < 10 ? "0" + timeSelector.selectedTime.getHours() : timeSelector.selectedTime.getHours()
                             color: "white"
-                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            font.pixelSize: __isLandscape ? 30 : 25
                             anchors.verticalCenter: parent.verticalCenter
-                            opacity: __mode === "HOUR" ? 1 : 0.7
+                            opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: dateTimePicker.show("HOUR")
+                                onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
                             }
                         }
 
                         Label {
                             text: ":"
                             color: "white"
-                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            font.pixelSize: __isLandscape ? 30 : 25
                         }
 
                         Label {
-                            text: selectedDate.getMinutes() < 10 ? "0" + selectedDate.getMinutes() : selectedDate.getMinutes()
+                            text: timeSelector.selectedTime.getMinutes() < 10 ? "0" + timeSelector.selectedTime.getMinutes() : timeSelector.selectedTime.getMinutes()
                             color: "white"
-                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                            opacity: __mode === "MINUTE" ? 1 : 0.7
+                            font.pixelSize: __isLandscape ? 30 : 25
+                            opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: dateTimePicker.show("MINUTE")
+                                onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
                             }
                         }
 
                         Label {
                             text: ":"
                             color: "white"
-                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
+                            font.pixelSize: __isLandscape ? 30 : 25
                         }
 
                         Label {
-                            text: selectedDate.getSeconds() < 10 ? "0" + selectedDate.getSeconds() : selectedDate.getSeconds()
+                            text: timeSelector.selectedTime.getSeconds() < 10 ? "0" + timeSelector.selectedTime.getSeconds() : timeSelector.selectedTime.getSeconds()
                             color: "white"
-                            font.pixelSize: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 30 : 25
-                            opacity: __mode === "SECOND" ? 1 : 0.7
+                            font.pixelSize: __isLandscape ? 30 : 25
+                            opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
 
                             MouseArea {
                                 anchors.fill: parent
-                                onClicked: dateTimePicker.show("SECOND")
+                                onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
                             }
                         }
                     }
 
                     Column {
-                        Layout.column: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 1 : 2
-                        Layout.row: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? 2 : 1
-                        Layout.alignment: dateTimePicker.orientation === FluidControls.DateTimePicker.Landscape ? Qt.AlignHCenter : Qt.AlignBottom
+                        Layout.column: __isLandscape ? 1 : 2
+                        Layout.row: __isLandscape ? 2 : 1
+                        Layout.alignment: __isLandscape ? Qt.AlignHCenter : Qt.AlignBottom
                         visible: !timeSelector.prefer24Hour
 
                         Label {
@@ -262,63 +260,80 @@ FluidControls.Picker {
             id: dateSelector
             width: parent.width
             height: parent.height
-            dayOfWeekRowVisible: dateTimePicker.dayOfWeekRowVisible
-            weekNumberVisible: dateTimePicker.weekNumberVisible
-            from: dateTimePicker.minDate
-            to: dateTimePicker.maxDate
-            visible: true
-            locale: dateTimePicker.locale
+            dayOfWeekRowVisible: picker.dayOfWeekRowVisible
+            weekNumberVisible: picker.weekNumberVisible
+            from: picker.from
+            to: picker.to
+            locale: picker.locale
+            visible: picker.mode === FluidTemplates.DateTimePicker.Month
             onSelectedDateChanged: {
-                if(dateTimePicker.selectedDate != selectedDate) {
-                    var date = new Date(dateTimePicker.selectedDate.getTime());
+                if (picker.selectedDateTime !== selectedDate) {
+                    var date = new Date(picker.selectedDateTime.getTime());
                     date.setDate(selectedDate.getDate());
                     date.setMonth(selectedDate.getMonth());
                     date.setFullYear(selectedDate.getFullYear());
-                    dateTimePicker.selectedDate = new Date(date.getTime())
+                    picker.selectedDateTime = new Date(date.getTime());
+                    yearSelector.selectedYear = selectedDate.getFullYear();
                 }
             }
         }
 
         FluidControls.YearSelector {
             id: yearSelector
-            anchors.fill: parent
-            from: dateTimePicker.minDate
-            to: dateTimePicker.maxDate
-            visible: false
-            onSelectedDateChanged: {
-                if(dateTimePicker.selectedDate != selectedDate)
-                    dateTimePicker.selectedDate = selectedDate
+            width: parent.width
+            height: parent.height
+            from: picker.from
+            to: picker.to
+            visible: picker.mode === FluidTemplates.DateTimePicker.Year
+            onSelectedYearChanged: {
+                if (picker.selectedDateTime.getFullYear() !== selectedYear) {
+                    var date = new Date(picker.selectedDateTime.getTime());
+                    date.setFullYear(selectedYear);
+                    picker.selectedDateTime = new Date(date.getTime());
+                    dateSelector.selectedDate = new Date(date.getTime());
+                }
             }
         }
 
         FluidControls.TimeSelector {
             id: timeSelector
-            anchors.fill: parent
-            anchors.topMargin: 10
-            anchors.bottomMargin: 10
-            visible: false
-
-            onSelectedDateChanged: {
-                if(dateTimePicker.selectedDate != selectedDate)
-                    dateTimePicker.selectedDate = selectedDate
+            width: parent.width
+            height: parent.height
+            prefer24Hour: picker.prefer24Hour
+            visible: picker.mode === FluidTemplates.DateTimePicker.Hour ||
+                     picker.mode === FluidTemplates.DateTimePicker.Minute ||
+                     picker.mode === FluidTemplates.DateTimePicker.Second
+            onModeChanged: {
+                switch (mode) {
+                case FluidTemplates.TimeSelector.Hour:
+                    picker.mode = FluidTemplates.DateTimePicker.Hour;
+                    break;
+                case FluidTemplates.TimeSelector.Minute:
+                    picker.mode = FluidTemplates.DateTimePicker.Minute;
+                    break;
+                case FluidTemplates.TimeSelector.Second:
+                    picker.mode = FluidTemplates.DateTimePicker.Second;
+                    break;
+                }
             }
-        }
-    }
+            onSelectedTimeChanged: {
+                if (compareTime(picker.selectedDateTime, selectedTime)) {
+                    var date = new Date(picker.selectedDateTime.getTime());
+                    date.setHours(selectedTime.getHours());
+                    date.setMinutes(selectedTime.getMinutes());
+                    date.setSeconds(selectedTime.getSeconds());
+                    date.setMilliseconds(selectedTime.getMilliseconds());
+                    picker.selectedDateTime = date;
+                }
+            }
 
-    onSelectedDateChanged: {
-        switch(__mode) {
-        case "YEAR":
-            if(yearSelector.selectedDate.getTime() != dateTimePicker.selectedDate.getTime())
-                yearSelector.selectedDate = dateTimePicker.selectedDate;
-            break;
-        case "MONTH":
-            if(dateSelector.selectedDate.getTime() != dateTimePicker.selectedDate.getTime())
-                dateSelector.selectedDate = dateTimePicker.selectedDate;
-            break;
-        default:
-            if(timeSelector.selectedDate.getTime() != dateTimePicker.selectedDate.getTime())
-                timeSelector.selectedDate = dateTimePicker.selectedDate;
-            break;
+            // Compare the time portion of \a dateTime with \a time.
+            function compareTime(dateTime, time) {
+                return dateTime.getHours() === time.getHours() &&
+                        dateTime.getMinutes() === time.getMinutes() &&
+                        dateTime.getSeconds() === time.getSeconds() &&
+                        dateTime.getMilliseconds() === time.getMilliseconds();
+            }
         }
     }
 }

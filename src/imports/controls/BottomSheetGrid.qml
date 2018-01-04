@@ -130,8 +130,17 @@ BottomSheet {
                         delegate: QQC2.ItemDelegate {
                             id: item
 
-                            icon.width: 48
-                            icon.height: 48
+                            icon.width: modelData.icon.width || 48
+                            icon.height: modelData.icon.height || 48
+                            icon.name: modelData.icon.name
+                            icon.source: modelData.icon.source
+
+                            Binding {
+                                target: item
+                                property: "icon.color"
+                                value: item.enabled ? item.Material.iconColor : item.Material.iconDisabledColor
+                                when: modelData.icon.color.a === 0
+                            }
 
                             enabled: modelData.enabled
                             visible: modelData.visible
@@ -149,10 +158,10 @@ BottomSheet {
                                 mirrored: item.mirrored
                                 display: QQCImpl2.IconLabel.TextUnderIcon
 
-                                icon: modelData.icon
+                                icon: item.icon
                                 text: modelData.text
                                 font: item.font
-                                color: item.icon.color
+                                color: item.enabled ? item.Material.foreground : item.Material.hintTextColor
                             }
                         }
                     }

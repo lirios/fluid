@@ -58,6 +58,13 @@ ScrollView {
         selectedTime: new Date(1, 0, 1, 21, 12, 42)
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        standardButtonsContainer: Button {
+            height: parent.height - 5
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Now")
+            flat: true
+            onClicked: timePickerDialogLandscape.selectedTime = new Date()
+        }
         onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 
@@ -67,6 +74,13 @@ ScrollView {
         selectedTime: new Date(1, 0, 1, 21, 12, 42)
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        standardButtonsContainer: Button {
+            height: parent.height - 5
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Now")
+            flat: true
+            onClicked: timePickerDialogPortrait.selectedTime = new Date()
+        }
         onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")
     }
 }

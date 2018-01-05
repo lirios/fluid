@@ -14,66 +14,79 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 2.2
+import QtQuick.Controls.Material 2.2
 import Fluid.Controls 1.0 as FluidControls
+import "../.." as Components
 
-ScrollView {
-    Column {
-        spacing: 16
+Components.StyledPage {
+    id: page
 
-        Button {
-            text: qsTr("Landscape")
-            onClicked: datePickerDialogLandscape.open()
+    ScrollView {
+        anchors.fill: parent
+        clip: true
+
+        Column {
+            spacing: 16
+
+            Button {
+                text: qsTr("Landscape")
+                onClicked: datePickerDialogLandscape.open()
+            }
+
+            Button {
+                text: qsTr("Portrait")
+                onClicked: datePickerDialogPortrait.open()
+            }
+
+            FluidControls.DisplayLabel {
+                id: dateLabel
+                level: 2
+                text: qsTr("n.a.")
+            }
+
+            FluidControls.DatePicker {
+                orientation: FluidControls.DatePicker.Landscape
+                selectedDate: new Date(2012, 11, 21)
+            }
+
+            FluidControls.DatePicker {
+                orientation: FluidControls.DatePicker.Portrait
+                selectedDate: new Date(2012, 11, 21)
+            }
         }
 
-        Button {
-            text: qsTr("Portrait")
-            onClicked: datePickerDialogPortrait.open()
-        }
-
-        FluidControls.DisplayLabel {
-            id: dateLabel
-            level: 2
-            text: qsTr("n.a.")
-        }
-
-        FluidControls.DatePicker {
+        FluidControls.DatePickerDialog {
+            id: datePickerDialogLandscape
             orientation: FluidControls.DatePicker.Landscape
             selectedDate: new Date(2012, 11, 21)
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Today")
+                flat: true
+                onClicked: datePickerDialogLandscape.selectedDate = new Date()
+            }
+            onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
+
+            Material.theme: page.Material.theme
         }
 
-        FluidControls.DatePicker {
+        FluidControls.DatePickerDialog {
+            id: datePickerDialogPortrait
             orientation: FluidControls.DatePicker.Portrait
             selectedDate: new Date(2012, 11, 21)
-        }
-    }
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                height: parent.height - 5
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Today")
+                flat: true
+                onClicked: datePickerDialogPortrait.selectedDate = new Date()
+            }
+            onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
 
-    FluidControls.DatePickerDialog {
-        id: datePickerDialogLandscape
-        orientation: FluidControls.DatePicker.Landscape
-        selectedDate: new Date(2012, 11, 21)
-        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        standardButtonsContainer: Button {
-            height: parent.height - 5
-            anchors.verticalCenter: parent.verticalCenter
-            text: qsTr("Today")
-            flat: true
-            onClicked: datePickerDialogLandscape.selectedDate = new Date()
+            Material.theme: page.Material.theme
         }
-        onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
-    }
-
-    FluidControls.DatePickerDialog {
-        id: datePickerDialogPortrait
-        orientation: FluidControls.DatePicker.Portrait
-        selectedDate: new Date(2012, 11, 21)
-        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        standardButtonsContainer: Button {
-            height: parent.height - 5
-            anchors.verticalCenter: parent.verticalCenter
-            text: qsTr("Today")
-            flat: true
-            onClicked: datePickerDialogPortrait.selectedDate = new Date()
-        }
-        onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
     }
 }

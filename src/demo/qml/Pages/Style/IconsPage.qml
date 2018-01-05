@@ -19,31 +19,15 @@ import QtQuick.Controls.Material 2.2
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Layouts 1.0 as FluidLayouts
 import Fluid.Demo 1.0 as FluidDemo
+import "../.." as Components
 
-Page {
-    header: Row {
-        RadioButton {
-            id: lightRadio
-            text: qsTr("Light")
-            checked: true
-        }
-
-        RadioButton {
-            id: darkRadio
-            text: qsTr("Dark")
-        }
-    }
-
-    Material.theme: lightRadio.checked ? Material.Light : Material.Dark
-
+Components.StyledPage {
     ScrollView {
         id: scrollView
         anchors.fill: parent
         clip: true
 
         ColumnLayout {
-            anchors.fill: parent
-
             Repeater {
                 model: FluidDemo.IconCategoryModel {}
                 delegate: ColumnLayout {

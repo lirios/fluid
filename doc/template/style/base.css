@@ -71,3 +71,20 @@ table.alignedsummary td {
   padding: 3px 5px 3px 10px;
   text-align: right;
 }
+
+.qmlproto table {
+  border: none;
+  border-bottom: 2px #eee solid;
+}
+.qmlname, .qmlname td p {
+  font-size: 1.46em;
+}
+.qmlname td, .qmlname th {
+  text-align: left;
+  padding: 5px 0 0 0;
+}
+.context h3.fn .name,
+.context h3 span.type,
+.qmlname span.name {
+  font-weight: 400;
+}

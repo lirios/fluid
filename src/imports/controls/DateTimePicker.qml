@@ -108,7 +108,7 @@ FluidTemplates.DateTimePicker {
     }
 
     header: Rectangle {
-        color: picker.Material.accentColor
+        color: picker.Material.theme === Material.Dark ? picker.Material.dialogColor : picker.Material.accent
 
         Item {
             anchors.fill: parent

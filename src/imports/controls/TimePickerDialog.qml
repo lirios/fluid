@@ -14,6 +14,7 @@
 
 import QtQuick 2.3
 import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.1
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -72,6 +73,8 @@ Dialog {
             standardButtons: dialog.standardButtons
             onAccepted: dialog.accept()
             onRejected: dialog.reject()
+
+            Material.background: "transparent"
         }
     }
 }

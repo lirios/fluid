@@ -106,12 +106,12 @@ FluidTemplates.TimeSelector {
         width: Math.min(parent.width, parent.height)
         height: width
         radius: width / 2
-        color: Qt.darker(Material.background, 1.05)
+        color: timeSelector.Material.theme === Material.Dark ? timeSelector.Material.dialogColor : Qt.darker(timeSelector.Material.background, 1.05)
 
         Rectangle {
             id: centerPoint
             anchors.centerIn: parent
-            color: Material.accent
+            color: timeSelector.Material.accent
             width: 8
             height: 8
             radius: width / 2
@@ -119,7 +119,7 @@ FluidTemplates.TimeSelector {
 
         Rectangle {
             id: pointer
-            color: Material.accent
+            color: timeSelector.Material.accent
             width: 2
             height: circle.height / 2 - y
             rotation: (360 / circle.valuesAtRing) * circle.selectedValue
@@ -220,7 +220,7 @@ FluidTemplates.TimeSelector {
                 width: (Math.max(label.implicitHeight, label.implicitWidth) * 2) / (index % circle.labelSteps === 0 ? 1 : 2)
                 height: width
                 radius: width / 2
-                color: isSelected(modelData) ? Material.accent : "transparent"
+                color: isSelected(modelData) ? timeSelector.Material.accent : "transparent"
 
                 Label {
                     id: label
@@ -230,7 +230,7 @@ FluidTemplates.TimeSelector {
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    color: isSelected(modelData) ? "white" : Material.foreground
+                    color: isSelected(modelData) ? "white" : timeSelector.Material.foreground
                     visible: index % circle.labelSteps === 0
                 }
             }

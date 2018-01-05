@@ -20,35 +20,6 @@ import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 
-/*!
-    \qmltype picker
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Picker to select time
-
-    A standalone picker component to select a time
-
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0 as FluidControls
-
-    Item {
-        width: 600
-        height: 600
-
-        FluidControls.picker {
-            onAccepted: {
-                console.log(date)
-            }
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
-*/
 FluidTemplates.TimePicker {
     id: picker
 

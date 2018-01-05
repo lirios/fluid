@@ -21,44 +21,6 @@ import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 import Qt.labs.calendar 1.0
 
-/*!
-    \qmltype picker
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Picker to select a datetime
-
-    A standalone picker component to select a datetime
-
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0 as FluidControls
-
-    Item {
-        width: 600
-        height: 600
-
-        FluidControls.picker {
-            id: picker
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-            standardButtonsContainer: Button {
-                height: parent.height - 5
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Now"
-                Material.theme: Material.Light
-                Material.foreground: Material.accent
-                flat: true
-                onClicked: {
-                    picker.selectedDate = new Date()
-                }
-            }
-            onAccepted: {
-                console.log(date)
-            }
-        }
-    }
-
-    \endcode*/
 FluidTemplates.DateTimePicker {
     id: picker
 

@@ -18,7 +18,7 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
-    \qmltype DatePickerDialog
+    \qmltype DateTimePickerDialog
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
@@ -49,13 +49,80 @@ import Fluid.Controls 1.0 as FluidControls
 Dialog {
     id: dialog
 
+    /*!
+        \qmlproperty enumeration Fluid.Controls::DateTimePickerDialog::orientation
+
+        This property holds the picker orientation.
+        The default value is automatically selected based on the device orientation.
+
+        Possible values:
+        \value DatePicker.Landscape The picker is landscape.
+        \value DatePicker.Portrait The picker is portrait.
+    */
     property alias orientation: dateTimePicker.orientation
+
+    /*!
+        \qmlproperty bool Fluid.Controls::DateTimePickerDialog::dayOfWeekRowVisible
+
+        This property determines the visibility of the day of week row.
+    */
     property alias dayOfWeekRowVisible: dateTimePicker.dayOfWeekRowVisible
+
+    /*!
+        \qmlproperty bool Fluid.Controls::DateTimePickerDialog::weekNumberVisible
+
+        This property determines the visibility of the week number column.
+    */
     property alias weekNumberVisible: dateTimePicker.weekNumberVisible
+
+    /*!
+        \qmlproperty bool Fluid.Controls::DateTimePicker::prefer24Hour
+
+        This property determines the visibility of the AM/PM switch.
+    */
     property alias prefer24Hour: dateTimePicker.prefer24Hour
-    property alias selectedDateTime: dateTimePicker.selectedDateTime
+
+    /*!
+        \qmlproperty date Fluid.Controls::DateTimePickerDialog::from
+
+        This property holds the start date.
+    */
     property alias from: dateTimePicker.from
+
+    /*!
+        \qmlproperty date Fluid.Controls::DateTimePickerDialog::to
+
+        This property holds the end date.
+    */
     property alias to: dateTimePicker.to
+
+    /*!
+        \qmlproperty date Fluid.Controls::DateTimePickerDialog::selectedDateTime
+
+        This property holds the date and time that has been selected by the user.
+        The default value is the current date and time.
+    */
+    property alias selectedDateTime: dateTimePicker.selectedDateTime
+
+    /*!
+        \qmlproperty list<Object> Fluid.Controls::DateTimePickerDialog::standardButtonsContainer
+
+        This property allows you to place additional buttons alongside the standard buttons
+        of the dialog, like in this example:
+
+        \code
+        FluidControls.DateTimePickerDialog {
+            id: dateTimePickerDialog
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+            standardButtonsContainer: Button {
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("Now")
+                flat: true
+                onClicked: dateTimePickerDialog.selectedDate = new Date()
+            }
+        }
+        \endcode
+    */
     property alias standardButtonsContainer: buttonBox.data
 
     x: (parent.width - width) / 2

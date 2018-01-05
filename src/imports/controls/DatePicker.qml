@@ -21,47 +21,6 @@ import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 import Qt.labs.calendar 1.0
 
-/*!
-    \qmltype DatePicker
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Picker to select a date
-
-    A standalone datepicker component to select a date
-
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0 as FluidControls
-
-    Item {
-        width: 600
-        height: 600
-
-        FluidControls.DatePicker {
-            id: datepicker
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-            standardButtonsContainer: Button {
-                height: parent.height - 5
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Now"
-                Material.theme: Material.Light
-                Material.foreground: Material.accent
-                flat: true
-                onClicked: {
-                    datepicker.selectedDate = new Date()
-                }
-            }
-            onAccepted: {
-                console.log(date)
-            }
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
-*/
 FluidTemplates.DatePicker {
     id: picker
 

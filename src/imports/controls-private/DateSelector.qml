@@ -21,41 +21,6 @@ import Qt.labs.calendar 1.0
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 
-/*!
-    \qmltype DateSelector
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief datePicker to select date between \a from and \a to
-
-    The DateSelector is used to select a date between \a from and \a to.
-    It's part of the DatePicker but can be used also standalone.
-
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0 as FluidControls
-
-    Item {
-        width: 600
-        height: 600
-
-        FluidControls.DateSelector {
-            anchors.fill: parent
-            from: new Date(1976, 0, 1)
-            to: new Date(2150, 11, 31)
-            dayOfWeekRowVisible: false
-            weekNumberVisible: false
-
-            onSelectedDateChanged: {
-                console.log(selectedDate)
-            }
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
-*/
 FluidTemplates.DateSelector {
     id: control
 

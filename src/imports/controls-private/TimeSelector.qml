@@ -18,37 +18,6 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 
-/*!
-    \qmltype TimeSelector
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Clock to select time
-
-    The TimeSelector is used to select a time
-    It's part of the TimePicker but can be used also standalone.
-
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0 as FluidControls
-
-    Item {
-        width: 600
-        height: 600
-
-        FluidControls.TimeSelector {
-            anchors.fill: parent
-
-            onSelectedDateChanged: {
-                console.log(selectedDate)
-            }
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
-*/
 FluidTemplates.TimeSelector {
     id: timeSelector
 

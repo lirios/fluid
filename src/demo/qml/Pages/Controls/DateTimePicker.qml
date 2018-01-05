@@ -43,17 +43,20 @@ ScrollView {
 
         FluidControls.DateTimePicker {
             orientation: FluidControls.DateTimePicker.Landscape
+            selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
         }
 
         FluidControls.DateTimePicker {
             orientation: FluidControls.DateTimePicker.Portrait
+            selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
         }
     }
 
     FluidControls.DateTimePickerDialog {
         id: dateTimePickerDialogLandscape
         orientation: FluidControls.DateTimePicker.Landscape
-        prefer24hView: prefer24HourSwitch.checked
+        selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
+        prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5
@@ -68,7 +71,8 @@ ScrollView {
     FluidControls.DateTimePickerDialog {
         id: dateTimePickerDialogPortrait
         orientation: FluidControls.DateTimePicker.Portrait
-        prefer24hView: prefer24HourSwitch.checked
+        selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
+        prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5

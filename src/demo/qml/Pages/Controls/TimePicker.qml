@@ -43,16 +43,19 @@ ScrollView {
 
         FluidControls.TimePicker {
             orientation: FluidControls.TimePicker.Landscape
+            selectedTime: new Date(1, 0, 1, 21, 12, 42)
         }
 
         FluidControls.TimePicker {
             orientation: FluidControls.TimePicker.Portrait
+            selectedTime: new Date(1, 0, 1, 21, 12, 42)
         }
     }
 
     FluidControls.TimePickerDialog {
         id: timePickerDialogLandscape
         orientation: FluidControls.TimePicker.Landscape
+        selectedTime: new Date(1, 0, 1, 21, 12, 42)
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")
@@ -61,6 +64,7 @@ ScrollView {
     FluidControls.TimePickerDialog {
         id: timePickerDialogPortrait
         orientation: FluidControls.TimePicker.Portrait
+        selectedTime: new Date(1, 0, 1, 21, 12, 42)
         prefer24Hour: prefer24HourSwitch.checked
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         onAccepted: timeLabel.text = selectedTime.toLocaleTimeString(Qt.locale(), "hh:mm ap")

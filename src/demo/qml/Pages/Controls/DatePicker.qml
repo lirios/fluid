@@ -38,16 +38,19 @@ ScrollView {
 
         FluidControls.DatePicker {
             orientation: FluidControls.DatePicker.Landscape
+            selectedDate: new Date(2012, 11, 21)
         }
 
         FluidControls.DatePicker {
             orientation: FluidControls.DatePicker.Portrait
+            selectedDate: new Date(2012, 11, 21)
         }
     }
 
     FluidControls.DatePickerDialog {
         id: datePickerDialogLandscape
         orientation: FluidControls.DatePicker.Landscape
+        selectedDate: new Date(2012, 11, 21)
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5
@@ -62,6 +65,7 @@ ScrollView {
     FluidControls.DatePickerDialog {
         id: datePickerDialogPortrait
         orientation: FluidControls.DatePicker.Portrait
+        selectedDate: new Date(2012, 11, 21)
         standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         standardButtonsContainer: Button {
             height: parent.height - 5

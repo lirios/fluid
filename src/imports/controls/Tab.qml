@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 
 /*!
    \qmltype Tab

@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 //! [file]
-import QtQuick 2.4
+import QtQuick 2.10
 import Fluid.Controls 1.0 as FluidControls
 
 FluidControls.Card {

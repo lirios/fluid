@@ -15,7 +15,7 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-import QtQuick 2.8
+import QtQuick 2.10
 import Fluid.Controls 1.0 as FluidControls
 
 Item {

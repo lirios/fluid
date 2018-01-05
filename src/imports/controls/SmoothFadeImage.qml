@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
+import QtQuick 2.10
 
 /*!
     \qmltype SmoothFadeImage
@@ -32,7 +32,7 @@ import QtQuick 2.0
 
     Example of usage:
     \code
-    import QtQuick 2.0
+    import QtQuick 2.10
     import Fluid.Controls 1.0
 
     Item {

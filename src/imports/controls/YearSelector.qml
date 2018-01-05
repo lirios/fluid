@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 
@@ -29,7 +29,7 @@ import Fluid.Templates 1.0 as FluidTemplates
     It's part of the DatePicker but can be used also standalone.
 
     \code
-    import QtQuick 2.0
+    import QtQuick 2.10
     import Fluid.Controls 1.0 as FluidControls
 
     Item {

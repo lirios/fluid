@@ -13,8 +13,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
 import Fluid.Controls 1.0
 
 /*!

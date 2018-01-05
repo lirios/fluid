@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import Fluid.Core 1.0
 import Fluid.Effects 1.0
 

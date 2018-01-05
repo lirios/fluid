@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Controls.Universal 2.0
+import QtQuick 2.10
+import QtQuick.Controls.Universal 2.3
 
 Rectangle {
     color: Universal.background

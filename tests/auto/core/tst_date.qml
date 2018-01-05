@@ -14,7 +14,7 @@
  */
 
 import QtQml 2.2
-import QtQuick 2.4
+import QtQuick 2.10
 import QtTest 1.0
 import Fluid.Core 1.0
 

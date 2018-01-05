@@ -18,6 +18,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls.Private 1.0 as FluidControlsPrivate
 import Fluid.Templates 1.0 as FluidTemplates
 import Qt.labs.calendar 1.0
 
@@ -85,7 +86,7 @@ FluidTemplates.DatePicker {
     }
 
     selector: Item {
-        FluidControls.DateSelector {
+        FluidControlsPrivate.DateSelector {
             id: dateSelector
             width: parent.width
             height: parent.height
@@ -107,7 +108,7 @@ FluidTemplates.DatePicker {
             }
         }
 
-        FluidControls.YearSelector {
+        FluidControlsPrivate.YearSelector {
             id: yearSelector
             width: parent.width
             height: parent.height

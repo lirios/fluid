@@ -18,6 +18,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls.Private 1.0 as FluidControlsPrivate
 import Fluid.Templates 1.0 as FluidTemplates
 
 FluidTemplates.TimePicker {
@@ -76,11 +77,11 @@ FluidTemplates.TimePicker {
                         color: "white"
                         font.pixelSize: __isLandscape ? 30 : 40
                         anchors.verticalCenter: parent.verticalCenter
-                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Hour ? 1 : 0.7
+                        opacity: timeSelector.currentSelector === FluidControlsPrivate.TimeSelector.Hour ? 1 : 0.7
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Hour
+                            onClicked: timeSelector.mode = FluidControlsPrivate.TimeSelector.Hour
                         }
                     }
 
@@ -94,11 +95,11 @@ FluidTemplates.TimePicker {
                         text: timeSelector.selectedTime.getMinutes() < 10 ? "0" + timeSelector.selectedTime.getMinutes() : timeSelector.selectedTime.getMinutes()
                         color: "white"
                         font.pixelSize: __isLandscape ? 30 : 40
-                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Minute ? 1 : 0.7
+                        opacity: timeSelector.currentSelector === FluidControlsPrivate.TimeSelector.Minute ? 1 : 0.7
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Minute
+                            onClicked: timeSelector.mode = FluidControlsPrivate.TimeSelector.Minute
                         }
                     }
 
@@ -112,11 +113,11 @@ FluidTemplates.TimePicker {
                         text: timeSelector.selectedTime.getSeconds() < 10 ? "0" + timeSelector.selectedTime.getSeconds() : timeSelector.selectedTime.getSeconds()
                         color: "white"
                         font.pixelSize: __isLandscape ? 30 : 40
-                        opacity: timeSelector.currentSelector === FluidControls.TimeSelector.Second ? 1 : 0.7
+                        opacity: timeSelector.currentSelector === FluidControlsPrivate.TimeSelector.Second ? 1 : 0.7
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.mode = FluidControls.TimeSelector.Second
+                            onClicked: timeSelector.mode = FluidControlsPrivate.TimeSelector.Second
                         }
                     }
                 }
@@ -132,25 +133,25 @@ FluidTemplates.TimePicker {
                         text: "AM"
                         color: "white"
                         font.pixelSize: 18
-                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.AM ? 1 : 0.7
+                        opacity: timeSelector.timeMode === FluidControlsPrivate.TimeSelector.AM ? 1 : 0.7
                         horizontalAlignment: Text.AlignHCenter
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.AM
+                            onClicked: timeSelector.timeMode = FluidControlsPrivate.TimeSelector.AM
                         }
                     }
 
                     Label {
                         text: "PM"
                         color: "white"
-                        opacity: timeSelector.timeMode === FluidControls.TimeSelector.PM ? 1 : 0.7
+                        opacity: timeSelector.timeMode === FluidControlsPrivate.TimeSelector.PM ? 1 : 0.7
                         font.pixelSize: 18
                         horizontalAlignment: Text.AlignHCenter
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: timeSelector.timeMode = FluidControls.TimeSelector.PM
+                            onClicked: timeSelector.timeMode = FluidControlsPrivate.TimeSelector.PM
                         }
                     }
                 }
@@ -158,10 +159,10 @@ FluidTemplates.TimePicker {
         }
     }
 
-    selector: FluidControls.TimeSelector {
+    selector: FluidControlsPrivate.TimeSelector {
         id: timeSelector
         prefer24Hour: picker.prefer24Hour
-        mode: FluidControls.TimeSelector.Hour
+        mode: FluidControlsPrivate.TimeSelector.Hour
         onSelectedTimeChanged: {
             if (picker.selectedTime !== selectedTime)
                 picker.selectedTime = selectedTime;

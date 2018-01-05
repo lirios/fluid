@@ -1,0 +1,40 @@
+/*
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:MPL2$
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * $END_LICENSE$
+ */
+
+/*!
+    \qmlmodule Fluid.Templates 1.0
+    \title Fluid Templates QML Types
+    \ingroup qmlmodules
+
+    \brief Provides a set of non-visual templates for user interfaces.
+
+    Fluid Templates provides a set of non-visual templates for creating user interfaces
+    controls in QML using \l {Qt Quick}.
+
+    For the sake of clarity and simplicity there is a one-to-one mapping between the
+    types provided by the \c Fluid.Templates and \c Fluid.Controls imports.
+    For each non-visual template type available in the \c Fluid.Templates import, a
+    visual type by the same name exists in the \c Fluid.Controls import.
+
+    Fluid Templates QML types can be imported into your application
+    using the following import statement in your \c .qml file:
+
+    \badcode
+    import Fluid.Templates 1.0 as FluidTemplates
+    \endcode
+
+    \section1
+    \generatelist {qmltypesbymodule Fluid.Templates}
+    \noautolist
+*/

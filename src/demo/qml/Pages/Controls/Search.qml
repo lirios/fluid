@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Magnus Groß <magnus.gross21@gmail.com>
+ * Copyright (C) 2018 Magnus Groß <magnus.gross21@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *

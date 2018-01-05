@@ -7,7 +7,7 @@ import QtQuick.tooling 1.2
 // 'qmlplugindump -noinstantiate -notrelocatable Fluid.Core 1.0'
 
 Module {
-    dependencies: ["QtQuick 2.0"]
+    dependencies: ["QtQuick 2.10"]
     Component {
         name: "Clipboard"
         prototype: "QObject"
@@ -168,6 +168,7 @@ Module {
         Property { name: "isSortLocaleAware"; type: "bool" }
         Property { name: "sortRole"; type: "int" }
         Property { name: "filterRole"; type: "int" }
+        Property { name: "recursiveFilteringEnabled"; type: "bool" }
         Method {
             name: "setFilterRegExp"
             Parameter { name: "pattern"; type: "string" }
@@ -283,11 +284,6 @@ Module {
             name: "isDarkColor"
             type: "QVariant"
             Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "getSourceForIconName"
-            type: "QVariant"
-            Parameter { name: "name"; type: "QVariant" }
         }
         Method {
             name: "scale"

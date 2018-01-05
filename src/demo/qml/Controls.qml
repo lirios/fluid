@@ -43,20 +43,20 @@ Tab {
             anchors.fill: parent
             currentIndex: 0
             model: ListModel {
-                ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
-                ListElement { title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
-                ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Controls/InfoBarPage.qml" }
-                ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
-                ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
-                ListElement { title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
                 ListElement { title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Controls/BottomSheetPage.qml" }
-                ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
-                ListElement { title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                ListElement { title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
+                ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
                 ListElement { title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
                 ListElement { title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
-                ListElement { title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
+                ListElement { title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
+                ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Controls/InfoBarPage.qml" }
+                ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
                 ListElement { title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
+                ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
                 ListElement { title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/Placeholder.qml" }
+                ListElement { title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                ListElement { title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
+                ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
             }
             header: Subheader {
                 text: qsTr("Demos")
@@ -82,6 +82,6 @@ Tab {
             right: parent.right
             bottom: parent.bottom
         }
-        initialItem: ListItemPage {}
+        initialItem: BottomSheetPage {}
     }
 }

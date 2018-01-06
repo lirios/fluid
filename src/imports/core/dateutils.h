@@ -13,7 +13,8 @@
  * $END_LICENSE$
  */
 
-#pragma once
+#ifndef DATEUTILS_H
+#define DATEUTILS_H
 
 #include <QObject>
 #include <QDate>
@@ -38,3 +39,5 @@ public:
     Q_INVOKABLE QString friendlyTime(const QDateTime &time, bool standalone) const;
     Q_INVOKABLE QString dayOfWeek(const QDate &date) const;
 };
+
+#endif // DATEUTILS_H

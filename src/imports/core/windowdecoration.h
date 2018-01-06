@@ -12,7 +12,8 @@
  * $END_LICENSE$
  */
 
-#pragma once
+#ifndef WINDOWDECORATION_H
+#define WINDOWDECORATION_H
 
 #include <QObject>
 #include <QColor>
@@ -63,3 +64,5 @@ private:
 private Q_SLOTS:
     void updateDecorationColor();
 };
+
+#endif // WINDOWDECORATION_H

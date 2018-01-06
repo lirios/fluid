@@ -60,8 +60,6 @@ QString Device::name() const
         return tr("TV");
     case Unknown:
         return tr("device");
-    default:
-        return tr("unknown");
     }
 }
 
@@ -79,7 +77,6 @@ QString Device::iconName() const
     case TV:
         return QLatin1String("hardware/tv");
     case Unknown:
-    default:
         return QLatin1String("hardware/computer");
     }
 }

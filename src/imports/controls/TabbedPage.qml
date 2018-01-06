@@ -173,7 +173,7 @@ FluidControls.Page {
 
                             icon.width: 16
                             icon.height: 16
-                            icon.name: "navigation/close"
+                            icon.source: FluidCore.Utils.iconUrl("navigation/close")
 
                             focus: Qt.NoFocus
                             visible: delegateData.canRemove

@@ -18,6 +18,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0
 
 ApplicationWindow {
@@ -60,28 +61,28 @@ ApplicationWindow {
         actions: [
             Action {
                 text: qsTr("Action 1")
-                icon.name: "action/info"
+                icon.source: FluidCore.Utils.iconUrl("action/info")
                 onTriggered: console.log("action1 triggered")
             },
             Action {
                 text: qsTr("Action 2")
-                icon.name: "action/info"
+                icon.source: FluidCore.Utils.iconUrl("action/info")
                 hasDividerAfter: true
                 onTriggered: console.log("action2 triggered")
             },
             Action {
                 text: qsTr("Action 3")
-                icon.name: "action/info"
+                icon.source: FluidCore.Utils.iconUrl("action/info")
                 onTriggered: console.log("action3 triggered")
             },
             Action {
                 text: qsTr("Action 4")
-                icon.name: "action/info"
+                icon.source: FluidCore.Utils.iconUrl("action/info")
                 onTriggered: console.log("action4 triggered")
             },
             Action {
                 text: qsTr("Action 5")
-                icon.name: "action/info"
+                icon.source: FluidCore.Utils.iconUrl("action/info")
                 visible: false
                 onTriggered: console.log("action5 triggered")
             }
@@ -92,43 +93,43 @@ ApplicationWindow {
         title: window.title
 
         leftAction: Action {
-            icon.name: "navigation/menu"
+            icon.source: FluidCore.Utils.iconUrl("navigation/menu")
             onTriggered: navDrawer.open()
         }
 
         actions: [
             Action {
                 text: qsTr("Dummy error")
-                icon.name: "alert/warning"
+                icon.source: FluidCore.Utils.iconUrl("alert/warning")
                 toolTip: qsTr("Show a dummy error")
                 onTriggered: console.log("Dummy error")
             },
             Action {
                 text: qsTr("Colors")
-                icon.name: "image/color_lens"
+                icon.source: FluidCore.Utils.iconUrl("image/color_lens")
                 toolTip: qsTr("Pick a color")
                 onTriggered: console.log("Colors")
             },
             Action {
                 text: qsTr("Settings")
-                icon.name: "action/settings"
+                icon.source: FluidCore.Utils.iconUrl("action/settings")
                 toolTip: qsTr("Settings")
                 hoverAnimation: true
                 onTriggered: console.log("Settings clicked")
             },
             Action {
                 text: qsTr("This should not be visible")
-                icon.name: "alert/warning"
+                icon.source: FluidCore.Utils.iconUrl("alert/warning")
                 visible: false
             },
             Action {
                 text: qsTr("Language")
-                icon.name: "action/language"
+                icon.source: FluidCore.Utils.iconUrl("action/language")
                 enabled: false
             },
             Action {
                 text: qsTr("Accounts")
-                icon.name: "action/account_circle"
+                icon.source: FluidCore.Utils.iconUrl("action/account_circle")
             }
         ]
 

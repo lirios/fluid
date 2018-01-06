@@ -12,8 +12,6 @@
  * $END_LICENSE$
  */
 
-#include <QIcon>
-
 #include "color.h"
 #include "controlsplugin.h"
 #include "iconthemeimageprovider.h"
@@ -32,12 +30,6 @@ void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 
     // For system icons
     engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
-
-    // For Material Design icons
-    QStringList paths = QIcon::themeSearchPaths();
-    paths.append(QLatin1String(":/Fluid/Controls/icons"));
-    QIcon::setThemeSearchPaths(paths);
-    QIcon::setThemeName(QLatin1String("fluid"));
 }
 
 void FluidControlsPlugin::registerTypes(const char *uri)

@@ -17,12 +17,13 @@
 
 //! [file]
 import QtQuick 2.10
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 Item {
     FluidControls.FloatingActionButton {
         anchors.centerIn: parent
-        icon.name: "device/airplanemode_active"
+        icon.source: FluidCore.Utils.iconUrl("device/airplanemode_active")
         mini: false
     }
 }

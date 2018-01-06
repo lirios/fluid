@@ -16,6 +16,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -131,7 +132,7 @@ Item {
             anchors.top: parent.top
             anchors.margins: 8
 
-            icon.name: "action/search"
+            icon.source: FluidCore.Utils.iconUrl("action/search")
 
             onClicked: open()
         }
@@ -205,7 +206,7 @@ Item {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
-                    icon.name: "navigation/close"
+                    icon.source: FluidCore.Utils.iconUrl("navigation/close")
                     rotation: opacity*90
                     onClicked: {
                         searchTextField.clear();
@@ -246,7 +247,7 @@ Item {
             }
             Keys.onReturnPressed: autoComplete();
             onClicked: autoComplete();
-            icon.name: "action/search"
+            icon.source: FluidCore.Utils.iconUrl("action/search")
         }
     }
 }

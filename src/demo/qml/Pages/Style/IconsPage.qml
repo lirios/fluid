@@ -16,6 +16,7 @@ import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Layouts 1.0 as FluidLayouts
 import Fluid.Demo 1.0 as FluidDemo
@@ -49,11 +50,11 @@ Components.StyledPage {
                                 category: entry.currentCategory
                             }
                             delegate: FluidControls.Icon {
-                                name: entry.currentCategory + "/" + model.name
+                                source: FluidCore.Utils.iconUrl(entry.currentCategory + "/" + model.name)
                                 size: 48
 
                                 ToolTip.visible: iconMouseArea.containsMouse
-                                ToolTip.text: name
+                                ToolTip.text: entry.currentCategory + "/" + model.name
 
                                 MouseArea {
                                     id: iconMouseArea

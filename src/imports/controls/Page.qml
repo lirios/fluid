@@ -16,6 +16,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -29,6 +30,7 @@ import Fluid.Controls 1.0 as FluidControls
 
    \qml
    import QtQuick 2.10
+   import Fluid.Core 1.0 as FluidCore
    import Fluid.Controls 1.0 as FluidControls
 
    FluidControls.Page {
@@ -39,7 +41,7 @@ import Fluid.Controls 1.0 as FluidControls
                name: "Print"
 
                // Icon name from the Google Material Design icon pack
-               icon.name: "action/print"
+               icon.source: FluidCore.Utils.iconUrl("action/print")
            }
        ]
    }
@@ -159,7 +161,7 @@ Page {
         title: page.title
 
         leftAction: FluidControls.Action {
-            icon.name: "navigation/arrow_back"
+            icon.source: FluidCore.Utils.iconUrl("navigation/arrow_back")
 
             text: qsTr("Back")
             toolTip: qsTr("Go back")

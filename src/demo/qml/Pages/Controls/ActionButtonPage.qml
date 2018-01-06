@@ -14,6 +14,7 @@
 
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
@@ -45,23 +46,23 @@ Flickable {
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "device/airplanemode_active"
+                            icon.source: FluidCore.Utils.iconUrl("device/airplanemode_active")
                             mini: false
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "navigation/check"
+                            icon.source: FluidCore.Utils.iconUrl("navigation/check")
                             highlighted: true
                             mini: false
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "device/airplanemode_active"
+                            icon.source: FluidCore.Utils.iconUrl("device/airplanemode_active")
                             mini: true
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "navigation/check"
+                            icon.source: FluidCore.Utils.iconUrl("navigation/check")
                             highlighted: true
                             mini: true
                         }
@@ -73,26 +74,26 @@ Flickable {
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "device/airplanemode_active"
+                            icon.source: FluidCore.Utils.iconUrl("device/airplanemode_active")
                             mini: false
                             enabled: false
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "navigation/check"
+                            icon.source: FluidCore.Utils.iconUrl("navigation/check")
                             highlighted: true
                             mini: false
                             enabled: false
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "device/airplanemode_active"
+                            icon.source: FluidCore.Utils.iconUrl("device/airplanemode_active")
                             mini: true
                             enabled: false
                         }
 
                         FluidControls.FloatingActionButton {
-                            icon.name: "navigation/check"
+                            icon.source: FluidCore.Utils.iconUrl("navigation/check")
                             highlighted: true
                             mini: true
                             enabled: false

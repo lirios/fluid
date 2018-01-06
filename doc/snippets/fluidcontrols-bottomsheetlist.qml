@@ -18,6 +18,7 @@
 //! [file]
 import QtQuick 2.10
 import QtQuick.Controls 2.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 Item {
@@ -33,27 +34,27 @@ Item {
         actions: [
             FluidControls.Action {
                 text: qsTr("Folder")
-                icon.name: "file/folder"
+                icon.source: FluidCore.Utils.iconUrl("file/folder")
             },
             FluidControls.Action {
                 text: qsTr("New Folder")
-                icon.name: "file/create_new_folder"
+                icon.source: FluidCore.Utils.iconUrl("file/create_new_folder")
             },
             FluidControls.Action {
                 text: qsTr("Shared Folder")
-                icon.name: "file/folder_shared"
+                icon.source: FluidCore.Utils.iconUrl("file/folder_shared")
             },
             FluidControls.Action {
                 text: qsTr("Cloud")
-                icon.name: "file/cloud"
+                icon.source: FluidCore.Utils.iconUrl("file/cloud")
             },
             FluidControls.Action {
                 text: qsTr("Email Attachment")
-                icon.name: "file/attachment"
+                icon.source: FluidCore.Utils.iconUrl("file/attachment")
             },
             FluidControls.Action {
                 text: qsTr("Upload")
-                icon.name: "file/file_upload"
+                icon.source: FluidCore.Utils.iconUrl("file/file_upload")
             }
         ]
     }

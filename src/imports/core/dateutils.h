@@ -22,7 +22,6 @@
 class DateUtils : public QObject
 {
     Q_OBJECT
-
 public:
     enum DurationFormat { Long, Short };
     Q_ENUM(DurationFormat)

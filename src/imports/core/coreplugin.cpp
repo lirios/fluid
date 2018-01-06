@@ -17,7 +17,7 @@
 #include "coreplugin.h"
 #include "clipboard.h"
 #include "device.h"
-#include "qmldateutils.h"
+#include "dateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
 #include "windowdecoration.h"

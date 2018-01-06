@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-#include "qmldateutils.h"
+#include "dateutils.h"
 
 DateUtils::DateUtils(QObject *parent)
     : QObject(parent)

@@ -137,6 +137,13 @@ QQC2.ToolBar {
             source: leftAction ? leftAction.icon.source : ""
         }
 
+        Binding {
+            target: leftButton
+            property: "icon.color"
+            value: leftAction.icon.color
+            when: leftAction && leftAction.icon.color.a > 0
+        }
+
         visible: leftAction && leftAction.visible
         enabled: leftAction && leftAction.enabled
         hoverAnimation: leftAction && leftAction.hoverAnimation
@@ -194,6 +201,13 @@ QQC2.ToolBar {
                     source: appBar.actions[index].icon.source
                 }
 
+                Binding {
+                    target: actionButton
+                    property: "icon.color"
+                    value: appBar.actions[index].icon.color
+                    when: appBar.actions[index].icon.color.a > 0
+                }
+
                 visible: appBar.actions[index].visible
                 enabled: appBar.actions[index].enabled
                 hoverAnimation: appBar.actions[index].hoverAnimation
@@ -237,6 +251,13 @@ QQC2.ToolBar {
                             height: appBar.__iconSize
                             name: appBar.actions[index + appBar.maxActionCount].icon.name
                             source: appBar.actions[index + appBar.maxActionCount].icon.source
+                        }
+
+                        Binding {
+                            target: overflowMenuItem
+                            property: "icon.color"
+                            value: appBar.actions[index + appBar.maxActionCount].icon.color
+                            when: appBar.actions[index + appBar.maxActionCount].icon.color.a > 0
                         }
 
                         text: appBar.actions[index + appBar.maxActionCount].text

@@ -199,7 +199,13 @@ QQC2.ToolBar {
                     height: appBar.__iconSize
                     name: appBar.actions[index].icon.name
                     source: appBar.actions[index].icon.source
-                    color: appBar.actions[index].icon.color
+                }
+
+                Binding {
+                    target: actionButton
+                    property: "icon.color"
+                    value: appBar.actions[index].icon.color
+                    when: appBar.actions[index].icon.color.a > 0
                 }
 
                 visible: appBar.actions[index].visible
@@ -244,7 +250,13 @@ QQC2.ToolBar {
                             height: appBar.__iconSize
                             name: appBar.actions[index + appBar.maxActionCount].icon.name
                             source: appBar.actions[index + appBar.maxActionCount].icon.source
-                            color: appBar.actions[index + appBar.maxActionCount].icon.color
+                        }
+
+                        Binding {
+                            target: overflowMenuItem
+                            property: "icon.color"
+                            value: appBar.actions[index + appBar.maxActionCount].icon.color
+                            when: appBar.actions[index + appBar.maxActionCount].icon.color.a > 0
                         }
 
                         text: appBar.actions[index + appBar.maxActionCount].text

@@ -194,6 +194,7 @@ Item {
                     text: searchPlaceHolder
                     visible: searchTextField.displayText === ""
                     anchors.fill: searchTextField
+                    verticalAlignment: Label.AlignVCenter
                     font.pixelSize: searchTextField.font.pixelSize
                     color: Material.color(Material.Grey, Material.Shade400)
                 }

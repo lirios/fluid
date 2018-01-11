@@ -9,7 +9,7 @@ import QtQuick.tooling 1.2
 Module {
     dependencies: [
         "QtGraphicalEffects 1.0",
-        "QtQuick 2.6",
+        "QtQuick 2.8",
         "QtQuick.Window 2.1"
     ]
 }

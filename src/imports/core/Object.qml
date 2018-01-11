@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
+import QtQuick 2.10
 
 /*!
     \qmltype Object
@@ -25,7 +25,7 @@ import QtQuick 2.0
     with the ability to hold children objects.
 
    \qml
-   import QtQuick 2.4
+   import QtQuick 2.10
    import Fluid.Core 1.0 as FluidCore
 
    FluidCore.Object {

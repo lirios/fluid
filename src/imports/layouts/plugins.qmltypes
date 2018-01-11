@@ -7,5 +7,5 @@ import QtQuick.tooling 1.2
 // 'qmlplugindump -noinstantiate -notrelocatable Fluid.Layouts 1.0'
 
 Module {
-    dependencies: ["QtQuick 2.4"]
+    dependencies: ["QtQuick 2.10"]
 }

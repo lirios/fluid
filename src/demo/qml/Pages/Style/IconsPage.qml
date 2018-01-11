@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,38 +12,22 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick 2.10
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Layouts 1.0 as FluidLayouts
 import Fluid.Demo 1.0 as FluidDemo
+import "../.." as Components
 
-Page {
-    header: Row {
-        RadioButton {
-            id: lightRadio
-            text: qsTr("Light")
-            checked: true
-        }
-
-        RadioButton {
-            id: darkRadio
-            text: qsTr("Dark")
-        }
-    }
-
-    Material.theme: lightRadio.checked ? Material.Light : Material.Dark
-
+Components.StyledPage {
     ScrollView {
         id: scrollView
         anchors.fill: parent
         clip: true
 
         ColumnLayout {
-            anchors.fill: parent
-
             Repeater {
                 model: FluidDemo.IconCategoryModel {}
                 delegate: ColumnLayout {

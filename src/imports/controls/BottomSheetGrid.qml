@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,9 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3 as QQC2
+import QtQuick.Controls.impl 2.3 as QQCImpl2
+import QtQuick.Controls.Material 2.3
 import QtQuick.Templates 2.0 as T
 import Fluid.Controls 1.0
 import Fluid.Layouts 1.0 as FluidLayouts
@@ -108,7 +109,7 @@ BottomSheet {
                 contentWidth: width
                 contentHeight: grid.height
 
-                ScrollIndicator.vertical: ScrollIndicator {}
+                QQC2.ScrollIndicator.vertical: QQC2.ScrollIndicator {}
 
                 Grid {
                     id: grid
@@ -120,14 +121,26 @@ BottomSheet {
 
                     spacing: 16
 
-                    columns: Math.floor((width - leftMargin - rightMargin) / (cellWidth + spacing))
+                    columns: Math.floor(width - listView.leftMargin - listView.rightMargin) / (cellWidth + spacing * 2)
                     rows: Math.ceil(actions.length / columns)
 
                     Repeater {
                         model: actions
 
-                        delegate: ItemDelegate {
+                        delegate: QQC2.ItemDelegate {
                             id: item
+
+                            icon.width: modelData.icon.width || 48
+                            icon.height: modelData.icon.height || 48
+                            icon.name: modelData.icon.name
+                            icon.source: modelData.icon.source
+
+                            Binding {
+                                target: item
+                                property: "icon.color"
+                                value: item.enabled ? item.Material.iconColor : item.Material.iconDisabledColor
+                                when: modelData.icon.color.a === 0
+                            }
 
                             enabled: modelData.enabled
                             visible: modelData.visible
@@ -140,33 +153,18 @@ BottomSheet {
                             background.implicitWidth: grid.cellWidth
                             background.implicitHeight: grid.cellHeight
 
-                            contentItem: Item {
-                                anchors.fill: parent
+                            contentItem: QQCImpl2.IconLabel {
+                                width: grid.cellWidth
+                                height: grid.cellHeight
 
-                                Icon {
-                                    id: icon
+                                spacing: item.spacing
+                                mirrored: item.mirrored
+                                display: QQCImpl2.IconLabel.TextUnderIcon
 
-                                    anchors.top: parent.top
-                                    anchors.topMargin: 8
-                                    anchors.horizontalCenter: parent.horizontalCenter
-
-                                    name: modelData.iconName
-                                    source: modelData.iconSource
-                                    size: 48
-                                }
-
-                                Label {
-                                    anchors.top: icon.bottom
-                                    anchors.left: parent.left
-                                    anchors.topMargin: 8
-                                    anchors.leftMargin: 8
-                                    anchors.rightMargin: 8
-                                    width: grid.cellWidth - anchors.leftMargin - anchors.rightMargin
-
-                                    text: modelData.text
-                                    elide: Text.ElideRight
-                                    horizontalAlignment: Text.AlignHCenter
-                                }
+                                icon: item.icon
+                                text: modelData.text
+                                font: item.font
+                                color: item.enabled ? item.Material.foreground : item.Material.hintTextColor
                             }
                         }
                     }

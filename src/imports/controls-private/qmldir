@@ -1,0 +1,6 @@
+module Fluid.Controls.Private
+depends Fluid.Template 1.0
+
+DateSelector 1.0 DateSelector.qml
+TimeSelector 1.0 TimeSelector.qml
+YearSelector 1.0 YearSelector.qml

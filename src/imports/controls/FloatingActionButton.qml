@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,10 +12,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Window 2.0
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick 2.10
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.3
+import QtQuick.Controls.impl 2.3
+import QtQuick.Controls.Material 2.3
 import QtGraphicalEffects 1.0
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
@@ -41,11 +42,13 @@ import Fluid.Effects 1.0 as FluidEffects
 RoundButton {
     id: control
 
-    /*!
-       The name of the icon to display in the action button, selected from the Material
-       Design icon collection by Google.
-     */
-    property alias iconName: icon.name
+    icon.width: 24
+    icon.height: 24
+    icon.color: !control.enabled ? control.Material.hintTextColor : control.flat && control.highlighted
+                                   ? control.Material.accentColor
+                                   : control.highlighted
+                                     ? control.Material.primaryHighlightedTextColor
+                                     : control.Material.foreground
 
     /*!
         \qmlproperty bool mini
@@ -69,15 +72,17 @@ RoundButton {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
-        FluidControls.Icon {
+        IconLabel {
             id: icon
 
             anchors.centerIn: parent
-            size: 24
 
-            color: !control.enabled ? control.Material.hintTextColor :
-                              control.flat && control.highlighted ? control.Material.accentColor :
-                                                    control.highlighted ? control.Material.primaryHighlightedTextColor : control.Material.foreground
+            spacing: control.spacing
+            mirrored: control.mirrored
+            display: RoundButton.IconOnly
+
+            icon: control.icon
+            color: control.icon.color
         }
     }
 

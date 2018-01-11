@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
 
-SUBDIRS += core controls effects layouts
+SUBDIRS += core controls controls-private effects layouts templates

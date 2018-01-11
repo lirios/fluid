@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
+import QtQuick 2.10
 
 pragma Singleton
 
@@ -87,22 +87,6 @@ QtObject {
         color = asColor(color);
         var a = 1 - (0.299 * color.r + 0.587 * color.g + 0.114 * color.b);
         return color.a > 0 && a >= 0.3;
-    }
-
-    /*!
-        \qmlmethod string Utils::getSourceForIconName(string name)
-
-        Returns a source suitable for an \l Image from an icon name.
-        If \a name is an URL it will be returned verbatim, instead if it
-        contains a slash character an icon relative to Fluid icons/ directory
-        will be returned, otherwise an image://fluidicontheme/\a name URL.
-    */
-    function getSourceForIconName(name) {
-        return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0 || name.indexOf("qrc") === 0
-                      ? name
-                      : name.indexOf("/") !== -1 ? "image://fluidicons/" + name
-                                                 : "image://fluidicontheme/" + name
-                    : "";
     }
 
     /*!

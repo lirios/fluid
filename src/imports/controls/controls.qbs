@@ -5,7 +5,6 @@ LiriQmlPlugin {
     name: "fluidcontrolsplugin"
     pluginPath: "Fluid/Controls"
 
-    Depends { name: "fluidcoreplugin" }
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
     Properties {
@@ -21,14 +20,13 @@ LiriQmlPlugin {
 
     cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
 
-    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
+    Group {
+        name: "QML"
+        files: ["qmldir", "*.qml", "*.qmltypes"]
+    }
 
     Group {
-        name: "Icons"
-        files: "**/*.svg"
-        prefix: qbs.installSourceBase
-        qbs.install: true
-        qbs.installSourceBase: "../../../icons/"
-        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath, "icons")
+        name: "Sources"
+        files: ["*.cpp", "*.h", "*.qrc"]
     }
 }

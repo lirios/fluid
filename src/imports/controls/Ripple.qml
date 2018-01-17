@@ -15,6 +15,7 @@
 
 import QtQuick 2.10
 import Fluid.Core 1.0
+import Fluid.Controls 1.0 as FluidControls
 import Fluid.Effects 1.0
 
 /*!
@@ -157,7 +158,7 @@ MouseArea {
         width: parent.width
         height: parent.height
 
-        color: Utils.isDarkColor(focusColor) && focusColor.a > 0
+        color: FluidControls.Color.isDarkColor(focusColor) && focusColor.a > 0
                 ? Qt.rgba(0,0,0,0.2) : Qt.rgba(0,0,0,0.1)
 
         opacity: __private.showFocus && focused ? 1 : 0

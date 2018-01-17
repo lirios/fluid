@@ -149,7 +149,7 @@ FluidControls.Page {
                     Material.accent: appBar.Material.foreground
 
                     // Unfocused color
-                    Material.foreground: FluidCore.Utils.alpha(appBar.Material.foreground, 0.7)
+                    Material.foreground: FluidControls.Color.transparent(appBar.Material.foreground, 0.7)
 
                     contentItem: RowLayout {
                         IconLabel {

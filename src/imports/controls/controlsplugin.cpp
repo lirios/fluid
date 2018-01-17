@@ -14,8 +14,17 @@
 
 #include <QIcon>
 
+#include "color.h"
 #include "controlsplugin.h"
 #include "iconthemeimageprovider.h"
+
+static QObject *colorProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(jsEngine);
+
+    return new Color();
+}
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -34,4 +43,6 @@ void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 void FluidControlsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
+
+    qmlRegisterSingletonType<Color>(uri, 1, 0, "Color", colorProvider);
 }

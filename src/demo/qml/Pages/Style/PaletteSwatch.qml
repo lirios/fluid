@@ -36,7 +36,7 @@ Column {
             anchors {
                 top: parent.top
                 left: parent.left
-                margins: Units.smallSpacing * 2
+                margins: FluidControls.Units.smallSpacing * 2
             }
             font.bold: true
             color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)

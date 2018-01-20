@@ -1,4 +1,6 @@
 module Fluid.Controls.Private
+plugin fluidcontrolsprivateplugin
+classname FluidControlsPrivatePlugin
 depends Fluid.Template 1.0
 
 DateSelector 1.0 DateSelector.qml

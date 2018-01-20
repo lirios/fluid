@@ -20,7 +20,6 @@
 #include "dateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
-#include "windowdecoration.h"
 
 static QObject *dateUtilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -53,7 +52,6 @@ void FluidCorePlugin::registerTypes(const char *uri)
     // @uri Fluid.Core
 
     qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
-    qmlRegisterType<WindowDecoration>(uri, 1, 0, "WindowDecoration");
 
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");

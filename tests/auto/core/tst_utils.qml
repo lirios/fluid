@@ -20,6 +20,9 @@ TestCase {
     name: "UtilsTests"
 
     function test_scale() {
-        compare(FluidCore.Utils.scale(50, 0, 1), 50);
+        compare(FluidCore.Utils.scale(50, 0, 1), 0.5);
+        compare(FluidCore.Utils.scale(50, 0, 100), 50);
+        compare(FluidCore.Utils.scale(50, 50, 100), 75);
+        compare(FluidCore.Utils.scale(50, 1, 100), 50.5);
     }
 }

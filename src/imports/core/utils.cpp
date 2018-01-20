@@ -2,7 +2,6 @@
  * This file is part of Fluid.
  *
  * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,9 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-
-pragma Singleton
+#include "utils.h"
 
 /*!
     \qmltype Utils
@@ -24,14 +21,17 @@ pragma Singleton
 
     \brief A collection of helpful utility methods.
 */
-QtObject {
-    /*!
-        \qmlmethod real Utils::scale(real percent, real start, real end)
+Utils::Utils(QObject *parent)
+    : QObject(parent)
+{
+}
 
-        Scale \a percent in the range between \a start and \a end.
-    */
-    function scale(percent, start, end) {
-        var diff = end - start;
-        return start + percent * diff;
-    }
+/*!
+    \qmlmethod real Fluid.Controls::Utils::scale(real percent, real start, real end)
+
+    Scale \a percent in the range between \a start and \a end.
+*/
+qreal Utils::scale(qreal percent, qreal start, qreal end)
+{
+    return start + ((end - start) * (percent / 100));
 }

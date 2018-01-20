@@ -29,7 +29,7 @@ ToolBar {
 
     Material.elevation: page ? page.appBar.elevation : 2
     Material.background: Material.primaryColor
-    Material.theme: FluidControls.Color.lightDark(Material.background, Material.Light, Material.Dark)
+    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
 
     /*!
         \internal

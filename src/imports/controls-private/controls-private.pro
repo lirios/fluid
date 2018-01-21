@@ -4,6 +4,12 @@ IMPORT_VERSION = 1.0
 
 QT += qml quick
 
+HEADERS += \
+    $$files($$PWD/*.h)
+
+SOURCES += \
+    $$files($$PWD/*.cpp)
+
 QML_FILES += \
     $$files(*.qml)
 

@@ -5,15 +5,13 @@ IMPORT_VERSION = 1.0
 QT += qml quick
 
 HEADERS += \
-    $$PWD/templatesplugin.h \
-    $$PWD/timeselector.h
+    $$files($$PWD/*.h)
 
 SOURCES += \
-    $$PWD/templatesplugin.cpp \
-    $$PWD/timeselector.h
+    $$files($$PWD/*.cpp)
 
 QML_FILES += \
-    $$files(*.qml)
+    $$files($$PWD/*.qml)
 
 INCLUDEPATH += $$PWD
 

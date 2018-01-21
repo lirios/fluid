@@ -194,7 +194,7 @@ Item {
     QtObject {
         id: __priv
 
-        property size sourceSize: undefined
+        property size sourceSize: Qt.size(undefined, undefined)
 
         property Image currentImage: image1
         property Image nextImage: image2

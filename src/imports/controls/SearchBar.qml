@@ -155,7 +155,7 @@ Item {
                 height: openSearchButton.height
                 FluidControls.ToolButton {
                     id: dismissSearchButton
-                    icon.name: persistent ? "action/search" : "navigation/arrow_back"
+                    icon.source: FluidCore.Utils.iconUrl(persistent ? "action/search" : "navigation/arrow_back")
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     rotation: persistent ? 0 : searchWave.open ? 0 : 180

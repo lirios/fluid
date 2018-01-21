@@ -92,6 +92,11 @@ ItemDelegate {
     */
     property alias secondaryItem: secondaryItem.children
 
+    /*!
+        \internal
+    */
+    readonly property bool __isIconEmpty: listItem.icon.name === "" && listItem.icon.source.toString() === ""
+
     icon.width: 24
     icon.height: 24
     icon.color: listItem.highlighted ? listItem.Material.primaryColor : enabled ? listItem.Material.iconColor : listItem.Material.iconDisabledColor
@@ -169,7 +174,7 @@ ItemDelegate {
 
                 icon: listItem.icon
                 color: listItem.enabled ? listItem.Material.foreground : listItem.Material.hintTextColor
-                visible: listItem.icon.name !== ""
+                visible: !listItem.__isIconEmpty
             }
         }
 

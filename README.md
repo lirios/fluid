@@ -60,11 +60,13 @@ qbs -d build profile:qt5
 
 You can also append the following options to the last line:
 
- * `project.withDemo:false`: Do not build the demo app.
- * `project.withDocumentation:false`: Do not build the documentation.
- * `project.useStaticAnalyzer:true` to enable the Clang static analyzer.
+ * `projects.Fluid.withDemo:false`: Do not build the demo app.
+ * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
+ * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
+ * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared
+   instead of the git submodule included here.
 
-Run the demo with (unless `project.withDemo:false`):
+Run the demo with (unless `projects.Liri.withDemo:false`):
 
 ```sh
 qbs run --no-build -d build --products fluid-demo

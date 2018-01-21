@@ -41,14 +41,14 @@ import QtQuick 2.10
 
         SmoothFadeImage {
             anchors.fill: parent
-            source: "http://www.maui-project.org/images/logos/m.png"
+            source: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Qt_logo_2015.svg/1380px-Qt_logo_2015.svg.png"
             fillMode: Image.PreserveAspectFit
             smooth: true
             fadeDuration: 400
 
             MouseArea {
                 anchors.fill: parent
-                onClicked: parent.source = "http://www.maui-project.org/images/logos/qt.png"
+                onClicked: parent.source = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Qt_logo_2016.svg/1280px-Qt_logo_2016.svg.png"
             }
         }
     }

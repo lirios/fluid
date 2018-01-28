@@ -15,6 +15,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
@@ -37,7 +38,7 @@ Flickable {
 
                 FluidControls.Placeholder {
                     anchors.centerIn: parent
-                    icon.name: "social/notifications_none"
+                    icon.source: FluidCore.Utils.iconUrl("social/notifications_none")
                     text: qsTr("No notifications")
                     subText: qsTr("At the moment there are no notifications available")
                 }

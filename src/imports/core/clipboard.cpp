@@ -13,9 +13,9 @@
  * $END_LICENSE$
  */
 
-#include "clipboard.h"
-
 #include <QGuiApplication>
+
+#include "clipboard.h"
 
 /*!
     \qmltype Clipboard

@@ -15,6 +15,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtTest 1.0
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0
 
 Item {
@@ -63,7 +64,7 @@ Item {
         ListItem {
             id: listItemWithLeftItem
 
-            icon.name: "action/settings"
+            icon.source: FluidCore.Utils.iconUrl("action/settings")
         }
 
         ListItem {

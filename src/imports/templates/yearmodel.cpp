@@ -74,9 +74,9 @@ int YearModel::rowCount(const QModelIndex &parent) const
 
 int YearModel::get(int index) const
 {
-    if (0 <= index < m_list.size())
-        return m_list.at(index);
-    return -1;
+    if (index < 0 || index >= m_list.size())
+        return -1;
+    return m_list.at(index);
 }
 
 void YearModel::reset()

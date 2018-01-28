@@ -129,7 +129,7 @@ All code follows the following coding style and conventions, please read:
 
 * [Qt C++ Coding Conventions](https://wiki.qt.io/Coding_Conventions)
 * [Qt C++ Coding Style](https://wiki.qt.io/Qt_Coding_Style)
-* [QML Coding Conventions](https://github.com/lirios/lirios/wiki/QML-Coding-Conventions)
+* [QML Coding Conventions](https://liri-dev.readthedocs.io/en/latest/contributing/coding-conventions/qml-conventions/)
 
 ## Additional Notes
 

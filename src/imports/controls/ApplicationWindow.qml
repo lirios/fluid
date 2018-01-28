@@ -15,8 +15,8 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
-import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls.Private 1.0 as FluidControlsPrivate
 
 /*!
    \qmltype ApplicationWindow
@@ -108,7 +108,7 @@ ApplicationWindow {
         onReplaced: appBar.replace(page)
     }
 
-    FluidCore.WindowDecoration {
+    FluidControlsPrivate.WindowDecoration {
         id: windowDecoration
         window: window
         color: Material.shade(window.Material.primaryColor, Material.Shade700)

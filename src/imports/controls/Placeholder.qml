@@ -49,11 +49,17 @@ Control {
     */
     property alias subText: subTextLabel.text
 
+    implicitWidth: columnLayout.implicitWidth
+    implicitHeight: columnLayout.implicitHeight
+
+    leftPadding: Units.mediumSpacing
+    rightPadding: Units.mediumSpacing
+
     ColumnLayout {
+        id: columnLayout
+
         anchors.centerIn: parent
         
-        width: parent.width - 2 * Units.mediumSpacing
-
         IconLabel {
             id: iconLabel
 

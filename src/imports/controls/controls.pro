@@ -5,12 +5,10 @@ IMPORT_VERSION = 1.0
 QT += qml quick
 
 HEADERS += \
-    $$PWD/iconthemeimageprovider.h \
-    $$PWD/controlsplugin.h
+    $$files($$PWD/*.h)
 
 SOURCES += \
-    $$PWD/iconthemeimageprovider.cpp \
-    $$PWD/controlsplugin.cpp
+    $$files($$PWD/*.cpp)
 
 QML_FILES += \
     $$files(*.qml)

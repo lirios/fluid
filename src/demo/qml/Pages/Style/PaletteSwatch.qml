@@ -15,8 +15,7 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
 Column {
@@ -37,10 +36,10 @@ Column {
             anchors {
                 top: parent.top
                 left: parent.left
-                margins: Units.smallSpacing * 2
+                margins: FluidControls.Units.smallSpacing * 2
             }
             font.bold: true
-            color: Utils.lightDark(parent.color, blackColor, whiteColor)
+            color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)
             text: paletteName
         }
     }
@@ -97,10 +96,10 @@ Column {
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
-                        margins: Units.smallSpacing * 2
+                        margins: FluidControls.Units.smallSpacing * 2
                     }
                     font.bold: true
-                    color: Utils.lightDark(parent.color, blackColor, whiteColor)
+                    color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)
                     text: model.name
                 }
 
@@ -108,10 +107,10 @@ Column {
                     anchors {
                         right: parent.right
                         verticalCenter: parent.verticalCenter
-                        margins: Units.smallSpacing * 2
+                        margins: FluidControls.Units.smallSpacing * 2
                     }
                     font.bold: true
-                    color: Utils.lightDark(parent.color, blackColor, whiteColor)
+                    color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)
                     text: parent.color
                 }
             }
@@ -150,10 +149,10 @@ Column {
                     anchors {
                         left: parent.left
                         verticalCenter: parent.verticalCenter
-                        margins: Units.smallSpacing * 2
+                        margins: FluidControls.Units.smallSpacing * 2
                     }
                     font.bold: true
-                    color: Utils.lightDark(parent.color, blackColor, whiteColor)
+                    color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)
                     text: model.name
                 }
 
@@ -161,10 +160,10 @@ Column {
                     anchors {
                         right: parent.right
                         verticalCenter: parent.verticalCenter
-                        margins: Units.smallSpacing * 2
+                        margins: FluidControls.Units.smallSpacing * 2
                     }
                     font.bold: true
-                    color: Utils.lightDark(parent.color, blackColor, whiteColor)
+                    color: FluidControls.Color.lightDark(parent.color, blackColor, whiteColor)
                     text: parent.color
                 }
             }

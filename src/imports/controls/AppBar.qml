@@ -18,7 +18,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
-import Fluid.Core 1.0
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0
 
 /*!
@@ -75,7 +75,7 @@ QQC2.ToolBar {
        \internal
        The size of the left icon and the action icons.
     */
-    property int __iconSize: Device.gridUnit <= 48 ? 20 : 24
+    property int __iconSize: FluidCore.Device.gridUnit <= 48 ? 20 : 24
 
     /*!
         \qmlproperty real leftKeyline
@@ -112,7 +112,7 @@ QQC2.ToolBar {
     */
     property AppToolBar toolbar
 
-    implicitHeight: Device.gridUnit
+    implicitHeight: FluidCore.Device.gridUnit
 
     ToolButton {
         id: leftButton
@@ -120,7 +120,7 @@ QQC2.ToolBar {
         property bool showing: leftAction && leftAction.visible
         property int margin: (width - 24)/2
 
-        QQC2.ToolTip.visible: QQC2.ToolTip.text != "" && (Device.isMobile ? pressed : hovered)
+        QQC2.ToolTip.visible: QQC2.ToolTip.text != "" && (FluidCore.Device.isMobile ? pressed : hovered)
         QQC2.ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
         QQC2.ToolTip.text: leftAction ? leftAction.toolTip : ""
 
@@ -130,12 +130,10 @@ QQC2.ToolBar {
             leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
         }
 
-        icon {
-            width: appBar.__iconSize
-            height: appBar.__iconSize
-            name: leftAction ? leftAction.icon.name : ""
-            source: leftAction ? leftAction.icon.source : ""
-        }
+        icon.width: appBar.__iconSize
+        icon.height: appBar.__iconSize
+        icon.name: leftAction ? leftAction.icon.name : ""
+        icon.source: leftAction ? leftAction.icon.source : ""
 
         Binding {
             target: leftButton
@@ -161,7 +159,7 @@ QQC2.ToolBar {
             verticalCenter: actionsRow.verticalCenter
             left: parent.left
             right: actionsRow.left
-            leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
+            leftMargin: 16 + (leftButton.showing ? FluidCore.Device.gridUnit - leftButton.margin : 0)
             rightMargin: 16
         }
 
@@ -188,18 +186,16 @@ QQC2.ToolBar {
             delegate: ToolButton {
                 id: actionButton
 
-                QQC2.ToolTip.visible: QQC2.ToolTip.text !== "" && !overflowMenu.visible && (Device.isMobile ? pressed : hovered)
+                QQC2.ToolTip.visible: QQC2.ToolTip.text !== "" && !overflowMenu.visible && (FluidCore.Device.isMobile ? pressed : hovered)
                 QQC2.ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
                 QQC2.ToolTip.text: appBar.actions[index].toolTip
 
                 anchors.verticalCenter: parent.verticalCenter
 
-                icon {
-                    width: appBar.__iconSize
-                    height: appBar.__iconSize
-                    name: appBar.actions[index].icon.name
-                    source: appBar.actions[index].icon.source
-                }
+                icon.width: appBar.__iconSize
+                icon.height: appBar.__iconSize
+                icon.name: appBar.actions[index].icon.name
+                icon.source: appBar.actions[index].icon.source
 
                 Binding {
                     target: actionButton
@@ -222,11 +218,9 @@ QQC2.ToolBar {
 
             anchors.verticalCenter: parent.verticalCenter
 
-            icon {
-                width: appBar.__iconSize
-                height: appBar.__iconSize
-                name: "navigation/more_vert"
-            }
+            icon.width: appBar.__iconSize
+            icon.height: appBar.__iconSize
+            icon.source: FluidCore.Utils.iconUrl("navigation/more_vert")
 
             onClicked: overflowMenu.open()
 
@@ -246,12 +240,10 @@ QQC2.ToolBar {
                     delegate: QQC2.MenuItem {
                         id: overflowMenuItem
 
-                        icon {
-                            width: appBar.__iconSize
-                            height: appBar.__iconSize
-                            name: appBar.actions[index + appBar.maxActionCount].icon.name
-                            source: appBar.actions[index + appBar.maxActionCount].icon.source
-                        }
+                        icon.width: appBar.__iconSize
+                        icon.height: appBar.__iconSize
+                        icon.name: appBar.actions[index + appBar.maxActionCount].icon.name
+                        icon.source: appBar.actions[index + appBar.maxActionCount].icon.source
 
                         Binding {
                             target: overflowMenuItem

@@ -187,7 +187,7 @@ Item {
 
         anchors.fill: parent
         source: image
-        color: Utils.alpha(icon.color, 1)
+        color: Color.transparent(icon.color, 1)
         cached: true
         visible: icon.valid && colorize
         opacity: icon.color.a

@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef FLUID_CONTROLS_UTILS_H
+#define FLUID_CONTROLS_UTILS_H
 
 #include <QObject>
 #include <QUrl>
@@ -24,7 +24,7 @@ class Utils : public QObject
 public:
     explicit Utils(QObject *parent = nullptr);
 
-    Q_INVOKABLE qreal scale(qreal percent, qreal start, qreal end);
+    Q_INVOKABLE QUrl iconUrl(const QString &name);
 };
 
-#endif // UTILS_H
+#endif // FLUID_CONTROLS_UTILS_H

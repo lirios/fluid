@@ -19,7 +19,7 @@ import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Core 1.0 as FluidCore
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
    \qmltype AppBar
@@ -49,7 +49,7 @@ QQC2.ToolBar {
         When using an action bar in a page, set the \l Page::leftAction instead of
         directly setting this property.
     */
-    property Action leftAction
+    property FluidControls.Action leftAction
 
     /*!
         \qmlproperty list<Action> actions
@@ -61,7 +61,7 @@ QQC2.ToolBar {
         When used with a page, the actions will be set to the page's \l Page::actions
         property, so set that instead of changing this directly.
     */
-    property list<Action> actions
+    property list<FluidControls.Action> actions
 
     /*!
         \qmlproperty int elevation
@@ -110,11 +110,11 @@ QQC2.ToolBar {
 
         Tool bar.
     */
-    property AppToolBar toolbar
+    property FluidControls.AppToolBar toolbar
 
     implicitHeight: FluidCore.Device.gridUnit
 
-    ToolButton {
+    FluidControls.ToolButton {
         id: leftButton
 
         property bool showing: leftAction && leftAction.visible
@@ -152,7 +152,7 @@ QQC2.ToolBar {
         }
     }
 
-    TitleLabel {
+    FluidControls.TitleLabel {
         id: titleLabel
 
         anchors {
@@ -183,7 +183,7 @@ QQC2.ToolBar {
         Repeater {
             model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
                    ? appBar.maxActionCount : appBar.actions.length
-            delegate: ToolButton {
+            delegate: FluidControls.ToolButton {
                 id: actionButton
 
                 QQC2.ToolTip.visible: QQC2.ToolTip.text !== "" && !overflowMenu.visible && (FluidCore.Device.isMobile ? pressed : hovered)
@@ -213,14 +213,14 @@ QQC2.ToolBar {
             }
         }
 
-        ToolButton {
+        FluidControls.ToolButton {
             id: overflowButton
 
             anchors.verticalCenter: parent.verticalCenter
 
             icon.width: appBar.__iconSize
             icon.height: appBar.__iconSize
-            icon.source: FluidCore.Utils.iconUrl("navigation/more_vert")
+            icon.source: FluidControls.Utils.iconUrl("navigation/more_vert")
 
             onClicked: overflowMenu.open()
 

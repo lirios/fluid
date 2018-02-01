@@ -18,7 +18,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.impl 2.3
 import QtQuick.Controls.Material 2.3
-import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -173,7 +172,7 @@ FluidControls.Page {
 
                             icon.width: 16
                             icon.height: 16
-                            icon.source: FluidCore.Utils.iconUrl("navigation/close")
+                            icon.source: FluidControls.Utils.iconUrl("navigation/close")
 
                             focus: Qt.NoFocus
                             visible: delegateData.canRemove

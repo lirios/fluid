@@ -55,8 +55,22 @@ git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
 qbs setup-qt /usr/bin/qmake-qt5 qt5
 qbs config profiles.qt5.baseProfile gcc
-qbs -d build profile:qt5
+qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
 ```
+
+On the last `qbs` line, you can specify additional configuration parameters at the end:
+
+ * `modules.lirideployment.prefix:/path/to/prefix` where most files are installed (default: `/usr/local`)
+ * `modules.lirideployment.dataDir:path/to/lib` where data files are installed (default: `/usr/local/share`)
+ * `modules.lirideployment.libDir:path/to/lib` where libraries are installed (default: `/usr/local/lib`)
+ * `modules.lirideployment.qmlDir:path/to/qml` where QML plugins are installed (default: `/usr/local/lib/qml`)
+ * `modules.lirideployment.pluginsDir:path/to/plugins` where Qt plugins are installed (default: `/usr/local/lib/plugins`)
+ * `modules.lirideployment.qbsModulesDir:path/to/qbs` where Qbs modules are installed (default: `/usr/local/share/qbs/modules`)
+
+See [lirideployment.qbs](https://github.com/lirios/qbs-shared/blob/develop/modules/lirideployment/lirideployment.qbs)
+for more deployment-related parameters.
+
+See also [System-wide installation](#system-wide-installation).
 
 You can also append the following options to the last line:
 
@@ -74,10 +88,10 @@ qbs run --no-build -d build --products fluid-demo
 
 ### Documentation
 
-The HTML documentation is built if `project.withDocumentation:true` is passed
-to qbs and it is localed inside `<install root>/share/doc/fluid/html`.
+The HTML documentation is built if `projects.Fluid.withDocumentation:true` is passed
+to qbs and it is localed inside `<install root>/<prefix>/share/doc/fluid/html`.
 
-Open `<install root>/share/doc/fluid/html/index.html` with a browser to read it.
+Open `<install root>/<prefix>/share/doc/fluid/html/index.html` with a browser to read it.
 
 ## Installation
 

@@ -66,7 +66,7 @@ You can also append the following options to the last line:
  * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared
    instead of the git submodule included here.
 
-Run the demo with (unless `projects.Liri.withDemo:false`):
+Run the demo with (unless `projects.Fluid.withDemo:false`):
 
 ```sh
 qbs run --no-build -d build --products fluid-demo
@@ -104,7 +104,7 @@ git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
 qbs setup-qt /usr/bin/qmake-qt5 qt5
 qbs config profiles.qt5.baseProfile gcc
-qbs build --no-install -d build profile:qt5 modules.qbs.installRoot:/ modules.qbs.installPrefix:usr modules.lirideployment.qmlDir:lib/qt/qml
+qbs build --no-install -d build profile:qt5 modules.lirideployment.prefix:/usr modules.lirideployment.qmlDir:/usr/lib/qt/qml
 sudo qbs install -d build --no-build -v --install-root / profile:qt5
 ```
 

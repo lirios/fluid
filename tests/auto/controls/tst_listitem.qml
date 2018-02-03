@@ -53,7 +53,10 @@ Item {
         ListItem {
             id: listItemWithSecondaryItem
 
-            secondaryItem: Button {}
+            secondaryItem: Item {
+                width: parent.width
+                height: 42
+            }
         }
 
         ListItem {
@@ -70,13 +73,9 @@ Item {
             id: listItemWithRightItem
 
             text: "Random Text"
-            rightItem: ComboBox {
-                anchors.centerIn: parent
-                textRole: "text"
-                model: ListModel {
-                    ListElement { text: "One"; value: 1 }
-                    ListElement { text: "Two"; value: 2 }
-                }
+            rightItem: Item {
+                width: parent.width
+                height: 69
             }
         }
     }
@@ -86,38 +85,27 @@ Item {
         when: windowShown
 
         function test_leftItem_shows_when_icon_name_is_set() {
-            var leftItem = findChild(listItem, "leftItem")
+            var leftItem = findChild(listItem, "leftItem");
 
-            compare(leftItem.showing, false)
+            compare(leftItem.showing, false);
 
-            listItem.icon.name = "action/settings"
-
-            compare(leftItem.showing, true)
+            listItem.icon.name = "action/settings";
+            compare(leftItem.showing, true);
         }
 
         function test_click_isnt_eaten_by_ripple() {
-            clickedSpy.clear()
-
-            mouseClick(listItem)
-
-            compare(clickedSpy.count, 1)
+            clickedSpy.clear();
+            mouseClick(listItem);
+            compare(clickedSpy.count, 1);
         }
 
         function test_implicit_height() {
-            compare(listItemWithSubtext1.implicitHeight, 72)
-
-            compare(listItemWithSubtext2.implicitHeight, 88)
-
-            var secondaryItem = findChild(listItemWithSecondaryItem, "secondaryItem")
-            compare(listItemWithSecondaryItem.implicitHeight, 64)
-
-            compare(listItemWithoutSecondaryItem.implicitHeight, 48)
-
-            var leftItem = findChild(listItemWithLeftItem, "leftItem")
-            compare(listItemWithLeftItem.implicitHeight, 48)
-
-            var rightItem = findChild(listItemWithRightItem, "rightItem")
-            compare(listItemWithRightItem.implicitHeight, 56)
+            compare(listItemWithSubtext1.implicitHeight, 72);
+            compare(listItemWithSubtext2.implicitHeight, 88);
+            compare(listItemWithSecondaryItem.implicitHeight, 58);
+            compare(listItemWithoutSecondaryItem.implicitHeight, 48);
+            compare(listItemWithLeftItem.implicitHeight, 48);
+            compare(listItemWithRightItem.implicitHeight, 85);
         }
     }
 }

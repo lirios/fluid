@@ -106,6 +106,12 @@ FluidTemplates.DatePicker {
                     yearSelector.selectedYear = selectedDate.getFullYear();
                 }
             }
+
+            Binding {
+                target   : dateSelector
+                property : "selectedDate"
+                value    : picker.selectedDate
+            }
         }
 
         FluidControlsPrivate.YearSelector {

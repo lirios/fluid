@@ -24,6 +24,7 @@ Project {
         environment: {
             var env = base;
             env.push("QML2_IMPORT_PATH=" + FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir));
+            env.push("QT_QUICK_CONTROLS_STYLE=material");
             return env;
         }
     }

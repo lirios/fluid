@@ -7,7 +7,6 @@ Project {
     references: [
         "controls/controls.qbs",
         "core/core.qbs",
-        "material/material.qbs",
     ]
 
     AutotestRunner {

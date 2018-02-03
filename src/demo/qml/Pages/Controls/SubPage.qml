@@ -13,7 +13,6 @@
  */
 
 import QtQuick.Controls 2.3
-import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 FluidControls.Page {
@@ -21,7 +20,7 @@ FluidControls.Page {
 
     actions: [
         FluidControls.Action {
-            icon.source: FluidCore.Utils.iconUrl("action/settings")
+            icon.source: FluidControls.Utils.iconUrl("action/settings")
             toolTip: qsTr("Settings")
             hoverAnimation: true
         }

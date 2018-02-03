@@ -58,9 +58,11 @@ QString Device::name() const
         return tr("computer");
     case TV:
         return tr("TV");
-    case Unknown:
-        return tr("device");
+    default:
+        break;
     }
+
+    return tr("device");
 }
 
 QString Device::iconName() const
@@ -76,9 +78,11 @@ QString Device::iconName() const
         return QLatin1String("hardware/desktop_windows");
     case TV:
         return QLatin1String("hardware/tv");
-    case Unknown:
-        return QLatin1String("hardware/computer");
+    default:
+        break;
     }
+
+    return QLatin1String("hardware/computer");
 }
 
 bool Device::isPortrait() const

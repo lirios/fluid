@@ -14,7 +14,6 @@
 
 import QtQuick 2.10
 import QtQuick.Controls.Material 2.3
-import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 Item {
@@ -56,7 +55,7 @@ Item {
                 delegate: FluidControls.ToolButton {
                     anchors.verticalCenter: parent.verticalCenter
 
-                    icon.source: FluidCore.Utils.iconUrl(modelData)
+                    icon.source: FluidControls.Utils.iconUrl(modelData)
                     icon.color: Material.iconColor
 
                     Material.theme: Material.Dark

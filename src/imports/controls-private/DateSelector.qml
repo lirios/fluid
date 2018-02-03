@@ -18,7 +18,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import Qt.labs.calendar 1.0
-import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
 
@@ -37,7 +36,7 @@ FluidTemplates.DateSelector {
             anchors.top: parent.top
             anchors.leftMargin: 16
 
-            icon.source: FluidCore.Utils.iconUrl("navigation/chevron_left")
+            icon.source: FluidControls.Utils.iconUrl("navigation/chevron_left")
 
             onClicked: listView.currentIndex--;
         }
@@ -55,7 +54,7 @@ FluidTemplates.DateSelector {
             anchors.right: parent.right
             anchors.rightMargin: 16
 
-            icon.source: FluidCore.Utils.iconUrl("navigation/chevron_right")
+            icon.source: FluidControls.Utils.iconUrl("navigation/chevron_right")
 
             onClicked: listView.currentIndex++;
         }

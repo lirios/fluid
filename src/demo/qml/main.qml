@@ -18,9 +18,9 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
-import Fluid.Controls 1.0
+import Fluid.Controls 1.0 as FluidControls
 
-ApplicationWindow {
+FluidControls.ApplicationWindow {
     id: window
 
     visible: true
@@ -37,7 +37,7 @@ ApplicationWindow {
 
     Universal.accent: Universal.Cobalt
 
-    NavigationDrawer {
+    FluidControls.NavigationDrawer {
         id: navDrawer
 
         //width: Math.min(window.width, window.height) / 3 * 2
@@ -58,28 +58,28 @@ ApplicationWindow {
         ]
 
         actions: [
-            Action {
+            FluidControls.Action {
                 text: qsTr("Action 1")
                 icon.source: FluidControls.Utils.iconUrl("action/info")
                 onTriggered: console.log("action1 triggered")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Action 2")
                 icon.source: FluidControls.Utils.iconUrl("action/info")
                 hasDividerAfter: true
                 onTriggered: console.log("action2 triggered")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Action 3")
                 icon.source: FluidControls.Utils.iconUrl("action/info")
                 onTriggered: console.log("action3 triggered")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Action 4")
                 icon.source: FluidControls.Utils.iconUrl("action/info")
                 onTriggered: console.log("action4 triggered")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Action 5")
                 icon.source: FluidControls.Utils.iconUrl("action/info")
                 visible: false
@@ -88,45 +88,45 @@ ApplicationWindow {
         ]
     }
 
-    initialPage: TabbedPage {
+    initialPage: FluidControls.TabbedPage {
         title: window.title
 
-        leftAction: Action {
+        leftAction: FluidControls.Action {
             icon.source: FluidControls.Utils.iconUrl("navigation/menu")
             onTriggered: navDrawer.open()
         }
 
         actions: [
-            Action {
+            FluidControls.Action {
                 text: qsTr("Dummy error")
                 icon.source: FluidControls.Utils.iconUrl("alert/warning")
                 toolTip: qsTr("Show a dummy error")
                 onTriggered: console.log("Dummy error")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Colors")
                 icon.source: FluidControls.Utils.iconUrl("image/color_lens")
                 toolTip: qsTr("Pick a color")
                 onTriggered: console.log("Colors")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Settings")
                 icon.source: FluidControls.Utils.iconUrl("action/settings")
                 toolTip: qsTr("Settings")
                 hoverAnimation: true
                 onTriggered: console.log("Settings clicked")
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("This should not be visible")
                 icon.source: FluidControls.Utils.iconUrl("alert/warning")
                 visible: false
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Language")
                 icon.source: FluidControls.Utils.iconUrl("action/language")
                 enabled: false
             },
-            Action {
+            FluidControls.Action {
                 text: qsTr("Accounts")
                 icon.source: FluidControls.Utils.iconUrl("action/account_circle")
             }

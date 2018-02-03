@@ -48,17 +48,22 @@ We strongly advise against manual builds, unless you have previous experience.
 **Qbs does not currently support Android builds**, please use per-project installation
 if you are building a mobile app.
 
-From the root of the repository, run:
+If you haven't already, start by setting up a `qt5` profile for `qbs`:
 
 ```sh
 git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
-qbs setup-qt /usr/bin/qmake-qt5 qt5
+qbs setup-qt $(which qmake) qt5 # make sure that qmake is in PATH
 qbs config profiles.qt5.baseProfile gcc
+```
+
+Then, from the root of the repository, run:
+
+```sh
 qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
 ```
 
-On the last `qbs` line, you can specify additional configuration parameters at the end:
+To the `qbs` call above you can append additional configuration parameters:
 
  * `modules.lirideployment.prefix:/path/to/prefix` where most files are installed (default: `/usr/local`)
  * `modules.lirideployment.dataDir:path/to/lib` where data files are installed (default: `/usr/local/share`)

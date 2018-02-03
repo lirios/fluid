@@ -71,9 +71,9 @@ Components.StyledPage {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Now")
                 flat: true
-                onClicked: dateTimePickerDialogLandscape.selectedDate = new Date()
+                onClicked: dateTimePickerDialogLandscape.selectedDateTime = new Date()
             }
-            onAccepted: dateTimeLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap")
+            onAccepted: dateTimeLabel.text = selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap")
 
             Material.theme: page.Material.theme
         }
@@ -89,9 +89,9 @@ Components.StyledPage {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Now")
                 flat: true
-                onClicked: dateTimePickerDialogPortrait.selectedDate = new Date()
+                onClicked: dateTimePickerDialogPortrait.selectedDateTime = new Date()
             }
-            onAccepted: dateTimeLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd  hh:mm ap")
+            onAccepted: dateTimeLabel.text = selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd  hh:mm ap")
 
             Material.theme: page.Material.theme
         }

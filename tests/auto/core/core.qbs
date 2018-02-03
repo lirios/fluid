@@ -10,5 +10,5 @@ QtGuiApplication {
 
     cpp.defines: base.concat(['QUICK_TEST_SOURCE_DIR="' + product.sourceDirectory + '"'])
 
-    files: ["*.cpp"]
+    files: ["*.cpp", "*.qml"]
 }

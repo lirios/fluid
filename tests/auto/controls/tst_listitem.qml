@@ -91,6 +91,17 @@ Item {
 
             listItem.icon.name = "action/settings";
             compare(leftItem.showing, true);
+            listItem.icon.name = "";
+        }
+
+        function test_leftItem_shows_when_icon_source_is_set() {
+            var leftItem = findChild(listItem, "leftItem");
+
+            compare(leftItem.showing, false);
+
+            listItem.icon.source = Utils.iconUrl("action/settings");
+            compare(leftItem.showing, true);
+            listItem.icon.source = "";
         }
 
         function test_click_isnt_eaten_by_ripple() {

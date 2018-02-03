@@ -15,7 +15,6 @@
 import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.3
-import QtQuick.Controls.impl 2.3
 import QtQuick.Controls.Material 2.3
 import QtGraphicalEffects 1.0
 import Fluid.Core 1.0 as FluidCore
@@ -42,13 +41,13 @@ import Fluid.Effects 1.0 as FluidEffects
 RoundButton {
     id: control
 
-    icon.width: 24
-    icon.height: 24
-    icon.color: !control.enabled ? control.Material.hintTextColor : control.flat && control.highlighted
-                                   ? control.Material.accentColor
-                                   : control.highlighted
-                                     ? control.Material.primaryHighlightedTextColor
-                                     : control.Material.foreground
+    implicitWidth: Math.max(background ? background.implicitWidth : 0, contentItem.implicitWidth) + leftPadding + rightPadding
+    implicitHeight: Math.max(background ? background.implicitHeight : 0, contentItem.implicitHeight) + topPadding + bottomPadding
+
+    leftPadding: 6
+    rightPadding: 6
+    topPadding: 6
+    bottomPadding: 6
 
     /*!
         \qmlproperty bool mini
@@ -68,33 +67,12 @@ RoundButton {
 
     Material.elevation: 1
 
-    contentItem: Item {
+    background: Rectangle {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
-        IconLabel {
-            id: icon
-
-            anchors.centerIn: parent
-
-            spacing: control.spacing
-            mirrored: control.mirrored
-            display: RoundButton.IconOnly
-
-            icon: control.icon
-            color: control.icon.color
-        }
-    }
-
-    background: Rectangle {
-        implicitWidth: 48
-        implicitHeight: implicitWidth
-
-        x: 6
-        y: 6
-
-        width: parent.width - 12
-        height: parent.height - 12
+        x: control.leftPadding
+        y: control.topPadding
 
         color: !control.enabled ? control.Material.buttonDisabledColor
                                 : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor

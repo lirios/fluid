@@ -13,4 +13,5 @@ InstallPackage {
     Depends { name: "fluidcoreplugin" }
     Depends { name: "fluideffectsplugin" }
     Depends { name: "fluidlayoutsplugin" }
+    Depends { name: "fluidtemplatesplugin" }
 }

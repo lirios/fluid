@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -14,7 +14,7 @@
 
 /****************************************************************************
 **
-** Copyright (C) 2017 The Qt Company Ltd.
+** Copyright (C) 2018 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
 **
 ** This file is part of Fluid and is derived from NoisyGradient.qml
@@ -53,7 +53,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.10
 
 /*!
     \qmltype NoiseBackground

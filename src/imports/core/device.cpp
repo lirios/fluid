@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -58,11 +58,11 @@ QString Device::name() const
         return tr("computer");
     case TV:
         return tr("TV");
-    case Unknown:
-        return tr("device");
     default:
-        return tr("unknown");
+        break;
     }
+
+    return tr("device");
 }
 
 QString Device::iconName() const
@@ -78,10 +78,11 @@ QString Device::iconName() const
         return QLatin1String("hardware/desktop_windows");
     case TV:
         return QLatin1String("hardware/tv");
-    case Unknown:
     default:
-        return QLatin1String("hardware/computer");
+        break;
     }
+
+    return QLatin1String("hardware/computer");
 }
 
 bool Device::isPortrait() const

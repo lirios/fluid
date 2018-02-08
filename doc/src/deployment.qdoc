@@ -1,0 +1,42 @@
+/*
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:MPL2$
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * $END_LICENSE$
+ */
+
+/*!
+    \page deployment.html
+    \title Deploying Fluid applications
+
+    Deployment of Fluid applications is very similar to deployment
+    of Qt Quick Controls 2 applications.
+
+    Fluid uses the \l{http://qbs.io}{Qbs} build system, but at the moment
+    this doesn't support Android and iOS deployments so we added support
+    for QMake.
+
+    The easiest way to use Fluid for Linux desktop projects is to install
+    a Linux distribution package, but if you want to support Android and
+    iOS as well as Windows you should use qmake and take a look at the
+    minimalqmake example in the examples/perproject/minimalqmake.
+
+    This is called the "per-project installation".
+
+    Create a directory for your project that we call \c minimalqmake and inside clone \b Fluid:
+
+    \code
+    mkdir minimalqmake
+    cd minimalqmake
+    git clone -b master https://github.com/lirios/fluid.git
+    \endcode
+
+    Now copy the \c minimalqmake.pro project file and \c src/ directory from the example.
+*/

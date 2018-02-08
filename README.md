@@ -7,18 +7,23 @@ Fluid
 [![GitHub release](https://img.shields.io/github/release/lirios/fluid.svg)](https://github.com/lirios/fluid)
 [![Build Status](https://travis-ci.org/lirios/fluid.svg?branch=develop)](https://travis-ci.org/lirios/fluid)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/fluid.svg)](https://github.com/lirios/fluid/issues)
-[![Maintained](https://img.shields.io/maintenance/yes/2017.svg)](https://github.com/lirios/fluid/commits/develop)
+[![Maintained](https://img.shields.io/maintenance/yes/2018.svg)](https://github.com/lirios/fluid/commits/develop)
 
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications,
 using the [Material Design](https://material.io/guidelines/) guidelines.
 
 Online documentation is available at [liri.io](https://liri.io/docs/sdk/fluid/develop/).
 
+We develop using the [git flow](https://danielkummer.github.io/git-flow-cheatsheet/) method
+this means that the `develop` branch contains code that is being developed and might break
+from time to time. If you want to check out a stable version just install one of the
+releases or clone the `master` branch that has the latest released version.
+
 ![Desktop](.github/demo.png)
 
 ## Dependencies
 
-Qt >= 5.8.0 with at least the following modules is required:
+Qt >= 5.10.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
@@ -26,10 +31,6 @@ Qt >= 5.8.0 with at least the following modules is required:
  * [qtgraphicaleffects](http://code.qt.io/cgit/qt/qtgraphicaleffects.git)
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
  * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
-
-Optionally for Linux builds:
-
- * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git) (for window decoration color)
 
 ## Build
 
@@ -47,23 +48,44 @@ We strongly advise against manual builds, unless you have previous experience.
 **Qbs does not currently support Android builds**, please use per-project installation
 if you are building a mobile app.
 
-From the root of the repository, run:
+If you haven't already, start by setting up a `qt5` profile for `qbs`:
 
 ```sh
 git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
-qbs setup-qt /usr/bin/qmake-qt5 qt5
+qbs setup-qt $(which qmake) qt5 # make sure that qmake is in PATH
 qbs config profiles.qt5.baseProfile gcc
-qbs -d build profile:qt5
 ```
+
+Then, from the root of the repository, run:
+
+```sh
+qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
+```
+
+To the `qbs` call above you can append additional configuration parameters:
+
+ * `modules.lirideployment.prefix:/path/to/prefix` where most files are installed (default: `/usr/local`)
+ * `modules.lirideployment.dataDir:path/to/lib` where data files are installed (default: `/usr/local/share`)
+ * `modules.lirideployment.libDir:path/to/lib` where libraries are installed (default: `/usr/local/lib`)
+ * `modules.lirideployment.qmlDir:path/to/qml` where QML plugins are installed (default: `/usr/local/lib/qml`)
+ * `modules.lirideployment.pluginsDir:path/to/plugins` where Qt plugins are installed (default: `/usr/local/lib/plugins`)
+ * `modules.lirideployment.qbsModulesDir:path/to/qbs` where Qbs modules are installed (default: `/usr/local/share/qbs/modules`)
+
+See [lirideployment.qbs](https://github.com/lirios/qbs-shared/blob/develop/modules/lirideployment/lirideployment.qbs)
+for more deployment-related parameters.
+
+See also [System-wide installation](#system-wide-installation).
 
 You can also append the following options to the last line:
 
- * `project.withDemo:false`: Do not build the demo app.
- * `project.withDocumentation:false`: Do not build the documentation.
- * `project.useStaticAnalyzer:true` to enable the Clang static analyzer.
+ * `projects.Fluid.withDemo:false`: Do not build the demo app.
+ * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
+ * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
+ * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared
+   instead of the git submodule included here.
 
-Run the demo with (unless `project.withDemo:false`):
+Run the demo with (unless `projects.Fluid.withDemo:false`):
 
 ```sh
 qbs run --no-build -d build --products fluid-demo
@@ -71,10 +93,10 @@ qbs run --no-build -d build --products fluid-demo
 
 ### Documentation
 
-The HTML documentation is built if `project.withDocumentation:true` is passed
-to qbs and it is localed inside `<install root>/share/doc/fluid/html`.
+The HTML documentation is built if `projects.Fluid.withDocumentation:true` is passed
+to qbs and it is localed inside `<install root>/<prefix>/share/doc/fluid/html`.
 
-Open `<install root>/share/doc/fluid/html/index.html` with a browser to read it.
+Open `<install root>/<prefix>/share/doc/fluid/html/index.html` with a browser to read it.
 
 ## Installation
 
@@ -101,7 +123,7 @@ git submodule update --init --recursive
 qbs setup-toolchains --type gcc /usr/bin/g++ gcc
 qbs setup-qt /usr/bin/qmake-qt5 qt5
 qbs config profiles.qt5.baseProfile gcc
-qbs build --no-install -d build profile:qt5 qbs.installRoot:/ qbs.installPrefix:usr modules.lirideployment.qmlDir:lib/qt/qml
+qbs build --no-install -d build profile:qt5 modules.lirideployment.prefix:/usr modules.lirideployment.qmlDir:/usr/lib/qt/qml
 sudo qbs install -d build --no-build -v --install-root / profile:qt5
 ```
 

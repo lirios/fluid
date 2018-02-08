@@ -36,6 +36,12 @@ Product {
     }
 
     Group {
+        name: "Style"
+        prefix: "template/style/"
+        files: "**"
+    }
+
+    Group {
         fileTagsFilter: ["qdoc-output"]
         qbs.install: true
         qbs.installDir: qbs.targetOS.contains("linux") ? lirideployment.docDir + "/fluid/html" : "Docs"

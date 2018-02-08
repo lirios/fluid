@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2016 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -22,6 +22,12 @@
 
     Fluid controls are based on \l{Qt Quick Controls 2}.
 
+    \section2 Instructions
+
+    \list
+      \li \l{Deploying Fluid applications}{Deployment}
+    \endlist
+
     \section2 QML Modules
 
     Fluid is comprised of several QML modules.
@@ -31,5 +37,6 @@
       \li \l{Fluid Controls QML Types}{Fluid Controls}
       \li \l{Fluid Effects QML Types}{Fluid Effects}
       \li \l{Fluid Layouts QML Types}{Fluid Layouts}
+      \li \l{Fluid Templates QML Types}{Fluid Templates}
     \endlist
 */

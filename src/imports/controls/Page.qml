@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,9 +13,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -28,7 +28,7 @@ import Fluid.Controls 1.0 as FluidControls
    Example:
 
    \qml
-   import QtQuick 2.4
+   import QtQuick 2.10
    import Fluid.Controls 1.0 as FluidControls
 
    FluidControls.Page {
@@ -39,7 +39,7 @@ import Fluid.Controls 1.0 as FluidControls
                name: "Print"
 
                // Icon name from the Google Material Design icon pack
-               iconName: "action/print"
+               icon.source: FluidControls.Utils.iconUrl("action/print")
            }
        ]
    }
@@ -158,12 +158,14 @@ Page {
 
         title: page.title
 
-        leftAction: Action {
+        leftAction: FluidControls.Action {
+            icon.source: FluidControls.Utils.iconUrl("navigation/arrow_back")
+
             text: qsTr("Back")
             toolTip: qsTr("Go back")
-            iconName: "navigation/arrow_back"
-            onTriggered: page.pop()
             visible: page.canGoBack
+
+            onTriggered: page.pop()
         }
     }
 }

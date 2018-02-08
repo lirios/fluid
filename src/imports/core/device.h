@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,7 +12,8 @@
  * $END_LICENSE$
  */
 
-#pragma once
+#ifndef DEVICE_H
+#define DEVICE_H
 
 #include <QObject>
 
@@ -25,23 +26,19 @@
 class Device : public QObject
 {
     Q_OBJECT
-
     Q_PROPERTY(FormFactor formFactor READ formFactor NOTIFY geometryChanged)
     Q_PROPERTY(QString name READ name NOTIFY geometryChanged)
     Q_PROPERTY(QString iconName READ iconName NOTIFY geometryChanged)
-
     Q_PROPERTY(bool isPortrait READ isPortrait NOTIFY geometryChanged)
     Q_PROPERTY(bool isMobile READ isMobile CONSTANT)
     Q_PROPERTY(bool hasTouchScreen READ hasTouchScreen CONSTANT)
     Q_PROPERTY(bool hoverEnabled READ hoverEnabled CONSTANT)
-
     Q_PROPERTY(int gridUnit READ gridUnit NOTIFY geometryChanged)
-
 public:
     enum FormFactor { Phone, Phablet, Tablet, Computer, TV, Unknown };
     Q_ENUM(FormFactor)
 
-    Device(QObject *parent = nullptr);
+    explicit Device(QObject *parent = nullptr);
 
     FormFactor formFactor() const;
     QString name() const;
@@ -65,3 +62,5 @@ private:
 
     QScreen *m_screen;
 };
+
+#endif // DEVICE_H

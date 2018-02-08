@@ -7,5 +7,6 @@ Project {
     references: [
         "windows.qbs",
         "linux.qbs",
+        "module.qbs",
     ]
 }

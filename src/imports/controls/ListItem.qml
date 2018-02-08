@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,10 +13,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick 2.10
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3
+import QtQuick.Controls.impl 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
@@ -71,24 +72,6 @@ ItemDelegate {
     property alias valueText: valueLabel.text
 
     /*!
-        \qmlproperty string iconName
-
-        Icon name.
-
-        \sa Icon::name
-    */
-    property alias iconName: icon.name
-
-    /*!
-        \qmlproperty url iconSource
-
-        Icon source URL.
-
-        \sa Icon::source
-    */
-    property alias iconSource: icon.source
-
-    /*!
         \qmlproperty Item leftItem
 
         Item to show on the left.
@@ -108,6 +91,15 @@ ItemDelegate {
         Secondary item.
     */
     property alias secondaryItem: secondaryItem.children
+
+    /*!
+        \internal
+    */
+    readonly property bool __isIconEmpty: listItem.icon.name === "" && listItem.icon.source.toString() === ""
+
+    icon.width: 24
+    icon.height: 24
+    icon.color: listItem.highlighted ? listItem.Material.primaryColor : enabled ? listItem.Material.iconColor : listItem.Material.iconDisabledColor
 
     leftPadding: FluidControls.Units.smallSpacing * 2
     rightPadding: FluidControls.Units.smallSpacing * 2
@@ -168,8 +160,7 @@ ItemDelegate {
             Layout.preferredHeight: width
             Layout.alignment: Qt.AlignCenter
 
-            FluidControls.Icon {
-                id: icon
+            IconLabel {
                 objectName: "icon"
 
                 anchors {
@@ -177,8 +168,13 @@ ItemDelegate {
                     left: parent.left
                 }
 
-                visible: icon.valid
-                color: listItem.highlighted ? Material.primaryColor : enabled ? Material.iconColor : Material.iconDisabledColor
+                spacing: 16
+                mirrored: listItem.mirrored
+                display: IconLabel.IconOnly
+
+                icon: listItem.icon
+                color: listItem.enabled ? listItem.Material.foreground : listItem.Material.hintTextColor
+                visible: !listItem.__isIconEmpty
             }
         }
 

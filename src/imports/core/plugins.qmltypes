@@ -7,7 +7,7 @@ import QtQuick.tooling 1.2
 // 'qmlplugindump -noinstantiate -notrelocatable Fluid.Core 1.0'
 
 Module {
-    dependencies: ["QtQuick 2.0"]
+    dependencies: ["QtQuick 2.10"]
     Component {
         name: "Clipboard"
         prototype: "QObject"
@@ -168,6 +168,7 @@ Module {
         Property { name: "isSortLocaleAware"; type: "bool" }
         Property { name: "sortRole"; type: "int" }
         Property { name: "filterRole"; type: "int" }
+        Property { name: "recursiveFilteringEnabled"; type: "bool" }
         Method {
             name: "setFilterRegExp"
             Parameter { name: "pattern"; type: "string" }
@@ -226,75 +227,18 @@ Module {
         }
     }
     Component {
-        name: "WindowDecoration"
+        name: "Utils"
         prototype: "QObject"
-        exports: ["Fluid.Core/WindowDecoration 1.0"]
-        exportMetaObjectRevisions: [0]
-        Enum {
-            name: "Theme"
-            values: {
-                "Light": 0,
-                "Dark": 1
-            }
-        }
-        Property { name: "window"; type: "QWindow"; isPointer: true }
-        Property { name: "theme"; type: "Theme" }
-        Property { name: "color"; type: "QColor" }
-    }
-    Component {
-        prototype: "QObject"
-        name: "Utils 1.0"
-        exports: ["Utils 1.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
+        exports: ["Fluid.Core/Utils 1.0"]
         isCreatable: false
         isSingleton: true
-        Method {
-            name: "asColor"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "alpha"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-            Parameter { name: "alpha"; type: "QVariant" }
-        }
-        Method {
-            name: "blendColors"
-            type: "QVariant"
-            Parameter { name: "color1"; type: "QVariant" }
-            Parameter { name: "color2"; type: "QVariant" }
-            Parameter { name: "a"; type: "QVariant" }
-        }
-        Method {
-            name: "luminance"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "lightDark"
-            type: "QVariant"
-            Parameter { name: "background"; type: "QVariant" }
-            Parameter { name: "lightColor"; type: "QVariant" }
-            Parameter { name: "darkColor"; type: "QVariant" }
-        }
-        Method {
-            name: "isDarkColor"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "getSourceForIconName"
-            type: "QVariant"
-            Parameter { name: "name"; type: "QVariant" }
-        }
+        exportMetaObjectRevisions: [0]
         Method {
             name: "scale"
-            type: "QVariant"
-            Parameter { name: "percent"; type: "QVariant" }
-            Parameter { name: "start"; type: "QVariant" }
-            Parameter { name: "end"; type: "QVariant" }
+            type: "double"
+            Parameter { name: "percent"; type: "double" }
+            Parameter { name: "start"; type: "double" }
+            Parameter { name: "end"; type: "double" }
         }
     }
 }

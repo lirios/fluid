@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,10 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import Fluid.Core 1.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
    \qmltype AppToolBar
@@ -29,7 +29,7 @@ ToolBar {
 
     Material.elevation: page ? page.appBar.elevation : 2
     Material.background: Material.primaryColor
-    Material.theme: Utils.lightDark(Material.background, Material.Light, Material.Dark)
+    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
 
     /*!
         \internal

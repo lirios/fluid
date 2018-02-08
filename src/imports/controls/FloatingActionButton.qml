@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,10 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Window 2.0
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick 2.10
+import QtQuick.Window 2.2
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import QtGraphicalEffects 1.0
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
@@ -41,11 +41,13 @@ import Fluid.Effects 1.0 as FluidEffects
 RoundButton {
     id: control
 
-    /*!
-       The name of the icon to display in the action button, selected from the Material
-       Design icon collection by Google.
-     */
-    property alias iconName: icon.name
+    implicitWidth: Math.max(background ? background.implicitWidth : 0, contentItem.implicitWidth) + leftPadding + rightPadding
+    implicitHeight: Math.max(background ? background.implicitHeight : 0, contentItem.implicitHeight) + topPadding + bottomPadding
+
+    leftPadding: 6
+    rightPadding: 6
+    topPadding: 6
+    bottomPadding: 6
 
     /*!
         \qmlproperty bool mini
@@ -65,31 +67,12 @@ RoundButton {
 
     Material.elevation: 1
 
-    contentItem: Item {
+    background: Rectangle {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
-        FluidControls.Icon {
-            id: icon
-
-            anchors.centerIn: parent
-            size: 24
-
-            color: !control.enabled ? control.Material.hintTextColor :
-                              control.flat && control.highlighted ? control.Material.accentColor :
-                                                    control.highlighted ? control.Material.primaryHighlightedTextColor : control.Material.foreground
-        }
-    }
-
-    background: Rectangle {
-        implicitWidth: 48
-        implicitHeight: implicitWidth
-
-        x: 6
-        y: 6
-
-        width: parent.width - 12
-        height: parent.height - 12
+        x: control.leftPadding
+        y: control.topPadding
 
         color: !control.enabled ? control.Material.buttonDisabledColor
                                 : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor

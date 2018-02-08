@@ -1,7 +1,7 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pierre-Yves Siret
+ * Copyright (C) 2018 Pierre-Yves Siret
  *
  * $BEGIN_LICENSE:MIT$
  *

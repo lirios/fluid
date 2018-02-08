@@ -1,0 +1,9 @@
+module Fluid.Controls.Private
+plugin fluidcontrolsprivateplugin
+classname FluidControlsPrivatePlugin
+depends Fluid.Template 1.0
+typeinfo plugins.qmltypes
+
+DateSelector 1.0 DateSelector.qml
+TimeSelector 1.0 TimeSelector.qml
+YearSelector 1.0 YearSelector.qml

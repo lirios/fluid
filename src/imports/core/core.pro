@@ -2,27 +2,13 @@ TARGET = fluidcoreplugin
 TARGETPATH = Fluid/Core
 IMPORT_VERSION = 1.0
 
-QT += qml quick svg
+QT += qml quick
 
 HEADERS += \
-    $$PWD/clipboard.h \
-    $$PWD/device.h \
-    $$PWD/iconsimageprovider.h \
-    $$PWD/qmldateutils.h \
-    $$PWD/qqmlsortfilterproxymodel.h \
-    $$PWD/standardpaths.h \
-    $$PWD/windowdecoration.h \
-    $$PWD/coreplugin.h
+    $$files($$PWD/*.h)
 
 SOURCES += \
-    $$PWD/clipboard.cpp \
-    $$PWD/device.cpp \
-    $$PWD/iconsimageprovider.cpp \
-    $$PWD/qmldateutils.cpp \
-    $$PWD/qqmlsortfilterproxymodel.cpp \
-    $$PWD/standardpaths.cpp \
-    $$PWD/windowdecoration.cpp \
-    $$PWD/coreplugin.cpp
+    $$files($$PWD/*.cpp)
 
 QML_FILES += \
     $$files($$PWD/*.qml)

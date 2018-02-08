@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
+import QtQuick 2.10
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3
 import QtQml 2.2
 import Fluid.Core 1.0
 import Fluid.Controls 1.0
@@ -108,6 +108,13 @@ Drawer {
     */
     property list<QtObject> actions
 
+    /*!
+        \qmlproperty Component delegate
+
+        The delegate for item that constitute a menu item.
+    */
+    property  alias delegate : navDrawerListView.delegate
+
     width: {
         switch (Device.formFactor) {
         case Device.Phone:
@@ -146,6 +153,7 @@ Drawer {
             }
 
             ListView {
+                id: navDrawerListView
                 currentIndex: -1
                 spacing: 0
                 clip: true
@@ -153,7 +161,7 @@ Drawer {
                 model: drawer.actions
 
                 delegate: ListItem {
-                    iconName: modelData.iconName
+                    icon.name: modelData.icon.name
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0

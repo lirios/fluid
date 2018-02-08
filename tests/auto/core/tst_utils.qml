@@ -1,8 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,26 +12,17 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import QtTest 1.0
-import Fluid.Core 1.0
+import Fluid.Core 1.0 as FluidCore
 
 TestCase {
     name: "UtilsTests"
 
-    function test_blendColors() {
-        compare(Utils.blendColors("lightsteelblue", "#10FF0000", 0.5), "#80b5b8d0")
-    }
-
-    function test_luminance() {
-        compare(Utils.luminance("lightsteelblue"), 0.7593254230563821)
-    }
-
-    function test_isDarkColor_should_return_true_for_dark_color() {
-        compare(Utils.isDarkColor("#455A64"), true)
-    }
-
-    function test_isDarkColor_should_return_false_for_light_color() {
-        compare(Utils.isDarkColor("#B0BEC5"), false)
+    function test_scale() {
+        compare(FluidCore.Utils.scale(50, 0, 1), 0.5);
+        compare(FluidCore.Utils.scale(50, 0, 100), 50);
+        compare(FluidCore.Utils.scale(50, 50, 100), 75);
+        compare(FluidCore.Utils.scale(50, 1, 100), 50.5);
     }
 }

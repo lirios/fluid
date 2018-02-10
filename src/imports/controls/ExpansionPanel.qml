@@ -1,31 +1,135 @@
+/*
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
+ *
+ * $BEGIN_LICENSE:MPL2$
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * $END_LICENSE$
+ */
+
 import QtQuick 2.0
 import QtQuick.Controls 1.4
 import Fluid.Controls 1.0 as FluidControls
 
+/*!
+    \qmltype ExpansionPanel
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief An expansion panel is a lightweight container that may either stand alone or be connected to a larger surface, such as a card.
+
+    Expansion panels are best used for lightweight editing of an element, such as selecting a value for a setting.
+
+    Expansion panels may be displayed in a sequence to form creation flows.
+
+    The state of the panel could be controlled by the \l checked property.
+
+    This component support \l ExlusiveGroup.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/expansion-panels.html}{Material Design guidelines}.
+*/
 Item {
     id: root
 
     height: checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
 
-    property int paddingLeft   : 24
-    property int paddingRight  : paddingLeft
-    property int paddingTop    : spacing
+    /*!
+        \qmlproperty int paddingLeft
+
+        Left padding.
+    */
+    property int paddingLeft : 24
+
+    /*!
+        \qmlproperty int paddingRight
+
+        Right padding.
+    */
+    property int paddingRight : paddingLeft
+
+    /*!
+        \qmlproperty int paddingTop
+
+        Top padding.
+    */
+    property int paddingTop : spacing
+
+    /*!
+        \qmlproperty int paddingBottom
+
+        Bottom padding.
+    */
     property int paddingBottom : paddingTop
-    property int spacing       : 16
 
-    property int animationDuration  : 100
+    /*!
+        \qmlproperty int spacing
 
-    property alias summaryDelegate: summaryLoader.sourceComponent
-    property alias expandedPanelDelegate: contentLoader.sourceComponent
-    property alias backgroundDelegate: backgroundLoader.sourceComponent
+        Spacing between internal elements.
+    */
+    property int spacing : 16
 
+    /*!
+        \qmlproperty Component summaryDelegate
+
+        Delegate of the summary row. By default it contains two labels, one for the \l summaryTitle, one for the \l summarySubtitle
+    */
+    property alias summaryDelegate : summaryLoader.sourceComponent
+
+    /*!
+        \qmlproperty Component expandedPanelDelegate
+
+        Expanded panel content's delegate. By default is null
+    */
+    property alias expandedPanelDelegate : contentLoader.sourceComponent
+
+    /*!
+        \qmlproperty Component expandedPanelDelegate
+
+        Delegate used to draw the background of the summary row
+    */
+    property alias backgroundDelegate : backgroundLoader.sourceComponent
+
+    /*!
+        \qmlproperty string summaryTitle
+
+        Title of the panel, used only if the \l summaryDelegate is the default one
+    */
     property string summaryTitle
+
+    /*!
+        \qmlproperty string summarySubtitle
+
+        Subtitle of the panel, used only if the \l summaryDelegate is the default one
+    */
     property string summarySubtitle
 
-    property bool           checked: false
-    property ExclusiveGroup exclusiveGroup: null
+    /*!
+        \qmlproperty bool checked
+
+        This property is true if the control is expanded.
+    */
+    property bool checked : false
+
+    /*!
+        \qmlproperty ExclusiveGroup exclusiveGroup
+
+        This property stores the \l ExclusiveGroup that the control belongs to.
+    */
+    property ExclusiveGroup exclusiveGroup : null
 
     onExclusiveGroupChanged: if (exclusiveGroup) exclusiveGroup.bindCheckable(root)
+
+    /*!
+        \internal
+    */
+    property int animationDuration : 100
 
     Card {
         id: card

@@ -48,6 +48,7 @@ Tab {
                 ListElement { title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
                 ListElement { title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
                 ListElement { title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
+                ListElement { title: qsTr("ExpansionPanel"); source: "qrc:/qml/Pages/Controls/ExpansionPanelPage.qml" }
                 ListElement { title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
                 ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Controls/InfoBarPage.qml" }
                 ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }

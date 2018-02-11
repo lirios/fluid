@@ -203,6 +203,8 @@ Item {
 
                     verticalAlignment : "AlignVCenter"
 
+                    elide             : "ElideRight"
+
                     opacity           : 0.87
 
                     text              : root.summaryTitle
@@ -213,6 +215,8 @@ Item {
                     height            : parent.height
 
                     verticalAlignment : "AlignVCenter"
+
+                    elide             : "ElideRight"
 
                     opacity           : 0.54
 

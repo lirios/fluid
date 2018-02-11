@@ -76,6 +76,14 @@ Item {
     property int spacing : 16
 
     /*!
+        \qmlproperty real summaryTitleWidthPercentage
+
+        Percentage of the summary title label in terms of parent's width. Note: if \l summarySubtitle is null
+        this value is ignored and the title's label will take all the available width.
+    */
+    property real summaryTitleWidthPercentage: 0.3
+
+    /*!
         \qmlproperty Component summaryDelegate
 
         Delegate of the summary row. By default it contains two labels, one for the \l summaryTitle, one for the \l summarySubtitle
@@ -198,7 +206,7 @@ Item {
                 BodyLabel {
                     id: titleLabel
 
-                    width             : parent.width * 0.3
+                    width             : root.summarySubtitle ? parent.width * root.summaryTitleWidthPercentage : parent.width
                     height            : parent.height
 
                     verticalAlignment : "AlignVCenter"

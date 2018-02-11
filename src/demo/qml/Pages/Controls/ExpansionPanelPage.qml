@@ -122,7 +122,6 @@ Flickable {
             exclusiveGroup : panelsExlusiveGroup
 
             expandedPanelDelegate : Column {
-                height : 100
 
                 RadioButton {
                     id: bestLineRadioButton

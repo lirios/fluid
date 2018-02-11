@@ -154,7 +154,13 @@ Page {
     FluidControls.AppBar {
         id: appBar
 
+        padding: 0
         Material.elevation: 0
+        anchors {
+          left: parent.left
+          top: parent.top
+          right: parent.right
+        }
 
         title: page.title
 

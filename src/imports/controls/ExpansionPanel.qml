@@ -30,7 +30,7 @@ import Fluid.Controls 1.0 as FluidControls
 
     The state of the panel could be controlled by the \l checked property.
 
-    This component support \l ExlusiveGroup.
+    This component support ExlusiveGroup.
 
     For more information you can read the
     \l{https://material.io/guidelines/components/expansion-panels.html}{Material Design guidelines}.
@@ -102,7 +102,7 @@ Item {
     property alias expandedPanelDelegate : contentLoader.sourceComponent
 
     /*!
-        \qmlproperty Component expandedPanelDelegate
+        \qmlproperty Component backgroundDelegate
 
         Delegate used to draw the background of the summary row
     */
@@ -132,7 +132,7 @@ Item {
     /*!
         \qmlproperty ExclusiveGroup exclusiveGroup
 
-        This property stores the \l ExclusiveGroup that the control belongs to.
+        This property stores the ExclusiveGroup that the control belongs to.
     */
     property ExclusiveGroup exclusiveGroup : null
 

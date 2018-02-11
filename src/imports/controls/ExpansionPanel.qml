@@ -80,6 +80,10 @@ Item {
 
         Percentage of the summary title label in terms of parent's width. Note: if \l summarySubtitle is null
         this value is ignored and the title's label will take all the available width.
+
+        If the value is less than 0, or greater than 1, the default value will be used.
+
+        Default value: 0.3
     */
     property real summaryTitleWidthPercentage: 0.3
 
@@ -206,7 +210,7 @@ Item {
                 BodyLabel {
                     id: titleLabel
 
-                    width             : root.summarySubtitle ? parent.width * root.summaryTitleWidthPercentage : parent.width
+                    width             : root.summarySubtitle ? parent.width * (0 <= root.summaryTitleWidthPercentage && root.summaryTitleWidthPercentage <= 1 ? root.summaryTitleWidthPercentage : 0.3 ) : parent.width
                     height            : parent.height
 
                     verticalAlignment : "AlignVCenter"

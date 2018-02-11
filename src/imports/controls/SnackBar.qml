@@ -168,6 +168,10 @@ Rectangle {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+    }
+
     RowLayout {
         id: snackLayout
 

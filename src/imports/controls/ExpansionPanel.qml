@@ -184,7 +184,7 @@ Item {
     Row {
         id: summaryRow
 
-        height              : root.checked ? 64 : 48
+        height              : summaryLoader.height
 
         anchors.top         : parent.top
         anchors.topMargin   : root.checked ? spacing : 0
@@ -201,11 +201,12 @@ Item {
             id: summaryLoader
 
             width  : parent.width - expandedIndicatorIcon.width - parent.spacing
-            height : parent.height
 
             sourceComponent: Row {
 
-                spacing: summaryRow.spacing
+                height  : root.checked ? 64 : 48
+
+                spacing : summaryRow.spacing
 
                 BodyLabel {
                     id: titleLabel
@@ -240,12 +241,11 @@ Item {
         Icon {
             id: expandedIndicatorIcon
 
-            anchors.top       : parent.top
-            anchors.topMargin : 12
+            anchors.verticalCenter : parent.verticalCenter
 
-            opacity           : 0.54
+            opacity                : 0.54
 
-            name              : FluidControls.Utils.iconUrl(root.checked ? "hardware/keyboard_arrow_up" : "hardware/keyboard_arrow_down")
+            name                   : FluidControls.Utils.iconUrl(root.checked ? "hardware/keyboard_arrow_up" : "hardware/keyboard_arrow_down")
         }
     }
 

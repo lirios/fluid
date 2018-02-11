@@ -150,5 +150,47 @@ Flickable {
                 }
             }
         }
+
+        FluidControls.ExpansionPanel {
+            id: customPanel
+
+            width          : parent.width
+
+            exclusiveGroup : panelsExlusiveGroup
+
+            summaryDelegate: Row {
+                height  : 100
+
+                spacing : 10
+
+                Label {
+                    width                  : (parent.width - parent.spacing*2) /3
+
+                    anchors.verticalCenter : parent.verticalCenter
+
+                    text                   : qsTr("Column 1")
+                }
+
+                Label {
+                    width                  : (parent.width - parent.spacing*2) /3
+
+                    anchors.verticalCenter : parent.verticalCenter
+
+                    text                   : qsTr("Column 2")
+                }
+
+                Label {
+                    width                  : (parent.width - parent.spacing*2) /3
+
+                    anchors.verticalCenter : parent.verticalCenter
+
+                    text                   : qsTr("Column 3")
+                }
+            }
+
+            expandedPanelDelegate : Label {
+                text : qsTr("This is a customized panel")
+            }
+        }
     }
 }

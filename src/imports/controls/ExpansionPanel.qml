@@ -146,11 +146,12 @@ Item {
     Card {
         id: card
 
-        anchors.fill         : parent
+        width                : parent.width
+
+        anchors.top          : parent.top
+        anchors.bottom       : parent.bottom
         anchors.topMargin    : root.checked ? root.spacing : 0
         anchors.bottomMargin : anchors.topMargin
-        anchors.leftMargin   : 10
-        anchors.rightMargin  : 10
     }
 
     MouseArea {
@@ -183,17 +184,16 @@ Item {
     Row {
         id: summaryRow
 
-        anchors.top         : parent.top
-        anchors.topMargin   : root.checked ? spacing : 0
-
         height              : root.checked ? 64 : 48
 
-        spacing             : root.spacing
-
+        anchors.top         : parent.top
+        anchors.topMargin   : root.checked ? spacing : 0
         anchors.left        : parent.left
         anchors.leftMargin  : root.paddingLeft
         anchors.right       : parent.right
         anchors.rightMargin : root.paddingRight
+
+        spacing             : root.spacing
 
         Behavior on height { NumberAnimation { duration: root.animationDuration } }
 

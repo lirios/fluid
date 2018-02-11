@@ -16,7 +16,7 @@ FluidControls.ApplicationWindow {
 
         actions: [
             FluidControls.Action {
-                icon.source: FluidCore.Utils.iconUrl("content/add")
+                icon.source: FluidControls.Utils.iconUrl("content/add")
                 text: qsTr("Add content")
                 toolTip: qsTr("Add content")
                 onTriggered: console.log("Example action...")

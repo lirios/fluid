@@ -162,6 +162,7 @@ Drawer {
 
                 delegate: ListItem {
                     icon.name: modelData.icon.name
+                    icon.source: modelData.icon.source
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0

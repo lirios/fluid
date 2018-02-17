@@ -93,6 +93,13 @@ ItemDelegate {
     property alias secondaryItem: secondaryItem.children
 
     /*!
+        \qmlproperty bool keepMissingIconSpace
+
+        Set to true if missing icon shall be substituted with empty space in order to align item text with other icon-headed items.
+    */
+    property bool keepMissingIconSpace: false
+
+    /*!
         \internal
     */
     readonly property bool __isIconEmpty: listItem.icon.name === "" && listItem.icon.source.toString() === ""
@@ -175,6 +182,10 @@ ItemDelegate {
                 icon: listItem.icon
                 color: listItem.enabled ? listItem.Material.foreground : listItem.Material.hintTextColor
                 visible: !listItem.__isIconEmpty
+            }
+
+            Item {
+              visible: !icon.visible && keepMissingIconSpace
             }
         }
 

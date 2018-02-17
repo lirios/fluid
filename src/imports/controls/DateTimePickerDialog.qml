@@ -36,7 +36,7 @@ import Fluid.Controls 1.0 as FluidControls
 
         FluidControls.DateTimePickerDialog {
             onAccepted: {
-                console.log(selectedDate);
+                console.log(selectedDateTime);
             }
             standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
         }
@@ -118,7 +118,7 @@ Dialog {
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("Now")
                 flat: true
-                onClicked: dateTimePickerDialog.selectedDate = new Date()
+                onClicked: dateTimePickerDialog.selectedDateTime = new Date()
             }
         }
         \endcode

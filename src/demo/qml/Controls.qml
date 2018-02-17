@@ -49,12 +49,12 @@ Tab {
                 ListElement { title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
                 ListElement { title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
                 ListElement { title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
-                ListElement { title: qsTr("InfoBar"); source: "qrc:/qml/Pages/Controls/InfoBarPage.qml" }
                 ListElement { title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
                 ListElement { title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
                 ListElement { title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
                 ListElement { title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/Placeholder.qml" }
                 ListElement { title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                ListElement { title: qsTr("SnackBar"); source: "qrc:/qml/Pages/Controls/SnackBarPage.qml" }
                 ListElement { title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
                 ListElement { title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
             }

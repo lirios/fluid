@@ -143,6 +143,7 @@ Rectangle {
     radius: fullWidth ? 0 : 2
     color: Material.background
     height: snackLayout.implicitHeight
+    z: 10000
 
     layer.enabled: !fullWidth
     layer.effect: FluidEffects.Elevation {

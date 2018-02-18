@@ -40,9 +40,18 @@ Item {
             }
         }
 
-        Button {
-            text: qsTr("Open")
-            onClicked: snackBar.open(textField.text, buttonTextField.text)
+        Row {
+            spacing: 8
+
+            Button {
+                text: qsTr("Open")
+                onClicked: snackBar.open(textField.text, buttonTextField.text)
+            }
+
+            Button {
+                text: qsTr("Close")
+                onClicked: snackBar.close()
+            }
         }
     }
 

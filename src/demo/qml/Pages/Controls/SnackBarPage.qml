@@ -57,5 +57,6 @@ Item {
 
     FluidControls.SnackBar {
         id: snackBar
+        onClicked: console.log("Snack bar button clicked")
     }
 }

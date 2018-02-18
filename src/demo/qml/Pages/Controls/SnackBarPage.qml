@@ -24,20 +24,20 @@ Item {
             id: textField
             placeholderText: qsTr("Text")
             text: qsTr("Marked as read")
+            width: 300
         }
 
         TextField {
             id: buttonTextField
             placeholderText: qsTr("Button Text")
             text: qsTr("Undo")
+            width: 300
         }
 
-        Row {
-            Switch {
-                text: qsTr("Full Width")
-                checked: snackBar.fullWidth
-                onCheckedChanged: snackBar.fullWidth = checked
-            }
+        Switch {
+            text: qsTr("Full Width")
+            checked: snackBar.fullWidth
+            onCheckedChanged: snackBar.fullWidth = checked
         }
 
         Row {

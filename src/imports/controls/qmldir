@@ -26,7 +26,6 @@ ExpansionPanel 1.0 ExpansionPanel.qml
 FloatingActionButton 1.0 FloatingActionButton.qml
 HeadlineLabel 1.0 HeadlineLabel.qml
 Icon 1.0 Icon.qml
-InfoBar 1.0 InfoBar.qml
 InputDialog 1.0 InputDialog.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml
@@ -42,6 +41,7 @@ Showable 1.0 Showable.qml
 Sidebar 1.0 Sidebar.qml
 SmoothFadeImage 1.0 SmoothFadeImage.qml
 SmoothFadeLoader 1.0 SmoothFadeLoader.qml
+SnackBar 1.0 SnackBar.qml
 Subheader 1.0 Subheader.qml
 SubheadingLabel 1.0 SubheadingLabel.qml
 Tab 1.0 Tab.qml

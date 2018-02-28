@@ -137,7 +137,7 @@ Page {
         \sa StackView::push()
     */
     function push(component, properties) {
-        return StackView.view.push({item: component, properties: properties});
+        return StackView.view.push(component, properties);
     }
 
     Keys.onReleased: {

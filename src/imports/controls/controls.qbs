@@ -5,6 +5,7 @@ LiriQmlPlugin {
     name: "fluidcontrolsplugin"
     pluginPath: "Fluid/Controls"
 
+    Depends { name: "Qt"; submodules: ["quickcontrols2", "svg"]; versionAtLeast: project.minimumQtVersion }
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
     Properties {

@@ -2,7 +2,7 @@ TARGET = fluidcontrolsplugin
 TARGETPATH = Fluid/Controls
 IMPORT_VERSION = 1.0
 
-QT += qml quick
+QT += qml quick quickcontrols2 svg
 
 HEADERS += \
     $$files($$PWD/*.h)

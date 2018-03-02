@@ -101,6 +101,10 @@ Drawer {
     */
     property alias topContent: topContent.data
 
+    property alias currentIndex: navDrawerListView.currentIndex
+    property alias currentItem: navDrawerListView.currentItem
+    property bool autoHighlight: false
+
     /*!
         \qmlproperty list<QtObject> actions
 
@@ -161,13 +165,18 @@ Drawer {
                 model: drawer.actions
 
                 delegate: ListItem {
+                    property int modelIndex: index
+                    highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
                     icon.name: modelData.icon.name
                     icon.source: modelData.icon.source
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0
                     visible: modelData.visible
-                    onClicked: modelData.triggered(drawer)
+                    onClicked: {
+                        navDrawerListView.currentIndex = modelIndex
+                        modelData.triggered(drawer)
+                    }
                     enabled: modelData.enabled
                 }
 

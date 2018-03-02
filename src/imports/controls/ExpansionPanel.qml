@@ -15,6 +15,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls 2.3
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -35,45 +36,17 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/components/expansion-panels.html}{Material Design guidelines}.
 */
-Item {
+Control {
     id: root
 
-    height: checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
+    height        : checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
 
-    /*!
-        \qmlproperty int paddingLeft
-
-        Left padding.
-    */
-    property int paddingLeft : 24
-
-    /*!
-        \qmlproperty int paddingRight
-
-        Right padding.
-    */
-    property int paddingRight : paddingLeft
-
-    /*!
-        \qmlproperty int paddingTop
-
-        Top padding.
-    */
-    property int paddingTop : spacing
-
-    /*!
-        \qmlproperty int paddingBottom
-
-        Bottom padding.
-    */
-    property int paddingBottom : paddingTop
-
-    /*!
-        \qmlproperty int spacing
-
-        Spacing between internal elements.
-    */
-    property int spacing : 16
+    bottomPadding : topPadding
+    leftPadding   : 24
+    rightPadding  : leftPadding
+    topPadding    : spacing
+    
+    spacing       : 16
 
     /*!
         \qmlproperty real summaryTitleWidthPercentage
@@ -189,9 +162,9 @@ Item {
         anchors.top         : parent.top
         anchors.topMargin   : root.checked ? spacing : 0
         anchors.left        : parent.left
-        anchors.leftMargin  : root.paddingLeft
+        anchors.leftMargin  : root.leftPadding
         anchors.right       : parent.right
-        anchors.rightMargin : root.paddingRight
+        anchors.rightMargin : root.rightPadding
 
         spacing             : root.spacing
 
@@ -253,11 +226,11 @@ Item {
         height              : visible ? contentLoader.height : 0
 
         anchors.top         : summaryRow.bottom
-        anchors.topMargin   : root.checked ? root.paddingTop : 0
+        anchors.topMargin   : root.checked ? root.topPadding : 0
         anchors.left        : parent.left
-        anchors.leftMargin  : root.paddingLeft
+        anchors.leftMargin  : root.leftPadding
         anchors.right       : parent.right
-        anchors.rightMargin : root.paddingRight
+        anchors.rightMargin : root.rightPadding
 
         visible             : root.checked
         clip                : true

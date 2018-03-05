@@ -88,6 +88,11 @@ Item {
     readonly property alias expanded: searchWave.open
 
     /*!
+      The font of text in search TextInput box
+    */
+    property alias searchTextFont : searchTextField.font
+
+    /*!
       The model containing the search results
     */
     property var searchResults: ListModel {}

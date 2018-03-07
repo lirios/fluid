@@ -15,7 +15,8 @@ Product {
         "FLUID_VERSION=" + project.version,
         "FLUID_VERSION_TAG=" + versionTag,
         "SRCDIR=" + path,
-        "QT_INSTALL_DOCS=" + Qt.core.docPath
+        "QT_INSTALL_DOCS=" + Qt.core.docPath,
+        "QT_VERSION=" + Qt.core.version
     ]
 
     files: [

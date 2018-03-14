@@ -20,6 +20,8 @@ Project {
     property bool withDocumentation: true
     property bool withDemo: true
 
+    property bool installIcons: true
+
     property bool deploymentEnabled: false
 
     minimumQbsVersion: "1.9.0"

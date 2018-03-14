@@ -12,10 +12,11 @@
  * $END_LICENSE$
  */
 
-import Fluid.Controls 1.0
+import QtQuick.Controls 2.3 as C
+import QtQuick.Controls.Material 2.3
 
 /*!
-    \qmltype Card
+    \qmltype AbstractCard
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
@@ -26,5 +27,9 @@ import Fluid.Controls 1.0
     For more information you can read the
     \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.
 */
-AbstractCard {
+C.Pane {
+    padding: 0
+
+    Material.background: "white"
+    Material.elevation: 1
 }

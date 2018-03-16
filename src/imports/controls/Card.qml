@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import Fluid.Controls 1.0
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype Card
@@ -26,5 +26,5 @@ import Fluid.Controls 1.0
     For more information you can read the
     \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.
 */
-AbstractCard {
+FluidTemplates.Card {
 }

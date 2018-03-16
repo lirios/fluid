@@ -17,12 +17,10 @@ import QtQuick.Controls.Material 2.3
 
 /*!
     \qmltype AbstractCard
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
+    \inqmlmodule Fluid.Templates
+    \ingroup fluidtemplates
 
     \brief Cards display content composed of different elements.
-
-    \snippet fluidcontrols-card.qml file
 
     For more information you can read the
     \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.

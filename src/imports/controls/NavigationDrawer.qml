@@ -101,8 +101,29 @@ Drawer {
     */
     property alias topContent: topContent.data
 
+    /*!
+        \qmlproperty int currentIndex
+
+        The \c currentIndex property holds the index of the current item.
+    */
     property alias currentIndex: navDrawerListView.currentIndex
+
+    /*!
+        \qmlproperty Item currentItem
+
+        The \c currentItem property holds the current item.
+    */
     property alias currentItem: navDrawerListView.currentItem
+
+    /*!
+        \qmlproperty bool autoHighlight
+
+        This property holds whether auto-highlight is enabled.
+
+        If this property is \c true, the current item will be automatically highlighted.
+
+        The default value is \c false.
+    */
     property bool autoHighlight: false
 
     /*!

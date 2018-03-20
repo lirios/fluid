@@ -42,11 +42,8 @@ ssh-keyscan $DEPLOY_HOST 2>&1 | tee -a $HOME/.ssh/known_hosts
 openssl aes-256-cbc -K $encrypted_a841ddf051d0_key -iv $encrypted_a841ddf051d0_iv -in .travis/github_deploy_key_fluid.enc -out /tmp/github_deploy_key_fluid -d
 openssl aes-256-cbc -K $encrypted_a841ddf051d0_key -iv $encrypted_a841ddf051d0_iv -in .travis/github_deploy_key_liri_ci.enc -out /tmp/github_deploy_key_liri_ci -d
 chmod 600 /tmp/github_deploy_key_fluid /tmp/github_deploy_key_liri_ci
-
 eval "$(ssh-agent -s)"
 ssh-add /tmp/github_deploy_key_fluid
-rsync -crvz --rsh="ssh" --delete-after --delete-excluded build/default/fluid-doc.*/qdoc_html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH
-kill $SSH_AGENT_PID
-
 ssh-add /tmp/github_deploy_key_liri_ci
-scp $filename $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH/$destfilename
+rsync -crvz --rsh="ssh -i /tmp/github_deploy_key_fluid" --delete-after --delete-excluded build/default/fluid-doc.*/qdoc_html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH
+scp -i /tmp/github_deploy_key_liri_ci $filename $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH/$destfilename

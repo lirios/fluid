@@ -11,16 +11,10 @@ services:
 
 env:
   global:
-    # FTP_USER
-    - secure: "0ye9KRdOWOvKtXHZwAyxwgTkGrz5nmThQXxGMbLV1HzfmnJTsm/A38HuIaUlZt4bNVC20oDX2XJ7xZNZsj20eH3K7jREAJV8wCGp35OLEdDhMaDFt21PnsruhZAGdvGVT6m0vCBxJ6WF4m08Y/nY9pG74u2xm9gcEwg74zykV705rvS+HVOssf9n0B8nFCF0HdKnNmAK41qxKKaGxZ2x06kobyQTtmAZpu+sEzRdjQsXx2oyDyYISybUiqc3KqLjrzfRa0oNGxXvZbQqk/1BdihVTkC55jl6zPUnmSpMRDmvt+vX6Wi7qr2JucguxokSDBCAsC7rJqYOrga4Wb1m58r+OkhVfjGs8rWHqBpdQb2WEjpxsHfjN5ofn320/non9moJspMon5PkSd6UnJB5NymUjYKubBti370K3k/24YXYVoSg5/29Ol6GUzXpoV8QeNe97At8wsSXwJNKhSN6OqPWVUZpnF4yHxJsYIVIKqkXzKV/xgPQgyaw3+88gfljoxgWgnRxO3CTftrgNsLovwfRvz+ae3VfphXAVa0NDbiotyJPF8eUaLA8JqToF42nhAvMB4VE4UmnAfUXtN0qLL2cCXyvFCuj9c3XfRXXxAk2pVgNAuc62RnOBAUpoSz6DMozYzwCfdU4JlR5kNX2ugYYdhpku8BixLlk1+zgqcA="
-    # FTP_PASSWORD
-    - secure: "pyQugd8ZXVTSLPuLAnLhFRz9A5JODhLQfWMHqeGPElgisEMSXcwjh1QEYQbwqk/9o1y33L5nM1Q3LzSEdMG2T+jeXKnDq9+Oyl/gt8Y9F9wMuHX3VJsWm07j420ogIzJnoZipYGuhh0i7mZNHHoS13DJC7UiGLvtspbRhR+fX9KcZgpxhYqaJxjZxzFzV9Nj2vRn0VgOaphdctRy0bIMJBBuZ4+uG3roeme2Uz7NDdlP1Fr0S9/7pKF/93NvEYHAioaXOTlPMrjVspT2WIkujbCNK08kJbPNphK20X78e3VL5YufTlALxVY4c+vpOVNyaKl4+/0QdsZ8dy+orT/CSyCJiSdpYAmJEMlZHQQaa44pI8m1sN1LR1Cvv6MbhXtXme2zZKUP7doLyt9A5tbtdnl+SXlN6V8++J83sgIB7O4v/UXYLpmd1IL7G+cgH6g8ckjcLqQWPWfhJEix1hNwzPR6GFjo39KyftnBM4jp00bjzIFkIdOD9cW461NqIjCeiyCiBF/bmNtZ3Y3M9i8MG/KvxBKtcTmam1m+HRvUKkDslEahDjhHzYr/h952UIllhy2CJvviG+h5/WbxxnKKUtd+xaFhYgZZrv6K7gA9tAUwW02v27oHzOjBvaLHaoKHv2lTAgchIgxPn+YjScAUQv3qkD9Wk9oF6xEIPLe8c0w="
-    # FTP_URL
-    - secure: "Kh/Gq5WiAfED6+2+xjni1jnEPWbpDpHTiTMDkUF1RLnTUBmyTKiC1Nvmf6nUNFb3YsH3FeoDvxHsoznKxBrQVOBhfpedGqum465wkt0KBn+5crty0tYfSf2VZ86tN3oYMP7bJy1MKcFL2rq7cXUnWp98bv/GNlITu7yuIUTOXoOybxSUTFPgRLivzl8Apy1lmgcpFB7Cw0N1p6C/eWyJFix5MFpoF2ejO/ozKQGVptKXgTJMAEgQbcpn71E3Dh95ui3oxv1K9FzonqtPn4cag0msBZdJIvX9UdBEGpWcpADP2Q7g+Vdv5c5UF4zgFUYugeUtmQkIKK66/G4JtZ0+iYTA8Z7NBjkP0ToYpgXKAujuZf0CZf6Buj/3W/HBnsbxTYoUpUwtGHWIoYYeN/LFmT/JgW+B6M4KJLuyWQkmc7uysLScPuJ35FVvEaVdrxJ3myjEa45uoTAKAfI4Hk5J6ocbX9MvBR/76OKwukHZT9LjKwY+fGmi5Cc4hVhkJ7qpsBCnyBZ9ZN/jiwrAywXmTYYHyVEjulRrOUTrOcrI+zeydm866KPnzVU4bcLFPIWYzUGL0ksK14t9iR8gGmAJd2bi0koMh9Fb5bZUjGFKceLR4RWOfeNL6ViDSepvj8xWEEwlu5//Z9Y7mPpZHOpIiyr7+XdRDUVdQcpE9CdDfn4="
     # DEPLOY_USER
-    - secure: "nLSB2P40AmeFf6LThfbSvLX9hEjW/ppM9ukRusx4xnXOSHBcBJERoPZguF3B7f37JNp7WV2hWloAF+8x1jIOHyPq4P+1wZaZuUCrtpKVvCPMKHwJ2YqZ3vOT7CP165C0SowbdTXnHT0SOn18xKBD+GBSKQmWpziygUTxta1Vcb55xUhAXgDXLkDmsVGpRIBJTbhAH4im85isTUORLKHcCJgLyCMxwfFimsOGLyyXM/69v3qPAhcIN0AryVE2IY4hJTTcCE3YWk7ffDbdTeSegjdX6l6IdbBI8JaVpCPuvonybogpEsI9BIlgx+MC7kba57usMwBnxKaLUsPrOWTkn1HVlQ5DcBRv46up9lo+Jap9zzlNgQBGh/aDDSbBY7RSL46xZkXKXZ10PYlgkhhzQqroJ/qMSb/gYcoxseRmrdM6itjCwt3oQ6KdxhUcQ3nrgUDisejRBVYAudV2JC8rBauYAAWxFr4DOED6nOWsSo3G2Yv1Ngcj5U9bErBASh2WIefu6cdLC86NPvotDUf+B4o7ZzAhfXY63z64a8FMFtjLiTljNzcEPaNTm7YjSaCfB+mTsn5VJHYmQxkZP8H8hhFpyq/ihfeJMmuYb0j5MZduJCvf20vAZg6U3LNsJEVMKlo3f2oSkUXxTrg4+/vyZoATyY1eVJhwZ2qSL7scCjk="
+    - secure: "G8DS21df95TDm9NReqj5Eeh8V69qN8VF02YMfzKnq1lb13PbN5eV4sFjGK3ndaUGF+oK9rGSLo+HkNpaYdSFVEpLjFBTbYf9bjgpu012EsU4UBpMFKYEc3vGh4bqO2IWB4JKdILLBpKSC1fHaMkTuZjRXnl1uim0jajQuNNkTrUW3WcXxJ3ObN2NuYB9MMhmSXtFAU1++NnxNURChHprdkQcE/8FUnrt1L6z5EERplgOg4WjSITxYCaSOjZLhV/bav/T7x7Tci+rhO7xd0rrfHcCpmVaQzsBXNgZWEMOYIAhVcJTGMQObPtbOEYOysGQHMON9uMkT1cnagYLYCUW+mYjnbeaow3qvlI4HVThAkcpS3q2simp8BPFuH0cEa5E+s0XtUAJmSzPpX/s/6pqz2RqMMpHZ4wV+4fDbKJE1ng2up9yy3UF54aLpMjotTvd9Bl8zLtpVkld1EIVMf8KsC2QwKG++U6Z7TOFIqpLVBc8Zu6U89pv99Y1WBxgjy8JM4oeR4PrsDGDIMR4vsB38Kc5aVJs1A3QSMHRLFPLcpK1Qhy09hgTUrqElVxF2te8hLMgLoP00WWkPDYqyPl3f/HTH/ZYthkbRbcw9a8LN8IR218SbFfNQsVSxKDHLOFPu8xr6pGykw2YmYwHaXE8aZVoqdjXFUYbGxbwGVcjWHk="
     # DEPLOY_HOST
-    - secure: "EM5nZeBDPU5vJd1MYtbVhOMZxfBLf2/VSH/U9ozqeGOH7IcrSOlppK9y0LrgM9pHqnd9rL2mWz/UmiknDy74f9IwrR43LhkWjWghQs2sbmVs1Z5iPAJXGJw2MIxHOZmmuHWtHf0q8hDXirHnq0vh1RidKNvwOZjUE0x/NoDC4cNwik6bElz0GkGrzUFnImEd9rPJKwnD6ohhO+CrBTTca/EWB2CQOUz4ie5vcgxdZ5bnTycvodGUE/dj1Afl3tWCmn8Ej82OuSDbhrmHxCg0/aKlJA0k01FX+elXGFBe76UPTTydmKWE6/Vzs8+OjmBKuGDYMA5ne8rk+G0vAu6PWRFUo6gZT7M1kRycqQe6zOIwTm7u1ExHDVp40Q5ZRsvVc9/eZYsG9MREjPN4HYCBfNCgnpYqdRJ4wnwQRfEkF1UURdIaXnpTuz9XKt80ia9ajepFaFYD/gGOTkuQOzkS3GsAmsX6vs6Jz6TtxCQJwPiXUcf0D0nyRds4JPU41odLVuWvjkeZVznvSo6wArGTuiO5m5FSwEgPsNzoMb38qy7pHA/Hom0Ar7/RqFOW941Ix7o4LU+t4x/MFWE6eKQhIoSU+HdB+ooTUtGEOF3+C+jqRmobwqfbB7yBDpeJTrXCb6cAaP8wIym7LkDXajQXcJNMA74xCdB8GYjOonKXpoc="
+    - secure: "0L8BKnozSiwI5VMRAL6QAQ6gwVIrnBhoYq6NkACbIOchkQShZlQH9p/4/2A9/6Wu4pTrB7eTeR1JQahmjwAqUFoMfpZm+LCBZGnQpHnZd6ZgT1rcgd1MAWR4PBhoeHGbTBly00Ez9BlE5nwUxwV7XszVxbEab5tzP52JThetf+tOoL1FjUyYb3/YpPOZzlQ2gh1BeBGi8PE29i06Sa5vlGdTtJXBZmHqn2IZ2bDCNFaetI9yr6HwkxvmuhQew/vv4bsSuUidfgdZrwPodJMo0aO78INWcIl8qleHaaKvVw5sRpdk3qNPqSW517/FHMG4jDHimDnX4s2aWaq+iaVuRc4VmeQ4Ebp5Zjlf9qVuhkOCUbCy0ojrEROsqYy/oVfAH99O9lvUDBl8Q6taFJeBwhZAdDMUttqQdRSaDEspFjOk7zDoeCLN4DFzOElW1DT1XYUXUvE+WIZci5zTyhNRp6WSIKHJKHjltTqa6KscKlmWUYvroKh80SdUrjNxibM/PVl5PlFRSeXAxq3s9bC/8oNUj0CbhZBqzIP9JMbCTrjX5KnO4BPULKo94pi4LBzGtzQNs6qQ/K1srH4FsB1M9RxrD3Uqr3VcU4XbLCRLGB5rZR6Jph0IOYiRUKgQkxHnsS6mXqIizCCxDuVR6MdSvnyDcy5PuEcAEG3tC//JFnw="
 
 arch:
   packages:
@@ -46,29 +40,17 @@ script:
 
 deploy:
   - provider: script
-    script: curl --ftp-create-dirs -T build/default/fluid-artifacts.tar.gz -u $FTP_USER:$FTP_PASSWORD $FTP_URL/artifacts/master/fluid-artifacts.tar.gz
+    script: .travis/deploy.sh build/default/fluid-artifacts.tar.gz
     skip_cleanup: true
     on:
       branch: master
-      condition: "$CC = gcc"
+      condition: "$CC = gcc) && ($TRAVIS_PULL_REQUEST = false"
   - provider: script
-    script: curl --ftp-create-dirs -T build/default/fluid-artifacts.tar.gz -u $FTP_USER:$FTP_PASSWORD $FTP_URL/artifacts/develop/fluid-artifacts.tar.gz
+    script: .travis/deploy.sh build/default/fluid-artifacts.tar.gz
     skip_cleanup: true
     on:
       branch: develop
-      condition: "$CC = gcc"
-  - provider: script
-    script: .travis/deploy.sh
-    skip_cleanup: true
-    on:
-      branch: master
-      condition: "$CC = gcc"
-  - provider: script
-    script: .travis/deploy.sh
-    skip_cleanup: true
-    on:
-      branch: develop
-      condition: "$CC = gcc"
+      condition: "$CC = gcc) && ($TRAVIS_PULL_REQUEST = false"
 
 notifications:
   email: false

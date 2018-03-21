@@ -102,6 +102,31 @@ Drawer {
     property alias topContent: topContent.data
 
     /*!
+        \qmlproperty int currentIndex
+
+        The \c currentIndex property holds the index of the current item.
+    */
+    property alias currentIndex: navDrawerListView.currentIndex
+
+    /*!
+        \qmlproperty Item currentItem
+
+        The \c currentItem property holds the current item.
+    */
+    property alias currentItem: navDrawerListView.currentItem
+
+    /*!
+        \qmlproperty bool autoHighlight
+
+        This property holds whether auto-highlight is enabled.
+
+        If this property is \c true, the current item will be automatically highlighted.
+
+        The default value is \c false.
+    */
+    property bool autoHighlight: false
+
+    /*!
         \qmlproperty list<QtObject> actions
 
         List of actions to be displayed by the drawer.
@@ -161,13 +186,18 @@ Drawer {
                 model: drawer.actions
 
                 delegate: ListItem {
+                    property int modelIndex: index
+                    highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
                     icon.name: modelData.icon.name
                     icon.source: modelData.icon.source
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0
                     visible: modelData.visible
-                    onClicked: modelData.triggered(drawer)
+                    onClicked: {
+                        navDrawerListView.currentIndex = modelIndex
+                        modelData.triggered(drawer)
+                    }
                     enabled: modelData.enabled
                 }
 

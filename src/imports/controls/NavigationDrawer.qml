@@ -127,11 +127,11 @@ Drawer {
     property bool autoHighlight: false
 
     /*!
-        \qmlproperty list<QtObject> actions
+        \qmlproperty list<Action> actions
 
         List of actions to be displayed by the drawer.
     */
-    property list<QtObject> actions
+    property list<Action> actions
 
     /*!
         \qmlproperty Component delegate

@@ -15,9 +15,8 @@
 import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
-import QtQml 2.2
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import Fluid.Core 1.0 as FluidCore
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
     \qmltype NavigationDrawer
@@ -131,25 +130,25 @@ Drawer {
 
         List of actions to be displayed by the drawer.
     */
-    property list<Action> actions
+    property list<FluidControls.Action> actions
 
     /*!
         \qmlproperty Component delegate
 
         The delegate for item that constitute a menu item.
     */
-    property  alias delegate : navDrawerListView.delegate
+    property alias delegate : navDrawerListView.delegate
 
     width: {
-        switch (Device.formFactor) {
-        case Device.Phone:
-            return 280
-        case Device.Tablet:
-            return 320
+        switch (FluidCore.Device.formFactor) {
+        case FluidCore.Device.Phone:
+            return 280;
+        case FluidCore.Device.Tablet:
+            return 320;
         default:
-            break
+            break;
         }
-        return 56 * 4
+        return 56 * 4;
     }
     height: ApplicationWindow.height
 
@@ -187,16 +186,18 @@ Drawer {
 
                 delegate: ListItem {
                     property int modelIndex: index
-                    highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
+
                     icon.name: modelData.icon.name
                     icon.source: modelData.icon.source
+
+                    highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
                     text: modelData.text
                     showDivider: modelData.hasDividerAfter
                     dividerInset: 0
                     visible: modelData.visible
                     onClicked: {
-                        navDrawerListView.currentIndex = modelIndex
-                        modelData.triggered(drawer)
+                        navDrawerListView.currentIndex = modelIndex;
+                        modelData.triggered(drawer);
                     }
                     enabled: modelData.enabled
                 }

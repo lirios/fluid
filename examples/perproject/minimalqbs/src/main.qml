@@ -1,6 +1,6 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
 
 FluidControls.ApplicationWindow {
@@ -14,7 +14,7 @@ FluidControls.ApplicationWindow {
 
         actions: [
             FluidControls.Action {
-                iconName: "content/add"
+                icon.source: FluidControls.Utils.iconUrl("content/add")
                 text: qsTr("Add content")
                 toolTip: qsTr("Add content")
                 onTriggered: console.log("Example action...")

@@ -5,7 +5,7 @@ LiriQmlPlugin {
     name: "fluidcontrolsplugin"
     pluginPath: "Fluid/Controls"
 
-    Depends { name: "fluidcoreplugin" }
+    Depends { name: "Qt"; submodules: ["quickcontrols2", "svg"]; versionAtLeast: project.minimumQtVersion }
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
 
     Properties {
@@ -14,16 +14,38 @@ LiriQmlPlugin {
         Android.ndk.appStl: "gnustl_shared"
     }
 
-    cpp.defines: base.concat(['FLUID_VERSION="' + project.version + '"'])
+    Properties {
+        condition: qbs.targetOS.contains("osx")
+        cpp.linkerFlags: ["-lstdc++"]
+    }
 
-    files: ["*.cpp", "*.h", "qmldir", "*.qml", "*.qmltypes"]
+    cpp.defines: [
+        'FLUID_VERSION="' + project.version + '"',
+        'FLUID_INSTALL_ICONS=' + (project.installIcons ? '1' : '0'),
+    ]
 
     Group {
+        name: "QML"
+        files: ["qmldir", "*.qml", "*.qmltypes"]
+    }
+
+    Group {
+        name: "Sources"
+        files: {
+            var sources = ["*.cpp", "*.h"];
+            if (!project.installIcons)
+                sources.concat(["*.qrc"]);
+            return sources;
+        }
+    }
+
+    Group {
+        condition: project.installIcons
         name: "Icons"
-        files: "**/*.svg"
-        prefix: qbs.installSourceBase
+        prefix: "icons/"
+        files: ["**/*.svg"]
         qbs.install: true
-        qbs.installSourceBase: "../../../icons/"
+        qbs.installSourceBase: prefix
         qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath, "icons")
     }
 }

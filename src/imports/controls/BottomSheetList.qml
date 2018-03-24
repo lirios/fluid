@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,8 +13,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.1
-import QtQuick.Controls 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
 import Fluid.Controls 1.0
 
 /*!
@@ -106,8 +106,8 @@ BottomSheet {
                                 id: listItem
 
                                 text: modelData.text
-                                iconName: modelData.iconName
-                                iconSource: modelData.iconSource
+                                icon.name: modelData.icon.name
+                                icon.source: modelData.icon.source
                                 enabled: modelData.enabled
                                 visible: modelData.visible
 

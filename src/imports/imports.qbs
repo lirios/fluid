@@ -6,7 +6,9 @@ Project {
     references: [
         "core/core.qbs",
         "controls/controls.qbs",
+        "controls-private/controls-private.qbs",
         "effects/effects.qbs",
         "layouts/layouts.qbs",
+        "templates/templates.qbs",
     ]
 }

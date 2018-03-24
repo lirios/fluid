@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,10 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import QtTest 1.0
 import Fluid.Controls 1.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Material 2.3
 
 Icon {
     id: icon
@@ -33,7 +33,7 @@ Icon {
         function test_source_should_use_icon_prefix_for_material_icon() {
             icon.name = 'action/settings'
 
-            compare(icon.source, 'image://fluidicons/action/settings')
+            compare(icon.source, 'image://fluidicontheme/action/settings')
         }
 
         function test_source_should_use_file_url_for_file_name() {

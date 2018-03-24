@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,7 +12,8 @@
  * $END_LICENSE$
  */
 
-#pragma once
+#ifndef CLIPBOARD_H
+#define CLIPBOARD_H
 
 #include <QObject>
 #include <QClipboard>
@@ -20,9 +21,7 @@
 class Clipboard : public QObject
 {
     Q_OBJECT
-
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
-
 public:
     explicit Clipboard(QObject *parent = nullptr);
 
@@ -39,3 +38,5 @@ Q_SIGNALS:
 private:
     QClipboard *m_clipboard = nullptr;
 };
+
+#endif // CLIPBOARD_H

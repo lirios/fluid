@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,8 +13,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import Fluid.Core 1.0
+import Fluid.Controls 1.0 as FluidControls
 import Fluid.Effects 1.0
 
 /*!
@@ -157,7 +158,7 @@ MouseArea {
         width: parent.width
         height: parent.height
 
-        color: Utils.isDarkColor(focusColor) && focusColor.a > 0
+        color: FluidControls.Color.isDarkColor(focusColor) && focusColor.a > 0
                 ? Qt.rgba(0,0,0,0.2) : Qt.rgba(0,0,0,0.1)
 
         opacity: __private.showFocus && focused ? 1 : 0

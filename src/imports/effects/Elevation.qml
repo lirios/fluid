@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.6
+import QtQuick 2.10
 import Fluid.Effects 1.0
 
 /*!

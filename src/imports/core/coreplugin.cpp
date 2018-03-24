@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -17,11 +17,19 @@
 #include "coreplugin.h"
 #include "clipboard.h"
 #include "device.h"
-#include "iconsimageprovider.h"
-#include "qmldateutils.h"
+#include "dateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
-#include "windowdecoration.h"
+#include "utils.h"
+
+static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine);
+    Q_UNUSED(jsEngine);
+
+    return new Utils();
+}
+
 
 static QObject *dateUtilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -47,13 +55,6 @@ static QObject *standardPathsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
     return new StandardPaths();
 }
 
-void FluidCorePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Core"));
-
-    engine->addImageProvider(QLatin1String("fluidicons"), new IconsImageProvider());
-}
-
 void FluidCorePlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String("Fluid.Core") == QLatin1String(uri));
@@ -61,7 +62,6 @@ void FluidCorePlugin::registerTypes(const char *uri)
     // @uri Fluid.Core
 
     qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
-    qmlRegisterType<WindowDecoration>(uri, 1, 0, "WindowDecoration");
 
     qmlRegisterType<QAbstractItemModel>();
     qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");
@@ -69,4 +69,5 @@ void FluidCorePlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<DateUtils>(uri, 1, 0, "DateUtils", dateUtilsProvider);
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device", deviceProvider);
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths", standardPathsProvider);
+    qmlRegisterSingletonType<Utils>(uri, 1, 0, "Utils", utilsProvider);
 }

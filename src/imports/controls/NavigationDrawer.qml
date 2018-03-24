@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,12 +12,13 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.0
-import QtQml 2.2
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import QtQuick 2.10
+import QtQuick.Window 2.0
+import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
+import Fluid.Core 1.0 as FluidCore
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
     \qmltype NavigationDrawer
@@ -26,12 +27,18 @@ import Fluid.Controls 1.0
 
     \brief The navigation drawer slides in from the left and is a common pattern in apps.
 
+    This is a temporary navigation drawer: it can toggle open or closed.
+    Closed by default, this type of navigation drawer opens temporarily above all
+    other content until a section is selected or the overlay is tapped.
+
+    NavigationDrawer is recommended on phones and tablets.
+
+    This navigation drawer comes with no contents, therefore it's completely customizable.
+
     \code
-    import QtQuick.Window 2.2
     import Fluid.Controls 2.0 as FluidControls
 
-    Window {
-        id: window
+    FluidControls.ApplicationWindow {
         width: 400
         height: 400
         visible: true
@@ -42,21 +49,28 @@ import Fluid.Controls 1.0
         }
 
         FluidControls.NavigationDrawer {
-            topContent: [
-                Button {
-                    text: "Push me"
-                    onClicked: console.log("Pushed")
-                }
-            ]
+            topContent: Image {
+                source: "background.png"
 
-            actions: [
-                FluidControls.Action {
-                    text: "Action 1"
-                },
-                FluidControls.Action {
-                    text: "Action 2"
-                }
-            ]
+                Layout.fillWidth: true
+                Layout.preferredHeight: 200
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/inbox")
+                text: "Inbox"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/archive")
+                text: "Archive"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("action/settings")
+                text: "Settings"
+                showDivider: true
+            }
         }
     }
     \endcode
@@ -70,58 +84,39 @@ Drawer {
     /*!
         \qmlproperty list<Item> topContent
 
-        The items added to this list will be displayed on top of the
-        actions list.
-
-        \code
-        import QtQuick.Window 2.2
-        import Fluid.Controls 2.0 as FluidControls
-
-        Window {
-            id: window
-            width: 400
-            height: 400
-            visible: true
-
-            Button {
-                text: "Open"
-                onClicked: drawer.open()
-            }
-
-            FluidControls.NavigationDrawer {
-                topContent: [
-                    Button {
-                        text: "Push me"
-                        onClicked: console.log("Pushed")
-                    }
-                ]
-            }
-        }
-        \endcode
+        The items added to this list will be displayed on top of the contents.
     */
     property alias topContent: topContent.data
 
     /*!
-        \qmlproperty list<QtObject> actions
-
-        List of actions to be displayed by the drawer.
+        \internal
     */
-    property list<QtObject> actions
+    default property alias contents: mainLayout.data
 
     width: {
-        switch (Device.formFactor) {
-        case Device.Phone:
-            return 280
-        case Device.Tablet:
-            return 320
+        switch (FluidCore.Device.formFactor) {
+        case FluidCore.Device.Phone:
+            return 280;
+        case FluidCore.Device.Tablet:
+            return 320;
         default:
-            break
+            break;
         }
-        return 56 * 4
+        return 56 * 4;
     }
-    height: ApplicationWindow.height
+    height: {
+        if (ApplicationWindow)
+            return (ApplicationWindow.header ? ApplicationWindow.header.height : 0) +
+                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0);
+        else if (Window)
+            return Window.contentItem;
+        else
+            return parent.height;
+    }
 
     padding: 0
+
+    Material.elevation: interactive ? 4 : 0
 
     Pane {
         id: pane
@@ -130,44 +125,20 @@ Drawer {
         padding: 0
 
         ColumnLayout {
+            id: mainLayout
+
             anchors.fill: parent
             spacing: 0
 
             ColumnLayout {
                 id: topContent
 
-                height: childrenRect.height + 2 * drawer.padding
-
                 spacing: 0
                 visible: children.length > 0
 
                 Layout.margins: drawer.padding
                 Layout.fillWidth: true
-            }
-
-            ListView {
-                currentIndex: -1
-                spacing: 0
-                clip: true
-
-                model: drawer.actions
-
-                delegate: ListItem {
-                    iconName: modelData.iconName
-                    text: modelData.text
-                    showDivider: modelData.hasDividerAfter
-                    dividerInset: 0
-                    visible: modelData.visible
-                    onClicked: modelData.triggered(drawer)
-                    enabled: modelData.enabled
-                }
-
-                visible: count > 0
-
-                Layout.fillWidth: true
                 Layout.fillHeight: true
-
-                ScrollBar.vertical: ScrollBar {}
             }
         }
     }

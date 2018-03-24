@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick.Controls 2.0 as C
-import QtQuick.Controls.Material 2.0
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype Card
@@ -27,9 +26,5 @@ import QtQuick.Controls.Material 2.0
     For more information you can read the
     \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.
 */
-C.Pane {
-    padding: 0
-
-    Material.background: "white"
-    Material.elevation: 1
+FluidTemplates.Card {
 }

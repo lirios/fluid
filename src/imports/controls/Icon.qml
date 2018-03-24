@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  * Copyright (C) 2015 Bogdan Cuza <bogdan.cuza@hotmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
@@ -13,10 +13,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 import QtQuick.Window 2.2
 import QtGraphicalEffects 1.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0
 import Fluid.Controls 1.0
 
@@ -112,7 +112,11 @@ Item {
 
         \sa name
      */
-     property url source: Utils.getSourceForIconName(name)
+     property url source: {
+        return name ? name.indexOf("/") === 0 || name.indexOf("file://") === 0 || name.indexOf("qrc") === 0
+                      ? name : "image://fluidicontheme/" + name
+                    : "";
+    }
 
     /*!
         \qmlproperty enumeration status
@@ -150,7 +154,9 @@ Item {
      */
     property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
-                            String(icon.source).indexOf("symbolic") !== -1
+                            String(icon.source).indexOf("symbolic") !== -1 ||
+                            (String(icon.source).indexOf("image://fluidicontheme/") !== -1 &&
+                             icon.name.indexOf("/") !== -1)
 
     /*!
         \qmlproperty real sourceSize
@@ -181,7 +187,7 @@ Item {
 
         anchors.fill: parent
         source: image
-        color: Utils.alpha(icon.color, 1)
+        color: Color.transparent(icon.color, 1)
         cached: true
         visible: icon.valid && colorize
         opacity: icon.color.a

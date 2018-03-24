@@ -11,20 +11,63 @@ Module {
         "Fluid.Core 1.0",
         "Fluid.Effects 1.0",
         "Fluid.Layouts 1.0",
+        "Fluid.Templates 1.0",
         "Qt.labs.calendar 1.0",
         "QtGraphicalEffects 1.0",
         "QtQml 2.2",
-        "QtQuick 2.9",
-        "QtQuick.Controls 2.2",
-        "QtQuick.Controls.Material 2.2",
-        "QtQuick.Controls.Material.impl 2.2",
-        "QtQuick.Controls.Universal 2.2",
-        "QtQuick.Controls.Universal.impl 2.2",
-        "QtQuick.Controls.impl 2.2",
-        "QtQuick.Layouts 1.1",
-        "QtQuick.Templates 2.2",
+        "QtQuick 2.8",
+        "QtQuick.Controls 2.3",
+        "QtQuick.Controls.Fusion 2.3",
+        "QtQuick.Controls.Fusion.impl 2.3",
+        "QtQuick.Controls.Imagine 2.3",
+        "QtQuick.Controls.Imagine.impl 2.3",
+        "QtQuick.Controls.Material 2.3",
+        "QtQuick.Controls.Material.impl 2.3",
+        "QtQuick.Controls.Universal 2.3",
+        "QtQuick.Controls.Universal.impl 2.3",
+        "QtQuick.Controls.impl 2.3",
+        "QtQuick.Layouts 1.3",
+        "QtQuick.Templates 2.3",
         "QtQuick.Window 2.3"
     ]
+    Component {
+        name: "Color"
+        prototype: "QObject"
+        exports: ["Fluid.Controls/Color 1.0"]
+        isCreatable: false
+        isSingleton: true
+        exportMetaObjectRevisions: [0]
+        Method {
+            name: "transparent"
+            type: "QColor"
+            Parameter { name: "color"; type: "QColor" }
+            Parameter { name: "alpha"; type: "double" }
+        }
+        Method {
+            name: "blend"
+            type: "QColor"
+            Parameter { name: "color1"; type: "QColor" }
+            Parameter { name: "color2"; type: "QColor" }
+            Parameter { name: "alpha"; type: "double" }
+        }
+        Method {
+            name: "luminance"
+            type: "double"
+            Parameter { name: "color"; type: "QColor" }
+        }
+        Method {
+            name: "isDarkColor"
+            type: "bool"
+            Parameter { name: "color"; type: "QColor" }
+        }
+        Method {
+            name: "lightDark"
+            type: "QColor"
+            Parameter { name: "background"; type: "QColor" }
+            Parameter { name: "lightColor"; type: "QColor" }
+            Parameter { name: "darkColor"; type: "QColor" }
+        }
+    }
     Component {
         prototype: "QQuickAbstractButton"
         name: "QtQuick.Controls/AbstractButton 2.0"
@@ -32,6 +75,21 @@ Module {
         exportMetaObjectRevisions: [0]
         isComposite: true
         defaultProperty: "data"
+    }
+    Component {
+        prototype: "QQuickAction"
+        name: "QtQuick.Controls/Action 2.3"
+        exports: ["QtQuick.Controls/Action 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+    }
+    Component {
+        prototype: "QQuickActionGroup"
+        name: "QtQuick.Controls/ActionGroup 2.3"
+        exports: ["QtQuick.Controls/ActionGroup 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "actions"
     }
     Component {
         prototype: "QQuickApplicationWindow"
@@ -85,6 +143,16 @@ Module {
         isComposite: true
     }
     Component {
+        prototype: "QQuickRectangle"
+        name: "QtQuick.Controls.Fusion.impl/ButtonPanel 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/ButtonPanel 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "data"
+        Property { name: "control"; type: "QQuickItem"; isPointer: true }
+        Property { name: "highlighted"; type: "bool" }
+    }
+    Component {
         prototype: "QQuickCheckBox"
         name: "QtQuick.Controls/CheckBox 2.0"
         exports: ["QtQuick.Controls/CheckBox 2.0"]
@@ -102,12 +170,14 @@ Module {
     }
     Component {
         prototype: "QQuickRectangle"
-        name: "QtQuick.Controls.impl/CheckIndicator 2.0"
-        exports: ["QtQuick.Controls.impl/CheckIndicator 2.0"]
-        exportMetaObjectRevisions: [0]
+        name: "QtQuick.Controls.Fusion.impl/CheckIndicator 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/CheckIndicator 2.3"]
+        exportMetaObjectRevisions: [3]
         isComposite: true
         defaultProperty: "data"
         Property { name: "control"; type: "QQuickItem"; isPointer: true }
+        Property { name: "pressedColor"; type: "QColor"; isReadonly: true }
+        Property { name: "checkMarkColor"; type: "QColor"; isReadonly: true }
     }
     Component {
         prototype: "QQuickRectangle"
@@ -256,6 +326,22 @@ Module {
         defaultProperty: "contentData"
     }
     Component {
+        prototype: "QQuickMenuBar"
+        name: "QtQuick.Controls/MenuBar 2.3"
+        exports: ["QtQuick.Controls/MenuBar 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "contentData"
+    }
+    Component {
+        prototype: "QQuickMenuBarItem"
+        name: "QtQuick.Controls/MenuBarItem 2.3"
+        exports: ["QtQuick.Controls/MenuBarItem 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "data"
+    }
+    Component {
         prototype: "QQuickMenuItem"
         name: "QtQuick.Controls/MenuItem 2.0"
         exports: ["QtQuick.Controls/MenuItem 2.0"]
@@ -329,6 +415,15 @@ Module {
     }
     Component {
         prototype: "QQuickRectangle"
+        name: "QtQuick.Controls.Material.impl/RadioIndicator 2.0"
+        exports: ["QtQuick.Controls.Material.impl/RadioIndicator 2.0"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        defaultProperty: "data"
+        Property { name: "control"; type: "QQuickItem"; isPointer: true }
+    }
+    Component {
+        prototype: "QQuickRectangle"
         name: "QtQuick.Controls.Universal.impl/RadioIndicator 2.0"
         exports: ["QtQuick.Controls.Universal.impl/RadioIndicator 2.0"]
         exportMetaObjectRevisions: [0]
@@ -338,21 +433,14 @@ Module {
     }
     Component {
         prototype: "QQuickRectangle"
-        name: "QtQuick.Controls.impl/RadioIndicator 2.0"
-        exports: ["QtQuick.Controls.impl/RadioIndicator 2.0"]
-        exportMetaObjectRevisions: [0]
+        name: "QtQuick.Controls.Fusion.impl/RadioIndicator 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/RadioIndicator 2.3"]
+        exportMetaObjectRevisions: [3]
         isComposite: true
         defaultProperty: "data"
         Property { name: "control"; type: "QQuickItem"; isPointer: true }
-    }
-    Component {
-        prototype: "QQuickRectangle"
-        name: "QtQuick.Controls.Material.impl/RadioIndicator 2.0"
-        exports: ["QtQuick.Controls.Material.impl/RadioIndicator 2.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
-        defaultProperty: "data"
-        Property { name: "control"; type: "QQuickItem"; isPointer: true }
+        Property { name: "pressedColor"; type: "QColor"; isReadonly: true }
+        Property { name: "checkMarkColor"; type: "QColor"; isReadonly: true }
     }
     Component {
         prototype: "QQuickRangeSlider"
@@ -416,6 +504,31 @@ Module {
         defaultProperty: "data"
     }
     Component {
+        prototype: "QQuickRectangle"
+        name: "QtQuick.Controls.Fusion.impl/SliderGroove 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/SliderGroove 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "data"
+        Property { name: "control"; type: "QQuickItem"; isPointer: true }
+        Property { name: "offset"; type: "double" }
+        Property { name: "progress"; type: "double" }
+        Property { name: "visualProgress"; type: "double" }
+    }
+    Component {
+        prototype: "QQuickRectangle"
+        name: "QtQuick.Controls.Fusion.impl/SliderHandle 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/SliderHandle 2.3"]
+        exportMetaObjectRevisions: [3]
+        isComposite: true
+        defaultProperty: "data"
+        Property { name: "palette"; type: "QVariant" }
+        Property { name: "pressed"; type: "bool" }
+        Property { name: "hovered"; type: "bool" }
+        Property { name: "vertical"; type: "bool" }
+        Property { name: "visualFocus"; type: "bool" }
+    }
+    Component {
         prototype: "QQuickItem"
         name: "QtQuick.Controls.Material.impl/SliderHandle 2.0"
         exports: ["QtQuick.Controls.Material.impl/SliderHandle 2.0"]
@@ -427,7 +540,6 @@ Module {
         Property { name: "handlePressed"; type: "bool" }
         Property { name: "handleHovered"; type: "bool" }
         Property { name: "initialSize"; type: "int"; isReadonly: true }
-        Property { name: "horizontal"; type: "bool"; isReadonly: true }
         Property { name: "control"; type: "QVariant"; isReadonly: true }
     }
     Component {
@@ -488,13 +600,15 @@ Module {
         Property { name: "control"; type: "QQuickItem"; isPointer: true }
     }
     Component {
-        prototype: "QQuickItem"
-        name: "QtQuick.Controls.impl/SwitchIndicator 2.0"
-        exports: ["QtQuick.Controls.impl/SwitchIndicator 2.0"]
-        exportMetaObjectRevisions: [0]
+        prototype: "QQuickRectangle"
+        name: "QtQuick.Controls.Fusion.impl/SwitchIndicator 2.3"
+        exports: ["QtQuick.Controls.Fusion.impl/SwitchIndicator 2.3"]
+        exportMetaObjectRevisions: [3]
         isComposite: true
         defaultProperty: "data"
         Property { name: "control"; type: "QQuickItem"; isPointer: true }
+        Property { name: "pressedColor"; type: "QColor"; isReadonly: true }
+        Property { name: "checkMarkColor"; type: "QColor"; isReadonly: true }
     }
     Component {
         prototype: "QQuickItem"
@@ -604,62 +718,6 @@ Module {
             name: "roundToIconSize"
             type: "QVariant"
             Parameter { name: "x"; type: "QVariant" }
-        }
-    }
-    Component {
-        prototype: "QObject"
-        name: "Utils 1.0"
-        exports: ["Utils 1.0"]
-        exportMetaObjectRevisions: [0]
-        isComposite: true
-        isCreatable: false
-        isSingleton: true
-        Method {
-            name: "asColor"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "alpha"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-            Parameter { name: "alpha"; type: "QVariant" }
-        }
-        Method {
-            name: "blendColors"
-            type: "QVariant"
-            Parameter { name: "color1"; type: "QVariant" }
-            Parameter { name: "color2"; type: "QVariant" }
-            Parameter { name: "a"; type: "QVariant" }
-        }
-        Method {
-            name: "luminance"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "lightDark"
-            type: "QVariant"
-            Parameter { name: "background"; type: "QVariant" }
-            Parameter { name: "lightColor"; type: "QVariant" }
-            Parameter { name: "darkColor"; type: "QVariant" }
-        }
-        Method {
-            name: "isDarkColor"
-            type: "QVariant"
-            Parameter { name: "color"; type: "QVariant" }
-        }
-        Method {
-            name: "getSourceForIconName"
-            type: "QVariant"
-            Parameter { name: "name"; type: "QVariant" }
-        }
-        Method {
-            name: "scale"
-            type: "QVariant"
-            Parameter { name: "percent"; type: "QVariant" }
-            Parameter { name: "start"; type: "QVariant" }
-            Parameter { name: "end"; type: "QVariant" }
         }
     }
 }

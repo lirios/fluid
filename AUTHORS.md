@@ -1,29 +1,15 @@
 Fluid
 =====
 
-# Maintainers
+# Core Developers
 
- * Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Pier Luigi Fiorini
 
-This is the list of contributors to this code base.
+# Contributors
 
-Names are sorted by number of commits at the time of this writing.
-Commit data has been generated with:
+You can see the list of contributors to this code base,
+and the number of their commits with:
 
 ```sh
 git shortlog -s -e -n
 ```
-
-Commit counts have been removed, since they change pretty frequently.
-
-Remember to update this file before any release is made, also make sure
-a .mailmap file is maintained if committer names and email addresses
-change over time.
-
- * Pier Luigi Fiorini <pierluigi.fiorini@liri.io>
- * Michael Spencer <sonrisesoftware@gmail.com>
- * Rajesh Kumar Mallah <mallah.rajesh@gmail.com>
- * Magnus Groß <magnus.gross@rwth-aachen.de>
- * oKcerG <oKcerG@users.noreply.github.com>
- * SushiTee <weichel.sascha@gmail.com>
- * Tim Süberkrüb <dev@timsueberkrueb.io>

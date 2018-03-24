@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,92 +13,50 @@
  */
 
 import QtQml 2.2
-import QtQuick 2.3
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import QtQuick.Layouts 1.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
+import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls.Private 1.0 as FluidControlsPrivate
+import Fluid.Templates 1.0 as FluidTemplates
 import Qt.labs.calendar 1.0
 
-/*!
-    \qmltype DatePicker
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
+FluidTemplates.DatePicker {
+    id: picker
 
-    \brief Picker to select a date
+    /*!
+        \internal
+    */
+    readonly property bool __isLandscape : picker.orientation === FluidTemplates.DatePicker.Landscape
 
-    A standalone datepicker component to select a date
+    /*!
+        \internal
+    */
+    readonly property bool __footerIsVisible: footer && footer.children.length > 0
 
-    \code
-    import QtQuick 2.0
-    import Fluid.Controls 1.0 as FluidControls
+    implicitWidth: background.implicitWidth
+    implicitHeight: background.implicitHeight
 
-    Item {
-        width: 600
-        height: 600
+    background: Pane {
+        implicitWidth: __isLandscape ? 500 : 340
+        implicitHeight: __isLandscape ? 350 : 470
 
-        FluidControls.DatePicker {
-            id: datepicker
-            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
-            standardButtonsContainer: Button {
-                height: parent.height - 5
-                anchors.verticalCenter: parent.verticalCenter
-                text: "Now"
-                Material.theme: Material.Light
-                Material.foreground: Material.accent
-                flat: true
-                onClicked: {
-                    datepicker.selectedDate = new Date()
-                }
-            }
-            onAccepted: {
-                console.log(date)
-            }
-        }
-    }
-    \endcode
+        locale: picker.locale
 
-    For more information you can read the
-    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
-*/
-Picker {
-    id: datePicker
-
-    property bool dayOfWeekRowVisible: true
-    property bool weekNumberVisible: true
-    property var selectedDate: new Date()
-    property var minDate: new Date(1976, 0, 1)
-    property var maxDate: new Date(2150, 11, 31)
-
-    function show(type) {
-        switch(type) {
-        case "YEAR":
-            dateSelector.visible = false;
-            yearSelector.visible = true;
-            break;
-        case "MONTH":
-            dateSelector.visible = true;
-            yearSelector.visible = false;
-            break;
-        }
+        Material.elevation: __footerIsVisible ? 0 : 1
     }
 
-    onSelectedDateChanged: {
-        dateSelector.selectedDate = datePicker.selectedDate
-        yearSelector.selectedDate = datePicker.selectedDate
-    }
-
-    header: Item {
-        id: header
-        anchors.fill: parent
-        anchors.margins: 16
+    header: Rectangle {
+        color: picker.Material.theme === Material.Dark ? picker.Material.dialogColor : picker.Material.accent
 
         ColumnLayout {
             anchors.fill: parent
+            anchors.margins: 16
             spacing: 0
 
             FluidControls.BodyLabel {
-                text: selectedDate.getFullYear()
+                text: yearSelector.selectedYear
                 level: 2
                 color: "white"
                 opacity: yearSelector.visible ? 1 : 0.7
@@ -106,14 +64,14 @@ Picker {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: datePicker.show("YEAR")
+                    onClicked: picker.mode = FluidTemplates.DatePicker.Year
                 }
             }
 
             Label {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                text: selectedDate.toLocaleString(datePicker.locale, "ddd, MMM dd")
+                text: dateSelector.selectedDate.toLocaleString(picker.locale, "ddd, MMM dd")
                 font.pixelSize: 30
                 color: "white"
                 wrapMode: Text.Wrap
@@ -121,43 +79,55 @@ Picker {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: datePicker.show("MONTH")
+                    onClicked: picker.mode = FluidTemplates.DatePicker.Month
                 }
             }
         }
     }
 
     selector: Item {
-        id: selectorContainer
-        width: parent.width
-        height: parent.height
-
-        DateSelector {
+        FluidControlsPrivate.DateSelector {
             id: dateSelector
             width: parent.width
             height: parent.height
-            orientation: datePicker.orientation
-            dayOfWeekRowVisible: datePicker.dayOfWeekRowVisible
-            weekNumberVisible: datePicker.weekNumberVisible
-            minDate: datePicker.minDate
-            maxDate: datePicker.maxDate
-            visible: true
-            locale: datePicker.locale
+            dayOfWeekRowVisible: picker.dayOfWeekRowVisible
+            weekNumberVisible: picker.weekNumberVisible
+            from: picker.from
+            to: picker.to
+            locale: picker.locale
+            visible: picker.mode === FluidTemplates.DatePicker.Month
             onSelectedDateChanged: {
-                if(datePicker.selectedDate != selectedDate)
-                    datePicker.selectedDate = selectedDate
+                if (picker.selectedDate !== selectedDate) {
+                    var date = new Date(picker.selectedDate.getTime());
+                    date.setDate(selectedDate.getDate());
+                    date.setMonth(selectedDate.getMonth());
+                    date.setFullYear(selectedDate.getFullYear());
+                    picker.selectedDate = new Date(date.getTime());
+                    yearSelector.selectedYear = selectedDate.getFullYear();
+                }
+            }
+
+            Binding {
+                target   : dateSelector
+                property : "selectedDate"
+                value    : picker.selectedDate
             }
         }
 
-        YearSelector {
+        FluidControlsPrivate.YearSelector {
             id: yearSelector
-            anchors.fill: parent
-            minDate: datePicker.minDate
-            maxDate: datePicker.maxDate
-            visible: false
-            onSelectedDateChanged: {
-                if(datePicker.selectedDate != selectedDate)
-                    datePicker.selectedDate = selectedDate
+            width: parent.width
+            height: parent.height
+            from: picker.from
+            to: picker.to
+            visible: picker.mode === FluidTemplates.DatePicker.Year
+            onSelectedYearChanged: {
+                if (picker.selectedDate.getFullYear() !== selectedYear) {
+                    var date = new Date(picker.selectedDate.getTime());
+                    date.setFullYear(selectedYear);
+                    picker.selectedDate = new Date(date.getTime());
+                    dateSelector.selectedDate = new Date(date.getTime());
+                }
             }
         }
     }

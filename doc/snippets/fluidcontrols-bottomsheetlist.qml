@@ -1,7 +1,7 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:FDL$
  *
@@ -16,8 +16,9 @@
  ***************************************************************************/
 
 //! [file]
-import QtQuick 2.0
-import QtQuick.Controls 2.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 Item {
@@ -33,27 +34,27 @@ Item {
         actions: [
             FluidControls.Action {
                 text: qsTr("Folder")
-                iconName: "file/folder"
+                icon.source: FluidCore.Utils.iconUrl("file/folder")
             },
             FluidControls.Action {
                 text: qsTr("New Folder")
-                iconName: "file/create_new_folder"
+                icon.source: FluidCore.Utils.iconUrl("file/create_new_folder")
             },
             FluidControls.Action {
                 text: qsTr("Shared Folder")
-                iconName: "file/folder_shared"
+                icon.source: FluidCore.Utils.iconUrl("file/folder_shared")
             },
             FluidControls.Action {
                 text: qsTr("Cloud")
-                iconName: "file/cloud"
+                icon.source: FluidCore.Utils.iconUrl("file/cloud")
             },
             FluidControls.Action {
                 text: qsTr("Email Attachment")
-                iconName: "file/attachment"
+                icon.source: FluidCore.Utils.iconUrl("file/attachment")
             },
             FluidControls.Action {
                 text: qsTr("Upload")
-                iconName: "file/file_upload"
+                icon.source: FluidCore.Utils.iconUrl("file/file_upload")
             }
         ]
     }

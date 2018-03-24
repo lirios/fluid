@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Magnus Groß <magnus.gross21@gmail.com>
+ * Copyright (C) 2018 Magnus Groß <magnus.gross21@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,11 +12,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.8
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import QtQuick.Layouts 1.1
-import Fluid.Controls 1.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
+import QtQuick.Layouts 1.3
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
   \qmltype SearchBar
@@ -83,6 +83,11 @@ Item {
     property bool persistent: false
 
     /*!
+      Whether the SearchBar is currently open
+    */
+    readonly property alias expanded: searchWave.open
+
+    /*!
       The model containing the search results
     */
     property var searchResults: ListModel {}
@@ -104,9 +109,14 @@ Item {
       Closes the search bar
     */
     function close() {
+
+        if (persistent)
+            return;
+
         searchWave.closeWave(searchWave.initialX, searchWave.initialY);
         searchSuggestions.clear();
         searchResults.clear();
+        searchTextField.focus = false;
     }
 
     anchors {left: parent.left; right: parent.right; top: parent.top}
@@ -114,16 +124,19 @@ Item {
 
     Item {
         anchors.fill: parent
-        IconButton {
+        FluidControls.ToolButton {
             id: openSearchButton
-            iconName: "action/search"
+
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.margins: 8
+
+            icon.source: FluidControls.Utils.iconUrl("action/search")
+
             onClicked: open()
         }
 
-        Wave {
+        FluidControls.Wave {
             id: searchWave
             anchors.fill: parent
             size: persistent ? diameter : 0
@@ -132,16 +145,16 @@ Item {
                 anchors.fill: parent
                 color: waveColor
             }
-            Card {
+            FluidControls.Card {
                 id: searchCard
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.margins: Units.smallSpacing
                 width: cardWidth
                 height: openSearchButton.height
-                IconButton {
+                FluidControls.ToolButton {
                     id: dismissSearchButton
-                    iconName: persistent ? "action/search" : "navigation/arrow_back"
+                    icon.source: FluidControls.Utils.iconUrl(persistent ? "action/search" : "navigation/arrow_back")
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
                     rotation: persistent ? 0 : searchWave.open ? 0 : 180
@@ -175,22 +188,24 @@ Item {
                         searchResults.clear();
                         searchSuggestions.clear();
                     }
+                    inputMethodHints: Qt.ImhNoPredictiveText
                 }
                 Label {
                     text: searchPlaceHolder
-                    visible: searchTextField.text === ""
+                    visible: searchTextField.displayText === ""
                     anchors.fill: searchTextField
+                    verticalAlignment: Label.AlignVCenter
                     font.pixelSize: searchTextField.font.pixelSize
                     color: Material.color(Material.Grey, Material.Shade400)
                 }
 
-                IconButton {
+                FluidControls.ToolButton {
                     id: resetSearchButton
-                    opacity: searchTextField.text !== ""
+                    opacity: searchTextField.displayText !== ""
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.right: parent.right
-                    iconName: "navigation/close"
+                    icon.source: FluidControls.Utils.iconUrl("navigation/close")
                     rotation: opacity*90
                     onClicked: {
                         searchTextField.clear();
@@ -231,7 +246,7 @@ Item {
             }
             Keys.onReturnPressed: autoComplete();
             onClicked: autoComplete();
-            iconName: "action/search"
+            icon.source: FluidControls.Utils.iconUrl("action/search")
         }
     }
 }

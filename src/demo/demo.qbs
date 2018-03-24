@@ -23,28 +23,26 @@ Project {
             Android.ndk.appStl: "gnustl_shared"
         }
 
+        Properties {
+            condition: qbs.targetOS.contains("osx")
+            cpp.linkerFlags: ["-lstdc++"]
+        }
+
         cpp.defines: [
             "FLUID_VERSION=" + project.version,
             "QT_NO_CAST_FROM_ASCII",
             "QT_NO_CAST_TO_ASCII"
         ]
 
-        files: ["*.cpp", "*.qrc"]
+        Qt.core.resourcePrefix: "/"
+        Qt.core.resourceSourceBase: sourceDirectory
+
+        files: ["*.cpp", "*.h"]
 
         Group {
-            name: "QML Files"
-            files: [
-                "qml/*.qml",
-                "qml/+material/*.qml",
-                "qml/+universal/*.qml",
-                "qml/Pages/Basic/*.qml",
-                "qml/Pages/Compound/*.qml",
-                "qml/Pages/Style/*.qml",
-                "qml/Pages/Layouts/*.qml",
-                "qml/Pages/Material/*.qml",
-                "qml/Pages/Navigation/*.qml"
-            ]
-            fileTags: ["qml"]
+            name: "Resource Data"
+            files: ["images/**", "qml/**"]
+            fileTags: ["qt.core.resource_data"]
         }
 
         Group {
@@ -61,8 +59,8 @@ Project {
                 else
                     return "";
             }
-            qbs.installSourceBase: isBundle ? product.buildDirectory : ""
-            fileTagsFilter: isBundle ? ["bundle.content"] : ["application"]
+            qbs.installSourceBase: destinationDirectory
+            fileTagsFilter: isBundle ? ["bundle.content"] : product.type
         }
     }
 

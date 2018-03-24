@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -14,11 +14,11 @@
  */
 
 import QtQml 2.2
-import QtQuick 2.0
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
-import QtQuick.Layouts 1.0
-import Fluid.Core 1.0
+import QtQuick 2.10
+import QtQuick.Controls 2.3 as QQC2
+import QtQuick.Controls.Material 2.3
+import QtQuick.Layouts 1.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 /*!
@@ -31,7 +31,7 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/layout/structure.html#structure-app-bar}{Material Design guidelines}.
  */
-ToolBar {
+QQC2.ToolBar {
     id: appBar
 
     Material.elevation: toolbar ? 0 : elevation
@@ -49,7 +49,7 @@ ToolBar {
         When using an action bar in a page, set the \l Page::leftAction instead of
         directly setting this property.
     */
-    property Action leftAction
+    property FluidControls.Action leftAction
 
     /*!
         \qmlproperty list<Action> actions
@@ -61,7 +61,7 @@ ToolBar {
         When used with a page, the actions will be set to the page's \l Page::actions
         property, so set that instead of changing this directly.
     */
-    property list<Action> actions
+    property list<FluidControls.Action> actions
 
     /*!
         \qmlproperty int elevation
@@ -75,7 +75,7 @@ ToolBar {
        \internal
        The size of the left icon and the action icons.
     */
-    property int iconSize: Device.gridUnit <= 48 ? 20 : 24
+    property int __iconSize: FluidCore.Device.gridUnit <= 48 ? 20 : 24
 
     /*!
         \qmlproperty real leftKeyline
@@ -110,19 +110,19 @@ ToolBar {
 
         Tool bar.
     */
-    property AppToolBar toolbar
+    property FluidControls.AppToolBar toolbar
 
-    implicitHeight: Device.gridUnit
+    implicitHeight: FluidCore.Device.gridUnit
 
-    IconButton {
+    FluidControls.ToolButton {
         id: leftButton
 
         property bool showing: leftAction && leftAction.visible
         property int margin: (width - 24)/2
 
-        ToolTip.visible: ToolTip.text != "" && (Device.isMobile ? pressed : hovered)
-        ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-        ToolTip.text: leftAction ? leftAction.toolTip : ""
+        QQC2.ToolTip.visible: QQC2.ToolTip.text != "" && (FluidCore.Device.isMobile ? pressed : hovered)
+        QQC2.ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+        QQC2.ToolTip.text: leftAction ? leftAction.toolTip : ""
 
         anchors {
             verticalCenter: actionsRow.verticalCenter
@@ -130,9 +130,18 @@ ToolBar {
             leftMargin: leftButton.showing ? 16 - leftButton.margin : -leftButton.width
         }
 
-        iconSize: appBar.iconSize
+        icon.width: appBar.__iconSize
+        icon.height: appBar.__iconSize
+        icon.name: leftAction ? leftAction.icon.name : ""
+        icon.source: leftAction ? leftAction.icon.source : ""
 
-        iconSource: leftAction ? leftAction.iconSource : ""
+        Binding {
+            target: leftButton
+            property: "icon.color"
+            value: leftAction.icon.color
+            when: leftAction && leftAction.icon.color.a > 0
+        }
+
         visible: leftAction && leftAction.visible
         enabled: leftAction && leftAction.enabled
         hoverAnimation: leftAction && leftAction.hoverAnimation
@@ -150,7 +159,7 @@ ToolBar {
             verticalCenter: actionsRow.verticalCenter
             left: parent.left
             right: actionsRow.left
-            leftMargin: 16 + (leftButton.showing ? Device.gridUnit - leftButton.margin : 0)
+            leftMargin: 16 + (leftButton.showing ? FluidCore.Device.gridUnit - leftButton.margin : 0)
             rightMargin: 16
         }
 
@@ -174,17 +183,26 @@ ToolBar {
         Repeater {
             model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
                    ? appBar.maxActionCount : appBar.actions.length
-            delegate: FluidControls.IconButton {
+            delegate: FluidControls.ToolButton {
                 id: actionButton
 
-                ToolTip.visible: ToolTip.text !== "" && !overflowMenu.visible && (Device.isMobile ? pressed : hovered)
-                ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
-                ToolTip.text: appBar.actions[index].toolTip
+                QQC2.ToolTip.visible: QQC2.ToolTip.text !== "" && !overflowMenu.visible && (FluidCore.Device.isMobile ? pressed : hovered)
+                QQC2.ToolTip.delay: Qt.styleHints.mousePressAndHoldInterval
+                QQC2.ToolTip.text: appBar.actions[index].toolTip
 
                 anchors.verticalCenter: parent.verticalCenter
 
-                iconSize: appBar.iconSize
-                iconSource: appBar.actions[index].iconSource
+                icon.width: appBar.__iconSize
+                icon.height: appBar.__iconSize
+                icon.name: appBar.actions[index].icon.name
+                icon.source: appBar.actions[index].icon.source
+
+                Binding {
+                    target: actionButton
+                    property: "icon.color"
+                    value: appBar.actions[index].icon.color
+                    when: appBar.actions[index].icon.color.a > 0
+                }
 
                 visible: appBar.actions[index].visible
                 enabled: appBar.actions[index].enabled
@@ -195,33 +213,44 @@ ToolBar {
             }
         }
 
-        FluidControls.IconButton {
+        FluidControls.ToolButton {
             id: overflowButton
 
             anchors.verticalCenter: parent.verticalCenter
 
-            iconSize: appBar.iconSize
-            iconName: "navigation/more_vert"
+            icon.width: appBar.__iconSize
+            icon.height: appBar.__iconSize
+            icon.source: FluidControls.Utils.iconUrl("navigation/more_vert")
 
             onClicked: overflowMenu.open()
 
             visible: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
             focusPolicy: Qt.TabFocus
 
-            Menu {
+            QQC2.Menu {
                 id: overflowMenu
 
-                y: parent.topPadding
-                transformOrigin: Menu.TopRight
+                x: -width + overflowButton.width - overflowButton.rightPadding
+                y: overflowButton.topPadding
+                transformOrigin: QQC2.Menu.TopRight
 
                 Instantiator {
                     model: appBar.actions.length > appBar.maxActionCount && appBar.maxActionCount > 0
                            ? appBar.actions.length - appBar.maxActionCount : 0
-                    delegate: FluidControls.MenuItem {
+                    delegate: QQC2.MenuItem {
                         id: overflowMenuItem
 
-                        iconSource: appBar.actions[index + appBar.maxActionCount].iconSource
-                        iconSize: appBar.iconSize
+                        icon.width: appBar.__iconSize
+                        icon.height: appBar.__iconSize
+                        icon.name: appBar.actions[index + appBar.maxActionCount].icon.name
+                        icon.source: appBar.actions[index + appBar.maxActionCount].icon.source
+
+                        Binding {
+                            target: overflowMenuItem
+                            property: "icon.color"
+                            value: appBar.actions[index + appBar.maxActionCount].icon.color
+                            when: appBar.actions[index + appBar.maxActionCount].icon.color.a > 0
+                        }
 
                         text: appBar.actions[index + appBar.maxActionCount].text
 

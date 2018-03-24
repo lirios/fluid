@@ -1,8 +1,8 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2017 Michael Spencer <sonrisesoftware@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.4
+import QtQuick 2.10
 
 /*!
     \qmltype AutomaticGrid
@@ -23,7 +23,7 @@ import QtQuick 2.4
     \brief Lay out children in a grid that automatically fits the available space.
 
     \code
-    import QtQuick 2.0
+    import QtQuick 2.10
     import Fluid.Layouts 1.0 as FluidLayouts
 
     Item {

@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -15,7 +15,7 @@
 #ifndef STANDARDPATHS_H
 #define STANDARDPATHS_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class StandardPaths : public QObject
 {
@@ -42,7 +42,7 @@ public:
     };
     Q_ENUM(StandardLocation)
 
-    StandardPaths(QObject *parent = 0);
+    explicit StandardPaths(QObject *parent = nullptr);
 
     Q_INVOKABLE QString locateFile(StandardLocation type, const QString &fileName);
     Q_INVOKABLE QString locateDirectory(StandardLocation type, const QString &dirName);

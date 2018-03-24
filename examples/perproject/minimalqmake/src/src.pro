@@ -33,6 +33,17 @@ android {
     ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 }
 
+macx {
+    # Bundle Fluid QML plugins with the application
+    APP_QML_FILES.files = $$OUT_PWD/../fluid/qml/Fluid
+    APP_QML_FILES.path = Contents/MacOS
+    QMAKE_BUNDLE_DATA += APP_QML_FILES
+}
+
+win32 {
+    WINDEPLOYQT_OPTIONS = -qmldir $$OUT_PWD/../fluid/qml/Fluid
+}
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

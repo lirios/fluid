@@ -1,7 +1,7 @@
 /****************************************************************************
  * This file is part of Fluid.
  *
- * Copyright (C) 2017 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:FDL$
  *
@@ -15,7 +15,8 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-import QtQuick 2.8
+import QtQuick 2.10
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 Item {
@@ -23,7 +24,7 @@ Item {
     FluidControls.Action {
         id: copyAction
         text: qsTr("&Copy")
-        iconName: "content/content_copy"
+        icon.source: FluidCore.Utils.iconUrl("content/content_copy")
         shortcut: StandardKey.Copy
         onTriggered: window.activeFocusItem.copy()
     }

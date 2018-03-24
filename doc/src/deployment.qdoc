@@ -38,5 +38,12 @@
     git clone -b master https://github.com/lirios/fluid.git
     \endcode
 
-    Now copy the \c minimalqmake.pro project file and \c src/ directory from the example.
+    Now copy the \c minimalqmake.pro project file and \c src/ directory from the
+    \l{https://github.com/lirios/fluid/tree/master/examples/perproject/minimalqmake}{example}.
+
+    \l{https://material.io/icons/}{Material Design icons} can either be installed alongside the
+    \c Fluid.Controls QML plugin (the default), or be embedded into the resources.
+
+    Pass \c CONFIG+=fluid_resource_icons to \c qmake in order to embed icons
+    into the resources.
 */

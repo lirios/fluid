@@ -107,38 +107,39 @@ FluidControls.NavigationDrawer {
     */
     property alias delegate : navDrawerListView.delegate
 
-    ListView {
-        id: navDrawerListView
-        currentIndex: -1
-        spacing: 0
+    ScrollView {
         clip: true
 
-        model: drawer.actions
+        ListView {
+            id: navDrawerListView
+            currentIndex: -1
+            spacing: 0
 
-        delegate: ListItem {
-            property int modelIndex: index
+            model: drawer.actions
 
-            icon.name: modelData.icon.name
-            icon.source: modelData.icon.source
+            delegate: ListItem {
+                property int modelIndex: index
 
-            highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
-            text: modelData.text
-            showDivider: modelData.hasDividerAfter
-            dividerInset: 0
-            enabled: modelData.enabled
-            visible: modelData.visible
+                icon.name: modelData.icon.name
+                icon.source: modelData.icon.source
 
-            onClicked: {
-                navDrawerListView.currentIndex = modelIndex;
-                modelData.triggered(drawer);
+                highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
+                text: modelData.text
+                showDivider: modelData.hasDividerAfter
+                dividerInset: 0
+                enabled: modelData.enabled
+                visible: modelData.visible
+
+                onClicked: {
+                    navDrawerListView.currentIndex = modelIndex;
+                    modelData.triggered(drawer);
+                }
             }
-        }
 
-        visible: count > 0
+            visible: count > 0
+        }
 
         Layout.fillWidth: true
         Layout.fillHeight: true
-
-        ScrollBar.vertical: ScrollBar {}
     }
 }

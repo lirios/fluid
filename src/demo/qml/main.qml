@@ -18,6 +18,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
+import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
 FluidControls.ApplicationWindow {
@@ -41,10 +42,10 @@ FluidControls.ApplicationWindow {
         id: navDrawer
 
         topContent: Image {
-            source: "qrc:/images/materialbg.png"
+            source: FluidCore.Device.isMobile ? "qrc:/images/materialbg.png" : ""
 
             Layout.fillWidth: true
-            Layout.preferredHeight: 200
+            Layout.preferredHeight: FluidCore.Device.isMobile ? 200 : window.header.height
         }
 
         actions: [

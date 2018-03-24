@@ -1,7 +1,7 @@
 import qbs 1.0
 
 Product {
-    property string versionTag: project.version.replace(/\.|-/g, "")
+    readonly property string versionTag: project.version.replace(/\./g, "_")
 
     name: "fluid-doc"
     condition: project.withDocumentation && !qbs.targetOS.contains("android")

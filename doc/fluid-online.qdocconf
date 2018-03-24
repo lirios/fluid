@@ -1,13 +1,17 @@
 include(config/fluid-project.qdocconf)
-include($QT_INSTALL_DOCS/global/qt-html-templates-online.qdocconf)
+include($QT_INSTALL_DOCS/global/qt-html-templates-offline.qdocconf)
 
-HTML.nonavigationbar = "true"
+HTML.nonavigationbar = "false"
 
 HTML.navigationseparator = ""
 
 HTML.stylesheets = \
     template/style/base.css \
-    template/style/liri.css
+    template/style/liri.css \
+    template/style/liri.eot \
+    template/style/liri.svg \
+    template/style/liri.ttf \
+    template/style/liri.woff
 
 HTML.headerstyles = \
     "<!-- begin headerstyles -->\n" \
@@ -19,7 +23,6 @@ HTML.headerstyles = \
     "<!-- end headerstyles -->\n" \
 
 HTML.headerscripts = \
-    "  <script defer type=\"text/javascript\" src=\"https://code.jquery.com/jquery-3.2.1.min.js\"></script>\n" \
     "  <script defer type=\"text/javascript\" src=\"https://code.getmdl.io/1.3.0/material.min.js\"></script>\n" \
 
 HTML.endheader = \
@@ -27,15 +30,15 @@ HTML.endheader = \
 
 HTML.postheader = \
     "<!-- begin postheader -->\n" \
-    "<div style=\"display: none;\">\n" \
-    "<!-- end postheader -->\n" \
-
-HTML.postpostheader = \
-    "<!-- begin postpostheader -->\n" \
-    "</div>\n" \
     "<body class=\"mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base\">\n" \
     "  <div class=\"liri-layout mdl-layout mdl-js-layout mdl-layout--fixed-header\">\n" \
     "    <header class=\"mdl-layout__header mdl-layout__header--scroll\">\n" \
+    "      <div class=\"mdl-layout__header-row\">\n" \
+    "        <i class=\"icon-liri liri-bird pointer\" onclick=\"location.href='index.html'\"></i>\n" \
+    "        <span class=\"mdl-layout-title pointer mdl-layout--large-screen-only\"" \
+    "              onclick=\"location.href='/'\">Liri</span>\n" \
+    "        <span class=\"mdl-layout-title mdl-layout--small-screen-only\">Fluid API</span>\n" \
+    "      </div>\n" \
     "    </header>\n" \
     "    <div class=\"liri-ribbon mdl-color--primary\"></div>\n" \
     "    <main class=\"liri-main mdl-layout__content\">\n" \
@@ -44,6 +47,12 @@ HTML.postpostheader = \
     "        <div class=\"liri-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col pt32\">\n" \
     "          <a name=\"top\"></a>\n" \
     "          <div class=\"container\">\n" \
+    "            <ul class=\"navigationbar\">\n" \
+    "<!-- end postheader -->\n" \
+
+HTML.postpostheader = \
+    "<!-- begin postpostheader -->\n" \
+    "            </ul>\n" \
     "<!-- end postpostheader -->\n" \
 
 HTML.prologue = ""

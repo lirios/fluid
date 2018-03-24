@@ -3,7 +3,7 @@ import qbs 1.0
 InstallPackage {
     name: "fluid-artifacts"
     targetName: name
-    builtByDefault: false
+    builtByDefault: project.deploymentEnabled
 
     archiver.type: "tar"
     archiver.outputDirectory: project.buildDirectory

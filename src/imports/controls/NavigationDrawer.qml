@@ -13,8 +13,10 @@
  */
 
 import QtQuick 2.10
+import QtQuick.Window 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
@@ -25,12 +27,13 @@ import Fluid.Controls 1.0 as FluidControls
 
     \brief The navigation drawer slides in from the left and is a common pattern in apps.
 
+    This navigation drawer comes with no contents, therefore it's completely customizable.
+    Here's an example:
+
     \code
-    import QtQuick.Window 2.2
     import Fluid.Controls 2.0 as FluidControls
 
-    Window {
-        id: window
+    FluidControls.ApplicationWindow {
         width: 400
         height: 400
         visible: true
@@ -41,21 +44,28 @@ import Fluid.Controls 1.0 as FluidControls
         }
 
         FluidControls.NavigationDrawer {
-            topContent: [
-                Button {
-                    text: "Push me"
-                    onClicked: console.log("Pushed")
-                }
-            ]
+            topContent: Image {
+                source: "background.png"
 
-            actions: [
-                FluidControls.Action {
-                    text: "Action 1"
-                },
-                FluidControls.Action {
-                    text: "Action 2"
-                }
-            ]
+                Layout.fillWidth: true
+                Layout.preferredHeight: 200
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/inbox")
+                text: "Inbox"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/archive")
+                text: "Archive"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("action/settings")
+                text: "Settings"
+                showDivider: true
+            }
         }
     }
     \endcode
@@ -69,75 +79,14 @@ Drawer {
     /*!
         \qmlproperty list<Item> topContent
 
-        The items added to this list will be displayed on top of the
-        actions list.
-
-        \code
-        import QtQuick.Window 2.2
-        import Fluid.Controls 2.0 as FluidControls
-
-        Window {
-            id: window
-            width: 400
-            height: 400
-            visible: true
-
-            Button {
-                text: "Open"
-                onClicked: drawer.open()
-            }
-
-            FluidControls.NavigationDrawer {
-                topContent: [
-                    Button {
-                        text: "Push me"
-                        onClicked: console.log("Pushed")
-                    }
-                ]
-            }
-        }
-        \endcode
+        The items added to this list will be displayed on top of the contents.
     */
     property alias topContent: topContent.data
 
     /*!
-        \qmlproperty int currentIndex
-
-        The \c currentIndex property holds the index of the current item.
+        \internal
     */
-    property alias currentIndex: navDrawerListView.currentIndex
-
-    /*!
-        \qmlproperty Item currentItem
-
-        The \c currentItem property holds the current item.
-    */
-    property alias currentItem: navDrawerListView.currentItem
-
-    /*!
-        \qmlproperty bool autoHighlight
-
-        This property holds whether auto-highlight is enabled.
-
-        If this property is \c true, the current item will be automatically highlighted.
-
-        The default value is \c false.
-    */
-    property bool autoHighlight: false
-
-    /*!
-        \qmlproperty list<Action> actions
-
-        List of actions to be displayed by the drawer.
-    */
-    property list<FluidControls.Action> actions
-
-    /*!
-        \qmlproperty Component delegate
-
-        The delegate for item that constitute a menu item.
-    */
-    property alias delegate : navDrawerListView.delegate
+    default property alias contents: mainLayout.data
 
     width: {
         switch (FluidCore.Device.formFactor) {
@@ -150,9 +99,19 @@ Drawer {
         }
         return 56 * 4;
     }
-    height: ApplicationWindow.height
+    height: {
+        if (ApplicationWindow)
+            return (ApplicationWindow.header ? ApplicationWindow.header.height : 0) +
+                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0);
+        else if (Window)
+            return Window.contentItem;
+        else
+            return parent.height;
+    }
 
     padding: 0
+
+    Material.elevation: interactive ? 4 : 0
 
     Pane {
         id: pane
@@ -161,53 +120,20 @@ Drawer {
         padding: 0
 
         ColumnLayout {
+            id: mainLayout
+
             anchors.fill: parent
             spacing: 0
 
             ColumnLayout {
                 id: topContent
 
-                height: childrenRect.height + 2 * drawer.padding
-
                 spacing: 0
                 visible: children.length > 0
 
                 Layout.margins: drawer.padding
                 Layout.fillWidth: true
-            }
-
-            ListView {
-                id: navDrawerListView
-                currentIndex: -1
-                spacing: 0
-                clip: true
-
-                model: drawer.actions
-
-                delegate: ListItem {
-                    property int modelIndex: index
-
-                    icon.name: modelData.icon.name
-                    icon.source: modelData.icon.source
-
-                    highlighted: drawer.autoHighlight ? ListView.isCurrentItem : false
-                    text: modelData.text
-                    showDivider: modelData.hasDividerAfter
-                    dividerInset: 0
-                    visible: modelData.visible
-                    onClicked: {
-                        navDrawerListView.currentIndex = modelIndex;
-                        modelData.triggered(drawer);
-                    }
-                    enabled: modelData.enabled
-                }
-
-                visible: count > 0
-
-                Layout.fillWidth: true
                 Layout.fillHeight: true
-
-                ScrollBar.vertical: ScrollBar {}
             }
         }
     }

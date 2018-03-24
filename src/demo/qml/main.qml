@@ -37,25 +37,15 @@ FluidControls.ApplicationWindow {
 
     Universal.accent: Universal.Cobalt
 
-    FluidControls.NavigationDrawer {
+    FluidControls.NavigationListView {
         id: navDrawer
 
-        //width: Math.min(window.width, window.height) / 3 * 2
-        height: window.height
+        topContent: Image {
+            source: "qrc:/images/materialbg.png"
 
-        topContent: [
-            Rectangle {
-                color: Material.primary
-                height: 48
-
-                Label {
-                    anchors.centerIn: parent
-                    text: qsTr("Top Content")
-                }
-
-                Layout.fillWidth: true
-            }
-        ]
+            Layout.fillWidth: true
+            Layout.preferredHeight: 200
+        }
 
         actions: [
             FluidControls.Action {

@@ -31,6 +31,7 @@ InputDialog 1.0 InputDialog.qml
 ListItem 1.0 ListItem.qml
 Loadable 1.0 Loadable.qml
 NavigationDrawer 1.0 NavigationDrawer.qml
+NavigationListView 1.0 NavigationListView.qml
 NoiseBackground 1.0 NoiseBackground.qml
 OverlayView 1.0 OverlayView.qml
 Page 1.0 Page.qml

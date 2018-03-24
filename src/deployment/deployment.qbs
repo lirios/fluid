@@ -5,7 +5,7 @@ Project {
 
     references: [
         "windows.qbs",
-        "linux.qbs",
+        "tarball.qbs",
         "module.qbs",
     ]
 }

@@ -51,7 +51,7 @@ Product {
 
     Group {
         fileTagsFilter: ["qch"]
-        qbs.install: false
-        qbs.installDir: qbs.targetOS.contains("linux") ? lirideployment.docDir + "/fluid/html" : "Docs"
+        qbs.install: true
+        qbs.installDir: qbs.targetOS.contains("linux") ? lirideployment.docDir + "/fluid" : "Docs"
     }
 }

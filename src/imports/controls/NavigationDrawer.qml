@@ -27,8 +27,13 @@ import Fluid.Controls 1.0 as FluidControls
 
     \brief The navigation drawer slides in from the left and is a common pattern in apps.
 
+    This is a temporary navigation drawer: it can toggle open or closed.
+    Closed by default, this type of navigation drawer opens temporarily above all
+    other content until a section is selected or the overlay is tapped.
+
+    NavigationDrawer is recommended on phones and tablets.
+
     This navigation drawer comes with no contents, therefore it's completely customizable.
-    Here's an example:
 
     \code
     import Fluid.Controls 2.0 as FluidControls

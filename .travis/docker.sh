@@ -14,7 +14,7 @@ apt-get install -y \
     g++ clang \
     git \
     xvfb \
-    dbus-x11 \
+    dbus \
     qt5-default \
     qbs \
     qtbase5-dev qtbase5-dev-tools qtbase5-private-dev \
@@ -35,7 +35,7 @@ qbs config profiles.travis-qt5.baseProfile $CC
 
 # Build
 msg "Build..."
-eval `dbus-launch --sh-syntax`
+dbus-run-session -- \
 xvfb-run -a -s "-screen 0 800x600x24" \
 qbs -d build -j $(nproc) --all-products profile:travis-qt5 \
     modules.lirideployment.prefix:/usr \

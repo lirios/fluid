@@ -102,7 +102,6 @@ Item {
     */
     function open() {
         searchWave.openWave(openSearchButton.x, openSearchButton.y);
-        searchTextField.forceActiveFocus();
     }
 
     /*!

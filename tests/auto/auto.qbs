@@ -3,7 +3,7 @@ import qbs.FileInfo
 
 Project {
     name: "Autotests"
-    condition: project.autotestEnabled
+    condition: project.autotestEnabled && project.withQmlImports
 
     references: [
         "controls/controls.qbs",

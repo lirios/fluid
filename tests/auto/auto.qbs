@@ -3,6 +3,7 @@ import qbs.FileInfo
 
 Project {
     name: "Autotests"
+    condition: project.autotestEnabled
 
     references: [
         "controls/controls.qbs",

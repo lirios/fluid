@@ -64,7 +64,7 @@ Project {
         }
 
         Group {
-            condition: qbs.targetOS.contains("linux")
+            condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin")
             name: "Desktop File"
             files: ["io.liri.Fluid.Demo.desktop"]
             qbs.install: true
@@ -72,7 +72,7 @@ Project {
         }
 
         Group {
-            condition: qbs.targetOS.contains("linux")
+            condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin")
             name: "AppStream Metadata"
             files: ["io.liri.Fluid.Demo.appdata.xml"]
             qbs.install: true

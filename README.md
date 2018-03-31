@@ -85,6 +85,7 @@ See also [System-wide installation](#system-wide-installation).
 You can also append the following options to the last line:
 
  * `projects.Fluid.withDemo:false`: Do not build the demo app.
+ * `projects.Fluid.withQmlModules:false`: Do not build QML modules.
  * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
  * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
  * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared

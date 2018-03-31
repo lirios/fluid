@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>io.liri.Fluid.Demo.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <name>Fluid Demo</name>
+  <summary>Demonstrate Fluid QML modules</summary>
+  <description>
+    <p>
+      Fluid is an implementation of the Material Design language for
+      Qt developers.
+    </p>
+    <p>
+      This app shows what Fluid has to offer.
+    </p>
+  </description>
+  <!-- TODO: Add screenshots -->
+  <url type="homepage">https://liri.io</url>
+  <update_contact>info@liri.io</update_contact>
+</component>

@@ -62,6 +62,22 @@ Project {
             qbs.installSourceBase: destinationDirectory
             fileTagsFilter: isBundle ? ["bundle.content"] : product.type
         }
+
+        Group {
+            condition: qbs.targetOS.contains("linux")
+            name: "Desktop File"
+            files: ["io.liri.Fluid.Demo.desktop"]
+            qbs.install: true
+            qbs.installDir: lirideployment.applicationsDir
+        }
+
+        Group {
+            condition: qbs.targetOS.contains("linux")
+            name: "AppStream Metadata"
+            files: ["io.liri.Fluid.Demo.appdata.xml"]
+            qbs.install: true
+            qbs.installDir: lirideployment.appDataDir
+        }
     }
 
     /*

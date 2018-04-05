@@ -16,8 +16,13 @@ env:
     # DEPLOY_HOST
     - secure: "0L8BKnozSiwI5VMRAL6QAQ6gwVIrnBhoYq6NkACbIOchkQShZlQH9p/4/2A9/6Wu4pTrB7eTeR1JQahmjwAqUFoMfpZm+LCBZGnQpHnZd6ZgT1rcgd1MAWR4PBhoeHGbTBly00Ez9BlE5nwUxwV7XszVxbEab5tzP52JThetf+tOoL1FjUyYb3/YpPOZzlQ2gh1BeBGi8PE29i06Sa5vlGdTtJXBZmHqn2IZ2bDCNFaetI9yr6HwkxvmuhQew/vv4bsSuUidfgdZrwPodJMo0aO78INWcIl8qleHaaKvVw5sRpdk3qNPqSW517/FHMG4jDHimDnX4s2aWaq+iaVuRc4VmeQ4Ebp5Zjlf9qVuhkOCUbCy0ojrEROsqYy/oVfAH99O9lvUDBl8Q6taFJeBwhZAdDMUttqQdRSaDEspFjOk7zDoeCLN4DFzOElW1DT1XYUXUvE+WIZci5zTyhNRp6WSIKHJKHjltTqa6KscKlmWUYvroKh80SdUrjNxibM/PVl5PlFRSeXAxq3s9bC/8oNUj0CbhZBqzIP9JMbCTrjX5KnO4BPULKo94pi4LBzGtzQNs6qQ/K1srH4FsB1M9RxrD3Uqr3VcU4XbLCRLGB5rZR6Jph0IOYiRUKgQkxHnsS6mXqIizCCxDuVR6MdSvnyDcy5PuEcAEG3tC//JFnw="
 
+branches:
+  except:
+    - /^(?i:continuous)$/
+
 script:
-  - ./.travis/run.sh
+  - wget -c https://raw.githubusercontent.com/lirios/infra-travis/master/run
+  - bash run ./.travis/build.sh
 
 deploy:
   - provider: script

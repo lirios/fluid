@@ -2,38 +2,18 @@
 
 set -e
 
-msg() {
-    lightblue='\033[1;34m'
-    reset='\e[0m'
-    echo -e "${lightblue}$@${reset}"
-}
-
-# Install
-msg "Install packages..."
-apt-get install -y \
-    g++ clang \
-    git \
-    xvfb \
-    dbus \
-    qt5-default \
-    qbs \
-    qtbase5-dev qtbase5-dev-tools qtbase5-private-dev \
-    qtdeclarative5-dev qtdeclarative5-dev-tools qtdeclarative5-private-dev \
-    qtquickcontrols2-5-dev \
-    libqt5svg5-dev \
-    qttools5-dev qttools5-dev-tools qttools5-private-dev \
-    qt5-doc qtbase5-doc qtdeclarative5-doc qttools5-doc qtquickcontrols2-5-doc \
-    qml-module-qtquick2 qml-module-qtquick-window2 qml-module-qtquick-layouts qml-module-qttest \
-    qml-module-qtgraphicaleffects qml-module-qtqml-models2 \
-    qml-module-qtquick-controls2 qml-module-qtquick-templates2 qml-module-qt-labs-calendar
+source /usr/local/share/liri-travis/functions
 
 # Configure qbs
+travis_start "qbs_setup"
 msg "Setup qbs..."
 qbs setup-toolchains --detect
 qbs setup-qt $(which qmake) travis-qt5
 qbs config profiles.travis-qt5.baseProfile $CC
+travis_end "qbs_setup"
 
 # Build
+travis_start "build"
 msg "Build..."
 dbus-run-session -- \
 xvfb-run -a -s "-screen 0 800x600x24" \
@@ -45,3 +25,4 @@ qbs -d build -j $(nproc) --all-products profile:travis-qt5 \
     projects.Fluid.autotestEnabled:true \
     projects.Fluid.useSystemQbsShared:false \
     projects.Fluid.deploymentEnabled:true
+travis_end "build"

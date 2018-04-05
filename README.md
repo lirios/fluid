@@ -34,8 +34,8 @@ Qt >= 5.10.0 with at least the following modules is required:
 
 The following modules and their dependencies are required:
 
- * [qbs >= 1.9.0](http://code.qt.io/cgit/qbs/qbs.git)
- * [qbs-shared >= 1.2.0](https://github.com/lirios/qbs-shared.git)
+ * [qbs](http://code.qt.io/cgit/qbs/qbs.git) >= 1.9.0
+ * [qbs-shared](https://github.com/lirios/qbs-shared.git) >= 1.2.0
 
 ## Build
 
@@ -85,6 +85,7 @@ See also [System-wide installation](#system-wide-installation).
 You can also append the following options to the last line:
 
  * `projects.Fluid.withDemo:false`: Do not build the demo app.
+ * `projects.Fluid.withQmlModules:false`: Do not build QML modules.
  * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
  * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
  * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared

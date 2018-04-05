@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
     QQuickStyle::setStyle(QLatin1String("Material"));
 
     QGuiApplication app(argc, argv);
+    app.setDesktopFileName(QLatin1String("io.liri.Fluid.Demo.desktop"));
     app.setQuitOnLastWindowClosed(true);
 
     // @uri Fluid.Demo

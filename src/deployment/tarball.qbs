@@ -8,10 +8,10 @@ InstallPackage {
     archiver.type: "tar"
     archiver.outputDirectory: project.buildDirectory
 
-    Depends { name: "fluid-demo" }
-    Depends { name: "fluidcontrolsplugin" }
-    Depends { name: "fluidcoreplugin" }
-    Depends { name: "fluideffectsplugin" }
-    Depends { name: "fluidlayoutsplugin" }
-    Depends { name: "fluidtemplatesplugin" }
+    Depends { name: "fluid-demo"; required: project.withDemo }
+    Depends { name: "fluidcontrolsplugin"; required: project.withQmlModules }
+    Depends { name: "fluidcoreplugin"; required: project.withQmlModules }
+    Depends { name: "fluideffectsplugin"; required: project.withQmlModules }
+    Depends { name: "fluidlayoutsplugin"; required: project.withQmlModules }
+    Depends { name: "fluidtemplatesplugin"; required: project.withQmlModules }
 }

@@ -19,6 +19,7 @@ Project {
 
     property bool withDocumentation: true
     property bool withDemo: true
+    property bool withQmlModules: true
 
     property bool installIcons: true
 

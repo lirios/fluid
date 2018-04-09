@@ -19,7 +19,17 @@
   <provides>
     <binary>fluid-demo</binary>
   </provides>
-  <!-- TODO: Add screenshots -->
+  <screenshots>
+    <screenshot type="default">
+      <image>https://liri.io/images/apps/fluid/fluid-demo1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://liri.io/images/apps/fluid/fluid-demo2.png</image>
+    </screenshot>
+  </screenshots>
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+  </kudos>
   <releases>
     <release date="2018-03-24" version="1.0.0"/>
     <release date="2017-10-29" version="0.11.0"/>
@@ -27,5 +37,6 @@
     <release date="2016-12-25" version="0.9.0"/>
   </releases>
   <url type="homepage">https://liri.io</url>
+  <url type="bugtracker">https://github.com/lirios/fluid/issues/new</url>
   <update_contact>info_at_liri.io</update_contact>
 </component>

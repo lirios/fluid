@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>io.liri.Fluid.Demo</id>
+  <id>io.liri.Fluid.Demo.desktop</id>
   <name>Fluid Demo</name>
   <developer_name>Liri</developer_name>
   <summary>Demonstrate Fluid QML modules</summary>

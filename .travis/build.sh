@@ -4,6 +4,12 @@ set -e
 
 source /usr/local/share/liri-travis/functions
 
+# Install packages
+travis_start "install_packages"
+msg "Install packages..."
+sudo apt-get install -y desktop-file-utils appstream-util
+travis_end "install_packages"
+
 # Configure qbs
 travis_start "qbs_setup"
 msg "Setup qbs..."
@@ -26,3 +32,11 @@ qbs -d build -j $(nproc) --all-products profile:travis-qt5 \
     projects.Fluid.useSystemQbsShared:false \
     projects.Fluid.deploymentEnabled:true
 travis_end "build"
+
+# Validate desktop file and appdata
+for filename in $(find . -type f -name "*.desktop"); do
+    desktop-file-validate $filename
+done
+for filename in $(find . -type f -name "*.appdata.xml"); do
+    appstream-util validate-relax --nonet $filename
+done

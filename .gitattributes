@@ -4,3 +4,4 @@
 .gitmodules export-ignore
 .travis export-ignore
 .travis.yml export-ignore
+.mailmap export-ignore

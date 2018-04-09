@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>io.liri.Fluid.Demo.desktop</id>
+  <id>io.liri.Fluid.Demo</id>
+  <name>Fluid Demo</name>
+  <developer_name>Liri</developer_name>
+  <summary>Demonstrate Fluid QML modules</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0+</project_license>
-  <name>Fluid Demo</name>
-  <summary>Demonstrate Fluid QML modules</summary>
   <description>
     <p>
       Fluid is an implementation of the Material Design language for
@@ -14,7 +15,17 @@
       This app shows what Fluid has to offer.
     </p>
   </description>
+  <launchable type="desktop-id">io.liri.Fluid.Demo.desktop</launchable>
+  <provides>
+    <binary>fluid-demo</binary>
+  </provides>
   <!-- TODO: Add screenshots -->
+  <releases>
+    <release date="2018-03-24" version="1.0.0"/>
+    <release date="2017-10-29" version="0.11.0"/>
+    <release date="2017-03-11" version="0.10.0"/>
+    <release date="2016-12-25" version="0.9.0"/>
+  </releases>
   <url type="homepage">https://liri.io</url>
-  <update_contact>info@liri.io</update_contact>
+  <update_contact>info_at_liri.io</update_contact>
 </component>

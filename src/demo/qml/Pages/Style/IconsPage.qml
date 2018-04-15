@@ -19,12 +19,40 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Layouts 1.0 as FluidLayouts
 import Fluid.Demo 1.0 as FluidDemo
-import "../.." as Components
 
-Components.StyledPage {
+Page {
+    Material.theme: lightRadio.checked ? Material.Light : Material.Dark
+
+    Row {
+        id: themeRow
+        anchors {
+            top: parent.top
+            left: parent.left
+        }
+
+        spacing: 16
+
+        RadioButton {
+            id: lightRadio
+            text: qsTr("Light")
+            checked: true
+        }
+
+        RadioButton {
+            id: darkRadio
+            text: qsTr("Dark")
+        }
+    }
+
+    FluidControls.SearchBar {
+        id: searchBar
+        anchors.left: themeRow.right
+    }
+
     ScrollView {
         id: scrollView
-        anchors.fill: parent
+        anchors { left: parent.left; right: parent.right; top: searchBar.bottom; bottom: parent.bottom }
+
         clip: true
 
         ColumnLayout {
@@ -50,6 +78,7 @@ Components.StyledPage {
                             }
                             delegate: FluidControls.Icon {
                                 source: FluidControls.Utils.iconUrl(entry.currentCategory + "/" + model.name)
+                                visible: model.name.indexOf(searchBar.searchText) !== -1
                                 size: 48
 
                                 ToolTip.visible: iconMouseArea.containsMouse

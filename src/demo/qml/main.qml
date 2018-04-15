@@ -73,6 +73,7 @@ FluidControls.ApplicationWindow {
                     ListElement { category: qsTr("Layout"); title: qsTr("ColumnFlow"); source: "qrc:/qml/Pages/Layouts/ColumnFlowPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Controls/BottomSheetPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Chip"); source: "qrc:/qml/Pages/Controls/ChipPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }

@@ -17,6 +17,7 @@ BottomSheetList 1.0 BottomSheetList.qml
 BottomSheetGrid 1.0 BottomSheetGrid.qml
 CaptionLabel 1.0 CaptionLabel.qml
 Card 1.0 Card.qml
+Chip 1.0 Chip.qml
 CircleImage 1.0 CircleImage.qml
 DatePicker 1.0 DatePicker.qml
 DatePickerDialog 1.0 DatePickerDialog.qml

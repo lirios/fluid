@@ -31,9 +31,10 @@ import Fluid.Controls 1.0 as FluidControls
     Closed by default, this type of navigation drawer opens temporarily above all
     other content until a section is selected or the overlay is tapped.
 
-    NavigationDrawer is recommended on phones and tablets.
-
     This navigation drawer comes with no contents, therefore it's completely customizable.
+
+    By default the navigation drawer is permanent and pinned on desktop and
+    temporary on mobile.
 
     \code
     import Fluid.Controls 2.0 as FluidControls
@@ -51,9 +52,8 @@ import Fluid.Controls 1.0 as FluidControls
         FluidControls.NavigationDrawer {
             topContent: Image {
                 source: "background.png"
-
-                Layout.fillWidth: true
-                Layout.preferredHeight: 200
+                width: parent.width
+                height: 200
             }
 
             FluidControls.ListItem {
@@ -86,13 +86,18 @@ Drawer {
 
         The items added to this list will be displayed on top of the contents.
     */
-    property alias topContent: topContent.data
+    property alias topContent: topItem.data
 
     /*!
         \internal
     */
-    default property alias contents: mainLayout.data
+    default property alias contents: mainitem.data
 
+    y: {
+        if (ApplicationWindow && ApplicationWindow.header)
+            return ApplicationWindow.header.height;
+        return 0;
+    }
     width: {
         switch (FluidCore.Device.formFactor) {
         case FluidCore.Device.Phone:
@@ -114,6 +119,11 @@ Drawer {
             return parent.height;
     }
 
+    modal: FluidCore.Device.isMobile
+    interactive: FluidCore.Device.isMobile
+    position: FluidCore.Device.isMobile ? 0.0 : 1.0
+    visible: !FluidCore.Device.isMobile
+
     padding: 0
 
     Material.elevation: interactive ? 4 : 0
@@ -124,22 +134,28 @@ Drawer {
         anchors.fill: parent
         padding: 0
 
-        ColumnLayout {
-            id: mainLayout
+        Item {
+            id: topItem
 
-            anchors.fill: parent
-            spacing: 0
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: drawer.padding
 
-            ColumnLayout {
-                id: topContent
+            height: childrenRect.height
+            visible: height > 0
+        }
 
-                spacing: 0
-                visible: children.length > 0
+        Item {
+            id: mainitem
 
-                Layout.margins: drawer.padding
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: drawer.padding
+
+            height: pane.height - topItem.height
+            visible: children.length > 0
         }
     }
 }

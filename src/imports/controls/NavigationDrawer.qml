@@ -144,6 +144,10 @@ Drawer {
 
             height: childrenRect.height
             visible: height > 0
+
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
+            }
         }
 
         Item {
@@ -156,6 +160,10 @@ Drawer {
 
             height: pane.height - topItem.height
             visible: children.length > 0
+
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
+            }
         }
     }
 }

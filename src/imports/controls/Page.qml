@@ -71,6 +71,13 @@ Page {
     property alias leftAction: appBar.leftAction
 
     /*!
+        \qmlproperty list<Item> customContent
+
+        Custom content to show instead of the title.
+    */
+    property alias customContent: appBar.customContent
+
+    /*!
        \internal
        Set by the page stack to true if there is a page behind this page on the
        page stack.

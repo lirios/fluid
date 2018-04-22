@@ -106,6 +106,13 @@ QQC2.ToolBar {
     property alias title: titleLabel.text
 
     /*!
+        \qmlproperty list<Item> customContent
+
+        Custom content to show instead of the title.
+    */
+    property alias customContent: customContentItem.data
+
+    /*!
         \qmlproperty AppToolBar toolbar
 
         Tool bar.
@@ -166,6 +173,7 @@ QQC2.ToolBar {
         textFormat: Text.PlainText
         color: Material.primaryTextColor
         elide: Text.ElideRight
+        visible: text !== "" && customContentItem.children.length === 0
     }
 
     Row {
@@ -264,5 +272,19 @@ QQC2.ToolBar {
                 }
             }
         }
+    }
+
+    Item {
+        id: customContentItem
+
+        anchors.left: parent.left
+        anchors.right: actionsRow.left
+        anchors.leftMargin: 16 + (leftButton.showing ? FluidCore.Device.gridUnit - leftButton.margin : 0)
+        anchors.rightMargin: 16
+        anchors.verticalCenter: actionsRow.verticalCenter
+
+        height: appBar.height
+
+        visible: children.length > 0
     }
 }

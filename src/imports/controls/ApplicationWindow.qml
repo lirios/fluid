@@ -111,6 +111,6 @@ ApplicationWindow {
     FluidControlsPrivate.WindowDecoration {
         id: windowDecoration
         window: window
-        color: Material.shade(window.Material.primaryColor, Material.Shade700)
+        color: Material.shade(appBar ? appBar.Material.background : window.Material.primaryColor, Material.Shade700)
     }
 }

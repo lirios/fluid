@@ -35,6 +35,7 @@ QQC2.ToolBar {
     id: appBar
 
     Material.elevation: toolbar ? 0 : elevation
+    Material.background: toolbar ? toolbar.Material.background : backgroundColor
     Material.theme: toolbar ? toolbar.Material.theme : Material.Light
 
     /*!
@@ -70,6 +71,24 @@ QQC2.ToolBar {
         other view below the action bar that you want to appear as part of the action bar.
     */
     property int elevation: 2
+
+    /*!
+        \qmlproperty color backgroundColor
+
+        The background color of the tool bar when the AppBar's page is active.
+        By default this is the primary color defined in \l Material.primaryColor
+    */
+    property color backgroundColor: appBar.Material.primaryColor
+
+    /*!
+        \qmlproperty color decorationColor
+
+        The background color of the window decoration when the AppBar's page is active,
+        usually a darker version of \l backgroundColor.
+        By default this is the primary color defined in \l Material.primaryColor with a
+        shade of \l Material.Shade700.
+    */
+    property color decorationColor: Material.shade(backgroundColor, Material.Shade700)
 
     /*!
        \internal

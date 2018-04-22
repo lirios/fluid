@@ -28,8 +28,8 @@ ToolBar {
     id: toolbar
 
     Material.elevation: page ? page.appBar.elevation : 2
-    Material.background: Material.primaryColor
-    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
+    Material.background: page ? page.appBar.backgroundColor : toolbar.Material.primaryColor
+    Material.theme: FluidControls.Color.isDarkColor(page ? page.appBar.backgroundColor : toolbar.Material.background) ? Material.Dark : Material.Light
 
     /*!
         \internal

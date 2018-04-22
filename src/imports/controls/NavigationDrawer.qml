@@ -94,7 +94,7 @@ Drawer {
     default property alias contents: mainitem.data
 
     y: {
-        if (ApplicationWindow && ApplicationWindow.header)
+        if (!modal && ApplicationWindow && ApplicationWindow.header)
             return ApplicationWindow.header.height;
         return 0;
     }

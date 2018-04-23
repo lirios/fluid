@@ -14,8 +14,7 @@ Product {
     property stringList excludedPathPrefixes: []
 
     name: "fluid-windows"
-    condition: qbs.targetOS.contains("windows")
-    builtByDefault: project.deploymentEnabled
+    condition: qbs.targetOS.contains("windows") && project.deploymentEnabled
     type: ["archiver.archive"]
     targetName: "fluid-windows-" + qbs.architecture + "-" + project.version
     destinationDirectory: project.buildDirectory

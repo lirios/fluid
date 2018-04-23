@@ -28,7 +28,7 @@ before_build:
 - qbs config preferences.qbsSearchPaths %cd%/fluid/qbs/shared
 build_script:
 - git submodule update --init --recursive
-- qbs -d build --all-products config:release project.autotestEnabled:true project.useSystemQbsShared:false project.deploymentEnabled:true project.withDocumentation:false
+- qbs -d build --all-products config:release project.autotestEnabled:true project.useSystemQbsShared:false project.deploymentEnabled:false project.withDocumentation:false
 - dir build\release\install-root
 notifications:
 - provider: Slack

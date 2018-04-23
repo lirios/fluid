@@ -9,7 +9,11 @@ Project {
         readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
         name: "fluid-demo"
-        targetName: "fluid-demo"
+        targetName: {
+            if (qbs.targetOS.contains("windows"))
+                return "FluidDemo";
+            return name;
+        }
         condition: project.withDemo
         consoleApplication: false
 

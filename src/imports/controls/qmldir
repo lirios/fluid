@@ -2,7 +2,7 @@ module Fluid.Controls
 plugin fluidcontrolsplugin
 classname FluidControlsPlugin
 depends QtQuick.Controls 2.0
-depends Fluid.Template 1.0
+depends Fluid.Templates 1.0
 typeinfo plugins.qmltypes
 
 AbstractCard 1.0 AbstractCard.qml

@@ -17,6 +17,7 @@ Product {
     files: [
         "config/*.qdocconf",
         "src/*.qdoc",
+        "src/controls/*.qdoc",
     ]
 
     Group {

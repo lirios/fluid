@@ -1,0 +1,118 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+   \qmltype AppBar
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
+   \brief Application tool bar.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/layout/structure.html#structure-app-bar}{Material Design guidelines}.
+*/
+
+/*!
+    \qmlproperty Action AppBar::leftAction
+
+    The back action to display to the left of the title in the action bar.
+    When used with a page, this will pick up the page's back action, which
+    by default is a back arrow when there is a page behind the current page
+    on the page stack. However, you can customize this, for example, to show
+    a navigation drawer at the root of your app.
+
+    When using an action bar in a page, set the \l Page::leftAction instead of
+    directly setting this property.
+*/
+
+/*!
+    \qmlproperty list<Action> AppBar::actions
+
+    A list of actions to show in the action bar. These actions will be shown
+    anchored to the right, and will overflow if there are more than the
+    maximum number of actions as defined in \l maxActionCount.
+
+    When used with a page, the actions will be set to the page's \l Page::actions
+    property, so set that instead of changing this directly.
+*/
+
+/*!
+    \qmlproperty int AppBar::elevation
+
+    The elevation of the action bar. Set to 0 if you want have a header or some
+    other view below the action bar that you want to appear as part of the action bar.
+*/
+
+/*!
+    \qmlproperty color AppBar::backgroundColor
+
+    The background color of the tool bar when the AppBar's page is active.
+    By default this is the primary color defined in \l Material.primaryColor
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
+    \qmlproperty color AppBar::decorationColor
+
+    The background color of the window decoration when the AppBar's page is active,
+    usually a darker version of \l backgroundColor.
+    By default this is the primary color defined in \l Material.primaryColor with a
+    shade of \l Material.Shade700.
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
+    \qmlproperty real AppBar::leftKeyline
+
+    Keyline to align contents to the left to be visually appealing.
+*/
+
+/*!
+    \qmlproperty int AppBar::maxActionCount
+
+    The maximum number of actions that can be displayed before they spill over
+    into a drop-down menu. When using an action bar with a page, this inherits
+    from the global \l AppToolBar::maxActionCount. If you are using an action bar
+    for custom purposes outside of a toolbar, this defaults to \c 3.
+
+    Set to \c 0 if you don't want to overflow actions.
+*/
+
+/*!
+    \qmlproperty string AppBar::title
+
+    The title displayed in the action bar. When used in a page, the title will
+    be set to the title of the page, so set the \l Page::title property instead
+    of changing this directly.
+*/
+
+/*!
+    \qmlproperty list<Item> AppBar::customContent
+
+    Custom content to show instead of the title.
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
+    \qmlproperty AppToolBar AppBar::toolbar
+
+    Tool bar.
+*/

@@ -15,14 +15,14 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
-import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls 1.1 as FluidControls
 
 ToolBar {
     id: toolbar
 
     Material.elevation: page ? page.appBar.elevation : 2
-    Material.background: Material.primaryColor
-    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
+    Material.background: page ? page.appBar.backgroundColor : toolbar.Material.primaryColor
+    Material.theme: FluidControls.Color.isDarkColor(page ? page.appBar.backgroundColor : toolbar.Material.background) ? Material.Dark : Material.Light
 
     property Page page
 

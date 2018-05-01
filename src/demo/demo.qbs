@@ -82,6 +82,16 @@ Project {
             qbs.install: true
             qbs.installDir: lirideployment.appDataDir
         }
+
+        Group {
+            condition: qbs.targetOS.contains("unix") && !qbs.targetOS.contains("darwin")
+            name: "Icons"
+            prefix: "icons/"
+            files: ["**/*.png", "**/*.svg"]
+            qbs.install: true
+            qbs.installSourceBase: prefix
+            qbs.installDir: lirideployment.dataDir + "/icons/hicolor"
+        }
     }
 
     /*

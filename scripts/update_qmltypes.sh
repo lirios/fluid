@@ -10,7 +10,7 @@ case $1 in
 ;;
 esac
 
-cmd="${QMLPLUGINDUMP} -noinstantiate -notrelocatable -platform minimal"
+cmd="${QMLPLUGINDUMP} -v -noinstantiate -notrelocatable -platform minimal"
 curpath=`dirname $0`
 rootpath=`dirname $(readlink -e $curpath)`
 

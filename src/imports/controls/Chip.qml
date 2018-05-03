@@ -23,6 +23,8 @@ import Fluid.Effects 1.0
   \ingroup fluidcontrols
 
   \brief Chips represent complex entities in small blocks, such as a contact.
+
+  \since 1.1
 */
 Rectangle {
     /*!
@@ -38,6 +40,13 @@ Rectangle {
       The icon to display (if any)
     */
     property alias icon: contactIcon
+
+    /*!
+      \qmlproperty alias font
+
+      The caption font in the Chip
+    */
+    property alias font: captionLabel.font
 
     /*!
       \qmlproperty bool deletable

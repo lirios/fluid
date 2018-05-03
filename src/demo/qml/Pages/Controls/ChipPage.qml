@@ -13,7 +13,7 @@
  */
 
 import QtQuick 2.10
-import Fluid.Controls 1.0
+import Fluid.Controls 1.1
 
 Item {
     Row {

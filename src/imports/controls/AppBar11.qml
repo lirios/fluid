@@ -52,6 +52,14 @@ QQC2.ToolBar {
 
     implicitHeight: FluidCore.Device.gridUnit
 
+    Behavior on backgroundColor {
+        ColorAnimation { duration: FluidControls.Units.mediumDuration }
+    }
+
+    Behavior on decorationColor {
+        ColorAnimation { duration: FluidControls.Units.mediumDuration }
+    }
+
     FluidControls.ToolButton {
         id: leftButton
 

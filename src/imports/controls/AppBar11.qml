@@ -240,4 +240,14 @@ QQC2.ToolBar {
 
         visible: children.length > 0
     }
+
+    function toggleOverflowMenu() {
+        if (!overflowButton.visible)
+            return;
+
+        if (overflowMenu.visible)
+            overflowMenu.close();
+        else
+            overflowMenu.open();
+    }
 }

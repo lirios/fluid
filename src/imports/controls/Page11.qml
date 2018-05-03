@@ -73,6 +73,12 @@ Page {
             pop(event, false);
             event.accepted = true;
         }
+
+        // Toggle overflow menu when the menu button is released
+        if (event.key === Qt.Key_Menu) {
+            appBar.toggleOverflowMenu();
+            event.accepted = true;
+        }
     }
 
     header: null

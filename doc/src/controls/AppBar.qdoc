@@ -135,3 +135,11 @@
 
     Tool bar.
 */
+
+/*!
+    \qmlmethod void AppBar::toggleOverflowMenu()
+
+    Toggle the overflow menu if the number of actions is greater than \l AppBar::maxActionCount.
+
+    \since Fluid.Controls 1.1
+*/

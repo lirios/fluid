@@ -47,6 +47,9 @@ QQC2.ToolBar {
     property alias title: titleLabel.text
 
     property alias customContent: customContentItem.data
+    property alias extendedContent: extendedContentItem.data
+
+    readonly property alias extendedContentHeight: extendedContentItem.height
 
     property FluidControls.AppToolBar toolbar
 
@@ -122,8 +125,6 @@ QQC2.ToolBar {
             right: parent.right
             rightMargin: 16 - leftButton.margin
         }
-
-        height: appBar.height
 
         spacing: 24 - 2 * leftButton.margin
 
@@ -222,7 +223,20 @@ QQC2.ToolBar {
         anchors.rightMargin: 16
         anchors.verticalCenter: actionsRow.verticalCenter
 
-        height: appBar.height
+        height: parent.height
+
+        visible: children.length > 0
+    }
+
+    Item {
+        id: extendedContentItem
+
+        anchors.left: titleLabel.left
+        anchors.top: actionsRow.bottom
+        anchors.right: actionsRow.right
+        anchors.rightMargin: 16
+
+        height: childrenRect.height
 
         visible: children.length > 0
     }

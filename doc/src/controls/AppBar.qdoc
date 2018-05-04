@@ -112,6 +112,25 @@
 */
 
 /*!
+    \qmlproperty list<Item> AppBar::extendedContent
+
+    A custom view to show under the row containing the title and actions.
+    Causes the action bar to be extend in height to contain this view.
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
+    \qmlproperty real AppBar::extendedContentHeight
+    \readonly
+
+    The height of the custom view shown under the row containing the
+    title and actions.
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
     \qmlproperty AppToolBar AppBar::toolbar
 
     Tool bar.

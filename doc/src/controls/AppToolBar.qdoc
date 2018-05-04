@@ -31,6 +31,12 @@
 */
 
 /*!
+    \qmlproperty real AppToolBar::appBarHeight
+
+    Height of the \l AppBar considering its extended content.
+*/
+
+/*!
     \qmlmethod void AppToolBar::pop(Page page)
 
     Pop the \l AppBar that belongs to \a page from the stack.

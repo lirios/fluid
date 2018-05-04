@@ -28,6 +28,17 @@ ToolBar {
 
     property int maxActionCount: 3
 
+    property real appBarHeight: {
+        if (!page || !page.appBar || !page.appBar.visible)
+            return 0;
+
+        var height = implicitHeight + page.appBar.extendedContentHeight;
+
+        return height;
+    }
+
+    height: appBarHeight
+
     function pop(page) {
         stack.pop(page.appBar, StackView.PopTransition);
         toolbar.page = page;

@@ -112,11 +112,11 @@ Drawer {
     height: {
         if (ApplicationWindow)
             return (ApplicationWindow.header ? ApplicationWindow.header.height : 0) +
-                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0);
+                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0) - y;
         else if (Window)
-            return Window.contentItem;
+            return Window.contentItem - y;
         else
-            return parent.height;
+            return parent.height - y;
     }
 
     modal: FluidCore.Device.isMobile

@@ -29,11 +29,11 @@ Item {
         }
         FluidControls.Chip {
             caption: qsTr("Chip with icon")
-            icon.source: Utils.iconUrl("action/face")
+            icon.source: FluidControls.Utils.iconUrl("action/face")
         }
         FluidControls.Chip {
             caption: qsTr("Deletable chip with icon")
-            icon.source: Utils.iconUrl("social/person")
+            icon.source: FluidControls.Utils.iconUrl("social/person")
             deletable: true
         }
     }

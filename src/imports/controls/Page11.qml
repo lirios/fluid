@@ -81,6 +81,7 @@ Page {
 
             text: qsTr("Back")
             toolTip: qsTr("Go back")
+            shortcut: StandardKey.Back
             visible: page.canGoBack
 
             onTriggered: page.pop()

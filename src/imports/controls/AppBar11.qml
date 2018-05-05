@@ -26,7 +26,7 @@ QQC2.ToolBar {
 
     Material.elevation: toolbar ? 0 : elevation
     Material.background: toolbar ? toolbar.Material.background : backgroundColor
-    Material.theme: toolbar ? toolbar.Material.theme : Material.Light
+    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
 
     property FluidControls.Action leftAction
 

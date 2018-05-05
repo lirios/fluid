@@ -85,6 +85,15 @@
 */
 
 /*!
+    \qmlproperty PageSidebar rightSidebar
+
+    A sidebar to show on the right of the page. This will have its own
+    app bar and title, which will split the toolbar into two app bars.
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
     \qmlsignal void Page::goBack(var event)
 
     This signal is emitted when the back action is triggered or back key is released.

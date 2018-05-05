@@ -34,32 +34,67 @@ ToolBar {
 
         var height = implicitHeight + page.appBar.extendedContentHeight;
 
+        if (page.rightSidebar && page.rightSidebar.showing) {
+            var sidebarHeight = implicitHeight + page.rightSidebar.appBar.extendedContentHeight;
+            height = Math.max(height, sidebarHeight);
+        }
+
         return height;
     }
 
     height: appBarHeight
 
+    Behavior on height {
+        NumberAnimation { duration: FluidControls.Units.mediumDuration }
+    }
+
     function pop(page) {
         stack.pop(page.appBar, StackView.PopTransition);
+
+        if (page.rightSidebar && page.rightSidebar.appBar)
+            rightSidebarStack.pop(page.rightSidebar.appBar);
+        else
+            rightSidebarStack.pop(emptyRightSidebar);
+
         toolbar.page = page;
     }
 
     function push(page) {
         stack.push(page.appBar, {}, StackView.PushTransition);
+
         page.appBar.toolbar = toolbar;
         toolbar.page = page;
+
+        if (page.rightSidebar && page.rightSidebar.appBar)
+            rightSidebarStack.replace(page.rightSidebar.appBar);
+        else
+            rightSidebarStack.replace(emptyRightSidebar);
     }
 
     function replace(page) {
         stack.replace(page.appBar, {}, StackView.ReplaceTransition);
+
         page.appBar.toolbar = toolbar;
         toolbar.page = page;
+
+        if (page.rightSidebar && page.rightSidebar.appBar)
+            rightSidebarStack.replace(page.rightSidebar.appBar);
+        else
+            rightSidebarStack.replace(emptyRightSidebar);
     }
 
     StackView {
         id: stack
 
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: page && page.rightSidebar ? rightSidebarStack.left : parent.right
+        anchors.rightMargin: 0
+
+        height: appBarHeight
+
+        Behavior on height {
+            NumberAnimation { duration: FluidControls.Units.mediumDuration }
+        }
 
         popEnter: Transition {
             NumberAnimation { property: "y"; from: 0.5 *  -stack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
@@ -78,5 +113,43 @@ ToolBar {
             NumberAnimation { property: "y"; from: 0; to: 0.5 * -stack.height; duration: 250; easing.type: Easing.OutCubic }
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 250; easing.type: Easing.OutCubic }
         }
+    }
+
+    StackView {
+        id: rightSidebarStack
+
+        anchors.right: parent.right
+        anchors.rightMargin: page && page.rightSidebar ? page.rightSidebar.anchors.rightMargin : 0
+
+        width: page && page.rightSidebar ? page.rightSidebar.width : 0
+        height: appBarHeight
+
+        Behavior on height {
+            NumberAnimation { duration: FluidControls.Units.mediumDuration }
+        }
+
+        popEnter: Transition {
+            NumberAnimation { property: "y"; from: 0.5 *  -stack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 250; easing.type: Easing.OutCubic }
+        }
+        popExit: Transition {
+            NumberAnimation { property: "y"; from: 0; to: 0.5 * stack.height; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 250; easing.type: Easing.OutCubic }
+        }
+
+        pushEnter: Transition {
+            NumberAnimation { property: "y"; from: 0.5 * stack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 250; easing.type: Easing.OutCubic }
+        }
+        pushExit: Transition {
+            NumberAnimation { property: "y"; from: 0; to: 0.5 * -stack.height; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 250; easing.type: Easing.OutCubic }
+        }
+    }
+
+    Component {
+        id: emptyRightSidebar
+
+        Item {}
     }
 }

@@ -62,4 +62,5 @@ ApplicationWindow 1.1 ApplicationWindow11.qml
 AppToolBar 1.1 AppToolBar11.qml
 AppBar 1.1 AppBar11.qml
 Page 1.1 Page11.qml
+PageSidebar 1.1 PageSidebar.qml
 SearchBar 1.1 SearchBar11.qml

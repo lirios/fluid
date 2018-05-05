@@ -15,7 +15,7 @@
 import QtQuick 2.10
 import QtQuick.Controls.Material 2.2
 import Fluid.Controls 1.1
-import Fluid.Effects 1.1
+import Fluid.Effects 1.0
 
 /*!
   \qmltype Chip

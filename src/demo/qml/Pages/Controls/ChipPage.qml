@@ -13,24 +13,25 @@
  */
 
 import QtQuick 2.10
-import Fluid.Controls 1.1
+import Fluid.Controls 1.1 as FluidControls
 
 Item {
     Row {
         anchors.centerIn: parent
         spacing: 16
-        Chip {
+        
+        FluidControls.Chip {
             caption: qsTr("Chip")
         }
-        Chip {
+        FluidControls.Chip {
             caption: qsTr("Deletable chip")
             deletable: true
         }
-        Chip {
+        FluidControls.Chip {
             caption: qsTr("Chip with icon")
             icon.source: Utils.iconUrl("action/face")
         }
-        Chip {
+        FluidControls.Chip {
             caption: qsTr("Deletable chip with icon")
             icon.source: Utils.iconUrl("social/person")
             deletable: true

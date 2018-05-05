@@ -33,23 +33,23 @@ Page {
 
     function pop(event, force) {
         if (StackView.view.currentItem !== page)
-            return false
+            return false;
 
         if (!event)
-            event = {accepted: false}
+            event = {accepted: false};
 
         if (!force)
-            goBack(event)
+            goBack(event);
 
         if (event.accepted) {
-            return true
+            return true;
         } else {
-            return StackView.view.pop()
+            return StackView.view.pop();
         }
     }
 
     function forcePop() {
-        pop(null, true)
+        pop(null, true);
     }
 
     function push(component, properties) {
@@ -57,7 +57,7 @@ Page {
     }
 
     Keys.onReleased: {
-        // catches the Android back button event and pops the page, if it isn't the top page
+        // Catches the Android back button event and pops the page, if it isn't the top page
         if (event.key === Qt.Key_Back && StackView.view.depth > 1) {
             pop(event, false);
             event.accepted = true;

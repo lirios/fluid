@@ -17,6 +17,7 @@
 
 /*!
     \qmltype Chip
+    \inherits QtQuick.Controls::AbstractButton
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
     \since Fluid.Controls 1.1
@@ -28,27 +29,79 @@
 */
 
 /*!
-    \qmlproperty string Fluid.Controls::Chip::caption
+    \qmlproperty bool Fluid.Controls::Chip::expandable
 
-    The caption to show in the chip.
+    This property holds whether this chip can expand to show
+    more information or options.
+
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::delegate
+    \sa Fluid.Controls::Chip::selectedItem
 */
 
 /*!
-    \qmlproperty alias Fluid.Controls::Chip::icon
+    \qmlproperty model Fluid.Controls::Chip::model
 
-    The icon to display (if any)
+    Expandable chips show a popup with a list view when clicked.
+
+    This property holds the model providing data for said list view.
+
+    The following roles are expected to be present:
+
+    \list
+      \li label - Description of the option
+      \li value - Actual value of the option
+      \li imageSource - URL with the image source for the option
+    \endlist
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::delegate
+    \sa Fluid.Controls::Chip::selectedItem
 */
 
 /*!
-    \qmlproperty font Fluid.Controls::Chip::font
+    \qmlproperty Component Fluid.Controls::Chip::delegate
 
-    The caption font in the Chip.
+    Expandable chips show a popup with a list view when clicked.
+
+    The delegate provides a template defining each item instantiated
+    by the list view.
+
+    By default the delegate is a Fluid.Controls::ListItem.
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::selectedItem
 */
+
+/*!
+    \qmlproperty Component Fluid.Controls::Chip::selectedItem
+    \readonly
+
+    Expandable chips show a popup with a list view when clicked.
+
+    This property holds the currently selected item.
+
+    By default the delegate is a Fluid.Controls::ListItem and the
+    selected item contains the following properties:
+
+    \list
+      \li string label - Description of the option
+      \li string value - Actual value of the option
+      \li url imageSource - URL with the image source for the option
+    \endlist
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::delegate
+*/
+
 
 /*!
     \qmlproperty bool Fluid.Controls::Chip::deletable
 
-    Whether the chip can be deleted.
+    This property holds whether the chip can be deleted.
+    The default value is \c false.
 */
 
 /*!

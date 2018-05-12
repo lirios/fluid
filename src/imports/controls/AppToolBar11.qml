@@ -129,20 +129,20 @@ ToolBar {
         }
 
         popEnter: Transition {
-            NumberAnimation { property: "y"; from: 0.5 *  -stack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "y"; from: 0.5 *  -rightSidebarStack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
             NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 250; easing.type: Easing.OutCubic }
         }
         popExit: Transition {
-            NumberAnimation { property: "y"; from: 0; to: 0.5 * stack.height; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "y"; from: 0; to: 0.5 * rightSidebarStack.height; duration: 250; easing.type: Easing.OutCubic }
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 250; easing.type: Easing.OutCubic }
         }
 
         pushEnter: Transition {
-            NumberAnimation { property: "y"; from: 0.5 * stack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "y"; from: 0.5 * rightSidebarStack.height; to: 0; duration: 250; easing.type: Easing.OutCubic }
             NumberAnimation { property: "opacity"; from: 0.0; to: 1.0; duration: 250; easing.type: Easing.OutCubic }
         }
         pushExit: Transition {
-            NumberAnimation { property: "y"; from: 0; to: 0.5 * -stack.height; duration: 250; easing.type: Easing.OutCubic }
+            NumberAnimation { property: "y"; from: 0; to: 0.5 * -rightSidebarStack.height; duration: 250; easing.type: Easing.OutCubic }
             NumberAnimation { property: "opacity"; from: 1.0; to: 0.0; duration: 250; easing.type: Easing.OutCubic }
         }
     }

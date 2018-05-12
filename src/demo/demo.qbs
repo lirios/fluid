@@ -46,11 +46,54 @@ Project {
         Qt.core.resourcePrefix: "/"
         Qt.core.resourceSourceBase: sourceDirectory
 
-        files: ["*.cpp", "*.h"]
+        files: [
+            "iconcategorymodel.cpp",
+            "iconcategorymodel.h",
+            "iconnamemodel.cpp",
+            "iconnamemodel.h",
+            "main.cpp",
+        ]
 
         Group {
             name: "Resource Data"
-            files: ["images/**", "qml/**"]
+            files: [
+                "images/balloon.jpg",
+                "images/materialbg.png",
+                "qml/icons.txt",
+                "qml/main.qml",
+                "qml/StyledPage.qml",
+                "qml/StyledRectangle.qml",
+                "qml/Pages/Basic/BusyIndicatorPage.qml",
+                "qml/Pages/Basic/ButtonPage.qml",
+                "qml/Pages/Basic/CheckBoxPage.qml",
+                "qml/Pages/Basic/ProgressBarPage.qml",
+                "qml/Pages/Basic/RadioButtonPage.qml",
+                "qml/Pages/Basic/SliderPage.qml",
+                "qml/Pages/Basic/SwitchPage.qml",
+                "qml/Pages/Controls/ActionButtonPage.qml",
+                "qml/Pages/Controls/BottomSheetPage.qml",
+                "qml/Pages/Controls/CardPage.qml",
+                "qml/Pages/Controls/ChipPage.qml",
+                "qml/Pages/Controls/DatePickerPage.qml",
+                "qml/Pages/Controls/DateTimePickerPage.qml",
+                "qml/Pages/Controls/DialogsPage.qml",
+                "qml/Pages/Controls/ListItemPage.qml",
+                "qml/Pages/Controls/NavDrawerPage.qml",
+                "qml/Pages/Controls/OverlayPage.qml",
+                "qml/Pages/Controls/Placeholder.qml",
+                "qml/Pages/Controls/Search.qml",
+                "qml/Pages/Controls/SnackBarPage.qml",
+                "qml/Pages/Controls/SubPage.qml",
+                "qml/Pages/Controls/TimePicker.qml",
+                "qml/Pages/Controls/WavePage.qml",
+                "qml/Pages/Layouts/AutomaticGridPage.qml",
+                "qml/Pages/Layouts/ColumnFlowPage.qml",
+                "qml/Pages/Style/IconsPage.qml",
+                "qml/Pages/Style/PalettePage.qml",
+                "qml/Pages/Style/PaletteSwatch.qml",
+                "qml/Pages/Style/SystemIconsPage.qml",
+                "qml/Pages/Style/TypographyPage.qml",
+            ]
             fileTags: ["qt.core.resource_data"]
         }
 

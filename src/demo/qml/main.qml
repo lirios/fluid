@@ -72,16 +72,16 @@ FluidControls.ApplicationWindow {
                     ListElement { category: qsTr("Controls"); title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Chip"); source: "qrc:/qml/Pages/Controls/ChipPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
-                    ListElement { category: qsTr("Controls"); title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
-                    ListElement { category: qsTr("Controls"); title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePickerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePickerPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
-                    ListElement { category: qsTr("Controls"); title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/Placeholder.qml" }
-                    ListElement { category: qsTr("Controls"); title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/Search.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/PlaceholderPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/SearchPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("SnackBar"); source: "qrc:/qml/Pages/Controls/SnackBarPage.qml" }
-                    ListElement { category: qsTr("Controls"); title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePicker.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePickerPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
                     ListElement { category: qsTr("Style"); title: qsTr("Palette"); source: "qrc:/qml/Pages/Style/PalettePage.qml" }
                     ListElement { category: qsTr("Style"); title: qsTr("Typography"); source: "qrc:/qml/Pages/Style/TypographyPage.qml" }

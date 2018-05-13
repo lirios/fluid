@@ -14,8 +14,9 @@
 
 import QtQuick 2.10
 import Fluid.Controls 1.1 as FluidControls
+import "../.." as Components
 
-Item {
+Components.StyledPage {
     Row {
         anchors.centerIn: parent
         spacing: 16

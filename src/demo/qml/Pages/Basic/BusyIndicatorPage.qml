@@ -14,31 +14,11 @@
 
 import QtQuick 2.10
 import QtQuick.Controls 2.3
-import QtQuick.Layouts 1.3
-import "../.."
+import "../.." as Components
 
-Flickable {
-    clip: true
-    contentHeight: Math.max(layout.implicitHeight, height)
-
-    ScrollBar.vertical: ScrollBar {}
-
-    ColumnLayout {
-        id: layout
-        anchors.fill: parent
-
-        Repeater {
-            model: 2
-
-            StyledRectangle {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                BusyIndicator {
-                    anchors.centerIn: parent
-                    running: true
-                }
-            }
-        }
+Components.StyledPage {
+    BusyIndicator {
+        anchors.centerIn: parent
+        running: true
     }
 }

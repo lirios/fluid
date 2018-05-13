@@ -62,6 +62,7 @@ Project {
                 "qml/icons.txt",
                 "qml/main.qml",
                 "qml/StyledPage.qml",
+                "qml/StyledPageTwoColumns.qml",
                 "qml/StyledRectangle.qml",
                 "qml/Pages/Basic/BusyIndicatorPage.qml",
                 "qml/Pages/Basic/ButtonPage.qml",

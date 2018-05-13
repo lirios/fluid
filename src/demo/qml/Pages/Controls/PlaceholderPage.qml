@@ -16,32 +16,13 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Controls 1.1 as FluidControls
-import "../.."
+import "../.." as Components
 
-Flickable {
-    clip: true
-    contentHeight: Math.max(layout.implicitHeight, height)
-
-    ScrollBar.vertical: ScrollBar {}
-
-    ColumnLayout {
-        id: layout
-        anchors.fill: parent
-
-        Repeater {
-            model: 2
-
-            StyledRectangle {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                FluidControls.Placeholder {
-                    anchors.centerIn: parent
-                    icon.source: FluidControls.Utils.iconUrl("social/notifications_none")
-                    text: qsTr("No notifications")
-                    subText: qsTr("At the moment there are no notifications available")
-                }
-            }
-        }
+Components.StyledPage {
+    FluidControls.Placeholder {
+        anchors.centerIn: parent
+        icon.source: FluidControls.Utils.iconUrl("social/notifications_none")
+        text: qsTr("No notifications")
+        subText: qsTr("At the moment there are no notifications available")
     }
 }

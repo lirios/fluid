@@ -9,8 +9,18 @@ TextField {
 
     property alias title: placeholderLabel.text
 
-    onPlaceholderTextChanged: placeholderText = ""
-    Component.onCompleted: placeholderText = ""
+    onPlaceholderTextChanged: {
+        title = placeholderText
+        placeholderText = ""
+    }
+
+    Component.onCompleted: {
+        if(placeholderText !== "")
+        {
+            title = placeholderText
+            placeholderText = ""
+        }
+    }
 
     // NOTE: add contentHeight to topPadding when changing it externally
     topPadding: contentHeight

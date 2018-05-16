@@ -26,6 +26,7 @@ DateTimePickerDialog 1.0 DateTimePickerDialog.qml
 DialogLabel 1.0 DialogLabel.qml
 DisplayLabel 1.0 DisplayLabel.qml
 FloatingActionButton 1.0 FloatingActionButton.qml
+FloatingTextField 1.0 FloatingTextField.qml
 HeadlineLabel 1.0 HeadlineLabel.qml
 Icon 1.0 Icon.qml
 InputDialog 1.0 InputDialog.qml

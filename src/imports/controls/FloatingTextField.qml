@@ -12,6 +12,9 @@ TextField {
     onPlaceholderTextChanged: placeholderText = ""
     Component.onCompleted: placeholderText = ""
 
+    // NOTE: add contentHeight to topPadding when changing it externally
+    topPadding: contentHeight
+
     selectByMouse: true
 
     Label {
@@ -35,7 +38,7 @@ TextField {
 
                     color: Material.accent
                     font.pointSize: Qt.application.font.pointSize
-                    anchors.topMargin: -offset
+                    anchors.topMargin: 0
                 }
             },
             State {
@@ -45,7 +48,7 @@ TextField {
                     target: placeholderLabel
 
                     font.pointSize: Qt.application.font.pointSize
-                    anchors.topMargin: -offset
+                    anchors.topMargin: 0
                     color: Material.color(Material.Grey)
                 }
             },
@@ -56,7 +59,7 @@ TextField {
                     target: placeholderLabel
 
                     color: Material.color(Material.Grey)
-                    anchors.topMargin: offset
+                    anchors.topMargin: offset * 2
                     font.pointSize: Qt.application.font.pointSize + 2
                 }
             }

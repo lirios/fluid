@@ -38,6 +38,8 @@ QQC2.ToolBar {
 
     property color backgroundColor: appBar.Material.primaryColor
 
+    readonly property alias overflowMenuVisible: overflowMenu.visible
+
     property color decorationColor: Material.shade(backgroundColor, Material.Shade700)
 
     property alias leftKeyline: titleLabel.x

@@ -79,6 +79,15 @@
 */
 
 /*!
+    \qmlproperty bool AppBar::overflowMenuVisible
+
+    Value indicates if overflow menu is open or not.
+
+    \readonly
+    \since Fluid.Controls 1.1
+*/
+
+/*!
     \qmlproperty real AppBar::leftKeyline
 
     Keyline to align contents to the left to be visually appealing.

@@ -35,8 +35,6 @@ QQC2.ToolBar {
 
     property int __iconSize: FluidCore.Device.gridUnit <= 48 ? 20 : 24
 
-    readonly property alias overflowMenuVisible: overflowMenu.visible
-
     property alias leftKeyline: titleLabel.x
 
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3

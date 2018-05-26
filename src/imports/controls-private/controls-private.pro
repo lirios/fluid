@@ -2,7 +2,7 @@ TARGET = fluidcontrolsprivateplugin
 TARGETPATH = Fluid/Controls/Private
 IMPORT_VERSION = 1.0
 
-QT += qml quick
+QT += qml quick quickcontrols2
 
 HEADERS += \
     $$files($$PWD/*.h)

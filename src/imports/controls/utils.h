@@ -22,9 +22,12 @@ class Utils : public QObject
 {
     Q_OBJECT
 public:
-    explicit Utils(QObject *parent = nullptr);
+    explicit Utils(const QUrl &baseUrl, QObject *parent = nullptr);
 
     Q_INVOKABLE QUrl iconUrl(const QString &name);
+
+private:
+    QUrl m_baseUrl;
 };
 
 #endif // FLUID_CONTROLS_UTILS_H

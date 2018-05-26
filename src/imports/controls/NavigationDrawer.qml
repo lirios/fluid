@@ -13,11 +13,12 @@
  */
 
 import QtQuick 2.10
+import QtQuick.Window 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
-import QtQml 2.2
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import QtQuick.Controls.Material 2.3
+import Fluid.Core 1.0 as FluidCore
+import Fluid.Controls 1.0 as FluidControls
 
 /*!
     \qmltype NavigationDrawer
@@ -26,12 +27,19 @@ import Fluid.Controls 1.0
 
     \brief The navigation drawer slides in from the left and is a common pattern in apps.
 
+    This is a temporary navigation drawer: it can toggle open or closed.
+    Closed by default, this type of navigation drawer opens temporarily above all
+    other content until a section is selected or the overlay is tapped.
+
+    This navigation drawer comes with no contents, therefore it's completely customizable.
+
+    By default the navigation drawer is permanent and pinned on desktop and
+    temporary on mobile.
+
     \code
-    import QtQuick.Window 2.2
     import Fluid.Controls 2.0 as FluidControls
 
-    Window {
-        id: window
+    FluidControls.ApplicationWindow {
         width: 400
         height: 400
         visible: true
@@ -42,21 +50,27 @@ import Fluid.Controls 1.0
         }
 
         FluidControls.NavigationDrawer {
-            topContent: [
-                Button {
-                    text: "Push me"
-                    onClicked: console.log("Pushed")
-                }
-            ]
+            topContent: Image {
+                source: "background.png"
+                width: parent.width
+                height: 200
+            }
 
-            actions: [
-                FluidControls.Action {
-                    text: "Action 1"
-                },
-                FluidControls.Action {
-                    text: "Action 2"
-                }
-            ]
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/inbox")
+                text: "Inbox"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("content/archive")
+                text: "Archive"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("action/settings")
+                text: "Settings"
+                showDivider: true
+            }
         }
     }
     \endcode
@@ -70,65 +84,49 @@ Drawer {
     /*!
         \qmlproperty list<Item> topContent
 
-        The items added to this list will be displayed on top of the
-        actions list.
-
-        \code
-        import QtQuick.Window 2.2
-        import Fluid.Controls 2.0 as FluidControls
-
-        Window {
-            id: window
-            width: 400
-            height: 400
-            visible: true
-
-            Button {
-                text: "Open"
-                onClicked: drawer.open()
-            }
-
-            FluidControls.NavigationDrawer {
-                topContent: [
-                    Button {
-                        text: "Push me"
-                        onClicked: console.log("Pushed")
-                    }
-                ]
-            }
-        }
-        \endcode
+        The items added to this list will be displayed on top of the contents.
     */
-    property alias topContent: topContent.data
+    property alias topContent: topItem.data
 
     /*!
-        \qmlproperty list<QtObject> actions
-
-        List of actions to be displayed by the drawer.
+        \internal
     */
-    property list<QtObject> actions
+    default property alias contents: mainitem.data
 
-    /*!
-        \qmlproperty Component delegate
-
-        The delegate for item that constitute a menu item.
-    */
-    property  alias delegate : navDrawerListView.delegate
-
-    width: {
-        switch (Device.formFactor) {
-        case Device.Phone:
-            return 280
-        case Device.Tablet:
-            return 320
-        default:
-            break
-        }
-        return 56 * 4
+    y: {
+        if (!modal && ApplicationWindow && ApplicationWindow.header)
+            return ApplicationWindow.header.height;
+        return 0;
     }
-    height: ApplicationWindow.height
+    width: {
+        switch (FluidCore.Device.formFactor) {
+        case FluidCore.Device.Phone:
+            return 280;
+        case FluidCore.Device.Tablet:
+            return 320;
+        default:
+            break;
+        }
+        return 56 * 4;
+    }
+    height: {
+        if (ApplicationWindow)
+            return (ApplicationWindow.header ? ApplicationWindow.header.height : 0) +
+                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0) - y;
+        else if (Window)
+            return Window.contentItem - y;
+        else
+            return parent.height - y;
+    }
+
+    modal: FluidCore.Device.isMobile
+    interactive: FluidCore.Device.isMobile
+    position: FluidCore.Device.isMobile ? 0.0 : 1.0
+    visible: !FluidCore.Device.isMobile
 
     padding: 0
+
+    Material.elevation: interactive ? 4 : 0
 
     Pane {
         id: pane
@@ -136,47 +134,35 @@ Drawer {
         anchors.fill: parent
         padding: 0
 
-        ColumnLayout {
-            anchors.fill: parent
-            spacing: 0
+        Item {
+            id: topItem
 
-            ColumnLayout {
-                id: topContent
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: drawer.padding
 
-                height: childrenRect.height + 2 * drawer.padding
+            height: childrenRect.height
+            visible: height > 0
 
-                spacing: 0
-                visible: children.length > 0
-
-                Layout.margins: drawer.padding
-                Layout.fillWidth: true
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
             }
+        }
 
-            ListView {
-                id: navDrawerListView
-                currentIndex: -1
-                spacing: 0
-                clip: true
+        Item {
+            id: mainitem
 
-                model: drawer.actions
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: drawer.padding
 
-                delegate: ListItem {
-                    icon.name: modelData.icon.name
-                    icon.source: modelData.icon.source
-                    text: modelData.text
-                    showDivider: modelData.hasDividerAfter
-                    dividerInset: 0
-                    visible: modelData.visible
-                    onClicked: modelData.triggered(drawer)
-                    enabled: modelData.enabled
-                }
+            height: pane.height - topItem.height
+            visible: children.length > 0
 
-                visible: count > 0
-
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                ScrollBar.vertical: ScrollBar {}
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
             }
         }
     }

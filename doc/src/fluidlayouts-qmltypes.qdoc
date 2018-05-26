@@ -13,7 +13,7 @@
  */
 
 /*!
-    \qmlmodule Fluid.Layouts 1.0
+    \qmlmodule Fluid.Layouts 1.1
     \title Fluid Layouts QML Types
     \ingroup qmlmodules
 
@@ -25,7 +25,7 @@
     using the following import statement in your .qml file:
 
     \badcode
-    import Fluid.Layouts 1.0 as FluidLayouts
+    import Fluid.Layouts 1.1 as FluidLayouts
     \endcode
 
     \section1

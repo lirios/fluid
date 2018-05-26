@@ -1,4 +1,5 @@
 module Fluid.Effects
+depends QtGraphicalEffects 1.0
 typeinfo plugins.qmltypes
 
 BoxShadow 1.0 BoxShadow.qml

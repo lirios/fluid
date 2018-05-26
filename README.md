@@ -32,6 +32,11 @@ Qt >= 5.10.0 with at least the following modules is required:
  * [qtsvg](http://code.qt.io/cgit/qt/qtsvg.git)
  * [qtdoc](http://code.qt.io/cgit/qt/qtdoc.git)
 
+The following modules and their dependencies are required:
+
+ * [qbs](http://code.qt.io/cgit/qbs/qbs.git) >= 1.9.0
+ * [qbs-shared](https://github.com/lirios/qbs-shared.git) >= 1.2.0
+
 ## Build
 
 Qbs is a new build system that is much easier to use compared to qmake or CMake.
@@ -80,6 +85,7 @@ See also [System-wide installation](#system-wide-installation).
 You can also append the following options to the last line:
 
  * `projects.Fluid.withDemo:false`: Do not build the demo app.
+ * `projects.Fluid.withQmlModules:false`: Do not build QML modules.
  * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
  * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
  * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared

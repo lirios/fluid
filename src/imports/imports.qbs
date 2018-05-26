@@ -2,6 +2,7 @@ import qbs 1.0
 
 Project {
     name: "QML Plugins"
+    condition: project.withQmlModules
 
     references: [
         "core/core.qbs",

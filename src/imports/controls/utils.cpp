@@ -21,8 +21,9 @@
 
     \brief A collection of helpful utility methods.
 */
-Utils::Utils(QObject *parent)
+Utils::Utils(const QUrl &baseUrl, QObject *parent)
     : QObject(parent)
+    , m_baseUrl(baseUrl)
 {
 }
 
@@ -54,5 +55,9 @@ Utils::Utils(QObject *parent)
 */
 QUrl Utils::iconUrl(const QString &name)
 {
+#if FLUID_INSTALL_ICONS == 1
+    return QUrl::fromLocalFile(QStringLiteral("%1/icons/%2.svg").arg(m_baseUrl.toLocalFile()).arg(name));
+#else
     return QUrl(QStringLiteral("qrc:/liri.io/imports/Fluid/Controls/icons/%1.svg").arg(name));
+#endif
 }

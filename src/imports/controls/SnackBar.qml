@@ -113,7 +113,7 @@ Rectangle {
             when: fullWidth
 
             AnchorChanges {
-                target: snackBar
+                target: control
                 anchors.left: parent.left
                 anchors.right: parent.right
             }
@@ -123,11 +123,11 @@ Rectangle {
             when: !fullWidth
 
             PropertyChanges {
-                target: snackBar
+                target: control
                 width: snackLayout.implicitWidth
             }
             AnchorChanges {
-                target: snackBar
+                target: control
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }

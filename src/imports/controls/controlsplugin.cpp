@@ -27,15 +27,17 @@ static QObject *colorProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 
 static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
-    Q_UNUSED(engine);
     Q_UNUSED(jsEngine);
 
-    return new Utils();
+    return new Utils(engine->baseUrl());
 }
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
+
+    // Set base URL to the plugin URL
+    engine->setBaseUrl(baseUrl());
 
     // For system icons
     engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());

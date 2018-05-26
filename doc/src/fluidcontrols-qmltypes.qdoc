@@ -13,7 +13,7 @@
  */
 
 /*!
-    \qmlmodule Fluid.Controls 1.0
+    \qmlmodule Fluid.Controls 1.1
     \title Fluid Controls QML Types
     \ingroup qmlmodules
 
@@ -25,7 +25,7 @@
     using the following import statement in your .qml file:
 
     \badcode
-    import Fluid.Controls 1.0 as FluidControls
+    import Fluid.Controls 1.1 as FluidControls
     \endcode
 
     \section1

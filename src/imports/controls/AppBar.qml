@@ -21,95 +21,26 @@ import QtQuick.Layouts 1.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-   \qmltype AppBar
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
-
-   \brief Application tool bar.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/layout/structure.html#structure-app-bar}{Material Design guidelines}.
- */
 QQC2.ToolBar {
     id: appBar
 
     Material.elevation: toolbar ? 0 : elevation
     Material.theme: toolbar ? toolbar.Material.theme : Material.Light
 
-    /*!
-        \qmlproperty Action leftAction
-
-        The back action to display to the left of the title in the action bar.
-        When used with a page, this will pick up the page's back action, which
-        by default is a back arrow when there is a page behind the current page
-        on the page stack. However, you can customize this, for example, to show
-        a navigation drawer at the root of your app.
-
-        When using an action bar in a page, set the \l Page::leftAction instead of
-        directly setting this property.
-    */
     property FluidControls.Action leftAction
 
-    /*!
-        \qmlproperty list<Action> actions
-
-        A list of actions to show in the action bar. These actions will be shown
-        anchored to the right, and will overflow if there are more than the
-        maximum number of actions as defined in \l maxActionCount.
-
-        When used with a page, the actions will be set to the page's \l Page::actions
-        property, so set that instead of changing this directly.
-    */
     property list<FluidControls.Action> actions
 
-    /*!
-        \qmlproperty int elevation
-
-        The elevation of the action bar. Set to 0 if you want have a header or some
-        other view below the action bar that you want to appear as part of the action bar.
-    */
     property int elevation: 2
 
-    /*!
-       \internal
-       The size of the left icon and the action icons.
-    */
     property int __iconSize: FluidCore.Device.gridUnit <= 48 ? 20 : 24
 
-    /*!
-        \qmlproperty real leftKeyline
-
-        Keyline to align contents to the left to be visually appealing.
-    */
     property alias leftKeyline: titleLabel.x
 
-    /*!
-        \qmlproperty int maxActionCount
-
-        The maximum number of actions that can be displayed before they spill over
-        into a drop-down menu. When using an action bar with a page, this inherits
-        from the global \l AppToolBar::maxActionCount. If you are using an action bar
-        for custom purposes outside of a toolbar, this defaults to \c 3.
-
-        Set to \c 0 if you don't want to overflow actions.
-    */
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3
 
-    /*!
-        \qmlproperty string title
-
-        The title displayed in the action bar. When used in a page, the title will
-        be set to the title of the page, so set the \l Page::title property instead
-        of changing this directly.
-    */
     property alias title: titleLabel.text
 
-    /*!
-        \qmlproperty AppToolBar toolbar
-
-        Tool bar.
-    */
     property FluidControls.AppToolBar toolbar
 
     implicitHeight: FluidCore.Device.gridUnit

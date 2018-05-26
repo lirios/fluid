@@ -52,6 +52,8 @@ void WindowDecoration::setTheme(WindowDecoration::Theme theme)
 
     m_theme = theme;
     Q_EMIT themeChanged();
+
+    updateDecorationColor();
 }
 
 QColor WindowDecoration::color() const
@@ -66,6 +68,8 @@ void WindowDecoration::setColor(const QColor &color)
 
     m_color = color;
     Q_EMIT colorChanged();
+
+    updateDecorationColor();
 }
 
 void WindowDecoration::classBegin()
@@ -121,6 +125,9 @@ void WindowDecoration::updateDecorationColor()
         // Set properties
         m_window->setProperty("__material_decoration_backgroundColor", m_color);
         m_window->setProperty("__material_decoration_foregroundColor", textColor);
+
+        // Trigger a decoration update
+        m_window->resize(m_window->size());
     }
 #endif
 }

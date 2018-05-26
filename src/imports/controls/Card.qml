@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick.Controls 2.3 as C
-import QtQuick.Controls.Material 2.3
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype Card
@@ -27,9 +26,5 @@ import QtQuick.Controls.Material 2.3
     For more information you can read the
     \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.
 */
-C.Pane {
-    padding: 0
-
-    Material.background: "white"
-    Material.elevation: 1
+FluidTemplates.Card {
 }

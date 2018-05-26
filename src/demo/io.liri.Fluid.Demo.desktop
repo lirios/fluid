@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Fluid Demo
+Comment=Demonstrate Fluid modules
+Exec=fluid-demo
+Terminal=false
+Type=Application
+Categories=X-Liri;Qt;Development;
+Icon=io.liri.Fluid.Demo

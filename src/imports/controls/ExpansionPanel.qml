@@ -203,7 +203,7 @@ AbstractButton {
 
             opacity                : 0.54
 
-            name                   : FluidControls.Utils.iconUrl(root.checked ? "hardware/keyboard_arrow_up" : "hardware/keyboard_arrow_down")
+            source: FluidControls.Utils.iconUrl(root.checked ? "hardware/keyboard_arrow_up" : "hardware/keyboard_arrow_down")
         }
     }
 

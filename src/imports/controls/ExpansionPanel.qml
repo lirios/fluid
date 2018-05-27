@@ -41,14 +41,14 @@ import QtQuick.Controls.Material 2.3
 AbstractButton {
     id: root
 
-    height        : checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
+    height: checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
 
-    bottomPadding : topPadding
-    leftPadding   : 24
-    rightPadding  : leftPadding
-    topPadding    : spacing
-    
-    spacing       : 16
+    bottomPadding: topPadding
+    leftPadding: 24
+    rightPadding: leftPadding
+    topPadding: spacing
+
+    spacing: 16
 
     /*!
         \qmlproperty real summaryTitleWidthPercentage
@@ -67,14 +67,14 @@ AbstractButton {
 
         Delegate of the summary row. By default it contains two labels, one for the \l summaryTitle, one for the \l summarySubtitle
     */
-    property alias summaryDelegate : summaryLoader.sourceComponent
+    property alias summaryDelegate: summaryLoader.sourceComponent
 
     /*!
         \qmlproperty Component expandedPanelDelegate
 
         Expanded panel content's delegate. By default is null
     */
-    property alias expandedPanelDelegate : contentLoader.sourceComponent
+    property alias expandedPanelDelegate: contentLoader.sourceComponent
 
     /*!
         \qmlproperty string summaryTitle
@@ -93,23 +93,23 @@ AbstractButton {
     FluidTemplates.Card {
         id: card
 
-        width                : parent.width
+        width: parent.width
 
-        anchors.top          : parent.top
-        anchors.bottom       : parent.bottom
-        anchors.topMargin    : root.checked ? root.spacing : 0
-        anchors.bottomMargin : anchors.topMargin
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.topMargin: root.checked ? root.spacing : 0
+        anchors.bottomMargin: anchors.topMargin
     }
 
     MouseArea {
         id: mouseArea
 
-        width       : parent.width
-        height      : summaryRow.height
+        width: parent.width
+        height: summaryRow.height
 
-        anchors.top : summaryRow.top
+        anchors.top: summaryRow.top
 
-        onClicked   : root.checked = !root.checked
+        onClicked: root.checked = !root.checked
     }
 
     Rectangle {
@@ -125,56 +125,56 @@ AbstractButton {
     Row {
         id: summaryRow
 
-        height              : summaryLoader.height
+        height: summaryLoader.height
 
-        anchors.top         : parent.top
-        anchors.topMargin   : root.checked ? spacing : 0
-        anchors.left        : parent.left
-        anchors.leftMargin  : root.leftPadding
-        anchors.right       : parent.right
-        anchors.rightMargin : root.rightPadding
+        anchors.top: parent.top
+        anchors.topMargin: root.checked ? spacing : 0
+        anchors.left: parent.left
+        anchors.leftMargin: root.leftPadding
+        anchors.right: parent.right
+        anchors.rightMargin: root.rightPadding
 
-        spacing             : root.spacing
+        spacing: root.spacing
 
         Behavior on height { NumberAnimation { duration: 100 } }
 
         Loader {
             id: summaryLoader
 
-            width  : parent.width - expandedIndicatorIcon.width - parent.spacing
+            width: parent.width - expandedIndicatorIcon.width - parent.spacing
 
             sourceComponent: Row {
 
-                height  : root.checked ? 64 : 48
+                height: root.checked ? 64 : 48
 
-                spacing : summaryRow.spacing
+                spacing: summaryRow.spacing
 
                 FluidControls.BodyLabel {
                     id: titleLabel
 
-                    width             : root.summarySubtitle ? parent.width * (0 <= root.summaryTitleWidthPercentage && root.summaryTitleWidthPercentage <= 1 ? root.summaryTitleWidthPercentage : 0.3 ) : parent.width
-                    height            : parent.height
+                    width: root.summarySubtitle ? parent.width * (0 <= root.summaryTitleWidthPercentage && root.summaryTitleWidthPercentage <= 1 ? root.summaryTitleWidthPercentage : 0.3 ) : parent.width
+                    height: parent.height
 
                     verticalAlignment: FluidControls.BodyLabel.AlignVCenter
 
                     elide: FluidControls.BodyLabel.ElideRight
 
-                    opacity           : 0.87
+                    opacity: 0.87
 
-                    text              : root.summaryTitle
+                    text: root.summaryTitle
                 }
 
                 FluidControls.BodyLabel {
-                    width             : parent.width - parent.spacing - titleLabel.width
-                    height            : parent.height
+                    width: parent.width - parent.spacing - titleLabel.width
+                    height: parent.height
 
                     verticalAlignment: FluidControls.BodyLabel.AlignVCenter
 
                     elide: FluidControls.BodyLabel.ElideRight
 
-                    opacity           : 0.54
+                    opacity: 0.54
 
-                    text              : root.summarySubtitle
+                    text: root.summarySubtitle
                 }
             }
         }
@@ -182,33 +182,33 @@ AbstractButton {
         FluidControls.Icon {
             id: expandedIndicatorIcon
 
-            anchors.verticalCenter : parent.verticalCenter
+            anchors.verticalCenter: parent.verticalCenter
 
-            opacity                : 0.54
+            opacity: 0.54
 
             source: FluidControls.Utils.iconUrl(root.checked ? "hardware/keyboard_arrow_up" : "hardware/keyboard_arrow_down")
         }
     }
 
     Item {
-        height              : visible ? contentLoader.height : 0
+        height: visible ? contentLoader.height : 0
 
-        anchors.top         : summaryRow.bottom
-        anchors.topMargin   : root.checked ? root.topPadding : 0
-        anchors.left        : parent.left
-        anchors.leftMargin  : root.leftPadding
-        anchors.right       : parent.right
-        anchors.rightMargin : root.rightPadding
+        anchors.top: summaryRow.bottom
+        anchors.topMargin: root.checked ? root.topPadding : 0
+        anchors.left: parent.left
+        anchors.leftMargin: root.leftPadding
+        anchors.right: parent.right
+        anchors.rightMargin: root.rightPadding
 
-        visible             : root.checked
-        clip                : true
+        visible: root.checked
+        clip: true
 
         Behavior on height { NumberAnimation { duration: 100 } }
 
         Loader {
             id: contentLoader
 
-            width : parent.width
+            width: parent.width
         }
     }
 }

@@ -20,9 +20,9 @@ import "../.."
 Flickable {
     id: root
 
-    contentHeight : content.height + padding * 2
-    
-    clip          : true
+    contentHeight: content.height + padding * 2
+
+    clip: true
 
     property int padding: 16
 
@@ -31,42 +31,42 @@ Flickable {
     Column {
         id: content
 
-        anchors.top         : parent.top
-        anchors.topMargin   : root.padding
-        anchors.left        : parent.left
-        anchors.right       : parent.right
-        anchors.leftMargin  : root.padding
-        anchors.rightMargin : root.padding
+        anchors.top: parent.top
+        anchors.topMargin: root.padding
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: root.padding
+        anchors.rightMargin: root.padding
 
-        spacing             : 1
+        spacing: 1
 
         ButtonGroup { id: panelsExlusiveGroup }
 
         FluidControls.ExpansionPanel {
             id: tripNamePanel
 
-            width          : parent.width
+            width: parent.width
 
-            summaryTitle   : qsTr("Trip name")
+            summaryTitle: qsTr("Trip name")
 
             ButtonGroup.group: panelsExlusiveGroup
 
-            expandedPanelDelegate : Item {
-                height : childrenRect.height
+            expandedPanelDelegate: Item {
+                height: childrenRect.height
 
                 TextField {
                     id: tripNameField
 
-                    width           : parent.width
+                    width: parent.width
 
-                    placeholderText : qsTr("Insert the trip name")
+                    placeholderText: qsTr("Insert the trip name")
 
-                    text            : qsTr("Carribean cruise")
+                    text: qsTr("Carribean cruise")
 
                     Binding {
-                        target   : tripNamePanel
-                        property : "summarySubtitle"
-                        value    : tripNameField.text ? tripNameField.text : tripNameField.placeholderText
+                        target: tripNamePanel
+                        property: "summarySubtitle"
+                        value: tripNameField.text ? tripNameField.text : tripNameField.placeholderText
                     }
                 }
             }
@@ -75,38 +75,38 @@ Flickable {
         FluidControls.ExpansionPanel {
             id: locationPanel
 
-            width          : parent.width
+            width: parent.width
 
-            summaryTitle   : qsTr("Location")
+            summaryTitle: qsTr("Location")
 
             ButtonGroup.group: panelsExlusiveGroup
 
-            expandedPanelDelegate : Column {
+            expandedPanelDelegate: Column {
 
                 RadioButton {
                     id: barbadosRadioButton
 
-                    anchors.horizontalCenter : parent.horizontalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                    checked                  : false
+                    checked: false
 
-                    text                     : qsTr("Barbados")
+                    text: qsTr("Barbados")
                 }
 
                 RadioButton {
                     id: dominicaRadioButton
 
-                    anchors.horizontalCenter : parent.horizontalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                    checked                  : false
+                    checked: false
 
-                    text                     : qsTr("Dominica")
+                    text: qsTr("Dominica")
                 }
 
                 Binding {
-                    target   : locationPanel
-                    property : "summarySubtitle"
-                    value    : barbadosRadioButton.checked ? barbadosRadioButton.text : (dominicaRadioButton.checked ? dominicaRadioButton.text : qsTr("No location selected"))
+                    target: locationPanel
+                    property: "summarySubtitle"
+                    value: barbadosRadioButton.checked ? barbadosRadioButton.text : (dominicaRadioButton.checked ? dominicaRadioButton.text : qsTr("No location selected"))
                 }
             }
         }
@@ -114,38 +114,38 @@ Flickable {
         FluidControls.ExpansionPanel {
             id: carrierPanel
 
-            width          : parent.width
+            width: parent.width
 
-            summaryTitle   : qsTr("Carrier")
+            summaryTitle: qsTr("Carrier")
 
             ButtonGroup.group: panelsExlusiveGroup
 
-            expandedPanelDelegate : Column {
+            expandedPanelDelegate: Column {
 
                 RadioButton {
                     id: bestLineRadioButton
 
-                    anchors.horizontalCenter : parent.horizontalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                    checked                  : false
+                    checked: false
 
-                    text                     : qsTr("The best cruise line")
+                    text: qsTr("The best cruise line")
                 }
 
                 RadioButton {
                     id: worstLineRadioButton
 
-                    anchors.horizontalCenter : parent.horizontalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
 
-                    checked                  : false
+                    checked: false
 
-                    text                     : qsTr("The worst cruise line")
+                    text: qsTr("The worst cruise line")
                 }
 
                 Binding {
-                    target   : carrierPanel
-                    property : "summarySubtitle"
-                    value    : bestLineRadioButton.checked ? bestLineRadioButton.text : (worstLineRadioButton.checked ? worstLineRadioButton.text : qsTr("No carrier selected"))
+                    target: carrierPanel
+                    property: "summarySubtitle"
+                    value: bestLineRadioButton.checked ? bestLineRadioButton.text : (worstLineRadioButton.checked ? worstLineRadioButton.text : qsTr("No carrier selected"))
                 }
             }
         }
@@ -153,42 +153,42 @@ Flickable {
         FluidControls.ExpansionPanel {
             id: customPanel
 
-            width          : parent.width
+            width: parent.width
 
             ButtonGroup.group: panelsExlusiveGroup
 
             summaryDelegate: Row {
-                height  : 100
+                height: 100
 
-                spacing : 10
+                spacing: 10
 
                 Label {
-                    width                  : (parent.width - parent.spacing*2) /3
+                    width: (parent.width - parent.spacing*2) /3
 
-                    anchors.verticalCenter : parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    text                   : qsTr("Column 1")
+                    text: qsTr("Column 1")
                 }
 
                 Label {
-                    width                  : (parent.width - parent.spacing*2) /3
+                    width: (parent.width - parent.spacing*2) /3
 
-                    anchors.verticalCenter : parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    text                   : qsTr("Column 2")
+                    text: qsTr("Column 2")
                 }
 
                 Label {
-                    width                  : (parent.width - parent.spacing*2) /3
+                    width: (parent.width - parent.spacing*2) /3
 
-                    anchors.verticalCenter : parent.verticalCenter
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    text                   : qsTr("Column 3")
+                    text: qsTr("Column 3")
                 }
             }
 
-            expandedPanelDelegate : Label {
-                text : qsTr("This is a customized panel")
+            expandedPanelDelegate: Label {
+                text: qsTr("This is a customized panel")
             }
         }
     }

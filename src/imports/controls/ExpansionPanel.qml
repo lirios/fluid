@@ -90,12 +90,6 @@ AbstractButton {
     */
     property string summarySubtitle
 
-
-    /*!
-        \internal
-    */
-    property int animationDuration : 100
-
     FluidTemplates.Card {
         id: card
 
@@ -142,7 +136,7 @@ AbstractButton {
 
         spacing             : root.spacing
 
-        Behavior on height { NumberAnimation { duration: root.animationDuration } }
+        Behavior on height { NumberAnimation { duration: 100 } }
 
         Loader {
             id: summaryLoader
@@ -209,7 +203,7 @@ AbstractButton {
         visible             : root.checked
         clip                : true
 
-        Behavior on height { NumberAnimation { duration: root.animationDuration } }
+        Behavior on height { NumberAnimation { duration: 100 } }
 
         Loader {
             id: contentLoader

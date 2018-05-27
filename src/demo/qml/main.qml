@@ -77,6 +77,7 @@ FluidControls.ApplicationWindow {
                     ListElement { category: qsTr("Controls"); title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePicker.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePicker.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("ExpansionPanel"); source: "qrc:/qml/Pages/Controls/ExpansionPanelPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }

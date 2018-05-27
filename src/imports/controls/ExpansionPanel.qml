@@ -155,9 +155,9 @@ AbstractButton {
                     width             : root.summarySubtitle ? parent.width * (0 <= root.summaryTitleWidthPercentage && root.summaryTitleWidthPercentage <= 1 ? root.summaryTitleWidthPercentage : 0.3 ) : parent.width
                     height            : parent.height
 
-                    verticalAlignment : "AlignVCenter"
+                    verticalAlignment: FluidControls.BodyLabel.AlignVCenter
 
-                    elide             : "ElideRight"
+                    elide: FluidControls.BodyLabel.ElideRight
 
                     opacity           : 0.87
 
@@ -168,9 +168,9 @@ AbstractButton {
                     width             : parent.width - parent.spacing - titleLabel.width
                     height            : parent.height
 
-                    verticalAlignment : "AlignVCenter"
+                    verticalAlignment: FluidControls.BodyLabel.AlignVCenter
 
-                    elide             : "ElideRight"
+                    elide: FluidControls.BodyLabel.ElideRight
 
                     opacity           : 0.54
 

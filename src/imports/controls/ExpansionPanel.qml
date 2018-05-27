@@ -18,6 +18,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.3
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Templates 1.0 as FluidTemplates
+import QtQuick.Controls.Material 2.3
 
 /*!
     \qmltype ExpansionPanel
@@ -76,13 +77,6 @@ AbstractButton {
     property alias expandedPanelDelegate : contentLoader.sourceComponent
 
     /*!
-        \qmlproperty Component backgroundDelegate
-
-        Delegate used to draw the background of the summary row
-    */
-    property alias backgroundDelegate : backgroundLoader.sourceComponent
-
-    /*!
         \qmlproperty string summaryTitle
 
         Title of the panel, used only if the \l summaryDelegate is the default one
@@ -124,20 +118,14 @@ AbstractButton {
         onClicked   : root.checked = !root.checked
     }
 
-    Loader {
-        id: backgroundLoader
+    Rectangle {
+        width: card.width
+        height: summaryRow.height
 
-        width        : card.width
-        height       : summaryRow.height
+        anchors.top: summaryRow.top
+        anchors.left: card.left
 
-        anchors.top  : summaryRow.top
-        anchors.left : card.left
-
-        sourceComponent: Rectangle {
-            color : mouseArea.pressed && !root.checked ? "#C8C8C8" : "white"
-
-            Behavior on color { ColorAnimation { duration: root.animationDuration } }
-        }
+        color: mouseArea.pressed && !root.checked ? root.Material.listHighlightColor : "white"
     }
 
     Row {

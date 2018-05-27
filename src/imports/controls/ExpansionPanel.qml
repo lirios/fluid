@@ -17,6 +17,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Controls 2.3
 import Fluid.Controls 1.0 as FluidControls
+import Fluid.Templates 1.0 as FluidTemplates
 
 /*!
     \qmltype ExpansionPanel
@@ -101,7 +102,7 @@ AbstractButton {
     */
     property int animationDuration : 100
 
-    Card {
+    FluidTemplates.Card {
         id: card
 
         width                : parent.width
@@ -166,7 +167,7 @@ AbstractButton {
 
                 spacing : summaryRow.spacing
 
-                BodyLabel {
+                FluidControls.BodyLabel {
                     id: titleLabel
 
                     width             : root.summarySubtitle ? parent.width * (0 <= root.summaryTitleWidthPercentage && root.summaryTitleWidthPercentage <= 1 ? root.summaryTitleWidthPercentage : 0.3 ) : parent.width
@@ -181,7 +182,7 @@ AbstractButton {
                     text              : root.summaryTitle
                 }
 
-                BodyLabel {
+                FluidControls.BodyLabel {
                     width             : parent.width - parent.spacing - titleLabel.width
                     height            : parent.height
 
@@ -196,7 +197,7 @@ AbstractButton {
             }
         }
 
-        Icon {
+        FluidControls.Icon {
             id: expandedIndicatorIcon
 
             anchors.verticalCenter : parent.verticalCenter

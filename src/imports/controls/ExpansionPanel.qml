@@ -36,7 +36,7 @@ import Fluid.Controls 1.0 as FluidControls
     For more information you can read the
     \l{https://material.io/guidelines/components/expansion-panels.html}{Material Design guidelines}.
 */
-Control {
+AbstractButton {
     id: root
 
     height        : checked ? summaryRow.height + spacing*4 + contentLoader.height : summaryRow.height
@@ -95,21 +95,6 @@ Control {
     */
     property string summarySubtitle
 
-    /*!
-        \qmlproperty bool checked
-
-        This property is true if the control is expanded.
-    */
-    property bool checked : false
-
-    /*!
-        \qmlproperty ExclusiveGroup exclusiveGroup
-
-        This property stores the ExclusiveGroup that the control belongs to.
-    */
-    property ExclusiveGroup exclusiveGroup : null
-
-    onExclusiveGroupChanged: if (exclusiveGroup) exclusiveGroup.bindCheckable(root)
 
     /*!
         \internal

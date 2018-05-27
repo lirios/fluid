@@ -13,7 +13,6 @@
  */
 
 import QtQuick 2.10
-import QtQuick.Controls 1.4 as OldControls
 import QtQuick.Controls 2.3
 import Fluid.Controls 1.0 as FluidControls
 import "../.."
@@ -41,7 +40,7 @@ Flickable {
 
         spacing             : 1
 
-        OldControls.ExclusiveGroup { id: panelsExlusiveGroup }
+        ButtonGroup { id: panelsExlusiveGroup }
 
         FluidControls.ExpansionPanel {
             id: tripNamePanel
@@ -50,7 +49,7 @@ Flickable {
 
             summaryTitle   : qsTr("Trip name")
 
-            exclusiveGroup : panelsExlusiveGroup
+            ButtonGroup.group: panelsExlusiveGroup
 
             expandedPanelDelegate : Item {
                 height : childrenRect.height
@@ -80,7 +79,7 @@ Flickable {
 
             summaryTitle   : qsTr("Location")
 
-            exclusiveGroup : panelsExlusiveGroup
+            ButtonGroup.group: panelsExlusiveGroup
 
             expandedPanelDelegate : Column {
 
@@ -119,7 +118,7 @@ Flickable {
 
             summaryTitle   : qsTr("Carrier")
 
-            exclusiveGroup : panelsExlusiveGroup
+            ButtonGroup.group: panelsExlusiveGroup
 
             expandedPanelDelegate : Column {
 
@@ -156,7 +155,7 @@ Flickable {
 
             width          : parent.width
 
-            exclusiveGroup : panelsExlusiveGroup
+            ButtonGroup.group: panelsExlusiveGroup
 
             summaryDelegate: Row {
                 height  : 100

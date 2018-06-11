@@ -71,8 +71,7 @@ RoundButton {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
-        x: control.leftPadding
-        y: control.topPadding
+        anchors.centerIn: parent
 
         color: !control.enabled ? control.Material.buttonDisabledColor
                                 : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor

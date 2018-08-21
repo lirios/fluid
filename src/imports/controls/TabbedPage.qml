@@ -65,7 +65,7 @@ FluidControls.Page {
     /*!
         \internal
      */
-    default property alias contents: swipeView.contentChildren
+    default property alias contents: swipeView.contentData
 
     /*!
         \qmlproperty int count

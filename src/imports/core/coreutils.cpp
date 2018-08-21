@@ -27,7 +27,7 @@ CoreUtils::CoreUtils(QObject *parent)
 }
 
 /*!
-    \qmlmethod real Fluid.Controls::Utils::scale(real percent, real start, real end)
+    \qmlmethod real Fluid.Core::Utils::scale(real percent, real start, real end)
 
     Scale \a percent in the range between \a start and \a end.
 */

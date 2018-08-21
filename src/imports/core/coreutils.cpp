@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-#include "utils.h"
+#include "coreutils.h"
 
 /*!
     \qmltype Utils
@@ -21,7 +21,7 @@
 
     \brief A collection of helpful utility methods.
 */
-Utils::Utils(QObject *parent)
+CoreUtils::CoreUtils(QObject *parent)
     : QObject(parent)
 {
 }
@@ -31,7 +31,7 @@ Utils::Utils(QObject *parent)
 
     Scale \a percent in the range between \a start and \a end.
 */
-qreal Utils::scale(qreal percent, qreal start, qreal end)
+qreal CoreUtils::scale(qreal percent, qreal start, qreal end)
 {
     return start + ((end - start) * (percent / 100));
 }

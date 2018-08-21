@@ -12,19 +12,19 @@
  * $END_LICENSE$
  */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef COREUTILS_H
+#define COREUTILS_H
 
 #include <QObject>
 #include <QUrl>
 
-class Utils : public QObject
+class CoreUtils : public QObject
 {
     Q_OBJECT
 public:
-    explicit Utils(QObject *parent = nullptr);
+    explicit CoreUtils(QObject *parent = nullptr);
 
     Q_INVOKABLE qreal scale(qreal percent, qreal start, qreal end);
 };
 
-#endif // UTILS_H
+#endif // COREUTILS_H

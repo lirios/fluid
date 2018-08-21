@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-#include "utils.h"
+#include "controlsutils.h"
 
 /*!
     \qmltype Utils
@@ -21,7 +21,7 @@
 
     \brief A collection of helpful utility methods.
 */
-Utils::Utils(const QUrl &baseUrl, QObject *parent)
+ControlsUtils::ControlsUtils(const QUrl &baseUrl, QObject *parent)
     : QObject(parent)
     , m_baseUrl(baseUrl)
 {
@@ -53,7 +53,7 @@ Utils::Utils(const QUrl &baseUrl, QObject *parent)
     }
     \endcode
 */
-QUrl Utils::iconUrl(const QString &name)
+QUrl ControlsUtils::iconUrl(const QString &name)
 {
 #if FLUID_INSTALL_ICONS == 1
     return QUrl::fromLocalFile(QStringLiteral("%1/icons/%2.svg").arg(m_baseUrl.toLocalFile()).arg(name));

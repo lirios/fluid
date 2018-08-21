@@ -12,17 +12,17 @@
  * $END_LICENSE$
  */
 
-#ifndef FLUID_CONTROLS_UTILS_H
-#define FLUID_CONTROLS_UTILS_H
+#ifndef CONTROLSUTILS_H
+#define CONTROLSUTILS_H
 
 #include <QObject>
 #include <QUrl>
 
-class Utils : public QObject
+class ControlsUtils : public QObject
 {
     Q_OBJECT
 public:
-    explicit Utils(const QUrl &baseUrl, QObject *parent = nullptr);
+    explicit ControlsUtils(const QUrl &baseUrl, QObject *parent = nullptr);
 
     Q_INVOKABLE QUrl iconUrl(const QString &name);
 
@@ -30,4 +30,4 @@ private:
     QUrl m_baseUrl;
 };
 
-#endif // FLUID_CONTROLS_UTILS_H
+#endif // CONTROLSUTILS_H

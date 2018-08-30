@@ -17,6 +17,18 @@ Product {
     files: [
         "config/fluid-project.qdocconf",
         "config/macros.qdocconf",
+        "src/controls/Action.qdoc",
+        "src/controls/AlertDialog.qdoc",
+        "src/controls/AppBar.qdoc",
+        "src/controls/AppToolBar.qdoc",
+        "src/controls/ApplicationWindow.qdoc",
+        "src/controls/BodyLabel.qdoc",
+        "src/controls/BottomSheet.qdoc",
+        "src/controls/BottomSheetGrid.qdoc",
+        "src/controls/Chip.qdoc",
+        "src/controls/Page.qdoc",
+        "src/controls/PageSidebar.qdoc",
+        "src/controls/SearchBar.qdoc",
         "src/deployment.qdoc",
         "src/fluidcontrols-qmltypes.qdoc",
         "src/fluidcore-qmltypes.qdoc",
@@ -24,13 +36,6 @@ Product {
         "src/fluidlayouts-qmltypes.qdoc",
         "src/fluidtemplates-qmltypes.qdoc",
         "src/index.qdoc",
-        "src/controls/AppBar.qdoc",
-        "src/controls/ApplicationWindow.qdoc",
-        "src/controls/AppToolBar.qdoc",
-        "src/controls/Chip.qdoc",
-        "src/controls/Page.qdoc",
-        "src/controls/PageSidebar.qdoc",
-        "src/controls/SearchBar.qdoc",
     ]
 
     Group {

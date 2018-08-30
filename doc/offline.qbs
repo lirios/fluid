@@ -15,9 +15,22 @@ Product {
     ])
 
     files: [
-        "config/*.qdocconf",
-        "src/*.qdoc",
-        "src/controls/*.qdoc",
+        "config/fluid-project.qdocconf",
+        "config/macros.qdocconf",
+        "src/deployment.qdoc",
+        "src/fluidcontrols-qmltypes.qdoc",
+        "src/fluidcore-qmltypes.qdoc",
+        "src/fluideffects-qmltypes.qdoc",
+        "src/fluidlayouts-qmltypes.qdoc",
+        "src/fluidtemplates-qmltypes.qdoc",
+        "src/index.qdoc",
+        "src/controls/AppBar.qdoc",
+        "src/controls/ApplicationWindow.qdoc",
+        "src/controls/AppToolBar.qdoc",
+        "src/controls/Chip.qdoc",
+        "src/controls/Page.qdoc",
+        "src/controls/PageSidebar.qdoc",
+        "src/controls/SearchBar.qdoc",
     ]
 
     Group {
@@ -29,7 +42,14 @@ Product {
     Group {
         name: "Style"
         prefix: "template/style/"
-        files: "**"
+        files: [
+            "base.css",
+            "liri.css",
+            "liri.eot",
+            "liri.svg",
+            "liri.ttf",
+            "liri.woff",
+        ]
     }
 
     Group {

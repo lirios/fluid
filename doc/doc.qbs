@@ -11,7 +11,6 @@ Project {
     condition: project.withDocumentation && !qbs.targetOS.contains("android")
 
     references: [
-        "online.qbs",
         "offline.qbs",
     ]
 }

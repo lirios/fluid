@@ -1,0 +1,78 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype ListItem
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+    \inherits ItemDelegate
+
+    \brief A standard list item, with one or more lines of text and optional left and right items.
+*/
+
+/*!
+    \qmlproperty int Fluid.Controls::ListItem::dividerInset
+
+    How many pixels the divider is from the left border.
+    This property is set to the \l leftItem width by default.
+
+    \sa Fluid.Controls::ListItem::showDivider
+    \sa Fluid.Controls::ListItem::leftItem
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::ListItem::showDivider
+
+    This property holds whether the divider is shown or not.
+    Default value is \c false.
+*/
+
+/*!
+    \qmlproperty int Fluid.Controls::ListItem::maximumLineCount
+
+    Maximum number of text lines allowed to show.
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::ListItem::subText
+
+    Text to display below \l text.
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::ListItem::valueText
+
+    Value text.
+*/
+
+/*!
+    \qmlproperty Item Fluid.Controls::ListItem::leftItem
+
+    Item to show on the left.
+*/
+
+/*!
+    \qmlproperty Item Fluid.Controls::ListItem::rightItem
+
+    Item to show on the right.
+*/
+
+/*!
+    \qmlproperty Item Fluid.Controls::ListItem::secondaryItem
+
+    Secondary item.
+*/

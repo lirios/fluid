@@ -16,31 +16,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import Fluid.Core 1.0 as FluidCore
 
-/*!
-    \qmltype SubheadingLabel
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Text label with standard font and styling suitable to subheading.
-
-    Text label for the Material Design subheading text style.
-
-    \snippet fluidcontrols-subheadinglabel.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/style/typography.html}{Material Design guidelines}.
-*/
 Label {
-    /*!
-        \qmlproperty int level
-
-        This property holds the label level that controls
-        font style and size.
-
-        Only values between 1 and 4 are allowed.
-
-        Default value is 1.
-    */
     property int level: 1
 
     font.pixelSize: FluidCore.Device.isMobile ? 16 : 15

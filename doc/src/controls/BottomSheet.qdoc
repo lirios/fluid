@@ -32,7 +32,7 @@
 */
 
 /*!
-    \qmlproperty int BottomSheet::maxHeight
+    \qmlproperty int Fluid.Controls::BottomSheet::maxHeight
 
     Maximum height of the bottom sheet.
 

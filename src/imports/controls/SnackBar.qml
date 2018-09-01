@@ -19,77 +19,15 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Effects 1.0 as FluidEffects
 
-/*!
-   \qmltype SnackBar
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
-
-   \brief SnackBar provides a brief feedback about an operation.
-
-   \code
-   Page {
-       title: qsTr("Send a message")
-
-       Button {
-           anchors.centerIn: parent
-           text: qsTr("Send Message")
-           onClicked: snackBar.open(qsTr("Message sent"))
-       }
-
-       SnackBar {
-           id: snackBar
-       }
-   }
-   \endcode
-
-    SnackBar provides a brief feedback about an operation through a
-    message at the bottom of the screen.
-
-    It contains a single line of text directly related to the operation performed.
-    There can be a text action, but no icons.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/snackbars-toasts.html}{Material Design guidelines}.
-*/
 Rectangle {
     id: control
 
-    /*!
-        \qmlproperty bool opened
-
-        Whether the snack bar is currently open or not.
-    */
     readonly property bool opened: d.opened
-
-    /*!
-        \qmlproperty int duration
-
-        Amount of time (in ms) to keep the notification visible.
-        The default is 2s.
-    */
     property int duration: 2000
-
-    /*!
-        \qmlproperty bool fullWidth
-
-        Whether the bar should take full screen width.
-        The default depends on the device: full width only on phones and tablets.
-    */
     property bool fullWidth: FluidCore.Device.type === FluidCore.Device.phone || FluidCore.Device.type === FluidCore.Device.phablet
 
-    /*!
-        \qmlsignal clicked()
-
-        This signal is emitted when the button is clicked.
-        The handler is \c onClicked.
-    */
     signal clicked()
 
-    /*!
-        \qmlmethod void SnackBar::open(string text, string buttonText = "")
-
-        Open the bar with the specified \a text and \a buttonText.
-    */
     function open(text, buttonText) {
         snackText.text = text;
         snackButton.text = buttonText;
@@ -98,11 +36,6 @@ Rectangle {
         timer.restart();
     }
 
-    /*!
-        \qmlmethod void SnackBar::close()
-
-        Close the bar.
-    */
     function close() {
         d.opened = false;
     }

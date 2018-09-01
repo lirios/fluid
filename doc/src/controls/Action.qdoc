@@ -32,13 +32,13 @@
 */
 
 /*!
-    \qmlproperty string Action::toolTip
+    \qmlproperty string Fluid.Controls::Action::toolTip
 
     The tool tip displayed for the action.
 */
 
 /*!
-    \qmlproperty bool Action::visible
+    \qmlproperty bool Fluid.Controls::Action::visible
 
     Set to \c false to hide the action in the UI.
 
@@ -46,7 +46,7 @@
 */
 
 /*!
-    \qmlproperty bool Action::hasDividerAfter
+    \qmlproperty bool Fluid.Controls::Action::hasDividerAfter
 
     Set to \c true to display a divider after the control bound to this action.
 
@@ -54,7 +54,7 @@
 */
 
 /*!
-    \qmlproperty bool Action::hoverAnimation
+    \qmlproperty bool Fluid.Controls::Action::hoverAnimation
 
     Set to \c true to rotate the icon 90 degrees on mouseover.
 

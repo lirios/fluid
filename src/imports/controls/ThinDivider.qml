@@ -15,13 +15,6 @@
 import QtQuick 2.10
 import QtQuick.Controls.Material 2.3
 
-/*!
-   \qmltype ThinDivider
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
-
-   \brief A 1px high divider for use in lists and other columns of content.
- */
 Rectangle {
     color: Material.dividerColor
     width: parent.width

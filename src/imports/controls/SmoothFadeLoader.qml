@@ -14,58 +14,9 @@
 
 import QtQuick 2.10
 
-/*!
-    \qmltype SmoothFadeLoader
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Displays an item and smoothly fade when the source is changed.
-
-    This component loads an item with a Loader and smoothly fade to another item when
-    the source URL is changed.
-
-    Items are loaded synchronously, also the item being hidden is not unloaded to
-    avoid an unpleasant "flash" after the transition.
-
-    Example of usage:
-    \code
-    import QtQuick 2.10
-    import Fluid.Controls 1.0
-
-    Item {
-        width: 640
-        height: 480
-
-        SmoothFadeLoader {
-            anchors.fill: parent
-            source: "MyComponent.qml"
-            fadeDuration: 400
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: parent.source = "AnotherComponent.qml"
-            }
-        }
-    }
-    \endcode
-*/
 Item {
-    /*!
-        The item being displayed.
-
-        \sa Loader::source
-    */
     property url source
-
-    /*!
-        Set this to change the fade animation time (in milliseconds).
-        Default value is 250 ms.
-    */
     property int fadeDuration: 250
-
-    /*!
-        This property holds whether the fade animation is running or not.
-    */
     readonly property bool running: animation.running
 
     id: root

@@ -54,33 +54,33 @@
 */
 
 /*!
-   \qmlproperty color ApplicationWindow::decorationColor
+   \qmlproperty color Fluid.Controls::ApplicationWindow::decorationColor
 
    The color of the status bar or window decorations, if the current
    platform supports it.
 */
 
 /*!
-    \qmlproperty Theme ApplicationWindow::decorationTheme
+    \qmlproperty Theme Fluid.Controls::ApplicationWindow::decorationTheme
 
     Theme of the status bar or window decoration, if the current
     platform supports it.
 */
 
 /*!
-    \qmlproperty AppToolBar ApplicationWindow::appBar
+    \qmlproperty AppToolBar Fluid.Controls::ApplicationWindow::appBar
 
     The tool bar for this application.
 */
 
 /*!
-   \qmlproperty Page ApplicationWindow::initialPage
+   \qmlproperty Page Fluid.Controls::ApplicationWindow::initialPage
 
    The initial page shown when the application starts.
 */
 
 /*!
-   \qmlproperty PageStack ApplicationWindow::pageStack
+   \qmlproperty PageStack Fluid.Controls::ApplicationWindow::pageStack
 
    The \l PageStack used for controlling pages and transitions between pages.
 */

@@ -14,26 +14,8 @@
 
 import QtQuick 2.10
 
-/*!
-    \qmltype Showable
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Showtable component.
-*/
 FocusScope {
-    /*!
-        \qmlproperty Animation showAnimation
-
-        Animation to play to show the component.
-    */
     property var showAnimation
-
-    /*!
-        \qmlproperty Animation hideAnimation
-
-        Animation to play to hide the component.
-    */
     property var hideAnimation
 
     id: root
@@ -54,11 +36,6 @@ FocusScope {
         }
     }
 
-    /*!
-        \qmlmethod void Showable::show()
-
-        Show the component.
-    */
     function show() {
         // Stop hide animation if it's still running
         if (hideAnimation != undefined && hideAnimation.running)
@@ -72,11 +49,6 @@ FocusScope {
             showAnimation.restart();
     }
 
-    /*!
-        \qmlmethod void Showable::hide()
-
-        Hide the component.
-    */
     function hide() {
         // Stop show animation if it's still running
         if (showAnimation != undefined && showAnimation.running)

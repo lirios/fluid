@@ -31,7 +31,7 @@
 */
 
 /*!
-    \qmlproperty int BodyLabel::level
+    \qmlproperty int Fluid.Controls::BodyLabel::level
 
     This property holds the label level that controls
     font style and size.

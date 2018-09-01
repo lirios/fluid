@@ -28,31 +28,31 @@
 */
 
 /*!
-    \qmlproperty string Chip::caption
+    \qmlproperty string Fluid.Controls::Chip::caption
 
     The caption to show in the chip.
 */
 
 /*!
-    \qmlproperty alias icon
+    \qmlproperty alias Fluid.Controls::Chip::icon
 
     The icon to display (if any)
 */
 
 /*!
-    \qmlproperty font Chip::font
+    \qmlproperty font Fluid.Controls::Chip::font
 
     The caption font in the Chip.
 */
 
 /*!
-    \qmlproperty bool Chip::deletable
+    \qmlproperty bool Fluid.Controls::Chip::deletable
 
     Whether the chip can be deleted.
 */
 
 /*!
-    \qmlsignal void Chip::deleted()
+    \qmlsignal void Fluid.Controls::Chip::deleted()
 
     Emitted when the user wants to delete the chip.
 */

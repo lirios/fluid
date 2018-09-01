@@ -33,26 +33,26 @@
 */
 
 /*!
-    \qmlproperty string BottomSheetGrid::title
+    \qmlproperty string Fluid.Controls::BottomSheetGrid::title
 
     Title.
 */
 
 /*!
-    \qmlproperty list<Action> BottomSheetGrid::actions
+    \qmlproperty list<Action> Fluid.Controls::BottomSheetGrid::actions
 
     Actions to display in the bottom sheet.
 */
 
 /*!
-    \qmlproperty int BottomSheetGrid::columns
+    \qmlproperty int Fluid.Controls::BottomSheetGrid::columns
 
     Number of columns.
     By default it's set to fit the screen width.
 */
 
 /*!
-    \qmlproperty int BottomSheetGrid::rows
+    \qmlproperty int Fluid.Controls::BottomSheetGrid::rows
 
     Number of rows.
     By default it's set to fit the screen size based on the \l columns.

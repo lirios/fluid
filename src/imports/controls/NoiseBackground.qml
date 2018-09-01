@@ -55,30 +55,8 @@
 
 import QtQuick 2.10
 
-/*!
-    \qmltype NoiseBackground
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Background with noise.
-*/
 ShaderEffect {
-    /*!
-        \qmlproperty Gradient gradient
-
-        The gradient to use to fill the rectangle.
-
-        \sa Rectangle::gradient
-    */
     property alias gradient: rect.gradient
-
-    /*!
-        \qmlproperty color color
-
-        The color to use to fill the rectangle.
-
-        \sa Rectangle::color
-    */
     property alias color: rect.color
 
     Rectangle {

@@ -25,31 +25,31 @@
  */
 
 /*!
-    \qmlproperty int AppToolBar::maxActionCount
+    \qmlproperty int Fluid.Controls::AppToolBar::maxActionCount
 
     Maximum actions to be available on this tool bar.
 */
 
 /*!
-    \qmlproperty real AppToolBar::appBarHeight
+    \qmlproperty real Fluid.Controls::AppToolBar::appBarHeight
 
     Height of the \l AppBar considering its extended content.
 */
 
 /*!
-    \qmlmethod void AppToolBar::pop(Page page)
+    \qmlmethod void Fluid.Controls::AppToolBar::pop(Page page)
 
     Pop the \l AppBar that belongs to \a page from the stack.
 */
 
 /*!
-    \qmlmethod void AppToolBar::push(Page page)
+    \qmlmethod void Fluid.Controls::AppToolBar::push(Page page)
 
     Push the \l AppBar that belongs to \a page to the stack.
 */
 
 /*!
-    \qmlmethod void AppToolBar::replace(Page page)
+    \qmlmethod void Fluid.Controls::AppToolBar::replace(Page page)
 
     Replace current \l AppBar with the one that belongs to \a page.
 */

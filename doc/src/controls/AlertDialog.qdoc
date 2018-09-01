@@ -35,7 +35,7 @@
 */
 
 /*!
-    \qmlproperty string AlertDialog::text
+    \qmlproperty string Fluid.Controls::AlertDialog::text
 
     Informative text to display.
 */

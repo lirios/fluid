@@ -20,72 +20,9 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-    \qmltype NavigationDrawer
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief The navigation drawer slides in from the left and is a common pattern in apps.
-
-    This is a temporary navigation drawer: it can toggle open or closed.
-    Closed by default, this type of navigation drawer opens temporarily above all
-    other content until a section is selected or the overlay is tapped.
-
-    This navigation drawer comes with no contents, therefore it's completely customizable.
-
-    By default the navigation drawer is permanent and pinned on desktop and
-    temporary on mobile.
-
-    \code
-    import Fluid.Controls 2.0 as FluidControls
-
-    FluidControls.ApplicationWindow {
-        width: 400
-        height: 400
-        visible: true
-
-        Button {
-            text: "Open"
-            onClicked: drawer.open()
-        }
-
-        FluidControls.NavigationDrawer {
-            topContent: Image {
-                source: "background.png"
-                width: parent.width
-                height: 200
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("content/inbox")
-                text: "Inbox"
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("content/archive")
-                text: "Archive"
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("action/settings")
-                text: "Settings"
-                showDivider: true
-            }
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/patterns/navigation-drawer.html}{Material Design guidelines}.
-*/
 Drawer {
     id: drawer
 
-    /*!
-        \qmlproperty list<Item> topContent
-
-        The items added to this list will be displayed on top of the contents.
-    */
     property alias topContent: topItem.data
 
     /*!

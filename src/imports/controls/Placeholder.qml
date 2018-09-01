@@ -20,33 +20,11 @@ import QtQuick.Controls.impl 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0
 
-/*!
-    \qmltype Placeholder
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Shows a placeholder icon and text.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/patterns/empty-states.html#empty-states-avoiding-completely-empty-states}{Material Design guidelines}.
-*/
 Control {
     id: control
 
     property alias icon: iconLabel.icon
-
-    /*!
-        \qmlproperty string text
-
-        Text.
-    */
     property alias text: textLabel.text
-
-    /*!
-        \qmlproperty string subText
-
-        Sub text.
-    */
     property alias subText: subTextLabel.text
 
     implicitWidth: columnLayout.implicitWidth

@@ -77,6 +77,7 @@ FluidControls.ApplicationWindow {
                     ListElement { category: qsTr("Controls"); title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("NavigationListView"); source: "qrc:/qml/Pages/Controls/NavigationListViewPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/PlaceholderPage.qml" }
                     ListElement { category: qsTr("Controls"); title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/SearchPage.qml" }

@@ -59,6 +59,7 @@ Project {
             files: [
                 "images/balloon.jpg",
                 "images/materialbg.png",
+                "qml/Pages/Controls/NavigationListViewPage.qml",
                 "qml/icons.txt",
                 "qml/main.qml",
                 "qml/StyledPage.qml",

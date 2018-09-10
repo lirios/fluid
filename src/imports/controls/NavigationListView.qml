@@ -13,7 +13,6 @@
  */
 
 import QtQuick 2.10
-import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
@@ -34,8 +33,10 @@ import Fluid.Controls 1.0 as FluidControls
     This navigation drawer comes with a built-in ListView.
 
     \code
+    import QtQuick 2.10
+    import QtQuick.Controls 2.3
     import QtQuick.Window 2.2
-    import Fluid.Controls 2.0 as FluidControls
+    import Fluid.Controls 1.0 as FluidControls
 
     Window {
         id: window
@@ -50,10 +51,9 @@ import Fluid.Controls 1.0 as FluidControls
 
         FluidControls.NavigationListView {
             topContent: Image {
+                width: parent.width
+                height: 200
                 source: "background.png"
-
-                Layout.fillWidth: true
-                Layout.preferredHeight: 200
             }
 
             actions: [
@@ -114,6 +114,7 @@ FluidControls.NavigationDrawer {
     property alias delegate : navDrawerListView.delegate
 
     ScrollView {
+        anchors.fill: parent
         clip: true
 
         ListView {
@@ -144,8 +145,5 @@ FluidControls.NavigationDrawer {
 
             visible: count > 0
         }
-
-        Layout.fillWidth: true
-        Layout.fillHeight: true
     }
 }

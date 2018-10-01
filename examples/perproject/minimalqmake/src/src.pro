@@ -45,7 +45,13 @@ ios {
     APP_QML_FILES.files = $$OUT_PWD/../fluid/qml/Fluid
     APP_QML_FILES.path = qml
     QMAKE_BUNDLE_DATA += APP_QML_FILES
+}
 
+win32 {
+    WINDEPLOYQT_OPTIONS = -qmldir $$OUT_PWD/../fluid/qml/Fluid
+}
+
+qtConfig(static) {
     QMAKE_LIBDIR += \
         $$OUT_PWD/../fluid/qml/Fluid/Core \
         $$OUT_PWD/../fluid/qml/Fluid/Controls \
@@ -57,10 +63,6 @@ ios {
         fluidcontrolsplugin \
         fluidcontrolsprivateplugin \
         fluidtemplatesplugin
-}
-
-win32 {
-    WINDEPLOYQT_OPTIONS = -qmldir $$OUT_PWD/../fluid/qml/Fluid
 }
 
 # Default rules for deployment.

@@ -2,7 +2,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#ifdef Q_OS_IOS
+#ifdef QT_STATIC
 #  include <QQmlExtensionPlugin>
 Q_IMPORT_PLUGIN(FluidCorePlugin)
 Q_IMPORT_PLUGIN(FluidControlsPlugin)

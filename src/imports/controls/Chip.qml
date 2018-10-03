@@ -13,76 +13,169 @@
  */
 
 import QtQuick 2.10
+import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.1 as FluidControls
 import Fluid.Effects 1.0 as FluidEffects
 
-Rectangle {
-    property string caption: ""
-    property alias icon: contactIcon
-    property alias font: captionLabel.font
+AbstractButton {
+    id: control
+
+    property bool expandable: false
+    property alias model: listView.model
+    property alias delegate: listView.delegate
+    readonly property alias selectedItem: listView.currentItem
+    property alias iconItem: iconItem.children
     property bool deletable: false
 
     signal deleted()
 
-    width: contactIcon.width + captionLabel.implicitWidth + deleteButton.width + 12
-    height: 32
-    radius: 16
-    color: Material.color(Material.Grey, Material.Shade300)
+    implicitWidth: Math.max(background ? background.implicitWidth : 0, contentItem.implicitWidth) + leftPadding + rightPadding
+    implicitHeight: Math.max(background ? background.implicitHeight : 0, contentItem.implicitHeight) + topPadding + bottomPadding
 
-    FluidControls.Icon {
-        id: contactIcon
+    font.pixelSize: expandable ? 14 : 13
 
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-        }
+    leftPadding: 12
+    rightPadding: 12
+    spacing: 8
 
-        width: 32
-        height: width
+    icon.width: 24
+    icon.height: 24
 
-        visible: false
+    hoverEnabled: true
+
+    Material.elevation: control.pressed ? 2 : 0
+    Material.background: Material.color(Material.Grey, control.checked || control.hovered ? Material.Shade700 : Material.Shade300)
+
+    onClicked: {
+        if (control.expandable)
+            popup.open();
     }
 
-    FluidEffects.CircleMask {
-        id: circleMask
+    background: Rectangle {
+        implicitHeight: 32
+        radius: 16
+        color: control.Material.backgroundColor
 
-        anchors.fill: contactIcon
-        source: contactIcon
-
-        visible: source !== ""
+        layer.enabled: control.Material.elevation > 0
+        layer.effect: FluidEffects.Elevation {
+            elevation: control.Material.elevation
+        }
     }
 
-    FluidControls.CaptionLabel {
-        id: captionLabel
+    contentItem: RowLayout {
+        spacing: control.spacing
 
-        anchors {
-            left: parent.left
-            right: deleteButton.left
-            verticalCenter: parent.verticalCenter
-            leftMargin: circleMask.visible ? 40 : 12
-            rightMargin: deletable ? 4 : 12
+        Material.theme: control.hovered ? Material.Dark : Material.Light
+
+        FluidControls.Icon {
+            id: actualIcon
+
+            Layout.alignment: Qt.AlignVCenter
+
+            name: control.icon.name
+            source: control.icon.source
+            size: control.icon.width
+            color: bodyLabel.color
+
+            visible: !iconItem.visible && (name || source.toString())
         }
 
-        text: caption
+        Item {
+            id: iconItem
+
+            Layout.alignment: Qt.AlignVCenter
+
+            objectName: "iconItem"
+
+            implicitWidth: childrenRect.width
+            implicitHeight: childrenRect.height
+
+            visible: visibleChildren.length > 0
+        }
+
+        Label {
+            id: bodyLabel
+
+            Layout.alignment: Qt.AlignVCenter
+
+            text: control.text
+            font: control.font
+            color: FluidControls.Color.transparent(control.checked || control.hovered ? Material.primaryHighlightedTextColor : Material.primaryTextColor, 0.87)
+        }
+
+        FluidControls.Icon {
+            id: deleteIcon
+
+            Layout.alignment: Qt.AlignVCenter
+
+            implicitWidth: control.icon.width
+            implicitHeight: control.icon.height
+
+            source: FluidControls.Utils.iconUrl("navigation/cancel")
+            color: control.hovered ? Material.primaryHighlightedTextColor : Material.iconColor
+            colorize: true
+
+            opacity: control.hovered ? 1.0 : 0.54
+
+            visible: control.deletable
+
+            MouseArea {
+                anchors.fill: parent
+                enabled: control.deletable
+                onClicked: control.deleted()
+            }
+        }
     }
 
-    ToolButton {
-        id: deleteButton
+    Popup {
+        id: popup
 
-        icon.source: FluidControls.Utils.iconUrl("navigation/close")
-        icon.color: Material.iconColor
+        width: 400
 
-        anchors {
-            right: parent.right
-            verticalCenter: parent.verticalCenter
+        padding: 0
+
+        Material.elevation: 8
+
+        ScrollView {
+            anchors.fill: parent
+
+            clip: true
+
+            ListView {
+                id: listView
+                currentIndex: 0
+                delegate: FluidControls.ListItem {
+                    readonly property string label: model.label
+                    readonly property string value: model.value
+                    readonly property url imageSource: model.imageSource
+
+                    text: listView.currentIndex === index ? model.label : ""
+                    subText: model.value
+                    highlighted: ListView.isCurrentItem
+                    leftItem: FluidControls.CircleImage {
+                        anchors.centerIn: parent
+                        source: model.imageSource
+                        width: 40
+                        height: width
+                    }
+                    rightItem: FluidControls.Icon {
+                        anchors.centerIn: parent
+                        source: FluidControls.Utils.iconUrl("navigation/cancel")
+                        visible: listView.currentIndex === index
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: popup.close()
+                        }
+                    }
+                    onClicked: {
+                        listView.currentIndex = index;
+                        popup.close();
+                    }
+                }
+            }
         }
-
-        width: 40
-        height: width
-
-        visible: deletable
-
-        onClicked: deleted()
     }
 }

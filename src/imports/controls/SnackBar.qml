@@ -24,7 +24,7 @@ Rectangle {
 
     readonly property bool opened: d.opened
     property int duration: 2000
-    property bool fullWidth: FluidCore.Device.type === FluidCore.Device.phone || FluidCore.Device.type === FluidCore.Device.phablet
+    property bool fullWidth: FluidCore.Device.formFactor === FluidCore.Device.Phone || FluidCore.Device.formFactor === FluidCore.Device.Phablet
 
     signal clicked()
 

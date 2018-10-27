@@ -67,27 +67,6 @@ ItemDelegate {
     }
 
     contentItem: RowLayout {
-        implicitHeight: {
-            var height = 0;
-
-            if (subText != "") {
-                if (maximumLineCount == 2)
-                    height = 72;
-                else
-                    height = 88;
-            } else {
-                if (secondaryItem.showing)
-                    height = secondaryItem.childrenRect.height + (label.visible ? FluidControls.Units.largeSpacing * 2 : FluidControls.Units.smallSpacing * 2);
-                else
-                    height = 48;
-            }
-
-            var leftHeight = leftItem.childrenRect.height + FluidControls.Units.smallSpacing * 2;
-            var rightHeight = rightItem.childrenRect.height + FluidControls.Units.smallSpacing * 2;
-
-            return Math.max(height, leftHeight, rightHeight);
-        }
-
         spacing: FluidControls.Units.smallSpacing * 2
 
         Item {
@@ -97,8 +76,8 @@ ItemDelegate {
 
             objectName: "leftItem"
 
-            Layout.preferredWidth: showing ? 40 : 0
-            Layout.preferredHeight: width
+            Layout.preferredWidth: showing ? childrenRect.width : 0
+            Layout.preferredHeight: showing ? childrenRect.height : 0
             Layout.alignment: Qt.AlignCenter
 
             IconLabel {
@@ -169,14 +148,13 @@ ItemDelegate {
                 objectName: "subTextLabel"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: visible ? implicitHeight * maximumLineCount/lineCount : 0
 
                 color: Material.secondaryTextColor
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
 
                 visible: text != "" && !contentItem.showing
-                maximumLineCount: visible ? listItem.maximumLineCount - 1 : 0
+                maximumLineCount: visible ? listItem.maximumLineCount : 0
             }
 
             Item {
@@ -187,7 +165,7 @@ ItemDelegate {
                 objectName: "secondaryItem"
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: showing ? childrenRect.height + (label.visible ? FluidControls.Units.smallSpacing : FluidControls.Units.largeSpacing) : 0
+                Layout.preferredHeight: showing ? childrenRect.height + (FluidControls.Units.smallSpacing * 2) : 0
             }
         }
 
@@ -199,7 +177,7 @@ ItemDelegate {
             objectName: "rightItem"
 
             Layout.preferredWidth: showing ? childrenRect.width : 0
-            Layout.preferredHeight: parent.height
+            Layout.preferredHeight: showing ? childrenRect.height + (FluidControls.Units.smallSpacing * 2) : 0
         }
     }
 }

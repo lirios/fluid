@@ -19,12 +19,12 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Effects 1.0 as FluidEffects
 
-Rectangle {
-    id: control
+Item {
+    id: snackBar
 
-    readonly property bool opened: d.opened
+    readonly property bool opened: popup.visible
     property int duration: 2000
-    property bool fullWidth: FluidCore.Device.type === FluidCore.Device.phone || FluidCore.Device.type === FluidCore.Device.phablet
+    property bool fullWidth: FluidCore.Device.formFactor === FluidCore.Device.Phone || FluidCore.Device.formFactor === FluidCore.Device.Phablet
 
     signal clicked()
 
@@ -32,125 +32,104 @@ Rectangle {
         snackText.text = text;
         snackButton.text = buttonText;
         snackButton.visible = buttonText !== "";
-        d.opened = true;
-        timer.restart();
+        popup.open();
     }
 
     function close() {
-        d.opened = false;
-    }
-
-    states: [
-        State {
-            name: "fullWidth"
-            when: fullWidth
-
-            AnchorChanges {
-                target: control
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
-        },
-        State {
-            name: "normalWidth"
-            when: !fullWidth
-
-            PropertyChanges {
-                target: control
-                width: snackLayout.implicitWidth
-            }
-            AnchorChanges {
-                target: control
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
-    ]
-
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: d.opened ? 0 : -control.height
-
-    Behavior on anchors.bottomMargin {
-        NumberAnimation { duration: 300 }
-    }
-
-    radius: fullWidth ? 0 : 2
-    color: Material.background
-    height: snackLayout.implicitHeight
-    z: 10000
-
-    layer.enabled: !fullWidth
-    layer.effect: FluidEffects.Elevation {
-        elevation: 1
-    }
-
-    Material.theme: Material.Dark
-
-    QtObject {
-        id: d
-
-        property bool opened: false
+        popup.close();
     }
 
     Timer {
         id: timer
 
-        interval: control.duration
+        interval: snackBar.duration
+        running: popup.visible
 
-        onTriggered: {
-            if (!running)
-                d.opened = false;
-        }
+        onTriggered: popup.close()
     }
 
-    MouseArea {
-        anchors.fill: parent
-    }
+    Popup {
+        id: popup
 
-    RowLayout {
-        id: snackLayout
+        Material.theme: Material.Dark
 
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: control.fullWidth ? parent.left : undefined
-            right: control.fullWidth ? parent.right : undefined
+        modal: false
+        closePolicy: Popup.NoAutoClose
+
+        x: snackBar.fullWidth ? 0 : (snackBar.parent.width - width) / 2
+
+        width: snackBar.fullWidth ? snackBar.parent.width : snackLayout.implicitWidth
+        height: snackLayout.implicitHeight
+
+        enter: Transition {
+            NumberAnimation { property: "y"; from: snackBar.parent.height; to: snackBar.parent.height - popup.height }
         }
 
-        spacing: 0
-
-        Item {
-            width: 24
+        exit: Transition {
+            NumberAnimation { property: "y"; from: snackBar.parent.height - popup.height; to: snackBar.parent.height }
         }
 
-        Label {
-            id: snackText
+        background: Rectangle {
+            radius: snackBar.fullWidth ? 0 : 2
+            color: Material.background
 
-            verticalAlignment: Text.AlignVCenter
-            maximumLineCount: 2
-            wrapMode: Text.Wrap
-            elide: Text.ElideRight
-
-            Layout.fillWidth: true
-            Layout.minimumWidth: control.fullWidth ? -1 : 288
-            Layout.maximumWidth: control.fullWidth ? -1 : 568
-            Layout.preferredHeight: lineCount == 2 ? 80 : 48
+            layer.enabled: !snackBar.fullWidth
+            layer.effect: FluidEffects.Elevation {
+                elevation: 1
+            }
         }
 
-        Item {
-            id: middleSpacer
-            width: snackButton.text == "" ? 0 : (control.fullWidth ? 24 : 48)
-        }
+        contentItem: Item {
+            implicitWidth: snackLayout.implicitWidth
+            implicitHeight: snackLayout.implicitHeight
 
-        Button {
-            id: snackButton
+            RowLayout {
+                id: snackLayout
 
-            flat: true
-            onClicked: control.clicked()
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: snackBar.fullWidth ? parent.left : undefined
+                    right: snackBar.fullWidth ? parent.right : undefined
+                }
 
-            Material.foreground: Material.accentColor
-        }
+                spacing: 0
 
-        Item {
-            width: 24
+                Item {
+                    width: 24
+                }
+
+                Label {
+                    id: snackText
+
+                    verticalAlignment: Text.AlignVCenter
+                    maximumLineCount: 2
+                    wrapMode: Text.Wrap
+                    elide: Text.ElideRight
+
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: snackBar.fullWidth ? -1 : 288
+                    Layout.maximumWidth: snackBar.fullWidth ? -1 : 568
+                    Layout.preferredHeight: lineCount == 2 ? 80 : 48
+                }
+
+                Item {
+                    id: middleSpacer
+                    width: snackButton.text == "" ? 0 : (snackBar.fullWidth ? 24 : 48)
+                }
+
+                Button {
+                    id: snackButton
+
+                    flat: true
+                    onClicked: snackBar.clicked()
+
+                    Material.foreground: Material.accentColor
+                }
+
+                Item {
+                    width: 24
+                }
+            }
         }
     }
 }

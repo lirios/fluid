@@ -18,37 +18,7 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0
 
-/*!
-   \qmltype Sidebar
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
 
-   \brief A sidebar component for use in adaptive layouts
-
-   To use, simply add an instance to your code, and anchor other components to it.
-
-   To show or hide, set the expanded property.
-
-   By default, the sidebar has a flickable built in, and whatever contents are added
-   will be placed in the flickable. When you want this disabled, or want to fill the
-   entire sidebar, set the autoFill property to false.
-
-   Examples:
-   \code
-   Item {
-       property bool wideAspect: width > Units.gu(80)
-
-       Sidebar {
-           expanded: wideAspect
-
-           // Anchoring is automatic
-       }
-   }
-   \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/patterns/navigation-drawer.html}{Material Design guidelines}.
- */
 Pane {
     id: sidebar
 
@@ -57,24 +27,9 @@ Pane {
     */
     default property alias contents: contents.data
 
-    /*!
-       The text displayed for the action.
-     */
     property int edge: Qt.LeftEdge
-
-    /*!
-       Show or hide the sidebar.
-     */
     property bool expanded: true
-
-    /*!
-       Flick automatically.
-     */
     property bool autoFlick: true
-
-    /*!
-       The text displayed as header.
-     */
     property alias header: headerItem.text
 
     Behavior on anchors.leftMargin {

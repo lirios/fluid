@@ -18,24 +18,9 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 
-/*!
-   \qmltype Subheader
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
-
-   \brief Subheaders are special list tiles that delineate distinct sections of a list or grid list.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/subheaders.html}{Material Design guidelines}.
- */
 ItemDelegate {
     id: listItem
 
-    /*!
-        \qmlproperty color textColor
-
-        Text color.
-    */
     property alias textColor: label.color
 
     width: parent ? parent.width : undefined

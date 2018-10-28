@@ -20,79 +20,21 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-    \qmltype NavigationDrawer
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief The navigation drawer slides in from the left and is a common pattern in apps.
-
-    This is a temporary navigation drawer: it can toggle open or closed.
-    Closed by default, this type of navigation drawer opens temporarily above all
-    other content until a section is selected or the overlay is tapped.
-
-    NavigationDrawer is recommended on phones and tablets.
-
-    This navigation drawer comes with no contents, therefore it's completely customizable.
-
-    \code
-    import Fluid.Controls 2.0 as FluidControls
-
-    FluidControls.ApplicationWindow {
-        width: 400
-        height: 400
-        visible: true
-
-        Button {
-            text: "Open"
-            onClicked: drawer.open()
-        }
-
-        FluidControls.NavigationDrawer {
-            topContent: Image {
-                source: "background.png"
-
-                Layout.fillWidth: true
-                Layout.preferredHeight: 200
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("content/inbox")
-                text: "Inbox"
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("content/archive")
-                text: "Archive"
-            }
-
-            FluidControls.ListItem {
-                icon.source: FluidControls.Utils.iconUrl("action/settings")
-                text: "Settings"
-                showDivider: true
-            }
-        }
-    }
-    \endcode
-
-    For more information you can read the
-    \l{https://material.io/guidelines/patterns/navigation-drawer.html}{Material Design guidelines}.
-*/
 Drawer {
     id: drawer
 
-    /*!
-        \qmlproperty list<Item> topContent
-
-        The items added to this list will be displayed on top of the contents.
-    */
-    property alias topContent: topContent.data
+    property alias topContent: topItem.data
 
     /*!
         \internal
     */
-    default property alias contents: mainLayout.data
+    default property alias contents: mainitem.data
 
+    y: {
+        if (!modal && ApplicationWindow && ApplicationWindow.header)
+            return ApplicationWindow.header.height;
+        return 0;
+    }
     width: {
         switch (FluidCore.Device.formFactor) {
         case FluidCore.Device.Phone:
@@ -107,12 +49,17 @@ Drawer {
     height: {
         if (ApplicationWindow)
             return (ApplicationWindow.header ? ApplicationWindow.header.height : 0) +
-                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0);
+                    (ApplicationWindow.contentItem ? ApplicationWindow.contentItem.height : 0) - y;
         else if (Window)
-            return Window.contentItem;
+            return Window.contentItem - y;
         else
-            return parent.height;
+            return parent.height - y;
     }
+
+    modal: FluidCore.Device.isMobile
+    interactive: FluidCore.Device.isMobile
+    position: FluidCore.Device.isMobile ? 0.0 : 1.0
+    visible: !FluidCore.Device.isMobile
 
     padding: 0
 
@@ -124,21 +71,35 @@ Drawer {
         anchors.fill: parent
         padding: 0
 
-        ColumnLayout {
-            id: mainLayout
+        Item {
+            id: topItem
 
-            anchors.fill: parent
-            spacing: 0
+            anchors.left: parent.left
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: drawer.padding
 
-            ColumnLayout {
-                id: topContent
+            height: childrenRect.height
+            visible: height > 0
 
-                spacing: 0
-                visible: children.length > 0
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
+            }
+        }
 
-                Layout.margins: drawer.padding
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+        Item {
+            id: mainitem
+
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.margins: drawer.padding
+
+            height: pane.height - topItem.height
+            visible: children.length > 0
+
+            Behavior on height {
+                NumberAnimation { duration: FluidControls.Units.shortDuration }
             }
         }
     }

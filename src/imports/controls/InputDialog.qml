@@ -17,34 +17,10 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-    \qmltype InputDialog
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Input dialogs ask the user to input data with certain constraints.
-
-    The dialog is automatically accepted when the Return or Enter key is pressed
-    and the input in an acceptable state.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/dialogs.html}{Material Design guidelines}.
-*/
 Dialog {
     id: dialog
 
-    /*!
-        \qmlproperty TextField textField
-
-        Text field.
-    */
     property alias textField: textField
-
-    /*!
-        \qmlproperty string text
-
-        Dialog text.
-    */
     property alias text: dialogLabel.text
 
     focus: true

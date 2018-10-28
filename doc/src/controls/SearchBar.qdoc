@@ -1,0 +1,124 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Magnus Groß <magnus.gross21@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+  \qmltype SearchBar
+  \inqmlmodule Fluid.Controls
+  \ingroup fluidcontrols
+
+  \brief Provides a searchbar, that supports autocompletion and displays search results using cards.
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::SearchBar::searchText
+
+    The current search text in the search bar typed in so far.
+*/
+
+/*!
+    \qmlproperty model Fluid.Controls::SearchBar::searchSuggestions
+
+    The suggestions to display.
+
+    \sa SearchBar::suggestionTextRole
+    \sa SearchBar::suggestionDelegate
+*/
+
+/*!
+    \qmlproperty Component Fluid.Controls::SearchBar::suggestionDelegate
+
+    The delegate item for the suggestion list view.
+
+    \sa SearchBar::searchSuggestions
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::SearchBar::suggestionTextRole
+
+    The model type that contains the text to display in the suggestion delegate
+
+    \sa SearchBar::searchSuggestions
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::SearchBar::searchPlaceHolder
+
+    The string to display when the search field is empty
+*/
+
+/*!
+    \qmlproperty int Fluid.Controls::SearchBar::cardWidth
+
+    The width of the search card. By default the search bar centers in the parent with a margin of 64 each side
+*/
+
+/*!
+    \qmlproperty int Fluid.Controls::SearchBar::suggestionsHeight
+
+    The viewable area of the suggestions list until it begins scrolling.
+*/
+
+/*!
+    \qmlproperty color Fluid.Controls::SearchBar::waveColor
+
+    The background color of the expanded search bar.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::SearchBar::persistent
+
+    Whether the SearchBar is persistent or expandable
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::SearchBar::expanded
+
+    Whether the SearchBar is currently open
+*/
+
+/*!
+    \qmlproperty font Fluid.Controls::SearchBar::searchTextFont
+
+    The font of text in search TextInput box
+
+    \since Fluid.Controls 1.1
+*/
+
+/*!
+    \qmlproperty model Fluid.Controls::SearchBar::searchResults
+
+    The model containing the search results
+*/
+
+/*!
+    \qmlsignal Fluid.Controls::SearchBar::search(string query)
+
+    Is emitted, when the user searches for a query. The \a query parameter contains the search query as string. Use this signal to provide search results.
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::SearchBar::open()
+
+    Opens the search bar
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::SearchBar::close()
+
+    Closes the search bar
+*/

@@ -13,9 +13,10 @@
  */
 
 import QtQuick 2.10
+import QtQuick.Controls.Material 2.3
 
 Rectangle {
-    // Default styled rectangle is red to spot errors
-    // related to how styles are loaded
-    color: "red"
+    color: Material.background
+
+    Material.theme: index == 0 ? Material.Light : Material.Dark
 }

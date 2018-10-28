@@ -15,19 +15,19 @@
 #include <QtQml/qqml.h>
 
 #include "coreplugin.h"
+#include "coreutils.h"
 #include "clipboard.h"
 #include "device.h"
 #include "dateutils.h"
 #include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
-#include "utils.h"
 
 static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine);
     Q_UNUSED(jsEngine);
 
-    return new Utils();
+    return new CoreUtils();
 }
 
 
@@ -69,5 +69,5 @@ void FluidCorePlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<DateUtils>(uri, 1, 0, "DateUtils", dateUtilsProvider);
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device", deviceProvider);
     qmlRegisterSingletonType<StandardPaths>(uri, 1, 0, "StandardPaths", standardPathsProvider);
-    qmlRegisterSingletonType<Utils>(uri, 1, 0, "Utils", utilsProvider);
+    qmlRegisterSingletonType<CoreUtils>(uri, 1, 0, "Utils", utilsProvider);
 }

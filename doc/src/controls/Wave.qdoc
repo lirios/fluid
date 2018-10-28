@@ -1,0 +1,88 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype Wave
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Provides a wave animation for transitioning between views of content.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/motion/material-motion.html#material-motion-how-does-material-move}{Material Design guidelines}.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::Wave::open
+
+    This property holds whether the wave is open.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::size
+
+    This property holds the current size of the wave.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::initialX
+
+    This property holds the horizontal center of the wave.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::initialY
+
+    This property holds the vertical center of the wave.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::abstractWidth
+
+    This property holds the abstract width of the wave.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::abstractHeight
+
+    This property holds the abstract height of the wave.
+*/
+
+/*!
+    \qmlproperty real Fluid.Controls::Wave::diameter
+
+    This property holds the diameter of the completely open wave.
+*/
+
+/*!
+    \qmlsignal void Fluid.Controls::Wave::finished(bool open)
+
+    This signal is emitted, when the wave has finished opening or closing.
+    \a open defines, whether the wave was being opened or closed.
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::Wave::openWave(real x, real y)
+
+    Opens the wave centering the wave at (\a x, \a y).
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::Wave::closeWave(real x, real y)
+
+    Closes the wave centering the wave at (\a x, \a y).
+*/

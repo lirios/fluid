@@ -18,96 +18,38 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-  \qmltype SearchBar
-  \inqmlmodule Fluid.Controls
-  \ingroup fluidcontrols
-
-  \brief Provides a searchbar, that supports autocompletion and displays search results using cards.
-*/
 Item {
     id: searchBar
 
-    /*!
-        \qmlproperty string searchText
-
-        The current search text in the search bar typed in so far.
-    */
     property alias searchText: searchTextField.text
 
-    /*!
-        \qmlproperty any model
-
-        The suggestions to display.
-
-        \sa SearchBar::suggestionTextRole
-        \sa SearchBar::suggestionDelegate
-    */
     property alias searchSuggestions: suggestionsListView.model
 
-    /*!
-      The delegate item for the suggestion list view.
-      \sa searchSuggestions
-    */
     property alias suggestionDelegate: suggestionsListView.delegate
 
-    /*!
-      The model type that contains the text to display in the suggestion delegate
-      \sa searchSuggestions
-    */
     property string suggestionTextRole: "text"
 
-    /*!
-      The string to display when the search field is empty
-    */
     property string searchPlaceHolder: qsTr("Search")
 
-    /*!
-      The width of the search card. By default the search bar centers in the parent with a margin of 64 each side
-    */
     property int cardWidth: searchBar.width - Units.largeSpacing
 
-    /*!
-      The viewable area of the suggestions list until it begins scrolling.
-    */
     property int suggestionsHeight: 300
 
-    /*!
-      The background color of the expanded search bar.
-    */
     property color waveColor: Material.accentColor
 
-    /*!
-      Whether the SearchBar is persistent or expandable
-    */
     property bool persistent: false
 
-    /*!
-      Whether the SearchBar is currently open
-    */
     readonly property alias expanded: searchWave.open
 
-    /*!
-      The model containing the search results
-    */
     property var searchResults: ListModel {}
 
-    /*!
-      Is emitted, when the user searches for a query. The \a query parameter contains the search query as string. Use this signal to provide search results.
-    */
     signal search(string query)
 
-    /*!
-      Opens the search bar
-    */
     function open() {
         searchWave.openWave(openSearchButton.x, openSearchButton.y);
         searchTextField.forceActiveFocus();
     }
 
-    /*!
-      Closes the search bar
-    */
     function close() {
 
         if (persistent)

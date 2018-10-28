@@ -2,7 +2,7 @@ module Fluid.Controls.Private
 plugin fluidcontrolsprivateplugin
 classname FluidControlsPrivatePlugin
 depends QtQuick.Controls 2.0
-depends Fluid.Template 1.0
+depends Fluid.Templates 1.0
 typeinfo plugins.qmltypes
 
 DateSelector 1.0 DateSelector.qml

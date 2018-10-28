@@ -10,7 +10,7 @@ case $1 in
 ;;
 esac
 
-cmd="${QMLPLUGINDUMP} -noinstantiate -notrelocatable -platform minimal"
+cmd="${QMLPLUGINDUMP} -v -noinstantiate -notrelocatable -platform minimal"
 curpath=`dirname $0`
 rootpath=`dirname $(readlink -e $curpath)`
 
@@ -24,7 +24,7 @@ function update() {
 }
 
 update Fluid.Core 1.0 core
-update Fluid.Controls 1.0 controls
+update Fluid.Controls 1.1 controls
 update Fluid.Controls.Private 1.0 controls-private
 update Fluid.Effects 1.0 effects
 update Fluid.Layouts 1.0 layouts

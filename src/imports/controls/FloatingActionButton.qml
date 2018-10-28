@@ -21,23 +21,7 @@ import Fluid.Core 1.0 as FluidCore
 import Fluid.Controls 1.0 as FluidControls
 import Fluid.Effects 1.0 as FluidEffects
 
-/*!
-    \qmltype FloatingActionButton
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
 
-    \brief A floating action button.
-
-    A floating action button represents the primary action of the current page
-    and is used for a promoted action.
-
-    It is a push button with rounded corners and an icon in the center.
-
-    \snippet fluidcontrols-fab.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/buttons-floating-action-button.html}{Material Design guidelines}.
-*/
 RoundButton {
     id: control
 
@@ -49,20 +33,6 @@ RoundButton {
     topPadding: 6
     bottomPadding: 6
 
-    /*!
-        \qmlproperty bool mini
-
-        Floating action button comes in two sizes:
-
-        \list
-            \li \c Default (56x56 pixels): default size for most use cases
-            \li \c Mini (40x40 pixels): only used to create visual continuity with other screen elements
-        \endlist
-
-        This property holds whether the floating action button size is \c Mini or not.
-
-        By default it is \c true if screen width is less than 460 pixels.
-    */
     property bool mini: Screen.width < 460
 
     Material.elevation: 1
@@ -71,8 +41,7 @@ RoundButton {
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
-        x: control.leftPadding
-        y: control.topPadding
+        anchors.centerIn: parent
 
         color: !control.enabled ? control.Material.buttonDisabledColor
                                 : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor

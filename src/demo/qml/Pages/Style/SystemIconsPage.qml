@@ -16,7 +16,7 @@ import QtQuick 2.10
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
-import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls 1.1 as FluidControls
 
 Page {
     header: Row {
@@ -39,50 +39,69 @@ Page {
         anchors.fill: parent
         clip: true
 
-        GridLayout {
+        Column {
             anchors.fill: parent
-            columns: (scrollView.width * 0.8) / 48
-            columnSpacing: 16
-            rowSpacing: 16
+            anchors.margins: 16
 
-            FluidControls.Icon {
-                name: "text-editor-symbolic"
-                size: 48
+            Label {
+                id: warningLabel
+                width: parent.width
+                text: qsTr("This feature might not be available on your platform, as it depends on " +
+                           "the installation of a freedesktop.org icon theme.")
+                wrapMode: Label.WordWrap
+                visible: Qt.platform.os !== "linux"
             }
 
-            FluidControls.Icon {
-                name: "weather-few-clouds-symbolic"
-                size: 48
+            Item {
+                width: parent.width
+                height: 16
+                visible: warningLabel.visible
             }
 
-            FluidControls.Icon {
-                name: "system-software-install-symbolic"
-                size: 48
-            }
+            GridLayout {
+                columns: (scrollView.width * 0.8) / 48
+                columnSpacing: 16
+                rowSpacing: 16
 
-            FluidControls.Icon {
-                name: "system-users-symbolic"
-                size: 48
-            }
+                FluidControls.Icon {
+                    name: "text-editor-symbolic"
+                    size: 48
+                }
 
-            FluidControls.Icon {
-                name: "accessories-calculator"
-                size: 48
-            }
+                FluidControls.Icon {
+                    name: "weather-few-clouds-symbolic"
+                    size: 48
+                }
 
-            FluidControls.Icon {
-                name: "accessories-character-map"
-                size: 48
-            }
+                FluidControls.Icon {
+                    name: "system-software-install-symbolic"
+                    size: 48
+                }
 
-            FluidControls.Icon {
-                name: "accessories-dictionary"
-                size: 48
-            }
+                FluidControls.Icon {
+                    name: "system-users-symbolic"
+                    size: 48
+                }
 
-            FluidControls.Icon {
-                name: "accessories-text-editor"
-                size: 48
+                FluidControls.Icon {
+                    name: "accessories-calculator"
+                    size: 48
+                }
+
+                FluidControls.Icon {
+                    name: "accessories-character-map"
+                    size: 48
+                }
+
+                FluidControls.Icon {
+                    name: "accessories-dictionary"
+                    size: 48
+                }
+
+                FluidControls.Icon {
+                    name: "accessories-text-editor"
+                    size: 48
+                }
             }
         }
     }

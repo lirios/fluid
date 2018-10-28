@@ -27,6 +27,8 @@ LiriQmlPlugin {
     Group {
         name: "QML"
         files: ["qmldir", "*.qml", "*.qmltypes"]
+        qbs.install: true
+        qbs.installDir: FileInfo.joinPaths(lirideployment.qmlDir, pluginPath)
     }
 
     Group {

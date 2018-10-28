@@ -15,20 +15,6 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 
-/*!
-    \qmltype HeadlineLabel
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Text label with standard font and styling suitable to headlines.
-
-    Text label for the Material Design headline text style.
-
-    \snippet fluidcontrols-headinglabel.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/style/typography.html}{Material Design guidelines}.
-*/
 Label {
     font.pixelSize: 24
     lineHeight: 32.0

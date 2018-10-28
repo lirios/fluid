@@ -20,8 +20,8 @@ Project {
         filePath: "fluid/fluid.qbs"
 
         Properties {
-            documentationEnabled: false
-            demoEnabled: false
+            withDocumentation: false
+            withDemo: false
             autotestEnabled: false
         }
     }

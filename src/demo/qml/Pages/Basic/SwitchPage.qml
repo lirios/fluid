@@ -15,86 +15,51 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import Fluid.Controls 1.0
-import "../.."
+import Fluid.Controls 1.1
+import "../.." as Components
 
-Flickable {
-    clip: true
-    contentHeight: Math.max(layout.implicitHeight, height)
+Components.StyledPageTwoColumns {
+    leftColumn: ColumnLayout {
+        anchors.centerIn: parent
 
-    ScrollBar.vertical: ScrollBar {}
+        TitleLabel {
+            text: qsTr("Enabled")
 
-    ColumnLayout {
-        id: layout
-        anchors.fill: parent
+            Layout.alignment: Qt.AlignHCenter
+        }
 
-        Repeater {
-            model: 2
+        Switch {
+            checked: true
+            text: checked ? qsTr("On") : qsTr("Off")
+        }
 
-            StyledRectangle {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumWidth: grid.width + 80
-                Layout.minimumHeight: grid.height + 80
+        Switch {
+            checked: false
+            checkable: false
+            text: qsTr("Off")
+        }
+    }
 
-                GridLayout {
-                    id: grid
-                    anchors.centerIn: parent
-                    columns: 3
-                    rows: 3
+    rightColumn: ColumnLayout {
+        anchors.centerIn: parent
 
-                    // Row 1
+        TitleLabel {
+            text: qsTr("Disabled")
 
-                    Item {
-                        width: 1
-                        height: 1
-                    }
+            Layout.alignment: Qt.AlignHCenter
+        }
 
-                    TitleLabel {
-                        text: qsTr("Enabled")
+        Switch {
+            enabled: false
+            checked: true
+            text: checked ? qsTr("On") : qsTr("Off")
+        }
 
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-
-                    TitleLabel {
-                        text: qsTr("Disabled")
-
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-
-                    // Row 2
-
-                    Label {
-                        text: qsTr("On")
-                    }
-
-                    Switch {
-                        checked: true
-                        text: qsTr("Switch")
-                    }
-
-                    Switch {
-                        checked: true
-                        enabled: false
-                        text: qsTr("Switch")
-                    }
-
-                    // Row 3
-
-                    Label {
-                        text: qsTr("Off")
-                    }
-
-                    Switch {
-                        text: qsTr("Switch")
-                    }
-
-                    Switch {
-                        text: qsTr("Switch")
-                        enabled: false
-                    }
-                }
-            }
+        Switch {
+            enabled: false
+            checked: false
+            checkable: false
+            text: qsTr("Off")
         }
     }
 }

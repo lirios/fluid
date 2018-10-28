@@ -1,0 +1,39 @@
+version: '{build}'
+pull_requests:
+  do_not_increment_build_number: true
+configuration: Release
+branches:
+  except:
+  - /^(?i:continuous)$/
+skip_tags: true
+environment:
+  matrix:
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    QT_PROFILE: msvc2015
+    QTDIR: C:\Qt\5.10.1\msvc2015
+    QBS_PROFILE: MSVC2015-x86
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    QT_PROFILE: msvc2017_64
+    QTDIR: C:\Qt\5.10.1\msvc2017_64
+    QBS_PROFILE: MSVC2017-x86_x64
+init:
+- set PATH=%QTDIR%\bin;%PATH%
+install:
+- choco install -y qbs --version 1.11.0
+before_build:
+- qbs setup-toolchains --detect
+- qbs setup-qt %QTDIR%\bin\qmake.exe appveyor-qt5
+- qbs config profiles.appveyor-qt5.baseProfile %QBS_PROFILE%
+- qbs config defaultProfile appveyor-qt5
+- qbs config preferences.qbsSearchPaths %cd%/fluid/qbs/shared
+build_script:
+- git submodule update --init --recursive
+- qbs -d build --all-products config:release project.autotestEnabled:false project.useSystemQbsShared:false project.deploymentEnabled:false project.withDocumentation:false
+- dir build\release\install-root
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#events'
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true

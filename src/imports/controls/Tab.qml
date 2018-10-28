@@ -15,21 +15,10 @@
 
 import QtQuick 2.10
 
-/*!
-   \qmltype Tab
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
 
-   \brief Tab for tabbed pages.
-
-   Tab of a \l TabbedPage.
- */
 Item {
     id: tab
 
-    /*!
-        This property holds the tab icon information.
-     */
     property QtObject icon: QtObject {
         property string name
         property url source
@@ -37,14 +26,6 @@ Item {
         property int height: 24
         property color color: "transparent"
     }
-
-    /*!
-       The title of this tab.
-     */
     property string title
-
-    /*!
-        Controls whether a close button will be shown for this tab.
-     */
     property bool canRemove: false
 }

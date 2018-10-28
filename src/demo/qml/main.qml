@@ -16,10 +16,9 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
-import QtQuick.Controls.Universal 2.3
 import QtQuick.Layouts 1.3
 import Fluid.Core 1.0 as FluidCore
-import Fluid.Controls 1.0 as FluidControls
+import Fluid.Controls 1.1 as FluidControls
 
 FluidControls.ApplicationWindow {
     id: window
@@ -36,55 +35,95 @@ FluidControls.ApplicationWindow {
     Material.primary: Material.LightBlue
     Material.accent: Material.Blue
 
-    Universal.accent: Universal.Cobalt
-
-    FluidControls.NavigationListView {
+    FluidControls.NavigationDrawer {
         id: navDrawer
 
-        topContent: Image {
-            source: FluidCore.Device.isMobile ? "qrc:/images/materialbg.png" : ""
+        readonly property bool mobileAspect: window.width < 500
 
-            Layout.fillWidth: true
-            Layout.preferredHeight: FluidCore.Device.isMobile ? 200 : window.header.height
+        modal: mobileAspect
+        interactive: mobileAspect
+        position: mobileAspect ? 0.0 : 1.0
+        visible: !mobileAspect
+
+        topContent: Image {
+            source: navDrawer.mobileAspect ? "qrc:/images/materialbg.png" : ""
+            width: parent.width
+            height: navDrawer.mobileAspect ? 200 : 0
         }
 
-        actions: [
-            FluidControls.Action {
-                text: qsTr("Action 1")
-                icon.source: FluidControls.Utils.iconUrl("action/info")
-                onTriggered: console.log("action1 triggered")
-            },
-            FluidControls.Action {
-                text: qsTr("Action 2")
-                icon.source: FluidControls.Utils.iconUrl("action/info")
-                hasDividerAfter: true
-                onTriggered: console.log("action2 triggered")
-            },
-            FluidControls.Action {
-                text: qsTr("Action 3")
-                icon.source: FluidControls.Utils.iconUrl("action/info")
-                onTriggered: console.log("action3 triggered")
-            },
-            FluidControls.Action {
-                text: qsTr("Action 4")
-                icon.source: FluidControls.Utils.iconUrl("action/info")
-                onTriggered: console.log("action4 triggered")
-            },
-            FluidControls.Action {
-                text: qsTr("Action 5")
-                icon.source: FluidControls.Utils.iconUrl("action/info")
-                visible: false
-                onTriggered: console.log("action5 triggered")
+        ScrollView {
+            anchors.fill: parent
+
+            clip: true
+
+            ListView {
+                id: navListView
+                model: ListModel {
+                    ListElement { category: qsTr("Basic"); title: qsTr("Button"); source: "qrc:/qml/Pages/Basic/ButtonPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("CheckBox"); source: "qrc:/qml/Pages/Basic/CheckBoxPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("RadioButton"); source: "qrc:/qml/Pages/Basic/RadioButtonPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("Switch"); source: "qrc:/qml/Pages/Basic/SwitchPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("ProgressBar"); source: "qrc:/qml/Pages/Basic/ProgressBarPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("BusyIndicator"); source: "qrc:/qml/Pages/Basic/BusyIndicatorPage.qml" }
+                    ListElement { category: qsTr("Basic"); title: qsTr("Slider"); source: "qrc:/qml/Pages/Basic/SliderPage.qml" }
+                    ListElement { category: qsTr("Layout"); title: qsTr("AutomaticGrid"); source: "qrc:/qml/Pages/Layouts/AutomaticGridPage.qml" }
+                    ListElement { category: qsTr("Layout"); title: qsTr("ColumnFlow"); source: "qrc:/qml/Pages/Layouts/ColumnFlowPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("BottomSheet"); source: "qrc:/qml/Pages/Controls/BottomSheetPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Card"); source: "qrc:/qml/Pages/Controls/CardPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Chip"); source: "qrc:/qml/Pages/Controls/ChipPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Dialogs"); source: "qrc:/qml/Pages/Controls/DialogsPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("DatePicker"); source: "qrc:/qml/Pages/Controls/DatePickerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("DateTimePicker"); source: "qrc:/qml/Pages/Controls/DateTimePickerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("FAB"); source: "qrc:/qml/Pages/Controls/ActionButtonPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("ListItem"); source: "qrc:/qml/Pages/Controls/ListItemPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("NavigationDrawer"); source: "qrc:/qml/Pages/Controls/NavDrawerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("NavigationListView"); source: "qrc:/qml/Pages/Controls/NavigationListViewPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Overlay"); source: "qrc:/qml/Pages/Controls/OverlayPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Placeholder"); source: "qrc:/qml/Pages/Controls/PlaceholderPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Search"); source: "qrc:/qml/Pages/Controls/SearchPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("SnackBar"); source: "qrc:/qml/Pages/Controls/SnackBarPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("TimePicker"); source: "qrc:/qml/Pages/Controls/TimePickerPage.qml" }
+                    ListElement { category: qsTr("Controls"); title: qsTr("Wave"); source: "qrc:/qml/Pages/Controls/WavePage.qml" }
+                    ListElement { category: qsTr("Style"); title: qsTr("Palette"); source: "qrc:/qml/Pages/Style/PalettePage.qml" }
+                    ListElement { category: qsTr("Style"); title: qsTr("Typography"); source: "qrc:/qml/Pages/Style/TypographyPage.qml" }
+                    ListElement { category: qsTr("Style"); title: qsTr("System Icons"); source: "qrc:/qml/Pages/Style/SystemIconsPage.qml" }
+                    ListElement { category: qsTr("Style"); title: qsTr("Material Icons"); source: "qrc:/qml/Pages/Style/IconsPage.qml" }
+                }
+                currentIndex: -1
+                section.property: "category"
+                section.criteria: ViewSection.FullString
+                section.delegate: FluidControls.Subheader {
+                    text: section
+                    width: parent.width
+
+                    FluidControls.ThinDivider {
+                        width: parent.width
+                    }
+                }
+                delegate: FluidControls.ListItem {
+                    text: model.title
+                    highlighted: ListView.isCurrentItem
+                    onClicked: {
+                        navListView.currentIndex = index;
+                        stackView.push(model.source);
+                        if (navDrawer.modal)
+                            navDrawer.close();
+                    }
+                }
             }
-        ]
+        }
     }
 
-    initialPage: FluidControls.TabbedPage {
+    initialPage: FluidControls.Page {
         title: window.title
+
+        x: navDrawer.modal ? 0 : navDrawer.position * navDrawer.width
+        width: window.width - x
 
         leftAction: FluidControls.Action {
             icon.source: FluidControls.Utils.iconUrl("navigation/menu")
-            onTriggered: navDrawer.open()
+            visible: navDrawer.modal
+            onTriggered: navDrawer.visible ? navDrawer.close() : navDrawer.open()
         }
 
         actions: [
@@ -123,9 +162,14 @@ FluidControls.ApplicationWindow {
             }
         ]
 
-        BasicComponents {}
-        LayoutComponents {}
-        Controls {}
-        Style {}
+        StackView {
+            id: stackView
+            anchors.fill: parent
+            initialItem: FluidControls.Placeholder {
+                icon.source: FluidControls.Utils.iconUrl("content/filter_list")
+                text: qsTr("Select a demo")
+                subText: qsTr("At the moment there is no demo selected from the navigration drawer, choose one and play with it.")
+            }
+        }
     }
 }

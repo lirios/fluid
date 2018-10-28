@@ -1,0 +1,111 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype Chip
+    \inherits QtQuick.Controls::AbstractButton
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+    \since Fluid.Controls 1.1
+
+    \brief Chips represent complex entities in small blocks, such as a contact.
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/chips.html}{Material Design guidelines}.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::Chip::expandable
+
+    This property holds whether this chip can expand to show
+    more information or options.
+
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::delegate
+    \sa Fluid.Controls::Chip::selectedItem
+*/
+
+/*!
+    \qmlproperty model Fluid.Controls::Chip::model
+
+    Expandable chips show a popup with a list view when clicked.
+
+    This property holds the model providing data for said list view.
+
+    The following roles are expected to be present:
+
+    \list
+      \li label - Description of the option
+      \li value - Actual value of the option
+      \li imageSource - URL with the image source for the option
+    \endlist
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::delegate
+    \sa Fluid.Controls::Chip::selectedItem
+*/
+
+/*!
+    \qmlproperty Component Fluid.Controls::Chip::delegate
+
+    Expandable chips show a popup with a list view when clicked.
+
+    The delegate provides a template defining each item instantiated
+    by the list view.
+
+    By default the delegate is a Fluid.Controls::ListItem.
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::selectedItem
+*/
+
+/*!
+    \qmlproperty Component Fluid.Controls::Chip::selectedItem
+    \readonly
+
+    Expandable chips show a popup with a list view when clicked.
+
+    This property holds the currently selected item.
+
+    By default the delegate is a Fluid.Controls::ListItem and the
+    selected item contains the following properties:
+
+    \list
+      \li string label - Description of the option
+      \li string value - Actual value of the option
+      \li url imageSource - URL with the image source for the option
+    \endlist
+
+    \sa Fluid.Controls::Chip::expandable
+    \sa Fluid.Controls::Chip::model
+    \sa Fluid.Controls::Chip::delegate
+*/
+
+
+/*!
+    \qmlproperty bool Fluid.Controls::Chip::deletable
+
+    This property holds whether the chip can be deleted.
+    The default value is \c false.
+*/
+
+/*!
+    \qmlsignal void Fluid.Controls::Chip::deleted()
+
+    Emitted when the user wants to delete the chip.
+*/

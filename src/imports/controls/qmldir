@@ -2,9 +2,10 @@ module Fluid.Controls
 plugin fluidcontrolsplugin
 classname FluidControlsPlugin
 depends QtQuick.Controls 2.0
-depends Fluid.Template 1.0
+depends Fluid.Templates 1.0
 typeinfo plugins.qmltypes
 
+# 1.0
 AbstractCard 1.0 AbstractCard.qml
 Action 1.0 Action.qml
 AlertDialog 1.0 AlertDialog.qml
@@ -55,3 +56,13 @@ TitleLabel 1.0 TitleLabel.qml
 ToolButton 1.0 ToolButton.qml
 singleton Units 1.0 Units.qml
 Wave 1.0 Wave.qml
+
+# 1.1
+ApplicationWindow 1.1 ApplicationWindow11.qml
+AppToolBar 1.1 AppToolBar11.qml
+AppBar 1.1 AppBar11.qml
+Chip 1.1 Chip.qml
+ContactChip 1.1 ContactChip.qml
+Page 1.1 Page11.qml
+PageSidebar 1.1 PageSidebar.qml
+SearchBar 1.1 SearchBar11.qml

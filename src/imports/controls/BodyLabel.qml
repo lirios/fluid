@@ -16,31 +16,7 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3
 import Fluid.Core 1.0 as FluidCore
 
-/*!
-    \qmltype BodyLabel
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Text label with standard font and styling suitable to body text.
-
-    Text label for the Material Design body text style.
-
-    \snippet fluidcontrols-bodylabel.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/style/typography.html}{Material Design guidelines}.
-*/
 Label {
-    /*!
-        \qmlproperty int level
-
-        This property holds the label level that controls
-        font style and size.
-
-        It can be either 1 or 2.
-
-        Default value is 1.
-    */
     property int level: 1
 
     font.pixelSize: FluidCore.Device.isMobile ? 14 : 13

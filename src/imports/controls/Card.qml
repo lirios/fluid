@@ -14,17 +14,5 @@
 
 import Fluid.Templates 1.0 as FluidTemplates
 
-/*!
-    \qmltype Card
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Cards display content composed of different elements.
-
-    \snippet fluidcontrols-card.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/cards.html}{Material Design guidelines}.
-*/
 FluidTemplates.Card {
 }

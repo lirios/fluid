@@ -15,116 +15,84 @@
 import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.3
-import Fluid.Controls 1.0
-import "../.."
+import Fluid.Controls 1.1
+import "../.." as Components
 
-Flickable {
-    clip: true
-    contentHeight: Math.max(layout.implicitHeight, height)
+Components.StyledPageTwoColumns {
+    leftColumn: ColumnLayout {
+        anchors.centerIn: parent
 
-    ScrollBar.vertical: ScrollBar {}
+        TitleLabel {
+            text: qsTr("Enabled")
 
-    ColumnLayout {
-        id: layout
-        anchors.fill: parent
+            Layout.alignment: Qt.AlignHCenter
+        }
 
-        Repeater {
-            model: 2
+        Button {
+            text: qsTr("Button")
+        }
 
-            StyledRectangle {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumWidth: grid.width + 80
-                Layout.minimumHeight: grid.height + 80
+        Button {
+            text: qsTr("Checked")
+            checkable: false
+            checked: true
+        }
 
-                GridLayout {
-                    id: grid
-                    anchors.centerIn: parent
-                    columns: 2
-                    rows: 6
+        Button {
+            text: qsTr("Flat")
+            flat: true
+        }
 
-                    // Row 1
+        Button {
+            text: qsTr("Highlighted")
+            highlighted: true
+        }
 
-                    TitleLabel {
-                        text: qsTr("Enabled")
+        Button {
+            text: qsTr("Flat Highlighted")
+            flat: true
+            highlighted: true
+        }
+    }
 
-                        Layout.alignment: Qt.AlignHCenter
-                    }
+    rightColumn: ColumnLayout {
+        anchors.centerIn: parent
 
-                    TitleLabel {
-                        text: qsTr("Disabled")
+        TitleLabel {
+            text: qsTr("Disabled")
 
-                        Layout.alignment: Qt.AlignHCenter
-                    }
+            Layout.alignment: Qt.AlignHCenter
+        }
 
-                    // Row 2
+        Button {
+            text: qsTr("Button")
+            enabled: false
+        }
 
-                    Button {
-                        text: qsTr("Button")
-                    }
+        Button {
+            text: qsTr("Checked")
+            checkable: false
+            checked: true
+            enabled: false
+        }
 
-                    Button {
-                        text: qsTr("Button")
-                        enabled: false
-                    }
+        Button {
+            text: qsTr("Flat")
+            flat: true
+            enabled: false
+        }
 
-                    // Row 3
+        Button {
+            text: qsTr("Highlighted")
+            highlighted: true
+            enabled: false
+        }
 
-                    Button {
-                        text: qsTr("Checked")
-                        checkable: false
-                        checked: true
-                    }
-
-                    Button {
-                        text: qsTr("Checked")
-                        checkable: false
-                        checked: true
-                        enabled: false
-                    }
-
-                    // Row 4
-
-                    Button {
-                        text: qsTr("Flat")
-                        flat: true
-                    }
-
-                    Button {
-                        text: qsTr("Flat")
-                        flat: true
-                        enabled: false
-                    }
-
-                    // Row 5
-
-                    Button {
-                        text: qsTr("Highlighted")
-                        highlighted: true
-                    }
-
-                    Button {
-                        text: qsTr("Highlighted")
-                        highlighted: true
-                        enabled: false
-                    }
-
-                    // Row 6
-
-                    Button {
-                        text: qsTr("Flat Highlighted")
-                        flat: true
-                        highlighted: true
-                    }
-
-                    Button {
-                        text: qsTr("Flat Highlighted")
-                        flat: true
-                        highlighted: true
-                        enabled: false
-                    }
-                }
-            }
+        Button {
+            text: qsTr("Flat Highlighted")
+            flat: true
+            highlighted: true
+            enabled: false
         }
     }
 }

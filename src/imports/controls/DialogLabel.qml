@@ -17,20 +17,6 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 
-/*!
-    \qmltype DialogLabel
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Text label with standard font and styling suitable to message box text.
-
-    Text label for the Material Design dialog text style.
-
-    \snippet fluidcontrols-dialoglabel.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/style/typography.html}{Material Design guidelines}.
-*/
 Label {
     font.pixelSize: FluidCore.Device.isMobile ? 18 : 17
     color: Material.secondaryTextColor

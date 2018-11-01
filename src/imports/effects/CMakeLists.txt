@@ -1,0 +1,11 @@
+liri_add_qml_module(fluideffects
+    MODULE_PATH
+        "Fluid/Effects"
+    QML_FILES
+        BoxShadow.qml
+        CircleMask.qml
+        Elevation.qml
+        Vignette.qml
+        qmldir
+        plugins.qmltypes
+)

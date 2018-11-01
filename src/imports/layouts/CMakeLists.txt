@@ -1,0 +1,9 @@
+liri_add_qml_module(fluidlayouts
+    MODULE_PATH
+        "Fluid/Layouts"
+    QML_FILES
+        AutomaticGrid.qml
+        ColumnFlow.qml
+        qmldir
+        plugins.qmltypes
+)

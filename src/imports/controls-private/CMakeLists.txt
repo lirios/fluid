@@ -1,0 +1,19 @@
+liri_add_qml_plugin(fluidcontrolsprivate
+    MODULE_PATH
+        "Fluid/Controls/Private"
+    SOURCES
+        controlsprivateplugin.cpp
+        windowdecoration.cpp
+        windowdecoration.h
+    QML_FILES
+        DateSelector.qml
+        TimeSelector.qml
+        YearSelector.qml
+        qmldir
+        plugins.qmltypes
+    DEFINES
+        QT_NO_CAST_FROM_ASCII
+        QT_NO_FOREACH
+    PUBLIC_LIBRARIES
+        Qt5::QuickControls2
+)

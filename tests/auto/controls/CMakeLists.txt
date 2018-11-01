@@ -1,0 +1,14 @@
+liri_add_test(tst_fluid_controls
+    SOURCES
+        controls.cpp
+        tst_color.qml
+        tst_fab.qml
+        tst_icon.qml
+        tst_listitem.qml
+        tst_ripple.qml
+        tst_typography.qml
+    DEFINES
+        QUICK_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+    LIBRARIES
+        Qt5::QuickTest
+)

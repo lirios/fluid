@@ -32,75 +32,36 @@ Qt >= 5.10.0 with at least the following modules is required:
 
 The following modules and their dependencies are required:
 
- * [qbs](http://code.qt.io/cgit/qbs/qbs.git) >= 1.9.0
- * [qbs-shared](https://github.com/lirios/qbs-shared.git) >= 1.2.0
+ * [cmake](https://gitlab.kitware.com/cmake/cmake) >= 3.10.0
+ * [cmake-shared](https://github.com/lirios/cmake-shared.git) >= 1.0.0
 
 ## Build
 
-Qbs is a new build system that is much easier to use compared to qmake or CMake.
-
-If you want to learn more, please read the [Qbs manual](http://doc.qt.io/qbs/index.html),
-especially the [setup guide](http://doc.qt.io/qbs/configuring.html) and how to install artifacts
-from the [installation guide](http://doc.qt.io/qbs/installing-files.html).
-
-Open up `fluid.qbs` with QtCreator, hit build and run to see the demo in action.
-
-Alternatively you can build it yourself from the terminal.
-We strongly advise against manual builds, unless you have previous experience.
-
-**Qbs does not currently support Android builds**, please use per-project installation
-if you are building a mobile app.
-
-If you haven't already, start by setting up a `qt5` profile for `qbs`:
-
 ```sh
-git submodule update --init --recursive
-qbs setup-toolchains --type gcc /usr/bin/g++ gcc
-qbs setup-qt $(which qmake) qt5 # make sure that qmake is in PATH
-qbs config profiles.qt5.baseProfile gcc
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/prefix ..
+make
+make install # use sudo if necessary
 ```
 
-Then, from the root of the repository, run:
+Replace `/path/to/prefix` to your installation prefix.
+Default is `/usr/local`.
 
-```sh
-qbs -d build -j $(nproc) profile:qt5 # use sudo if necessary
-```
+You can also append the following options to the `cmake` command:
 
-To the `qbs` call above you can append additional configuration parameters:
-
- * `modules.lirideployment.prefix:/path/to/prefix` where most files are installed (default: `/usr/local`)
- * `modules.lirideployment.dataDir:path/to/lib` where data files are installed (default: `/usr/local/share`)
- * `modules.lirideployment.libDir:path/to/lib` where libraries are installed (default: `/usr/local/lib`)
- * `modules.lirideployment.qmlDir:path/to/qml` where QML plugins are installed (default: `/usr/local/lib/qml`)
- * `modules.lirideployment.pluginsDir:path/to/plugins` where Qt plugins are installed (default: `/usr/local/lib/plugins`)
- * `modules.lirideployment.qbsModulesDir:path/to/qbs` where Qbs modules are installed (default: `/usr/local/share/qbs/modules`)
-
-See [lirideployment.qbs](https://github.com/lirios/qbs-shared/blob/develop/modules/lirideployment/lirideployment.qbs)
-for more deployment-related parameters.
-
-See also [System-wide installation](#system-wide-installation).
-
-You can also append the following options to the last line:
-
- * `projects.Fluid.withDemo:false`: Do not build the demo app.
- * `projects.Fluid.withQmlModules:false`: Do not build QML modules.
- * `projects.Fluid.withDocumentation:false`: Do not build the documentation.
- * `projects.Fluid.useStaticAnalyzer:true` to enable the Clang static analyzer.
- * `projects.Fluid.useSystemQbsShared:true` to use a system-wide installation of qbs-shared
-   instead of the git submodule included here.
-
-Run the demo with (unless `projects.Fluid.withDemo:false`):
-
-```sh
-qbs run --no-build -d build --products fluid-demo
-```
+ * `-DFLUID_USE_SYSTEM_LCS:BOOL=ON`: Use a system-wide copy of LiriCMakeShared.
+ * `-DFLUID_WITH_DOCUMENTATION:BOOL=OFF`: Do not build the documentation.
+ * `-DFLUID_WITH_DEMO:BOOL=OFF`: Do not build the demo application.
+ * `-DFLUID_WITH_QML_MODULES:BOOL=OFF`: Do not build QML modules.
+ * `-DFLUID_INSTALL_ICONS:BOOL=OFF`: Embed icons into resources.
 
 ### Documentation
 
-The HTML documentation is built if `projects.Fluid.withDocumentation:true` is passed
-to qbs and it is localed inside `<install root>/<prefix>/share/doc/fluid/html`.
+The HTML documentation is built unless `-DFLUID_WITH_DOCUMENTATION:BOOL=OFF` is
+passed to cmake and it's installed into `<prefix>/share/doc/fluid/html`.
 
-Open `<install root>/<prefix>/share/doc/fluid/html/index.html` with a browser to read it.
+Open `<prefix>/share/doc/fluid/html/index.html` with a browser to read it.
 
 ## Installation
 
@@ -124,11 +85,10 @@ From the root of the repository, run:
 
 ```sh
 git submodule update --init --recursive
-qbs setup-toolchains --type gcc /usr/bin/g++ gcc
-qbs setup-qt /usr/bin/qmake-qt5 qt5
-qbs config profiles.qt5.baseProfile gcc
-qbs build --no-install -d build profile:qt5 modules.lirideployment.prefix:/usr modules.lirideployment.qmlDir:/usr/lib/qt/qml
-sudo qbs install -d build --no-build -v --install-root / profile:qt5
+mkdir build
+cmake -DCMAKE_INSTALL_PREFIX=/usr -DINSTALL_QMLDIR=lib/qt/qml ..
+make
+sudo make install
 ```
 
 Please note that a system-wide installation is discouraged in most cases

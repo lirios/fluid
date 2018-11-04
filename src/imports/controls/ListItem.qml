@@ -49,6 +49,10 @@ ItemDelegate {
 
     width: parent ? parent.width : undefined
 
+    implicitHeight: Math.max(48, Math.max(background ? background.implicitHeight : 0,
+                                                       Math.max(contentItem.implicitHeight,
+                                                                indicator ? indicator.implicitHeight : 0))) + topPadding + bottomPadding
+
     hoverEnabled: FluidCore.Device.hoverEnabled
 
     opacity: enabled ? 1.0 : 0.6

@@ -33,6 +33,9 @@ Item {
         snackButton.text = buttonText;
         snackButton.visible = buttonText !== "";
         popup.open();
+        if (timer.running) {
+            timer.restart();
+        }
     }
 
     function close() {

@@ -19,7 +19,7 @@
     \instantiates Color
     \inqmlmodule Fluid.Controls
 
-    \brief Utility functions for colors
+    \brief Utility functions for colors.
 
     Utility functions to manipulate colors.
 */

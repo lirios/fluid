@@ -20,7 +20,7 @@
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
-    \brief Dialog with a picker to select time
+    \brief Dialog with a picker to select time.
 
     A dialog that lets you selected time.
 

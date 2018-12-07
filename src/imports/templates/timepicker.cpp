@@ -20,7 +20,7 @@
     \instantiates TimePicker
     \inqmlmodule Fluid.Controls
 
-    \brief Control to select a time
+    \brief Control to select a time.
 
     Stand-alone control to select a time.
 

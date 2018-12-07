@@ -20,7 +20,7 @@
    \inqmlmodule Fluid.Controls
    \ingroup fluidcontrols
 
-   \brief A sidebar component for use in adaptive layouts
+   \brief A sidebar component for use in adaptive layouts.
 
    To use, simply add an instance to your code, and anchor other components to it.
 

@@ -111,10 +111,6 @@ void WindowDecoration::updateDecorationColor()
     if (m_color == Qt::transparent)
         return;
 
-    QPlatformWindow *platformWindow = m_window->handle();
-    if (!platformWindow)
-        return;
-
 #ifdef Q_OS_LINUX
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
         // Calculate text color automatically based on the decoration color

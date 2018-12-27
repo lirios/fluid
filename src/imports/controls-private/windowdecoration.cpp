@@ -18,12 +18,23 @@
 
 #include "windowdecoration.h"
 
+#ifdef Q_OS_LINUX
+#  include "extensions/liridecoration.h"
+
+Q_GLOBAL_STATIC(LiriDecorationManager, s_decorationManager)
+#endif
+
 WindowDecoration::WindowDecoration(QObject *parent)
     : QObject(parent)
     , m_window(nullptr)
     , m_theme(WindowDecoration::Light)
     , m_color(Qt::transparent)
 {
+#ifdef Q_OS_LINUX
+    if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland")))
+        connect(s_decorationManager, &LiriDecorationManager::activeChanged,
+                this, &WindowDecoration::setServerSideDecorationColor);
+#endif
 }
 
 QWindow *WindowDecoration::window() const
@@ -122,8 +133,30 @@ void WindowDecoration::updateDecorationColor()
         m_window->setProperty("__material_decoration_backgroundColor", m_color);
         m_window->setProperty("__material_decoration_foregroundColor", textColor);
 
-        // Trigger a decoration update
+        // Trigger a QtWayland client-side decoration update
         m_window->resize(m_window->size());
+
+        // Register a server-side decoration object if needed
+        setServerSideDecorationColor();
     }
 #endif
 }
+
+#ifdef Q_OS_LINUX
+void WindowDecoration::setServerSideDecorationColor()
+{
+    if (!m_window)
+        return;
+
+    if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
+        const QVariant fgColor = m_window->property("__material_decoration_foregroundColor");
+        const QVariant bgColor = m_window->property("__material_decoration_backgroundColor");
+
+        if (s_decorationManager->isActive() && fgColor.isValid() && bgColor.isValid()) {
+            LiriDecoration *decoration = s_decorationManager->decorationForWindow(m_window);
+            decoration->setForegroundColor(fgColor.value<QColor>());
+            decoration->setBackgroundColor(bgColor.value<QColor>());
+        }
+    }
+}
+#endif

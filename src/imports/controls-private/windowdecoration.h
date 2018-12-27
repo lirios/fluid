@@ -63,6 +63,9 @@ private:
 
 private Q_SLOTS:
     void updateDecorationColor();
+#ifdef Q_OS_LINUX
+    void setServerSideDecorationColor();
+#endif
 };
 
 #endif // WINDOWDECORATION_H

@@ -63,7 +63,7 @@ private:
 
 private Q_SLOTS:
     void updateDecorationColor();
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
     void setServerSideDecorationColor();
 #endif
 };

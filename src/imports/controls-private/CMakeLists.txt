@@ -1,4 +1,4 @@
-if(LINUX)
+if(LINUX AND NOT ANDROID)
     set(SOURCES
         extensions/liridecoration.cpp
         extensions/liridecoration.h
@@ -9,6 +9,7 @@ if(LINUX)
     ecm_add_qtwayland_client_protocol(SOURCES
         PROTOCOL "${CMAKE_CURRENT_SOURCE_DIR}/extensions/liri-decoration.xml"
         BASENAME "liri-decoration")
+    set(DEFINES FLUID_ENABLE_WAYLAND=1)
     set(LIBRARIES Qt5::GuiPrivate Qt5::WaylandClient)
 endif()
 
@@ -29,6 +30,7 @@ liri_add_qml_plugin(fluidcontrolsprivate
     DEFINES
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH
+        ${DEFINES}
     PUBLIC_LIBRARIES
         Qt5::QuickControls2
         ${LIBRARIES}

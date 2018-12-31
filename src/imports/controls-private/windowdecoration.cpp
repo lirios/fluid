@@ -18,7 +18,7 @@
 
 #include "windowdecoration.h"
 
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
 #  include "extensions/liridecoration.h"
 
 Q_GLOBAL_STATIC(LiriDecorationManager, s_decorationManager)
@@ -30,7 +30,7 @@ WindowDecoration::WindowDecoration(QObject *parent)
     , m_theme(WindowDecoration::Light)
     , m_color(Qt::transparent)
 {
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland")))
         connect(s_decorationManager, &LiriDecorationManager::activeChanged,
                 this, &WindowDecoration::setServerSideDecorationColor);
@@ -122,7 +122,7 @@ void WindowDecoration::updateDecorationColor()
     if (m_color == Qt::transparent)
         return;
 
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
         // Calculate text color automatically based on the decoration color
         const qreal alpha = 1.0 - (0.299 * m_color.redF() + 0.587 * m_color.greenF() + 0.114 * m_color.blueF());
@@ -142,7 +142,7 @@ void WindowDecoration::updateDecorationColor()
 #endif
 }
 
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
 void WindowDecoration::setServerSideDecorationColor()
 {
     if (!m_window)

@@ -13,6 +13,8 @@ endif()
 liri_add_qml_plugin(fluidcontrols
     MODULE_PATH
         "Fluid/Controls"
+    VERSION
+        "1.1"
     SOURCES
         color.cpp
         color.h
@@ -80,7 +82,6 @@ liri_add_qml_plugin(fluidcontrols
         Units.qml
         Wave.qml
         qmldir
-        plugins.qmltypes
     RESOURCES
         ${FluidControls_RESOURCES}
     DEFINES

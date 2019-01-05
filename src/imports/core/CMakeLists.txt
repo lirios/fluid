@@ -1,6 +1,8 @@
 liri_add_qml_plugin(fluidcore
     MODULE_PATH
         "Fluid/Core"
+    VERSION
+        "1.0"
     SOURCES
         clipboard.cpp
         clipboard.h
@@ -19,7 +21,6 @@ liri_add_qml_plugin(fluidcore
     QML_FILES
         Object.qml
         qmldir
-        plugins.qmltypes
     DEFINES
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH

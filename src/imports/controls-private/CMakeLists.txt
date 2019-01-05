@@ -16,6 +16,8 @@ endif()
 liri_add_qml_plugin(fluidcontrolsprivate
     MODULE_PATH
         "Fluid/Controls/Private"
+    VERSION
+        "1.0"
     SOURCES
         controlsprivateplugin.cpp
         windowdecoration.cpp
@@ -26,7 +28,6 @@ liri_add_qml_plugin(fluidcontrolsprivate
         TimeSelector.qml
         YearSelector.qml
         qmldir
-        plugins.qmltypes
     DEFINES
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH

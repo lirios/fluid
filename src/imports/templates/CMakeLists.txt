@@ -1,6 +1,8 @@
 liri_add_qml_plugin(fluidtemplates
     MODULE_PATH
         "Fluid/Templates"
+    VERSION
+        "1.0"
     SOURCES
         datepicker.cpp
         datepicker.h
@@ -23,7 +25,6 @@ liri_add_qml_plugin(fluidtemplates
     QML_FILES
         Card.qml
         qmldir
-        plugins.qmltypes
     DEFINES
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH

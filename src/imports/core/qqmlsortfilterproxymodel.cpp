@@ -50,6 +50,11 @@ int QQmlSortFilterProxyModel::count() const
     return rowCount();
 }
 
+QHash<int, QByteArray> QQmlSortFilterProxyModel::roleNames() const
+{
+    return sourceModel() ? sourceModel()->roleNames() : QHash<int, QByteArray>();
+}
+
 const QString &QQmlSortFilterProxyModel::filterRoleName() const
 {
     return m_filterRoleName;

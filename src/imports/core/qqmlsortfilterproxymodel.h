@@ -67,6 +67,8 @@ public:
 
     int count() const;
 
+    QHash<int, QByteArray> roleNames() const override;
+
     const QString &filterRoleName() const;
     void setFilterRoleName(const QString &filterRoleName);
 

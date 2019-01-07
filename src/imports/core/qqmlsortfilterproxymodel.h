@@ -105,8 +105,8 @@ signals:
     void sortExpressionChanged();
 
 protected:
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private slots:
     void invalidateFilter();

@@ -105,7 +105,7 @@ bool WindowDecoration::eventFilter(QObject *object, QEvent *event)
         return QObject::eventFilter(object, event);
 
     if (event->type() == QEvent::PlatformSurface) {
-        auto pe = dynamic_cast<QPlatformSurfaceEvent *>(event);
+        auto pe = static_cast<QPlatformSurfaceEvent *>(event);
         if (pe->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
             updateDecorationColor();
             return true;

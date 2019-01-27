@@ -12,6 +12,8 @@ dnf install -y \
     libappstream-glib \
     wayland-devel \
     qt5-qtwayland-devel
+# workaround for the missing renameat2 syscall
+strip --remove-section=.note.ABI-tag /usr/lib64/libQt5Core.so.5
 travis_end "install_packages"
 
 # Install artifacts

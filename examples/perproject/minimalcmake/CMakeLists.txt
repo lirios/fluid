@@ -11,8 +11,8 @@ set(LIRI_LOCAL_ECM TRUE)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fluid/cmake/shared/modules")
 
 ## Configure Fluid:
-set(FLUID_WITH_DOCUMENTATION FALSE)
-set(FLUID_WITH_DEMO FALSE)
+option(FLUID_WITH_DOCUMENTATION "" OFF)
+option(FLUID_WITH_DEMO "" OFF)
 
 ## Set minimum versions required:
 set(QT_MIN_VERSION "5.10.0")

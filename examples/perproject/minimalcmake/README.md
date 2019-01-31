@@ -30,12 +30,14 @@ make install
 
 This examples the following file system:
 
+```
 install-root
 ├── bin
 │   └── example
 └── lib
     └── qml
         └── ...
+```
 
 You can adopt a different layout passing the following arguments to `cmake`:
 

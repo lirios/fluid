@@ -52,11 +52,13 @@ Components.StyledPage {
             FluidControls.DateTimePicker {
                 orientation: FluidControls.DateTimePicker.Landscape
                 selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
+                onSelectedDateTimeChanged: console.log("Selected date time:", selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap"))
             }
 
             FluidControls.DateTimePicker {
                 orientation: FluidControls.DateTimePicker.Portrait
                 selectedDateTime: new Date(2012, 11, 21, 21, 12, 42)
+                onSelectedDateTimeChanged: console.log("Selected date time:", selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap"))
             }
         }
 
@@ -74,6 +76,7 @@ Components.StyledPage {
                 onClicked: dateTimePickerDialogLandscape.selectedDateTime = new Date()
             }
             onAccepted: dateTimeLabel.text = selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap")
+            onSelectedDateTimeChanged: console.log("Selected date time:", selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap"))
 
             Material.theme: page.Material.theme
         }
@@ -92,6 +95,7 @@ Components.StyledPage {
                 onClicked: dateTimePickerDialogPortrait.selectedDateTime = new Date()
             }
             onAccepted: dateTimeLabel.text = selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd  hh:mm ap")
+            onSelectedDateTimeChanged: console.log("Selected date time:", selectedDateTime.toLocaleString(Qt.locale(), "yyyy-MM-dd hh:mm ap"))
 
             Material.theme: page.Material.theme
         }

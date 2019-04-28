@@ -19,71 +19,76 @@ import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
 Page {
-    ColumnLayout {
+    ScrollView {
         anchors.fill: parent
+        clip: true
 
-        FluidControls.ListItem {
-            text: "ListItem with only text"
-        }
+        ColumnLayout {
+            width: parent.width
 
-        FluidControls.ListItem {
-            text: "ListItem with sub text"
-            subText: "Sub text"
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with sub text and 2/2 lines"
-            subText: "Sub text line 1\nSub text line 2"
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with sub text and 3/3 lines"
-            subText: "Sub text line 1\nSub text line 2\nSub text line 3"
-            maximumLineCount: 3
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with sub text and 4/4 lines"
-            subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4"
-            maximumLineCount: 4
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with sub text and 5/3 lines"
-            subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4\nSub text line 5"
-            maximumLineCount: 3
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with value text"
-            valueText: "Value"
-        }
-
-        FluidControls.ListItem {
-            icon.source: FluidControls.Utils.iconUrl("action/event")
-            text: "ListItem with icon"
-        }
-
-        FluidControls.ListItem {
-            text: "ListItem with custom rightItem"
-            rightItem: Switch {
-                anchors.centerIn: parent
-                checked: true
+            FluidControls.ListItem {
+                text: "ListItem with only text"
             }
-        }
 
-        FluidControls.ListItem {
-            text: "ListItem with custom secondaryItem"
-            secondaryItem: Slider {
-                width: parent.width
-                from: 0
-                to: 100
-                value: 50
+            FluidControls.ListItem {
+                text: "ListItem with sub text"
+                subText: "Sub text"
             }
-        }
 
-        Item {
-            Layout.fillHeight: true
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 2/2 lines"
+                subText: "Sub text line 1\nSub text line 2"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 3/3 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3"
+                maximumLineCount: 3
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 4/4 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4"
+                maximumLineCount: 4
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 5/3 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4\nSub text line 5"
+                maximumLineCount: 3
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with value text"
+                valueText: "Value"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("action/event")
+                text: "ListItem with icon"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with custom rightItem"
+                rightItem: Switch {
+                    anchors.centerIn: parent
+                    checked: true
+                }
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with custom secondaryItem"
+                secondaryItem: Slider {
+                    width: parent.width
+                    from: 0
+                    to: 100
+                    value: 50
+                }
+            }
+
+            Item {
+                Layout.fillHeight: true
+            }
         }
     }
 }

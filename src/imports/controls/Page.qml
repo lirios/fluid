@@ -21,6 +21,8 @@ import Fluid.Controls 1.0 as FluidControls
 Page {
     id: page
 
+    default property alias data: content.data
+
     property alias appBar: appBar
 
     property alias actions: appBar.actions
@@ -67,6 +69,9 @@ Page {
     header: null
     footer: null
 
+    contentWidth: content.childrenRect.width
+    contentHeight: content.childrenRect.height
+
     FluidControls.AppBar {
         id: appBar
 
@@ -84,5 +89,11 @@ Page {
 
             onTriggered: page.pop()
         }
+    }
+
+    Item {
+        id: content
+
+        anchors.fill: parent
     }
 }

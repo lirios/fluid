@@ -84,6 +84,9 @@ Page {
     header: null
     footer: null
 
+    contentWidth: content.childrenRect.width
+    contentHeight: content.childrenRect.height
+
     FluidControls.AppBar {
         id: appBar
 

@@ -51,6 +51,7 @@ liri_add_executable(FluidDemo
         qml/StyledRectangle.qml
     RESOURCES
         fluid-demo.qrc
+    QTQUICK_COMPILER
     DEFINES
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH

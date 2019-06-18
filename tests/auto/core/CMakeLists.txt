@@ -3,7 +3,6 @@ liri_add_test(tst_fluid_core
         core.cpp
         tst_clipboard.qml
         tst_date.qml
-        tst_dateutils.qml
         tst_utils.qml
     DEFINES
         QUICK_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}"

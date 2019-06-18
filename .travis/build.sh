@@ -27,7 +27,10 @@ travis_start "configure"
 msg "Setup CMake..."
 mkdir build
 cd build
-cmake .. \
+if [ "$CXX" == "clang++" ]; then
+    clazy="-DCMAKE_CXX_COMPILER=clazy"
+fi
+cmake .. $clazy \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DINSTALL_LIBDIR=/usr/lib64 \
     -DINSTALL_QMLDIR=/usr/lib64/qt5/qml \

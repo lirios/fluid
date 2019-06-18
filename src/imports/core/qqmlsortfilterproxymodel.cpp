@@ -132,8 +132,9 @@ void QQmlSortFilterProxyModel::setFilterExpression(const QQmlScriptString &filte
     m_filterScriptString = filterScriptString;
     QQmlContext *context = new QQmlContext(qmlContext(this));
 
+    auto roles = roleNames().values();
     QVariantMap map;
-    for (const QByteArray &roleName : roleNames().values())
+    for (const QByteArray &roleName : roles)
         map.insert(QString::fromLatin1(roleName), QVariant());
 
     context->setContextProperty(QLatin1String("model"), map);
@@ -168,6 +169,7 @@ void QQmlSortFilterProxyModel::setSortOrder(Qt::SortOrder sortOrder)
 {
     if (!m_sortRoleName.isEmpty())
         sort(0, sortOrder);
+    emit sortOrderChanged();
 }
 
 const QQmlScriptString &QQmlSortFilterProxyModel::sortExpression() const
@@ -183,8 +185,9 @@ void QQmlSortFilterProxyModel::setSortExpression(const QQmlScriptString &compare
     m_compareScriptString = compareScriptString;
     QQmlContext *context = new QQmlContext(qmlContext(this));
 
+    auto roles = roleNames().values();
     QVariantMap map;
-    for (const QByteArray &roleName : roleNames().values())
+    for (const QByteArray &roleName : roles)
         map.insert(QString::fromLatin1(roleName), QVariant());
 
     context->setContextProperty(QLatin1String("modelLeft"), map);
@@ -280,7 +283,7 @@ QVariantMap QQmlSortFilterProxyModel::modelDataMap(const QModelIndex &modelIndex
 {
     QVariantMap map;
     QHash<int, QByteArray> roles = roleNames();
-    for (QHash<int, QByteArray>::const_iterator it = roles.begin(); it != roles.end(); ++it)
+    for (QHash<int, QByteArray>::const_iterator it = roles.constBegin(); it != roles.constEnd(); ++it)
         map.insert(QString::fromLatin1(it.value()), sourceModel()->data(modelIndex, it.key()));
     return map;
 }

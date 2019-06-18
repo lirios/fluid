@@ -44,8 +44,8 @@ public:
 
     explicit StandardPaths(QObject *parent = nullptr);
 
-    Q_INVOKABLE QString locateFile(StandardLocation type, const QString &fileName);
-    Q_INVOKABLE QString locateDirectory(StandardLocation type, const QString &dirName);
+    Q_INVOKABLE QString locateFile(StandardPaths::StandardLocation type, const QString &fileName);
+    Q_INVOKABLE QString locateDirectory(StandardPaths::StandardLocation type, const QString &dirName);
 };
 
 #endif // STANDARDPATHS_H

@@ -58,7 +58,7 @@ ControlsUtils::ControlsUtils(const QUrl &baseUrl, QObject *parent)
 QUrl ControlsUtils::iconUrl(const QString &name)
 {
 #if FLUID_INSTALL_ICONS == 1
-    return QUrl::fromLocalFile(QStringLiteral("%1/icons/%2.svg").arg(m_baseUrl.toLocalFile()).arg(name));
+    return QUrl::fromLocalFile(QStringLiteral("%1/icons/%2.svg").arg(m_baseUrl.toLocalFile(), name));
 #else
     return QUrl(QStringLiteral("qrc:/liri.io/imports/Fluid/Controls/icons/%1.svg").arg(name));
 #endif

@@ -28,7 +28,7 @@ msg "Setup CMake..."
 mkdir build
 cd build
 if [ "$CXX" == "clang++" ]; then
-    clazy="-DCMAKE_CXX_COMPILER=clazy"
+    clazy="-DENABLE_CLAZY:BOOL=ON"
 fi
 cmake .. $clazy \
     -DCMAKE_INSTALL_PREFIX=/usr \

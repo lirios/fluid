@@ -24,7 +24,7 @@ build_script:
   - mkdir build
   - cd build
   - cmake --version
-  - cmake -DLIRI_BUILD_TESTING:BOOL=OFF -DFLUID_WITH_DOCUMENTATION:BOOL=OFF .. -G "%CMAKE_GENERATOR%"
+  - cmake -DBUILD_TESTING:BOOL=OFF -DFLUID_WITH_DOCUMENTATION:BOOL=OFF .. -G "%CMAKE_GENERATOR%"
   - cmake --build .
 #test_script:
 #  - ctest -V -C Debug

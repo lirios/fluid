@@ -40,7 +40,7 @@ void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     engine->setBaseUrl(baseUrl());
 
     // For system icons
-    engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
+    engine->addImageProvider(QStringLiteral("fluidicontheme"), new IconThemeImageProvider());
 }
 
 void FluidControlsPlugin::registerTypes(const char *uri)

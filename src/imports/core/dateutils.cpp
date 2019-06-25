@@ -96,5 +96,5 @@ QString DateUtils::friendlyTime(const QDateTime &time, bool standalone) const
 
 QString DateUtils::dayOfWeek(const QDate &date) const
 {
-    return date.toString(QLatin1String("dddd"));
+    return date.toString(QStringLiteral("dddd"));
 }

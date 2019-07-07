@@ -34,6 +34,8 @@ option(FLUID_WITH_QML_MODULES "Build QML modules" ON)
 add_feature_info("Fluid::QMLModules" FLUID_WITH_QML_MODULES "Build Fluid QML modules")
 option(FLUID_INSTALL_ICONS "Install Material Design icons" ON)
 add_feature_info("Fluid::Icons" FLUID_INSTALL_ICONS "Install Material Design icons")
+option(FLUID_ENABLE_QTQUICK_COMPILER "Build with QtQuick compiler (resulting binaries may not be compatible with future Qt releases without rebuilding them)" OFF)
+add_feature_info("Fluid::QtQuickCompiler" FLUID_ENABLE_QTQUICK_COMPILER "Build with QtQuick compiler")
 
 ## Find Qt 5:
 find_package(Qt5 "${QT_MIN_VERSION}"

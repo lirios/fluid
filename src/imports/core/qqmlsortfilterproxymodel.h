@@ -36,8 +36,7 @@ class QQmlSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QString filterRoleName READ filterRoleName WRITE setFilterRoleName NOTIFY
-                   filterRoleNameChanged)
+    Q_PROPERTY(QString filterRoleName READ filterRoleName WRITE setFilterRoleName NOTIFY filterRoleNameChanged)
     Q_PROPERTY(
         QString filterPattern READ filterPattern WRITE setFilterPattern NOTIFY filterPatternChanged)
     Q_PROPERTY(PatternSyntax filterPatternSyntax READ filterPatternSyntax WRITE
@@ -48,9 +47,8 @@ class QQmlSortFilterProxyModel : public QSortFilterProxyModel
 
     Q_PROPERTY(
         QString sortRoleName READ sortRoleName WRITE setSortRoleName NOTIFY sortRoleNameChanged)
-    Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder)
-    Q_PROPERTY(QQmlScriptString sortExpression READ sortExpression WRITE setSortExpression NOTIFY
-                   sortExpressionChanged)
+    Q_PROPERTY(Qt::SortOrder sortOrder READ sortOrder WRITE setSortOrder NOTIFY sortOrderChanged)
+    Q_PROPERTY(QQmlScriptString sortExpression READ sortExpression WRITE setSortExpression NOTIFY sortExpressionChanged)
 
 public:
     enum PatternSyntax {
@@ -66,6 +64,8 @@ public:
     QQmlSortFilterProxyModel(QObject *parent = 0);
 
     int count() const;
+
+    QHash<int, QByteArray> roleNames() const override;
 
     const QString &filterRoleName() const;
     void setFilterRoleName(const QString &filterRoleName);
@@ -100,11 +100,12 @@ signals:
     void filterExpressionChanged();
 
     void sortRoleNameChanged();
+    void sortOrderChanged();
     void sortExpressionChanged();
 
 protected:
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const;
+    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private slots:
     void invalidateFilter();

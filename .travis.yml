@@ -1,4 +1,4 @@
-language: c
+language: cpp
 
 compiler:
   - clang
@@ -26,13 +26,13 @@ script:
 
 deploy:
   - provider: script
-    script: .travis/deploy.sh build/default/fluid-artifacts.tar.gz
+    script: .travis/deploy.sh build/artifacts/fluid-artifacts.tar.gz
     skip_cleanup: true
     on:
       branch: master
       condition: "$CC = gcc) && ($TRAVIS_PULL_REQUEST = false"
   - provider: script
-    script: .travis/deploy.sh build/default/fluid-artifacts.tar.gz
+    script: .travis/deploy.sh build/artifacts/fluid-artifacts.tar.gz
     skip_cleanup: true
     on:
       branch: develop

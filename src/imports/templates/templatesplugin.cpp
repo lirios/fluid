@@ -33,5 +33,6 @@ void FluidTemplatesPlugin::registerTypes(const char *uri)
     qmlRegisterType<TimeSelector>(uri, 1, 0, "TimeSelector");
     qmlRegisterType<YearSelector>(uri, 1, 0, "YearSelector");
 
-    qmlRegisterUncreatableType<YearModel>(uri, 1, 0, "YearModel", QLatin1String("Cannot instantiate YearModel"));
+    qmlRegisterUncreatableType<YearModel>(uri, 1, 0, "YearModel",
+                                          QStringLiteral("Cannot instantiate YearModel"));
 }

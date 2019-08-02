@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="liri_decoration">
+  <copyright><![CDATA[
+    Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation files
+    (the "Software"), to deal in the Software without restriction,
+    including without limitation the rights to use, copy, modify, merge,
+    publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so,
+    subject to the following conditions:
+
+    The above copyright notice and this permission notice (including the
+    next paragraph) shall be included in all copies or substantial
+    portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+    ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  ]]></copyright>
+
+  <interface name="liri_decoration_manager" version="1">
+    <description summary="server-side decoration integration">
+      This interface allows a client to alter the look of
+      server-side decorations.
+    </description>
+
+    <enum name="error">
+      <entry name="already_exists" value="0"
+             summary="the surface already has a liri_decoration object associated"/>
+    </enum>
+
+    <request name="create">
+      <description summary="create a manager object">
+        Instantiate an interface extention for the given wl_surface to
+        change the server-side decoration background and foreground
+        colors.
+
+        If a liri_decoration object has already been associated with this
+        surface, the compositor will post an error.
+      </description>
+      <arg name="id" type="new_id" interface="liri_decoration"/>
+      <arg name="surface" type="object" interface="wl_surface"/>
+    </request>
+
+    <request name="destroy" type="destructor">
+      <description summary="release the object">
+        This destroys the liri_decoration_manager object.
+        It must be called after all liri_decoration objects are freed.
+        The compositor is not forced to revert the colors back
+        to the original ones.
+      </description>
+    </request>
+  </interface>
+
+  <interface name="liri_decoration" version="1">
+    <description summary="server-side decoration interface">
+      This interface allows a client to change the server-side decoration
+      background and foreground colors to match the primary color used
+      by the window.
+    </description>
+
+    <request name="set_foreground">
+      <description summary="set the foreground color">
+        Change the server-side decoration foreground color
+        in hex color code (for example #ffffff for white).
+      </description>
+      <arg name="color" type="string"/>
+    </request>
+
+    <request name="set_background">
+      <description summary="set the background color">
+        Change the server-side decoration background color
+        in hex color code (for example #ffffff for white).
+      </description>
+      <arg name="color" type="string"/>
+    </request>
+
+    <request name="destroy" type="destructor">
+      <description summary="release the object">
+        This destroys the liri_decoration object.
+        The compositor is not forced to revert the colors back
+        to the original ones.
+      </description>
+    </request>
+  </interface>
+</protocol>

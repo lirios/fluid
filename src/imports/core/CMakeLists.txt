@@ -1,0 +1,27 @@
+liri_add_qml_plugin(fluidcore
+    MODULE_PATH
+        "Fluid/Core"
+    VERSION
+        "1.0"
+    SOURCES
+        clipboard.cpp
+        clipboard.h
+        coreplugin.cpp
+        coreplugin.h
+        coreutils.cpp
+        coreutils.h
+        dateutils.cpp
+        dateutils.h
+        device.cpp
+        device.h
+        qqmlsortfilterproxymodel.cpp
+        qqmlsortfilterproxymodel.h
+        standardpaths.cpp
+        standardpaths.h
+    QML_FILES
+        Object.qml
+        qmldir
+    DEFINES
+        QT_NO_CAST_FROM_ASCII
+        QT_NO_FOREACH
+)

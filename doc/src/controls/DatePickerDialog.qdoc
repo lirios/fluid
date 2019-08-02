@@ -20,7 +20,7 @@
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 
-    \brief Dialog to select a single date
+    \brief Dialog to select a single date.
 
     Dialog to select a single date from a calendar.
 

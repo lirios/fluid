@@ -62,7 +62,7 @@
     \qmlproperty color Fluid.Controls::AppBar::backgroundColor
 
     The background color of the tool bar when the AppBar's page is active.
-    By default this is the primary color defined in \l Material.primaryColor
+    By default this is the primary color defined in \c Material.primaryColor
 
     \since Fluid.Controls 1.1
 */
@@ -72,8 +72,8 @@
 
     The background color of the window decoration when the AppBar's page is active,
     usually a darker version of \l backgroundColor.
-    By default this is the primary color defined in \l Material.primaryColor with a
-    shade of \l Material.Shade700.
+    By default this is the primary color defined in \c Material.primaryColor with a
+    shade of \c Material.Shade700.
 
     \since Fluid.Controls 1.1
 */

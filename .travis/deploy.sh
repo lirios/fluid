@@ -43,5 +43,5 @@ openssl aes-256-cbc -K $encrypted_a841ddf051d0_key -iv $encrypted_a841ddf051d0_i
 chmod 600 /tmp/github_deploy_key_liri_ci
 eval "$(ssh-agent -s)"
 ssh-add /tmp/github_deploy_key_liri_ci
-rsync -crvz --rsh="ssh" --delete-after --delete-excluded build/default/fluid-offline-doc.*/qdoc_html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH
+rsync -crvz --rsh="ssh" --delete-after --delete-excluded build/doc/qdoc_html/ $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH
 scp $filename $DEPLOY_USER@$DEPLOY_HOST:$TRAVIS_BRANCH/$destfilename

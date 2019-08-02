@@ -1,0 +1,31 @@
+liri_add_qml_plugin(fluidtemplates
+    MODULE_PATH
+        "Fluid/Templates"
+    VERSION
+        "1.0"
+    SOURCES
+        datepicker.cpp
+        datepicker.h
+        dateselector.cpp
+        dateselector.h
+        datetimepicker.cpp
+        datetimepicker.h
+        picker.cpp
+        picker.h
+        templatesplugin.cpp
+        templatesplugin.h
+        timepicker.cpp
+        timepicker.h
+        timeselector.cpp
+        timeselector.h
+        yearmodel.cpp
+        yearmodel.h
+        yearselector.cpp
+        yearselector.h
+    QML_FILES
+        Card.qml
+        qmldir
+    DEFINES
+        QT_NO_CAST_FROM_ASCII
+        QT_NO_FOREACH
+)

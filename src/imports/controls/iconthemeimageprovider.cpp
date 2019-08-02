@@ -42,6 +42,6 @@ QPixmap IconThemeImageProvider::requestPixmap(const QString &id, QSize *realSize
     // Return icon from theme or fallback to a generic icon
     QIcon icon = QIcon::fromTheme(id);
     if (icon.isNull())
-        icon = QIcon::fromTheme(QLatin1String("application-x-executable"));
+        icon = QIcon::fromTheme(QStringLiteral("application-x-executable"));
     return icon.pixmap(size);
 }

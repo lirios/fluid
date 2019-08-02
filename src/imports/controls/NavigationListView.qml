@@ -47,6 +47,7 @@ FluidControls.NavigationDrawer {
                 text: modelData.text
                 showDivider: modelData.hasDividerAfter
                 dividerInset: 0
+                width: navDrawerListView.width
                 enabled: modelData.enabled
                 visible: modelData.visible
 

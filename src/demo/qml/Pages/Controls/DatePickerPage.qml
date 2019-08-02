@@ -47,11 +47,13 @@ Components.StyledPage {
             FluidControls.DatePicker {
                 orientation: FluidControls.DatePicker.Landscape
                 selectedDate: new Date(2012, 11, 21)
+                onSelectedDateChanged: console.log("Selected date:", selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd"))
             }
 
             FluidControls.DatePicker {
                 orientation: FluidControls.DatePicker.Portrait
                 selectedDate: new Date(2012, 11, 21)
+                onSelectedDateChanged: console.log("Selected date:", selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd"))
             }
         }
 
@@ -68,6 +70,7 @@ Components.StyledPage {
                 onClicked: datePickerDialogLandscape.selectedDate = new Date()
             }
             onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
+            onSelectedDateChanged: console.log("Selected date:", selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd"))
 
             Material.theme: page.Material.theme
         }
@@ -85,6 +88,7 @@ Components.StyledPage {
                 onClicked: datePickerDialogPortrait.selectedDate = new Date()
             }
             onAccepted: dateLabel.text = selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd")
+            onSelectedDateChanged: console.log("Selected date:", selectedDate.toLocaleString(Qt.locale(), "yyyy-MM-dd"))
 
             Material.theme: page.Material.theme
         }

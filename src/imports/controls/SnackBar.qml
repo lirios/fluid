@@ -33,6 +33,8 @@ Item {
         snackButton.text = buttonText;
         snackButton.visible = buttonText !== "";
         popup.open();
+        if (timer.running)
+            timer.restart();
     }
 
     function close() {
@@ -51,22 +53,25 @@ Item {
     Popup {
         id: popup
 
+        property int offset: 0
+
         Material.theme: Material.Dark
 
         modal: false
         closePolicy: Popup.NoAutoClose
 
         x: snackBar.fullWidth ? 0 : (snackBar.parent.width - width) / 2
+        y: snackBar.parent.height - offset
 
         width: snackBar.fullWidth ? snackBar.parent.width : snackLayout.implicitWidth
         height: snackLayout.implicitHeight
 
         enter: Transition {
-            NumberAnimation { property: "y"; from: snackBar.parent.height; to: snackBar.parent.height - popup.height }
+            NumberAnimation { property: "offset"; from: 0; to: popup.height }
         }
 
         exit: Transition {
-            NumberAnimation { property: "y"; from: snackBar.parent.height - popup.height; to: snackBar.parent.height }
+            NumberAnimation { property: "offset"; from: popup.height; to: 0 }
         }
 
         background: Rectangle {

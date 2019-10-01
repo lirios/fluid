@@ -31,6 +31,7 @@ Qt >= 5.10.0 with at least the following modules is required:
 
 On Linux you also need:
 
+ * [wayland](https://gitlab.freedesktop.org/wayland/wayland) >= 1.15
  * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git)
 
 The following modules and their dependencies are required:

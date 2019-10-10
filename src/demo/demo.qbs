@@ -5,6 +5,7 @@ Project {
     name: "Demo"
 
     QtGuiApplication {
+        Depends { name: "bundle" }
         readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
         readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 

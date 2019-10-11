@@ -24,7 +24,6 @@ Project {
 
         Depends { name: "lirideployment" }
         Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: project.minimumQtVersion }
-        Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
         Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
 
         Properties {

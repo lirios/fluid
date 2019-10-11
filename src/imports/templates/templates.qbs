@@ -4,8 +4,6 @@ LiriQmlPlugin {
     name: "fluidtemplatesplugin"
     pluginPath: "Fluid/Templates"
 
-    Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
-
     Properties {
         condition: qbs.targetOS.contains("osx")
         cpp.linkerFlags: ["-lstdc++"]

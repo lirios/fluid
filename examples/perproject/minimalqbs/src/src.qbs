@@ -20,11 +20,6 @@ QtGuiApplication {
 
     // Android NDK
     Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
-    Properties {
-        condition: qbs.targetOS.contains("android")
-        architectures: !qbs.architecture ? ["x86", "armv7a"] : undefined
-        Android.ndk.appStl: "gnustl_shared"
-    }
 
     // Source files
     files: ["*.cpp", "*.h", "*.qrc"]

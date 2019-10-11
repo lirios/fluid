@@ -6,7 +6,6 @@ depends Fluid.Templates 1.0
 typeinfo plugins.qmltypes
 
 # 1.0
-AbstractCard 1.0 AbstractCard.qml
 Action 1.0 Action.qml
 AlertDialog 1.0 AlertDialog.qml
 AppBar 1.0 AppBar.qml
@@ -62,7 +61,6 @@ ApplicationWindow 1.1 ApplicationWindow11.qml
 AppToolBar 1.1 AppToolBar11.qml
 AppBar 1.1 AppBar11.qml
 Chip 1.1 Chip.qml
-ContactChip 1.1 ContactChip.qml
 Page 1.1 Page11.qml
 PageSidebar 1.1 PageSidebar.qml
 SearchBar 1.1 SearchBar11.qml

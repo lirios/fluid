@@ -5,6 +5,7 @@ Project {
     name: "Demo"
 
     QtGuiApplication {
+        Depends { name: "bundle" }
         readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
         readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
@@ -23,14 +24,7 @@ Project {
 
         Depends { name: "lirideployment" }
         Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: project.minimumQtVersion }
-        Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
         Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-
-        Properties {
-            condition: qbs.targetOS.contains("android")
-            architectures: !qbs.architecture ? ["x86", "armv7a"] : undefined
-            Android.ndk.appStl: "gnustl_shared"
-        }
 
         Properties {
             condition: qbs.targetOS.contains("osx")

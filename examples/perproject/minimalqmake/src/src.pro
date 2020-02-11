@@ -35,9 +35,44 @@ android {
 
 macx {
     # Bundle Fluid QML plugins with the application
-    APP_QML_FILES.files = $$OUT_PWD/../fluid/qml/Fluid
-    APP_QML_FILES.path = Contents/MacOS
-    QMAKE_BUNDLE_DATA += APP_QML_FILES
+
+    APP_QML_FILES_Core.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Core/*qml*) \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Core/*.dylib)
+    APP_QML_FILES_Core.path = Contents/MacOS/Fluid/Core
+
+    APP_QML_FILES_Controls.files = \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/*qml*) \
+        $$OUT_PWD/../fluid/qml/Fluid/Controls/icons \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/*.dylib)
+    APP_QML_FILES_Controls.path = Contents/MacOS/Fluid/Controls
+
+    APP_QML_FILES_ControlsPrivate.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/Private/*qml*) \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/Private/*.dylib)
+    APP_QML_FILES_ControlsPrivate.path = Contents/MacOS/Fluid/Controls/Private
+
+    APP_QML_FILES_Effects.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Effects/*qml*) \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Effects/*.dylib)
+    APP_QML_FILES_Effects.path = Contents/MacOS/Fluid/Effects
+
+    APP_QML_FILES_Layouts.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Layouts/*qml*) \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Layouts/*.dylib)
+    APP_QML_FILES_Layouts.path = Contents/MacOS/Fluid/Layouts
+
+    APP_QML_FILES_Templates.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Templates/*qml*) \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Templates/*.dylib)
+    APP_QML_FILES_Templates.path = Contents/MacOS/Fluid/Templates
+
+    QMAKE_BUNDLE_DATA += \
+        APP_QML_FILES_Core \
+        APP_QML_FILES_Controls \
+        APP_QML_FILES_ControlsPrivate \
+        APP_QML_FILES_Effects \
+        APP_QML_FILES_Layouts \
+        APP_QML_FILES_Templates
+
+
+
+
 }
 
 ios {

@@ -1,10 +1,25 @@
+cmake_minimum_required(VERSION 3.10.0)
+
+project("FluidDemo"
+    VERSION "1.0.0"
+    DESCRIPTION "Demo project showing Fluid Controls"
+    LANGUAGES CXX C
+)
+
 if(WIN32)
     set(FluidDemo_OUTPUT_NAME "FluidDemo")
 else()
     set(FluidDemo_OUTPUT_NAME "fluid-demo")
 endif()
 
-liri_add_executable(FluidDemo
+set(LIRI_LOCAL_ECM TRUE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fluid/cmake/shared/modules")
+
+include(LiriSetup)
+
+
+add_executable(FluidDemo
     OUTPUT_NAME
         "${FluidDemo_OUTPUT_NAME}"
     SOURCES

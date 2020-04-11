@@ -37,11 +37,21 @@ On Linux you also need:
 The following modules and their dependencies are required:
 
  * [cmake](https://gitlab.kitware.com/cmake/cmake) >= 3.10.0
+
+The following module must be installed, unless you want to use the copy provided
+as a submodule:
+
  * [cmake-shared](https://github.com/lirios/cmake-shared.git) >= 1.0.0
 
 ## Build
 
+You can perform a standalone build opening `CMakeLists.txt` with QtCreator,
+but make sure `cmake` is [set up correctly](https://doc.qt.io/qtcreator/creator-project-cmake.html).
+
+You can also build from command line:
+
 ```sh
+git submodule update --init
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/prefix ..
@@ -59,6 +69,12 @@ You can also append the following options to the `cmake` command:
  * `-DFLUID_WITH_DEMO:BOOL=OFF`: Do not build the demo application.
  * `-DFLUID_WITH_QML_MODULES:BOOL=OFF`: Do not build QML modules.
  * `-DFLUID_INSTALL_ICONS:BOOL=OFF`: Embed icons into resources.
+
+If `cmake-shared` is not installed and `-DFLUID_USE_SYSTEM_LCS:BOOL=ON` is
+passed to `cmake`, the build will fail without finding `LiriSetup`.
+
+The `cmake` arguments above can also be specified when building on QtCreator,
+as explained in [this guide](https://doc.qt.io/qtcreator/creator-build-settings.html).
 
 ### Documentation
 
@@ -103,8 +119,9 @@ managed by a package manager.
 
 You can embed Fluid in your project and build it along your app.
 
-We have an example with qmake in `examples/perproject/minimalqmake`
-and another one for qbs in `examples/perproject/minimalqbs`.
+We have the following examples:
+We have examples for [qmake](examples/perproject/minimalqmake),
+[qbs](examples/perproject/minimalqbs) and [cmake](examples/perproject/minimalcmake).
 
 ## Licensing
 

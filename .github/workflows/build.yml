@@ -11,65 +11,131 @@ on:
       - develop
 
 jobs:
-  linux-qt514-gcc:
+  linux:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler:
+          - gcc
+          - clang
+        qt:
+          - 5.12.7
+          - 5.14.1
+    runs-on: ubuntu-18.04
     steps:
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            echo "##[set-output name=branch;]${{ github.base_ref }}"
+          else
+            echo "##[set-output name=branch;]${{ github.ref }}"
+          fi
       - name: Install dependencies
         run: |
-          sudo add-apt-repository ppa:beineri/opt-qt-5.14.1-bionic
+          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          set -x
+          wget -qO - 'http://archive.neon.kde.org/public.key' | sudo apt-key add -
+          sudo apt-add-repository http://archive.neon.kde.org/user
+          sudo add-apt-repository ppa:beineri/opt-qt-${{ matrix.qt }}-bionic
           sudo apt-get update
-          sudo apt-get install -y qt514-meta-full libwayland-dev
-          source /opt/qt514/bin/qt514-env.sh
-      - uses: actions/checkout@v2
+          sudo apt-get install -y \
+            libgl1-mesa-dev \
+            libwayland-dev \
+            extra-cmake-modules \
+            dbus-x11 \
+            xvfb \
+            ${QTPFX}base \
+            ${QTPFX}declarative \
+            ${QTPFX}quickcontrols2 \
+            ${QTPFX}graphicaleffects \
+            ${QTPFX}svg \
+            ${QTPFX}wayland \
+            ${QTPFX}doc \
+            ${QTPFX}tools
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            sudo apt-get install -y clang
+          fi
+      - name: Fetch cmake-shared artifact
+        uses: liri-infra/fetch-artifact@master
         with:
-          submodules: true
-      - name: Prepare
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: lirios/cmake-shared
+          workflow_path: .github/workflows/build.yml
+          artifact_name: artifacts-${{ steps.extract_branch.outputs.branch }}
+      - name: Uncompress artifacts
         run: |
+          tar xf cmake-shared.tar.gz -C /
+          rm -f artifacts-${{ steps.extract_branch.outputs.branch }}
+          rm -f cmake-shared.tar.gz
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          set -x
+          export QT_PATH=/opt/${QTPFX}
+          export PATH=$QT_PATH/bin:$PATH
+          export LD_LIBRARY_PATH=$QT_PATH/lib/x86_64-linux-gnu:$QT_PATH/lib:$LD_LIBRARY_PATH
+          export PKG_CONFIG_PATH=$QT_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            export CC=clang
+            export CXX=clang++
+          fi
           mkdir -p build
           cd build
           cmake .. -DCMAKE_INSTALL_PREFIX=/usr
-      - name: Build
+          make -j $(getconf _NPROCESSORS_ONLN)
+          sudo make install
+      - name: Test
         run: |
+          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          set -x
+          export QT_PATH=/opt/${QTPFX}
+          export PATH=$QT_PATH/bin:$PATH
+          export LD_LIBRARY_PATH=$QT_PATH/lib/x86_64-linux-gnu:$QT_PATH/lib:$LD_LIBRARY_PATH
+          export PKG_CONFIG_PATH=$QT_PATH/lib/pkgconfig:$PKG_CONFIG_PATH
           cd build
-          make -j
-          make install
+          dbus-run-session -- xvfb-run -a -s "-screen 0 800x600x24" ctest -V
       - name: Package
-        if: "github.event_name == 'push'"
+        if: github.event_name == 'push'
         run: |
           cd build
           mkdir -p artifacts
-          tar czf artifacts/fluid-artifacts.tar.gz -T install_manifest.txt
+          tar czf artifacts/fluid.tar.gz -T install_manifest.txt
       - name: Archive result
-        if: "github.event_name == 'push'"
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v1
         with:
-          name: fluid-artifacts-qt514.tar.gz
-          path: build/artifacts/fluid-artifacts.tar.gz
+          name: artifacts-${{ matrix.compiler }}-${{ matrix.qt }}-${{ steps.extract_branch.outputs.branch }}
+          path: build/artifacts/
 
-  linux-qt514-clang:
+  windows:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        qt:
+          - 5.12.7
+    runs-on: windows-2016
     steps:
-      - name: Install dependencies
-        run: |
-          sudo add-apt-repository ppa:beineri/opt-qt-5.14.1-bionic
-          sudo apt-get update
-          sudo apt-get install -y qt514-meta-full libwayland-dev clang
-          source /opt/qt514/bin/qt514-env.sh
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt }}
+          arch: win32_msvc2017
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Prepare
-        env:
-          CC: clang
-          CXX: clang++
-        run: |
-          mkdir -p build
-          cd build
-          cmake .. -DCMAKE_INSTALL_PREFIX=/usr
       - name: Build
         run: |
+          mkdir build
           cd build
-          make -j
-          make install
+          cmake .. -DFLUID_WITH_DOCUMENTATION:BOOL=OFF -DFLUID_WITH_DEMO:BOOL=OFF
+          cmake --build .

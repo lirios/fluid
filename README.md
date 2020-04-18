@@ -4,6 +4,7 @@ Fluid
 [![License](https://img.shields.io/badge/license-MPL2-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 [![GitHub release](https://img.shields.io/github/release/lirios/fluid.svg)](https://github.com/lirios/fluid)
 [![Build Status](https://travis-ci.org/lirios/fluid.svg?branch=develop)](https://travis-ci.org/lirios/fluid)
+[![CI](https://github.com/lirios/fluid/workflows/CI/badge.svg?branch=develop)](https://github.com/lirios/fluid/actions?query=workflow%3ACI)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/fluid.svg)](https://github.com/lirios/fluid/issues)
 
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications,

@@ -11,7 +11,7 @@ on:
       - develop
 
 jobs:
-  linux-qt514:
+  linux-qt514-gcc:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +19,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:beineri/opt-qt-5.14.1-bionic
           sudo apt-get update
-          sudo apt-get install -y qt514-meta-full
+          sudo apt-get install -y qt514-meta-full libwayland-dev
           source /opt/qt514/bin/qt514-env.sh
       - uses: actions/checkout@v2
         with:
@@ -46,3 +46,30 @@ jobs:
         with:
           name: fluid-artifacts-qt514.tar.gz
           path: build/artifacts/fluid-artifacts.tar.gz
+
+  linux-qt514-clang:
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo add-apt-repository ppa:beineri/opt-qt-5.14.1-bionic
+          sudo apt-get update
+          sudo apt-get install -y qt514-meta-full libwayland-dev clang
+          source /opt/qt514/bin/qt514-env.sh
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Prepare
+        env:
+          CC: clang
+          CXX: clang++
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+      - name: Build
+        run: |
+          cd build
+          make -j
+          make install

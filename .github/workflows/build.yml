@@ -30,7 +30,8 @@ jobs:
           if [ -n "${{ github.base_ref }}" ]; then
             echo "##[set-output name=branch;]${{ github.base_ref }}"
           else
-            echo "##[set-output name=branch;]${{ github.ref }}"
+            github_ref=${{ github.ref }}
+            echo "##[set-output name=branch;]${github_ref##*/}"
           fi
       - name: Install dependencies
         run: |

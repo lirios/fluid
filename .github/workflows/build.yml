@@ -133,7 +133,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ../Qt
-          key: ${{ runner.os }}-QtCache
+          key: ${{ runner.os }}-QtCache-${{ matrix.qt }}
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:

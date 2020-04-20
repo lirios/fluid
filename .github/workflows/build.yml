@@ -33,9 +33,15 @@ jobs:
             github_ref=${{ github.ref }}
             echo "##[set-output name=branch;]${github_ref##*/}"
           fi
+      - name: Qt version identifier
+        id: qt_version
+        shell: bash
+        run: |
+          qtverid=`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          echo "##[set-output name=id;]${qtverid}"
       - name: Install dependencies
         run: |
-          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          QTPFX=qt${{ steps.qt_version.outputs.id }}
           set -x
           wget -qO - 'http://archive.neon.kde.org/public.key' | sudo apt-key add -
           sudo apt-add-repository http://archive.neon.kde.org/user
@@ -65,15 +71,16 @@ jobs:
           repository: lirios/cmake-shared
           workflow_path: .github/workflows/build.yml
           artifact_name: artifacts-${{ steps.extract_branch.outputs.branch }}
+          save_as: cmake-shared.zip
       - name: Uncompress artifacts
         run: |
+          set -x
           tar xf cmake-shared.tar.gz -C /
-          rm -f artifacts-${{ steps.extract_branch.outputs.branch }}
-          rm -f cmake-shared.tar.gz
+          rm -f cmake-shared.zip cmake-shared.tar.gz
       - uses: actions/checkout@v2
       - name: Build
         run: |
-          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          QTPFX=qt${{ steps.qt_version.outputs.id }}
           set -x
           export QT_PATH=/opt/${QTPFX}
           export PATH=$QT_PATH/bin:$PATH
@@ -90,7 +97,7 @@ jobs:
           sudo make install
       - name: Test
         run: |
-          QTPFX=qt`echo "${{ matrix.qt }}" | awk -F. '{ print $1$2 }'`
+          QTPFX=qt${{ steps.qt_version.outputs.id }}
           set -x
           export QT_PATH=/opt/${QTPFX}
           export PATH=$QT_PATH/bin:$PATH
@@ -108,7 +115,7 @@ jobs:
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v1
         with:
-          name: artifacts-${{ matrix.compiler }}-${{ matrix.qt }}-${{ steps.extract_branch.outputs.branch }}
+          name: artifacts-${{ matrix.compiler }}-${{ steps.qt_version.outputs.id }}-${{ steps.extract_branch.outputs.branch }}
           path: build/artifacts/
 
   windows:

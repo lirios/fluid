@@ -19,8 +19,8 @@ jobs:
           - gcc
           - clang
         qt:
-          - 5.12.7
-          - 5.14.1
+          - 5.12.8
+          - 5.14.2
     runs-on: ubuntu-18.04
     steps:
       - name: Extract branch name
@@ -123,7 +123,7 @@ jobs:
     strategy:
       matrix:
         qt:
-          - 5.12.7
+          - 5.12.8
     runs-on: windows-2016
     steps:
       - name: Cache Qt

@@ -122,6 +122,8 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:
       matrix:
+        compiler:
+          - win32_msvc2017
         qt:
           - 5.12.8
     runs-on: windows-2016
@@ -136,7 +138,7 @@ jobs:
         uses: jurplel/install-qt-action@v2
         with:
           version: ${{ matrix.qt }}
-          arch: win32_msvc2017
+          arch: ${{ matrix.compiler }}
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
       - uses: actions/checkout@v2
         with:

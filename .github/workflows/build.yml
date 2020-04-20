@@ -123,7 +123,7 @@ jobs:
     strategy:
       matrix:
         qt:
-          - 5.12.7
+          - 5.12.8
     runs-on: windows-2016
     steps:
       - name: Cache Qt
@@ -145,5 +145,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake .. -DFLUID_WITH_DOCUMENTATION:BOOL=OFF -DFLUID_WITH_DEMO:BOOL=OFF
+          cmake ..
           cmake --build .

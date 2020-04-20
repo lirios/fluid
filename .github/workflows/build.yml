@@ -19,7 +19,7 @@ jobs:
           - gcc
           - clang
         qt:
-          - 5.12.8
+          - 5.12.7
           - 5.14.2
     runs-on: ubuntu-18.04
     steps:

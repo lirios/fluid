@@ -118,6 +118,99 @@ jobs:
           name: artifacts-${{ matrix.compiler }}-${{ steps.qt_version.outputs.id }}-${{ steps.extract_branch.outputs.branch }}
           path: build/artifacts/
 
+  # ppa:beineri is built with -no-egl and cannot be used for some repositories like eglfs
+  neon:
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    strategy:
+      matrix:
+        compiler:
+          - gcc
+          - clang
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            echo "##[set-output name=branch;]${{ github.base_ref }}"
+          else
+            github_ref=${{ github.ref }}
+            echo "##[set-output name=branch;]${github_ref##*/}"
+          fi
+      - name: Install dependencies
+        run: |
+          set -x
+          wget -qO - 'http://archive.neon.kde.org/public.key' | sudo apt-key add -
+          sudo apt-add-repository http://archive.neon.kde.org/user
+          sudo apt-get update
+          sudo apt-get install -y \
+            extra-cmake-modules \
+            dbus-x11 \
+            xvfb \
+            libgl1-mesa-dev \
+            libwayland-dev \
+            qtbase5-dev \
+            qtbase5-private-dev \
+            qtdeclarative5-dev \
+            qtquickcontrols2-5-dev \
+            qttools5-dev \
+            libqt5waylandclient5-dev \
+            libqt5svg5-dev \
+            qdoc-qt5 \
+            qml-module-qtquick2 \
+            qml-module-qtquick-window2 \
+            qml-module-qtquick-layouts \
+            qml-module-qtquick-controls2 \
+            qml-module-qtquick-templates2 \
+            qml-module-qtgraphicaleffects \
+            qml-module-qttest
+      - name: Fetch cmake-shared artifact
+        uses: liri-infra/fetch-artifact@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: lirios/cmake-shared
+          workflow_path: .github/workflows/build.yml
+          artifact_name: artifacts-${{ steps.extract_branch.outputs.branch }}
+          save_as: cmake-shared.zip
+      - name: Uncompress artifacts
+        run: |
+          set -x
+          for what in cmake-shared; do
+              sudo tar xf ${what}.tar.gz -C /
+              rm -f ${what}.zip ${what}.tar.gz
+          done
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          set -x
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            export CC=clang
+            export CXX=clang++
+          fi
+          mkdir -p build
+          cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+          make -j $(getconf _NPROCESSORS_ONLN)
+          sudo make install
+      - name: Test
+        run: |
+          set -x
+          cd build
+          dbus-run-session -- xvfb-run -a -s "-screen 0 800x600x24" ctest -V
+      - name: Package
+        if: github.event_name == 'push'
+        run: |
+          cd build
+          mkdir -p artifacts
+          tar czf artifacts/fluid.tar.gz -T install_manifest.txt
+      - name: Archive result
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v1
+        with:
+          name: artifacts-${{ matrix.compiler }}-${{ steps.extract_branch.outputs.branch }}
+          path: build/artifacts/
+
   windows:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     strategy:

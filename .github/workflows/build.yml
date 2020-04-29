@@ -240,5 +240,5 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake .. -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
           cmake --build .

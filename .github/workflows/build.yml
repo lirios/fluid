@@ -10,6 +10,9 @@ on:
       - master
       - develop
 
+env:
+  CLAZY_CHECKS: "level1"
+
 jobs:
   linux:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
@@ -59,14 +62,16 @@ jobs:
       - name: Build
         run: |
           set -x
-          if [ "${{ matrix.compiler }}" == "clang" ]; then
-            export CC=clang
-            export CXX=clang++
-          fi
           mkdir -p build
           cd build
           # OpenSuSE containers don't have any documentation
-          cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            export CC=clang
+            export CXX=clang++
+            cmake .. -DLIRI_ENABLE_CLAZY:BOOL=ON -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          else
+            cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          fi
           make -j $(getconf _NPROCESSORS_ONLN)
           sudo make install
       - name: Test

@@ -114,13 +114,6 @@ jobs:
           cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=ON -DFLUID_WITH_DEMO:BOOL=OFF -DFLUID_WITH_QML_MODULES:BOOL=OFF -DFLUID_INSTALL_ICONS:BOOL=OFF
           make -j $(getconf _NPROCESSORS_ONLN)
           sudo make install
-          cp -R /usr/share/doc/fluid/html/ .
-      - name: Deploy
-        if: github.event_name == 'push'
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          BRANCH: gh-pages
-          FOLDER: html
 
   windows:
     if: "!contains(github.event.head_commit.message, 'ci skip')"

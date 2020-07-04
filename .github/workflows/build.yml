@@ -116,7 +116,7 @@ jobs:
           sudo make install
           cp -R /usr/share/doc/fluid/html/ ..
       - name: Deploy
-        if: github.event_name == 'push'
+        #if: github.event_name == 'push'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           BRANCH: gh-pages

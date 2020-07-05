@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 /*!
-    \qmltype Card
+    \qmltype Fluid.Controls.Card
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 

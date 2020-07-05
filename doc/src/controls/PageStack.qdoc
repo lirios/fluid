@@ -27,17 +27,17 @@
 /*!
     \qmlsignal Fluid.Controls::PageStack::pushed(Item page)
 
-    This signal is emitted when an item is pushed to the stack.
+    This signal is emitted when a \a page is pushed to the stack.
 */
 
 /*!
     \qmlsignal Fluid.Controls::PageStack::popped(Item page)
 
-    This signal is emitted when an item is popped from the stack.
+    This signal is emitted when a \a page is popped from the stack.
 */
 
 /*!
     \qmlsignal Fluid.Controls::PageStack::replaced(Item page)
 
-    This signal is emitted when an item is replaced in the stack.
+    This signal is emitted when a \a page is replaced in the stack.
 */

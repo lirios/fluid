@@ -15,7 +15,7 @@
 #include "coreutils.h"
 
 /*!
-    \qmltype Utils
+    \qmltype Fluid.Core::Utils
     \inqmlmodule Fluid.Core
     \ingroup fluidcore
 

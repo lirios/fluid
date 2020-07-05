@@ -89,11 +89,11 @@
 /*!
     \qmlmethod int Fluid.Controls::Units::Units::gu(real size)
 
-    Returns a round size in pixels multiplied by grid unit.
+    Returns a round \a size in pixels multiplied by grid unit.
 */
 
 /*!
     \qmlmethod int Fluid.Controls::Units::Units::roundToIconSize(real size)
 
-    Returns the size in pixel closes to the icon size.
+    Returns the size in pixel closes to the icon \a size.
 */

@@ -14,8 +14,8 @@
 
 #include "color.h"
 #include "controlsplugin.h"
+#include "controlsutils.h"
 #include "iconthemeimageprovider.h"
-#include "utils.h"
 
 static QObject *colorProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -29,7 +29,7 @@ static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(jsEngine);
 
-    return new Utils(engine->baseUrl());
+    return new ControlsUtils(engine->baseUrl());
 }
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
@@ -40,7 +40,7 @@ void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     engine->setBaseUrl(baseUrl());
 
     // For system icons
-    engine->addImageProvider(QLatin1String("fluidicontheme"), new IconThemeImageProvider());
+    engine->addImageProvider(QStringLiteral("fluidicontheme"), new IconThemeImageProvider());
 }
 
 void FluidControlsPlugin::registerTypes(const char *uri)
@@ -48,5 +48,5 @@ void FluidControlsPlugin::registerTypes(const char *uri)
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
 
     qmlRegisterSingletonType<Color>(uri, 1, 0, "Color", colorProvider);
-    qmlRegisterSingletonType<Utils>(uri, 1, 0, "Utils", utilsProvider);
+    qmlRegisterSingletonType<ControlsUtils>(uri, 1, 0, "Utils", utilsProvider);
 }

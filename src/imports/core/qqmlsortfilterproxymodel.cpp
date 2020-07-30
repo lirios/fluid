@@ -50,6 +50,11 @@ int QQmlSortFilterProxyModel::count() const
     return rowCount();
 }
 
+QHash<int, QByteArray> QQmlSortFilterProxyModel::roleNames() const
+{
+    return sourceModel() ? sourceModel()->roleNames() : QHash<int, QByteArray>();
+}
+
 const QString &QQmlSortFilterProxyModel::filterRoleName() const
 {
     return m_filterRoleName;
@@ -127,12 +132,13 @@ void QQmlSortFilterProxyModel::setFilterExpression(const QQmlScriptString &filte
     m_filterScriptString = filterScriptString;
     QQmlContext *context = new QQmlContext(qmlContext(this));
 
+    auto roles = roleNames().values();
     QVariantMap map;
-    for (const QByteArray &roleName : roleNames().values())
+    for (const QByteArray &roleName : roles)
         map.insert(QString::fromLatin1(roleName), QVariant());
 
-    context->setContextProperty(QLatin1String("model"), map);
-    context->setContextProperty(QLatin1String("index"), -1);
+    context->setContextProperty(QStringLiteral("model"), map);
+    context->setContextProperty(QStringLiteral("index"), -1);
 
     delete (m_filterExpression);
     m_filterExpression = new QQmlExpression(m_filterScriptString, context, 0, this);
@@ -163,6 +169,7 @@ void QQmlSortFilterProxyModel::setSortOrder(Qt::SortOrder sortOrder)
 {
     if (!m_sortRoleName.isEmpty())
         sort(0, sortOrder);
+    emit sortOrderChanged();
 }
 
 const QQmlScriptString &QQmlSortFilterProxyModel::sortExpression() const
@@ -178,14 +185,15 @@ void QQmlSortFilterProxyModel::setSortExpression(const QQmlScriptString &compare
     m_compareScriptString = compareScriptString;
     QQmlContext *context = new QQmlContext(qmlContext(this));
 
+    auto roles = roleNames().values();
     QVariantMap map;
-    for (const QByteArray &roleName : roleNames().values())
+    for (const QByteArray &roleName : roles)
         map.insert(QString::fromLatin1(roleName), QVariant());
 
-    context->setContextProperty(QLatin1String("modelLeft"), map);
-    context->setContextProperty(QLatin1String("indexLeft"), -1);
-    context->setContextProperty(QLatin1String("modelRight"), map);
-    context->setContextProperty(QLatin1String("indexRight"), -1);
+    context->setContextProperty(QStringLiteral("modelLeft"), map);
+    context->setContextProperty(QStringLiteral("indexLeft"), -1);
+    context->setContextProperty(QStringLiteral("modelRight"), map);
+    context->setContextProperty(QStringLiteral("indexRight"), -1);
 
     delete (m_compareExpression);
     m_compareExpression = new QQmlExpression(m_compareScriptString, context, 0, this);
@@ -209,8 +217,8 @@ bool QQmlSortFilterProxyModel::filterAcceptsRow(int source_row,
         QVariantMap map = modelDataMap(modelIndex);
 
         QQmlContext context(qmlContext(this));
-        context.setContextProperty(QLatin1String("model"), map);
-        context.setContextProperty(QLatin1String("index"), source_row);
+        context.setContextProperty(QStringLiteral("model"), map);
+        context.setContextProperty(QStringLiteral("index"), source_row);
         QQmlExpression expression(m_filterScriptString, &context, 0);
         QVariant result = expression.evaluate();
 
@@ -227,10 +235,10 @@ bool QQmlSortFilterProxyModel::lessThan(const QModelIndex &source_left,
 {
     if (!m_compareScriptString.isEmpty()) {
         QQmlContext context(qmlContext(this));
-        context.setContextProperty(QLatin1String("modelLeft"), modelDataMap(source_left));
-        context.setContextProperty(QLatin1String("indexLeft"), source_left.row());
-        context.setContextProperty(QLatin1String("modelRight"), modelDataMap(source_right));
-        context.setContextProperty(QLatin1String("indexRight"), source_right.row());
+        context.setContextProperty(QStringLiteral("modelLeft"), modelDataMap(source_left));
+        context.setContextProperty(QStringLiteral("indexLeft"), source_left.row());
+        context.setContextProperty(QStringLiteral("modelRight"), modelDataMap(source_right));
+        context.setContextProperty(QStringLiteral("indexRight"), source_right.row());
 
         QQmlExpression expression(m_compareScriptString, &context, 0);
         QVariant result = expression.evaluate();
@@ -275,7 +283,7 @@ QVariantMap QQmlSortFilterProxyModel::modelDataMap(const QModelIndex &modelIndex
 {
     QVariantMap map;
     QHash<int, QByteArray> roles = roleNames();
-    for (QHash<int, QByteArray>::const_iterator it = roles.begin(); it != roles.end(); ++it)
+    for (QHash<int, QByteArray>::const_iterator it = roles.constBegin(); it != roles.constEnd(); ++it)
         map.insert(QString::fromLatin1(it.value()), sourceModel()->data(modelIndex, it.key()));
     return map;
 }

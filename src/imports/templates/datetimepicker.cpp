@@ -20,7 +20,7 @@
     \instantiates DateTimePicker
     \inqmlmodule Fluid.Controls
 
-    \brief Control to select a both date and time
+    \brief Control to select a both date and time.
 
     Stand-alone control to select both date and time.
 

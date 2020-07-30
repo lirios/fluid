@@ -40,8 +40,47 @@ macx {
     QMAKE_BUNDLE_DATA += APP_QML_FILES
 }
 
+ios {
+    # Bundle Fluid QML plugins with the application
+    APP_QML_FILES_Core.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Core/*qml*)
+    APP_QML_FILES_Core.path = qml/Fluid/Core
+    APP_QML_FILES_Controls.files = \
+        $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/*qml*) \
+        $$OUT_PWD/../fluid/qml/Fluid/Controls/icons
+    APP_QML_FILES_Controls.path = qml/Fluid/Controls
+    APP_QML_FILES_ControlsPrivate.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Controls/Private/*qml*)
+    APP_QML_FILES_ControlsPrivate.path = qml/Fluid/Controls/Private
+    APP_QML_FILES_Effects.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Effects/*qml*)
+    APP_QML_FILES_Effects.path = qml/Fluid/Effects
+    APP_QML_FILES_Layouts.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Layouts/*qml*)
+    APP_QML_FILES_Layouts.path = qml/Fluid/Layouts
+    APP_QML_FILES_Templates.files = $$files($$OUT_PWD/../fluid/qml/Fluid/Templates/*qml*)
+    APP_QML_FILES_Templates.path = qml/Fluid/Templates
+    QMAKE_BUNDLE_DATA += \
+        APP_QML_FILES_Core \
+        APP_QML_FILES_Controls \
+        APP_QML_FILES_ControlsPrivate \
+        APP_QML_FILES_Effects \
+        APP_QML_FILES_Layouts \
+        APP_QML_FILES_Templates
+}
+
 win32 {
     WINDEPLOYQT_OPTIONS = -qmldir $$OUT_PWD/../fluid/qml/Fluid
+}
+
+qtConfig(static) {
+    QMAKE_LIBDIR += \
+        $$OUT_PWD/../fluid/qml/Fluid/Core \
+        $$OUT_PWD/../fluid/qml/Fluid/Controls \
+        $$OUT_PWD/../fluid/qml/Fluid/Controls/Private \
+        $$OUT_PWD/../fluid/qml/Fluid/Templates
+    QTPLUGIN += \
+        qsvg \
+        fluidcoreplugin \
+        fluidcontrolsplugin \
+        fluidcontrolsprivateplugin \
+        fluidtemplatesplugin
 }
 
 # Default rules for deployment.

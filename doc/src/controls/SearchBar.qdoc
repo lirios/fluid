@@ -25,13 +25,13 @@
 */
 
 /*!
-    \qmlproperty string SearchBar::searchText
+    \qmlproperty string Fluid.Controls::SearchBar::searchText
 
     The current search text in the search bar typed in so far.
 */
 
 /*!
-    \qmlproperty model SearchBar::searchSuggestions
+    \qmlproperty model Fluid.Controls::SearchBar::searchSuggestions
 
     The suggestions to display.
 
@@ -40,7 +40,7 @@
 */
 
 /*!
-    \qmlproperty Component SearchBar::suggestionDelegate
+    \qmlproperty Component Fluid.Controls::SearchBar::suggestionDelegate
 
     The delegate item for the suggestion list view.
 
@@ -48,7 +48,7 @@
 */
 
 /*!
-    \qmlproperty string SearchBar::suggestionTextRole
+    \qmlproperty string Fluid.Controls::SearchBar::suggestionTextRole
 
     The model type that contains the text to display in the suggestion delegate
 
@@ -56,43 +56,43 @@
 */
 
 /*!
-    \qmlproperty string SearchBar::searchPlaceHolder
+    \qmlproperty string Fluid.Controls::SearchBar::searchPlaceHolder
 
     The string to display when the search field is empty
 */
 
 /*!
-    \qmlproperty int SearchBar::cardWidth
+    \qmlproperty int Fluid.Controls::SearchBar::cardWidth
 
     The width of the search card. By default the search bar centers in the parent with a margin of 64 each side
 */
 
 /*!
-    \qmlproperty int SearchBar::suggestionsHeight
+    \qmlproperty int Fluid.Controls::SearchBar::suggestionsHeight
 
     The viewable area of the suggestions list until it begins scrolling.
 */
 
 /*!
-    \qmlproperty color SearchBar::waveColor
+    \qmlproperty color Fluid.Controls::SearchBar::waveColor
 
     The background color of the expanded search bar.
 */
 
 /*!
-    \qmlproperty bool SearchBar::persistent
+    \qmlproperty bool Fluid.Controls::SearchBar::persistent
 
     Whether the SearchBar is persistent or expandable
 */
 
 /*!
-    \qmlproperty bool SearchBar::expanded
+    \qmlproperty bool Fluid.Controls::SearchBar::expanded
 
     Whether the SearchBar is currently open
 */
 
 /*!
-    \qmlproperty font SearchBar::searchTextFont
+    \qmlproperty font Fluid.Controls::SearchBar::searchTextFont
 
     The font of text in search TextInput box
 
@@ -100,25 +100,25 @@
 */
 
 /*!
-    \qmlproperty model SearchBar::searchResults
+    \qmlproperty model Fluid.Controls::SearchBar::searchResults
 
     The model containing the search results
 */
 
 /*!
-    \qmlsignal SearchBar::search(string query)
+    \qmlsignal Fluid.Controls::SearchBar::search(string query)
 
     Is emitted, when the user searches for a query. The \a query parameter contains the search query as string. Use this signal to provide search results.
 */
 
 /*!
-    \qmlmethod void SearchBar::open()
+    \qmlmethod void Fluid.Controls::SearchBar::open()
 
     Opens the search bar
 */
 
 /*!
-    \qmlmethod void SearchBar::close()
+    \qmlmethod void Fluid.Controls::SearchBar::close()
 
     Closes the search bar
 */

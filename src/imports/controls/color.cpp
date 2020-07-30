@@ -19,7 +19,7 @@
     \instantiates Color
     \inqmlmodule Fluid.Controls
 
-    \brief Utility functions for colors
+    \brief Utility functions for colors.
 
     Utility functions to manipulate colors.
 */
@@ -32,7 +32,7 @@ Color::Color(QObject *parent)
 /*!
     \qmlmethod color Fluid.Controls::Color::transparent(color color, real alpha)
 
-    A utility method for changing the alpha on colors.
+    A utility method for changing the \a alpha on \a color.
     Returns a new object, and does not modify the original color at all.
 */
 QColor Color::transparent(const QColor &color, qreal alpha)
@@ -43,7 +43,7 @@ QColor Color::transparent(const QColor &color, qreal alpha)
 /*!
     \qmlmethod color Fluid.Controls::Color::blend(color color1, color color2, real alpha)
 
-    Blend \a color1 and \a color2 together and set alpha to \a a.
+    Blend \a color1 and \a color2 together and set alpha to \a alpha.
 */
 QColor Color::blend(const QColor &color1, const QColor &color2, qreal alpha)
 {

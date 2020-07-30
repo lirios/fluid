@@ -1,6 +1,6 @@
 TARGET = fluidcontrolsplugin
 TARGETPATH = Fluid/Controls
-IMPORT_VERSION = 1.0
+IMPORT_VERSION = 1.1
 
 QT += qml quick quickcontrols2 svg
 

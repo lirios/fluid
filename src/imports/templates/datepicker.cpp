@@ -20,7 +20,7 @@
     \instantiates DatePicker
     \inqmlmodule Fluid.Controls
 
-    \brief Control to select a single date
+    \brief Control to select a single date.
 
     Stand-alone control to select a single date from a calendar.
 

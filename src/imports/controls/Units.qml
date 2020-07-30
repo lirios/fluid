@@ -17,72 +17,17 @@ pragma Singleton
 import QtQuick 2.10
 import Fluid.Core 1.0
 
-/*!
-    \qmltype Units
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief Units.
-*/
 Item {
-    /*!
-        \qmlproperty int gridUnit
-
-        Fundamental unit of space for sizes depending on the current font.
-        It correspond to the capital letter M width in pixel.
-    */
     readonly property int gridUnit: textMetrics.height
 
-    /*!
-        \qmlproperty real smallSpacing
-
-        The amount of spacing that should be used around smaller UI
-        elements. It can be used as margin around button box and
-        spacing between buttons.
-    */
     readonly property real smallSpacing: 8
-
-    /*!
-        \qmlproperty real mediumSpacing
-
-        The amount of spacing that should be used inside medium UI
-        elements such as padding between title and body text in a dialog box.
-    */
     readonly property real mediumSpacing: 20
-
-    /*!
-        \qmlproperty real largeSpacing
-
-        The amount of spacing that should be used inside bigger UI
-        elements such as padding in a dialog box.
-    */
     readonly property real largeSpacing: 24
 
-    /*!
-        \qmlproperty int shortDuration
-
-        Duration for short animations to make UI events noticeable.
-    */
     readonly property int shortDuration: 100
-
-    /*!
-        \qmlproperty int mediumDuration
-
-        Duration for medium length animations.
-    */
     readonly property int mediumDuration: 200
-
-    /*!
-        \qmlproperty int longDuration
-
-        Duration for long animations such as windows opening or closing.
-    */
     readonly property int longDuration: 400
 
-    /*!
-        \qmlproperty object iconSizes
-        Standard icon sizes.
-    */
     readonly property QtObject iconSizes: QtObject {
         readonly property int tiny: 8
         readonly property int small: 16
@@ -98,20 +43,10 @@ Item {
         text: "M"
     }
 
-    /*!
-        \qmlmethod int Units::gu(real size)
-
-        Returns a round size in pixels multiplied by grid unit.
-    */
     function gu(x) {
         return Math.round(x * gridUnit);
     }
 
-    /*!
-        \qmlmethod int Units::roundToIconSize(real size)
-
-        Returns the size in pixel closes to the icon size.
-    */
     function roundToIconSize(x) {
         // Find the size closest to icon size
         if (x <= 0)

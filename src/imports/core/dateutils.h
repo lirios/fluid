@@ -34,8 +34,8 @@ public:
 
     Q_INVOKABLE QString formattedDate(const QDate &date) const;
     Q_INVOKABLE QString formatDuration(qlonglong duration,
-                                       DurationFormat format = DurationFormat::Short,
-                                       DurationType type = DurationType::Any) const;
+                                       DateUtils::DurationFormat format = DateUtils::DurationFormat::Short,
+                                       DateUtils::DurationType type = DateUtils::DurationType::Any) const;
     Q_INVOKABLE QString friendlyTime(const QDateTime &time, bool standalone) const;
     Q_INVOKABLE QString dayOfWeek(const QDate &date) const;
 };

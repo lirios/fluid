@@ -1,0 +1,199 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 The Qt Company Ltd.
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype SmoothFadeImage
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Displays an image and smoothly fade when the source is changed.
+
+    This component can be used in place of an Image when a smooth fade animation
+    between two sources is needed.
+
+    When the source is changed and the fade animation ends, the image loaded before
+    is unloaded; this means that only one image at a time is loaded.
+
+    Images are loaded asynchronously and are not cache, so unlike the Image
+    component the \c asynchronous and \c cache properties are not available.
+
+    Example of usage:
+    \code
+    import QtQuick 2.10
+    import Fluid.Controls 1.0
+
+    Item {
+        width: 128
+        height: 128
+
+        SmoothFadeImage {
+            anchors.fill: parent
+            source: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Qt_logo_2015.svg/1380px-Qt_logo_2015.svg.png"
+            fillMode: Image.PreserveAspectFit
+            smooth: true
+            fadeDuration: 400
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: parent.source = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Qt_logo_2016.svg/1280px-Qt_logo_2016.svg.png"
+            }
+        }
+    }
+    \endcode
+*/
+
+/*!
+    \qmlproperty url Fluid.Controls::SmoothFadeImage::source
+
+    The image being displayed.
+    SmoothFadeImage can handle any image format supported by Qt, loaded
+    from any URL scheme supported by Qt.
+
+    \sa Image::source
+*/
+
+/*!
+    \qmlproperty enumeration Fluid.Controls::SmoothFadeImage::fillMode
+
+    Set this property to define what happens when the source image has a
+    different size than the item.
+
+    \list
+      \li Image.Stretch - the image is scaled to fit (default)
+      \li Image.PreserveAspectFit - the image is scaled uniformly to fit without cropping
+      \li Image.PreserveAspectCrop - the image is scaled uniformly to fill, cropping if necessary
+      \li Image.Tile - the image is duplicated horizontally and vertically
+      \li Image.TileVertically - the image is stretched horizontally and tiled vertically
+      \li Image.TileHorizontally - the image is stretched vertically and tiled horizontally
+      \li Image.Pad - the image is not transformed
+    \endlist
+
+    Defaults to \c Image.Stretch.
+
+    Note that \c clip is false by default which means that the item might
+    paint outside its bounding rectangle even if the fillMode is set to PreserveAspectCrop.
+*/
+
+/*!
+    \qmlproperty int Fluid.Controls::SmoothFadeImage::fadeDuration
+
+    Set this to change the fade animation time (in milliseconds).
+    Default value is 250 ms.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::SmoothFadeImage::running
+    \readonly
+
+    This property holds whether the fade animation is running or not.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::SmoothFadeImage::animationEnabled
+
+    Set this property to false to disable the fade animation.
+    If the animation is disable, SmoothFadeImage behaves like a normal Image.
+
+    The fade animation is enabled by default.
+*/
+
+/*!
+    \qmlproperty size Fluid.Controls::SmoothFadeImage::sourceSize
+
+    This property holds the actual width and height of the loaded image.
+
+    Unlike the \c width and \c height properties, which scale the painting of the
+    image, this property sets the actual number of pixels stored for the
+    loaded image so that large images do not use more memory than necessary.
+
+    For example, this ensures the image in memory is no larger than
+    1024x1024 pixels, regardless of the SmoothFadeImage's width and height values:
+
+    \code
+        Rectangle {
+            width: ...
+            height: ...
+
+            Image {
+                anchors.fill: parent
+                source: "reallyBigImage.jpg"
+                sourceSize.width: 1024
+                sourceSize.height: 1024
+            }
+        }
+    \endcode
+
+    If the image's actual size is larger than the sourceSize, the image is
+    scaled down. If only one dimension of the size is set to greater than 0,
+    the other dimension is set in proportion to preserve the source image's
+    aspect ratio. (The \c fillMode is independent of this.)
+
+    If both the sourceSize.width and sourceSize.height are set the image
+    will be scaled down to fit within the specified size, maintaining the
+    image's aspect ratio. The actual size of the image after scaling is
+    available via \c Item::implicitWidth and \c Item::implicitHeight.
+
+    If the source is an intrinsically scalable image (eg. SVG), this property
+    determines the size of the loaded image regardless of intrinsic size.
+    Avoid changing this property dynamically; rendering an SVG is slow compared
+    to an image.
+
+    If the source is a non-scalable image (eg. JPEG), the loaded image will be
+    no greater than this property specifies. For some formats (currently only
+    JPEG), the whole image will never actually be loaded into memory.
+
+    sourceSize can be cleared to the natural size of the image by setting
+    sourceSize to undefined.
+
+    Note: Changing this property dynamically causes the image source to be
+    reloaded, potentially even from the network, if it is not in the disk cache.
+*/
+
+/*!
+    \qmlproperty enumeration Fluid.Controls::SmoothFadeImage::status
+    \readonly
+
+    This property holds the status of image loading. It can be one of:
+
+    \list
+      \li Image.Null - no image has been set
+      \li Image.Ready - the image has been loaded
+      \li Image.Loading - the image is currently being loaded
+      \li Image.Error - an error occurred while loading the image
+    \endlist
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::SmoothFadeImage::smooth
+
+    This property holds whether the image is smoothly filtered when scaled or
+    transformed. Smooth filtering gives better visual quality, but it may be
+    slower on some hardware.
+
+    If the image is displayed at its natural size, this property has no
+    visual or performance effect.
+
+    By default, this property is set to \c true.
+*/
+
+/*!
+    \qmlsignal Fluid.Controls::SmoothFadeImage::imageSwapped()
+
+    This signal is emitted when the swap between the old source and the new
+    one has happened.
+*/

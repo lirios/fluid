@@ -69,7 +69,7 @@ Page {
 
     Keys.onReleased: {
         // Catches the Android back button event and pops the page, if it isn't the top page
-        if (event.key === Qt.Key_Back && StackView.view.depth > 1) {
+        if (event.key === Qt.Key_Back && StackView.view && StackView.view.depth > 1) {
             pop(event, false);
             event.accepted = true;
         }
@@ -83,6 +83,9 @@ Page {
 
     header: null
     footer: null
+
+    contentWidth: content.childrenRect.width
+    contentHeight: content.childrenRect.height
 
     FluidControls.AppBar {
         id: appBar

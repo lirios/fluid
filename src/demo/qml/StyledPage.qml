@@ -17,20 +17,21 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 
 Page {
-    header: Row {
+    Material.theme: themeCombo.currentIndex === 0 ? Material.Light : Material.Dark
+
+    header: ToolBar {
         spacing: 16
+        padding: 8
 
-        RadioButton {
-            id: lightRadio
-            text: qsTr("Light")
-            checked: true
-        }
+        Material.background: Material.shade(Material.primary, Material.ShadeA700)
+        Material.theme: Material.Dark
 
-        RadioButton {
-            id: darkRadio
-            text: qsTr("Dark")
+        ComboBox {
+            id: themeCombo
+            model: [qsTr("Light"), qsTr("Dark")]
+
+            Material.elevation: 0
+            Material.theme: Material.Dark
         }
     }
-
-    Material.theme: lightRadio.checked ? Material.Light : Material.Dark
 }

@@ -13,28 +13,82 @@
  */
 
 import QtQuick 2.10
+import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.3
-import Fluid.Controls 1.1
+import Fluid.Controls 1.0 as FluidControls
 import "../.."
 
 Page {
-    ListView {
+    ScrollView {
         anchors.fill: parent
-        model: ListModel {
-            ListElement { title: "List Item 1"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
-            ListElement { title: "List Item 2"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
-            ListElement { title: "List Item 3"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
-            ListElement { title: "List Item 4"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
-            ListElement { title: "List Item 5"; source: "qrc:/qml/Pages/Controls/SubPage.qml" }
-        }
-        header: Subheader {
-            text: "Header"
-        }
-        delegate: ListItem {
-            text: model.title
-            onClicked: pageStack.push(model.source)
-        }
+        clip: true
 
-        ScrollIndicator.vertical: ScrollIndicator {}
+        ColumnLayout {
+            width: parent.width
+
+            FluidControls.ListItem {
+                text: "ListItem with only text"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text"
+                subText: "Sub text"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 2/2 lines"
+                subText: "Sub text line 1\nSub text line 2"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 3/3 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3"
+                maximumLineCount: 3
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 4/4 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4"
+                maximumLineCount: 4
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with sub text and 5/3 lines"
+                subText: "Sub text line 1\nSub text line 2\nSub text line 3\nSub text line 4\nSub text line 5"
+                maximumLineCount: 3
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with value text"
+                valueText: "Value"
+            }
+
+            FluidControls.ListItem {
+                icon.source: FluidControls.Utils.iconUrl("action/event")
+                text: "ListItem with icon"
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with custom rightItem"
+                rightItem: Switch {
+                    anchors.centerIn: parent
+                    checked: true
+                }
+            }
+
+            FluidControls.ListItem {
+                text: "ListItem with custom secondaryItem"
+                secondaryItem: Slider {
+                    width: parent.width
+                    from: 0
+                    to: 100
+                    value: 50
+                }
+            }
+
+            Item {
+                Layout.fillHeight: true
+            }
+        }
     }
 }

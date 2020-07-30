@@ -16,7 +16,7 @@ import QtQuick.Controls 2.3 as C
 import QtQuick.Controls.Material 2.3
 
 /*!
-    \qmltype AbstractCard
+    \qmltype Fluid.Templates.Card
     \inqmlmodule Fluid.Templates
     \ingroup fluidtemplates
 

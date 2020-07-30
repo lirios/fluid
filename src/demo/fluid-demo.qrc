@@ -1,0 +1,42 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/balloon.jpg</file>
+        <file>images/materialbg.png</file>
+        <file>qml/icons.txt</file>
+        <file>qml/main.qml</file>
+        <file>qml/Pages/Basic/BusyIndicatorPage.qml</file>
+        <file>qml/Pages/Basic/ButtonPage.qml</file>
+        <file>qml/Pages/Basic/CheckBoxPage.qml</file>
+        <file>qml/Pages/Basic/ProgressBarPage.qml</file>
+        <file>qml/Pages/Basic/RadioButtonPage.qml</file>
+        <file>qml/Pages/Basic/SliderPage.qml</file>
+        <file>qml/Pages/Basic/SwitchPage.qml</file>
+        <file>qml/Pages/Controls/ActionButtonPage.qml</file>
+        <file>qml/Pages/Controls/BottomSheetPage.qml</file>
+        <file>qml/Pages/Controls/CardPage.qml</file>
+        <file>qml/Pages/Controls/ChipPage.qml</file>
+        <file>qml/Pages/Controls/DatePickerPage.qml</file>
+        <file>qml/Pages/Controls/DateTimePickerPage.qml</file>
+        <file>qml/Pages/Controls/DialogsPage.qml</file>
+        <file>qml/Pages/Controls/ListItemPage.qml</file>
+        <file>qml/Pages/Controls/NavDrawerPage.qml</file>
+        <file>qml/Pages/Controls/NavigationListViewPage.qml</file>
+        <file>qml/Pages/Controls/OverlayPage.qml</file>
+        <file>qml/Pages/Controls/PlaceholderPage.qml</file>
+        <file>qml/Pages/Controls/SearchPage.qml</file>
+        <file>qml/Pages/Controls/SnackBarPage.qml</file>
+        <file>qml/Pages/Controls/SubPage.qml</file>
+        <file>qml/Pages/Controls/TimePickerPage.qml</file>
+        <file>qml/Pages/Controls/WavePage.qml</file>
+        <file>qml/Pages/Layouts/AutomaticGridPage.qml</file>
+        <file>qml/Pages/Layouts/ColumnFlowPage.qml</file>
+        <file>qml/Pages/Style/IconsPage.qml</file>
+        <file>qml/Pages/Style/PalettePage.qml</file>
+        <file>qml/Pages/Style/PaletteSwatch.qml</file>
+        <file>qml/Pages/Style/SystemIconsPage.qml</file>
+        <file>qml/Pages/Style/TypographyPage.qml</file>
+        <file>qml/StyledPage.qml</file>
+        <file>qml/StyledPageTwoColumns.qml</file>
+        <file>qml/StyledRectangle.qml</file>
+    </qresource>
+</RCC>

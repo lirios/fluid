@@ -19,205 +19,122 @@ import QtQuick.Controls.Material 2.3
 import Fluid.Core 1.0 as FluidCore
 import Fluid.Effects 1.0 as FluidEffects
 
-/*!
-   \qmltype SnackBar
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
+Item {
+    id: snackBar
 
-   \brief SnackBar provides a brief feedback about an operation.
-
-   \code
-   Page {
-       title: qsTr("Send a message")
-
-       Button {
-           anchors.centerIn: parent
-           text: qsTr("Send Message")
-           onClicked: snackBar.open(qsTr("Message sent"))
-       }
-
-       SnackBar {
-           id: snackBar
-       }
-   }
-   \endcode
-
-    SnackBar provides a brief feedback about an operation through a
-    message at the bottom of the screen.
-
-    It contains a single line of text directly related to the operation performed.
-    There can be a text action, but no icons.
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/snackbars-toasts.html}{Material Design guidelines}.
-*/
-Rectangle {
-    id: control
-
-    /*!
-        \qmlproperty bool opened
-
-        Whether the snack bar is currently open or not.
-    */
-    readonly property bool opened: d.opened
-
-    /*!
-        \qmlproperty int duration
-
-        Amount of time (in ms) to keep the notification visible.
-        The default is 2s.
-    */
+    readonly property bool opened: popup.visible
     property int duration: 2000
+    property bool fullWidth: FluidCore.Device.formFactor === FluidCore.Device.Phone || FluidCore.Device.formFactor === FluidCore.Device.Phablet
 
-    /*!
-        \qmlproperty bool fullWidth
-
-        Whether the bar should take full screen width.
-        The default depends on the device: full width only on phones and tablets.
-    */
-    property bool fullWidth: FluidCore.Device.type === FluidCore.Device.phone || FluidCore.Device.type === FluidCore.Device.phablet
-
-    /*!
-        \qmlsignal clicked()
-
-        This signal is emitted when the button is clicked.
-        The handler is \c onClicked.
-    */
     signal clicked()
 
-    /*!
-        \qmlmethod void SnackBar::open(string text, string buttonText = "")
-
-        Open the bar with the specified \a text and \a buttonText.
-    */
     function open(text, buttonText) {
         snackText.text = text;
         snackButton.text = buttonText;
         snackButton.visible = buttonText !== "";
-        d.opened = true;
-        timer.restart();
+        popup.open();
+        if (timer.running)
+            timer.restart();
     }
 
-    /*!
-        \qmlmethod void SnackBar::close()
-
-        Close the bar.
-    */
     function close() {
-        d.opened = false;
-    }
-
-    states: [
-        State {
-            name: "fullWidth"
-            when: fullWidth
-
-            AnchorChanges {
-                target: control
-                anchors.left: parent.left
-                anchors.right: parent.right
-            }
-        },
-        State {
-            name: "normalWidth"
-            when: !fullWidth
-
-            PropertyChanges {
-                target: control
-                width: snackLayout.implicitWidth
-            }
-            AnchorChanges {
-                target: control
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-        }
-    ]
-
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: d.opened ? 0 : -control.height
-
-    Behavior on anchors.bottomMargin {
-        NumberAnimation { duration: 300 }
-    }
-
-    radius: fullWidth ? 0 : 2
-    color: Material.background
-    height: snackLayout.implicitHeight
-    z: 10000
-
-    layer.enabled: !fullWidth
-    layer.effect: FluidEffects.Elevation {
-        elevation: 1
-    }
-
-    Material.theme: Material.Dark
-
-    QtObject {
-        id: d
-
-        property bool opened: false
+        popup.close();
     }
 
     Timer {
         id: timer
 
-        interval: control.duration
+        interval: snackBar.duration
+        running: popup.visible
 
-        onTriggered: {
-            if (!running)
-                d.opened = false;
-        }
+        onTriggered: popup.close()
     }
 
-    MouseArea {
-        anchors.fill: parent
-    }
+    Popup {
+        id: popup
 
-    RowLayout {
-        id: snackLayout
+        property int offset: 0
 
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: control.fullWidth ? parent.left : undefined
-            right: control.fullWidth ? parent.right : undefined
+        Material.theme: Material.Dark
+
+        modal: false
+        closePolicy: Popup.NoAutoClose
+
+        x: snackBar.fullWidth ? 0 : (snackBar.parent.width - width) / 2
+        y: snackBar.parent.height - offset
+
+        width: snackBar.fullWidth ? snackBar.parent.width : snackLayout.implicitWidth
+        height: snackLayout.implicitHeight
+
+        enter: Transition {
+            NumberAnimation { property: "offset"; from: 0; to: popup.height }
         }
 
-        spacing: 0
-
-        Item {
-            width: 24
+        exit: Transition {
+            NumberAnimation { property: "offset"; from: popup.height; to: 0 }
         }
 
-        Label {
-            id: snackText
+        background: Rectangle {
+            radius: snackBar.fullWidth ? 0 : 2
+            color: Material.background
 
-            verticalAlignment: Text.AlignVCenter
-            maximumLineCount: 2
-            wrapMode: Text.Wrap
-            elide: Text.ElideRight
-
-            Layout.fillWidth: true
-            Layout.minimumWidth: control.fullWidth ? -1 : 288
-            Layout.maximumWidth: control.fullWidth ? -1 : 568
-            Layout.preferredHeight: lineCount == 2 ? 80 : 48
+            layer.enabled: !snackBar.fullWidth
+            layer.effect: FluidEffects.Elevation {
+                elevation: 1
+            }
         }
 
-        Item {
-            id: middleSpacer
-            width: snackButton.text == "" ? 0 : (control.fullWidth ? 24 : 48)
-        }
+        contentItem: Item {
+            implicitWidth: snackLayout.implicitWidth
+            implicitHeight: snackLayout.implicitHeight
 
-        Button {
-            id: snackButton
+            RowLayout {
+                id: snackLayout
 
-            flat: true
-            onClicked: control.clicked()
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: snackBar.fullWidth ? parent.left : undefined
+                    right: snackBar.fullWidth ? parent.right : undefined
+                }
 
-            Material.foreground: Material.accentColor
-        }
+                spacing: 0
 
-        Item {
-            width: 24
+                Item {
+                    width: 24
+                }
+
+                Label {
+                    id: snackText
+
+                    verticalAlignment: Text.AlignVCenter
+                    maximumLineCount: 2
+                    wrapMode: Text.Wrap
+                    elide: Text.ElideRight
+
+                    Layout.fillWidth: true
+                    Layout.minimumWidth: snackBar.fullWidth ? -1 : 288
+                    Layout.maximumWidth: snackBar.fullWidth ? -1 : 568
+                    Layout.preferredHeight: lineCount == 2 ? 80 : 48
+                }
+
+                Item {
+                    id: middleSpacer
+                    width: snackButton.text == "" ? 0 : (snackBar.fullWidth ? 24 : 48)
+                }
+
+                Button {
+                    id: snackButton
+
+                    flat: true
+                    onClicked: snackBar.clicked()
+
+                    Material.foreground: Material.accentColor
+                }
+
+                Item {
+                    width: 24
+                }
+            }
         }
     }
 }

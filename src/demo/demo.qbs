@@ -5,6 +5,7 @@ Project {
     name: "Demo"
 
     QtGuiApplication {
+        Depends { name: "bundle" }
         readonly property bool isBundle: qbs.targetOS.contains("darwin") && bundle.isBundle
         readonly property stringList qmlImportPaths: [FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix, lirideployment.qmlDir)]
 
@@ -17,15 +18,13 @@ Project {
         condition: project.withDemo
         consoleApplication: false
 
+        bundle.identifierPrefix: "io.liri"
+        bundle.identifier: "io.liri.Fluid.Demo"
+        bundle.infoPlist: ({"CFBundleName": "Fluid Demo"})
+
         Depends { name: "lirideployment" }
         Depends { name: "Qt"; submodules: ["gui", "qml", "quick", "quickcontrols2"]; versionAtLeast: project.minimumQtVersion }
-        Depends { name: "Android.ndk"; condition: qbs.targetOS.contains("android") }
-
-        Properties {
-            condition: qbs.targetOS.contains("android")
-            architectures: !qbs.architecture ? ["x86", "armv7a"] : undefined
-            Android.ndk.appStl: "gnustl_shared"
-        }
+        Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
 
         Properties {
             condition: qbs.targetOS.contains("osx")
@@ -41,11 +40,56 @@ Project {
         Qt.core.resourcePrefix: "/"
         Qt.core.resourceSourceBase: sourceDirectory
 
-        files: ["*.cpp", "*.h"]
+        files: [
+            "iconcategorymodel.cpp",
+            "iconcategorymodel.h",
+            "iconnamemodel.cpp",
+            "iconnamemodel.h",
+            "main.cpp",
+        ]
 
         Group {
             name: "Resource Data"
-            files: ["images/**", "qml/**"]
+            files: [
+                "images/balloon.jpg",
+                "images/materialbg.png",
+                "qml/Pages/Controls/NavigationListViewPage.qml",
+                "qml/icons.txt",
+                "qml/main.qml",
+                "qml/StyledPage.qml",
+                "qml/StyledPageTwoColumns.qml",
+                "qml/StyledRectangle.qml",
+                "qml/Pages/Basic/BusyIndicatorPage.qml",
+                "qml/Pages/Basic/ButtonPage.qml",
+                "qml/Pages/Basic/CheckBoxPage.qml",
+                "qml/Pages/Basic/ProgressBarPage.qml",
+                "qml/Pages/Basic/RadioButtonPage.qml",
+                "qml/Pages/Basic/SliderPage.qml",
+                "qml/Pages/Basic/SwitchPage.qml",
+                "qml/Pages/Controls/ActionButtonPage.qml",
+                "qml/Pages/Controls/BottomSheetPage.qml",
+                "qml/Pages/Controls/CardPage.qml",
+                "qml/Pages/Controls/ChipPage.qml",
+                "qml/Pages/Controls/DatePickerPage.qml",
+                "qml/Pages/Controls/DateTimePickerPage.qml",
+                "qml/Pages/Controls/DialogsPage.qml",
+                "qml/Pages/Controls/ListItemPage.qml",
+                "qml/Pages/Controls/NavDrawerPage.qml",
+                "qml/Pages/Controls/OverlayPage.qml",
+                "qml/Pages/Controls/PlaceholderPage.qml",
+                "qml/Pages/Controls/SearchPage.qml",
+                "qml/Pages/Controls/SnackBarPage.qml",
+                "qml/Pages/Controls/SubPage.qml",
+                "qml/Pages/Controls/TimePickerPage.qml",
+                "qml/Pages/Controls/WavePage.qml",
+                "qml/Pages/Layouts/AutomaticGridPage.qml",
+                "qml/Pages/Layouts/ColumnFlowPage.qml",
+                "qml/Pages/Style/IconsPage.qml",
+                "qml/Pages/Style/PalettePage.qml",
+                "qml/Pages/Style/PaletteSwatch.qml",
+                "qml/Pages/Style/SystemIconsPage.qml",
+                "qml/Pages/Style/TypographyPage.qml",
+            ]
             fileTags: ["qt.core.resource_data"]
         }
 

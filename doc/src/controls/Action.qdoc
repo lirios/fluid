@@ -1,0 +1,62 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+   \qmltype Action
+   \inqmlmodule Fluid.Controls
+   \ingroup fluidcontrols
+
+   \brief Represents an action shown in an action bar, context menu, or list.
+
+   One of the most common uses of actions is displaying actions in the action bar of a page
+   using the \l Page::actions property. See the example for \l Page for more details.
+
+   Actions may contain \l Action::text, an \l QQuickAction::icon, a \l toolTip and a \l Action::shortcut.
+
+   \snippet fluidcontrols-action.qml action
+*/
+
+/*!
+    \qmlproperty string Fluid.Controls::Action::toolTip
+
+    The tool tip displayed for the action.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::Action::visible
+
+    Set to \c false to hide the action in the UI.
+
+    This property is \c true by default.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::Action::hasDividerAfter
+
+    Set to \c true to display a divider after the control bound to this action.
+
+    This property is \c false by default.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::Action::hoverAnimation
+
+    Set to \c true to rotate the icon 90 degrees on mouseover.
+
+    This property is \c false by default.
+*/

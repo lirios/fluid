@@ -128,6 +128,8 @@ QQC2.ToolBar {
             rightMargin: 16 - leftButton.margin
         }
 
+        height: appBar.height
+
         spacing: 24 - 2 * leftButton.margin
 
         Repeater {

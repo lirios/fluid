@@ -47,7 +47,7 @@ Item {
             id: listItemWithSubtext2
 
             maximumLineCount: 3
-            subText: "Random Text"
+            subText: "Random Text\nRandom Text\nRandom Text"
         }
 
         ListItem {
@@ -55,7 +55,7 @@ Item {
 
             secondaryItem: Item {
                 width: parent.width
-                height: 42
+                height: 90
             }
         }
 
@@ -75,7 +75,7 @@ Item {
             text: "Random Text"
             rightItem: Item {
                 width: parent.width
-                height: 69
+                height: 70
             }
         }
     }
@@ -111,12 +111,12 @@ Item {
         }
 
         function test_implicit_height() {
-            compare(listItemWithSubtext1.implicitHeight, 72);
-            compare(listItemWithSubtext2.implicitHeight, 88);
-            compare(listItemWithSecondaryItem.implicitHeight, 58);
+            compare(listItemWithSubtext1.implicitHeight, 48);
+            compare(listItemWithSubtext2.implicitHeight, 60);
+            compare(listItemWithSecondaryItem.implicitHeight, 106);
             compare(listItemWithoutSecondaryItem.implicitHeight, 48);
             compare(listItemWithLeftItem.implicitHeight, 48);
-            compare(listItemWithRightItem.implicitHeight, 85);
+            compare(listItemWithRightItem.implicitHeight, 86);
         }
     }
 }

@@ -18,12 +18,23 @@
 
 #include "windowdecoration.h"
 
+#ifdef FLUID_ENABLE_WAYLAND
+#  include "extensions/liridecoration.h"
+
+Q_GLOBAL_STATIC(LiriDecorationManager, s_decorationManager)
+#endif
+
 WindowDecoration::WindowDecoration(QObject *parent)
     : QObject(parent)
     , m_window(nullptr)
     , m_theme(WindowDecoration::Light)
     , m_color(Qt::transparent)
 {
+#ifdef FLUID_ENABLE_WAYLAND
+    if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland")))
+        connect(s_decorationManager, &LiriDecorationManager::activeChanged,
+                this, &WindowDecoration::setServerSideDecorationColor);
+#endif
 }
 
 QWindow *WindowDecoration::window() const
@@ -94,7 +105,7 @@ bool WindowDecoration::eventFilter(QObject *object, QEvent *event)
         return QObject::eventFilter(object, event);
 
     if (event->type() == QEvent::PlatformSurface) {
-        auto pe = dynamic_cast<QPlatformSurfaceEvent *>(event);
+        auto pe = static_cast<QPlatformSurfaceEvent *>(event);
         if (pe->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
             updateDecorationColor();
             return true;
@@ -111,11 +122,7 @@ void WindowDecoration::updateDecorationColor()
     if (m_color == Qt::transparent)
         return;
 
-    QPlatformWindow *platformWindow = m_window->handle();
-    if (!platformWindow)
-        return;
-
-#ifdef Q_OS_LINUX
+#ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
         // Calculate text color automatically based on the decoration color
         const qreal alpha = 1.0 - (0.299 * m_color.redF() + 0.587 * m_color.greenF() + 0.114 * m_color.blueF());
@@ -126,8 +133,30 @@ void WindowDecoration::updateDecorationColor()
         m_window->setProperty("__material_decoration_backgroundColor", m_color);
         m_window->setProperty("__material_decoration_foregroundColor", textColor);
 
-        // Trigger a decoration update
+        // Trigger a QtWayland client-side decoration update
         m_window->resize(m_window->size());
+
+        // Register a server-side decoration object if needed
+        setServerSideDecorationColor();
     }
 #endif
 }
+
+#ifdef FLUID_ENABLE_WAYLAND
+void WindowDecoration::setServerSideDecorationColor()
+{
+    if (!m_window)
+        return;
+
+    if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
+        const QVariant fgColor = m_window->property("__material_decoration_foregroundColor");
+        const QVariant bgColor = m_window->property("__material_decoration_backgroundColor");
+
+        if (s_decorationManager->isActive() && fgColor.isValid() && bgColor.isValid()) {
+            LiriDecoration *decoration = s_decorationManager->decorationForWindow(m_window);
+            decoration->setForegroundColor(fgColor.value<QColor>());
+            decoration->setBackgroundColor(bgColor.value<QColor>());
+        }
+    }
+}
+#endif

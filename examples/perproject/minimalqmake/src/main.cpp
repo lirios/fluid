@@ -2,6 +2,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#ifdef QT_STATIC
+#  include <QQmlExtensionPlugin>
+Q_IMPORT_PLUGIN(FluidCorePlugin)
+Q_IMPORT_PLUGIN(FluidControlsPlugin)
+Q_IMPORT_PLUGIN(FluidControlsPrivatePlugin)
+Q_IMPORT_PLUGIN(FluidTemplatesPlugin)
+#endif
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

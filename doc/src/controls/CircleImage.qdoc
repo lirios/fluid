@@ -1,0 +1,81 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype CircleImage
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Circular image.
+
+    An \l Image with a \l CircleMask.
+*/
+
+/*!
+    \qmlproperty url Fluid.Controls::CircleImage::source
+
+    URL of the image to load.
+
+    \sa Image::source
+*/
+
+/*!
+    \qmlproperty enumeration Fluid.Controls::CircleImage::status
+    \list
+        \li Image.Null - no image has been set
+        \li Image.Ready - the image has been loaded
+        \li Image.Loading - the image is currently being loaded
+        \li Image.Error - an error occurred while loading the image
+    \endlist
+
+    Status of the image loading.
+
+    \sa Image::status
+*/
+
+/*!
+    \qmlproperty size Fluid.Controls::CircleImage::sourceSize
+
+    Actual width and height of the loaded image.
+
+    \sa Image::sourceSize
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::CircleImage::asynchronous
+
+    Specify whether the image should be loaded asynchronously.
+
+    \sa Image::asynchronous
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::CircleImage::cache
+
+    Specify whether the image should be cached.
+
+    \sa Image::cache
+*/
+
+/*!
+    \qmlproperty enumeration Fluid.Controls::CircleImage::fillMode
+
+    Set this property to define what happens when the source image
+    has a different size than the item.
+
+    \sa Image::fillMode
+*/

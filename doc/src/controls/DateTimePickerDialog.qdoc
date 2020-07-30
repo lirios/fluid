@@ -1,0 +1,115 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype DateTimePickerDialog
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Dialog with a picker to select dates and time.
+
+    A dialog that lets you select dates and time.
+
+    \code
+    import QtQuick 2.10
+    import Fluid.Controls 1.0 as FluidControls
+
+    Item {
+        width: 600
+        height: 600
+
+        FluidControls.DateTimePickerDialog {
+            onAccepted: {
+                console.log(selectedDate);
+            }
+            standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        }
+    }
+    \endcode
+
+    For more information you can read the
+    \l{https://material.io/guidelines/components/pickers.html}{Material Design guidelines}.
+*/
+
+/*!
+    \qmlproperty enumeration Fluid.Controls::DateTimePickerDialog::orientation
+
+    This property holds the picker orientation.
+    The default value is automatically selected based on the device orientation.
+
+    Possible values:
+    \value DatePicker.Landscape The picker is landscape.
+    \value DatePicker.Portrait The picker is portrait.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::DateTimePickerDialog::dayOfWeekRowVisible
+
+    This property determines the visibility of the day of week row.
+*/
+
+/*!
+    \qmlproperty bool Fluid.Controls::DateTimePickerDialog::weekNumberVisible
+
+    This property determines the visibility of the week number column.
+*/
+
+
+/*!
+    \qmlproperty bool Fluid.Controls::DateTimePicker::prefer24Hour
+
+    This property determines the visibility of the AM/PM switch.
+*/
+
+/*!
+    \qmlproperty date Fluid.Controls::DateTimePickerDialog::from
+
+    This property holds the start date.
+*/
+
+/*!
+    \qmlproperty date Fluid.Controls::DateTimePickerDialog::to
+
+    This property holds the end date.
+*/
+
+/*!
+    \qmlproperty date Fluid.Controls::DateTimePickerDialog::selectedDateTime
+
+    This property holds the date and time that has been selected by the user.
+    The default value is the current date and time.
+*/
+
+/*!
+    \qmlproperty list<Object> Fluid.Controls::DateTimePickerDialog::standardButtonsContainer
+
+    This property allows you to place additional buttons alongside the standard buttons
+    of the dialog, like in this example:
+
+    \code
+    FluidControls.DateTimePickerDialog {
+        id: dateTimePickerDialog
+        standardButtons: DialogButtonBox.Ok | DialogButtonBox.Cancel
+        standardButtonsContainer: Button {
+            anchors.verticalCenter: parent.verticalCenter
+            text: qsTr("Now")
+            flat: true
+            onClicked: dateTimePickerDialog.selectedDate = new Date()
+        }
+    }
+    \endcode
+*/

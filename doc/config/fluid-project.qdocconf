@@ -8,10 +8,10 @@ description = Fluid Reference Documentation
 indexes += \
     $QT_INSTALL_DOCS/qtqml/qtqml.index \
     $QT_INSTALL_DOCS/qtquick/qtquick.index \
-    $QT_INSTALL_DOCS/qtquickcontrols2/qtquickcontrols2.index \
+    $QT_INSTALL_DOCS/$QTQUICKCONTROLS_NAME/$QTQUICKCONTROLS_NAME.index \
     $QT_INSTALL_DOCS/qtgraphicaleffects/qtgraphicaleffects.index
 
-depends = qtcore qtgui qtdoc qtqml qtquick qtquickcontrols2
+depends = qtcore qtgui qtdoc qtqml qtquick $QTQUICKCONTROLS_NAME
 headerdirs += ../../src
 sourcedirs += \
     ../src \
@@ -24,6 +24,7 @@ sources.fileextensions = "*.qml *.qdoc *.cpp *.js"
 headers.fileextensions = "*.h"
 imagedirs = ../images
 exampledirs = .. ../snippets
+moduleheader =
 
 include(macros.qdocconf)
 

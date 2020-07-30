@@ -16,22 +16,9 @@ import QtQuick 2.10
 import QtQuick.Controls 2.3 as QQC2
 import QtQuick.Controls.impl 2.3 as QQCImpl2
 
-/*!
-    \qmltype ToolButton
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief \l ToolButton with a extra features.
-*/
 QQC2.ToolButton {
     id: control
 
-    /*!
-        \qmlproperty bool hoverAnimation
-
-        Specify whether the icon should be rotated 90 degrees when the mouse hovers.
-        Default is \c false.
-    */
     property bool hoverAnimation: false
 
     contentItem: QQCImpl2.IconLabel {

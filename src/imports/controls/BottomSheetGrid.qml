@@ -20,52 +20,13 @@ import QtQuick.Templates 2.0 as T
 import Fluid.Controls 1.0
 import Fluid.Layouts 1.0 as FluidLayouts
 
-/*!
-    \qmltype BottomSheetGrid
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
 
-    \brief A sheet of paper with actions and an optional title that slides up from the bottom.
-
-    A sheet of paper that displays actions in a grid and an optional title that slides up
-    from the bottom edge of the screen and presents a set of clear and simple actions.
-
-    \snippet fluidcontrols-bottomsheetgrid.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/bottom-sheets.html}{Material Design guidelines}.
-*/
 BottomSheet {
     id: bottomSheet
 
-    /*!
-        \qmlproperty string title
-
-        Title.
-    */
     property string title
-
-    /*!
-        \qmlproperty list<Action> actions
-
-        Actions to display in the bottom sheet.
-    */
     property list<Action> actions
-
-    /*!
-        \qmlproperty int columns
-
-        Number of columns.
-        By default it's set to fit the screen width.
-    */
     property alias columns: grid.columns
-
-    /*!
-        \qmlproperty int rows
-
-        Number of rows.
-        By default it's set to fit the screen size based on the \l columns.
-    */
     property alias rows: grid.rows
 
     height: Math.min(implicitHeight, maxHeight)

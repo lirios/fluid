@@ -17,21 +17,6 @@ import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-    \qmltype BottomSheet
-    \inqmlmodule Fluid.Controls
-    \ingroup fluidcontrols
-
-    \brief A sheet of paper that slides up from the bottom.
-
-    A sheet of paper that slides up from the bottom edge of the screen and presents
-    a set of clear and simple actions.
-
-    \snippet fluidcontrols-bottomsheet.qml file
-
-    For more information you can read the
-    \l{https://material.io/guidelines/components/bottom-sheets.html}{Material Design guidelines}.
-*/
 Drawer {
     id: bottomSheet
 
@@ -40,14 +25,6 @@ Drawer {
     */
     default property alias content: containerPane.data
 
-    /*!
-        \qmlproperty int maxHeight
-
-        Maximum height of the bottom sheet.
-
-        By default it's set to the height of the \c ApplicationWindow
-        minus \c AppBar height.
-    */
     property int maxHeight: ApplicationWindow.contentItem.height - ApplicationWindow.header.height
 
     modal: true

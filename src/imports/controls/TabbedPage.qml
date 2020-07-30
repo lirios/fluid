@@ -20,86 +20,18 @@ import QtQuick.Controls.impl 2.3
 import QtQuick.Controls.Material 2.3
 import Fluid.Controls 1.0 as FluidControls
 
-/*!
-   \qmltype TabbedPage
-   \inqmlmodule Fluid.Controls
-   \ingroup fluidcontrols
-
-   \brief Page with tabs.
-
-   \qml
-   import QtQuick 2.10
-   import Fluid.Controls 1.0 as FluidControls
-
-   FluidControls.ApplicationWindow {
-       title: "Application Name"
-       width: 1024
-       height: 800
-       visible: true
-
-       initialPage: FluidControls.TabbedPage {
-           FluidControls.Tab {
-               title: "Tab 1"
-
-               Label {
-                   anchors.centerIn: parent
-                   text: "Hello World!"
-               }
-           }
-
-           FluidControls.Tab {
-               title: "Tab 2"
-
-               Label {
-                   anchors.centerIn: parent
-                   text: "Hello World!"
-               }
-           }
-       }
-   }
-   \endqml
- */
 FluidControls.Page {
     id: page
 
     /*!
         \internal
-     */
-    default property alias contents: swipeView.contentChildren
-
-    /*!
-        \qmlproperty int count
-
-        Number of tabs.
     */
+    default property alias contents: swipeView.contentData
+
     readonly property alias count: swipeView.count
-
-    /*!
-        \qmlproperty int currentIndex
-
-        Index of the currently selected tab.
-    */
     readonly property alias currentIndex: swipeView.currentIndex
-
-    /*!
-        \qmlproperty Item selectedTab
-
-        The currently selected tab.
-    */
     readonly property alias selectedTab: swipeView.currentItem
-
-    /*!
-        \qmlproperty ToolBar tabBar
-
-        Tool bar that contains tabs.
-    */
     readonly property alias tabBar: tabToolBar
-
-    /*!
-        \qmlproperty TabBar tabs
-
-        Tab bar.
-    */
     readonly property alias tabs: tabBar
 
     appBar.elevation: 0
@@ -196,7 +128,7 @@ FluidControls.Page {
     /*!
         \qmlmethod void TabbedPage::addTab(Tab tab)
 
-        Add a tab programmatically to the page.
+        Add a \a tab programmatically to the page.
      */
     function addTab(tab) {
         swipeView.addItem(tab);

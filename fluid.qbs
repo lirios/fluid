@@ -4,7 +4,7 @@ import qbs.Probes
 Project {
     name: "Fluid"
 
-    readonly property string version: "1.0.0"
+    readonly property string version: "1.2.0"
     readonly property var versionParts: version.split('.').map(function(part) { return parseInt(part); })
 
     readonly property string minimumQtVersion: "5.10.0"
@@ -25,7 +25,7 @@ Project {
 
     property bool deploymentEnabled: false
 
-    minimumQbsVersion: "1.9.0"
+    minimumQbsVersion: "1.14.0"
 
     qbsSearchPaths: useSystemQbsShared ? [] : ["qbs/shared"]
 

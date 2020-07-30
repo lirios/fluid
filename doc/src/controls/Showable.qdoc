@@ -1,0 +1,48 @@
+/****************************************************************************
+ * This file is part of Fluid.
+ *
+ * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ *
+ * $BEGIN_LICENSE:FDL$
+ *
+ * Permission is granted to copy, distribute and/or modify this document
+ * under the terms of the GNU Free Documentation License, Version 1.3
+ * or any later version published by the Free Software Foundation;
+ * with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+ * A copy of the license is included in the section entitled "GNU
+ * Free Documentation License".
+ *
+ * $END_LICENSE$
+ ***************************************************************************/
+
+/*!
+    \qmltype Showable
+    \inqmlmodule Fluid.Controls
+    \ingroup fluidcontrols
+
+    \brief Showtable component.
+*/
+
+/*!
+    \qmlproperty Animation Fluid.Controls::Showable::showAnimation
+
+    Animation to play to show the component.
+*/
+
+/*!
+    \qmlproperty Animation Fluid.Controls::Showable::hideAnimation
+
+    Animation to play to hide the component.
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::Showable::show()
+
+    Show the component.
+*/
+
+/*!
+    \qmlmethod void Fluid.Controls::Showable::hide()
+
+    Hide the component.
+*/

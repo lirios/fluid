@@ -1,3 +1,7 @@
 build/
 *.user
 *.qmlc
+Makefile
+.obj/
+.moc/
+.qmake.stash

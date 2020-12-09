@@ -1,11 +1,13 @@
 #!/bin/bash
 
+rootdir=$(readlink -f `dirname $0`/..)
+
 GIT_URL=https://github.com/google/material-design-icons.git
 GIT_DIR=material-design-icons
-TARGET_DIR=src/imports/controls/icons
+TARGET_DIR=${rootdir}/src/imports/controls/icons
 RELATIVE_DIR=icons
-QRC_FILE=src/imports/controls/icons.qrc
-TXT_FILE=src/demo/qml/icons.txt
+QRC_FILE=${rootdir}/src/imports/controls/icons.qrc
+TXT_FILE=${rootdir}src/demo/qml/icons.txt
 
 function copy_icon()
 {

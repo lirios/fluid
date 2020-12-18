@@ -13,6 +13,8 @@
  * $END_LICENSE$
  */
 
+#include <QtCore/QLocale>
+
 #include "dateutils.h"
 
 DateUtils::DateUtils(QObject *parent)
@@ -26,7 +28,7 @@ QString DateUtils::formattedDate(const QDate &date) const
         return tr("Today (%1)").arg(dayOfWeek(date));
     else if (date == QDate::currentDate().addDays(1))
         return tr("Tomorrow (%1)").arg(dayOfWeek(date));
-    return date.toString(Qt::DefaultLocaleShortDate);
+    return QLocale::system().toString(date, QLocale::ShortFormat);
 }
 
 QString DateUtils::formatDuration(qlonglong duration, DurationFormat format,
@@ -90,7 +92,7 @@ QString DateUtils::friendlyTime(const QDateTime &time, bool standalone) const
         return tr("1 day ago");
     else if (days <= 10)
         return tr("%1 days ago").arg(days);
-    QString string = time.toString(Qt::DefaultLocaleShortDate);
+    QString string = QLocale::system().toString(time, QLocale::ShortFormat);
     return standalone ? string : tr("on %1").arg(string);
 }
 

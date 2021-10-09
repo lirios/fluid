@@ -93,6 +93,8 @@ liri_add_qml_plugin(fluidcontrols
         Qt5::Svg
 )
 
+liri_finalize_qml_plugin(fluidcontrols)
+
 if(FLUID_INSTALL_ICONS)
     file(GLOB icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*.svg")
     foreach(source_path IN LISTS icons)

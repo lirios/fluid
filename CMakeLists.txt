@@ -12,7 +12,7 @@ if(NOT FLUID_USE_SYSTEM_LCS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/modules")
 else()
     if(NOT LIRI_LOCAL_ECM)
-        find_package(LiriCMakeShared "1.0.0" REQUIRED NO_MODULE)
+        find_package(LiriCMakeShared "2.0.0" REQUIRED NO_MODULE)
         list(APPEND CMAKE_MODULE_PATH "${LCS_MODULE_PATH}")
     endif()
 endif()

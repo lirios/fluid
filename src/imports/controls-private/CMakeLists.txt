@@ -38,3 +38,5 @@ liri_add_qml_plugin(fluidcontrolsprivate
     LIBRARIES
         ${LIBRARIES}
 )
+
+liri_finalize_qml_plugin(fluidcontrolsprivate)

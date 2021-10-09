@@ -29,3 +29,5 @@ liri_add_qml_plugin(fluidtemplates
         QT_NO_CAST_FROM_ASCII
         QT_NO_FOREACH
 )
+
+liri_finalize_qml_plugin(fluidtemplates)

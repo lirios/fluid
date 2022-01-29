@@ -24,6 +24,7 @@ liri_add_qml_plugin(fluidcontrols
         controlsutils.h
         iconthemeimageprovider.cpp
         iconthemeimageprovider.h
+        inputregion.cpp inputregion.h
     QML_FILES
         Action.qml
         AlertDialog.qml

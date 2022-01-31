@@ -1,15 +1,15 @@
 if(LINUX AND NOT ANDROID)
     set(SOURCES
-        extensions/liridecoration.cpp
-        extensions/liridecoration.h
+        extensions/fluiddecorationv1.cpp
+        extensions/fluiddecorationv1.h
     )
 
     find_package(QtWaylandScanner REQUIRED)
     find_package(Wayland 1.15 COMPONENTS Client REQUIRED)
     find_package(Qt5WaylandClient REQUIRED)
     ecm_add_qtwayland_client_protocol(SOURCES
-        PROTOCOL "${CMAKE_CURRENT_SOURCE_DIR}/extensions/liri-decoration.xml"
-        BASENAME "liri-decoration")
+        PROTOCOL "${CMAKE_CURRENT_SOURCE_DIR}/extensions/fluid-decoration-unstable-v1.xml"
+        BASENAME "fluid-decoration-unstable-v1")
     set(DEFINES FLUID_ENABLE_WAYLAND=1)
     set(LIBRARIES Qt5::GuiPrivate Qt5::WaylandClient Wayland::Client)
 endif()

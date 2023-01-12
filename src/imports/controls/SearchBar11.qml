@@ -31,6 +31,8 @@ Item {
 
     property string searchPlaceHolder: qsTr("Search")
 
+    property alias searchCard: searchCard
+
     property int cardWidth: searchBar.width - Units.largeSpacing
 
     property int suggestionsHeight: 300

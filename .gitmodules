@@ -1,7 +1,3 @@
-[submodule "qbs-shared"]
-	path = qbs/shared
-	url = https://github.com/lirios/qbs-shared
-	branch = master
 [submodule "cmake-shared"]
 	path = cmake/shared
 	url = https://github.com/lirios/cmake-shared

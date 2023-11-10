@@ -3,13 +3,13 @@ Fluid
 
 [![License](https://img.shields.io/badge/license-MPL2-blue.svg)](https://www.mozilla.org/en-US/MPL/2.0/)
 [![GitHub release](https://img.shields.io/github/release/lirios/fluid.svg)](https://github.com/lirios/fluid)
-[![Build Status](https://travis-ci.org/lirios/fluid.svg?branch=develop)](https://travis-ci.org/lirios/fluid)
 [![GitHub issues](https://img.shields.io/github/issues/lirios/fluid.svg)](https://github.com/lirios/fluid/issues)
+[![CI](https://github.com/lirios/fluid/workflows/CI/badge.svg?branch=develop)](https://github.com/lirios/fluid/actions?query=workflow%3ACI)
 
 Fluid is a collection of cross-platform QtQuick components for building fluid and dynamic applications,
 using the [Material Design](https://material.io/guidelines/) guidelines.
 
-Online documentation is available at [liri.io](https://liri.io/docs/sdk/fluid/develop/).
+Online documentation is available at [docs.liri.io](https://docs.liri.io/sdk/fluid/develop/).
 
 We develop using the [git flow](https://danielkummer.github.io/git-flow-cheatsheet/) method
 this means that the `develop` branch contains code that is being developed and might break
@@ -31,16 +31,27 @@ Qt >= 5.10.0 with at least the following modules is required:
 
 On Linux you also need:
 
+ * [wayland](https://gitlab.freedesktop.org/wayland/wayland) >= 1.15
  * [qtwayland](http://code.qt.io/cgit/qt/qtwayland.git)
 
 The following modules and their dependencies are required:
 
  * [cmake](https://gitlab.kitware.com/cmake/cmake) >= 3.10.0
+
+The following module must be installed, unless you want to use the copy provided
+as a submodule:
+
  * [cmake-shared](https://github.com/lirios/cmake-shared.git) >= 1.0.0
 
 ## Build
 
+You can perform a standalone build opening `CMakeLists.txt` with QtCreator,
+but make sure `cmake` is [set up correctly](https://doc.qt.io/qtcreator/creator-project-cmake.html).
+
+You can also build from command line:
+
 ```sh
+git submodule update --init
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/prefix ..
@@ -58,6 +69,12 @@ You can also append the following options to the `cmake` command:
  * `-DFLUID_WITH_DEMO:BOOL=OFF`: Do not build the demo application.
  * `-DFLUID_WITH_QML_MODULES:BOOL=OFF`: Do not build QML modules.
  * `-DFLUID_INSTALL_ICONS:BOOL=OFF`: Embed icons into resources.
+
+If `cmake-shared` is not installed and `-DFLUID_USE_SYSTEM_LCS:BOOL=ON` is
+passed to `cmake`, the build will fail without finding `LiriSetup`.
+
+The `cmake` arguments above can also be specified when building on QtCreator,
+as explained in [this guide](https://doc.qt.io/qtcreator/creator-build-settings.html).
 
 ### Documentation
 
@@ -102,8 +119,9 @@ managed by a package manager.
 
 You can embed Fluid in your project and build it along your app.
 
-We have an example with qmake in `examples/perproject/minimalqmake`
-and another one for qbs in `examples/perproject/minimalqbs`.
+We have the following examples:
+We have examples for [qmake](examples/perproject/minimalqmake),
+[qbs](examples/perproject/minimalqbs) and [cmake](examples/perproject/minimalcmake).
 
 ## Licensing
 

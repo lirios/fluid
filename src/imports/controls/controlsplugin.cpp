@@ -16,6 +16,7 @@
 #include "controlsplugin.h"
 #include "controlsutils.h"
 #include "iconthemeimageprovider.h"
+#include "inputregion.h"
 
 static QObject *colorProvider(QQmlEngine *engine, QJSEngine *jsEngine)
 {
@@ -49,4 +50,6 @@ void FluidControlsPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<Color>(uri, 1, 0, "Color", colorProvider);
     qmlRegisterSingletonType<ControlsUtils>(uri, 1, 0, "Utils", utilsProvider);
+    qmlRegisterType<InputArea>(uri, 1, 0, "InputArea");
+    qmlRegisterType<InputRegion>(uri, 1, 0, "InputRegion");
 }

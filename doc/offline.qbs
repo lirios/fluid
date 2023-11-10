@@ -1,4 +1,5 @@
 import qbs 1.0
+import qbs.Utilities
 
 Product {
     name: "fluid-offline-doc"
@@ -8,10 +9,17 @@ Product {
     Depends { name: "lirideployment" }
     Depends { name: "Qt.core"; versionAtLeast: project.minimumQtVersion }
 
+    property string qtQuickControlName: {
+        if (Utilities.versionCompare(Qt.core.version, "5.12.0") >= 0)
+            return "qtquickcontrols";
+        return "qtquickcontrols2";
+    }
     Qt.core.qdocEnvironment: project.qdocEnvironment.concat([
         "SRCDIR=" + path,
         "QT_INSTALL_DOCS=" + Qt.core.docPath,
-        "QT_VERSION=" + Qt.core.version
+        "QT_VERSION=" + Qt.core.version,
+        "QT_VER=" + Qt.core.version,
+        "QTQUICKCONTROLS_NAME=" + qtQuickControlName
     ])
 
     files: [

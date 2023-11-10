@@ -98,6 +98,8 @@
 
     This signal is emitted when the back action is triggered or back key is released.
 
+    The \a event is provided with the signal.
+
     By default, the page will be popped from the page stack. To change the default
     behavior, for example to show a confirmation dialog, listen for this signal using
     \c onGoBack and set \c event.accepted to \c true. To dismiss the page from your
@@ -113,7 +115,9 @@
     Pop this page from the page stack. This does nothing if this page is not
     the current page on the page stack.
 
-    Use \c force to avoid calling the \l goBack signal. This is useful if you
+    The \a event will be passed to the \l goBack signal.
+
+    Use \a force to avoid calling the \l goBack signal. This is useful if you
     use the \l goBack signal to show a confirmation dialog, and want to close
     the page from your dialog without showing the dialog again. You can also
     use \l Fluid.Controls::Page::forcePop() as a shortcut to this behavior.
@@ -130,7 +134,7 @@
 /*!
     \qmlmethod void Fluid.Controls::Page::push(Component component, object properties)
 
-    Push the specified component onto the page stack.
+    Push the specified \a component onto the page stack and set the \a properties.
 
     \sa StackView::push()
 */

@@ -77,7 +77,7 @@
 */
 
 /*!
-    \qmlmethod void Fluid.Controls::SnackBar::open(string text, string buttonText = "")
+    \qmlmethod void Fluid.Controls::SnackBar::open(string text, string buttonText)
 
     Open the bar with the specified \a text and \a buttonText.
 */

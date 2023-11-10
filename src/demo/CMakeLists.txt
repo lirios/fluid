@@ -74,6 +74,8 @@ set_target_properties(FluidDemo PROPERTIES
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
 )
 
+liri_finalize_executable(FluidDemo)
+
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     file(GLOB png_icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*/*.png")
     file(GLOB svg_icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*/*.svg")

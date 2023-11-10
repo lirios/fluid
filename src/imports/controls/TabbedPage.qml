@@ -128,7 +128,7 @@ FluidControls.Page {
     /*!
         \qmlmethod void TabbedPage::addTab(Tab tab)
 
-        Add a tab programmatically to the page.
+        Add a \a tab programmatically to the page.
      */
     function addTab(tab) {
         swipeView.addItem(tab);

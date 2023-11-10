@@ -1,0 +1,125 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+env:
+  CLAZY_CHECKS: "level1"
+
+jobs:
+  linux:
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    strategy:
+      matrix:
+        compiler:
+          - gcc
+          - clang
+        container:
+          - suse-qt515
+    runs-on: ubuntu-latest
+    container:
+      image: liridev/${{ matrix.container }}
+    steps:
+      - name: Extract branch name
+        id: extract_branch
+        shell: bash
+        run: |
+          if [ -n "${{ github.base_ref }}" ]; then
+            echo "##[set-output name=branch;]${{ github.base_ref }}"
+          else
+            github_ref=${{ github.ref }}
+            echo "##[set-output name=branch;]${github_ref##*/}"
+          fi
+      - name: Qt version identifier
+        id: qt_version
+        shell: bash
+        run: |
+          qtverid=`echo "${{ matrix.container }}" | sed -e 's,suse-qt,,g'`
+          echo "##[set-output name=id;]${qtverid}"
+      - uses: actions/checkout@v2
+      - name: Build dependencies
+        run: |
+          set -x
+          ./.github/workflows/scripts/build-deps ${{ steps.extract_branch.outputs.branch }}
+      - name: Build
+        run: |
+          set -x
+          mkdir -p build
+          cd build
+          # OpenSuSE containers don't have any documentation
+          if [ "${{ matrix.compiler }}" == "clang" ]; then
+            export CC=clang
+            export CXX=clang++
+            cmake .. -DLIRI_ENABLE_CLAZY:BOOL=ON -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          else
+            cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          fi
+          make -j $(getconf _NPROCESSORS_ONLN)
+          sudo make install
+      - name: Test
+        run: |
+          set -x
+          cd build
+          dbus-run-session -- xvfb-run -a -s "-screen 0 800x600x24" ctest -V
+
+  # Build documentation under Ubuntu
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install dependencies
+        run: |
+          set -x
+          wget -qO - 'http://archive.neon.kde.org/public.key' | sudo apt-key add -
+          sudo apt-add-repository http://archive.neon.kde.org/user
+          sudo apt-get update -y
+          sudo apt-get install -y qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev qttools5-dev libqt5svg5-dev qdoc-qt5 qt5-doc qtbase5-doc
+      - name: Build
+        run: |
+          set -x
+          mkdir -p build
+          cd build
+          cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DFLUID_WITH_DOCUMENTATION:BOOL=ON -DFLUID_WITH_DEMO:BOOL=OFF -DFLUID_WITH_QML_MODULES:BOOL=OFF -DFLUID_INSTALL_ICONS:BOOL=OFF
+          make -j $(getconf _NPROCESSORS_ONLN)
+          sudo make install
+
+  windows:
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    strategy:
+      matrix:
+        compiler:
+          - win32_msvc2017
+        qt:
+          - 5.12.8
+    runs-on: windows-2016
+    steps:
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+          path: ../Qt
+          key: ${{ runner.os }}-QtCache-${{ matrix.qt }}
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt }}
+          arch: ${{ matrix.compiler }}
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake .. -DFLUID_WITH_DOCUMENTATION:BOOL=OFF
+          cmake --build .

@@ -15,7 +15,7 @@
 #include "controlsutils.h"
 
 /*!
-    \qmltype Utils
+    \qmltype Fluid.Controls::Utils
     \inqmlmodule Fluid.Controls
     \ingroup fluidcontrols
 

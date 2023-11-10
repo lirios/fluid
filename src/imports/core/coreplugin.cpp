@@ -61,9 +61,13 @@ void FluidCorePlugin::registerTypes(const char *uri)
 
     // @uri Fluid.Core
 
-    qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
-
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
     qmlRegisterType<QAbstractItemModel>();
+#else
+    qmlRegisterAnonymousType<QAbstractItemModel>(uri, 1);
+#endif
+
+    qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
     qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");
 
     qmlRegisterSingletonType<DateUtils>(uri, 1, 0, "DateUtils", dateUtilsProvider);

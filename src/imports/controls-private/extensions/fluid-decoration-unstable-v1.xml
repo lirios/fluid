@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="fluid_decoration_unstable_v1">
+  <copyright><![CDATA[
+    SPDX-FileCopyrightText: 2018-2022 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+
+    SPDX-License-Identifier: MIT
+  ]]></copyright>
+
+  <interface name="zfluid_decoration_manager_v1" version="1">
+    <description summary="server-side decoration integration">
+      This interface allows a client to alter the look of
+      server-side decorations.
+    </description>
+
+    <enum name="error">
+      <entry name="already_exists" value="0"
+             summary="the surface already has a zfluid_decoration_v1 object associated"/>
+    </enum>
+
+    <request name="create">
+      <description summary="create a manager object">
+        Instantiate an interface extention for the given wl_surface to
+        change the server-side decoration background and foreground
+        colors.
+
+        If a zfluid_decoration_v1 object has already been associated with this
+        surface, the compositor will post an error.
+      </description>
+      <arg name="id" type="new_id" interface="zfluid_decoration_v1"/>
+      <arg name="surface" type="object" interface="wl_surface"/>
+    </request>
+
+    <request name="destroy" type="destructor">
+      <description summary="release the object">
+        This destroys the zfluid_decoration_manager_v1 object.
+        It must be called after all zfluid_decoration_v1 objects are freed.
+        The compositor is not forced to revert the colors back
+        to the original ones.
+      </description>
+    </request>
+  </interface>
+
+  <interface name="zfluid_decoration_v1" version="1">
+    <description summary="server-side decoration interface">
+      This interface allows a client to change the server-side decoration
+      background and foreground colors to match the primary color used
+      by the window.
+    </description>
+
+    <request name="set_foreground">
+      <description summary="set the foreground color">
+        Change the server-side decoration foreground color
+        in hex color code (for example #ffffff for white).
+      </description>
+      <arg name="r" type="uint"/>
+      <arg name="g" type="uint"/>
+      <arg name="b" type="uint"/>
+      <arg name="a" type="uint"/>
+    </request>
+
+    <request name="set_background">
+      <description summary="set the background color">
+        Change the server-side decoration background color
+        in hex color code (for example #ffffff for white).
+      </description>
+      <arg name="r" type="uint"/>
+      <arg name="g" type="uint"/>
+      <arg name="b" type="uint"/>
+      <arg name="a" type="uint"/>
+    </request>
+
+    <request name="destroy" type="destructor">
+      <description summary="release the object">
+        This destroys the zfluid_decoration_v1 object.
+        The compositor is not forced to revert the colors back
+        to the original ones.
+      </description>
+    </request>
+  </interface>
+</protocol>

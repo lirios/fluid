@@ -19,9 +19,9 @@
 #include "windowdecoration.h"
 
 #ifdef FLUID_ENABLE_WAYLAND
-#  include "extensions/liridecoration.h"
+#  include "extensions/fluiddecorationv1.h"
 
-Q_GLOBAL_STATIC(LiriDecorationManager, s_decorationManager)
+Q_GLOBAL_STATIC(FluidDecorationManager, s_decorationManager)
 #endif
 
 WindowDecoration::WindowDecoration(QObject *parent)
@@ -32,7 +32,7 @@ WindowDecoration::WindowDecoration(QObject *parent)
 {
 #ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland")))
-        connect(s_decorationManager, &LiriDecorationManager::activeChanged,
+        connect(s_decorationManager, &FluidDecorationManager::activeChanged,
                 this, &WindowDecoration::setServerSideDecorationColor);
 #endif
 }
@@ -153,7 +153,7 @@ void WindowDecoration::setServerSideDecorationColor()
         const QVariant bgColor = m_window->property("__material_decoration_backgroundColor");
 
         if (s_decorationManager->isActive() && fgColor.isValid() && bgColor.isValid()) {
-            LiriDecoration *decoration = s_decorationManager->decorationForWindow(m_window);
+            FluidDecoration *decoration = s_decorationManager->decorationForWindow(m_window);
             decoration->setForegroundColor(fgColor.value<QColor>());
             decoration->setBackgroundColor(bgColor.value<QColor>());
         }

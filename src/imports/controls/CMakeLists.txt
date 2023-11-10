@@ -24,6 +24,7 @@ liri_add_qml_plugin(fluidcontrols
         controlsutils.h
         iconthemeimageprovider.cpp
         iconthemeimageprovider.h
+        inputregion.cpp inputregion.h
     QML_FILES
         Action.qml
         AlertDialog.qml
@@ -92,6 +93,8 @@ liri_add_qml_plugin(fluidcontrols
         Qt5::QuickControls2
         Qt5::Svg
 )
+
+liri_finalize_qml_plugin(fluidcontrols)
 
 if(FLUID_INSTALL_ICONS)
     file(GLOB icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*.svg")

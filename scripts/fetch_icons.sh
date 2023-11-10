@@ -1,31 +1,36 @@
 #!/bin/bash
 
+rootdir=$(readlink -f `dirname $0`/..)
+
 GIT_URL=https://github.com/google/material-design-icons.git
 GIT_DIR=material-design-icons
-TARGET_DIR=src/imports/controls/icons
+TARGET_DIR=${rootdir}/src/imports/controls/icons
 RELATIVE_DIR=icons
-QRC_FILE=src/imports/controls/icons.qrc
-TXT_FILE=src/demo/qml/icons.txt
+QRC_FILE=${rootdir}/src/imports/controls/icons.qrc
+TXT_FILE=${rootdir}/src/demo/qml/icons.txt
 
 function copy_icon()
 {
-    for FILE in $ICONS; do
-        ICON=$(basename $FILE)
-        NEW_NAME=$(echo $ICON | sed -E 's/ic_(.*)_24px.svg/\1.svg/' | sed -E 's/ic_(.*)_26x24px.svg/\1.svg/' | sed -E 's/ic_(.*)_48px.svg/\1.svg/')
-        BASE_NAME=$(echo $NEW_NAME | sed -E 's/.svg//')
-        if [ ! -f $TARGET_DIR/$CATEGORY/$NEW_NAME ]; then
-            cp $FILE $TARGET_DIR/$CATEGORY/$NEW_NAME
-            chmod 644 $TARGET_DIR/$CATEGORY/$NEW_NAME
-            echo "        <file>$RELATIVE_DIR/$CATEGORY/$NEW_NAME</file>" >> $QRC_FILE
-            echo -e "\t$BASE_NAME" >> $TXT_FILE
+    for NAME in $ICONS; do
+        source_path=$GIT_DIR/src/$CATEGORY/$NAME/materialicons/24px.svg
+        [ ! -f $source_path ] && continue
+        dest_path=$TARGET_DIR/$CATEGORY/$NAME.svg
+        if [ ! -f $dest_path ]; then
+            cp $source_path $dest_path
+            chmod 644 $dest_path
+            echo "        <file>$RELATIVE_DIR/$CATEGORY/$NAME.svg</file>" >> $QRC_FILE
+            echo -e "\t$NAME" >> $TXT_FILE
         fi
     done
 }
 
-rm -rf $GIT_DIR
-git clone $GIT_URL
+if [ -d $GIT_DIR ]; then
+    (cd $GIT_DIR && git pull)
+else
+    git clone --depth 1 $GIT_URL
+fi
 
-CATEGORIES=$(ls -1 -d  $GIT_DIR/*/drawable-mdpi | awk -F/ '{ print $2 }')
+CATEGORIES=$(ls -1 -d  $GIT_DIR/src/*/*/materialicons/*.svg | awk -F/ '{ print $3 }' | uniq)
 
 rm -rf $TARGET_DIR
 mkdir -p $TARGET_DIR
@@ -45,15 +50,10 @@ for CATEGORY in ${CATEGORIES[*]}; do
 
     mkdir $TARGET_DIR/$CATEGORY
 
-    ICONS=$(ls $GIT_DIR/$CATEGORY/svg/production/*48px*)
-    copy_icon
-
-    ICONS=$(ls $GIT_DIR/$CATEGORY/svg/production/*24px*)
+    ICONS=$(ls -1 $GIT_DIR/src/$CATEGORY)
     copy_icon
 done
 cat >> $QRC_FILE <<EOF
     </qresource>
 </RCC>
 EOF
-
-rm -rf $GIT_DIR

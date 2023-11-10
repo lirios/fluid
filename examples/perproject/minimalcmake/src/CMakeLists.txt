@@ -8,3 +8,5 @@ liri_add_executable("example"
         Qt5::Gui
         Qt5::QuickControls2
 )
+
+liri_finalize_executable("example")

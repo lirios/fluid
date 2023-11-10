@@ -19,7 +19,6 @@
 #include "clipboard.h"
 #include "device.h"
 #include "dateutils.h"
-#include "qqmlsortfilterproxymodel.h"
 #include "standardpaths.h"
 
 static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
@@ -68,7 +67,6 @@ void FluidCorePlugin::registerTypes(const char *uri)
 #endif
 
     qmlRegisterType<Clipboard>(uri, 1, 0, "Clipboard");
-    qmlRegisterType<QQmlSortFilterProxyModel>(uri, 1, 0, "SortFilterProxyModel");
 
     qmlRegisterSingletonType<DateUtils>(uri, 1, 0, "DateUtils", dateUtilsProvider);
     qmlRegisterSingletonType<Device>(uri, 1, 0, "Device", deviceProvider);

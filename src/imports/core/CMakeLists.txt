@@ -14,8 +14,6 @@ liri_add_qml_plugin(fluidcore
         dateutils.h
         device.cpp
         device.h
-        qqmlsortfilterproxymodel.cpp
-        qqmlsortfilterproxymodel.h
         standardpaths.cpp
         standardpaths.h
     QML_FILES

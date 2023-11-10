@@ -31,28 +31,23 @@ Components.StyledPage {
                 text: qsTr("Input Chips")
             }
 
-            FluidCore.SortFilterProxyModel {
+            ListModel {
                 id: contactModel
 
-                sourceModel: ListModel {
-                    ListElement {
-                        label: "Contact Name 1"
-                        value: "primaryemail@email.com"
-                        imageSource: "qrc:/images/balloon.jpg"
-                    }
-                    ListElement {
-                        label: "Contact Name 2"
-                        value: "email2@email.com"
-                        imageSource: "qrc:/images/balloon.jpg"
-                    }
-                    ListElement {
-                        label: "Contact Name 3"
-                        value: "email3@email.com"
-                        imageSource: "qrc:/images/balloon.jpg"
-                    }
+                ListElement {
+                    label: "Contact Name 1"
+                    value: "primaryemail@email.com"
+                    imageSource: "qrc:/images/balloon.jpg"
                 }
-                sortExpression: {
-                    return (modelLeft.weight < modelRight.weight) && (modelRight.email < modelRight.email);
+                ListElement {
+                    label: "Contact Name 2"
+                    value: "email2@email.com"
+                    imageSource: "qrc:/images/balloon.jpg"
+                }
+                ListElement {
+                    label: "Contact Name 3"
+                    value: "email3@email.com"
+                    imageSource: "qrc:/images/balloon.jpg"
                 }
             }
 

@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/liri.io/imports/Fluid/Controls/">
+        <file>icons/action/123.svg</file>
         <file>icons/action/3d_rotation.svg</file>
+        <file>icons/action/abc.svg</file>
         <file>icons/action/accessibility.svg</file>
         <file>icons/action/accessibility_new.svg</file>
         <file>icons/action/accessible.svg</file>
@@ -9,10 +11,12 @@
         <file>icons/action/account_balance_wallet.svg</file>
         <file>icons/action/account_box.svg</file>
         <file>icons/action/account_circle.svg</file>
-        <file>icons/action/addchart.svg</file>
+        <file>icons/action/add_card.svg</file>
+        <file>icons/action/add_home.svg</file>
         <file>icons/action/add_shopping_cart.svg</file>
         <file>icons/action/add_task.svg</file>
         <file>icons/action/add_to_drive.svg</file>
+        <file>icons/action/addchart.svg</file>
         <file>icons/action/admin_panel_settings.svg</file>
         <file>icons/action/ads_click.svg</file>
         <file>icons/action/alarm.svg</file>
@@ -27,34 +31,44 @@
         <file>icons/action/announcement.svg</file>
         <file>icons/action/api.svg</file>
         <file>icons/action/app_blocking.svg</file>
+        <file>icons/action/app_shortcut.svg</file>
         <file>icons/action/arrow_circle_down.svg</file>
+        <file>icons/action/arrow_circle_left.svg</file>
+        <file>icons/action/arrow_circle_right.svg</file>
         <file>icons/action/arrow_circle_up.svg</file>
+        <file>icons/action/arrow_outward.svg</file>
         <file>icons/action/arrow_right_alt.svg</file>
         <file>icons/action/article.svg</file>
         <file>icons/action/aspect_ratio.svg</file>
         <file>icons/action/assessment.svg</file>
         <file>icons/action/assignment.svg</file>
+        <file>icons/action/assignment_add.svg</file>
         <file>icons/action/assignment_ind.svg</file>
         <file>icons/action/assignment_late.svg</file>
         <file>icons/action/assignment_return.svg</file>
         <file>icons/action/assignment_returned.svg</file>
         <file>icons/action/assignment_turned_in.svg</file>
+        <file>icons/action/assured_workload.svg</file>
         <file>icons/action/autorenew.svg</file>
         <file>icons/action/backup.svg</file>
         <file>icons/action/backup_table.svg</file>
+        <file>icons/action/balance.svg</file>
+        <file>icons/action/barcode_reader.svg</file>
         <file>icons/action/batch_prediction.svg</file>
         <file>icons/action/book.svg</file>
+        <file>icons/action/book_online.svg</file>
         <file>icons/action/bookmark.svg</file>
         <file>icons/action/bookmark_add.svg</file>
         <file>icons/action/bookmark_added.svg</file>
         <file>icons/action/bookmark_border.svg</file>
         <file>icons/action/bookmark_remove.svg</file>
         <file>icons/action/bookmarks.svg</file>
-        <file>icons/action/book_online.svg</file>
+        <file>icons/action/browse_gallery.svg</file>
         <file>icons/action/bug_report.svg</file>
         <file>icons/action/build.svg</file>
         <file>icons/action/build_circle.svg</file>
         <file>icons/action/cached.svg</file>
+        <file>icons/action/calendar_month.svg</file>
         <file>icons/action/calendar_today.svg</file>
         <file>icons/action/calendar_view_day.svg</file>
         <file>icons/action/calendar_view_month.svg</file>
@@ -74,26 +88,34 @@
         <file>icons/action/code.svg</file>
         <file>icons/action/code_off.svg</file>
         <file>icons/action/comment_bank.svg</file>
+        <file>icons/action/commit.svg</file>
         <file>icons/action/commute.svg</file>
         <file>icons/action/compare_arrows.svg</file>
         <file>icons/action/compress.svg</file>
-        <file>icons/action/contactless.svg</file>
         <file>icons/action/contact_page.svg</file>
         <file>icons/action/contact_support.svg</file>
+        <file>icons/action/contactless.svg</file>
         <file>icons/action/copyright.svg</file>
         <file>icons/action/credit_card.svg</file>
         <file>icons/action/credit_card_off.svg</file>
+        <file>icons/action/css.svg</file>
+        <file>icons/action/currency_exchange.svg</file>
         <file>icons/action/dangerous.svg</file>
         <file>icons/action/dashboard.svg</file>
         <file>icons/action/dashboard_customize.svg</file>
         <file>icons/action/data_exploration.svg</file>
+        <file>icons/action/data_thresholding.svg</file>
         <file>icons/action/date_range.svg</file>
         <file>icons/action/delete.svg</file>
         <file>icons/action/delete_forever.svg</file>
         <file>icons/action/delete_outline.svg</file>
+        <file>icons/action/density_large.svg</file>
+        <file>icons/action/density_medium.svg</file>
+        <file>icons/action/density_small.svg</file>
         <file>icons/action/description.svg</file>
         <file>icons/action/disabled_by_default.svg</file>
         <file>icons/action/disabled_visible.svg</file>
+        <file>icons/action/display_settings.svg</file>
         <file>icons/action/dns.svg</file>
         <file>icons/action/done.svg</file>
         <file>icons/action/done_all.svg</file>
@@ -104,10 +126,13 @@
         <file>icons/action/dynamic_form.svg</file>
         <file>icons/action/eco.svg</file>
         <file>icons/action/edit_calendar.svg</file>
+        <file>icons/action/edit_document.svg</file>
         <file>icons/action/edit_off.svg</file>
+        <file>icons/action/edit_square.svg</file>
         <file>icons/action/eject.svg</file>
         <file>icons/action/euro_symbol.svg</file>
         <file>icons/action/event.svg</file>
+        <file>icons/action/event_repeat.svg</file>
         <file>icons/action/event_seat.svg</file>
         <file>icons/action/exit_to_app.svg</file>
         <file>icons/action/expand.svg</file>
@@ -119,9 +144,11 @@
         <file>icons/action/fact_check.svg</file>
         <file>icons/action/favorite.svg</file>
         <file>icons/action/favorite_border.svg</file>
+        <file>icons/action/fax.svg</file>
         <file>icons/action/feedback.svg</file>
         <file>icons/action/file_present.svg</file>
         <file>icons/action/filter_alt.svg</file>
+        <file>icons/action/filter_alt_off.svg</file>
         <file>icons/action/filter_list_alt.svg</file>
         <file>icons/action/find_in_page.svg</file>
         <file>icons/action/find_replace.svg</file>
@@ -134,14 +161,15 @@
         <file>icons/action/flip_to_front.svg</file>
         <file>icons/action/flutter_dash.svg</file>
         <file>icons/action/free_cancellation.svg</file>
+        <file>icons/action/g_translate.svg</file>
         <file>icons/action/gavel.svg</file>
         <file>icons/action/generating_tokens.svg</file>
         <file>icons/action/get_app.svg</file>
         <file>icons/action/gif.svg</file>
+        <file>icons/action/gif_box.svg</file>
         <file>icons/action/grade.svg</file>
         <file>icons/action/grading.svg</file>
         <file>icons/action/group_work.svg</file>
-        <file>icons/action/g_translate.svg</file>
         <file>icons/action/help.svg</file>
         <file>icons/action/help_center.svg</file>
         <file>icons/action/help_outline.svg</file>
@@ -150,6 +178,8 @@
         <file>icons/action/highlight_off.svg</file>
         <file>icons/action/history.svg</file>
         <file>icons/action/history_toggle_off.svg</file>
+        <file>icons/action/hls.svg</file>
+        <file>icons/action/hls_off.svg</file>
         <file>icons/action/home.svg</file>
         <file>icons/action/home_filled.svg</file>
         <file>icons/action/horizontal_split.svg</file>
@@ -157,14 +187,22 @@
         <file>icons/action/hourglass_disabled.svg</file>
         <file>icons/action/hourglass_empty.svg</file>
         <file>icons/action/hourglass_full.svg</file>
+        <file>icons/action/html.svg</file>
         <file>icons/action/http.svg</file>
         <file>icons/action/https.svg</file>
         <file>icons/action/important_devices.svg</file>
         <file>icons/action/info.svg</file>
         <file>icons/action/info_outline.svg</file>
         <file>icons/action/input.svg</file>
+        <file>icons/action/install_desktop.svg</file>
+        <file>icons/action/install_mobile.svg</file>
         <file>icons/action/integration_instructions.svg</file>
         <file>icons/action/invert_colors.svg</file>
+        <file>icons/action/javascript.svg</file>
+        <file>icons/action/join_full.svg</file>
+        <file>icons/action/join_inner.svg</file>
+        <file>icons/action/join_left.svg</file>
+        <file>icons/action/join_right.svg</file>
         <file>icons/action/label.svg</file>
         <file>icons/action/label_important.svg</file>
         <file>icons/action/label_important_outline.svg</file>
@@ -174,6 +212,7 @@
         <file>icons/action/launch.svg</file>
         <file>icons/action/leaderboard.svg</file>
         <file>icons/action/lightbulb.svg</file>
+        <file>icons/action/lightbulb_circle.svg</file>
         <file>icons/action/lightbulb_outline.svg</file>
         <file>icons/action/line_style.svg</file>
         <file>icons/action/line_weight.svg</file>
@@ -182,25 +221,32 @@
         <file>icons/action/lock_clock.svg</file>
         <file>icons/action/lock_open.svg</file>
         <file>icons/action/lock_outline.svg</file>
+        <file>icons/action/lock_person.svg</file>
+        <file>icons/action/lock_reset.svg</file>
         <file>icons/action/login.svg</file>
         <file>icons/action/logout.svg</file>
         <file>icons/action/loyalty.svg</file>
         <file>icons/action/manage_accounts.svg</file>
+        <file>icons/action/manage_history.svg</file>
         <file>icons/action/mark_as_unread.svg</file>
         <file>icons/action/markunread_mailbox.svg</file>
         <file>icons/action/maximize.svg</file>
         <file>icons/action/mediation.svg</file>
         <file>icons/action/minimize.svg</file>
         <file>icons/action/model_training.svg</file>
+        <file>icons/action/network_ping.svg</file>
         <file>icons/action/new_label.svg</file>
         <file>icons/action/next_plan.svg</file>
         <file>icons/action/nightlight_round.svg</file>
         <file>icons/action/no_accounts.svg</file>
+        <file>icons/action/noise_aware.svg</file>
+        <file>icons/action/noise_control_off.svg</file>
         <file>icons/action/not_accessible.svg</file>
-        <file>icons/action/note_add.svg</file>
         <file>icons/action/not_started.svg</file>
+        <file>icons/action/note_add.svg</file>
         <file>icons/action/offline_bolt.svg</file>
         <file>icons/action/offline_pin.svg</file>
+        <file>icons/action/on_device_training.svg</file>
         <file>icons/action/online_prediction.svg</file>
         <file>icons/action/opacity.svg</file>
         <file>icons/action/open_in_browser.svg</file>
@@ -213,12 +259,15 @@
         <file>icons/action/outbox.svg</file>
         <file>icons/action/outgoing_mail.svg</file>
         <file>icons/action/outlet.svg</file>
+        <file>icons/action/output.svg</file>
         <file>icons/action/pageview.svg</file>
         <file>icons/action/paid.svg</file>
         <file>icons/action/pan_tool.svg</file>
+        <file>icons/action/pan_tool_alt.svg</file>
         <file>icons/action/payment.svg</file>
         <file>icons/action/pending.svg</file>
         <file>icons/action/pending_actions.svg</file>
+        <file>icons/action/percent.svg</file>
         <file>icons/action/perm_camera_mic.svg</file>
         <file>icons/action/perm_contact_calendar.svg</file>
         <file>icons/action/perm_data_setting.svg</file>
@@ -228,10 +277,12 @@
         <file>icons/action/perm_phone_msg.svg</file>
         <file>icons/action/perm_scan_wifi.svg</file>
         <file>icons/action/pets.svg</file>
+        <file>icons/action/php.svg</file>
         <file>icons/action/picture_in_picture.svg</file>
         <file>icons/action/picture_in_picture_alt.svg</file>
         <file>icons/action/pin_end.svg</file>
         <file>icons/action/pin_invoke.svg</file>
+        <file>icons/action/pinch.svg</file>
         <file>icons/action/plagiarism.svg</file>
         <file>icons/action/play_for_work.svg</file>
         <file>icons/action/polymer.svg</file>
@@ -245,22 +296,28 @@
         <file>icons/action/published_with_changes.svg</file>
         <file>icons/action/query_builder.svg</file>
         <file>icons/action/question_answer.svg</file>
+        <file>icons/action/question_mark.svg</file>
         <file>icons/action/quickreply.svg</file>
+        <file>icons/action/rebase_edit.svg</file>
         <file>icons/action/receipt.svg</file>
         <file>icons/action/record_voice_over.svg</file>
         <file>icons/action/redeem.svg</file>
         <file>icons/action/remove_done.svg</file>
         <file>icons/action/remove_shopping_cart.svg</file>
         <file>icons/action/reorder.svg</file>
+        <file>icons/action/repartition.svg</file>
         <file>icons/action/report_problem.svg</file>
         <file>icons/action/request_page.svg</file>
         <file>icons/action/restore.svg</file>
         <file>icons/action/restore_from_trash.svg</file>
         <file>icons/action/restore_page.svg</file>
+        <file>icons/action/rocket.svg</file>
+        <file>icons/action/rocket_launch.svg</file>
         <file>icons/action/room.svg</file>
         <file>icons/action/rounded_corner.svg</file>
         <file>icons/action/rowing.svg</file>
         <file>icons/action/rule.svg</file>
+        <file>icons/action/satellite_alt.svg</file>
         <file>icons/action/saved_search.svg</file>
         <file>icons/action/savings.svg</file>
         <file>icons/action/schedule.svg</file>
@@ -291,13 +348,17 @@
         <file>icons/action/settings_voice.svg</file>
         <file>icons/action/shop.svg</file>
         <file>icons/action/shop_2.svg</file>
+        <file>icons/action/shop_two.svg</file>
         <file>icons/action/shopping_bag.svg</file>
         <file>icons/action/shopping_basket.svg</file>
         <file>icons/action/shopping_cart.svg</file>
-        <file>icons/action/shop_two.svg</file>
+        <file>icons/action/shopping_cart_checkout.svg</file>
         <file>icons/action/smart_button.svg</file>
         <file>icons/action/source.svg</file>
         <file>icons/action/space_dashboard.svg</file>
+        <file>icons/action/spatial_audio.svg</file>
+        <file>icons/action/spatial_audio_off.svg</file>
+        <file>icons/action/spatial_tracking.svg</file>
         <file>icons/action/speaker_notes.svg</file>
         <file>icons/action/speaker_notes_off.svg</file>
         <file>icons/action/spellcheck.svg</file>
@@ -315,12 +376,24 @@
         <file>icons/action/swap_vert.svg</file>
         <file>icons/action/swap_vertical_circle.svg</file>
         <file>icons/action/swipe.svg</file>
+        <file>icons/action/swipe_down.svg</file>
+        <file>icons/action/swipe_down_alt.svg</file>
+        <file>icons/action/swipe_left.svg</file>
+        <file>icons/action/swipe_left_alt.svg</file>
+        <file>icons/action/swipe_right.svg</file>
+        <file>icons/action/swipe_right_alt.svg</file>
+        <file>icons/action/swipe_up.svg</file>
+        <file>icons/action/swipe_up_alt.svg</file>
+        <file>icons/action/swipe_vertical.svg</file>
+        <file>icons/action/switch_access_shortcut.svg</file>
+        <file>icons/action/switch_access_shortcut_add.svg</file>
         <file>icons/action/sync_alt.svg</file>
         <file>icons/action/system_update_alt.svg</file>
         <file>icons/action/tab.svg</file>
-        <file>icons/action/table_view.svg</file>
         <file>icons/action/tab_unselected.svg</file>
+        <file>icons/action/table_view.svg</file>
         <file>icons/action/task_alt.svg</file>
+        <file>icons/action/terminal.svg</file>
         <file>icons/action/text_rotate_up.svg</file>
         <file>icons/action/text_rotate_vertical.svg</file>
         <file>icons/action/text_rotation_angledown.svg</file>
@@ -330,24 +403,29 @@
         <file>icons/action/theaters.svg</file>
         <file>icons/action/thumb_down.svg</file>
         <file>icons/action/thumb_down_off_alt.svg</file>
-        <file>icons/action/thumbs_up_down.svg</file>
         <file>icons/action/thumb_up.svg</file>
         <file>icons/action/thumb_up_off_alt.svg</file>
+        <file>icons/action/thumbs_up_down.svg</file>
         <file>icons/action/timeline.svg</file>
         <file>icons/action/tips_and_updates.svg</file>
         <file>icons/action/toc.svg</file>
         <file>icons/action/today.svg</file>
+        <file>icons/action/token.svg</file>
         <file>icons/action/toll.svg</file>
         <file>icons/action/touch_app.svg</file>
         <file>icons/action/tour.svg</file>
         <file>icons/action/track_changes.svg</file>
+        <file>icons/action/transcribe.svg</file>
         <file>icons/action/translate.svg</file>
         <file>icons/action/trending_down.svg</file>
         <file>icons/action/trending_flat.svg</file>
         <file>icons/action/trending_up.svg</file>
+        <file>icons/action/troubleshoot.svg</file>
         <file>icons/action/try.svg</file>
         <file>icons/action/turned_in.svg</file>
         <file>icons/action/turned_in_not.svg</file>
+        <file>icons/action/unfold_less_double.svg</file>
+        <file>icons/action/unfold_more_double.svg</file>
         <file>icons/action/unpublished.svg</file>
         <file>icons/action/update.svg</file>
         <file>icons/action/update_disabled.svg</file>
@@ -359,21 +437,31 @@
         <file>icons/action/view_array.svg</file>
         <file>icons/action/view_carousel.svg</file>
         <file>icons/action/view_column.svg</file>
+        <file>icons/action/view_comfy_alt.svg</file>
+        <file>icons/action/view_compact_alt.svg</file>
+        <file>icons/action/view_cozy.svg</file>
         <file>icons/action/view_day.svg</file>
         <file>icons/action/view_headline.svg</file>
         <file>icons/action/view_in_ar.svg</file>
+        <file>icons/action/view_kanban.svg</file>
         <file>icons/action/view_list.svg</file>
         <file>icons/action/view_module.svg</file>
         <file>icons/action/view_quilt.svg</file>
         <file>icons/action/view_sidebar.svg</file>
         <file>icons/action/view_stream.svg</file>
+        <file>icons/action/view_timeline.svg</file>
         <file>icons/action/view_week.svg</file>
         <file>icons/action/visibility.svg</file>
         <file>icons/action/visibility_off.svg</file>
         <file>icons/action/voice_over_off.svg</file>
         <file>icons/action/watch_later.svg</file>
+        <file>icons/action/webhook.svg</file>
+        <file>icons/action/width_full.svg</file>
+        <file>icons/action/width_normal.svg</file>
+        <file>icons/action/width_wide.svg</file>
         <file>icons/action/wifi_protected_setup.svg</file>
         <file>icons/action/work.svg</file>
+        <file>icons/action/work_history.svg</file>
         <file>icons/action/work_off.svg</file>
         <file>icons/action/work_outline.svg</file>
         <file>icons/action/wysiwyg.svg</file>
@@ -411,6 +499,7 @@
         <file>icons/av/airplay.svg</file>
         <file>icons/av/album.svg</file>
         <file>icons/av/art_track.svg</file>
+        <file>icons/av/audio_file.svg</file>
         <file>icons/av/av_timer.svg</file>
         <file>icons/av/branding_watermark.svg</file>
         <file>icons/av/call_to_action.svg</file>
@@ -437,20 +526,23 @@
         <file>icons/av/hearing.svg</file>
         <file>icons/av/hearing_disabled.svg</file>
         <file>icons/av/high_quality.svg</file>
+        <file>icons/av/interpreter_mode.svg</file>
         <file>icons/av/library_add.svg</file>
         <file>icons/av/library_add_check.svg</file>
         <file>icons/av/library_books.svg</file>
         <file>icons/av/library_music.svg</file>
         <file>icons/av/loop.svg</file>
+        <file>icons/av/lyrics.svg</file>
         <file>icons/av/mic.svg</file>
         <file>icons/av/mic_none.svg</file>
         <file>icons/av/mic_off.svg</file>
         <file>icons/av/missed_video_call.svg</file>
         <file>icons/av/movie.svg</file>
+        <file>icons/av/movie_edit.svg</file>
         <file>icons/av/music_video.svg</file>
         <file>icons/av/new_releases.svg</file>
-        <file>icons/av/note.svg</file>
         <file>icons/av/not_interested.svg</file>
+        <file>icons/av/note.svg</file>
         <file>icons/av/pause.svg</file>
         <file>icons/av/pause_circle.svg</file>
         <file>icons/av/pause_circle_filled.svg</file>
@@ -462,7 +554,10 @@
         <file>icons/av/play_disabled.svg</file>
         <file>icons/av/playlist_add.svg</file>
         <file>icons/av/playlist_add_check.svg</file>
+        <file>icons/av/playlist_add_check_circle.svg</file>
+        <file>icons/av/playlist_add_circle.svg</file>
         <file>icons/av/playlist_play.svg</file>
+        <file>icons/av/playlist_remove.svg</file>
         <file>icons/av/queue.svg</file>
         <file>icons/av/queue_music.svg</file>
         <file>icons/av/queue_play_next.svg</file>
@@ -493,11 +588,12 @@
         <file>icons/av/subtitles.svg</file>
         <file>icons/av/surround_sound.svg</file>
         <file>icons/av/video_call.svg</file>
-        <file>icons/av/videocam.svg</file>
-        <file>icons/av/videocam_off.svg</file>
+        <file>icons/av/video_file.svg</file>
         <file>icons/av/video_label.svg</file>
         <file>icons/av/video_library.svg</file>
         <file>icons/av/video_settings.svg</file>
+        <file>icons/av/videocam.svg</file>
+        <file>icons/av/videocam_off.svg</file>
         <file>icons/av/volume_down.svg</file>
         <file>icons/av/volume_down_alt.svg</file>
         <file>icons/av/volume_mute.svg</file>
@@ -520,12 +616,16 @@
         <file>icons/communication/call_received.svg</file>
         <file>icons/communication/call_split.svg</file>
         <file>icons/communication/cancel_presentation.svg</file>
+        <file>icons/communication/cell_tower.svg</file>
         <file>icons/communication/cell_wifi.svg</file>
         <file>icons/communication/chat.svg</file>
         <file>icons/communication/chat_bubble.svg</file>
         <file>icons/communication/chat_bubble_outline.svg</file>
         <file>icons/communication/clear_all.svg</file>
+        <file>icons/communication/co_present.svg</file>
         <file>icons/communication/comment.svg</file>
+        <file>icons/communication/comments_disabled.svg</file>
+        <file>icons/communication/contact_emergency.svg</file>
         <file>icons/communication/contact_mail.svg</file>
         <file>icons/communication/contact_phone.svg</file>
         <file>icons/communication/contacts.svg</file>
@@ -541,18 +641,23 @@
         <file>icons/communication/forward_to_inbox.svg</file>
         <file>icons/communication/hourglass_bottom.svg</file>
         <file>icons/communication/hourglass_top.svg</file>
+        <file>icons/communication/hub.svg</file>
         <file>icons/communication/import_contacts.svg</file>
         <file>icons/communication/import_export.svg</file>
         <file>icons/communication/invert_colors_off.svg</file>
+        <file>icons/communication/key.svg</file>
+        <file>icons/communication/key_off.svg</file>
         <file>icons/communication/list_alt.svg</file>
         <file>icons/communication/live_help.svg</file>
         <file>icons/communication/location_off.svg</file>
         <file>icons/communication/location_on.svg</file>
+        <file>icons/communication/mail_lock.svg</file>
         <file>icons/communication/mail_outline.svg</file>
         <file>icons/communication/mark_chat_read.svg</file>
         <file>icons/communication/mark_chat_unread.svg</file>
         <file>icons/communication/mark_email_read.svg</file>
         <file>icons/communication/mark_email_unread.svg</file>
+        <file>icons/communication/mark_unread_chat_alt.svg</file>
         <file>icons/communication/message.svg</file>
         <file>icons/communication/mobile_screen_share.svg</file>
         <file>icons/communication/more_time.svg</file>
@@ -579,9 +684,11 @@
         <file>icons/communication/rss_feed.svg</file>
         <file>icons/communication/rtt.svg</file>
         <file>icons/communication/screen_share.svg</file>
+        <file>icons/communication/send_time_extension.svg</file>
         <file>icons/communication/sentiment_satisfied_alt.svg</file>
         <file>icons/communication/sip.svg</file>
         <file>icons/communication/speaker_phone.svg</file>
+        <file>icons/communication/spoke.svg</file>
         <file>icons/communication/stay_current_landscape.svg</file>
         <file>icons/communication/stay_current_portrait.svg</file>
         <file>icons/communication/stay_primary_landscape.svg</file>
@@ -592,6 +699,7 @@
         <file>icons/communication/unsubscribe.svg</file>
         <file>icons/communication/voicemail.svg</file>
         <file>icons/communication/vpn_key.svg</file>
+        <file>icons/communication/vpn_key_off.svg</file>
         <file>icons/communication/wifi_calling.svg</file>
         <file>icons/content/add.svg</file>
         <file>icons/content/add_box.svg</file>
@@ -613,15 +721,20 @@
         <file>icons/content/content_copy.svg</file>
         <file>icons/content/content_cut.svg</file>
         <file>icons/content/content_paste.svg</file>
+        <file>icons/content/content_paste_go.svg</file>
         <file>icons/content/content_paste_off.svg</file>
+        <file>icons/content/content_paste_search.svg</file>
         <file>icons/content/copy_all.svg</file>
         <file>icons/content/create.svg</file>
         <file>icons/content/delete_sweep.svg</file>
+        <file>icons/content/deselect.svg</file>
         <file>icons/content/drafts.svg</file>
         <file>icons/content/dynamic_feed.svg</file>
         <file>icons/content/file_copy.svg</file>
         <file>icons/content/filter_list.svg</file>
+        <file>icons/content/filter_list_off.svg</file>
         <file>icons/content/flag.svg</file>
+        <file>icons/content/flag_circle.svg</file>
         <file>icons/content/font_download.svg</file>
         <file>icons/content/font_download_off.svg</file>
         <file>icons/content/forward.svg</file>
@@ -653,6 +766,7 @@
         <file>icons/content/report_off.svg</file>
         <file>icons/content/save.svg</file>
         <file>icons/content/save_alt.svg</file>
+        <file>icons/content/save_as.svg</file>
         <file>icons/content/select_all.svg</file>
         <file>icons/content/send.svg</file>
         <file>icons/content/shield.svg</file>
@@ -679,14 +793,21 @@
         <file>icons/device/access_alarms.svg</file>
         <file>icons/device/access_time.svg</file>
         <file>icons/device/access_time_filled.svg</file>
+        <file>icons/device/ad_units.svg</file>
         <file>icons/device/add_alarm.svg</file>
         <file>icons/device/add_to_home_screen.svg</file>
-        <file>icons/device/ad_units.svg</file>
         <file>icons/device/air.svg</file>
+        <file>icons/device/airplane_ticket.svg</file>
         <file>icons/device/airplanemode_active.svg</file>
         <file>icons/device/airplanemode_inactive.svg</file>
-        <file>icons/device/airplane_ticket.svg</file>
         <file>icons/device/aod.svg</file>
+        <file>icons/device/battery_0_bar.svg</file>
+        <file>icons/device/battery_1_bar.svg</file>
+        <file>icons/device/battery_2_bar.svg</file>
+        <file>icons/device/battery_3_bar.svg</file>
+        <file>icons/device/battery_4_bar.svg</file>
+        <file>icons/device/battery_5_bar.svg</file>
+        <file>icons/device/battery_6_bar.svg</file>
         <file>icons/device/battery_alert.svg</file>
         <file>icons/device/battery_charging_full.svg</file>
         <file>icons/device/battery_full.svg</file>
@@ -710,17 +831,22 @@
         <file>icons/device/data_saver_off.svg</file>
         <file>icons/device/data_saver_on.svg</file>
         <file>icons/device/data_usage.svg</file>
+        <file>icons/device/dataset.svg</file>
+        <file>icons/device/dataset_linked.svg</file>
         <file>icons/device/developer_mode.svg</file>
-        <file>icons/device/devices.svg</file>
         <file>icons/device/device_thermostat.svg</file>
+        <file>icons/device/devices.svg</file>
+        <file>icons/device/devices_fold.svg</file>
+        <file>icons/device/discount.svg</file>
         <file>icons/device/do_not_disturb_on_total_silence.svg</file>
         <file>icons/device/dvr.svg</file>
+        <file>icons/device/e_mobiledata.svg</file>
         <file>icons/device/edgesensor_high.svg</file>
         <file>icons/device/edgesensor_low.svg</file>
-        <file>icons/device/e_mobiledata.svg</file>
         <file>icons/device/flashlight_off.svg</file>
         <file>icons/device/flashlight_on.svg</file>
         <file>icons/device/flourescent.svg</file>
+        <file>icons/device/fluorescent.svg</file>
         <file>icons/device/fmd_bad.svg</file>
         <file>icons/device/fmd_good.svg</file>
         <file>icons/device/g_mobiledata.svg</file>
@@ -734,47 +860,56 @@
         <file>icons/device/grid_3x3.svg</file>
         <file>icons/device/grid_4x4.svg</file>
         <file>icons/device/grid_goldenratio.svg</file>
+        <file>icons/device/h_mobiledata.svg</file>
+        <file>icons/device/h_plus_mobiledata.svg</file>
         <file>icons/device/hdr_auto.svg</file>
         <file>icons/device/hdr_auto_select.svg</file>
         <file>icons/device/hdr_off_select.svg</file>
         <file>icons/device/hdr_on_select.svg</file>
-        <file>icons/device/h_mobiledata.svg</file>
-        <file>icons/device/h_plus_mobiledata.svg</file>
+        <file>icons/device/lan.svg</file>
         <file>icons/device/lens_blur.svg</file>
         <file>icons/device/light_mode.svg</file>
         <file>icons/device/location_disabled.svg</file>
         <file>icons/device/location_searching.svg</file>
         <file>icons/device/lte_mobiledata.svg</file>
         <file>icons/device/lte_plus_mobiledata.svg</file>
+        <file>icons/device/macro_off.svg</file>
         <file>icons/device/media_bluetooth_off.svg</file>
         <file>icons/device/media_bluetooth_on.svg</file>
         <file>icons/device/medication.svg</file>
-        <file>icons/device/mobiledata_off.svg</file>
+        <file>icons/device/medication_liquid.svg</file>
         <file>icons/device/mobile_friendly.svg</file>
         <file>icons/device/mobile_off.svg</file>
+        <file>icons/device/mobiledata_off.svg</file>
         <file>icons/device/mode_night.svg</file>
         <file>icons/device/mode_standby.svg</file>
+        <file>icons/device/monitor_heart.svg</file>
         <file>icons/device/monitor_weight.svg</file>
         <file>icons/device/nearby_error.svg</file>
         <file>icons/device/nearby_off.svg</file>
         <file>icons/device/network_cell.svg</file>
         <file>icons/device/network_wifi.svg</file>
+        <file>icons/device/network_wifi_1_bar.svg</file>
+        <file>icons/device/network_wifi_2_bar.svg</file>
+        <file>icons/device/network_wifi_3_bar.svg</file>
         <file>icons/device/nfc.svg</file>
         <file>icons/device/nightlight.svg</file>
         <file>icons/device/note_alt.svg</file>
         <file>icons/device/password.svg</file>
         <file>icons/device/pattern.svg</file>
+        <file>icons/device/phishing.svg</file>
         <file>icons/device/pin.svg</file>
         <file>icons/device/play_lesson.svg</file>
         <file>icons/device/price_change.svg</file>
         <file>icons/device/price_check.svg</file>
+        <file>icons/device/punch_clock.svg</file>
         <file>icons/device/quiz.svg</file>
+        <file>icons/device/r_mobiledata.svg</file>
         <file>icons/device/radar.svg</file>
         <file>icons/device/remember_me.svg</file>
         <file>icons/device/reset_tv.svg</file>
         <file>icons/device/restart_alt.svg</file>
         <file>icons/device/reviews.svg</file>
-        <file>icons/device/r_mobiledata.svg</file>
         <file>icons/device/rsvp.svg</file>
         <file>icons/device/screen_lock_landscape.svg</file>
         <file>icons/device/screen_lock_portrait.svg</file>
@@ -782,6 +917,7 @@
         <file>icons/device/screen_rotation.svg</file>
         <file>icons/device/screen_search_desktop.svg</file>
         <file>icons/device/screenshot.svg</file>
+        <file>icons/device/screenshot_monitor.svg</file>
         <file>icons/device/sd_storage.svg</file>
         <file>icons/device/security_update.svg</file>
         <file>icons/device/security_update_good.svg</file>
@@ -795,10 +931,12 @@
         <file>icons/device/signal_cellular_0_bar.svg</file>
         <file>icons/device/signal_cellular_4_bar.svg</file>
         <file>icons/device/signal_cellular_alt.svg</file>
+        <file>icons/device/signal_cellular_alt_1_bar.svg</file>
+        <file>icons/device/signal_cellular_alt_2_bar.svg</file>
         <file>icons/device/signal_cellular_connected_no_internet_0_bar.svg</file>
         <file>icons/device/signal_cellular_connected_no_internet_4_bar.svg</file>
-        <file>icons/device/signal_cellular_nodata.svg</file>
         <file>icons/device/signal_cellular_no_sim.svg</file>
+        <file>icons/device/signal_cellular_nodata.svg</file>
         <file>icons/device/signal_cellular_null.svg</file>
         <file>icons/device/signal_cellular_off.svg</file>
         <file>icons/device/signal_wifi_0_bar.svg</file>
@@ -813,6 +951,7 @@
         <file>icons/device/sim_card_download.svg</file>
         <file>icons/device/splitscreen.svg</file>
         <file>icons/device/sports_score.svg</file>
+        <file>icons/device/ssid_chart.svg</file>
         <file>icons/device/storage.svg</file>
         <file>icons/device/storm.svg</file>
         <file>icons/device/summarize.svg</file>
@@ -829,9 +968,15 @@
         <file>icons/device/wallpaper.svg</file>
         <file>icons/device/water.svg</file>
         <file>icons/device/widgets.svg</file>
+        <file>icons/device/wifi_1_bar.svg</file>
+        <file>icons/device/wifi_2_bar.svg</file>
         <file>icons/device/wifi_calling_3.svg</file>
+        <file>icons/device/wifi_channel.svg</file>
+        <file>icons/device/wifi_find.svg</file>
         <file>icons/device/wifi_lock.svg</file>
+        <file>icons/device/wifi_password.svg</file>
         <file>icons/device/wifi_tethering.svg</file>
+        <file>icons/device/wifi_tethering_error.svg</file>
         <file>icons/device/wifi_tethering_error_rounded.svg</file>
         <file>icons/device/wifi_tethering_off.svg</file>
         <file>icons/editor/add_chart.svg</file>
@@ -860,8 +1005,11 @@
         <file>icons/editor/border_top.svg</file>
         <file>icons/editor/border_vertical.svg</file>
         <file>icons/editor/bubble_chart.svg</file>
+        <file>icons/editor/candlestick_chart.svg</file>
         <file>icons/editor/checklist.svg</file>
         <file>icons/editor/checklist_rtl.svg</file>
+        <file>icons/editor/data_array.svg</file>
+        <file>icons/editor/data_object.svg</file>
         <file>icons/editor/drag_handle.svg</file>
         <file>icons/editor/draw.svg</file>
         <file>icons/editor/edit_note.svg</file>
@@ -879,6 +1027,7 @@
         <file>icons/editor/format_italic.svg</file>
         <file>icons/editor/format_line_spacing.svg</file>
         <file>icons/editor/format_list_bulleted.svg</file>
+        <file>icons/editor/format_list_bulleted_add.svg</file>
         <file>icons/editor/format_list_numbered.svg</file>
         <file>icons/editor/format_list_numbered_rtl.svg</file>
         <file>icons/editor/format_paint.svg</file>
@@ -891,6 +1040,7 @@
         <file>icons/editor/format_underlined.svg</file>
         <file>icons/editor/functions.svg</file>
         <file>icons/editor/height.svg</file>
+        <file>icons/editor/hexagon.svg</file>
         <file>icons/editor/highlight.svg</file>
         <file>icons/editor/horizontal_distribute.svg</file>
         <file>icons/editor/horizontal_rule.svg</file>
@@ -901,7 +1051,9 @@
         <file>icons/editor/insert_emoticon.svg</file>
         <file>icons/editor/insert_invitation.svg</file>
         <file>icons/editor/insert_link.svg</file>
+        <file>icons/editor/insert_page_break.svg</file>
         <file>icons/editor/insert_photo.svg</file>
+        <file>icons/editor/line_axis.svg</file>
         <file>icons/editor/linear_scale.svg</file>
         <file>icons/editor/margin.svg</file>
         <file>icons/editor/merge_type.svg</file>
@@ -912,29 +1064,40 @@
         <file>icons/editor/monetization_on.svg</file>
         <file>icons/editor/money_off.svg</file>
         <file>icons/editor/money_off_csred.svg</file>
+        <file>icons/editor/move_down.svg</file>
+        <file>icons/editor/move_up.svg</file>
         <file>icons/editor/multiline_chart.svg</file>
         <file>icons/editor/notes.svg</file>
+        <file>icons/editor/numbers.svg</file>
         <file>icons/editor/padding.svg</file>
+        <file>icons/editor/pentagon.svg</file>
         <file>icons/editor/pie_chart.svg</file>
         <file>icons/editor/pie_chart_outline.svg</file>
         <file>icons/editor/pie_chart_outlined.svg</file>
+        <file>icons/editor/polyline.svg</file>
         <file>icons/editor/post_add.svg</file>
         <file>icons/editor/publish.svg</file>
         <file>icons/editor/query_stats.svg</file>
+        <file>icons/editor/rectangle.svg</file>
         <file>icons/editor/scatter_plot.svg</file>
         <file>icons/editor/schema.svg</file>
         <file>icons/editor/score.svg</file>
+        <file>icons/editor/shape_line.svg</file>
         <file>icons/editor/short_text.svg</file>
         <file>icons/editor/show_chart.svg</file>
         <file>icons/editor/space_bar.svg</file>
+        <file>icons/editor/square.svg</file>
         <file>icons/editor/stacked_line_chart.svg</file>
         <file>icons/editor/strikethrough_s.svg</file>
         <file>icons/editor/subscript.svg</file>
         <file>icons/editor/superscript.svg</file>
         <file>icons/editor/table_chart.svg</file>
         <file>icons/editor/table_rows.svg</file>
+        <file>icons/editor/text_decrease.svg</file>
         <file>icons/editor/text_fields.svg</file>
+        <file>icons/editor/text_increase.svg</file>
         <file>icons/editor/title.svg</file>
+        <file>icons/editor/type_specimen.svg</file>
         <file>icons/editor/vertical_align_bottom.svg</file>
         <file>icons/editor/vertical_align_center.svg</file>
         <file>icons/editor/vertical_align_top.svg</file>
@@ -949,8 +1112,10 @@
         <file>icons/file/cloud_download.svg</file>
         <file>icons/file/cloud_off.svg</file>
         <file>icons/file/cloud_queue.svg</file>
+        <file>icons/file/cloud_sync.svg</file>
         <file>icons/file/cloud_upload.svg</file>
         <file>icons/file/create_new_folder.svg</file>
+        <file>icons/file/difference.svg</file>
         <file>icons/file/download.svg</file>
         <file>icons/file/download_done.svg</file>
         <file>icons/file/download_for_offline.svg</file>
@@ -963,11 +1128,19 @@
         <file>icons/file/file_download.svg</file>
         <file>icons/file/file_download_done.svg</file>
         <file>icons/file/file_download_off.svg</file>
+        <file>icons/file/file_open.svg</file>
         <file>icons/file/file_upload.svg</file>
+        <file>icons/file/file_upload_off.svg</file>
         <file>icons/file/folder.svg</file>
+        <file>icons/file/folder_copy.svg</file>
+        <file>icons/file/folder_delete.svg</file>
+        <file>icons/file/folder_off.svg</file>
         <file>icons/file/folder_open.svg</file>
         <file>icons/file/folder_shared.svg</file>
+        <file>icons/file/folder_zip.svg</file>
+        <file>icons/file/format_overline.svg</file>
         <file>icons/file/grid_view.svg</file>
+        <file>icons/file/newspaper.svg</file>
         <file>icons/file/request_quote.svg</file>
         <file>icons/file/rule_folder.svg</file>
         <file>icons/file/snippet_folder.svg</file>
@@ -978,22 +1151,27 @@
         <file>icons/file/workspaces.svg</file>
         <file>icons/file/workspaces_filled.svg</file>
         <file>icons/file/workspaces_outline.svg</file>
+        <file>icons/hardware/adf_scanner.svg</file>
         <file>icons/hardware/browser_not_supported.svg</file>
+        <file>icons/hardware/browser_updated.svg</file>
         <file>icons/hardware/cast.svg</file>
         <file>icons/hardware/cast_connected.svg</file>
         <file>icons/hardware/cast_for_education.svg</file>
         <file>icons/hardware/computer.svg</file>
         <file>icons/hardware/connected_tv.svg</file>
+        <file>icons/hardware/conveyor_belt.svg</file>
         <file>icons/hardware/desktop_mac.svg</file>
         <file>icons/hardware/desktop_windows.svg</file>
         <file>icons/hardware/developer_board.svg</file>
         <file>icons/hardware/developer_board_off.svg</file>
         <file>icons/hardware/device_hub.svg</file>
-        <file>icons/hardware/devices_other.svg</file>
         <file>icons/hardware/device_unknown.svg</file>
+        <file>icons/hardware/devices_other.svg</file>
         <file>icons/hardware/dock.svg</file>
         <file>icons/hardware/earbuds.svg</file>
         <file>icons/hardware/earbuds_battery.svg</file>
+        <file>icons/hardware/forklift.svg</file>
+        <file>icons/hardware/front_loader.svg</file>
         <file>icons/hardware/gamepad.svg</file>
         <file>icons/hardware/headphones.svg</file>
         <file>icons/hardware/headphones_battery.svg</file>
@@ -1010,7 +1188,14 @@
         <file>icons/hardware/keyboard_arrow_up.svg</file>
         <file>icons/hardware/keyboard_backspace.svg</file>
         <file>icons/hardware/keyboard_capslock.svg</file>
+        <file>icons/hardware/keyboard_command_key.svg</file>
+        <file>icons/hardware/keyboard_control_key.svg</file>
+        <file>icons/hardware/keyboard_double_arrow_down.svg</file>
+        <file>icons/hardware/keyboard_double_arrow_left.svg</file>
+        <file>icons/hardware/keyboard_double_arrow_right.svg</file>
+        <file>icons/hardware/keyboard_double_arrow_up.svg</file>
         <file>icons/hardware/keyboard_hide.svg</file>
+        <file>icons/hardware/keyboard_option_key.svg</file>
         <file>icons/hardware/keyboard_return.svg</file>
         <file>icons/hardware/keyboard_tab.svg</file>
         <file>icons/hardware/keyboard_voice.svg</file>
@@ -1021,6 +1206,7 @@
         <file>icons/hardware/memory.svg</file>
         <file>icons/hardware/monitor.svg</file>
         <file>icons/hardware/mouse.svg</file>
+        <file>icons/hardware/pallet.svg</file>
         <file>icons/hardware/phone_android.svg</file>
         <file>icons/hardware/phone_iphone.svg</file>
         <file>icons/hardware/phonelink.svg</file>
@@ -1032,21 +1218,55 @@
         <file>icons/hardware/security.svg</file>
         <file>icons/hardware/sim_card.svg</file>
         <file>icons/hardware/smart_display.svg</file>
-        <file>icons/hardware/smartphone.svg</file>
         <file>icons/hardware/smart_screen.svg</file>
         <file>icons/hardware/smart_toy.svg</file>
+        <file>icons/hardware/smartphone.svg</file>
         <file>icons/hardware/speaker.svg</file>
         <file>icons/hardware/speaker_group.svg</file>
+        <file>icons/hardware/start.svg</file>
         <file>icons/hardware/tablet.svg</file>
         <file>icons/hardware/tablet_android.svg</file>
         <file>icons/hardware/tablet_mac.svg</file>
         <file>icons/hardware/toys.svg</file>
+        <file>icons/hardware/trolley.svg</file>
         <file>icons/hardware/tv.svg</file>
         <file>icons/hardware/videogame_asset.svg</file>
         <file>icons/hardware/videogame_asset_off.svg</file>
         <file>icons/hardware/watch.svg</file>
+        <file>icons/hardware/watch_off.svg</file>
+        <file>icons/home/auto_mode.svg</file>
+        <file>icons/home/blinds.svg</file>
+        <file>icons/home/blinds_closed.svg</file>
+        <file>icons/home/broadcast_on_home.svg</file>
+        <file>icons/home/broadcast_on_personal.svg</file>
+        <file>icons/home/cloudy_snowing.svg</file>
+        <file>icons/home/curtains.svg</file>
+        <file>icons/home/curtains_closed.svg</file>
+        <file>icons/home/electric_bolt.svg</file>
+        <file>icons/home/electric_meter.svg</file>
+        <file>icons/home/energy_savings_leaf.svg</file>
+        <file>icons/home/foggy.svg</file>
+        <file>icons/home/gas_meter.svg</file>
+        <file>icons/home/heat_pump.svg</file>
+        <file>icons/home/mode_fan_off.svg</file>
+        <file>icons/home/nest_cam_wired_stand.svg</file>
+        <file>icons/home/oil_barrel.svg</file>
+        <file>icons/home/propane.svg</file>
+        <file>icons/home/propane_tank.svg</file>
+        <file>icons/home/roller_shades.svg</file>
+        <file>icons/home/roller_shades_closed.svg</file>
         <file>icons/home/sensor_door.svg</file>
+        <file>icons/home/sensor_occupied.svg</file>
         <file>icons/home/sensor_window.svg</file>
+        <file>icons/home/shelves.svg</file>
+        <file>icons/home/shield_moon.svg</file>
+        <file>icons/home/snowing.svg</file>
+        <file>icons/home/solar_power.svg</file>
+        <file>icons/home/sunny.svg</file>
+        <file>icons/home/sunny_snowing.svg</file>
+        <file>icons/home/vertical_shades.svg</file>
+        <file>icons/home/vertical_shades_closed.svg</file>
+        <file>icons/home/wind_power.svg</file>
         <file>icons/image/10mp.svg</file>
         <file>icons/image/11mp.svg</file>
         <file>icons/image/12mp.svg</file>
@@ -1086,9 +1306,10 @@
         <file>icons/image/auto_fix_high.svg</file>
         <file>icons/image/auto_fix_normal.svg</file>
         <file>icons/image/auto_fix_off.svg</file>
-        <file>icons/image/autofps_select.svg</file>
         <file>icons/image/auto_stories.svg</file>
+        <file>icons/image/autofps_select.svg</file>
         <file>icons/image/bedtime.svg</file>
+        <file>icons/image/bedtime_off.svg</file>
         <file>icons/image/blur_circular.svg</file>
         <file>icons/image/blur_linear.svg</file>
         <file>icons/image/blur_off.svg</file>
@@ -1114,9 +1335,10 @@
         <file>icons/image/circle.svg</file>
         <file>icons/image/collections.svg</file>
         <file>icons/image/collections_bookmark.svg</file>
-        <file>icons/image/colorize.svg</file>
         <file>icons/image/color_lens.svg</file>
+        <file>icons/image/colorize.svg</file>
         <file>icons/image/compare.svg</file>
+        <file>icons/image/contrast.svg</file>
         <file>icons/image/control_point.svg</file>
         <file>icons/image/control_point_duplicate.svg</file>
         <file>icons/image/crop.svg</file>
@@ -1131,6 +1353,15 @@
         <file>icons/image/crop_portrait.svg</file>
         <file>icons/image/crop_rotate.svg</file>
         <file>icons/image/crop_square.svg</file>
+        <file>icons/image/currency_bitcoin.svg</file>
+        <file>icons/image/currency_franc.svg</file>
+        <file>icons/image/currency_lira.svg</file>
+        <file>icons/image/currency_pound.svg</file>
+        <file>icons/image/currency_ruble.svg</file>
+        <file>icons/image/currency_rupee.svg</file>
+        <file>icons/image/currency_yen.svg</file>
+        <file>icons/image/currency_yuan.svg</file>
+        <file>icons/image/deblur.svg</file>
         <file>icons/image/dehaze.svg</file>
         <file>icons/image/details.svg</file>
         <file>icons/image/dirty_lens.svg</file>
@@ -1194,6 +1425,7 @@
         <file>icons/image/leak_remove.svg</file>
         <file>icons/image/lens.svg</file>
         <file>icons/image/linked_camera.svg</file>
+        <file>icons/image/logo_dev.svg</file>
         <file>icons/image/looks.svg</file>
         <file>icons/image/looks_3.svg</file>
         <file>icons/image/looks_4.svg</file>
@@ -1247,6 +1479,7 @@
         <file>icons/image/receipt_long.svg</file>
         <file>icons/image/remove_red_eye.svg</file>
         <file>icons/image/rotate_90_degrees_ccw.svg</file>
+        <file>icons/image/rotate_90_degrees_cw.svg</file>
         <file>icons/image/rotate_left.svg</file>
         <file>icons/image/rotate_right.svg</file>
         <file>icons/image/shutter_speed.svg</file>
@@ -1287,6 +1520,8 @@
         <file>icons/maps/add_location_alt.svg</file>
         <file>icons/maps/add_road.svg</file>
         <file>icons/maps/agriculture.svg</file>
+        <file>icons/maps/airline_stops.svg</file>
+        <file>icons/maps/airlines.svg</file>
         <file>icons/maps/alt_route.svg</file>
         <file>icons/maps/atm.svg</file>
         <file>icons/maps/attractions.svg</file>
@@ -1297,15 +1532,21 @@
         <file>icons/maps/breakfast_dining.svg</file>
         <file>icons/maps/brunch_dining.svg</file>
         <file>icons/maps/bus_alert.svg</file>
+        <file>icons/maps/car_crash.svg</file>
         <file>icons/maps/car_rental.svg</file>
         <file>icons/maps/car_repair.svg</file>
+        <file>icons/maps/castle.svg</file>
         <file>icons/maps/category.svg</file>
         <file>icons/maps/celebration.svg</file>
+        <file>icons/maps/church.svg</file>
         <file>icons/maps/cleaning_services.svg</file>
         <file>icons/maps/compass_calibration.svg</file>
+        <file>icons/maps/connecting_airports.svg</file>
+        <file>icons/maps/crisis_alert.svg</file>
         <file>icons/maps/delivery_dining.svg</file>
         <file>icons/maps/departure_board.svg</file>
         <file>icons/maps/design_services.svg</file>
+        <file>icons/maps/diamond.svg</file>
         <file>icons/maps/dinner_dining.svg</file>
         <file>icons/maps/directions.svg</file>
         <file>icons/maps/directions_bike.svg</file>
@@ -1328,17 +1569,29 @@
         <file>icons/maps/edit_location.svg</file>
         <file>icons/maps/edit_location_alt.svg</file>
         <file>icons/maps/edit_road.svg</file>
-        <file>icons/maps/electrical_services.svg</file>
+        <file>icons/maps/egg.svg</file>
+        <file>icons/maps/egg_alt.svg</file>
         <file>icons/maps/electric_bike.svg</file>
         <file>icons/maps/electric_car.svg</file>
         <file>icons/maps/electric_moped.svg</file>
         <file>icons/maps/electric_rickshaw.svg</file>
         <file>icons/maps/electric_scooter.svg</file>
+        <file>icons/maps/electrical_services.svg</file>
         <file>icons/maps/emergency.svg</file>
+        <file>icons/maps/emergency_recording.svg</file>
+        <file>icons/maps/emergency_share.svg</file>
         <file>icons/maps/ev_station.svg</file>
+        <file>icons/maps/factory.svg</file>
         <file>icons/maps/fastfood.svg</file>
         <file>icons/maps/festival.svg</file>
+        <file>icons/maps/fire_hydrant_alt.svg</file>
+        <file>icons/maps/fire_truck.svg</file>
         <file>icons/maps/flight.svg</file>
+        <file>icons/maps/flight_class.svg</file>
+        <file>icons/maps/forest.svg</file>
+        <file>icons/maps/fork_left.svg</file>
+        <file>icons/maps/fork_right.svg</file>
+        <file>icons/maps/fort.svg</file>
         <file>icons/maps/hail.svg</file>
         <file>icons/maps/handyman.svg</file>
         <file>icons/maps/hardware.svg</file>
@@ -1346,6 +1599,7 @@
         <file>icons/maps/hotel.svg</file>
         <file>icons/maps/hvac.svg</file>
         <file>icons/maps/icecream.svg</file>
+        <file>icons/maps/kebab_dining.svg</file>
         <file>icons/maps/layers.svg</file>
         <file>icons/maps/layers_clear.svg</file>
         <file>icons/maps/liquor.svg</file>
@@ -1384,11 +1638,16 @@
         <file>icons/maps/lunch_dining.svg</file>
         <file>icons/maps/map.svg</file>
         <file>icons/maps/maps_ugc.svg</file>
+        <file>icons/maps/medical_information.svg</file>
         <file>icons/maps/medical_services.svg</file>
         <file>icons/maps/menu_book.svg</file>
+        <file>icons/maps/merge.svg</file>
+        <file>icons/maps/minor_crash.svg</file>
         <file>icons/maps/miscellaneous_services.svg</file>
+        <file>icons/maps/mode_of_travel.svg</file>
         <file>icons/maps/money.svg</file>
         <file>icons/maps/moped.svg</file>
+        <file>icons/maps/mosque.svg</file>
         <file>icons/maps/moving.svg</file>
         <file>icons/maps/multiple_stop.svg</file>
         <file>icons/maps/museum.svg</file>
@@ -1397,10 +1656,11 @@
         <file>icons/maps/near_me.svg</file>
         <file>icons/maps/near_me_disabled.svg</file>
         <file>icons/maps/nightlife.svg</file>
+        <file>icons/maps/no_crash.svg</file>
         <file>icons/maps/no_meals.svg</file>
         <file>icons/maps/no_meals_ouline.svg</file>
-        <file>icons/maps/not_listed_location.svg</file>
         <file>icons/maps/no_transfer.svg</file>
+        <file>icons/maps/not_listed_location.svg</file>
         <file>icons/maps/park.svg</file>
         <file>icons/maps/pedal_bike.svg</file>
         <file>icons/maps/person_pin.svg</file>
@@ -1412,34 +1672,63 @@
         <file>icons/maps/plumbing.svg</file>
         <file>icons/maps/railway_alert.svg</file>
         <file>icons/maps/ramen_dining.svg</file>
+        <file>icons/maps/ramp_left.svg</file>
+        <file>icons/maps/ramp_right.svg</file>
         <file>icons/maps/rate_review.svg</file>
+        <file>icons/maps/remove_road.svg</file>
         <file>icons/maps/restaurant.svg</file>
         <file>icons/maps/restaurant_menu.svg</file>
+        <file>icons/maps/roundabout_left.svg</file>
+        <file>icons/maps/roundabout_right.svg</file>
+        <file>icons/maps/route.svg</file>
         <file>icons/maps/run_circle.svg</file>
+        <file>icons/maps/safety_check.svg</file>
         <file>icons/maps/sailing.svg</file>
         <file>icons/maps/satellite.svg</file>
+        <file>icons/maps/screen_rotation_alt.svg</file>
         <file>icons/maps/set_meal.svg</file>
+        <file>icons/maps/signpost.svg</file>
         <file>icons/maps/snowmobile.svg</file>
+        <file>icons/maps/sos.svg</file>
+        <file>icons/maps/soup_kitchen.svg</file>
+        <file>icons/maps/stadium.svg</file>
         <file>icons/maps/store_mall_directory.svg</file>
+        <file>icons/maps/straight.svg</file>
         <file>icons/maps/streetview.svg</file>
         <file>icons/maps/subway.svg</file>
+        <file>icons/maps/synagogue.svg</file>
         <file>icons/maps/takeout_dining.svg</file>
         <file>icons/maps/taxi_alert.svg</file>
+        <file>icons/maps/temple_buddhist.svg</file>
+        <file>icons/maps/temple_hindu.svg</file>
         <file>icons/maps/terrain.svg</file>
         <file>icons/maps/theater_comedy.svg</file>
+        <file>icons/maps/tire_repair.svg</file>
         <file>icons/maps/traffic.svg</file>
         <file>icons/maps/train.svg</file>
         <file>icons/maps/tram.svg</file>
         <file>icons/maps/transfer_within_a_station.svg</file>
         <file>icons/maps/transit_enterexit.svg</file>
         <file>icons/maps/trip_origin.svg</file>
+        <file>icons/maps/turn_left.svg</file>
+        <file>icons/maps/turn_right.svg</file>
+        <file>icons/maps/turn_sharp_left.svg</file>
+        <file>icons/maps/turn_sharp_right.svg</file>
+        <file>icons/maps/turn_slight_left.svg</file>
+        <file>icons/maps/turn_slight_right.svg</file>
         <file>icons/maps/two_wheeler.svg</file>
+        <file>icons/maps/u_turn_left.svg</file>
+        <file>icons/maps/u_turn_right.svg</file>
         <file>icons/maps/volunteer_activism.svg</file>
+        <file>icons/maps/warehouse.svg</file>
         <file>icons/maps/wine_bar.svg</file>
         <file>icons/maps/wrong_location.svg</file>
+        <file>icons/maps/zoom_in_map.svg</file>
         <file>icons/maps/zoom_out_map.svg</file>
-        <file>icons/navigation/apps.svg</file>
+        <file>icons/navigation/add_home_work.svg</file>
         <file>icons/navigation/app_settings_alt.svg</file>
+        <file>icons/navigation/apps.svg</file>
+        <file>icons/navigation/apps_outage.svg</file>
         <file>icons/navigation/arrow_back.svg</file>
         <file>icons/navigation/arrow_back_ios.svg</file>
         <file>icons/navigation/arrow_back_ios_new.svg</file>
@@ -1462,6 +1751,7 @@
         <file>icons/navigation/close.svg</file>
         <file>icons/navigation/double_arrow.svg</file>
         <file>icons/navigation/east.svg</file>
+        <file>icons/navigation/expand_circle_down.svg</file>
         <file>icons/navigation/expand_less.svg</file>
         <file>icons/navigation/expand_more.svg</file>
         <file>icons/navigation/first_page.svg</file>
@@ -1551,12 +1841,14 @@
         <file>icons/notification/support_agent.svg</file>
         <file>icons/notification/sync.svg</file>
         <file>icons/notification/sync_disabled.svg</file>
+        <file>icons/notification/sync_lock.svg</file>
         <file>icons/notification/sync_problem.svg</file>
         <file>icons/notification/system_update.svg</file>
         <file>icons/notification/tap_and_play.svg</file>
         <file>icons/notification/time_to_leave.svg</file>
         <file>icons/notification/tv_off.svg</file>
         <file>icons/notification/vibration.svg</file>
+        <file>icons/notification/video_chat.svg</file>
         <file>icons/notification/voice_chat.svg</file>
         <file>icons/notification/vpn_lock.svg</file>
         <file>icons/notification/wc.svg</file>
@@ -1586,6 +1878,7 @@
         <file>icons/places/cottage.svg</file>
         <file>icons/places/countertops.svg</file>
         <file>icons/places/crib.svg</file>
+        <file>icons/places/desk.svg</file>
         <file>icons/places/do_not_step.svg</file>
         <file>icons/places/do_not_touch.svg</file>
         <file>icons/places/dry.svg</file>
@@ -1605,8 +1898,8 @@
         <file>icons/places/holiday_village.svg</file>
         <file>icons/places/hot_tub.svg</file>
         <file>icons/places/house.svg</file>
-        <file>icons/places/houseboat.svg</file>
         <file>icons/places/house_siding.svg</file>
+        <file>icons/places/houseboat.svg</file>
         <file>icons/places/iron.svg</file>
         <file>icons/places/kitchen.svg</file>
         <file>icons/places/meeting_room.svg</file>
@@ -1638,6 +1931,8 @@
         <file>icons/places/tapas.svg</file>
         <file>icons/places/tty.svg</file>
         <file>icons/places/umbrella.svg</file>
+        <file>icons/places/vape_free.svg</file>
+        <file>icons/places/vaping_rooms.svg</file>
         <file>icons/places/villa.svg</file>
         <file>icons/places/wash.svg</file>
         <file>icons/places/water_damage.svg</file>
@@ -1656,9 +1951,9 @@
         <file>icons/search/coffee_maker.svg</file>
         <file>icons/search/dining.svg</file>
         <file>icons/search/door_back.svg</file>
-        <file>icons/search/doorbell.svg</file>
         <file>icons/search/door_front.svg</file>
         <file>icons/search/door_sliding.svg</file>
+        <file>icons/search/doorbell.svg</file>
         <file>icons/search/feed.svg</file>
         <file>icons/search/flatware.svg</file>
         <file>icons/search/garage.svg</file>
@@ -1667,26 +1962,41 @@
         <file>icons/search/manage_search.svg</file>
         <file>icons/search/podcasts.svg</file>
         <file>icons/search/shower.svg</file>
+        <file>icons/search/table_bar.svg</file>
+        <file>icons/search/table_restaurant.svg</file>
         <file>icons/search/window.svg</file>
         <file>icons/search/yard.svg</file>
+        <file>icons/social/18_up_rating.svg</file>
         <file>icons/social/6_ft_apart.svg</file>
         <file>icons/social/add_moderator.svg</file>
         <file>icons/social/add_reaction.svg</file>
         <file>icons/social/architecture.svg</file>
+        <file>icons/social/assist_walker.svg</file>
         <file>icons/social/back_hand.svg</file>
+        <file>icons/social/blind.svg</file>
+        <file>icons/social/boy.svg</file>
         <file>icons/social/cake.svg</file>
         <file>icons/social/catching_pokemon.svg</file>
         <file>icons/social/clean_hands.svg</file>
+        <file>icons/social/co2.svg</file>
         <file>icons/social/compost.svg</file>
         <file>icons/social/connect_without_contact.svg</file>
         <file>icons/social/construction.svg</file>
+        <file>icons/social/cookie.svg</file>
         <file>icons/social/coronavirus.svg</file>
         <file>icons/social/cruelty_free.svg</file>
+        <file>icons/social/cyclone.svg</file>
         <file>icons/social/deck.svg</file>
+        <file>icons/social/dew_point.svg</file>
+        <file>icons/social/diversity_1.svg</file>
+        <file>icons/social/diversity_2.svg</file>
+        <file>icons/social/diversity_3.svg</file>
         <file>icons/social/domain.svg</file>
+        <file>icons/social/domain_add.svg</file>
         <file>icons/social/downhill_skiing.svg</file>
         <file>icons/social/edit_notifications.svg</file>
         <file>icons/social/elderly.svg</file>
+        <file>icons/social/elderly_woman.svg</file>
         <file>icons/social/emoji_emotions.svg</file>
         <file>icons/social/emoji_events.svg</file>
         <file>icons/social/emoji_flags.svg</file>
@@ -1697,31 +2007,52 @@
         <file>icons/social/emoji_symbols.svg</file>
         <file>icons/social/emoji_transportation.svg</file>
         <file>icons/social/engineering.svg</file>
+        <file>icons/social/face_2.svg</file>
+        <file>icons/social/face_3.svg</file>
+        <file>icons/social/face_4.svg</file>
+        <file>icons/social/face_5.svg</file>
+        <file>icons/social/face_6.svg</file>
         <file>icons/social/facebook.svg</file>
         <file>icons/social/female.svg</file>
         <file>icons/social/fireplace.svg</file>
+        <file>icons/social/fitbit.svg</file>
+        <file>icons/social/flood.svg</file>
         <file>icons/social/follow_the_signs.svg</file>
         <file>icons/social/front_hand.svg</file>
+        <file>icons/social/girl.svg</file>
         <file>icons/social/group.svg</file>
         <file>icons/social/group_add.svg</file>
         <file>icons/social/group_off.svg</file>
+        <file>icons/social/group_remove.svg</file>
         <file>icons/social/groups.svg</file>
+        <file>icons/social/groups_2.svg</file>
+        <file>icons/social/groups_3.svg</file>
+        <file>icons/social/handshake.svg</file>
         <file>icons/social/health_and_safety.svg</file>
+        <file>icons/social/heart_broken.svg</file>
         <file>icons/social/hiking.svg</file>
         <file>icons/social/history_edu.svg</file>
+        <file>icons/social/hive.svg</file>
         <file>icons/social/ice_skating.svg</file>
+        <file>icons/social/interests.svg</file>
         <file>icons/social/ios_share.svg</file>
         <file>icons/social/kayaking.svg</file>
         <file>icons/social/king_bed.svg</file>
         <file>icons/social/kitesurfing.svg</file>
+        <file>icons/social/landslide.svg</file>
         <file>icons/social/location_city.svg</file>
         <file>icons/social/luggage.svg</file>
         <file>icons/social/male.svg</file>
+        <file>icons/social/man.svg</file>
+        <file>icons/social/man_2.svg</file>
+        <file>icons/social/man_3.svg</file>
+        <file>icons/social/man_4.svg</file>
         <file>icons/social/masks.svg</file>
         <file>icons/social/military_tech.svg</file>
         <file>icons/social/mood.svg</file>
         <file>icons/social/mood_bad.svg</file>
         <file>icons/social/nights_stay.svg</file>
+        <file>icons/social/no_adult_content.svg</file>
         <file>icons/social/no_luggage.svg</file>
         <file>icons/social/nordic_walking.svg</file>
         <file>icons/social/notification_add.svg</file>
@@ -1738,20 +2069,25 @@
         <file>icons/social/people_alt.svg</file>
         <file>icons/social/people_outline.svg</file>
         <file>icons/social/person.svg</file>
+        <file>icons/social/person_2.svg</file>
+        <file>icons/social/person_3.svg</file>
+        <file>icons/social/person_4.svg</file>
         <file>icons/social/person_add.svg</file>
         <file>icons/social/person_add_alt.svg</file>
         <file>icons/social/person_add_alt_1.svg</file>
-        <file>icons/social/personal_injury.svg</file>
         <file>icons/social/person_off.svg</file>
         <file>icons/social/person_outline.svg</file>
         <file>icons/social/person_remove.svg</file>
         <file>icons/social/person_remove_alt_1.svg</file>
+        <file>icons/social/personal_injury.svg</file>
         <file>icons/social/piano.svg</file>
         <file>icons/social/piano_off.svg</file>
+        <file>icons/social/pix.svg</file>
         <file>icons/social/plus_one.svg</file>
         <file>icons/social/poll.svg</file>
         <file>icons/social/precision_manufacturing.svg</file>
         <file>icons/social/psychology.svg</file>
+        <file>icons/social/psychology_alt.svg</file>
         <file>icons/social/public.svg</file>
         <file>icons/social/public_off.svg</file>
         <file>icons/social/real_estate_agent.svg</file>
@@ -1759,24 +2095,31 @@
         <file>icons/social/recycling.svg</file>
         <file>icons/social/reduce_capacity.svg</file>
         <file>icons/social/remove_moderator.svg</file>
+        <file>icons/social/roller_skating.svg</file>
         <file>icons/social/safety_divider.svg</file>
         <file>icons/social/sanitizer.svg</file>
+        <file>icons/social/scale.svg</file>
         <file>icons/social/school.svg</file>
         <file>icons/social/science.svg</file>
+        <file>icons/social/scoreboard.svg</file>
+        <file>icons/social/scuba_diving.svg</file>
         <file>icons/social/self_improvement.svg</file>
         <file>icons/social/sentiment_dissatisfied.svg</file>
         <file>icons/social/sentiment_neutral.svg</file>
         <file>icons/social/sentiment_satisfied.svg</file>
         <file>icons/social/sentiment_very_dissatisfied.svg</file>
         <file>icons/social/sentiment_very_satisfied.svg</file>
+        <file>icons/social/severe_cold.svg</file>
         <file>icons/social/share.svg</file>
         <file>icons/social/sick.svg</file>
+        <file>icons/social/sign_language.svg</file>
         <file>icons/social/single_bed.svg</file>
         <file>icons/social/skateboarding.svg</file>
         <file>icons/social/sledding.svg</file>
         <file>icons/social/snowboarding.svg</file>
         <file>icons/social/snowshoeing.svg</file>
         <file>icons/social/social_distance.svg</file>
+        <file>icons/social/south_america.svg</file>
         <file>icons/social/sports.svg</file>
         <file>icons/social/sports_baseball.svg</file>
         <file>icons/social/sports_basketball.svg</file>
@@ -1784,9 +2127,11 @@
         <file>icons/social/sports_esports.svg</file>
         <file>icons/social/sports_football.svg</file>
         <file>icons/social/sports_golf.svg</file>
+        <file>icons/social/sports_gymnastics.svg</file>
         <file>icons/social/sports_handball.svg</file>
         <file>icons/social/sports_hockey.svg</file>
         <file>icons/social/sports_kabaddi.svg</file>
+        <file>icons/social/sports_martial_arts.svg</file>
         <file>icons/social/sports_mma.svg</file>
         <file>icons/social/sports_motorsports.svg</file>
         <file>icons/social/sports_rugby.svg</file>
@@ -1797,11 +2142,21 @@
         <file>icons/social/switch_account.svg</file>
         <file>icons/social/thumb_down_alt.svg</file>
         <file>icons/social/thumb_up_alt.svg</file>
+        <file>icons/social/thunderstorm.svg</file>
+        <file>icons/social/tornado.svg</file>
         <file>icons/social/transgender.svg</file>
         <file>icons/social/travel_explore.svg</file>
+        <file>icons/social/tsunami.svg</file>
+        <file>icons/social/vaccines.svg</file>
+        <file>icons/social/volcano.svg</file>
+        <file>icons/social/wallet.svg</file>
         <file>icons/social/water_drop.svg</file>
         <file>icons/social/waving_hand.svg</file>
+        <file>icons/social/whatsapp.svg</file>
         <file>icons/social/whatshot.svg</file>
+        <file>icons/social/woman.svg</file>
+        <file>icons/social/woman_2.svg</file>
+        <file>icons/social/workspace_premium.svg</file>
         <file>icons/toggle/check_box.svg</file>
         <file>icons/toggle/check_box_outline_blank.svg</file>
         <file>icons/toggle/indeterminate_check_box.svg</file>

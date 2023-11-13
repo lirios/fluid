@@ -1,5 +1,7 @@
 action
+	123
 	3d_rotation
+	abc
 	accessibility
 	accessibility_new
 	accessible
@@ -8,10 +10,12 @@ action
 	account_balance_wallet
 	account_box
 	account_circle
-	addchart
+	add_card
+	add_home
 	add_shopping_cart
 	add_task
 	add_to_drive
+	addchart
 	admin_panel_settings
 	ads_click
 	alarm
@@ -26,34 +30,44 @@ action
 	announcement
 	api
 	app_blocking
+	app_shortcut
 	arrow_circle_down
+	arrow_circle_left
+	arrow_circle_right
 	arrow_circle_up
+	arrow_outward
 	arrow_right_alt
 	article
 	aspect_ratio
 	assessment
 	assignment
+	assignment_add
 	assignment_ind
 	assignment_late
 	assignment_return
 	assignment_returned
 	assignment_turned_in
+	assured_workload
 	autorenew
 	backup
 	backup_table
+	balance
+	barcode_reader
 	batch_prediction
 	book
+	book_online
 	bookmark
 	bookmark_add
 	bookmark_added
 	bookmark_border
 	bookmark_remove
 	bookmarks
-	book_online
+	browse_gallery
 	bug_report
 	build
 	build_circle
 	cached
+	calendar_month
 	calendar_today
 	calendar_view_day
 	calendar_view_month
@@ -73,26 +87,34 @@ action
 	code
 	code_off
 	comment_bank
+	commit
 	commute
 	compare_arrows
 	compress
-	contactless
 	contact_page
 	contact_support
+	contactless
 	copyright
 	credit_card
 	credit_card_off
+	css
+	currency_exchange
 	dangerous
 	dashboard
 	dashboard_customize
 	data_exploration
+	data_thresholding
 	date_range
 	delete
 	delete_forever
 	delete_outline
+	density_large
+	density_medium
+	density_small
 	description
 	disabled_by_default
 	disabled_visible
+	display_settings
 	dns
 	done
 	done_all
@@ -103,10 +125,13 @@ action
 	dynamic_form
 	eco
 	edit_calendar
+	edit_document
 	edit_off
+	edit_square
 	eject
 	euro_symbol
 	event
+	event_repeat
 	event_seat
 	exit_to_app
 	expand
@@ -118,9 +143,11 @@ action
 	fact_check
 	favorite
 	favorite_border
+	fax
 	feedback
 	file_present
 	filter_alt
+	filter_alt_off
 	filter_list_alt
 	find_in_page
 	find_replace
@@ -133,14 +160,15 @@ action
 	flip_to_front
 	flutter_dash
 	free_cancellation
+	g_translate
 	gavel
 	generating_tokens
 	get_app
 	gif
+	gif_box
 	grade
 	grading
 	group_work
-	g_translate
 	help
 	help_center
 	help_outline
@@ -149,6 +177,8 @@ action
 	highlight_off
 	history
 	history_toggle_off
+	hls
+	hls_off
 	home
 	home_filled
 	horizontal_split
@@ -156,14 +186,22 @@ action
 	hourglass_disabled
 	hourglass_empty
 	hourglass_full
+	html
 	http
 	https
 	important_devices
 	info
 	info_outline
 	input
+	install_desktop
+	install_mobile
 	integration_instructions
 	invert_colors
+	javascript
+	join_full
+	join_inner
+	join_left
+	join_right
 	label
 	label_important
 	label_important_outline
@@ -173,6 +211,7 @@ action
 	launch
 	leaderboard
 	lightbulb
+	lightbulb_circle
 	lightbulb_outline
 	line_style
 	line_weight
@@ -181,25 +220,32 @@ action
 	lock_clock
 	lock_open
 	lock_outline
+	lock_person
+	lock_reset
 	login
 	logout
 	loyalty
 	manage_accounts
+	manage_history
 	mark_as_unread
 	markunread_mailbox
 	maximize
 	mediation
 	minimize
 	model_training
+	network_ping
 	new_label
 	next_plan
 	nightlight_round
 	no_accounts
+	noise_aware
+	noise_control_off
 	not_accessible
-	note_add
 	not_started
+	note_add
 	offline_bolt
 	offline_pin
+	on_device_training
 	online_prediction
 	opacity
 	open_in_browser
@@ -212,12 +258,15 @@ action
 	outbox
 	outgoing_mail
 	outlet
+	output
 	pageview
 	paid
 	pan_tool
+	pan_tool_alt
 	payment
 	pending
 	pending_actions
+	percent
 	perm_camera_mic
 	perm_contact_calendar
 	perm_data_setting
@@ -227,10 +276,12 @@ action
 	perm_phone_msg
 	perm_scan_wifi
 	pets
+	php
 	picture_in_picture
 	picture_in_picture_alt
 	pin_end
 	pin_invoke
+	pinch
 	plagiarism
 	play_for_work
 	polymer
@@ -244,22 +295,28 @@ action
 	published_with_changes
 	query_builder
 	question_answer
+	question_mark
 	quickreply
+	rebase_edit
 	receipt
 	record_voice_over
 	redeem
 	remove_done
 	remove_shopping_cart
 	reorder
+	repartition
 	report_problem
 	request_page
 	restore
 	restore_from_trash
 	restore_page
+	rocket
+	rocket_launch
 	room
 	rounded_corner
 	rowing
 	rule
+	satellite_alt
 	saved_search
 	savings
 	schedule
@@ -290,13 +347,17 @@ action
 	settings_voice
 	shop
 	shop_2
+	shop_two
 	shopping_bag
 	shopping_basket
 	shopping_cart
-	shop_two
+	shopping_cart_checkout
 	smart_button
 	source
 	space_dashboard
+	spatial_audio
+	spatial_audio_off
+	spatial_tracking
 	speaker_notes
 	speaker_notes_off
 	spellcheck
@@ -314,12 +375,24 @@ action
 	swap_vert
 	swap_vertical_circle
 	swipe
+	swipe_down
+	swipe_down_alt
+	swipe_left
+	swipe_left_alt
+	swipe_right
+	swipe_right_alt
+	swipe_up
+	swipe_up_alt
+	swipe_vertical
+	switch_access_shortcut
+	switch_access_shortcut_add
 	sync_alt
 	system_update_alt
 	tab
-	table_view
 	tab_unselected
+	table_view
 	task_alt
+	terminal
 	text_rotate_up
 	text_rotate_vertical
 	text_rotation_angledown
@@ -329,24 +402,29 @@ action
 	theaters
 	thumb_down
 	thumb_down_off_alt
-	thumbs_up_down
 	thumb_up
 	thumb_up_off_alt
+	thumbs_up_down
 	timeline
 	tips_and_updates
 	toc
 	today
+	token
 	toll
 	touch_app
 	tour
 	track_changes
+	transcribe
 	translate
 	trending_down
 	trending_flat
 	trending_up
+	troubleshoot
 	try
 	turned_in
 	turned_in_not
+	unfold_less_double
+	unfold_more_double
 	unpublished
 	update
 	update_disabled
@@ -358,21 +436,31 @@ action
 	view_array
 	view_carousel
 	view_column
+	view_comfy_alt
+	view_compact_alt
+	view_cozy
 	view_day
 	view_headline
 	view_in_ar
+	view_kanban
 	view_list
 	view_module
 	view_quilt
 	view_sidebar
 	view_stream
+	view_timeline
 	view_week
 	visibility
 	visibility_off
 	voice_over_off
 	watch_later
+	webhook
+	width_full
+	width_normal
+	width_wide
 	wifi_protected_setup
 	work
+	work_history
 	work_off
 	work_outline
 	wysiwyg
@@ -412,6 +500,7 @@ av
 	airplay
 	album
 	art_track
+	audio_file
 	av_timer
 	branding_watermark
 	call_to_action
@@ -438,20 +527,23 @@ av
 	hearing
 	hearing_disabled
 	high_quality
+	interpreter_mode
 	library_add
 	library_add_check
 	library_books
 	library_music
 	loop
+	lyrics
 	mic
 	mic_none
 	mic_off
 	missed_video_call
 	movie
+	movie_edit
 	music_video
 	new_releases
-	note
 	not_interested
+	note
 	pause
 	pause_circle
 	pause_circle_filled
@@ -463,7 +555,10 @@ av
 	play_disabled
 	playlist_add
 	playlist_add_check
+	playlist_add_check_circle
+	playlist_add_circle
 	playlist_play
+	playlist_remove
 	queue
 	queue_music
 	queue_play_next
@@ -494,11 +589,12 @@ av
 	subtitles
 	surround_sound
 	video_call
-	videocam
-	videocam_off
+	video_file
 	video_label
 	video_library
 	video_settings
+	videocam
+	videocam_off
 	volume_down
 	volume_down_alt
 	volume_mute
@@ -522,12 +618,16 @@ communication
 	call_received
 	call_split
 	cancel_presentation
+	cell_tower
 	cell_wifi
 	chat
 	chat_bubble
 	chat_bubble_outline
 	clear_all
+	co_present
 	comment
+	comments_disabled
+	contact_emergency
 	contact_mail
 	contact_phone
 	contacts
@@ -543,18 +643,23 @@ communication
 	forward_to_inbox
 	hourglass_bottom
 	hourglass_top
+	hub
 	import_contacts
 	import_export
 	invert_colors_off
+	key
+	key_off
 	list_alt
 	live_help
 	location_off
 	location_on
+	mail_lock
 	mail_outline
 	mark_chat_read
 	mark_chat_unread
 	mark_email_read
 	mark_email_unread
+	mark_unread_chat_alt
 	message
 	mobile_screen_share
 	more_time
@@ -581,9 +686,11 @@ communication
 	rss_feed
 	rtt
 	screen_share
+	send_time_extension
 	sentiment_satisfied_alt
 	sip
 	speaker_phone
+	spoke
 	stay_current_landscape
 	stay_current_portrait
 	stay_primary_landscape
@@ -594,6 +701,7 @@ communication
 	unsubscribe
 	voicemail
 	vpn_key
+	vpn_key_off
 	wifi_calling
 content
 	add
@@ -616,15 +724,20 @@ content
 	content_copy
 	content_cut
 	content_paste
+	content_paste_go
 	content_paste_off
+	content_paste_search
 	copy_all
 	create
 	delete_sweep
+	deselect
 	drafts
 	dynamic_feed
 	file_copy
 	filter_list
+	filter_list_off
 	flag
+	flag_circle
 	font_download
 	font_download_off
 	forward
@@ -656,6 +769,7 @@ content
 	report_off
 	save
 	save_alt
+	save_as
 	select_all
 	send
 	shield
@@ -683,14 +797,21 @@ device
 	access_alarms
 	access_time
 	access_time_filled
+	ad_units
 	add_alarm
 	add_to_home_screen
-	ad_units
 	air
+	airplane_ticket
 	airplanemode_active
 	airplanemode_inactive
-	airplane_ticket
 	aod
+	battery_0_bar
+	battery_1_bar
+	battery_2_bar
+	battery_3_bar
+	battery_4_bar
+	battery_5_bar
+	battery_6_bar
 	battery_alert
 	battery_charging_full
 	battery_full
@@ -714,17 +835,22 @@ device
 	data_saver_off
 	data_saver_on
 	data_usage
+	dataset
+	dataset_linked
 	developer_mode
-	devices
 	device_thermostat
+	devices
+	devices_fold
+	discount
 	do_not_disturb_on_total_silence
 	dvr
+	e_mobiledata
 	edgesensor_high
 	edgesensor_low
-	e_mobiledata
 	flashlight_off
 	flashlight_on
 	flourescent
+	fluorescent
 	fmd_bad
 	fmd_good
 	g_mobiledata
@@ -738,47 +864,56 @@ device
 	grid_3x3
 	grid_4x4
 	grid_goldenratio
+	h_mobiledata
+	h_plus_mobiledata
 	hdr_auto
 	hdr_auto_select
 	hdr_off_select
 	hdr_on_select
-	h_mobiledata
-	h_plus_mobiledata
+	lan
 	lens_blur
 	light_mode
 	location_disabled
 	location_searching
 	lte_mobiledata
 	lte_plus_mobiledata
+	macro_off
 	media_bluetooth_off
 	media_bluetooth_on
 	medication
-	mobiledata_off
+	medication_liquid
 	mobile_friendly
 	mobile_off
+	mobiledata_off
 	mode_night
 	mode_standby
+	monitor_heart
 	monitor_weight
 	nearby_error
 	nearby_off
 	network_cell
 	network_wifi
+	network_wifi_1_bar
+	network_wifi_2_bar
+	network_wifi_3_bar
 	nfc
 	nightlight
 	note_alt
 	password
 	pattern
+	phishing
 	pin
 	play_lesson
 	price_change
 	price_check
+	punch_clock
 	quiz
+	r_mobiledata
 	radar
 	remember_me
 	reset_tv
 	restart_alt
 	reviews
-	r_mobiledata
 	rsvp
 	screen_lock_landscape
 	screen_lock_portrait
@@ -786,6 +921,7 @@ device
 	screen_rotation
 	screen_search_desktop
 	screenshot
+	screenshot_monitor
 	sd_storage
 	security_update
 	security_update_good
@@ -799,10 +935,12 @@ device
 	signal_cellular_0_bar
 	signal_cellular_4_bar
 	signal_cellular_alt
+	signal_cellular_alt_1_bar
+	signal_cellular_alt_2_bar
 	signal_cellular_connected_no_internet_0_bar
 	signal_cellular_connected_no_internet_4_bar
-	signal_cellular_nodata
 	signal_cellular_no_sim
+	signal_cellular_nodata
 	signal_cellular_null
 	signal_cellular_off
 	signal_wifi_0_bar
@@ -817,6 +955,7 @@ device
 	sim_card_download
 	splitscreen
 	sports_score
+	ssid_chart
 	storage
 	storm
 	summarize
@@ -833,9 +972,15 @@ device
 	wallpaper
 	water
 	widgets
+	wifi_1_bar
+	wifi_2_bar
 	wifi_calling_3
+	wifi_channel
+	wifi_find
 	wifi_lock
+	wifi_password
 	wifi_tethering
+	wifi_tethering_error
 	wifi_tethering_error_rounded
 	wifi_tethering_off
 editor
@@ -865,8 +1010,11 @@ editor
 	border_top
 	border_vertical
 	bubble_chart
+	candlestick_chart
 	checklist
 	checklist_rtl
+	data_array
+	data_object
 	drag_handle
 	draw
 	edit_note
@@ -884,6 +1032,7 @@ editor
 	format_italic
 	format_line_spacing
 	format_list_bulleted
+	format_list_bulleted_add
 	format_list_numbered
 	format_list_numbered_rtl
 	format_paint
@@ -896,6 +1045,7 @@ editor
 	format_underlined
 	functions
 	height
+	hexagon
 	highlight
 	horizontal_distribute
 	horizontal_rule
@@ -906,7 +1056,9 @@ editor
 	insert_emoticon
 	insert_invitation
 	insert_link
+	insert_page_break
 	insert_photo
+	line_axis
 	linear_scale
 	margin
 	merge_type
@@ -917,29 +1069,40 @@ editor
 	monetization_on
 	money_off
 	money_off_csred
+	move_down
+	move_up
 	multiline_chart
 	notes
+	numbers
 	padding
+	pentagon
 	pie_chart
 	pie_chart_outline
 	pie_chart_outlined
+	polyline
 	post_add
 	publish
 	query_stats
+	rectangle
 	scatter_plot
 	schema
 	score
+	shape_line
 	short_text
 	show_chart
 	space_bar
+	square
 	stacked_line_chart
 	strikethrough_s
 	subscript
 	superscript
 	table_chart
 	table_rows
+	text_decrease
 	text_fields
+	text_increase
 	title
+	type_specimen
 	vertical_align_bottom
 	vertical_align_center
 	vertical_align_top
@@ -955,8 +1118,10 @@ file
 	cloud_download
 	cloud_off
 	cloud_queue
+	cloud_sync
 	cloud_upload
 	create_new_folder
+	difference
 	download
 	download_done
 	download_for_offline
@@ -969,11 +1134,19 @@ file
 	file_download
 	file_download_done
 	file_download_off
+	file_open
 	file_upload
+	file_upload_off
 	folder
+	folder_copy
+	folder_delete
+	folder_off
 	folder_open
 	folder_shared
+	folder_zip
+	format_overline
 	grid_view
+	newspaper
 	request_quote
 	rule_folder
 	snippet_folder
@@ -985,22 +1158,27 @@ file
 	workspaces_filled
 	workspaces_outline
 hardware
+	adf_scanner
 	browser_not_supported
+	browser_updated
 	cast
 	cast_connected
 	cast_for_education
 	computer
 	connected_tv
+	conveyor_belt
 	desktop_mac
 	desktop_windows
 	developer_board
 	developer_board_off
 	device_hub
-	devices_other
 	device_unknown
+	devices_other
 	dock
 	earbuds
 	earbuds_battery
+	forklift
+	front_loader
 	gamepad
 	headphones
 	headphones_battery
@@ -1017,7 +1195,14 @@ hardware
 	keyboard_arrow_up
 	keyboard_backspace
 	keyboard_capslock
+	keyboard_command_key
+	keyboard_control_key
+	keyboard_double_arrow_down
+	keyboard_double_arrow_left
+	keyboard_double_arrow_right
+	keyboard_double_arrow_up
 	keyboard_hide
+	keyboard_option_key
 	keyboard_return
 	keyboard_tab
 	keyboard_voice
@@ -1028,6 +1213,7 @@ hardware
 	memory
 	monitor
 	mouse
+	pallet
 	phone_android
 	phone_iphone
 	phonelink
@@ -1039,22 +1225,56 @@ hardware
 	security
 	sim_card
 	smart_display
-	smartphone
 	smart_screen
 	smart_toy
+	smartphone
 	speaker
 	speaker_group
+	start
 	tablet
 	tablet_android
 	tablet_mac
 	toys
+	trolley
 	tv
 	videogame_asset
 	videogame_asset_off
 	watch
+	watch_off
 home
+	auto_mode
+	blinds
+	blinds_closed
+	broadcast_on_home
+	broadcast_on_personal
+	cloudy_snowing
+	curtains
+	curtains_closed
+	electric_bolt
+	electric_meter
+	energy_savings_leaf
+	foggy
+	gas_meter
+	heat_pump
+	mode_fan_off
+	nest_cam_wired_stand
+	oil_barrel
+	propane
+	propane_tank
+	roller_shades
+	roller_shades_closed
 	sensor_door
+	sensor_occupied
 	sensor_window
+	shelves
+	shield_moon
+	snowing
+	solar_power
+	sunny
+	sunny_snowing
+	vertical_shades
+	vertical_shades_closed
+	wind_power
 image
 	10mp
 	11mp
@@ -1095,9 +1315,10 @@ image
 	auto_fix_high
 	auto_fix_normal
 	auto_fix_off
-	autofps_select
 	auto_stories
+	autofps_select
 	bedtime
+	bedtime_off
 	blur_circular
 	blur_linear
 	blur_off
@@ -1123,9 +1344,10 @@ image
 	circle
 	collections
 	collections_bookmark
-	colorize
 	color_lens
+	colorize
 	compare
+	contrast
 	control_point
 	control_point_duplicate
 	crop
@@ -1140,6 +1362,15 @@ image
 	crop_portrait
 	crop_rotate
 	crop_square
+	currency_bitcoin
+	currency_franc
+	currency_lira
+	currency_pound
+	currency_ruble
+	currency_rupee
+	currency_yen
+	currency_yuan
+	deblur
 	dehaze
 	details
 	dirty_lens
@@ -1203,6 +1434,7 @@ image
 	leak_remove
 	lens
 	linked_camera
+	logo_dev
 	looks
 	looks_3
 	looks_4
@@ -1256,6 +1488,7 @@ image
 	receipt_long
 	remove_red_eye
 	rotate_90_degrees_ccw
+	rotate_90_degrees_cw
 	rotate_left
 	rotate_right
 	shutter_speed
@@ -1297,6 +1530,8 @@ maps
 	add_location_alt
 	add_road
 	agriculture
+	airline_stops
+	airlines
 	alt_route
 	atm
 	attractions
@@ -1307,15 +1542,21 @@ maps
 	breakfast_dining
 	brunch_dining
 	bus_alert
+	car_crash
 	car_rental
 	car_repair
+	castle
 	category
 	celebration
+	church
 	cleaning_services
 	compass_calibration
+	connecting_airports
+	crisis_alert
 	delivery_dining
 	departure_board
 	design_services
+	diamond
 	dinner_dining
 	directions
 	directions_bike
@@ -1338,17 +1579,29 @@ maps
 	edit_location
 	edit_location_alt
 	edit_road
-	electrical_services
+	egg
+	egg_alt
 	electric_bike
 	electric_car
 	electric_moped
 	electric_rickshaw
 	electric_scooter
+	electrical_services
 	emergency
+	emergency_recording
+	emergency_share
 	ev_station
+	factory
 	fastfood
 	festival
+	fire_hydrant_alt
+	fire_truck
 	flight
+	flight_class
+	forest
+	fork_left
+	fork_right
+	fort
 	hail
 	handyman
 	hardware
@@ -1356,6 +1609,7 @@ maps
 	hotel
 	hvac
 	icecream
+	kebab_dining
 	layers
 	layers_clear
 	liquor
@@ -1394,11 +1648,16 @@ maps
 	lunch_dining
 	map
 	maps_ugc
+	medical_information
 	medical_services
 	menu_book
+	merge
+	minor_crash
 	miscellaneous_services
+	mode_of_travel
 	money
 	moped
+	mosque
 	moving
 	multiple_stop
 	museum
@@ -1407,10 +1666,11 @@ maps
 	near_me
 	near_me_disabled
 	nightlife
+	no_crash
 	no_meals
 	no_meals_ouline
-	not_listed_location
 	no_transfer
+	not_listed_location
 	park
 	pedal_bike
 	person_pin
@@ -1422,35 +1682,64 @@ maps
 	plumbing
 	railway_alert
 	ramen_dining
+	ramp_left
+	ramp_right
 	rate_review
+	remove_road
 	restaurant
 	restaurant_menu
+	roundabout_left
+	roundabout_right
+	route
 	run_circle
+	safety_check
 	sailing
 	satellite
+	screen_rotation_alt
 	set_meal
+	signpost
 	snowmobile
+	sos
+	soup_kitchen
+	stadium
 	store_mall_directory
+	straight
 	streetview
 	subway
+	synagogue
 	takeout_dining
 	taxi_alert
+	temple_buddhist
+	temple_hindu
 	terrain
 	theater_comedy
+	tire_repair
 	traffic
 	train
 	tram
 	transfer_within_a_station
 	transit_enterexit
 	trip_origin
+	turn_left
+	turn_right
+	turn_sharp_left
+	turn_sharp_right
+	turn_slight_left
+	turn_slight_right
 	two_wheeler
+	u_turn_left
+	u_turn_right
 	volunteer_activism
+	warehouse
 	wine_bar
 	wrong_location
+	zoom_in_map
 	zoom_out_map
 navigation
-	apps
+	add_home_work
 	app_settings_alt
+	apps
+	apps_outage
 	arrow_back
 	arrow_back_ios
 	arrow_back_ios_new
@@ -1473,6 +1762,7 @@ navigation
 	close
 	double_arrow
 	east
+	expand_circle_down
 	expand_less
 	expand_more
 	first_page
@@ -1563,12 +1853,14 @@ notification
 	support_agent
 	sync
 	sync_disabled
+	sync_lock
 	sync_problem
 	system_update
 	tap_and_play
 	time_to_leave
 	tv_off
 	vibration
+	video_chat
 	voice_chat
 	vpn_lock
 	wc
@@ -1599,6 +1891,7 @@ places
 	cottage
 	countertops
 	crib
+	desk
 	do_not_step
 	do_not_touch
 	dry
@@ -1618,8 +1911,8 @@ places
 	holiday_village
 	hot_tub
 	house
-	houseboat
 	house_siding
+	houseboat
 	iron
 	kitchen
 	meeting_room
@@ -1651,6 +1944,8 @@ places
 	tapas
 	tty
 	umbrella
+	vape_free
+	vaping_rooms
 	villa
 	wash
 	water_damage
@@ -1670,9 +1965,9 @@ search
 	coffee_maker
 	dining
 	door_back
-	doorbell
 	door_front
 	door_sliding
+	doorbell
 	feed
 	flatware
 	garage
@@ -1681,27 +1976,42 @@ search
 	manage_search
 	podcasts
 	shower
+	table_bar
+	table_restaurant
 	window
 	yard
 social
+	18_up_rating
 	6_ft_apart
 	add_moderator
 	add_reaction
 	architecture
+	assist_walker
 	back_hand
+	blind
+	boy
 	cake
 	catching_pokemon
 	clean_hands
+	co2
 	compost
 	connect_without_contact
 	construction
+	cookie
 	coronavirus
 	cruelty_free
+	cyclone
 	deck
+	dew_point
+	diversity_1
+	diversity_2
+	diversity_3
 	domain
+	domain_add
 	downhill_skiing
 	edit_notifications
 	elderly
+	elderly_woman
 	emoji_emotions
 	emoji_events
 	emoji_flags
@@ -1712,31 +2022,52 @@ social
 	emoji_symbols
 	emoji_transportation
 	engineering
+	face_2
+	face_3
+	face_4
+	face_5
+	face_6
 	facebook
 	female
 	fireplace
+	fitbit
+	flood
 	follow_the_signs
 	front_hand
+	girl
 	group
 	group_add
 	group_off
+	group_remove
 	groups
+	groups_2
+	groups_3
+	handshake
 	health_and_safety
+	heart_broken
 	hiking
 	history_edu
+	hive
 	ice_skating
+	interests
 	ios_share
 	kayaking
 	king_bed
 	kitesurfing
+	landslide
 	location_city
 	luggage
 	male
+	man
+	man_2
+	man_3
+	man_4
 	masks
 	military_tech
 	mood
 	mood_bad
 	nights_stay
+	no_adult_content
 	no_luggage
 	nordic_walking
 	notification_add
@@ -1753,20 +2084,25 @@ social
 	people_alt
 	people_outline
 	person
+	person_2
+	person_3
+	person_4
 	person_add
 	person_add_alt
 	person_add_alt_1
-	personal_injury
 	person_off
 	person_outline
 	person_remove
 	person_remove_alt_1
+	personal_injury
 	piano
 	piano_off
+	pix
 	plus_one
 	poll
 	precision_manufacturing
 	psychology
+	psychology_alt
 	public
 	public_off
 	real_estate_agent
@@ -1774,24 +2110,31 @@ social
 	recycling
 	reduce_capacity
 	remove_moderator
+	roller_skating
 	safety_divider
 	sanitizer
+	scale
 	school
 	science
+	scoreboard
+	scuba_diving
 	self_improvement
 	sentiment_dissatisfied
 	sentiment_neutral
 	sentiment_satisfied
 	sentiment_very_dissatisfied
 	sentiment_very_satisfied
+	severe_cold
 	share
 	sick
+	sign_language
 	single_bed
 	skateboarding
 	sledding
 	snowboarding
 	snowshoeing
 	social_distance
+	south_america
 	sports
 	sports_baseball
 	sports_basketball
@@ -1799,9 +2142,11 @@ social
 	sports_esports
 	sports_football
 	sports_golf
+	sports_gymnastics
 	sports_handball
 	sports_hockey
 	sports_kabaddi
+	sports_martial_arts
 	sports_mma
 	sports_motorsports
 	sports_rugby
@@ -1812,11 +2157,21 @@ social
 	switch_account
 	thumb_down_alt
 	thumb_up_alt
+	thunderstorm
+	tornado
 	transgender
 	travel_explore
+	tsunami
+	vaccines
+	volcano
+	wallet
 	water_drop
 	waving_hand
+	whatsapp
 	whatshot
+	woman
+	woman_2
+	workspace_premium
 toggle
 	check_box
 	check_box_outline_blank

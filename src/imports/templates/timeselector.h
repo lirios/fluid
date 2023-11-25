@@ -26,6 +26,7 @@ class TimeSelector : public QQuickItem
     Q_PROPERTY(bool prefer24Hour READ prefer24Hour WRITE setPrefer24Hour NOTIFY prefer24HourChanged FINAL)
     Q_PROPERTY(QQuickItem *circle READ circle WRITE setCircle NOTIFY circleChanged FINAL)
     Q_PROPERTY(QTime selectedTime READ selectedTime WRITE setSelectedTime NOTIFY selectedTimeChanged FINAL)
+    QML_ELEMENT
 public:
     enum Mode {
         None,

@@ -17,14 +17,19 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QQmlEngine>
 
 class ControlsUtils : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Utils)
+    QML_SINGLETON
 public:
     explicit ControlsUtils(const QUrl &baseUrl, QObject *parent = nullptr);
 
     Q_INVOKABLE QUrl iconUrl(const QString &name);
+
+    static ControlsUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
     QUrl m_baseUrl;

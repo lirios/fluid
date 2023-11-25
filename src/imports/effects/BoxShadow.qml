@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtGraphicalEffects 1.0
+import QtQuick
+import Qt5Compat.GraphicalEffects
 
 /*!
   \qmltype BoxShadow

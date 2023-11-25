@@ -13,19 +13,20 @@
  * $END_LICENSE$
  */
 
-import QtQml 2.2
-import QtQuick 2.10
-import QtQuick.Controls 2.3 as QQC2
-import QtQuick.Controls.Material 2.3
-import QtQuick.Layouts 1.3
-import Fluid.Core 1.0 as FluidCore
-import Fluid.Controls 1.0 as FluidControls
+import QtQml.Models
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Controls.Material
+import QtQuick.Layouts
+import Fluid.Core as FluidCore
+import Fluid.Controls as FluidControls
 
 QQC2.ToolBar {
     id: appBar
 
     Material.elevation: toolbar ? 0 : elevation
-    Material.theme: toolbar ? toolbar.Material.theme : Material.Light
+    Material.background: toolbar ? toolbar.Material.background : backgroundColor
+    Material.theme: FluidControls.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
 
     property FluidControls.Action leftAction
 
@@ -35,15 +36,34 @@ QQC2.ToolBar {
 
     property int __iconSize: FluidCore.Device.gridUnit <= 48 ? 20 : 24
 
+    property color backgroundColor: appBar.Material.primaryColor
+
+    readonly property alias overflowMenuVisible: overflowMenu.visible
+
+    property color decorationColor: Material.shade(backgroundColor, Material.Shade700)
+
     property alias leftKeyline: titleLabel.x
 
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3
 
     property alias title: titleLabel.text
 
+    property alias customContent: customContentItem.data
+    property alias extendedContent: extendedContentItem.data
+
+    readonly property alias extendedContentHeight: extendedContentItem.height
+
     property FluidControls.AppToolBar toolbar
 
     implicitHeight: FluidCore.Device.gridUnit
+
+    Behavior on backgroundColor {
+        ColorAnimation { duration: FluidControls.Units.mediumDuration }
+    }
+
+    Behavior on decorationColor {
+        ColorAnimation { duration: FluidControls.Units.mediumDuration }
+    }
 
     FluidControls.ToolButton {
         id: leftButton
@@ -97,6 +117,7 @@ QQC2.ToolBar {
         textFormat: Text.PlainText
         color: Material.primaryTextColor
         elide: Text.ElideRight
+        visible: text !== "" && customContentItem.children.length === 0
     }
 
     Row {
@@ -190,10 +211,47 @@ QQC2.ToolBar {
 
                         onTriggered: appBar.actions[index + appBar.maxActionCount].triggered(overflowMenuItem)
                     }
-                    onObjectAdded: overflowMenu.addItem(object)
-                    onObjectRemoved: overflowMenu.removeItem(index)
+                    onObjectAdded: (index, object) => overflowMenu.addItem(object)
+                    onObjectRemoved: (index, object) => overflowMenu.removeItem(index)
                 }
             }
         }
+    }
+
+    Item {
+        id: customContentItem
+
+        anchors.left: parent.left
+        anchors.right: actionsRow.left
+        anchors.leftMargin: 16 + (leftButton.showing ? FluidCore.Device.gridUnit - leftButton.margin : 0)
+        anchors.rightMargin: 16
+        anchors.verticalCenter: actionsRow.verticalCenter
+
+        height: parent.height
+
+        visible: children.length > 0
+    }
+
+    Item {
+        id: extendedContentItem
+
+        anchors.left: titleLabel.left
+        anchors.top: actionsRow.bottom
+        anchors.right: actionsRow.right
+        anchors.rightMargin: 16
+
+        height: childrenRect.height
+
+        visible: children.length > 0
+    }
+
+    function toggleOverflowMenu() {
+        if (!overflowButton.visible)
+            return;
+
+        if (overflowMenu.visible)
+            overflowMenu.close();
+        else
+            overflowMenu.open();
     }
 }

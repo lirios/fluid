@@ -16,6 +16,7 @@
 #define DATEPICKER_H
 
 #include <QDate>
+#include <QQmlEngine>
 
 #include "picker.h"
 
@@ -28,6 +29,7 @@ class DatePicker : public Picker
     Q_PROPERTY(QDate from READ from WRITE setFrom RESET resetFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo RESET resetTo NOTIFY toChanged FINAL)
     Q_PROPERTY(QDate selectedDate READ selectedDate WRITE setSelectedDate NOTIFY selectedDateChanged FINAL)
+    QML_ELEMENT
 public:
     enum Mode {
         Year,

@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3 as QQC2
-import QtQuick.Controls.impl 2.3 as QQCImpl2
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Controls.impl as QQCImpl2
 
 QQC2.ToolButton {
     id: control

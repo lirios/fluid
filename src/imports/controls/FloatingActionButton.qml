@@ -12,15 +12,14 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Window 2.2
-import QtQuick.Controls 2.3
-import QtQuick.Controls.Material 2.3
-import QtGraphicalEffects 1.0
-import Fluid.Core 1.0 as FluidCore
-import Fluid.Controls 1.0 as FluidControls
-import Fluid.Effects 1.0 as FluidEffects
-
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Qt5Compat.GraphicalEffects
+import Fluid.Core as FluidCore
+import Fluid.Controls as FluidControls
+import Fluid.Effects as FluidEffects
 
 RoundButton {
     id: control
@@ -43,8 +42,8 @@ RoundButton {
 
         anchors.centerIn: parent
 
-        color: !control.enabled ? control.Material.buttonDisabledColor
-                                : control.checked || control.highlighted ? control.Material.highlightedButtonColor : control.Material.buttonColor
+        color: control.Material.buttonColor(control.Material.theme, control.Material.background,
+                    control.Material.accent, control.enabled, control.flat, control.highlighted, false /*checked*/)
         radius: control.radius
 
         RectangularGlow {

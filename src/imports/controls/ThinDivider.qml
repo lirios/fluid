@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls.Material 2.3
+import QtQuick
+import QtQuick.Controls.Material
 
 Rectangle {
     color: Material.dividerColor

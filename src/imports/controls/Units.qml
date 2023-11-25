@@ -14,8 +14,8 @@
 
 pragma Singleton
 
-import QtQuick 2.10
-import Fluid.Core 1.0
+import QtQuick
+import Fluid.Core
 
 Item {
     readonly property int gridUnit: textMetrics.height

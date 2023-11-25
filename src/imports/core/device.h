@@ -17,11 +17,10 @@
 
 #include <QObject>
 
-#include <cmath>
 #include <QQmlEngine>
 #include <QGuiApplication>
 #include <QScreen>
-#include <QTouchDevice>
+#include <QQmlEngine>
 
 class Device : public QObject
 {
@@ -34,6 +33,8 @@ class Device : public QObject
     Q_PROPERTY(bool hasTouchScreen READ hasTouchScreen CONSTANT)
     Q_PROPERTY(bool hoverEnabled READ hoverEnabled CONSTANT)
     Q_PROPERTY(int gridUnit READ gridUnit NOTIFY geometryChanged)
+    QML_ELEMENT
+    QML_SINGLETON
 public:
     enum FormFactor { Phone, Phablet, Tablet, Computer, TV, Unknown };
     Q_ENUM(FormFactor)
@@ -50,6 +51,8 @@ public:
     bool hoverEnabled() const;
 
     int gridUnit() const;
+
+    static Device *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 Q_SIGNALS:
     void geometryChanged();

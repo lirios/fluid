@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick.Controls 2.3 as C
-import QtQuick.Controls.Material 2.3
+import QtQuick.Controls as C
+import QtQuick.Controls.Material
 
 /*!
     \qmltype Fluid.Templates.Card

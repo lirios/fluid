@@ -145,10 +145,10 @@ void Picker::componentComplete()
     QQuickItem::componentComplete();
 }
 
-void Picker::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+void Picker::geometryChange(const QRectF &newGeometry, const QRectF &oldGeometry)
 {
     updateLayout();
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
 bool Picker::updateOrientation()

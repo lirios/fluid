@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import Fluid.Controls 1.1 as FluidControls
+import QtQuick
+import QtQuick.Controls
+import Fluid.Controls as FluidControls
 import "../.." as Components
 
 Components.StyledPageTwoColumns {

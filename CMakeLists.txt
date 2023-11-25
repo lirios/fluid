@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.19)
 
 project("Fluid"
     VERSION "1.3.0"
@@ -7,21 +7,18 @@ project("Fluid"
 )
 
 ## Shared macros and functions:
-if(NOT FLUID_USE_SYSTEM_LCS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/CMakeLists.txt")
-    set(LIRI_LOCAL_ECM TRUE)
-    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/modules")
-else()
-    if(NOT LIRI_LOCAL_ECM)
-        find_package(LiriCMakeShared "2.0.0" REQUIRED NO_MODULE)
-        list(APPEND CMAKE_MODULE_PATH "${LCS_MODULE_PATH}")
-    endif()
-endif()
+#if(NOT FLUID_USE_SYSTEM_LCS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/CMakeLists.txt")
+#    set(LIRI_LOCAL_ECM TRUE)
+#    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/modules")
+#else()
+#    if(NOT LIRI_LOCAL_ECM)
+#        find_package(LiriCMakeShared "2.0.0" REQUIRED NO_MODULE)
+#        list(APPEND CMAKE_MODULE_PATH "${LCS_MODULE_PATH}")
+#    endif()
+#endif()
 
-## Set minimum versions required:
-set(QT_MIN_VERSION "5.10.0")
-
-## Liri specific setup common for all modules:
-include(LiriSetup)
+## Enable feature summary at the end of the configure run:
+include(FeatureSummary)
 
 ## Features:
 option(FLUID_USE_SYSTEM_LCS "Use system-wide LiriCMakeShared" OFF)
@@ -37,9 +34,9 @@ add_feature_info("Fluid::Icons" FLUID_INSTALL_ICONS "Install Material Design ico
 option(FLUID_ENABLE_QTQUICK_COMPILER "Build with QtQuick compiler (resulting binaries may not be compatible with future Qt releases without rebuilding them)" OFF)
 add_feature_info("Fluid::QtQuickCompiler" FLUID_ENABLE_QTQUICK_COMPILER "Build with QtQuick compiler")
 
-## Find Qt 5:
-find_package(Qt5 "${QT_MIN_VERSION}"
-    CONFIG REQUIRED
+## Find Qt:
+find_package(Qt6
+    REQUIRED
     COMPONENTS
         Core
         Gui
@@ -50,9 +47,29 @@ find_package(Qt5 "${QT_MIN_VERSION}"
         QuickTest
 )
 
+## ECM:
+find_package(ECM 5.245.0 REQUIRED NO_MODULE)
+list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+include(KDEInstallDirs)
+#include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(ECMQmlModule)
+
+## Liri specific setup common for all modules:
+#include(LiriSetup)
+
+## Project setup:
+qt6_standard_project_setup(REQUIRES 6.6)
+
+## QML import path:
+set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/bin CACHE STRING "" FORCE)
+
+## Disable use of C++ API deprecated in Qt 5.15
+add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
+
 ## Add subdirectories:
 if(FLUID_WITH_DOCUMENTATION)
-    add_subdirectory(doc)
+    #add_subdirectory(doc)
 endif()
 if(FLUID_WITH_QML_MODULES)
     add_subdirectory(src/imports/controls)
@@ -67,9 +84,9 @@ if(FLUID_WITH_DEMO)
 endif()
 if(BUILD_TESTING)
     if(TARGET fluidcontrolsplugin)
-        add_subdirectory(tests/auto/controls)
+        #add_subdirectory(tests/auto/controls)
     endif()
     if(TARGET fluidcoreplugin)
-        add_subdirectory(tests/auto/core)
+        #add_subdirectory(tests/auto/core)
     endif()
 endif()

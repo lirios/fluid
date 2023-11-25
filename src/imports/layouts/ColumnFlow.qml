@@ -13,7 +13,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
+import QtQuick
 
 /*!
     \qmltype ColumnFlow
@@ -23,8 +23,8 @@ import QtQuick 2.10
     \brief Automatically position children in columns.
 
     \code
-    import QtQuick 2.10
-    import Fluid.Layouts 1.0 as FluidLayouts
+    import QtQuick
+    import Fluid.Layouts as FluidLayouts
 
     Item {
         width: 600

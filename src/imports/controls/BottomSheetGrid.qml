@@ -12,13 +12,13 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3 as QQC2
-import QtQuick.Controls.impl 2.3 as QQCImpl2
-import QtQuick.Controls.Material 2.3
-import QtQuick.Templates 2.0 as T
-import Fluid.Controls 1.0
-import Fluid.Layouts 1.0 as FluidLayouts
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Controls.impl as QQCImpl2
+import QtQuick.Controls.Material
+import QtQuick.Templates as T
+import Fluid.Controls
+import Fluid.Layouts as FluidLayouts
 
 
 BottomSheet {

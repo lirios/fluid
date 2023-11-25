@@ -13,10 +13,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import Fluid.Core 1.0
-import Fluid.Controls 1.0 as FluidControls
-import Fluid.Effects 1.0
+import QtQuick
+import Fluid.Core
+import Fluid.Controls as FluidControls
+import Fluid.Effects
 
 MouseArea {
     id: ripple
@@ -35,13 +35,13 @@ MouseArea {
     Connections {
         target: control
 
-        onPressedChanged: {
+        function onPressedChanged() {
             if (!control.pressed)
                 __private.removeLastCircle()
         }
     }
 
-    onPressed: {
+    onPressed: function(mouse) {
         __private.createTapCircle(mouse.x, mouse.y)
 
         if (control)

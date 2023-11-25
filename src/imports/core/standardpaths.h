@@ -16,10 +16,13 @@
 #define STANDARDPATHS_H
 
 #include <QObject>
+#include <QQmlEngine>
 
 class StandardPaths : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 public:
     enum StandardLocation {
         DesktopLocation,
@@ -46,6 +49,8 @@ public:
 
     Q_INVOKABLE QString locateFile(StandardPaths::StandardLocation type, const QString &fileName);
     Q_INVOKABLE QString locateDirectory(StandardPaths::StandardLocation type, const QString &dirName);
+
+    static StandardPaths *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
 #endif // STANDARDPATHS_H

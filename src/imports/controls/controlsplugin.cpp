@@ -12,26 +12,8 @@
  * $END_LICENSE$
  */
 
-#include "color.h"
 #include "controlsplugin.h"
-#include "controlsutils.h"
 #include "iconthemeimageprovider.h"
-#include "inputregion.h"
-
-static QObject *colorProvider(QQmlEngine *engine, QJSEngine *jsEngine)
-{
-    Q_UNUSED(engine);
-    Q_UNUSED(jsEngine);
-
-    return new Color();
-}
-
-static QObject *utilsProvider(QQmlEngine *engine, QJSEngine *jsEngine)
-{
-    Q_UNUSED(jsEngine);
-
-    return new ControlsUtils(engine->baseUrl());
-}
 
 void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -46,10 +28,5 @@ void FluidControlsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 
 void FluidControlsPlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid.Controls"));
-
-    qmlRegisterSingletonType<Color>(uri, 1, 0, "Color", colorProvider);
-    qmlRegisterSingletonType<ControlsUtils>(uri, 1, 0, "Utils", utilsProvider);
-    qmlRegisterType<InputArea>(uri, 1, 0, "InputArea");
-    qmlRegisterType<InputRegion>(uri, 1, 0, "InputRegion");
+    Q_UNUSED(uri)
 }

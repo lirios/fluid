@@ -1,6 +1,0 @@
-module Fluid.Core
-plugin fluidcoreplugin
-classname FluidCorePlugin
-typeinfo plugins.qmltypes
-
-Object 1.0 Object.qml

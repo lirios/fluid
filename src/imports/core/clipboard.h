@@ -17,11 +17,13 @@
 
 #include <QObject>
 #include <QClipboard>
+#include <QtQml/qqmlregistration.h>
 
 class Clipboard : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText NOTIFY textChanged)
+    QML_ELEMENT
 public:
     explicit Clipboard(QObject *parent = nullptr);
 

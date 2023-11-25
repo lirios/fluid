@@ -1,10 +1,15 @@
-liri_add_qml_module(fluidlayouts
-    MODULE_PATH
-        "Fluid/Layouts"
+ecm_add_qml_module(fluidlayouts
+    URI
+        "Fluid.Layouts"
     VERSION
-        "1.0"
-    QML_FILES
+        "2.0"
+    GENERATE_PLUGIN_SOURCE
+)
+
+ecm_target_qml_sources(fluidlayouts
+    SOURCES
         AutomaticGrid.qml
         ColumnFlow.qml
-        qmldir
 )
+
+ecm_finalize_qml_module(fluidlayouts)

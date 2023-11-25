@@ -12,14 +12,13 @@
  * $END_LICENSE$
  */
 
-import QtQml 2.2
-import QtQuick 2.10
-import QtQuick.Layouts 1.3
-import QtQuick.Controls 2.3
-import QtQuick.Controls.Material 2.3
-import Qt.labs.calendar 1.0
-import Fluid.Controls 1.0 as FluidControls
-import Fluid.Templates 1.0 as FluidTemplates
+import QtQml
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Fluid.Controls as FluidControls
+import Fluid.Templates as FluidTemplates
 
 FluidTemplates.DateSelector {
     id: control

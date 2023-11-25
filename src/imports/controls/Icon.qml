@@ -13,12 +13,12 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Window 2.2
-import QtGraphicalEffects 1.0
-import QtQuick.Controls.Material 2.3
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
+import QtQuick
+import QtQuick.Window
+import Qt5Compat.GraphicalEffects
+import QtQuick.Controls.Material
+import Fluid.Core
+import Fluid.Controls
 
 Item {
     id: icon

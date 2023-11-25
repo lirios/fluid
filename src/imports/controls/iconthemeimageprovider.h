@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include <QtQuick/QQuickImageProvider>
+#include <QQuickImageProvider>
 
 class IconThemeImageProvider : public QQuickImageProvider
 {

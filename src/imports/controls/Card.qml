@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import Fluid.Templates 1.0 as FluidTemplates
+import Fluid.Templates as FluidTemplates
 
 FluidTemplates.Card {
 }

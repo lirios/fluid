@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
+import QtQuick
 
 /*!
     \qmltype Object
@@ -25,8 +25,8 @@ import QtQuick 2.10
     with the ability to hold children objects.
 
    \qml
-   import QtQuick 2.10
-   import Fluid.Core 1.0 as FluidCore
+   import QtQuick
+   import Fluid.Core as FluidCore
 
    FluidCore.Object {
        QtObject {}

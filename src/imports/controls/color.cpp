@@ -86,3 +86,11 @@ QColor Color::lightDark(const QColor &background, const QColor &lightColor, cons
 {
     return isDarkColor(background) ? darkColor : lightColor;
 }
+
+Color *Color::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(jsEngine)
+
+    return new Color();
+}

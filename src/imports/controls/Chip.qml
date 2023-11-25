@@ -12,12 +12,12 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Layouts 1.0
-import QtQuick.Controls 2.3
-import QtQuick.Controls.Material 2.3
-import Fluid.Controls 1.1 as FluidControls
-import Fluid.Effects 1.0 as FluidEffects
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Fluid.Controls as FluidControls
+import Fluid.Effects as FluidEffects
 
 AbstractButton {
     id: control

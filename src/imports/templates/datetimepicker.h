@@ -29,6 +29,7 @@ class DateTimePicker : public Picker
     Q_PROPERTY(QDate from READ from WRITE setFrom RESET resetFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo RESET resetTo NOTIFY toChanged FINAL)
     Q_PROPERTY(QDateTime selectedDateTime READ selectedDateTime WRITE setSelectedDateTime NOTIFY selectedDateTimeChanged FINAL)
+    QML_ELEMENT
 public:
     enum Mode {
         Year,

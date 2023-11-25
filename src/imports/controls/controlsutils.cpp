@@ -63,3 +63,10 @@ QUrl ControlsUtils::iconUrl(const QString &name)
     return QUrl(QStringLiteral("qrc:/liri.io/imports/Fluid/Controls/icons/%1.svg").arg(name));
 #endif
 }
+
+ControlsUtils *ControlsUtils::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(jsEngine)
+
+    return new ControlsUtils(engine->baseUrl());
+}

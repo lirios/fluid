@@ -19,7 +19,7 @@
 #include <QColor>
 #include <QWindow>
 #include <QQmlParserStatus>
-
+#include <QtQml/qqmlregistration.h>
 class WindowDecoration : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
@@ -27,6 +27,7 @@ class WindowDecoration : public QObject, public QQmlParserStatus
     Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY colorChanged)
     Q_INTERFACES(QQmlParserStatus)
+    QML_ELEMENT
 public:
     enum Theme {
         Light,

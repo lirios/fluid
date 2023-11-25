@@ -53,7 +53,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.10
+import QtQuick
 
 ShaderEffect {
     property alias gradient: rect.gradient

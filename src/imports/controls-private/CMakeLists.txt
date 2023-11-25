@@ -1,42 +1,46 @@
-if(LINUX AND NOT ANDROID)
-    set(SOURCES
-        extensions/fluiddecorationv1.cpp
-        extensions/fluiddecorationv1.h
-    )
-
-    find_package(QtWaylandScanner REQUIRED)
-    find_package(Wayland 1.15 COMPONENTS Client REQUIRED)
-    find_package(Qt5WaylandClient REQUIRED)
-    ecm_add_qtwayland_client_protocol(SOURCES
-        PROTOCOL "${CMAKE_CURRENT_SOURCE_DIR}/extensions/fluid-decoration-unstable-v1.xml"
-        BASENAME "fluid-decoration-unstable-v1")
-    set(DEFINES FLUID_ENABLE_WAYLAND=1)
-    set(LIBRARIES Qt5::GuiPrivate Qt5::WaylandClient Wayland::Client)
-endif()
-
-liri_add_qml_plugin(fluidcontrolsprivate
-    MODULE_PATH
-        "Fluid/Controls/Private"
+ecm_add_qml_module(fluidcontrolsprivate
+    URI
+        "Fluid.Controls.Private"
     VERSION
-        "1.0"
-    SOURCES
-        controlsprivateplugin.cpp
-        windowdecoration.cpp
-        windowdecoration.h
-        ${SOURCES}
-    QML_FILES
-        DateSelector.qml
-        TimeSelector.qml
-        YearSelector.qml
-        qmldir
-    DEFINES
-        QT_NO_CAST_FROM_ASCII
-        QT_NO_FOREACH
-        ${DEFINES}
-    PUBLIC_LIBRARIES
-        Qt5::QuickControls2
-    LIBRARIES
-        ${LIBRARIES}
+        "2.0"
+    GENERATE_PLUGIN_SOURCE
 )
 
-liri_finalize_qml_plugin(fluidcontrolsprivate)
+target_sources(fluidcontrolsprivate
+    PRIVATE
+        windowdecoration.cpp windowdecoration.h
+)
+
+if(LINUX AND NOT ANDROID)
+    find_package(Wayland 1.15 COMPONENTS Client REQUIRED)
+    find_package(Qt6WaylandClient REQUIRED)
+    qt6_generate_wayland_protocol_client_sources(fluidcontrolsprivate
+        FILES
+            "${CMAKE_CURRENT_SOURCE_DIR}/extensions/fluid-decoration-unstable-v1.xml"
+    )
+    target_sources(fluidcontrolsprivate
+        PRIVATE
+            extensions/fluiddecorationv1.cpp extensions/fluiddecorationv1.h
+    )
+    target_compile_definitions(fluidcontrolsprivate PRIVATE FLUID_ENABLE_WAYLAND=1)
+    target_link_libraries(fluidcontrolsprivate
+        PRIVATE
+            Qt6::GuiPrivate Qt6::WaylandClient Wayland::Client
+    )
+endif()
+
+file(GLOB _qml "*.qml")
+ecm_target_qml_sources(fluidcontrolsprivate
+    SOURCES ${_qml}
+)
+
+target_link_libraries(fluidcontrolsprivate
+    PUBLIC
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Qml
+        Qt6::Quick
+        Qt6::QuickControls2
+)
+
+ecm_finalize_qml_module(fluidcontrolsprivate)

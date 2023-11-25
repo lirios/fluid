@@ -23,17 +23,15 @@
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QQuickStyle::setStyle(QStringLiteral("Material"));
 
     QGuiApplication app(argc, argv);
-    app.setDesktopFileName(QStringLiteral("io.liri.Fluid.Demo.desktop"));
+    app.setDesktopFileName(QStringLiteral("io.liri.Fluid.Demo"));
     app.setQuitOnLastWindowClosed(true);
 
     // @uri Fluid.Demo
-    qmlRegisterType<IconCategoryModel>("Fluid.Demo", 1, 0, "IconCategoryModel");
-    qmlRegisterType<IconNameModel>("Fluid.Demo", 1, 0, "IconNameModel");
+    qmlRegisterType<IconCategoryModel>("Fluid.Demo", 2, 0, "IconCategoryModel");
+    qmlRegisterType<IconNameModel>("Fluid.Demo", 2, 0, "IconNameModel");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));

@@ -13,11 +13,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import QtQuick.Controls.Material 2.3
-import Fluid.Controls 1.0 as FluidControls
-import Fluid.Controls.Private 1.0 as FluidControlsPrivate
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Fluid.Controls as FluidControls
+import Fluid.Controls.Private 2 as FluidControlsPrivate
 
 ApplicationWindow {
     id: window
@@ -41,14 +41,14 @@ ApplicationWindow {
 
         anchors.fill: parent
 
-        onPushed: appBar.push(page)
-        onPopped: appBar.pop(page)
-        onReplaced: appBar.replace(page)
+        onPushed: (page) => appBar.push(page)
+        onPopped: (page) => appBar.pop(page)
+        onReplaced: (page) => appBar.replace(page)
     }
 
     FluidControlsPrivate.WindowDecoration {
         id: windowDecoration
         window: window
-        color: Material.shade(window.Material.primaryColor, Material.Shade700)
+        color: Material.shade(appBar ? appBar.Material.background : window.Material.primaryColor, Material.Shade700)
     }
 }

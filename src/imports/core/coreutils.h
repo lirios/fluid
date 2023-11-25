@@ -17,14 +17,19 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QQmlEngine>
 
 class CoreUtils : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Utils)
+    QML_SINGLETON
 public:
     explicit CoreUtils(QObject *parent = nullptr);
 
     Q_INVOKABLE qreal scale(qreal percent, qreal start, qreal end);
+
+    static CoreUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
 #endif // COREUTILS_H

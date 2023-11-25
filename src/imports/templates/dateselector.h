@@ -30,6 +30,7 @@ class DateSelector : public QQuickItem
     Q_PROPERTY(QDate from READ from WRITE setFrom RESET resetFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo RESET resetTo NOTIFY toChanged FINAL)
     Q_PROPERTY(QDate selectedDate READ selectedDate WRITE setSelectedDate NOTIFY selectedDateChanged FINAL)
+    QML_ELEMENT
     Q_DISABLE_COPY(DateSelector)
 public:
     explicit DateSelector(QQuickItem *parent = nullptr);

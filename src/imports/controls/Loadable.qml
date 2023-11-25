@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
+import QtQuick
 
 Item {
     property Component component
@@ -43,7 +43,8 @@ Item {
 
     Connections {
         target: loader.item
-        onVisibleChanged: {
+
+        function onVisibleChanged() {
             // Unload component as soon as it's hidden and hide this item as well
             if (!loader.item.visible) {
                 loader.sourceComponent = undefined;

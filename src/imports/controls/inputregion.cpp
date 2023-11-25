@@ -176,11 +176,11 @@ void InputRegion::setWindow(QWindow *window)
 
 QQmlListProperty<InputArea> InputRegion::areas()
 {
-    return {
-        this, this,
+    return QQmlListProperty<InputArea>(
+        this, nullptr,
         &InputRegion::areasCount,
                 &InputRegion::areaAt
-    };
+    );
 }
 
 void InputRegion::registerArea(InputArea *area)
@@ -228,12 +228,12 @@ void InputRegion::componentComplete()
     setInputRegion();
 }
 
-int InputRegion::areasCount(QQmlListProperty<InputArea> *list)
+qsizetype InputRegion::areasCount(QQmlListProperty<InputArea> *list)
 {
     return reinterpret_cast<InputRegion *>(list->data)->m_areas.count();
 }
 
-InputArea *InputRegion::areaAt(QQmlListProperty<InputArea> *list, int index)
+InputArea *InputRegion::areaAt(QQmlListProperty<InputArea> *list, qsizetype index)
 {
     return reinterpret_cast<InputRegion *>(list->data)->m_areas.at(index);
 }

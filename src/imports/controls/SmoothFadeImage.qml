@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
+import QtQuick
 
 Item {
     id: root
@@ -98,11 +98,13 @@ Item {
 
     Connections {
         target: __priv.nextImage
-        onOpacityChanged: {
+
+        function onOpacityChanged() {
             if (__priv.nextImage.opacity == 1.0)
                 root.imageSwapped();
         }
-        onStatusChanged: {
+
+        function onStatusChanged() {
             if (__priv.nextImage.status === Image.Ready)
                 __priv.swapImages();
         }

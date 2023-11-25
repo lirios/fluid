@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import Fluid.Layouts 1.0 as FluidLayouts
+import QtQuick
+import QtQuick.Controls
+import Fluid.Layouts as FluidLayouts
 import "../.."
 
 Flickable {

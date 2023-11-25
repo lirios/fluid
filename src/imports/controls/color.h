@@ -17,10 +17,13 @@
 
 #include <QColor>
 #include <QObject>
+#include <QQmlEngine>
 
 class Color : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 public:
     explicit Color(QObject *parent = nullptr);
 
@@ -30,6 +33,8 @@ public:
     Q_INVOKABLE bool isDarkColor(const QColor &color);
     Q_INVOKABLE QColor lightDark(const QColor &background, const QColor &lightColor,
                                  const QColor &darkColor);
+
+    static Color *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
 #endif // COLOR_H

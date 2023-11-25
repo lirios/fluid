@@ -13,10 +13,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtQuick.Controls 2.3
-import QtQuick.Controls.Material 2.3
-import Fluid.Controls 1.0 as FluidControls
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import Fluid.Controls as FluidControls
 
 Page {
     id: page
@@ -31,7 +31,16 @@ Page {
 
     property bool canGoBack: false
 
+    property alias customContent: appBar.customContent
+
+    property Item rightSidebar: null
+
     signal goBack(var event)
+
+    onRightSidebarChanged: {
+        if (rightSidebar)
+            rightSidebar.edge = Qt.RightEdge;
+    }
 
     function pop(event, force) {
         if (StackView.view.currentItem !== page)
@@ -58,10 +67,16 @@ Page {
         return StackView.view.push(component, properties);
     }
 
-    Keys.onReleased: {
+    Keys.onReleased: function (event) {
         // Catches the Android back button event and pops the page, if it isn't the top page
         if (event.key === Qt.Key_Back && StackView.view && StackView.view.depth > 1) {
             pop(event, false);
+            event.accepted = true;
+        }
+
+        // Toggle overflow menu when the menu button is released
+        if (event.key === Qt.Key_Menu) {
+            appBar.toggleOverflowMenu();
             event.accepted = true;
         }
     }
@@ -94,6 +109,23 @@ Page {
     Item {
         id: content
 
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.right: rightSidebarContent.left
+        anchors.bottom: parent.bottom
+    }
+
+    Item {
+        id: rightSidebarContent
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        children: [rightSidebar]
+
+        width: rightSidebar
+               ? rightSidebar.width + rightSidebar.anchors.rightMargin
+               : 0
     }
 }

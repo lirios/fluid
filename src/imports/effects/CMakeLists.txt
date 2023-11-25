@@ -1,12 +1,17 @@
-liri_add_qml_module(fluideffects
-    MODULE_PATH
-        "Fluid/Effects"
+ecm_add_qml_module(fluideffects
+    URI
+        "Fluid.Effects"
     VERSION
-        "1.0"
-    QML_FILES
+        "2.0"
+    GENERATE_PLUGIN_SOURCE
+)
+
+ecm_target_qml_sources(fluideffects
+    SOURCES
         BoxShadow.qml
         CircleMask.qml
         Elevation.qml
         Vignette.qml
-        qmldir
 )
+
+ecm_finalize_qml_module(fluideffects)

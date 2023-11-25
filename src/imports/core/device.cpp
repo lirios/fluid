@@ -14,6 +14,7 @@
  */
 
 #include <QtMath>
+#include <QInputDevice>
 
 #include "device.h"
 
@@ -96,9 +97,9 @@ bool Device::hasTouchScreen() const
 #if defined(Q_OS_ANDROID)
     return true;
 #else
-    const auto devices = QTouchDevice::devices();
-    for (const QTouchDevice *dev : devices) {
-        if (dev->type() == QTouchDevice::TouchScreen)
+    const auto devices = QInputDevice::devices();
+    for (const auto *dev : devices) {
+        if (dev->type() == QInputDevice::DeviceType::TouchScreen)
             return true;
     }
     return false;
@@ -134,6 +135,14 @@ int Device::gridUnit() const
     } else {
         return hasTouchScreen() ? 64 : 48;
     }
+}
+
+Device *Device::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(jsEngine)
+
+    return new Device();
 }
 
 void Device::screenChanged()

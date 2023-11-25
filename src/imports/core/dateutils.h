@@ -19,10 +19,13 @@
 #include <QObject>
 #include <QDate>
 #include <QDateTime>
+#include <QQmlEngine>
 
 class DateUtils : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 public:
     enum DurationFormat { Long, Short };
     Q_ENUM(DurationFormat)
@@ -38,6 +41,8 @@ public:
                                        DateUtils::DurationType type = DateUtils::DurationType::Any) const;
     Q_INVOKABLE QString friendlyTime(const QDateTime &time, bool standalone) const;
     Q_INVOKABLE QString dayOfWeek(const QDate &date) const;
+
+    static DateUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
 #endif // DATEUTILS_H

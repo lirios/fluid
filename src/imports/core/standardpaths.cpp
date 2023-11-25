@@ -33,4 +33,12 @@ QString StandardPaths::locateDirectory(StandardLocation type, const QString &dir
     return QStandardPaths::locate(qtype, dirName, QStandardPaths::LocateDirectory);
 }
 
+StandardPaths *StandardPaths::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(jsEngine)
+
+    return new StandardPaths();
+}
+
 #include "moc_standardpaths.cpp"

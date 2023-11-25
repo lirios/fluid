@@ -5,6 +5,7 @@
 #ifndef INPUTREGION_H
 #define INPUTREGION_H
 
+#include <QQmlEngine>
 #include <QQmlListProperty>
 #include <QQmlParserStatus>
 #include <QWindow>
@@ -21,6 +22,8 @@ class InputArea : public QObject, public QQmlParserStatus
     Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY widthChanged)
     Q_PROPERTY(qreal height READ height WRITE setHeight NOTIFY heightChanged)
     Q_INTERFACES(QQmlParserStatus)
+    QML_ELEMENT
+    QML_LIST_PROPERTY_ASSIGN_BEHAVIOR_APPEND
 public:
     InputArea(QObject *parent = nullptr);
     ~InputArea();
@@ -71,6 +74,7 @@ class InputRegion : public QObject, public QQmlParserStatus
     Q_PROPERTY(QWindow *window READ window WRITE setWindow NOTIFY windowChanged)
     Q_PROPERTY(QQmlListProperty<InputArea> areas READ areas CONSTANT)
     Q_INTERFACES(QQmlParserStatus)
+    QML_ELEMENT
 public:
     explicit InputRegion(QObject *parent = nullptr);
 
@@ -99,8 +103,8 @@ private:
     QWindow *m_window = nullptr;
     QList<InputArea *> m_areas;
 
-    static int areasCount(QQmlListProperty<InputArea> *list);
-    static InputArea *areaAt(QQmlListProperty<InputArea> *list, int index);
+    static qsizetype areasCount(QQmlListProperty<InputArea> *list);
+    static InputArea *areaAt(QQmlListProperty<InputArea> *list, qsizetype index);
 
 private Q_SLOTS:
     void setInputRegion();

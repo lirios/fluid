@@ -31,6 +31,7 @@ class YearSelector : public QQuickItem
     Q_PROPERTY(QDate from READ from WRITE setFrom RESET resetFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo RESET resetTo NOTIFY toChanged FINAL)
     Q_PROPERTY(int selectedYear READ selectedYear WRITE setSelectedYear NOTIFY selectedYearChanged FINAL)
+    QML_ELEMENT
     Q_DISABLE_COPY(YearSelector)
 public:
     explicit YearSelector(QQuickItem *parent = nullptr);

@@ -12,7 +12,7 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
+import QtQuick
 
 /*!
   \qmltype Vignette

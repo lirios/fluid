@@ -25,6 +25,8 @@ class YearModel : public QAbstractListModel
     Q_PROPERTY(QDate from READ from WRITE setFrom NOTIFY fromChanged FINAL)
     Q_PROPERTY(QDate to READ to WRITE setTo NOTIFY toChanged FINAL)
     Q_PROPERTY(int count READ rowCount NOTIFY countChanged FINAL)
+    QML_ELEMENT
+    QML_UNCREATABLE("Cannot instantiate YearModel")
     Q_DISABLE_COPY(YearModel)
 public:
     explicit YearModel(QObject *parent = nullptr);

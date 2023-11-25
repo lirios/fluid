@@ -12,8 +12,8 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import Fluid.Effects 1.0
+import QtQuick
+import Fluid.Effects
 
 /*!
    \qmltype Elevation

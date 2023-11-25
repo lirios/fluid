@@ -35,3 +35,11 @@ qreal CoreUtils::scale(qreal percent, qreal start, qreal end)
 {
     return start + ((end - start) * (percent / 100));
 }
+
+CoreUtils *CoreUtils::create(QQmlEngine *engine, QJSEngine *jsEngine)
+{
+    Q_UNUSED(engine)
+    Q_UNUSED(jsEngine)
+
+    return new CoreUtils();
+}

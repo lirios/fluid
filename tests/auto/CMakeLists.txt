@@ -1,0 +1,11 @@
+if(NOT TARGET Qt6::QuickTest)
+    message(STATUS "Qt6QuickTest not found, autotests will not be built.")
+    return()
+endif()
+
+if(TARGET fluidcontrols)
+    add_subdirectory(controls)
+endif()
+if(TARGET fluidcore)
+    add_subdirectory(core)
+endif()

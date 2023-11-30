@@ -12,11 +12,11 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtTest 1.0
-import Fluid.Core 1.0
-import Fluid.Controls 1.0
-import QtQuick.Controls 2.3
+import QtQuick
+import QtTest
+import Fluid.Core
+import Fluid.Controls
+import QtQuick.Controls
 
 TestCase {
     id: testCase

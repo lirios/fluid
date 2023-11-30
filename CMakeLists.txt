@@ -6,16 +6,31 @@ project("Fluid"
     LANGUAGES CXX C
 )
 
-## Shared macros and functions:
-#if(NOT FLUID_USE_SYSTEM_LCS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/CMakeLists.txt")
-#    set(LIRI_LOCAL_ECM TRUE)
-#    list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/shared/modules")
-#else()
-#    if(NOT LIRI_LOCAL_ECM)
-#        find_package(LiriCMakeShared "2.0.0" REQUIRED NO_MODULE)
-#        list(APPEND CMAKE_MODULE_PATH "${LCS_MODULE_PATH}")
-#    endif()
-#endif()
+## C++ standard:
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+## ECM:
+find_package(ECM 5.245.0 REQUIRED NO_MODULE)
+list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+
+## Installation directories:
+include(KDEInstallDirs)
+
+## Compiler settings:
+set(KDE_SKIP_NULLPTR_WARNINGS_SETTINGS TRUE)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+
+## Enable keywords such as emit:
+# TODO: Replace keywords such as emit with Q_EMIT
+remove_definitions(-DQT_NO_KEYWORDS)
+
+## CMake settings:
+include(KDECMakeSettings)
+
+## QML module:
+include(ECMQmlModule)
 
 ## Enable feature summary at the end of the configure run:
 include(FeatureSummary)
@@ -47,17 +62,6 @@ find_package(Qt6
         QuickTest
 )
 
-## ECM:
-find_package(ECM 5.245.0 REQUIRED NO_MODULE)
-list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-include(KDEInstallDirs)
-#include(KDECompilerSettings)
-include(KDECMakeSettings)
-include(ECMQmlModule)
-
-## Liri specific setup common for all modules:
-#include(LiriSetup)
-
 ## Project setup:
 qt6_standard_project_setup(REQUIRES 6.6)
 
@@ -83,10 +87,5 @@ if(FLUID_WITH_DEMO)
     add_subdirectory(src/demo)
 endif()
 if(BUILD_TESTING)
-    if(TARGET fluidcontrolsplugin)
-        #add_subdirectory(tests/auto/controls)
-    endif()
-    if(TARGET fluidcoreplugin)
-        #add_subdirectory(tests/auto/core)
-    endif()
+    add_subdirectory(tests/auto)
 endif()

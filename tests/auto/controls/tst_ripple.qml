@@ -12,9 +12,9 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtTest 1.0
-import Fluid.Controls 1.0
+import QtQuick
+import QtTest
+import Fluid.Controls
 
 Ripple {
     id: ripple

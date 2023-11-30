@@ -12,10 +12,10 @@
  * $END_LICENSE$
  */
 
-import QtQuick 2.10
-import QtTest 1.0
-import Fluid.Controls 1.0
-import QtQuick.Controls.Material 2.3
+import QtQuick
+import QtTest
+import Fluid.Controls
+import QtQuick.Controls.Material
 
 Icon {
     id: icon

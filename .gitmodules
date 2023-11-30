@@ -1,4 +1,0 @@
-[submodule "cmake-shared"]
-	path = cmake/shared
-	url = https://github.com/lirios/cmake-shared
-	branch = develop

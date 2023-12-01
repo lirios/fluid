@@ -7,10 +7,6 @@ qt6_add_executable(FluidDemo
     io.liri.Fluid.Demo.desktop
 )
 
-if(NOT QML_IMPORT_PATH)
-    set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/bin CACHE STRING "" FORCE)
-endif()
-
 file(GLOB_RECURSE _images RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "images/*")
 file(GLOB_RECURSE _qml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qml/*")
 qt6_add_resources(FluidDemo "resources"

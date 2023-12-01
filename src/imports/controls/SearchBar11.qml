@@ -45,6 +45,8 @@ Item {
 
     property var searchResults: ListModel {}
 
+    property var customContentIntegration: false
+
     signal search(string query)
 
     function open() {
@@ -62,7 +64,8 @@ Item {
         searchResults.clear();
         searchTextField.focus = false;
     }
-
+    
+    anchors.fill: customContentIntegration? parent: null
     anchors {left: parent.left; right: parent.right; top: parent.top}
     height: 64
 
@@ -72,7 +75,7 @@ Item {
             id: openSearchButton
 
             anchors.right: parent.right
-            anchors.top: parent.top
+            anchors.top: customContentIntegration? null: parent.top
             anchors.margins: 8
 
             icon.source: FluidControls.Utils.iconUrl("action/search")
@@ -91,6 +94,7 @@ Item {
             }
             FluidControls.Card {
                 id: searchCard
+                anchors.fill: customContentIntegration? parent: null                
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.margins: Units.smallSpacing

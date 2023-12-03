@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+# SPDX-License-Identifier: CC0-1.0
+
 name: COPR
 
 on:
@@ -7,8 +10,6 @@ on:
 
 jobs:
   copr:
-    if: "!contains(github.event.head_commit.message, 'ci skip') && !contains(github.event.head_commit.message, 'copr skip')"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Rebuild package
-        run: curl -X POST ${{ secrets.COPR_WEBHOOK_URL }}
+    uses: lirios/.github/.github/workflows/copr.yml@master
+    secrets:
+      COPR_WEBHOOK_URL: ${{ secrets.COPR_WEBHOOK_URL }}

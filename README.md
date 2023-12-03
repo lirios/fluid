@@ -20,7 +20,7 @@ releases or clone the `master` branch that has the latest released version.
 
 ## Dependencies
 
-Qt >= 5.10.0 with at least the following modules is required:
+Qt >= 6.6.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)
@@ -36,12 +36,9 @@ On Linux you also need:
 
 The following modules and their dependencies are required:
 
- * [cmake](https://gitlab.kitware.com/cmake/cmake) >= 3.10.0
-
-The following module must be installed, unless you want to use the copy provided
-as a submodule:
-
- * [cmake-shared](https://github.com/lirios/cmake-shared.git) >= 1.0.0
+ * [cmake](https://gitlab.kitware.com/cmake/cmake) >= 3.19.0
+ * [extra-cmake-modules](https://invent.kde.org/frameworks/extra-cmake-modules) >= 5.245.0
+ * [cmake-shared](https://github.com/lirios/cmake-shared.git) >= 2.0.99
 
 ## Build
 
@@ -106,7 +103,7 @@ From the root of the repository, run:
 ```sh
 git submodule update --init --recursive
 mkdir build
-cmake -DCMAKE_INSTALL_PREFIX=/usr -DINSTALL_QMLDIR=lib/qt/qml ..
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 make
 sudo make install
 ```

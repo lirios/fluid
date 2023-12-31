@@ -33,7 +33,7 @@ Item {
     }
     property alias status: image.status
     property alias cache: image.cache
-    readonly property bool valid: status == Image.Ready
+    readonly property bool valid: image.status == Image.Ready
     property bool colorize: (String(icon.source).indexOf(".color.") === -1 &&
                              String(icon.source).indexOf("image://fluidicontheme/") === -1) ||
                             String(icon.source).indexOf("symbolic") !== -1 ||

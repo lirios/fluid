@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef DATETIMEPICKER_H
-#define DATETIMEPICKER_H
+#pragma once
 
 #include <QDateTime>
 
@@ -84,4 +83,3 @@ private:
     QDateTime m_selectedDateTime;
 };
 
-#endif // DATETIMEPICKER_H

@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef DATEPICKER_H
-#define DATEPICKER_H
+#pragma once
 
 #include <QDate>
 #include <QQmlEngine>
@@ -76,4 +75,3 @@ private:
     QDate m_selectedDate;
 };
 
-#endif // DATEPICKER_H

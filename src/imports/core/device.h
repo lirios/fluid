@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef DEVICE_H
-#define DEVICE_H
+#pragma once
 
 #include <QObject>
 
@@ -66,4 +65,3 @@ private:
     QScreen *m_screen;
 };
 
-#endif // DEVICE_H

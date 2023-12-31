@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef CONTROLSUTILS_H
-#define CONTROLSUTILS_H
+#pragma once
 
 #include <QObject>
 #include <QUrl>
@@ -35,4 +34,3 @@ private:
     QUrl m_baseUrl;
 };
 
-#endif // CONTROLSUTILS_H

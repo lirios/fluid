@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef STANDARDPATHS_H
-#define STANDARDPATHS_H
+#pragma once
 
 #include <QObject>
 #include <QQmlEngine>
@@ -53,4 +52,3 @@ public:
     static StandardPaths *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
-#endif // STANDARDPATHS_H

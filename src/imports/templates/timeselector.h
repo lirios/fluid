@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef TIMESELECTOR_H
-#define TIMESELECTOR_H
+#pragma once
 
 #include <QQuickItem>
 #include <QTime>
@@ -76,4 +75,3 @@ private:
 
 QML_DECLARE_TYPE(TimeSelector)
 
-#endif // TIMESELECTOR_H

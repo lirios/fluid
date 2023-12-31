@@ -2,8 +2,7 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
-#ifndef INPUTREGION_H
-#define INPUTREGION_H
+#pragma once
 
 #include <QQmlEngine>
 #include <QQmlListProperty>
@@ -110,4 +109,3 @@ private Q_SLOTS:
     void setInputRegion();
 };
 
-#endif // INPUTREGION_H

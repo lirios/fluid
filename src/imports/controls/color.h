@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef COLOR_H
-#define COLOR_H
+#pragma once
 
 #include <QColor>
 #include <QObject>
@@ -37,4 +36,3 @@ public:
     static Color *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
-#endif // COLOR_H

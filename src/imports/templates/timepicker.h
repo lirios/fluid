@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef TIMEPICKER_H
-#define TIMEPICKER_H
+#pragma once
 
 #include <QTime>
 #include <QQmlEngine>
@@ -46,4 +45,3 @@ private:
 
 QML_DECLARE_TYPE(TimePicker)
 
-#endif // TIMEPICKER_H

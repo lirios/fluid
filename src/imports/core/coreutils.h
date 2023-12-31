@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef COREUTILS_H
-#define COREUTILS_H
+#pragma once
 
 #include <QObject>
 #include <QUrl>
@@ -32,4 +31,3 @@ public:
     static CoreUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
-#endif // COREUTILS_H

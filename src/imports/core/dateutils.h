@@ -13,8 +13,7 @@
  * $END_LICENSE$
  */
 
-#ifndef DATEUTILS_H
-#define DATEUTILS_H
+#pragma once
 
 #include <QObject>
 #include <QDate>
@@ -45,4 +44,3 @@ public:
     static DateUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
 
-#endif // DATEUTILS_H

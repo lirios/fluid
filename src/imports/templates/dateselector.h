@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef DATESELECTOR_H
-#define DATESELECTOR_H
+#pragma once
 
 #include <QDate>
 #include <QQuickItem>
@@ -92,4 +91,3 @@ private Q_SLOTS:
 
 QML_DECLARE_TYPE(DateSelector)
 
-#endif // DATESELECTOR_H

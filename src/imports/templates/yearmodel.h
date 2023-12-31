@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef YEARMODEL_H
-#define YEARMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QDate>
@@ -58,4 +57,3 @@ private:
 
 QML_DECLARE_TYPE(YearModel)
 
-#endif // YEARMODEL_H

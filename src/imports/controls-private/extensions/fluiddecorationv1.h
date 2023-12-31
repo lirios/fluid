@@ -2,8 +2,7 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
-#ifndef FLUIDDECORATIONV1_H
-#define FLUIDDECORATIONV1_H
+#pragma once
 
 #include <QMap>
 #include <QWindow>
@@ -56,4 +55,3 @@ private:
     QColor m_bgColor = Qt::transparent;
 };
 
-#endif // FLUIDDECORATIONV1_H

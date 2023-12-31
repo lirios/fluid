@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef PICKER_H
-#define PICKER_H
+#pragma once
 
 #include <QLocale>
 #include <QQuickItem>
@@ -83,4 +82,3 @@ private:
     void updateLayout();
 };
 
-#endif // PICKER_H

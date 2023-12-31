@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef YEARSELECTOR_H
-#define YEARSELECTOR_H
+#pragma once
 
 #include <QDate>
 #include <QQuickItem>
@@ -83,4 +82,3 @@ private:
 
 QML_DECLARE_TYPE(YearSelector)
 
-#endif // YEARSELECTOR_H

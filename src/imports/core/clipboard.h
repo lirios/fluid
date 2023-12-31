@@ -12,8 +12,7 @@
  * $END_LICENSE$
  */
 
-#ifndef CLIPBOARD_H
-#define CLIPBOARD_H
+#pragma once
 
 #include <QObject>
 #include <QClipboard>
@@ -41,4 +40,3 @@ private:
     QClipboard *m_clipboard = nullptr;
 };
 
-#endif // CLIPBOARD_H

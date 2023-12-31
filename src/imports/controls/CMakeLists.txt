@@ -3,6 +3,7 @@ ecm_add_qml_module(fluidcontrols
         "Fluid.Controls"
     VERSION
         "2.0"
+    CLASS_NAME FluidControlsPlugin
     NO_GENERATE_PLUGIN_SOURCE
 )
 

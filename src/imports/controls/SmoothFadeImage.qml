@@ -24,7 +24,6 @@ Item {
     property bool animationEnabled: true
     property alias sourceSize: __priv.sourceSize
     readonly property int status: __priv.loadingImage ? __priv.loadingImage.status : Image.Null
-    property bool smooth: true
 
     signal imageSwapped()
 

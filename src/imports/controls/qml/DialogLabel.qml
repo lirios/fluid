@@ -17,6 +17,22 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+    \brief Text label with standard font and styling suitable to message box text.
+
+    Text label for the Material Design dialog text style.
+
+    \code{.qml}
+    import Fluid as Fluid
+
+    Fluid.DialogLabel {
+        text: "Text to display"
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/style/typography.html">Material Design guidelines</a>.
+*/
 Label {
     font.pixelSize: Fluid.Device.isMobile ? 18 : 17
     color: Material.secondaryTextColor

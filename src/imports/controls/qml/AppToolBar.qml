@@ -17,6 +17,9 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+   \brief Application tool bar.
+*/
 ToolBar {
     id: toolbar
 
@@ -26,8 +29,14 @@ ToolBar {
 
     property Page page
 
+    /*!
+        Maximum actions to be available on this tool bar.
+    */
     property int maxActionCount: 3
 
+    /*!
+        Height of the \l AppBar considering its extended content.
+    */
     property real appBarHeight: {
         if (!page || !page.appBar || !page.appBar.visible)
             return 0;
@@ -48,6 +57,9 @@ ToolBar {
         NumberAnimation { duration: Fluid.Units.mediumDuration }
     }
 
+    /*!
+        Pop the \l AppBar that belongs to \a page from the stack.
+    */
     function pop(page) {
         stack.pop(page.appBar, StackView.PopTransition);
 
@@ -59,6 +71,9 @@ ToolBar {
         toolbar.page = page;
     }
 
+    /*!
+        Push the \l AppBar that belongs to \a page to the stack.
+    */
     function push(page) {
         stack.push(page.appBar, {}, StackView.PushTransition);
 
@@ -71,6 +86,9 @@ ToolBar {
             rightSidebarStack.replace(emptyRightSidebar);
     }
 
+    /*!
+        Replace current \l AppBar with the one that belongs to \a page.
+    */
     function replace(page) {
         stack.replace(page.appBar, {}, StackView.ReplaceTransition);
 

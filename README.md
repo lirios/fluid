@@ -20,7 +20,7 @@ releases or clone the `master` branch that has the latest released version.
 
 ## Dependencies
 
-Qt >= 6.6.0 with at least the following modules is required:
+Qt >= 6.8.0 with at least the following modules is required:
 
  * [qtbase](http://code.qt.io/cgit/qt/qtbase.git)
  * [qtdeclarative](http://code.qt.io/cgit/qt/qtdeclarative.git)

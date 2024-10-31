@@ -20,6 +20,12 @@ import QtQuick.Controls.Material
 import QtQuick.Layouts
 import Fluid as Fluid
 
+/*!
+    \brief Application tool bar.
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/layout/structure.html#structure-app-bar">Material Design guidelines</a>.
+ */
 QQC2.ToolBar {
     id: appBar
 
@@ -27,31 +33,97 @@ QQC2.ToolBar {
     Material.background: toolbar ? toolbar.Material.background : backgroundColor
     Material.theme: Fluid.Color.isDarkColor(Material.background) ? Material.Dark : Material.Light
 
+    /*!
+        The back action to display to the left of the title in the action bar.
+        When used with a page, this will pick up the page's back action, which
+        by default is a back arrow when there is a page behind the current page
+        on the page stack. However, you can customize this, for example, to show
+        a navigation drawer at the root of your app.
+
+        When using an action bar in a page, set the \ref Page::leftAction instead of
+        directly setting this property.
+    */
     property Fluid.Action leftAction
 
+    /*!
+        A list of actions to show in the action bar. These actions will be shown
+        anchored to the right, and will overflow if there are more than the
+        maximum number of actions as defined in \ref maxActionCount.
+
+        When used with a page, the actions will be set to the page's \ref Page::actions
+        property, so set that instead of changing this directly.
+    */
     property list<Fluid.Action> actions
 
+    /*!
+        The elevation of the action bar. Set to 0 if you want have a header or some
+        other view below the action bar that you want to appear as part of the action bar.
+    */
     property int elevation: 2
 
     property int __iconSize: Fluid.Device.gridUnit <= 48 ? 20 : 24
 
+    /*!
+        The background color of the tool bar when the AppBar's page is active.
+        By default this is the primary color defined in \c Material.primaryColor
+    */
     property color backgroundColor: appBar.Material.primaryColor
 
+    /*!
+        Value indicates if overflow menu is open or not.
+    */
     readonly property alias overflowMenuVisible: overflowMenu.visible
 
+    /*!
+        The background color of the window decoration when the AppBar's page is active,
+        usually a darker version of \ref backgroundColor.
+        By default this is the primary color defined in \c Material.primaryColor with a
+        shade of \c Material.Shade700.
+    */
     property color decorationColor: Material.shade(backgroundColor, Material.Shade700)
 
+    /*!
+        Keyline to align contents to the left to be visually appealing.
+    */
     property alias leftKeyline: titleLabel.x
 
+    /*!
+        The maximum number of actions that can be displayed before they spill over
+        into a drop-down menu. When using an action bar with a page, this inherits
+        from the global \ref AppToolBar::maxActionCount. If you are using an action bar
+        for custom purposes outside of a toolbar, this defaults to \c 3.
+
+        Set to \c 0 if you don't want to overflow actions.
+    */
     property int maxActionCount: toolbar ? toolbar.maxActionCount : 3
 
+    /*!
+        The title displayed in the action bar. When used in a page, the title will
+        be set to the title of the page, so set the \ref Page::title property instead
+        of changing this directly.
+    */
     property alias title: titleLabel.text
 
+    /*!
+        Custom content to show instead of the title.
+    */
     property alias customContent: customContentItem.data
+
+    /*!
+        A custom view to show under the row containing the title and actions.
+        Causes the action bar to be extend in height to contain this view.
+    */
     property alias extendedContent: extendedContentItem.data
 
+    /*!
+        The height of the custom view shown under the row containing the
+        title and actions.
+    */
     readonly property alias extendedContentHeight: extendedContentItem.height
 
+    /*!
+        Tool bar.
+    */
     property Fluid.AppToolBar toolbar
 
     implicitHeight: Fluid.Device.gridUnit
@@ -244,6 +316,9 @@ QQC2.ToolBar {
         visible: children.length > 0
     }
 
+    /*!
+        Toggle the overflow menu if the number of actions is greater than \ref AppBar::maxActionCount.
+    */
     function toggleOverflowMenu() {
         if (!overflowButton.visible)
             return;

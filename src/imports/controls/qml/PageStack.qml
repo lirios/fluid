@@ -15,11 +15,26 @@
 import QtQuick
 import QtQuick.Controls
 
+/*!
+    \brief Manages the page stack used for navigation.
+*/
 StackView {
     id: stackView
 
+    /*!
+        This signal is emitted when a \a page is pushed to the stack.
+    */
     signal pushed(Item page)
+
+    /*!
+        This signal is emitted when a \a page is popped from the stack.
+    */
     signal popped(Item page)
+
+
+    /*!
+        This signal is emitted when a \a page is replaced in the stack.
+    */
     signal replaced(Item page)
 
     property int __lastDepth: 0

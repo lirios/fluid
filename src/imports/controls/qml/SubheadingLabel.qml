@@ -16,7 +16,31 @@ import QtQuick
 import QtQuick.Controls
 import Fluid as Fluid
 
+/*!
+    \brief Text label with standard font and styling suitable to subheading.
+
+    Text label for the Material Design subheading text style.
+
+    \code{.qml}
+    import Fluid as Fluid
+
+    Fluid.SubheadingLabel {
+        text: "Text to display"
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/style/typography.html">Material Design guidelines</a>.
+*/
 Label {
+    /*!
+        This property holds the label level that controls
+        font style and size.
+
+        Only values between 1 and 4 are allowed.
+
+        Default value is 1.
+    */
     property int level: 1
 
     font.pixelSize: Fluid.Device.isMobile ? 16 : 15

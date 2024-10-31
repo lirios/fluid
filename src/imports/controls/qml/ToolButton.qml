@@ -16,9 +16,16 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Controls.impl as QQCImpl2
 
+/*!
+    \brief \l ToolButton with a extra features.
+*/
 QQC2.ToolButton {
     id: control
 
+    /*!
+        Specify whether the icon should be rotated 90 degrees when the mouse hovers.
+        Default is \c false.
+    */
     property bool hoverAnimation: false
 
     contentItem: QQCImpl2.IconLabel {

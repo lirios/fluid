@@ -2,9 +2,6 @@ if(DOXYGEN_FOUND)
     # Set the output directory for Doxygen documentation
     set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/output)
 
-    # Ensure the output directory exists
-    #file(MAKE_DIRECTORY ${DOXYGEN_OUTPUT_DIR})
-
     # Configure Doxyfile
     configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in

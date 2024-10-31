@@ -246,7 +246,7 @@ void InputRegion::setInputRegion()
     // Calculate input region
     QRegion region;
     if (m_enabled) {
-        for (auto *a : qAsConst(m_areas)) {
+        for (auto *a : std::as_const(m_areas)) {
             if (a->isEnabled()) {
                 //qCDebug(gLcInputRegion) << "Input area" << a << "for" << a->rect().toRect();
                 region += a->rect().toRect();

@@ -17,6 +17,10 @@ import QtQuick
 import QtQuick.Controls
 import Fluid as Fluid
 
+/*!
+    \brief Represents a split sidebar in a page, with its own title, actions, and color
+    in the app bar.
+*/
 Fluid.Page {
     id: pageSidebar
 

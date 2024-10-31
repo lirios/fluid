@@ -17,10 +17,28 @@ import QtQuick
 import QtQuick.Controls
 import Fluid
 
+/*!
+    \brief A sheet of paper with actions and an optional title that slides up from the bottom.
+
+    A sheet of paper that displays actions in a list and an optional title that slides up
+    from the bottom edge of the screen and presents a set of clear and simple actions.
+
+    \snippet fluidcontrols-bottomsheetlist.qml file
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/components/bottom-sheets.html">Material Design guidelines</a>.
+*/
 BottomSheet {
     id: bottomSheet
 
+    /*!
+        Title.
+    */
     property string title
+
+    /*!
+        Actions to display in the bottom sheet.
+    */
     property list<Action> actions
 
     height: Math.min(implicitHeight, maxHeight)

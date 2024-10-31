@@ -20,16 +20,55 @@ import QtQuick.Controls.impl
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+    \brief A standard list item, with one or more lines of text and optional left and right items.
+*/
 ItemDelegate {
     id: listItem
 
+    /*!
+        How many pixels the divider is from the left border.
+        This property is set to the \l leftItem width by default.
+
+        \sa Fluid::ListItem::showDivider
+        \sa Fluid::ListItem::leftItem
+    */
     property int dividerInset: leftItem.showing ? listItem.height : 0
+
+    /*!
+        This property holds whether the divider is shown or not.
+        Default value is \c false.
+    */
     property alias showDivider: divider.visible
+
+    /*!
+        Maximum number of text lines allowed to show.
+    */
     property int maximumLineCount: 2
+
+    /*!
+        Text to display below \l text.
+    */
     property alias subText: subLabel.text
+
+    /*!
+        Value text.
+    */
     property alias valueText: valueLabel.text
+
+    /*!
+        Item to show on the left.
+    */
     property alias leftItem: leftItem.children
+
+    /*!
+        Item to show on the right.
+    */
     property alias rightItem: rightItem.children
+
+    /*!
+        Secondary item.
+    */
     property alias secondaryItem: secondaryItem.children
 
     /*!

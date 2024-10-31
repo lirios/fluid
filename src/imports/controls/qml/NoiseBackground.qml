@@ -55,8 +55,22 @@
 
 import QtQuick
 
+/*!
+    \brief Background with noise.
+*/
 ShaderEffect {
+    /*!
+        The gradient to use to fill the rectangle.
+
+        \sa Rectangle::gradient
+    */
     property alias gradient: rect.gradient
+
+    /*!
+        The color to use to fill the rectangle.
+
+        \sa Rectangle::color
+    */
     property alias color: rect.color
 
     Rectangle {

@@ -19,6 +19,34 @@ import QtQuick.Controls.Material
 import Qt5Compat.GraphicalEffects
 import Fluid as Fluid
 
+/*!
+    \qmltype FloatingActionButton
+    \inqmlmodule Fluid
+    \ingroup fluid
+
+    \brief A floating action button.
+
+    A floating action button represents the primary action of the current page
+    and is used for a promoted action.
+
+    It is a push button with rounded corners and an icon in the center.
+
+    \code{.qml}
+    import QtQuick
+    import Fluid as Fluid
+
+    Item {
+        Fluid.FloatingActionButton {
+            anchors.centerIn: parent
+            icon.source: Fluid.Utils.iconUrl("device/airplanemode_active")
+            mini: false
+        }
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/components/buttons-floating-action-button.html">Material Design guidelines</a>.
+*/
 RoundButton {
     id: control
 
@@ -30,6 +58,18 @@ RoundButton {
     topPadding: 6
     bottomPadding: 6
 
+    /*!
+        Floating action button comes in two sizes:
+
+        \list
+            \li \c Default (56x56 pixels): default size for most use cases
+            \li \c Mini (40x40 pixels): only used to create visual continuity with other screen elements
+        \endlist
+
+        This property holds whether the floating action button size is \c Mini or not.
+
+        By default it is \c true if screen width is less than 460 pixels.
+    */
     property bool mini: Screen.width < 460
 
     Material.elevation: 1

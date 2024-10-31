@@ -15,7 +15,32 @@
 import QtQuick
 import QtQuick.Controls
 
+/*!
+    \brief Text label with standard font and styling suitable to display text.
+
+    Text label for the Material Design display text style.
+
+    \code{.qml}
+    import QtQuick
+    import Fluid as Fluid
+
+    Fluid.DisplayLabel {
+        text: "Text to display"
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/style/typography.html">Material Design guidelines</a>.
+*/
 Label {
+    /*!
+        This property holds the label level that controls
+        font style and size.
+
+        Only values between 1 and 4 are allowed.
+
+        Default value is 1.
+    */
     property int level: 1
 
     font.pixelSize: {

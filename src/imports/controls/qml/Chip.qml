@@ -18,16 +18,89 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+    \brief Chips represent complex entities in small blocks, such as a contact.
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/components/chips.html">Material Design guidelines</a>.
+*/
 AbstractButton {
     id: control
 
+    /*!
+        This property holds whether this chip can expand to show
+        more information or options.
+
+        \sa Fluid::Chip::model
+        \sa Fluid::Chip::delegate
+        \sa Fluid::Chip::selectedItem
+    */
     property bool expandable: false
+
+    /*!
+        Expandable chips show a popup with a list view when clicked.
+
+        This property holds the model providing data for said list view.
+
+        The following roles are expected to be present:
+
+        \list
+        \li label - Description of the option
+        \li value - Actual value of the option
+        \li imageSource - URL with the image source for the option
+        \endlist
+
+        \sa Fluid::Chip::expandable
+        \sa Fluid::Chip::delegate
+        \sa Fluid::Chip::selectedItem
+    */
     property alias model: listView.model
+
+    /*!
+        Expandable chips show a popup with a list view when clicked.
+
+        The delegate provides a template defining each item instantiated
+        by the list view.
+
+        By default the delegate is a \ref ListItem.
+
+        \sa Fluid::Chip::expandable
+        \sa Fluid::Chip::model
+        \sa Fluid::Chip::selectedItem
+    */
     property alias delegate: listView.delegate
+
+    /*!
+        Expandable chips show a popup with a list view when clicked.
+
+        This property holds the currently selected item.
+
+        By default the delegate is a \ref ListItem and the
+        selected item contains the following properties:
+
+        \list
+        \li string label - Description of the option
+        \li string value - Actual value of the option
+        \li url imageSource - URL with the image source for the option
+        \endlist
+
+        \sa Fluid::Chip::expandable
+        \sa Fluid::Chip::model
+        \sa Fluid::Chip::delegate
+    */
     readonly property alias selectedItem: listView.currentItem
+
     property alias iconItem: iconItem.children
+
+    /*!
+        This property holds whether the chip can be deleted.
+        The default value is \c false.
+    */
     property bool deletable: false
 
+    /*!
+        Emitted when the user wants to delete the chip.
+    */
     signal deleted()
 
     implicitWidth: Math.max(background ? background.implicitWidth : 0, contentItem.implicitWidth) + leftPadding + rightPadding

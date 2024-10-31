@@ -14,11 +14,33 @@
 
 import QtQuick
 
+/*!
+    \brief Loadable component.
+*/
 Item {
+    /*!
+        Component to load.
+    */
     property Component component
+
+    /*!
+        Animation to play when the component is shown.
+    */
     property var showAnimation
+
+    /*!
+        Animation to play when the component is hidden.
+    */
     property var hideAnimation
+
+    /*!
+        Whether the component is loaded asynchronously or not.
+    */
     property alias asynchronous: loader.asynchronous
+
+    /*!
+        Item created after \l Loadable::component is loaded.
+    */
     property alias item: loader.item
 
     id: root
@@ -53,10 +75,16 @@ Item {
         }
     }
 
+    /*!
+        Show the component.
+    */
     function show() {
         loader.sourceComponent = root.component;
     }
 
+    /*!
+        Hide the component.
+    */
     function hide() {
         if (loader.item && loader.item.hide != undefined)
             loader.item.hide();

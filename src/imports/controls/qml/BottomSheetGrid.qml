@@ -19,13 +19,162 @@ import QtQuick.Controls.Material
 import QtQuick.Templates as T
 import Fluid as Fluid
 
+/*!
+    \brief A sheet of paper with actions and an optional title that slides up from the bottom.
 
+    A sheet of paper that displays actions in a grid and an optional title that slides up
+    from the bottom edge of the screen and presents a set of clear and simple actions.
+
+    \code{.qml}
+    import QtQuick
+    import QtQuick.Controls
+    import Fluid as Fluid
+
+    Item {
+        Fluid.Button {
+            anchors.centerIn: parent
+            text: qsTr("Press Me")
+            onClicked: gridBottomSheet.open()
+        }
+
+        Fluid.BottomSheetGrid {
+            id: gridBottomSheet
+            actions: [
+                Fluid.Action {
+                    text: qsTr("Folder")
+                    icon.source: Fluid.Utils.iconUrl("file/folder")
+                },
+                Fluid.Action {
+                    text: qsTr("New Folder")
+                    icon.source: Fluid.Utils.iconUrl("file/create_new_folder")
+                },
+                Fluid.Action {
+                    text: qsTr("Shared Folder")
+                    icon.source: Fluid.Utils.iconUrl("file/folder_shared")
+                },
+                Fluid.Action {
+                    text: qsTr("Cloud")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud")
+                },
+                Fluid.Action {
+                    text: qsTr("Email Attachment")
+                    icon.source: Fluid.Utils.iconUrl("file/attachment")
+                },
+                Fluid.Action {
+                    text: qsTr("Upload")
+                    icon.source: Fluid.Utils.iconUrl("file/file_upload")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 1")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 2")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 3")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 4")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 5")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 6")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 7")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 8")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 9")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 10")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 11")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 12")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 13")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 14")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 15")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 16")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 17")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 18")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 19")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                },
+                Fluid.Action {
+                    text: qsTr("Placeholder 20")
+                    icon.source: Fluid.Utils.iconUrl("file/cloud_done")
+                }
+            ]
+        }
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/components/bottom-sheets.html">Material Design guidelines</a>.
+*/
 BottomSheet {
     id: bottomSheet
 
+    /*!
+        Title.
+    */
     property string title
+
+    /*!
+        Actions to display in the bottom sheet.
+    */
     property list<Fluid.Action> actions
+
+    /*!
+        Number of columns.
+        By default it's set to fit the screen width.
+    */
     property alias columns: grid.columns
+
+    /*!
+        Number of rows.
+        By default it's set to fit the screen size based on the \l columns.
+    */
     property alias rows: grid.rows
 
     height: Math.min(implicitHeight, maxHeight)

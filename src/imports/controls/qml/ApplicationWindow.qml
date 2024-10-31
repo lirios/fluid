@@ -19,17 +19,66 @@ import QtQuick.Controls.Material
 import Fluid as Fluid
 import Fluid.Private as P
 
+/*!
+   \brief A window that provides features commonly used for Material Design apps.
+
+   This is normally what you should use as your root component. It provides a \l ToolBar and
+   \l PageStack to provide access to standard features used by Material Design applications.
+
+   Here is a short working example of an application:
+
+   \code{.qml}
+   import QtQuick
+   import Fluid as Fluid
+
+   Fluid.ApplicationWindow {
+       title: "Application Name"
+       width: 1024
+       height: 800
+       visible: true
+
+       initialPage: page
+
+       Fluid.Page {
+           id: page
+           title: "Page Title"
+
+           Label {
+               anchors.centerIn: parent
+               text: "Hello World!"
+           }
+       }
+   }
+   \endcode
+*/
 ApplicationWindow {
     id: window
 
+    /*!
+        The color of the status bar or window decorations, if the current
+        platform supports it.
+    */
     property alias decorationColor: windowDecoration.color
-
+    
+    /*!
+        Theme of the status bar or window decoration, if the current
+        platform supports it.
+    */
     property alias decorationTheme: windowDecoration.theme
 
+    /*!
+        The tool bar for this application.
+    */
     property alias appBar: appBar
 
+    /*!
+        The initial page shown when the application starts.
+    */
     property alias initialPage: pageStack.initialItem
 
+    /*!
+        The \l PageStack used for controlling pages and transitions between pages.
+    */
     property alias pageStack: pageStack
 
     header: Fluid.AppToolBar {

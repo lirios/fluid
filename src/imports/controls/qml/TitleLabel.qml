@@ -15,6 +15,22 @@
 import QtQuick
 import QtQuick.Controls
 
+/*!
+    \brief Text label with standard font and styling suitable to titles.
+
+    Text label for the Material Design title text style.
+
+    \code{.qml}
+    import Fluid as Fluid
+
+    Fluid.TitleLabel {
+        text: "Text to display"
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/style/typography.html">Material Design guidelines</a>.
+*/
 Label {
     font.pixelSize: 20
     font.weight: Font.Medium

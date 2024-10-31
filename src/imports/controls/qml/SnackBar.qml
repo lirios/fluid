@@ -18,15 +18,63 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+   \brief SnackBar provides a brief feedback about an operation.
+
+   \code{.qml}
+   Page {
+       title: qsTr("Send a message")
+
+       Button {
+           anchors.centerIn: parent
+           text: qsTr("Send Message")
+           onClicked: snackBar.open(qsTr("Message sent"))
+       }
+
+       SnackBar {
+           id: snackBar
+       }
+   }
+   \endcode
+
+    SnackBar provides a brief feedback about an operation through a
+    message at the bottom of the screen.
+
+    It contains a single line of text directly related to the operation performed.
+    There can be a text action, but no icons.
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/components/snackbars-toasts.html">Material Design guidelines</a>.
+*/
 Item {
     id: snackBar
 
+    /*!
+        Whether the snack bar is currently open or not.
+    */
     readonly property bool opened: popup.visible
+
+    /*!
+        Amount of time (in ms) to keep the notification visible.
+        The default is 2s.
+    */
     property int duration: 2000
+
+    /*!
+        Whether the bar should take full screen width.
+        The default depends on the device: full width only on phones and tablets.
+    */
     property bool fullWidth: Fluid.Device.formFactor === Fluid.Device.Phone || Fluid.Device.formFactor === Fluid.Device.Phablet
 
+    /*!
+        This signal is emitted when the button is clicked.
+        The handler is \c onClicked.
+    */
     signal clicked()
 
+    /*!
+        Open the bar with the specified \a text and \a buttonText.
+    */
     function open(text, buttonText) {
         snackText.text = text;
         snackButton.text = buttonText;
@@ -36,6 +84,9 @@ Item {
             timer.restart();
     }
 
+    /*!
+        Close the bar.
+    */
     function close() {
         popup.close();
     }

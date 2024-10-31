@@ -16,15 +16,58 @@
 import QtQuick
 import Fluid as Fluid
 
+/*!
+    \brief Represents a Material Design ripple ink animation used in various touchable components.
+
+    This component is useful for including in Material Design-specific components, which should be implemented using the +material file selector. Eventually this should be upstreamed to QtQuick
+    Controls 2.
+
+     For more information you can read the
+     <a href="https://material.io/guidelines/motion/material-motion.html#material-motion-how-does-material-move">Material Design guidelines</a>.
+*/
 MouseArea {
     id: ripple
 
+    /*!
+        The color of the ripple. Defaults to black with 12% opacity.
+    */
     property color color: Qt.rgba(0,0,0,0.12)
+
+    /*!
+        Set to \c true if the ripple is used on a circular component, such as a button in an
+        action bar or a floating action button.
+    */
     property bool circular: false
+
+    /*!
+        Set to \c true if the ripple should be centered regardless of where the mouse/touch
+        input came from.
+    */
     property bool centered: false
+
+    /*!
+        Set to \c true if the component is focused and should display a focus ripple.
+    */
     property bool focused
+
+    /*!
+        The color of the focus ripple. Also used to determine the color of the focus background
+        behind the ripple.
+
+        \sa Ripple::focused
+    */
     property color focusColor: "transparent"
+
+    /*!
+        The width of the focus ripple.
+
+        \sa Ripple::focused
+    */
     property int focusWidth: width - 32
+
+    /*!
+        Control that that needs the ripple effect.
+    */
     property Item control
 
     clip: true

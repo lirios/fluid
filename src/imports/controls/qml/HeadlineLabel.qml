@@ -15,6 +15,22 @@
 import QtQuick
 import QtQuick.Controls
 
+/*!
+    \brief Text label with standard font and styling suitable to headlines.
+
+    Text label for the Material Design headline text style.
+
+    \code{.qml}
+    import Fluid as Fluid
+
+    Fluid.HeadlineLabel {
+        text: "Text to display"
+    }
+    \endcode
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/style/typography.html">Material Design guidelines</a>.
+*/
 Label {
     font.pixelSize: 24
     lineHeight: 32.0

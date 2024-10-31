@@ -14,8 +14,18 @@
 
 import QtQuick
 
+/*!
+    \brief Showtable component.
+*/
 FocusScope {
+    /*!
+        Animation to play to show the component.
+    */
     property var showAnimation
+
+    /*!
+        Animation to play to hide the component.
+    */
     property var hideAnimation
 
     id: root
@@ -36,6 +46,9 @@ FocusScope {
         }
     }
 
+    /*!
+        Show the component.
+    */
     function show() {
         // Stop hide animation if it's still running
         if (hideAnimation != undefined && hideAnimation.running)
@@ -49,6 +62,9 @@ FocusScope {
             showAnimation.restart();
     }
 
+    /*!
+        Hide the component.
+    */
     function hide() {
         // Stop show animation if it's still running
         if (showAnimation != undefined && showAnimation.running)

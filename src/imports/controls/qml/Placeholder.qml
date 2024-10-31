@@ -20,11 +20,28 @@ import QtQuick.Controls.impl
 import QtQuick.Controls.Material
 import Fluid
 
+/*!
+    \brief Shows a placeholder icon and text.
+
+    For more information you can read the
+    <a href="https://material.io/guidelines/patterns/empty-states.html#empty-states-avoiding-completely-empty-states">Material Design guidelines</a>.
+*/
 Control {
     id: control
 
+    /*!
+        Icon.
+    */
     property alias icon: iconLabel.icon
+
+    /*!
+        Text.
+    */
     property alias text: textLabel.text
+
+    /*!
+        Sub text.
+    */
     property alias subText: subTextLabel.text
 
     implicitWidth: columnLayout.implicitWidth

@@ -15,6 +15,9 @@
 import QtQuick
 import QtQuick.Controls.Material
 
+/*!
+   \brief A 1px high divider for use in lists and other columns of content.
+*/
 Rectangle {
     color: Material.dividerColor
     width: parent.width

@@ -20,6 +20,41 @@ import QtQuick.Controls.impl
 import QtQuick.Controls.Material
 import Fluid as Fluid
 
+/*!
+    \brief Page with tabs.
+
+    \code{.qml}
+    import QtQuick 2.10
+    import Fluid.Controls 1.0 as FluidControls
+
+    Fluid.ApplicationWindow {
+        title: "Application Name"
+        width: 1024
+        height: 800
+        visible: true
+
+        initialPage: Fluid.TabbedPage {
+            Fluid.Tab {
+                title: "Tab 1"
+
+                Label {
+                    anchors.centerIn: parent
+                    text: "Hello World!"
+                }
+            }
+
+            Fluid.Tab {
+                title: "Tab 2"
+
+                Label {
+                    anchors.centerIn: parent
+                    text: "Hello World!"
+                }
+            }
+        }
+    }
+    \endcode
+*/
 Fluid.Page {
     id: page
 
@@ -28,10 +63,29 @@ Fluid.Page {
     */
     default property alias contents: swipeView.contentData
 
+    /*!
+        Number of tabs.
+    */
     readonly property alias count: swipeView.count
+
+    /*!
+        Index of the currently selected tab.
+    */
     readonly property alias currentIndex: swipeView.currentIndex
+
+    /*!
+        The currently selected tab.
+    */
     readonly property alias selectedTab: swipeView.currentItem
+
+    /*!
+        Tool bar that contains tabs.
+    */
     readonly property alias tabBar: tabToolBar
+
+    /*!
+        Tab bar.
+    */
     readonly property alias tabs: tabBar
 
     appBar.elevation: 0

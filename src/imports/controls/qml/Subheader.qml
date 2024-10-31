@@ -18,9 +18,18 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 
+/*!
+    \brief Subheaders are special list tiles that delineate distinct sections of a list or grid list.
+
+     For more information you can read the
+     <a href="https://material.io/guidelines/components/subheaders.html">Material Design guidelines</a>.
+*/
 ItemDelegate {
     id: listItem
 
+    /*!
+        Text color.
+    */
     property alias textColor: label.color
 
     width: parent ? parent.width : undefined

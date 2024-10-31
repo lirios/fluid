@@ -20,7 +20,7 @@ void FluidPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
     Q_ASSERT(QLatin1String(uri) == QLatin1String("Fluid"));
 
     // Set base URL to the plugin URL
-    engine->setBaseUrl(baseUrl());
+    //engine->setBaseUrl(baseUrl());
 
     // For system icons
     engine->addImageProvider(QStringLiteral("fluidicontheme"), new IconThemeImageProvider());

@@ -18,11 +18,6 @@ target_sources(fluidtemplates
         yearselector.cpp yearselector.h
 )
 
-ecm_target_qml_sources(fluidtemplates
-    SOURCES
-        Card.qml
-)
-
 target_link_libraries(fluidtemplates
     PUBLIC
         Qt6::Core

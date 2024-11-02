@@ -12,7 +12,8 @@
  * $END_LICENSE$
  */
 
-import Fluid.Templates as FluidTemplates
+import QtQuick.Controls as C
+import QtQuick.Controls.Material
 
 /*!
     \brief Cards display content composed of different elements.
@@ -81,5 +82,9 @@ import Fluid.Templates as FluidTemplates
     For more information you can read the
     <a href="https://material.io/guidelines/components/cards.html">Material Design guidelines</a>.
 */
-FluidTemplates.Card {
+C.Pane {
+    padding: 0
+
+    Material.background: "white"
+    Material.elevation: 1
 }

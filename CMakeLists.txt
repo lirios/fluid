@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.25)
 
 project("Fluid"
     VERSION "1.3.0"
@@ -33,8 +33,8 @@ include(features.cmake)
 ## Disable use of C++ API deprecated in Qt 5.15
 add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
 
-## Enable C++17:
-set(CMAKE_CXX_STANDARD 17)
+## Enable C++23:
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 ## Treat warnings as errors:

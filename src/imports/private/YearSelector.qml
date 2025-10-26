@@ -16,9 +16,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.YearSelector {
+Fluid.YearSelector {
     id: control
 
     delegate: Fluid.SubheadingLabel {

@@ -18,9 +18,8 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.DateSelector {
+Fluid.DateSelector {
     id: control
 
     property alias currentItem: listView.currentItem

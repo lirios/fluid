@@ -19,15 +19,14 @@ import QtQuick.Controls.Material
 import QtQuick.Layouts
 import Fluid as Fluid
 import Fluid.Private as P
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.DatePicker {
+Fluid.DatePicker {
     id: picker
 
     /*!
         \internal
     */
-    readonly property bool __isLandscape : picker.orientation === FluidTemplates.DatePicker.Landscape
+    readonly property bool __isLandscape : picker.orientation === Fluid.DatePicker.Landscape
 
     /*!
         \internal
@@ -63,7 +62,7 @@ FluidTemplates.DatePicker {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: picker.mode = FluidTemplates.DatePicker.Year
+                    onClicked: picker.mode = Fluid.DatePicker.Year
                 }
             }
 
@@ -78,7 +77,7 @@ FluidTemplates.DatePicker {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: picker.mode = FluidTemplates.DatePicker.Month
+                    onClicked: picker.mode = Fluid.DatePicker.Month
                 }
             }
         }
@@ -94,7 +93,7 @@ FluidTemplates.DatePicker {
             from: picker.from
             to: picker.to
             locale: picker.locale
-            visible: picker.mode === FluidTemplates.DatePicker.Month
+            visible: picker.mode === Fluid.DatePicker.Month
             onSelectedDateChanged: {
                 if (picker.selectedDate !== selectedDate) {
                     var date = new Date(picker.selectedDate.getTime());
@@ -119,7 +118,7 @@ FluidTemplates.DatePicker {
             height: parent.height
             from: picker.from
             to: picker.to
-            visible: picker.mode === FluidTemplates.DatePicker.Year
+            visible: picker.mode === Fluid.DatePicker.Year
             onSelectedYearChanged: {
                 if (picker.selectedDate.getFullYear() !== selectedYear) {
                     var date = new Date(picker.selectedDate.getTime());

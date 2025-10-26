@@ -15,9 +15,17 @@ target_sources(fluidcontrols
         controlsplugin.cpp controlsplugin.h
         controlsutils.cpp controlsutils.h
         dateutils.cpp dateutils.h
+        datepicker.cpp datepicker.h
+        dateselector.cpp dateselector.h
+        datetimepicker.cpp datetimepicker.h
         device.cpp device.h
+        picker.cpp picker.h
         iconthemeimageprovider.cpp iconthemeimageprovider.h
         inputregion.cpp inputregion.h
+        timepicker.cpp timepicker.h
+        timeselector.cpp timeselector.h
+        yearmodel.cpp yearmodel.h
+        yearselector.cpp yearselector.h
         standardpaths.cpp standardpaths.h
 )
 

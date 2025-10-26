@@ -19,15 +19,14 @@ import QtQuick.Controls.Material
 import QtQuick.Layouts
 import Fluid as Fluid
 import Fluid.Private as P
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.TimePicker {
+Fluid.TimePicker {
     id: picker
 
     /*!
         \internal
     */
-    readonly property bool __isLandscape : picker.orientation === FluidTemplates.TimePicker.Landscape
+    readonly property bool __isLandscape : picker.orientation === Fluid.TimePicker.Landscape
 
     /*!
         \internal

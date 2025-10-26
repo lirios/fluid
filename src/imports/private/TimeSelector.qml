@@ -16,22 +16,21 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.TimeSelector {
+Fluid.TimeSelector {
     id: timeSelector
 
     property int currentSelector: mode
 
     onModeChanged: {
         switch (mode) {
-        case FluidTemplates.TimeSelector.Hour:
+        case Fluid.TimeSelector.Hour:
             circle.selectedValue = selectedTime.getHours();
             break;
-        case FluidTemplates.TimeSelector.Minute:
+        case Fluid.TimeSelector.Minute:
             circle.selectedValue = selectedTime.getMinutes();
             break;
-        case FluidTemplates.TimeSelector.Second:
+        case Fluid.TimeSelector.Second:
             circle.selectedValue = selectedTime.getSeconds();
             break;
         }
@@ -42,13 +41,13 @@ FluidTemplates.TimeSelector {
 
         property int minValue: 0
         property int maxValue: {
-            if (timeSelector.mode === FluidTemplates.TimeSelector.Hour)
+            if (timeSelector.mode === Fluid.TimeSelector.Hour)
                 return prefer24Hour ? 23 : 11;
             return 59;
         }
         property int steps: 1
-        property int labelSteps: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? 1 : 5
-        property int valuesAtRing: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? 12 : 60
+        property int labelSteps: timeSelector.mode === Fluid.TimeSelector.Hour ? 1 : 5
+        property int valuesAtRing: timeSelector.mode === Fluid.TimeSelector.Hour ? 12 : 60
         property int selectedValue: 0
 
         function getValue(x, y) {
@@ -114,7 +113,7 @@ FluidTemplates.TimeSelector {
             anchors.fill: parent
             anchors.margins: 0
             interactive: false
-            model: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? twelveModel : sixtyModel
+            model: timeSelector.mode === Fluid.TimeSelector.Hour ? twelveModel : sixtyModel
             delegate: pathDelegate
             path: Path {
                 startX: circle.width / 2
@@ -147,11 +146,11 @@ FluidTemplates.TimeSelector {
 
             property real pathPadding: 65
 
-            visible: timeSelector.mode === FluidTemplates.TimeSelector.Hour ? prefer24Hour : false
+            visible: timeSelector.mode === Fluid.TimeSelector.Hour ? prefer24Hour : false
             anchors.fill: parent
             anchors.margins: 0
             interactive: false
-            model: timeSelector.mode === FluidTemplates.TimeSelector.Hour && prefer24Hour ? [0, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] : []
+            model: timeSelector.mode === Fluid.TimeSelector.Hour && prefer24Hour ? [0, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] : []
             delegate: pathDelegate
             path: Path {
                 startX: circle.width / 2
@@ -178,7 +177,7 @@ FluidTemplates.TimeSelector {
 
             Rectangle {
                 function isSelected(value) {
-                    if(currentSelector === FluidTemplates.TimeSelector.HourMode) {
+                    if(currentSelector === Fluid.TimeSelector.HourMode) {
                         if(circle.selectedValue === 0 && !prefer24Hour) {
                             return value === 12
                         }
@@ -216,17 +215,17 @@ FluidTemplates.TimeSelector {
             onClicked: {
                 var newTime = new Date(selectedTime.getTime());
                 switch (timeSelector.mode) {
-                case FluidTemplates.TimeSelector.Hour:
-                    newTime.setHours(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2) + (timeMode === FluidTemplates.TimeSelector.PM ? 12 : 0));
-                    timeSelector.mode = FluidTemplates.TimeSelector.Minute;
+                case Fluid.TimeSelector.Hour:
+                    newTime.setHours(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2) + (timeMode === Fluid.TimeSelector.PM ? 12 : 0));
+                    timeSelector.mode = Fluid.TimeSelector.Minute;
                     break;
-                case FluidTemplates.TimeSelector.Minute:
+                case Fluid.TimeSelector.Minute:
                     newTime.setMinutes(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
-                    timeSelector.mode = FluidTemplates.TimeSelector.Second;
+                    timeSelector.mode = Fluid.TimeSelector.Second;
                     break;
-                case FluidTemplates.TimeSelector.Second:
+                case Fluid.TimeSelector.Second:
                     newTime.setSeconds(circle.getValue(mouse.x - circle.width / 2, mouse.y - circle.width / 2));
-                    timeSelector.mode = FluidTemplates.TimeSelector.Hour;
+                    timeSelector.mode = Fluid.TimeSelector.Hour;
                     break;
                 }
                 selectedTime = newTime;

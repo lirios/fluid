@@ -19,15 +19,14 @@ import QtQuick.Controls.Material
 import QtQuick.Layouts
 import Fluid as Fluid
 import Fluid.Private as P
-import Fluid.Templates as FluidTemplates
 
-FluidTemplates.DateTimePicker {
+Fluid.DateTimePicker {
     id: picker
 
     /*!
         \internal
     */
-    readonly property bool __isLandscape : picker.orientation === FluidTemplates.DateTimePicker.Landscape
+    readonly property bool __isLandscape : picker.orientation === Fluid.DateTimePicker.Landscape
 
     /*!
         \internal
@@ -36,11 +35,11 @@ FluidTemplates.DateTimePicker {
 
     onSelectedDateTimeChanged: {
         switch(mode) {
-        case FluidTemplates.DateTimePicker.Year:
+        case Fluid.DateTimePicker.Year:
             if (yearSelector.selectedYear !== picker.selectedDateTime.getFullYear())
                 yearSelector.selectedYear = picker.selectedDateTime.getFullYear();
             break;
-        case FluidTemplates.DateTimePicker.Month:
+        case Fluid.DateTimePicker.Month:
             if (dateSelector.selectedDate.getTime() !== picker.selectedDateTime.getTime())
                 dateSelector.selectedDate = picker.selectedDateTime;
             break;
@@ -96,7 +95,7 @@ FluidTemplates.DateTimePicker {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: picker.mode = FluidTemplates.DateTimePicker.Year
+                            onClicked: picker.mode = Fluid.DateTimePicker.Year
                         }
                     }
 
@@ -111,7 +110,7 @@ FluidTemplates.DateTimePicker {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: picker.mode = FluidTemplates.DateTimePicker.Month
+                            onClicked: picker.mode = Fluid.DateTimePicker.Month
                         }
                     }
 
@@ -227,7 +226,7 @@ FluidTemplates.DateTimePicker {
             from: picker.from
             to: picker.to
             locale: picker.locale
-            visible: picker.mode === FluidTemplates.DateTimePicker.Month
+            visible: picker.mode === Fluid.DateTimePicker.Month
             onSelectedDateChanged: {
                 if (picker.selectedDateTime !== selectedDate) {
                     var date = new Date(picker.selectedDateTime.getTime());
@@ -246,7 +245,7 @@ FluidTemplates.DateTimePicker {
             height: parent.height
             from: picker.from
             to: picker.to
-            visible: picker.mode === FluidTemplates.DateTimePicker.Year
+            visible: picker.mode === Fluid.DateTimePicker.Year
             onSelectedYearChanged: {
                 if (picker.selectedDateTime.getFullYear() !== selectedYear) {
                     var date = new Date(picker.selectedDateTime.getTime());
@@ -262,19 +261,19 @@ FluidTemplates.DateTimePicker {
             width: parent.width
             height: parent.height
             prefer24Hour: picker.prefer24Hour
-            visible: picker.mode === FluidTemplates.DateTimePicker.Hour ||
-                     picker.mode === FluidTemplates.DateTimePicker.Minute ||
-                     picker.mode === FluidTemplates.DateTimePicker.Second
+            visible: picker.mode === Fluid.DateTimePicker.Hour ||
+                     picker.mode === Fluid.DateTimePicker.Minute ||
+                     picker.mode === Fluid.DateTimePicker.Second
             onModeChanged: {
                 switch (mode) {
-                case FluidTemplates.TimeSelector.Hour:
-                    picker.mode = FluidTemplates.DateTimePicker.Hour;
+                case Fluid.TimeSelector.Hour:
+                    picker.mode = Fluid.DateTimePicker.Hour;
                     break;
-                case FluidTemplates.TimeSelector.Minute:
-                    picker.mode = FluidTemplates.DateTimePicker.Minute;
+                case Fluid.TimeSelector.Minute:
+                    picker.mode = Fluid.DateTimePicker.Minute;
                     break;
-                case FluidTemplates.TimeSelector.Second:
-                    picker.mode = FluidTemplates.DateTimePicker.Second;
+                case Fluid.TimeSelector.Second:
+                    picker.mode = Fluid.DateTimePicker.Second;
                     break;
                 }
             }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 
 project("Fluid"
     VERSION "1.3.0"
-    DESCRIPTION "Material Design implementation with QtQuick Controls 2"
+    DESCRIPTION "Material Design for QtQuick and Qml"
     LANGUAGES CXX C
 )
 

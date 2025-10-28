@@ -40,16 +40,20 @@ target_link_libraries(FluidDemo
         Qt6::QuickControls2
 )
 
-install(TARGETS FluidDemo DESTINATION ${KDE_INSTALL_BINDIR})
-
-install(
-    FILES io.liri.Fluid.Demo.appdata.xml
-    DESTINATION ${KDE_INSTALL_METAINFODIR}
-)
-install(
-    FILES io.liri.Fluid.Demo.desktop
-    DESTINATION ${KDE_INSTALL_APPDIR}
-)
+if(UNIX AND NOT APPLE AND NOT ANDROID)
+    install(
+        TARGETS FluidDemo
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/bin
+    )
+    install(
+        FILES io.liri.Fluid.Demo.appdata.xml
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/metainfo
+    )
+    install(
+        FILES io.liri.Fluid.Demo.desktop
+        DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications
+    )
+endif()
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     file(GLOB png_icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*/*.png")

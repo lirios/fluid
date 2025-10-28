@@ -35,7 +35,6 @@ if(LINUX AND NOT ANDROID)
     target_compile_definitions(${LIBNAME} PRIVATE FLUID_ENABLE_WAYLAND=1)
     target_link_libraries(${LIBNAME}
         PRIVATE
-            Qt6::GuiPrivate
             Qt6::WaylandClient
             Wayland::Client
     )

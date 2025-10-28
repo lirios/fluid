@@ -1,40 +1,47 @@
-ecm_add_qml_module(fluidcontrolsprivate
-    URI
-        "Fluid.Private"
-    VERSION
-        "2.0"
-    GENERATE_PLUGIN_SOURCE
+set(LIBNAME fluidcontrolsprivate)
+
+set(_sources
+    windowdecoration.cpp windowdecoration.h
 )
 
-target_sources(fluidcontrolsprivate
-    PRIVATE
-        windowdecoration.cpp windowdecoration.h
+set(_qml
+    DateSelector.qml
+    TimeSelector.qml
+    YearSelector.qml
+)
+
+qt6_add_qml_module(${LIBNAME}
+    URI Fluid.Private
+    VERSION 2.0
+    RESOURCE_PREFIX /
+    SOURCES ${_sources}
+    QML_FILES ${_qml}
+    DEPENDENCIES
+        QtQuick
+    OUTPUT_TARGETS ${LIBNAME}_targets
 )
 
 if(LINUX AND NOT ANDROID)
     find_package(Wayland 1.15 COMPONENTS Client REQUIRED)
     find_package(Qt6WaylandClient REQUIRED)
-    qt6_generate_wayland_protocol_client_sources(fluidcontrolsprivate
+    qt6_generate_wayland_protocol_client_sources(${LIBNAME}
         FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/extensions/fluid-decoration-unstable-v1.xml"
     )
-    target_sources(fluidcontrolsprivate
-        PRIVATE
-            extensions/fluiddecorationv1.cpp extensions/fluiddecorationv1.h
+    set(_sources
+        ${_sources}
+        extensions/fluiddecorationv1.cpp extensions/fluiddecorationv1.h
     )
-    target_compile_definitions(fluidcontrolsprivate PRIVATE FLUID_ENABLE_WAYLAND=1)
-    target_link_libraries(fluidcontrolsprivate
+    target_compile_definitions(${LIBNAME} PRIVATE FLUID_ENABLE_WAYLAND=1)
+    target_link_libraries(${LIBNAME}
         PRIVATE
-            Qt6::GuiPrivate Qt6::WaylandClient Wayland::Client
+            Qt6::GuiPrivate
+            Qt6::WaylandClient
+            Wayland::Client
     )
 endif()
 
-file(GLOB _qml "*.qml")
-ecm_target_qml_sources(fluidcontrolsprivate
-    SOURCES ${_qml}
-)
-
-target_link_libraries(fluidcontrolsprivate
+target_link_libraries(${LIBNAME}
     PUBLIC
         Qt6::Core
         Qt6::Gui
@@ -42,5 +49,3 @@ target_link_libraries(fluidcontrolsprivate
         Qt6::Quick
         Qt6::QuickControls2
 )
-
-ecm_finalize_qml_module(fluidcontrolsprivate)

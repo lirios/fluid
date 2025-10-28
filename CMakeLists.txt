@@ -6,26 +6,9 @@ project("Fluid"
     LANGUAGES CXX C
 )
 
-## ECM:
-find_package(ECM 5.245.0 REQUIRED NO_MODULE)
-list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
-
-## Installation directories:
-include(KDEInstallDirs)
-
-## Compiler settings:
-set(KDE_SKIP_NULLPTR_WARNINGS_SETTINGS TRUE)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-
 ## Enable keywords such as emit:
 # TODO: Replace keywords such as emit with Q_EMIT
 remove_definitions(-DQT_NO_KEYWORDS)
-
-## CMake settings:
-include(KDECMakeSettings)
-
-## QML module:
-include(ECMQmlModule)
 
 ## Features:
 include(features.cmake)
@@ -37,8 +20,31 @@ add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+## Position independent code:
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+## Enable Qt features:
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOMOC_PATH_PREFIX ON)
+
 ## Treat warnings as errors:
 add_compile_options(-Wall -Wextra -Werror)
+
+set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml_modules")
+list(APPEND QML_DIRS "${QT_QML_OUTPUT_DIRECTORY}")
+
+## Set QT_INSTALL_QML on UNIX systems:
+if(UNIX)
+  include(GNUInstallDirs)
+
+  if("${QT_INSTALL_QML}" STREQUAL "")
+    set(QT_INSTALL_QML "${CMAKE_INSTALL_LIBDIR}/qml")
+  endif()
+endif()
+
+## Set QML install directory:
+set(QML_INSTALL_DIR "${QT_INSTALL_QML}" CACHE STRING "")
+message("QML_INSTALL_DIR: ${QML_INSTALL_DIR}")
 
 ## QML import path:
 if(NOT QML_IMPORT_PATH)

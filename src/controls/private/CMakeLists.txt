@@ -49,3 +49,8 @@ target_link_libraries(${LIBNAME}
         Qt6::Quick
         Qt6::QuickControls2
 )
+
+install(TARGETS ${${LIBNAME}_targets} EXPORT ${LIBNAME}-targets)
+install(TARGETS ${LIBNAME} EXPORT ${LIBNAME}-targets)
+
+qt_install_qml_module(${LIBNAME})

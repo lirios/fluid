@@ -6,6 +6,9 @@ project("Fluid"
     LANGUAGES CXX C
 )
 
+## Add some paths to check for CMake modules:
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 ## Enable keywords such as emit:
 # TODO: Replace keywords such as emit with Q_EMIT
 remove_definitions(-DQT_NO_KEYWORDS)
@@ -50,6 +53,9 @@ message("QML_INSTALL_DIR: ${QML_INSTALL_DIR}")
 if(NOT QML_IMPORT_PATH)
     set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/bin CACHE STRING "" FORCE)
 endif()
+
+## Install function for QML modules:
+include(cmake/QtInstallQmlModule.cmake)
 
 ## Add subdirectories:
 if(FLUID_WITH_DOCUMENTATION)

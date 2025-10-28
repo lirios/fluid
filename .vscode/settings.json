@@ -4,4 +4,6 @@
             "file": ".github/commit-instructions.md"
         }
     ],
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.installPrefix": "${workspaceFolder}/build/install-root"
 }

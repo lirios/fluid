@@ -11,6 +11,7 @@ if(FLUID_WITH_QML_MODULES)
         COMPONENTS
             Core
             Gui
+            GuiPrivate
             Svg
             Qml
             Quick

@@ -174,6 +174,8 @@ target_link_libraries(${LIBNAME}
         Qt6::Quick
         Qt6::QuickControls2
         Qt6::Svg
+    PRIVATE
+        Qt6::GuiPrivate
 )
 
 install(TARGETS ${${LIBNAME}_targets} EXPORT ${LIBNAME}-targets)

@@ -18,6 +18,7 @@ set(_sources
     yearmodel.cpp yearmodel.h
     yearselector.cpp yearselector.h
     standardpaths.cpp standardpaths.h
+    style.cpp style.h
 )
 
 #file(GLOB _qml "qml/*.qml")

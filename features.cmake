@@ -1,34 +1,10 @@
 # SPDX-FileCopyrightText: 2023 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 # SPDX-License-Identifier: BSD-3-Clause
 
+#### Features
+
 ## Enable feature summary at the end of the configure run:
 include(FeatureSummary)
-
-if(FLUID_WITH_QML_MODULES)
-    ## Find Qt:
-    find_package(Qt6 6.8
-        REQUIRED
-        COMPONENTS
-            Core
-            Gui
-            GuiPrivate
-            Svg
-            Qml
-            Quick
-            QuickControls2
-            QuickTest
-    )
-    
-    ## Standard project setup:
-    qt_standard_project_setup(REQUIRES 6.8)
-
-    ## Qt policies:
-    if(QT_KNOWN_POLICY_QTP0004)
-        qt_policy(SET QTP0004 NEW)
-    endif()
-endif()
-
-#### Features
 
 # Documentation
 option(FLUID_WITH_DOCUMENTATION "Build documentation" ON)
@@ -56,4 +32,30 @@ add_feature_info("Fluid::Icons" FLUID_INSTALL_ICONS "Install Material Design ico
 ## Summary:
 if(NOT LIRI_SUPERBUILD)
     feature_summary(WHAT ENABLED_FEATURES DISABLED_FEATURES)
+endif()
+
+#### Dependencies
+
+if(FLUID_WITH_QML_MODULES)
+    ## Find Qt:
+    find_package(Qt6 6.8
+        REQUIRED
+        COMPONENTS
+            Core
+            Gui
+            GuiPrivate
+            Svg
+            Qml
+            Quick
+            QuickControls2
+            QuickTest
+    )
+    
+    ## Standard project setup:
+    qt_standard_project_setup(REQUIRES 6.8)
+
+    ## Qt policies:
+    if(QT_KNOWN_POLICY_QTP0004)
+        qt_policy(SET QTP0004 NEW)
+    endif()
 endif()

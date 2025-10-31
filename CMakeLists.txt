@@ -9,12 +9,12 @@ project("Fluid"
 ## Add some paths to check for CMake modules:
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+## Features:
+include(features.cmake)
+
 ## Enable keywords such as emit:
 # TODO: Replace keywords such as emit with Q_EMIT
 remove_definitions(-DQT_NO_KEYWORDS)
-
-## Features:
-include(features.cmake)
 
 ## Disable use of C++ API deprecated in Qt 5.15
 add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)

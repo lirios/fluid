@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     container: archlinux
     steps:
-      - uses: action/checkout@v5
+      - uses: actions/checkout@v5
       - name: Download dependencies
         run: |
           pacman --noconfirm --noprogressbar -Syyu

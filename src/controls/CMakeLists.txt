@@ -149,7 +149,7 @@ qt_add_qml_module(${LIBNAME}
     DEPENDENCIES
         QtQuick
         QtQuick.Templates
-        Fluid.Private
+        #Fluid.Private
     PLUGIN_TARGET ${LIBNAME}
     CLASS_NAME FluidPlugin
     NO_PLUGIN_OPTIONAL

@@ -17,7 +17,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
 import Fluid as Fluid
-import Fluid.Private as P
+// import Fluid.Private as P
 
 /*!
    \brief A window that provides features commonly used for Material Design apps.
@@ -58,13 +58,15 @@ ApplicationWindow {
         The color of the status bar or window decorations, if the current
         platform supports it.
     */
-    property alias decorationColor: windowDecoration.color
+    // property alias decorationColor: windowDecoration.color
+    property color decorationColor: appBar ? appBar.Material.background : window.Material.primaryColor, Material.Shade700
     
     /*!
         Theme of the status bar or window decoration, if the current
         platform supports it.
     */
-    property alias decorationTheme: windowDecoration.theme
+    // property alias decorationTheme: windowDecoration.theme
+    property int decorationTheme: Material.System
 
     /*!
         The tool bar for this application.
@@ -95,9 +97,9 @@ ApplicationWindow {
         onReplaced: (page) => appBar.replace(page)
     }
 
-    P.WindowDecoration {
-        id: windowDecoration
-        window: window
-        color: Material.shade(appBar ? appBar.Material.background : window.Material.primaryColor, Material.Shade700)
-    }
+    // P.WindowDecoration {
+    //     id: windowDecoration
+    //     window: window
+    //     color: Material.shade(appBar ? appBar.Material.background : window.Material.primaryColor, Material.Shade700)
+    // }
 }

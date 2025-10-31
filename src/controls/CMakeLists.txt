@@ -150,9 +150,10 @@ qt_add_qml_module(${LIBNAME}
         QtQuick
         QtQuick.Templates
         Fluid.Private
-    # CLASS_NAME FluidPlugin
-    # NO_GENERATE_PLUGIN_SOURCE
-    OUTPUT_TARGETS ${LIBNAME}_targets
+    PLUGIN_TARGET ${LIBNAME}
+    CLASS_NAME FluidPlugin
+    NO_PLUGIN_OPTIONAL
+    NO_GENERATE_PLUGIN_SOURCE
 )
 
 set_source_files_properties(Units.qml PROPERTIES
@@ -178,9 +179,6 @@ target_link_libraries(${LIBNAME}
     PRIVATE
         Qt6::GuiPrivate
 )
-
-install(TARGETS ${${LIBNAME}_targets} EXPORT ${LIBNAME}-targets)
-install(TARGETS ${LIBNAME} EXPORT ${LIBNAME}-targets)
 
 qt_install_qml_module(${LIBNAME})
 

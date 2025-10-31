@@ -14,7 +14,35 @@ on:
     branches:
       - master
       - develop
+  workflow_dispatch:
 
 jobs:
   build-qt6:
     uses: lirios/.github/.github/workflows/build-linux-qt6.yml@master
+  build-archlinux:
+    name: Arch Linux
+    runs-on: ubuntu-latest
+    container: archlinux
+    steps:
+      - uses: action/checkout@v5
+      - name: Download dependencies
+        run: |
+          pacman --noconfirm --noprogressbar -Syyu
+          pacman --noconfirm --noprogressbar -Sy \
+            base-devel \
+            doxygen \
+            cmake \
+            ninja \
+            pkgconf \
+            qt6-base \
+            qt6-declarative \
+            qt6-svg \
+            qt6-wayland \
+            qt6-shadertools \
+            wayland-protocols \
+            wayland
+      - name: Build
+        run: |
+          cmake -GNinja -B build
+          cmake --build build
+          cmake --install build

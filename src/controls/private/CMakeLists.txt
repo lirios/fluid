@@ -10,12 +10,14 @@ set(_qml
     YearSelector.qml
 )
 
-qt6_add_qml_module(${LIBNAME}
+qt_add_qml_module(${LIBNAME}
     URI Fluid.Private
     VERSION 2.0
     RESOURCE_PREFIX /
     SOURCES ${_sources}
     QML_FILES ${_qml}
+    IMPORTS
+        QtQuick.Layouts
     DEPENDENCIES
         QtQuick
     OUTPUT_TARGETS ${LIBNAME}_targets
@@ -24,7 +26,7 @@ qt6_add_qml_module(${LIBNAME}
 if(LINUX AND NOT ANDROID)
     find_package(Wayland 1.15 COMPONENTS Client REQUIRED)
     find_package(Qt6WaylandClient REQUIRED)
-    qt6_generate_wayland_protocol_client_sources(${LIBNAME}
+    qt_generate_wayland_protocol_client_sources(${LIBNAME}
         FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/extensions/fluid-decoration-unstable-v1.xml"
     )

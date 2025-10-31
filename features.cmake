@@ -6,7 +6,7 @@ include(FeatureSummary)
 
 if(FLUID_WITH_QML_MODULES)
     ## Find Qt:
-    find_package(Qt6 "6.7.0"
+    find_package(Qt6 6.8
         REQUIRED
         COMPONENTS
             Core
@@ -18,10 +18,13 @@ if(FLUID_WITH_QML_MODULES)
             QuickControls2
             QuickTest
     )
+    
+    ## Standard project setup:
+    qt_standard_project_setup(REQUIRES 6.8)
 
     ## Qt policies:
     if(QT_KNOWN_POLICY_QTP0004)
-        qt6_policy(SET QTP0004 NEW)
+        qt_policy(SET QTP0004 NEW)
     endif()
 endif()
 

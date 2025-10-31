@@ -1,4 +1,4 @@
-qt6_add_executable(FluidDemo
+qt_add_executable(FluidDemo
     MANUAL_FINALIZATION
     iconcategorymodel.cpp iconcategorymodel.h
     iconnamemodel.cpp iconnamemodel.h
@@ -9,7 +9,7 @@ qt6_add_executable(FluidDemo
 
 file(GLOB_RECURSE _images RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "images/*")
 file(GLOB_RECURSE _qml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "qml/*")
-qt6_add_resources(FluidDemo "resources"
+qt_add_resources(FluidDemo "resources"
     PREFIX "/"
     FILES
         ${_images}
@@ -27,7 +27,7 @@ if(WIN32)
 else()
     set_target_properties(FluidDemo PROPERTIES OUTPUT_NAME "fluid-demo")
 endif()
-qt6_finalize_target(FluidDemo)
+qt_finalize_target(FluidDemo)
 
 target_compile_definitions(FluidDemo PRIVATE FLUID_VERSION="${PROJECT_VERSION}")
 

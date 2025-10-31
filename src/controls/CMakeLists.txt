@@ -138,7 +138,7 @@ set(_qml
     qml/WeekNumberColumn.qml
 )
 
-qt6_add_qml_module(${LIBNAME}
+qt_add_qml_module(${LIBNAME}
     URI Fluid
     VERSION 2.0
     RESOURCE_PREFIX /
@@ -149,8 +149,9 @@ qt6_add_qml_module(${LIBNAME}
     DEPENDENCIES
         QtQuick
         QtQuick.Templates
-    CLASS_NAME FluidPlugin
-    NO_GENERATE_PLUGIN_SOURCE
+        Fluid.Private
+    # CLASS_NAME FluidPlugin
+    # NO_GENERATE_PLUGIN_SOURCE
     OUTPUT_TARGETS ${LIBNAME}_targets
 )
 
@@ -161,7 +162,7 @@ set_source_files_properties(Units.qml PROPERTIES
 if(FLUID_INSTALL_ICONS)
     target_compile_definitions(${LIBNAME} PRIVATE -DFLUID_INSTALL_ICONS=1)
 else()
-qt6_add_resource(SOURCES icons.qrc)
+qt_add_resource(SOURCES icons.qrc)
     target_sources(${LIBNAME} PRIVATE ${_sources})
     target_compile_definitions(${LIBNAME} PRIVATE -DFLUID_INSTALL_ICONS=0)
 endif()

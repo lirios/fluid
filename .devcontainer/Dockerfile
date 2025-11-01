@@ -6,6 +6,7 @@ FROM archlinux:latest
 RUN pacman --noconfirm --noprogressbar -Syyu && \
     pacman --noconfirm --noprogressbar -Sy \
       base-devel \
+      openssh \
       git \
       doxygen \
       cmake \
@@ -20,3 +21,11 @@ RUN pacman --noconfirm --noprogressbar -Syyu && \
       wayland && \
     # Clean pacman cache to reduce image size
     pacman -Scc --noconfirm
+
+# Create an unprivileged user
+RUN useradd -m -s /bin/bash -u 1000 developer && \
+    echo "developer ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# Switch to unprivileged user
+USER developer
+WORKDIR /home/developer

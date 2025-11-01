@@ -5,9 +5,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-vscode.cpptools",
-				"ms-vscode.cmake-tools",
-				"twxs.cmake",
+				"TheQtCompany.qt-cpp-pack",
 				"ms-python.python"
 			]
 		}

@@ -29,6 +29,7 @@ Style::Style(QObject *parent)
     , m_systemTheme(globalTheme == Style::System)
     , m_theme(effectiveTheme(globalTheme))
 {
+    QQuickAttachedPropertyPropagator::initialize();
 }
 
 Style::Theme Style::theme() const

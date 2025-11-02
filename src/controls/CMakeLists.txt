@@ -5,18 +5,18 @@ set(_sources
     color.cpp color.h
     controlsplugin.cpp controlsplugin.h
     controlsutils.cpp controlsutils.h
-    dateutils.cpp dateutils.h
-    datepicker.cpp datepicker.h
-    dateselector.cpp dateselector.h
-    datetimepicker.cpp datetimepicker.h
+    datetime/datepicker.cpp datetime/datepicker.h
+    datetime/dateselector.cpp datetime/dateselector.h
+    datetime/datetimepicker.cpp datetime/datetimepicker.h
+    datetime/dateutils.cpp datetime/dateutils.h
+    datetime/picker.cpp datetime/picker.h
+    datetime/timepicker.cpp datetime/timepicker.h
+    datetime/timeselector.cpp datetime/timeselector.h
+    datetime/yearmodel.cpp datetime/yearmodel.h
+    datetime/yearselector.cpp datetime/yearselector.h
     device.cpp device.h
-    picker.cpp picker.h
     iconthemeimageprovider.cpp iconthemeimageprovider.h
     inputregion.cpp inputregion.h
-    timepicker.cpp timepicker.h
-    timeselector.cpp timeselector.h
-    yearmodel.cpp yearmodel.h
-    yearselector.cpp yearselector.h
     standardpaths.cpp standardpaths.h
     style.cpp style.h
 )

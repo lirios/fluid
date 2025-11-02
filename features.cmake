@@ -17,9 +17,9 @@ if(FLUID_WITH_DOCUMENTATION)
 endif()
 add_feature_info("Fluid::Documentation" FLUID_WITH_DOCUMENTATION "Build Fluid documentation")
 
-# Demo
-option(FLUID_WITH_DEMO "Build demo application" ON)
-add_feature_info("Fluid::Demo" FLUID_WITH_DEMO "Build Fluid demo application")
+# Gallery
+option(FLUID_WITH_GALLERY "Build demo application" ON)
+add_feature_info("Fluid::Gallery" FLUID_WITH_GALLERY "Build Fluid demo application")
 
 # QML modules
 option(FLUID_WITH_QML_MODULES "Build QML modules" ON)

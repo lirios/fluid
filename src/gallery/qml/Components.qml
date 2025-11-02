@@ -17,8 +17,4 @@
 
  MD.Page {
     title: qsTr("Components")
-
-    MD.Button {
-      anchors.centerIn: parent
-    }
  }

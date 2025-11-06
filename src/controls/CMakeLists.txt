@@ -24,7 +24,7 @@ set(_sources
 # QML files
 file(GLOB_RECURSE _qml CONFIGURE_DEPENDS
     RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-    "qml/**/*.qml"
+    "qml/*.qml" "qml/**/*.qml"
 )
 
 # Resources

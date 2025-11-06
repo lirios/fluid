@@ -5,5 +5,9 @@
         }
     ],
     "cmake.buildDirectory": "${workspaceFolder}/build",
-    "cmake.installPrefix": "${workspaceFolder}/build/install-root"
+    "cmake.installPrefix": "${workspaceFolder}/build/install-root",
+    "editor.formatOnSave": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    }
 }

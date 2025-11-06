@@ -72,6 +72,10 @@ target_compile_definitions(${LIBNAME}
 # ------------------------------------------------------------
 # Define the QML module
 # ------------------------------------------------------------
+set_source_files_properties(qml/core/Units.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(${LIBNAME}
     URI Fluid
     VERSION 2.0
@@ -86,10 +90,6 @@ qt_add_qml_module(${LIBNAME}
         #Fluid.Private
     #CLASS_NAME FluidPlugin
     #NO_GENERATE_PLUGIN_SOURCE
-)
-
-set_source_files_properties(qml/Units.qml PROPERTIES
-    QT_QML_SINGLETON_TYPE TRUE
 )
 
 install(TARGETS ${LIBNAME}

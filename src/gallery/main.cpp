@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     app.setQuitOnLastWindowClosed(true);
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl("qrc:/qml/main.qml"_L1));
+    engine.load(QUrl("qrc:/main.qml"_L1));
 
     return app.exec();
 }

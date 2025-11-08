@@ -5,8 +5,9 @@ qt_add_executable(FluidGallery
     io.liri.Fluid.Gallery.desktop
 )
 
-qt_add_resources(FluidGallery "resources"
+qt_add_resources(FluidGallery "gallery"
     PREFIX /
+    BASE qml
     FILES
         qml/main.qml
         qml/Components.qml
@@ -17,6 +18,7 @@ set_target_properties(FluidGallery PROPERTIES
     MACOSX_BUNDLE TRUE
     MACOSX_BUNDLE_GUI_IDENTIFIER "io.liri.Fluid.Gallery"
     MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
+    AUTOMOC ON
 )
 if(WIN32)
     set_target_properties(FluidGallery PROPERTIES OUTPUT_NAME "FluidGallery")
@@ -28,7 +30,7 @@ qt_finalize_target(FluidGallery)
 target_compile_definitions(FluidGallery PRIVATE FLUID_VERSION="${PROJECT_VERSION}")
 
 target_link_libraries(FluidGallery
-    PUBLIC
+    PRIVATE
         Qt6::Qml
         Qt6::Quick
 )

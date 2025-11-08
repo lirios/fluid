@@ -42,6 +42,7 @@ if(FLUID_WITH_QML_MODULES)
         REQUIRED
         COMPONENTS
             Core
+            Core5Compat
             Gui
             Svg
             Qml

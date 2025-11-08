@@ -37,6 +37,7 @@ jobs:
             qt6-svg \
             qt6-wayland \
             qt6-shadertools \
+            qt6-5compat \
             wayland-protocols \
             wayland
       - name: Build

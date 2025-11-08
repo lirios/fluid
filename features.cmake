@@ -43,13 +43,19 @@ if(FLUID_WITH_QML_MODULES)
         COMPONENTS
             Core
             Gui
-            GuiPrivate
             Svg
             Qml
             Quick
             QuickControls2
             QuickTest
     )
+
+    if(NOT TARGET Qt6::GuiPrivate)
+        # GuiPrivate is supposed to be automatically found when finding Gui per
+        # https://doc.qt.io/qt-6/qtguiprivate-module.html#details, but on Arch
+        # Linux it is packaged differently.
+        find_package(Qt6 6.8 REQUIRED COMPONENTS GuiPrivate)
+    endif()
     
     ## Standard project setup:
     qt_standard_project_setup(REQUIRES 6.8)

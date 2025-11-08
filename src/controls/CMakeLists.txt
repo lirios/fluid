@@ -18,6 +18,7 @@ set(_sources
     cpp/datetime/yearmodel.cpp cpp/datetime/yearmodel.h
     cpp/datetime/yearselector.cpp cpp/datetime/yearselector.h
     cpp/iconthemeimageprovider.cpp cpp/iconthemeimageprovider.h
+    cpp/style/color.cpp cpp/style/color.h
     cpp/style/style.cpp cpp/style/style.h
 )
 

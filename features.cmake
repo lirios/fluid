@@ -48,7 +48,6 @@ if(FLUID_WITH_QML_MODULES)
             Qml
             Quick
             QuickControls2
-            QuickTest
             ShaderTools
     )
 
@@ -57,6 +56,10 @@ if(FLUID_WITH_QML_MODULES)
         # https://doc.qt.io/qt-6/qtguiprivate-module.html#details, but on Arch
         # Linux it is packaged differently.
         find_package(Qt6 6.8 REQUIRED COMPONENTS GuiPrivate)
+    endif()
+
+    if(BUILD_TESTING)
+        find_package(Qt6 6.8 OPTIONAL_COMPONENTS QuickTest)
     endif()
     
     ## Standard project setup:

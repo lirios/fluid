@@ -9,5 +9,8 @@
     "editor.formatOnSave": true,
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[qml]": {
+        "editor.defaultFormatter": "Delgan.qml-format"
     }
 }

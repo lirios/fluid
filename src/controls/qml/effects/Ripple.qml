@@ -71,7 +71,7 @@ MouseArea {
     property Item control
 
     clip: true
-    hoverEnabled: Device.hoverEnabled
+    hoverEnabled: Fluid.Device.hoverEnabled
 
     Connections {
         target: control

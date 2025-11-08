@@ -16,7 +16,6 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Controls.impl as QQCImpl2
 import QtQuick.Controls.Material
-import QtQuick.Templates as T
 import Fluid as Fluid
 
 /*!

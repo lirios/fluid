@@ -5,6 +5,7 @@ FROM archlinux:latest
 # Update system and install required packages
 RUN pacman --noconfirm --noprogressbar -Syyu && \
     pacman --noconfirm --noprogressbar -Sy \
+      less \
       base-devel \
       openssh \
       git \

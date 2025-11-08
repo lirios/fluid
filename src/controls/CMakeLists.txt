@@ -27,16 +27,6 @@ file(GLOB_RECURSE _qml CONFIGURE_DEPENDS
     "qml/*.qml" "qml/**/*.qml"
 )
 
-# Resources
-set(_resources)
-if(NOT FLUID_INSTALL_ICONS)
-    file(GLOB_RECURSE _icons CONFIGURE_DEPENDS
-        RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-        "icons/*/*.svg"
-    )
-    list(APPEND _resources ${_icons})
-endif()
-
 # ------------------------------------------------------------
 # Backing library
 # ------------------------------------------------------------
@@ -81,7 +71,6 @@ qt_add_qml_module(${LIBNAME}
     VERSION 2.0
     SOURCES ${_sources}
     QML_FILES ${_qml}
-    RESOURCES ${_resources}
     IMPORTS
         QtQuick.Layouts
     DEPENDENCIES
@@ -104,4 +93,13 @@ if(FLUID_INSTALL_ICONS)
         get_filename_component(_category "${icon_basename}" DIRECTORY)
         install(FILES "${source_path}" DESTINATION "${QML_INSTALL_DIR}/Fluid/icons/${_category}")
     endforeach()
+else()
+    file(GLOB_RECURSE _icons CONFIGURE_DEPENDS
+        RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
+        "icons/*/*.svg"
+    )
+    qt_add_resources(${LIBNAME} FluidIcons
+        PREFIX "/liri.io/fluid"
+        FILES ${_icons}
+    )
 endif()

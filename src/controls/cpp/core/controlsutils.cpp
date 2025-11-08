@@ -18,6 +18,9 @@ ControlsUtils::ControlsUtils(const QUrl &baseUrl, QObject *parent)
     : QObject(parent)
     , m_baseUrl(baseUrl)
 {
+#if FLUID_INSTALL_ICONS == 0
+    Q_INIT_RESOURCE(FluidIcons);
+#endif
 }
 
 qreal ControlsUtils::scale(qreal percent, qreal start, qreal end)
@@ -30,7 +33,7 @@ QUrl ControlsUtils::iconUrl(const QString &name)
 #if FLUID_INSTALL_ICONS == 1
     return QUrl::fromLocalFile(QStringLiteral("%1/icons/%2.svg").arg(m_baseUrl.toLocalFile(), name));
 #else
-    return QUrl(QStringLiteral("qrc:/liri.io/imports/Fluid/icons/%1.svg").arg(name));
+    return QUrl(QStringLiteral("qrc:/liri.io/fluid/icons/%1.svg").arg(name));
 #endif
 }
 

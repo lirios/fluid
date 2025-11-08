@@ -11,6 +11,7 @@ qt_add_resources(FluidGallery "gallery"
     FILES
         qml/main.qml
         qml/Components.qml
+        qml/Elevation.qml
 )
 
 set_target_properties(FluidGallery PROPERTIES

@@ -48,6 +48,7 @@ if(FLUID_WITH_QML_MODULES)
             Quick
             QuickControls2
             QuickTest
+            ShaderTools
     )
 
     if(NOT TARGET Qt6::GuiPrivate)

@@ -2,6 +2,7 @@
  * This file is part of Fluid.
  *
  * Copyright (C) 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2024-2025 hypengw <hypengwip@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -12,22 +13,12 @@
  * $END_LICENSE$
  */
 
-import QtQuick
-import QtQuick.Window
-import QtQuick.Layouts
-import Fluid as MD
+#ifndef COMMMON_H
+#define COMMMON_H
 
-Window {
-    id: window
+#ifdef GLES
+#    define noperspective
+#endif
 
-    visible: true
 
-    width: 1024
-    height: 800
-
-    title: qsTr("Fluid Gallery")
-
-    Elevation {
-        anchors.fill: parent
-    }
-}
+#endif

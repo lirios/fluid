@@ -69,13 +69,13 @@ Item {
             spacing: 36
 
             Elevation {
-                elevation: 0
+                elevation: MD.Token.elevationLevel0
             }
             Elevation {
-                elevation: 1
+                elevation: MD.Token.elevationLevel1
             }
             Elevation {
-                elevation: 2
+                elevation: MD.Token.elevationLevel2
             }
         }
 
@@ -84,13 +84,13 @@ Item {
             spacing: 36
 
             Elevation {
-                elevation: 3
+                elevation: MD.Token.elevationLevel3
             }
             Elevation {
-                elevation: 4
+                elevation: MD.Token.elevationLevel4
             }
             Elevation {
-                elevation: 5
+                elevation: MD.Token.elevationLevel5
             }
         }
     }

@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include <QColor>
 #include <QtQml/QQmlEngine>
 #include <QtQuickControls2/QQuickAttachedPropertyPropagator>
 
@@ -25,6 +26,60 @@ class Style : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(Theme theme READ theme WRITE setTheme RESET resetTheme NOTIFY themeChanged FINAL)
     Q_PROPERTY(int elevation READ elevation WRITE setElevation RESET resetElevation NOTIFY
                        elevationChanged FINAL)
+
+    // Color properties - Primary
+    Q_PROPERTY(QColor primaryColor READ primaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onPrimaryColor READ onPrimaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor primaryContainerColor READ primaryContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(
+            QColor onPrimaryContainerColor READ onPrimaryContainerColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Secondary
+    Q_PROPERTY(QColor secondaryColor READ secondaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSecondaryColor READ onSecondaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(
+            QColor secondaryContainerColor READ secondaryContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSecondaryContainerColor READ onSecondaryContainerColor NOTIFY themeChanged
+                       FINAL)
+
+    // Color properties - Tertiary
+    Q_PROPERTY(QColor tertiaryColor READ tertiaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onTertiaryColor READ onTertiaryColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor tertiaryContainerColor READ tertiaryContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(
+            QColor onTertiaryContainerColor READ onTertiaryContainerColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Error
+    Q_PROPERTY(QColor errorColor READ errorColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onErrorColor READ onErrorColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor errorContainerColor READ errorContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onErrorContainerColor READ onErrorContainerColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Background
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onBackgroundColor READ onBackgroundColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Surface
+    Q_PROPERTY(QColor surfaceColor READ surfaceColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSurfaceColor READ onSurfaceColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceVariantColor READ surfaceVariantColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSurfaceVariantColor READ onSurfaceVariantColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceTintColor READ surfaceTintColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Outline
+    Q_PROPERTY(QColor outlineColor READ outlineColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor outlineVariantColor READ outlineVariantColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Inverse
+    Q_PROPERTY(QColor inverseSurfaceColor READ inverseSurfaceColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor inverseOnSurfaceColor READ inverseOnSurfaceColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor inversePrimaryColor READ inversePrimaryColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Scrim
+    Q_PROPERTY(QColor scrimColor READ scrimColor NOTIFY themeChanged FINAL)
+
+    // Color properties - Shadow
+    Q_PROPERTY(QColor shadowColor READ shadowColor NOTIFY themeChanged FINAL)
 
     QML_NAMED_ELEMENT(Style)
     QML_ATTACHED(Style)
@@ -47,6 +102,56 @@ public:
     int elevation() const;
     void setElevation(int elevation);
     void resetElevation();
+
+    // Color getters - Primary
+    QColor primaryColor() const;
+    QColor onPrimaryColor() const;
+    QColor primaryContainerColor() const;
+    QColor onPrimaryContainerColor() const;
+
+    // Color getters - Secondary
+    QColor secondaryColor() const;
+    QColor onSecondaryColor() const;
+    QColor secondaryContainerColor() const;
+    QColor onSecondaryContainerColor() const;
+
+    // Color getters - Tertiary
+    QColor tertiaryColor() const;
+    QColor onTertiaryColor() const;
+    QColor tertiaryContainerColor() const;
+    QColor onTertiaryContainerColor() const;
+
+    // Color getters - Error
+    QColor errorColor() const;
+    QColor onErrorColor() const;
+    QColor errorContainerColor() const;
+    QColor onErrorContainerColor() const;
+
+    // Color getters - Background
+    QColor backgroundColor() const;
+    QColor onBackgroundColor() const;
+
+    // Color getters - Surface
+    QColor surfaceColor() const;
+    QColor onSurfaceColor() const;
+    QColor surfaceVariantColor() const;
+    QColor onSurfaceVariantColor() const;
+    QColor surfaceTintColor() const;
+
+    // Color getters - Outline
+    QColor outlineColor() const;
+    QColor outlineVariantColor() const;
+
+    // Color getters - Inverse
+    QColor inverseSurfaceColor() const;
+    QColor inverseOnSurfaceColor() const;
+    QColor inversePrimaryColor() const;
+
+    // Color getters - Scrim
+    QColor scrimColor() const;
+
+    // Color getters - Shadow
+    QColor shadowColor() const;
 
     static Style *qmlAttachedProperties(QObject *object);
 

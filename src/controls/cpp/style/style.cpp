@@ -84,6 +84,166 @@ void Style::resetElevation()
     setElevation(globalElevation);
 }
 
+// Color getters - Primary
+QColor Style::primaryColor() const
+{
+    return m_theme == Dark ? QColor("#D0BCFF") : QColor("#6750A4");
+}
+
+QColor Style::onPrimaryColor() const
+{
+    return m_theme == Dark ? QColor("#381E72") : QColor("#FFFFFF");
+}
+
+QColor Style::primaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#4F378B") : QColor("#EADDFF");
+}
+
+QColor Style::onPrimaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#EADDFF") : QColor("#21005D");
+}
+
+// Color getters - Secondary
+QColor Style::secondaryColor() const
+{
+    return m_theme == Dark ? QColor("#CCC2DC") : QColor("#625B71");
+}
+
+QColor Style::onSecondaryColor() const
+{
+    return m_theme == Dark ? QColor("#332D41") : QColor("#FFFFFF");
+}
+
+QColor Style::secondaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#4A4458") : QColor("#E8DEF8");
+}
+
+QColor Style::onSecondaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#E8DEF8") : QColor("#1D192B");
+}
+
+// Color getters - Tertiary
+QColor Style::tertiaryColor() const
+{
+    return m_theme == Dark ? QColor("#EFB8C8") : QColor("#7D5260");
+}
+
+QColor Style::onTertiaryColor() const
+{
+    return m_theme == Dark ? QColor("#492532") : QColor("#FFFFFF");
+}
+
+QColor Style::tertiaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#633B48") : QColor("#FFD8E4");
+}
+
+QColor Style::onTertiaryContainerColor() const
+{
+    return m_theme == Dark ? QColor("#FFD8E4") : QColor("#31111D");
+}
+
+// Color getters - Error
+QColor Style::errorColor() const
+{
+    return m_theme == Dark ? QColor("#F2B8B5") : QColor("#B3261E");
+}
+
+QColor Style::onErrorColor() const
+{
+    return m_theme == Dark ? QColor("#601410") : QColor("#FFFFFF");
+}
+
+QColor Style::errorContainerColor() const
+{
+    return m_theme == Dark ? QColor("#8C1D18") : QColor("#F9DEDC");
+}
+
+QColor Style::onErrorContainerColor() const
+{
+    return m_theme == Dark ? QColor("#F9DEDC") : QColor("#410E0B");
+}
+
+// Color getters - Background
+QColor Style::backgroundColor() const
+{
+    return m_theme == Dark ? QColor("#1C1B1F") : QColor("#FFFBFE");
+}
+
+QColor Style::onBackgroundColor() const
+{
+    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#1C1B1F");
+}
+
+// Color getters - Surface
+QColor Style::surfaceColor() const
+{
+    return m_theme == Dark ? QColor("#1C1B1F") : QColor("#FFFBFE");
+}
+
+QColor Style::onSurfaceColor() const
+{
+    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#1C1B1F");
+}
+
+QColor Style::surfaceVariantColor() const
+{
+    return m_theme == Dark ? QColor("#49454F") : QColor("#E7E0EC");
+}
+
+QColor Style::onSurfaceVariantColor() const
+{
+    return m_theme == Dark ? QColor("#CAC4D0") : QColor("#49454F");
+}
+
+QColor Style::surfaceTintColor() const
+{
+    return m_theme == Dark ? QColor("#D0BCFF") : QColor("#6750A4");
+}
+
+// Color getters - Outline
+QColor Style::outlineColor() const
+{
+    return m_theme == Dark ? QColor("#938F99") : QColor("#79747E");
+}
+
+QColor Style::outlineVariantColor() const
+{
+    return m_theme == Dark ? QColor("#49454F") : QColor("#CAC4D0");
+}
+
+// Color getters - Inverse
+QColor Style::inverseSurfaceColor() const
+{
+    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#313033");
+}
+
+QColor Style::inverseOnSurfaceColor() const
+{
+    return m_theme == Dark ? QColor("#313033") : QColor("#F4EFF4");
+}
+
+QColor Style::inversePrimaryColor() const
+{
+    return m_theme == Dark ? QColor("#6750A4") : QColor("#D0BCFF");
+}
+
+// Color getters - Scrim
+QColor Style::scrimColor() const
+{
+    return QColor("#000000");
+}
+
+// Color getters - Shadow
+QColor Style::shadowColor() const
+{
+    return QColor("#000000");
+}
+
 Style *Style::qmlAttachedProperties(QObject *object)
 {
     return new Style(object);

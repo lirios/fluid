@@ -27,7 +27,41 @@ Window {
 
     title: qsTr("Fluid Gallery")
 
-    Elevation {
+    RowLayout {
         anchors.fill: parent
+        anchors.margins: 24
+        spacing: 24
+
+        ListView {
+            Layout.fillHeight: true
+            Layout.preferredWidth: 200
+
+            model: ListModel {
+                ListElement {
+                    name: "Elevation"
+                    source: "Elevation.qml"
+                }
+            }
+
+            delegate: MD.Label {
+                text: model.name
+                padding: 12
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        loader.source = model.source;
+                    }
+                }
+            }
+        }
+
+        Loader {
+            id: loader
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
 }

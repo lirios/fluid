@@ -65,10 +65,6 @@ target_link_libraries(${LIBNAME}
         Qt6::QuickControls2
         Qt6::Svg
 )
-target_compile_definitions(${LIBNAME}
-    PRIVATE
-        FLUID_INSTALL_ICONS=$<IF:$<BOOL:${FLUID_INSTALL_ICONS}>,1,0>
-)
 
 # ------------------------------------------------------------
 # Define the QML module
@@ -108,25 +104,6 @@ install(TARGETS ${LIBNAME}
 
 # Install QML module
 qt_install_qml_module(${LIBNAME})
-
-# Install icons if needed
-if(FLUID_INSTALL_ICONS)
-    file(GLOB icons "${CMAKE_CURRENT_SOURCE_DIR}/icons/*/*.svg")
-    foreach(source_path IN LISTS icons)
-        string(REPLACE "${CMAKE_CURRENT_SOURCE_DIR}/icons/" "" icon_basename "${source_path}")
-        get_filename_component(_category "${icon_basename}" DIRECTORY)
-        install(FILES "${source_path}" DESTINATION "${QML_INSTALL_DIR}/Fluid/icons/${_category}")
-    endforeach()
-else()
-    file(GLOB_RECURSE _icons CONFIGURE_DEPENDS
-        RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
-        "icons/*/*.svg"
-    )
-    qt_add_resources(${LIBNAME} FluidIcons
-        PREFIX "/liri.io/fluid"
-        FILES ${_icons}
-    )
-endif()
 
 # ------------------------------------------------------------
 # Shaders

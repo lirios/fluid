@@ -62,7 +62,6 @@ You can also append the following options to the `cmake` command:
  * `-DFLUID_WITH_DOCUMENTATION:BOOL=OFF`: Do not build the documentation.
  * `-DFLUID_WITH_DEMO:BOOL=OFF`: Do not build the demo application.
  * `-DFLUID_WITH_QML_MODULES:BOOL=OFF`: Do not build QML modules.
- * `-DFLUID_INSTALL_ICONS:BOOL=OFF`: Embed icons into resources.
 
 If `cmake-shared` is not installed and `-DFLUID_USE_SYSTEM_LCS:BOOL=ON` is
 passed to `cmake`, the build will fail without finding `LiriSetup`.

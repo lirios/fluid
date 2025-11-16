@@ -25,10 +25,6 @@ add_feature_info("Fluid::Gallery" FLUID_WITH_GALLERY "Build Fluid demo applicati
 option(FLUID_WITH_QML_MODULES "Build QML modules" ON)
 add_feature_info("Fluid::QMLModules" FLUID_WITH_QML_MODULES "Build Fluid QML modules")
 
-# Install Material Design icons
-option(FLUID_INSTALL_ICONS "Install Material Design icons" ON)
-add_feature_info("Fluid::Icons" FLUID_INSTALL_ICONS "Install Material Design icons")
-
 ## Summary:
 if(NOT LIRI_SUPERBUILD)
     feature_summary(WHAT ENABLED_FEATURES DISABLED_FEATURES)

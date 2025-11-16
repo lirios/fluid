@@ -34,37 +34,8 @@ public:
     */
     Q_INVOKABLE qreal scale(qreal percent, qreal start, qreal end);
 
-    /*!
-        Returns an URL for the Material Design icon \a name.
-        Use this URL with Image or icon grouped property with controls.
-
-        \code{.qml}
-        import QtQuick
-        import Fluid as Fluid
-
-        Image {
-            source: Fluid.Utils.iconUrl("action/alarm")
-            width: 64
-            height: 64
-        }
-        \endcode
-
-        \code{.qml}
-        import QtQuick
-        import QtQuick.Controls
-        import Fluid as Fluid
-
-        Button {
-            icon.source: Fluid.Utils.iconUrl("action/alarm")
-            text: qsTr("Alarm")
-        }
-        \endcode
-    */
-    Q_INVOKABLE QUrl iconUrl(const QString &name);
-
     static ControlsUtils *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
     QUrl m_baseUrl;
 };
-

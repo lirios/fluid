@@ -6,6 +6,8 @@ FROM archlinux:latest
 RUN pacman --noconfirm --noprogressbar -Syyu && \
     pacman --noconfirm --noprogressbar -Sy \
       less \
+      vim \
+      python python-requests \
       ttf-roboto ttf-roboto-mono-nerd ttf-noto-nerd \
       base-devel \
       openssh \

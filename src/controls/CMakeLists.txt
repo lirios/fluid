@@ -36,11 +36,36 @@ file(GLOB_RECURSE _qml CONFIGURE_DEPENDS
 )
 
 # ------------------------------------------------------------
-# Backing library
+# Define the QML module
 # ------------------------------------------------------------
-add_library(${LIBNAME} SHARED
-    ${_sources}
+set_source_files_properties(qml/core/Units.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
 )
+
+qt_add_qml_module(${LIBNAME}
+    SHARED
+    URI
+        Fluid
+    VERSION
+        2.0
+    SOURCES
+        ${_sources}
+    QML_FILES
+        ${_qml}
+    IMPORTS
+        QtQuick.Layouts
+    DEPENDENCIES
+        QtQuick
+        QtQuick.Templates
+        #Fluid.Private
+    PLUGIN_TARGET
+        ${LIBNAME}
+    CLASS_NAME
+        FluidPlugin
+    NO_PLUGIN_OPTIONAL
+    NO_GENERATE_PLUGIN_SOURCE
+)
+
 set_target_properties(${LIBNAME} PROPERTIES
     AUTOMOC ON
     AUTORCC ON
@@ -68,38 +93,6 @@ target_link_libraries(${LIBNAME}
 target_compile_definitions(${LIBNAME}
     PRIVATE
         FLUID_INSTALL_ICONS=$<IF:$<BOOL:${FLUID_INSTALL_ICONS}>,1,0>
-)
-
-# ------------------------------------------------------------
-# Define the QML module
-# ------------------------------------------------------------
-set_source_files_properties(qml/core/Units.qml PROPERTIES
-    QT_QML_SINGLETON_TYPE TRUE
-)
-
-qt_add_qml_module(${LIBNAME}
-    URI
-        Fluid
-    VERSION
-        2.0
-    SOURCES
-        ${_sources}
-    QML_FILES
-        ${_qml}
-    RESOURCES
-        ${_resources}
-    IMPORTS
-        QtQuick.Layouts
-    DEPENDENCIES
-        QtQuick
-        QtQuick.Templates
-        #Fluid.Private
-    #CLASS_NAME FluidPlugin
-    #NO_GENERATE_PLUGIN_SOURCE
-)
-
-set_source_files_properties(qml/Units.qml PROPERTIES
-    QT_QML_SINGLETON_TYPE TRUE
 )
 
 # Install library

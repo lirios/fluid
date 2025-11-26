@@ -7,12 +7,12 @@ RUN pacman --noconfirm --noprogressbar -Syyu && \
     pacman --noconfirm --noprogressbar -Sy \
       less \
       vim \
-      python python-requests \
+      python python-pipx python-requests \
       ttf-roboto ttf-roboto-mono-nerd ttf-noto-nerd \
       base-devel \
       openssh \
       git \
-      doxygen \
+      doxygen xdot \
       cmake \
       ninja \
       pkgconf \
@@ -23,6 +23,8 @@ RUN pacman --noconfirm --noprogressbar -Syyu && \
       qt6-shadertools \
       wayland-protocols \
       wayland && \
+    # Install doxyqml via pipx
+    pipx install --global doxyqml && \
     # Clean pacman cache to reduce image size
     pacman -Scc --noconfirm
 

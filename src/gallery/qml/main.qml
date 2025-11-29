@@ -41,6 +41,10 @@ Window {
                     name: "Elevation"
                     source: "Elevation.qml"
                 }
+                ListElement {
+                    name: "Symbols"
+                    source: "Symbols.qml"
+                }
             }
 
             delegate: MD.Label {

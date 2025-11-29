@@ -25,14 +25,16 @@ set(_sources
     cpp/style/color.cpp cpp/style/color.h
     cpp/style/elevation.cpp cpp/style/elevation.h
     cpp/style/style.cpp cpp/style/style.h
+    cpp/style/theme.cpp cpp/style/theme.h
     cpp/style/token.cpp cpp/style/token.h
     cpp/utils/cornersgroup.cpp cpp/utils/cornersgroup.h
 )
 
-# QML files
-file(GLOB_RECURSE _qml CONFIGURE_DEPENDS
+# QML and JavaScript files
+file(GLOB_RECURSE _qml_js CONFIGURE_DEPENDS
     RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}"
     "qml/*.qml" "qml/**/*.qml"
+    "qml/*.js" "qml/**/*.js"
 )
 
 # ------------------------------------------------------------
@@ -69,6 +71,9 @@ target_link_libraries(${LIBNAME}
 # ------------------------------------------------------------
 # Define the QML module
 # ------------------------------------------------------------
+set_source_files_properties(qml/symbols/SymbolNames.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
 set_source_files_properties(qml/core/Units.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
@@ -81,7 +86,7 @@ qt_add_qml_module(${LIBNAME}
     SOURCES
         ${_sources}
     QML_FILES
-        ${_qml}
+        ${_qml_js}
     RESOURCES
         ${_resources}
     IMPORTS
@@ -92,10 +97,6 @@ qt_add_qml_module(${LIBNAME}
         #Fluid.Private
     #CLASS_NAME FluidPlugin
     #NO_GENERATE_PLUGIN_SOURCE
-)
-
-set_source_files_properties(qml/Units.qml PROPERTIES
-    QT_QML_SINGLETON_TYPE TRUE
 )
 
 # Install library
@@ -150,3 +151,38 @@ foreach(file ${_shaders})
         APPEND
     )
 endforeach()
+
+# ------------------------------------------------------------
+# Fonts
+# ------------------------------------------------------------
+function(download_material_symbols_font name)
+    message(STATUS "Downloading Material Symbols font: ${name}")
+    file(DOWNLOAD
+        "https://raw.githubusercontent.com/google/material-design-icons/refs/heads/master/variablefont/${name}"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/${name}"
+        SHOW_PROGRESS
+        STATUS download_status
+    )
+
+    # Check download status and bail out on failure
+    list(GET download_status 0 download_result)
+    list(GET download_status 1 download_reason)
+    if(NOT download_result EQUAL 0)
+        message(FATAL_ERROR "Failed to download Material Symbols font: ${download_reason} (code ${download_result})")
+    endif()
+endfunction()
+
+download_material_symbols_font("MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2")
+download_material_symbols_font("MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2")
+download_material_symbols_font("MaterialSymbolsSharp[FILL,GRAD,opsz,wght].woff2")
+
+qt_add_resources(${LIBNAME} "assets/fonts"
+    PREFIX
+        /Fluid/assets/fonts
+    BASE
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts"
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsSharp[FILL,GRAD,opsz,wght].woff2"
+)

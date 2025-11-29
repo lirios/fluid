@@ -13,6 +13,7 @@ function(qt_install_qml_module target_)
       DESTINATION ${QML_TARGET_INSTALL_DIR}
       FILES_MATCHING
       PATTERN "*.qml"
+      PATTERN "*.js"
       PATTERN "*.mjs")
 
     install(

@@ -26,7 +26,7 @@ set(_sources
     cpp/style/elevation.cpp cpp/style/elevation.h
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
-    cpp/style/token.cpp cpp/style/token.h
+    cpp/style/tokens.cpp cpp/style/tokens.h
     cpp/utils/cornersgroup.cpp cpp/utils/cornersgroup.h
 )
 

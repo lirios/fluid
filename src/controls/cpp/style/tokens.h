@@ -17,6 +17,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+namespace Fluid {
+
 /*!
     \brief Material Design 3 design tokens.
 
@@ -25,13 +27,13 @@
 
     \code{.qml}
     import QtQuick
-    import Fluid
+    import Fluid as MD
 
     Rectangle {
-        radius: Fluid.Token.cornerRadiusMedium
+        radius: MD.Tokens.cornerRadiusMedium
 
         Text {
-            font.pixelSize: Fluid.Token.fontSizeTitleLarge
+            font.pixelSize: MD.Tokens.fontSizeTitleLarge
         }
     }
     \endcode
@@ -39,7 +41,7 @@
     For more information see the
     <a href="https://m3.material.io/styles">Material Design 3 guidelines</a>.
 */
-class Token : public QObject
+class Tokens : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
@@ -101,7 +103,7 @@ class Token : public QObject
     Q_PROPERTY(int durationLong4 READ durationLong4 CONSTANT FINAL)
 
 public:
-    explicit Token(QObject *parent = nullptr);
+    explicit Tokens(QObject *parent = nullptr);
 
     // Shape tokens - Corner radius
     qreal cornerRadiusNone() const;
@@ -158,5 +160,7 @@ public:
     int durationLong3() const;
     int durationLong4() const;
 
-    static Token *create(QQmlEngine *engine, QJSEngine *jsEngine);
+    static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 };
+
+} // namespace Fluid

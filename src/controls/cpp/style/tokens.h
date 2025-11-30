@@ -17,6 +17,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "typescale.h"
+
 namespace Fluid {
 
 /*!
@@ -33,7 +35,7 @@ namespace Fluid {
         radius: MD.Tokens.cornerRadiusMedium
 
         Text {
-            font.pixelSize: MD.Tokens.fontSizeTitleLarge
+            font.pixelSize: MD.Tokens.typescale.titleLarge.fontSize
         }
     }
     \endcode
@@ -56,22 +58,9 @@ class Tokens : public QObject
     Q_PROPERTY(qreal cornerRadiusExtraLarge READ cornerRadiusExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal cornerRadiusFull READ cornerRadiusFull CONSTANT FINAL)
 
-    // Typography tokens - Font sizes
-    Q_PROPERTY(int fontSizeDisplayLarge READ fontSizeDisplayLarge CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeDisplayMedium READ fontSizeDisplayMedium CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeDisplaySmall READ fontSizeDisplaySmall CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeHeadlineLarge READ fontSizeHeadlineLarge CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeHeadlineMedium READ fontSizeHeadlineMedium CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeHeadlineSmall READ fontSizeHeadlineSmall CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeTitleLarge READ fontSizeTitleLarge CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeTitleMedium READ fontSizeTitleMedium CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeTitleSmall READ fontSizeTitleSmall CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeBodyLarge READ fontSizeBodyLarge CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeBodyMedium READ fontSizeBodyMedium CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeBodySmall READ fontSizeBodySmall CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeLabelLarge READ fontSizeLabelLarge CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeLabelMedium READ fontSizeLabelMedium CONSTANT FINAL)
-    Q_PROPERTY(int fontSizeLabelSmall READ fontSizeLabelSmall CONSTANT FINAL)
+    // Typography tokens
+    Q_PROPERTY(TypeScale *typescale READ typescale CONSTANT FINAL)
+    Q_PROPERTY(EmphasizedTypeScale *emphasizedTypeScale READ emphasizedTypeScale CONSTANT FINAL)
 
     // Spacing tokens
     Q_PROPERTY(int spacingExtraSmall READ spacingExtraSmall CONSTANT FINAL)
@@ -114,22 +103,9 @@ public:
     qreal cornerRadiusExtraLarge() const;
     qreal cornerRadiusFull() const;
 
-    // Typography tokens - Font sizes
-    int fontSizeDisplayLarge() const;
-    int fontSizeDisplayMedium() const;
-    int fontSizeDisplaySmall() const;
-    int fontSizeHeadlineLarge() const;
-    int fontSizeHeadlineMedium() const;
-    int fontSizeHeadlineSmall() const;
-    int fontSizeTitleLarge() const;
-    int fontSizeTitleMedium() const;
-    int fontSizeTitleSmall() const;
-    int fontSizeBodyLarge() const;
-    int fontSizeBodyMedium() const;
-    int fontSizeBodySmall() const;
-    int fontSizeLabelLarge() const;
-    int fontSizeLabelMedium() const;
-    int fontSizeLabelSmall() const;
+    // Typography tokens
+    TypeScale *typescale() const;
+    EmphasizedTypeScale *emphasizedTypeScale() const;
 
     // Spacing tokens
     int spacingExtraSmall() const;
@@ -161,6 +137,10 @@ public:
     int durationLong4() const;
 
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
+
+private:
+    TypeScale *m_typescale = nullptr;
+    EmphasizedTypeScale *m_emphasizedTypeScale = nullptr;
 };
 
 } // namespace Fluid

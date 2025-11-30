@@ -18,6 +18,8 @@ namespace Fluid {
 
 Tokens::Tokens(QObject *parent)
     : QObject(parent)
+    , m_typescale(new TypeScale(this))
+    , m_emphasizedTypeScale(new EmphasizedTypeScale(this))
 {
 }
 
@@ -57,80 +59,15 @@ qreal Tokens::cornerRadiusFull() const
     return 9999.0; // Represents full rounding
 }
 
-// Typography tokens - Font sizes
-int Tokens::fontSizeDisplayLarge() const
+// Typography tokens
+TypeScale *Tokens::typescale() const
 {
-    return 57;
+    return m_typescale;
 }
 
-int Tokens::fontSizeDisplayMedium() const
+EmphasizedTypeScale *Tokens::emphasizedTypeScale() const
 {
-    return 45;
-}
-
-int Tokens::fontSizeDisplaySmall() const
-{
-    return 36;
-}
-
-int Tokens::fontSizeHeadlineLarge() const
-{
-    return 32;
-}
-
-int Tokens::fontSizeHeadlineMedium() const
-{
-    return 28;
-}
-
-int Tokens::fontSizeHeadlineSmall() const
-{
-    return 24;
-}
-
-int Tokens::fontSizeTitleLarge() const
-{
-    return 22;
-}
-
-int Tokens::fontSizeTitleMedium() const
-{
-    return 16;
-}
-
-int Tokens::fontSizeTitleSmall() const
-{
-    return 14;
-}
-
-int Tokens::fontSizeBodyLarge() const
-{
-    return 16;
-}
-
-int Tokens::fontSizeBodyMedium() const
-{
-    return 14;
-}
-
-int Tokens::fontSizeBodySmall() const
-{
-    return 12;
-}
-
-int Tokens::fontSizeLabelLarge() const
-{
-    return 14;
-}
-
-int Tokens::fontSizeLabelMedium() const
-{
-    return 12;
-}
-
-int Tokens::fontSizeLabelSmall() const
-{
-    return 11;
+    return m_emphasizedTypeScale;
 }
 
 // Spacing tokens

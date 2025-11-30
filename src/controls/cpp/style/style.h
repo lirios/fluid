@@ -27,6 +27,10 @@ class Style : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(int elevation READ elevation WRITE setElevation RESET resetElevation NOTIFY
                        elevationChanged FINAL)
 
+    // Fonts
+    Q_PROPERTY(QString brandFontFamily READ brandFontFamily CONSTANT FINAL)
+    Q_PROPERTY(QString plainFontFamily READ plainFontFamily CONSTANT FINAL)
+
     // Color properties - Primary
     Q_PROPERTY(QColor primaryColor READ primaryColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor onPrimaryColor READ onPrimaryColor NOTIFY themeChanged FINAL)
@@ -102,6 +106,10 @@ public:
     int elevation() const;
     void setElevation(int elevation);
     void resetElevation();
+
+    // Font getters
+    QString brandFontFamily() const;
+    QString plainFontFamily() const;
 
     // Color getters - Primary
     QColor primaryColor() const;

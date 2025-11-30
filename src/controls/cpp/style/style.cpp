@@ -19,6 +19,8 @@
 
 #include "style.h"
 
+using namespace Qt::StringLiterals;
+
 // These are the default values used when no value was inherited from a parent
 // or explicitly set on the instance
 static Style::Theme globalTheme = Style::Light;
@@ -82,6 +84,17 @@ void Style::setElevation(int elevation)
 void Style::resetElevation()
 {
     setElevation(globalElevation);
+}
+
+// Font getters
+QString Style::brandFontFamily() const
+{
+    return "Roboto"_L1;
+}
+
+QString Style::plainFontFamily() const
+{
+    return "Roboto"_L1;
 }
 
 // Color getters - Primary

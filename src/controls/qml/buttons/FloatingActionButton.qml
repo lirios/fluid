@@ -71,6 +71,7 @@ RoundButton {
     Material.elevation: 1
 
     background: Rectangle {
+        id: background
         implicitWidth: control.mini ? 40 : 56
         implicitHeight: implicitWidth
 
@@ -97,11 +98,11 @@ RoundButton {
             color: "black"
             cornerRadius: height/2
         }
+    }
 
-        Fluid.Ripple {
-            anchors.fill: parent
-            control: control
-            circular: true
-        }
+    Fluid.Ripple {
+        anchors.fill: background
+        control: control
+        circular: true
     }
 }

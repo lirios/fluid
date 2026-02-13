@@ -11,21 +11,21 @@ namespace Fluid {
 
 TypeScale::TypeScale(QObject *parent)
     : QObject(parent)
-    , m_displayLarge(TypeFace::TypeFace::Brand, 57, 64, QFont::Weight::Normal, -0.25)
-    , m_displayMedium(TypeFace::TypeFace::Brand, 45, 52, QFont::Weight::Normal, 0.0)
-    , m_displaySmall(TypeFace::TypeFace::Brand, 36, 44, QFont::Weight::Normal, 0.0)
-    , m_headlineLarge(TypeFace::TypeFace::Brand, 32, 40, QFont::Weight::Medium, 0.0)
-    , m_headlineMedium(TypeFace::TypeFace::Brand, 28, 36, QFont::Weight::Medium, 0.0)
-    , m_headlineSmall(TypeFace::TypeFace::Brand, 24, 32, QFont::Weight::Medium, 0.0)
-    , m_titleLarge(TypeFace::TypeFace::Brand, 22, 28, QFont::Weight::Normal, 0.0)
-    , m_titleMedium(TypeFace::TypeFace::Plain, 16, 24, QFont::Weight::Medium, 0.15)
-    , m_titleSmall(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.1)
-    , m_bodyLarge(TypeFace::TypeFace::Plain, 16, 24, QFont::Weight::Normal, 0.5)
-    , m_bodyMedium(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::Normal, 0.25)
-    , m_bodySmall(TypeFace::TypeFace::Plain, 12, 16, QFont::Weight::Normal, 0.4)
-    , m_labelLarge(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.1)
-    , m_labelMedium(TypeFace::TypeFace::Plain, 12, 16, QFont::Weight::Medium, 0.5)
-    , m_labelSmall(TypeFace::TypeFace::Plain, 11, 16, QFont::Weight::Medium, 0.5)
+    , m_displayLarge(Style::TypeFace::Brand, 57, 64, QFont::Weight::Normal, -0.25)
+    , m_displayMedium(Style::TypeFace::Brand, 45, 52, QFont::Weight::Normal, 0.0)
+    , m_displaySmall(Style::TypeFace::Brand, 36, 44, QFont::Weight::Normal, 0.0)
+    , m_headlineLarge(Style::TypeFace::Brand, 32, 40, QFont::Weight::Medium, 0.0)
+    , m_headlineMedium(Style::TypeFace::Brand, 28, 36, QFont::Weight::Medium, 0.0)
+    , m_headlineSmall(Style::TypeFace::Brand, 24, 32, QFont::Weight::Medium, 0.0)
+    , m_titleLarge(Style::TypeFace::Brand, 22, 28, QFont::Weight::Normal, 0.0)
+    , m_titleMedium(Style::TypeFace::Plain, 16, 24, QFont::Weight::Medium, 0.15)
+    , m_titleSmall(Style::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.1)
+    , m_bodyLarge(Style::TypeFace::Plain, 16, 24, QFont::Weight::Normal, 0.5)
+    , m_bodyMedium(Style::TypeFace::Plain, 14, 20, QFont::Weight::Normal, 0.25)
+    , m_bodySmall(Style::TypeFace::Plain, 12, 16, QFont::Weight::Normal, 0.4)
+    , m_labelLarge(Style::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.1)
+    , m_labelMedium(Style::TypeFace::Plain, 12, 16, QFont::Weight::Medium, 0.5)
+    , m_labelSmall(Style::TypeFace::Plain, 11, 16, QFont::Weight::Medium, 0.5)
 {
 }
 
@@ -111,24 +111,21 @@ TypeScaleValue TypeScale::labelSmall() const
 EmphasizedTypeScale::EmphasizedTypeScale(QObject *parent)
     : TypeScale(parent)
 {
-    m_displayLarge =
-            TypeScaleValue(TypeFace::TypeFace::Brand, 57, 64, QFont::Weight::Medium, -0.25);
-    m_displayMedium = TypeScaleValue(TypeFace::TypeFace::Brand, 45, 52, QFont::Weight::Medium, 0.0);
-    m_displaySmall = TypeScaleValue(TypeFace::TypeFace::Brand, 36, 44, QFont::Weight::Medium, 0.0);
-    m_headlineLarge = TypeScaleValue(TypeFace::TypeFace::Brand, 32, 40, QFont::Weight::Medium, 0.0);
-    m_headlineMedium =
-            TypeScaleValue(TypeFace::TypeFace::Brand, 28, 36, QFont::Weight::Medium, 0.0);
-    m_headlineSmall = TypeScaleValue(TypeFace::TypeFace::Brand, 24, 32, QFont::Weight::Medium, 0.0);
-    m_titleLarge = TypeScaleValue(TypeFace::TypeFace::Brand, 22, 28, QFont::Weight::Medium, 0.0);
-    m_titleMedium =
-            TypeScaleValue(TypeFace::TypeFace::Plain, 16, 24, QFont::Weight::DemiBold, 0.15);
-    m_titleSmall = TypeScaleValue(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::DemiBold, 0.1);
-    m_bodyLarge = TypeScaleValue(TypeFace::TypeFace::Plain, 16, 24, QFont::Weight::Medium, 0.5);
-    m_bodyMedium = TypeScaleValue(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.25);
-    m_bodySmall = TypeScaleValue(TypeFace::TypeFace::Plain, 12, 16, QFont::Weight::Medium, 0.4);
-    m_labelLarge = TypeScaleValue(TypeFace::TypeFace::Plain, 14, 20, QFont::Weight::Bold, 0.1);
-    m_labelMedium = TypeScaleValue(TypeFace::TypeFace::Plain, 12, 16, QFont::Weight::Bold, 0.5);
-    m_labelSmall = TypeScaleValue(TypeFace::TypeFace::Plain, 11, 16, QFont::Weight::Bold, 0.5);
+    m_displayLarge = TypeScaleValue(Style::TypeFace::Brand, 57, 64, QFont::Weight::Medium, -0.25);
+    m_displayMedium = TypeScaleValue(Style::TypeFace::Brand, 45, 52, QFont::Weight::Medium, 0.0);
+    m_displaySmall = TypeScaleValue(Style::TypeFace::Brand, 36, 44, QFont::Weight::Medium, 0.0);
+    m_headlineLarge = TypeScaleValue(Style::TypeFace::Brand, 32, 40, QFont::Weight::Medium, 0.0);
+    m_headlineMedium = TypeScaleValue(Style::TypeFace::Brand, 28, 36, QFont::Weight::Medium, 0.0);
+    m_headlineSmall = TypeScaleValue(Style::TypeFace::Brand, 24, 32, QFont::Weight::Medium, 0.0);
+    m_titleLarge = TypeScaleValue(Style::TypeFace::Brand, 22, 28, QFont::Weight::Medium, 0.0);
+    m_titleMedium = TypeScaleValue(Style::TypeFace::Plain, 16, 24, QFont::Weight::DemiBold, 0.15);
+    m_titleSmall = TypeScaleValue(Style::TypeFace::Plain, 14, 20, QFont::Weight::DemiBold, 0.1);
+    m_bodyLarge = TypeScaleValue(Style::TypeFace::Plain, 16, 24, QFont::Weight::Medium, 0.5);
+    m_bodyMedium = TypeScaleValue(Style::TypeFace::Plain, 14, 20, QFont::Weight::Medium, 0.25);
+    m_bodySmall = TypeScaleValue(Style::TypeFace::Plain, 12, 16, QFont::Weight::Medium, 0.4);
+    m_labelLarge = TypeScaleValue(Style::TypeFace::Plain, 14, 20, QFont::Weight::Bold, 0.1);
+    m_labelMedium = TypeScaleValue(Style::TypeFace::Plain, 12, 16, QFont::Weight::Bold, 0.5);
+    m_labelSmall = TypeScaleValue(Style::TypeFace::Plain, 11, 16, QFont::Weight::Bold, 0.5);
 }
 
 } // namespace Fluid

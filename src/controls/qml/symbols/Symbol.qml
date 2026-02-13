@@ -168,10 +168,10 @@ Item {
         text: MD.SymbolMappings.getSymbolName(icon.name) ?? "\u2753"
         textFormat: Text.PlainText
 
-        // lineHeight: MD.Token.typescale.labelLarge.lineHeight
+        // lineHeight: MD.Tokens.typescale.labelLarge.lineHeight
         lineHeightMode: Text.FixedHeight
 
-        // scale: 1.0 / MD.Token.calculateCurveScale(Screen.devicePixelRatio)
+        // scale: 1.0 / MD.Tokens.calculateCurveScale(Screen.devicePixelRatio)
 
         color: icon.color
     }

@@ -7,6 +7,8 @@
 
 namespace Fluid {
 
+namespace TypeFace {
+
 Q_NAMESPACE
 
 enum class TypeFace {
@@ -14,5 +16,7 @@ enum class TypeFace {
     Plain
 };
 Q_ENUM_NS(TypeFace)
+
+} // namespace TypeFace
 
 } // namespace Fluid

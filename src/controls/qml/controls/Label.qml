@@ -1,7 +1,7 @@
 /*
  * This file is part of Fluid.
  *
- * Copyright (C) 2024 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+ * Copyright (C) 2024-2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
  *
  * $BEGIN_LICENSE:MPL2$
  *
@@ -23,17 +23,17 @@ T.Label {
     color: MD.Style.onSurfaceVariantColor
     // TODO: linkColor from palette
 
-    textFormat: Text.PlainText
+    textFormat: T.Label.PlainText
 
-    font.family: typescale.face === MD.TypeFace.Brand ? MD.Style.brandFontFamily : MD.Style.plainFontFamily
+    font.family: typescale.face === MD.Style.TypeFace.Brand ? MD.Style.brandFontFamily : MD.Style.plainFontFamily
     font.pixelSize: typescale.fontSize
     font.weight: typescale.fontWeight
     font.letterSpacing: typescale.tracking
 
     lineHeight: typescale.lineHeight
-    lineHeightMode: Text.FixedHeight
+    lineHeightMode: T.Label.FixedHeight
 
-    wrapMode: Text.Wrap
+    wrapMode: T.Label.Wrap
 
-    elide: Text.ElideRight
+    elide: T.Label.ElideRight
 }

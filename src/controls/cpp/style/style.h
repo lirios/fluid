@@ -97,6 +97,12 @@ public:
     };
     Q_ENUM(Theme)
 
+    enum class TypeFace {
+        Brand,
+        Plain
+    };
+    Q_ENUM(TypeFace)
+
     explicit Style(QObject *parent = nullptr);
 
     Theme theme() const;

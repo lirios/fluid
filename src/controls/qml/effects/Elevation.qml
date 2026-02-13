@@ -1,16 +1,5 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 import Fluid as MD
@@ -22,4 +11,11 @@ import Fluid as MD
  */
 MD.ElevationImpl {
     color: MD.Style.shadowColor
+    visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0)
+
+    Behavior on elevation {
+        NumberAnimation {
+            duration: MD.Tokens.durationMedium1
+        }
+    }
 }

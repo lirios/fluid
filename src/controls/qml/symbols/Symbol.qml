@@ -63,9 +63,14 @@ Item {
     property string name
 
     /*!
-        The size of the icon. Defaults to 24px.
+        The width of the icon. Defaults to 24px.
     */
-    property int size: 24
+    property int iconWidth: 24
+
+    /*!
+        The height of the icon. Defaults to 24px.
+    */
+    property int iconHeight: 24
 
     /*!
         The color of the icon.
@@ -115,13 +120,13 @@ Item {
         }
     }
 
-    implicitWidth: size
-    implicitHeight: size
+    implicitWidth: iconWidth
+    implicitHeight: iconHeight
 
     Text {
         id: text
 
-        anchors.centerIn: parent
+        anchors.fill: parent
 
         font.family: {
             switch (icon.style) {
@@ -160,7 +165,7 @@ Item {
             };
             return variableAxes;
         }
-        font.pixelSize: icon.size / scale
+        font.pixelSize: Math.max(icon.iconWidth, icon.iconHeight) / scale
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -168,7 +173,7 @@ Item {
         text: MD.SymbolMappings.getSymbolName(icon.name) ?? "\u2753"
         textFormat: Text.PlainText
 
-        // lineHeight: MD.Tokens.typescale.labelLarge.lineHeight
+        lineHeight: MD.Tokens.typescale.labelLarge.lineHeight
         lineHeightMode: Text.FixedHeight
 
         // scale: 1.0 / MD.Tokens.calculateCurveScale(Screen.devicePixelRatio)

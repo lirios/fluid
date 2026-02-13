@@ -38,6 +38,10 @@ Window {
 
             model: ListModel {
                 ListElement {
+                    name: "Components"
+                    source: "Components.qml"
+                }
+                ListElement {
                     name: "Elevation"
                     source: "Elevation.qml"
                 }

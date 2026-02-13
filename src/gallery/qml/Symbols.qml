@@ -22,7 +22,8 @@ Item {
 
         contentItem: MD.Symbol {
             name: parent.name
-            size: symbolSize
+            iconWidth: symbolSize
+            iconHeight: symbolSize
             style: parent.style
             opticalSize: symbolSize > 48 ? MD.Symbol.OpticalSize.Large : MD.Symbol.OpticalSize.Normal
         }

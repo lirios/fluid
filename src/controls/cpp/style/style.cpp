@@ -17,6 +17,7 @@
 #include <QtGui/private/qguiapplication_p.h>
 #include <QtGui/qpa/qplatformtheme.h>
 
+#include "palette.h"
 #include "style.h"
 
 using namespace Qt::StringLiterals;
@@ -100,28 +101,58 @@ QString Style::plainFontFamily() const
 // Color getters - Primary
 QColor Style::primaryColor() const
 {
-    return m_theme == Dark ? QColor("#D0BCFF") : QColor("#6750A4");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Primary]
+                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
 }
 
 QColor Style::onPrimaryColor() const
 {
-    return m_theme == Dark ? QColor("#381E72") : QColor("#FFFFFF");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Primary]
+                               [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
 }
 
 QColor Style::primaryContainerColor() const
 {
-    return m_theme == Dark ? QColor("#4F378B") : QColor("#EADDFF");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Primary]
+                               [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
 }
 
 QColor Style::onPrimaryContainerColor() const
 {
-    return m_theme == Dark ? QColor("#EADDFF") : QColor("#21005D");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Primary]
+                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone10]);
+}
+
+QColor Style::primaryFixedColor() const
+{
+    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone90]);
+}
+
+QColor Style::primaryFixedDimColor() const
+{
+    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone80]);
+}
+
+QColor Style::onPrimaryFixedColor() const
+{
+    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone10]);
+}
+
+QColor Style::onPrimaryFixedVariantColor() const
+{
+    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone30]);
 }
 
 // Color getters - Secondary
 QColor Style::secondaryColor() const
 {
-    return m_theme == Dark ? QColor("#CCC2DC") : QColor("#625B71");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Secondary]
+                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
 }
 
 QColor Style::onSecondaryColor() const
@@ -163,59 +194,120 @@ QColor Style::onTertiaryContainerColor() const
 // Color getters - Error
 QColor Style::errorColor() const
 {
-    return m_theme == Dark ? QColor("#F2B8B5") : QColor("#B3261E");
+    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
+                                                                                : Palette::Tone40]);
 }
 
 QColor Style::onErrorColor() const
 {
-    return m_theme == Dark ? QColor("#601410") : QColor("#FFFFFF");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Error]
+                               [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
 }
 
 QColor Style::errorContainerColor() const
 {
-    return m_theme == Dark ? QColor("#8C1D18") : QColor("#F9DEDC");
+    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone30
+                                                                                : Palette::Tone90]);
 }
 
 QColor Style::onErrorContainerColor() const
 {
-    return m_theme == Dark ? QColor("#F9DEDC") : QColor("#410E0B");
+    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
+                                                                                : Palette::Tone10]);
 }
 
 // Color getters - Background
 QColor Style::backgroundColor() const
 {
-    return m_theme == Dark ? QColor("#1C1B1F") : QColor("#FFFBFE");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
 }
 
 QColor Style::onBackgroundColor() const
 {
-    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#1C1B1F");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone90 : Palette::Tone10]);
 }
 
 // Color getters - Surface
 QColor Style::surfaceColor() const
 {
-    return m_theme == Dark ? QColor("#1C1B1F") : QColor("#FFFBFE");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
 }
 
 QColor Style::onSurfaceColor() const
 {
-    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#1C1B1F");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone90 : Palette::Tone10]);
+}
+
+QColor Style::surfaceBrightColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone24 : Palette::Tone98]);
+}
+
+QColor Style::surfaceDimColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone6 : Palette::Tone87]);
 }
 
 QColor Style::surfaceVariantColor() const
 {
-    return m_theme == Dark ? QColor("#49454F") : QColor("#E7E0EC");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
 }
 
 QColor Style::onSurfaceVariantColor() const
 {
-    return m_theme == Dark ? QColor("#CAC4D0") : QColor("#49454F");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone30]);
 }
 
-QColor Style::surfaceTintColor() const
+QColor Style::surfaceContainerLowestColor() const
 {
-    return m_theme == Dark ? QColor("#D0BCFF") : QColor("#6750A4");
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone4 : Palette::Tone100]);
+}
+
+QColor Style::surfaceContainerLowColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone96]);
+}
+
+QColor Style::surfaceContainerColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone12 : Palette::Tone94]);
+}
+
+QColor Style::surfaceContainerHighColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone17 : Palette::Tone92]);
+}
+
+QColor Style::surfaceContainerHighestColor() const
+{
+    return QColor::fromRgba(
+            Palette::refPalette[Palette::Neutral]
+                               [m_theme == Dark ? Palette::Tone22 : Palette::Tone90]);
 }
 
 // Color getters - Outline

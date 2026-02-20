@@ -20,4 +20,6 @@ import Fluid as MD
 
    An effect for standard Material Design elevation shadows.
  */
-MD.ElevationImpl {}
+MD.ElevationImpl {
+    color: MD.Style.shadowColor
+}

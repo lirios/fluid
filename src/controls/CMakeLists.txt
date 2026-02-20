@@ -20,6 +20,7 @@ set(_sources
     cpp/scenegraph/rectanglematerial.cpp cpp/scenegraph/rectanglematerial.h
     cpp/style/color.cpp cpp/style/color.h
     cpp/style/elevation.cpp cpp/style/elevation.h
+    cpp/style/palette.h
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/style/tokens.cpp cpp/style/tokens.h

@@ -37,6 +37,11 @@ class Style : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(QColor primaryContainerColor READ primaryContainerColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(
             QColor onPrimaryContainerColor READ onPrimaryContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor primaryFixedColor READ primaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor primaryFixedDimColor READ primaryFixedDimColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onPrimaryFixedColor READ onPrimaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onPrimaryFixedVariantColor READ onPrimaryFixedVariantColor NOTIFY themeChanged
+                       FINAL)
 
     // Color properties - Secondary
     Q_PROPERTY(QColor secondaryColor READ secondaryColor NOTIFY themeChanged FINAL)
@@ -66,9 +71,19 @@ class Style : public QQuickAttachedPropertyPropagator
     // Color properties - Surface
     Q_PROPERTY(QColor surfaceColor READ surfaceColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor onSurfaceColor READ onSurfaceColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceBrightColor READ surfaceBrightColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceDimColor READ surfaceDimColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor surfaceVariantColor READ surfaceVariantColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor onSurfaceVariantColor READ onSurfaceVariantColor NOTIFY themeChanged FINAL)
-    Q_PROPERTY(QColor surfaceTintColor READ surfaceTintColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceContainerLowestColor READ surfaceContainerLowestColor NOTIFY
+                       themeChanged FINAL)
+    Q_PROPERTY(
+            QColor surfaceContainerLowColor READ surfaceContainerLowColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceContainerColor READ surfaceContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceContainerHighColor READ surfaceContainerHighColor NOTIFY themeChanged
+                       FINAL)
+    Q_PROPERTY(QColor surfaceContainerHighestColor READ surfaceContainerHighestColor NOTIFY
+                       themeChanged FINAL)
 
     // Color properties - Outline
     Q_PROPERTY(QColor outlineColor READ outlineColor NOTIFY themeChanged FINAL)
@@ -122,6 +137,10 @@ public:
     QColor onPrimaryColor() const;
     QColor primaryContainerColor() const;
     QColor onPrimaryContainerColor() const;
+    QColor primaryFixedColor() const;
+    QColor primaryFixedDimColor() const;
+    QColor onPrimaryFixedColor() const;
+    QColor onPrimaryFixedVariantColor() const;
 
     // Color getters - Secondary
     QColor secondaryColor() const;
@@ -148,9 +167,15 @@ public:
     // Color getters - Surface
     QColor surfaceColor() const;
     QColor onSurfaceColor() const;
+    QColor surfaceBrightColor() const;
+    QColor surfaceDimColor() const;
     QColor surfaceVariantColor() const;
     QColor onSurfaceVariantColor() const;
-    QColor surfaceTintColor() const;
+    QColor surfaceContainerLowestColor() const;
+    QColor surfaceContainerLowColor() const;
+    QColor surfaceContainerColor() const;
+    QColor surfaceContainerHighColor() const;
+    QColor surfaceContainerHighestColor() const;
 
     // Color getters - Outline
     QColor outlineColor() const;

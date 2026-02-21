@@ -6,7 +6,6 @@ set(_sources
     cpp/core/controlsutils.cpp cpp/core/controlsutils.h
     cpp/core/device.cpp cpp/core/device.h
     cpp/core/inputregion.cpp cpp/core/inputregion.h
-    cpp/core/standardpaths.cpp cpp/core/standardpaths.h
     cpp/datetime/datepicker.cpp cpp/datetime/datepicker.h
     cpp/datetime/dateselector.cpp cpp/datetime/dateselector.h
     cpp/datetime/datetimepicker.cpp cpp/datetime/datetimepicker.h

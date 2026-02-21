@@ -3,7 +3,6 @@ set(LIBNAME Fluid)
 # Source files
 set(_sources
     cpp/core/clipboard.cpp cpp/core/clipboard.h
-    cpp/core/controlsutils.cpp cpp/core/controlsutils.h
     cpp/core/device.cpp cpp/core/device.h
     cpp/core/inputregion.cpp cpp/core/inputregion.h
     cpp/datetime/datepicker.cpp cpp/datetime/datepicker.h
@@ -73,6 +72,9 @@ set_source_files_properties(qml/symbols/SymbolNames.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 set_source_files_properties(qml/core/Units.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+set_source_files_properties(qml/core/Utils.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 

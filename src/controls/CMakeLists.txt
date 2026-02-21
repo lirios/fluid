@@ -2,7 +2,6 @@ set(LIBNAME Fluid)
 
 # Source files
 set(_sources
-    cpp/controlsplugin.cpp cpp/controlsplugin.h
     cpp/core/clipboard.cpp cpp/core/clipboard.h
     cpp/core/controlsutils.cpp cpp/core/controlsutils.h
     cpp/core/device.cpp cpp/core/device.h
@@ -17,7 +16,6 @@ set(_sources
     cpp/datetime/timeselector.cpp cpp/datetime/timeselector.h
     cpp/datetime/yearmodel.cpp cpp/datetime/yearmodel.h
     cpp/datetime/yearselector.cpp cpp/datetime/yearselector.h
-    cpp/iconthemeimageprovider.cpp cpp/iconthemeimageprovider.h
     cpp/items/rectangle.cpp cpp/items/rectangle.h
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h

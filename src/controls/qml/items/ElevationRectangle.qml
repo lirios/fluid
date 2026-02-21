@@ -30,6 +30,6 @@ MD.Rectangle {
         corners: root.corners
         width: root.width
         height: root.height
-        // visible: !MD.Util.epsilonEqual(elevation, MD.Tokens.elevationLevel0) && root.color.a > 0
+        visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0) && root.color.a > 0
     }
 }

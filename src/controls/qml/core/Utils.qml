@@ -14,4 +14,8 @@ QtObject {
     function transparent(c: color, alpha: real): color {
         return Qt.rgba(c.r, c.g, c.b, alpha);
     }
+
+    function epsilonEqual(x: real, y: real): real {
+        return Math.abs(x - y) < Number.EPSILON;
+    }
 }

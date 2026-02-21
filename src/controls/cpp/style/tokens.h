@@ -90,6 +90,10 @@ class Tokens : public QObject
     Q_PROPERTY(int durationLong2 READ durationLong2 CONSTANT FINAL)
     Q_PROPERTY(int durationLong3 READ durationLong3 CONSTANT FINAL)
     Q_PROPERTY(int durationLong4 READ durationLong4 CONSTANT FINAL)
+    Q_PROPERTY(int durationExtraLong1 READ durationExtraLong1 CONSTANT FINAL)
+    Q_PROPERTY(int durationExtraLong2 READ durationExtraLong2 CONSTANT FINAL)
+    Q_PROPERTY(int durationExtraLong3 READ durationExtraLong3 CONSTANT FINAL)
+    Q_PROPERTY(int durationExtraLong4 READ durationExtraLong4 CONSTANT FINAL)
 
 public:
     explicit Tokens(QObject *parent = nullptr);
@@ -135,6 +139,10 @@ public:
     int durationLong2() const;
     int durationLong3() const;
     int durationLong4() const;
+    int durationExtraLong1() const;
+    int durationExtraLong2() const;
+    int durationExtraLong3() const;
+    int durationExtraLong4() const;
 
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 

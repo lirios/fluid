@@ -188,6 +188,26 @@ int Tokens::durationLong4() const
     return 600;
 }
 
+int Tokens::durationExtraLong1() const
+{
+    return 700;
+}
+
+int Tokens::durationExtraLong2() const
+{
+    return 800;
+}
+
+int Tokens::durationExtraLong3() const
+{
+    return 900;
+}
+
+int Tokens::durationExtraLong4() const
+{
+    return 1000;
+}
+
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine)

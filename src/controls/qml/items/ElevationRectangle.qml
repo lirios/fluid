@@ -7,7 +7,7 @@
 import QtQuick
 import Fluid as MD
 
-MD.Rectangle {
+Rectangle {
     id: root
 
     property alias elevation: shadow.elevation
@@ -18,9 +18,16 @@ MD.Rectangle {
         id: shadow
 
         z: -1
-        corners: root.corners
+
+        radius: root.radius
+        topLeftRadius: root.topLeftRadius
+        topRightRadius: root.topRightRadius
+        bottomLeftRadius: root.bottomLeftRadius
+        bottomRightRadius: root.bottomRightRadius
+
         width: root.width
         height: root.height
+
         visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0) && root.color.a > 0
     }
 }

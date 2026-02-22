@@ -1,17 +1,8 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2024-2025 hypengw <hypengwip@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2025-2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-FileCopyrightText: 2024-2025 hypengw <hypengwip@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
+//
+// Originally based on code by hypengw, licensed under the MIT license.
 
 #include <QQuickWindow>
 #include <QSGFlatColorMaterial>
@@ -108,8 +99,6 @@ public:
 
     \note This class uses Qt's scene graph API for efficient rendering.
     \note The shadow effect follows Material Design principles with ambient and spot lighting.
-
-    \sa CornersGroup
 */
 
 /*!
@@ -118,15 +107,14 @@ public:
 */
 Elevation::Elevation(QQuickItem *parentItem)
     : QQuickItem(parentItem)
-    , m_elevation(0)
-    , m_corners()
-    , m_radius(0)
-    , m_color(Qt::black)
 {
     setFlag(QQuickItem::ItemHasContents, true);
     connect(this, &Elevation::elevationChanged, this, &Elevation::update);
     connect(this, &Elevation::colorChanged, this, &Elevation::update);
-    connect(this, &Elevation::cornersChanged, this, &Elevation::update);
+    connect(this, &Elevation::bottomLeftRadiusChanged, this, &Elevation::update);
+    connect(this, &Elevation::bottomRightRadiusChanged, this, &Elevation::update);
+    connect(this, &Elevation::topLeftRadiusChanged, this, &Elevation::update);
+    connect(this, &Elevation::topRightRadiusChanged, this, &Elevation::update);
 }
 
 /*!
@@ -158,46 +146,125 @@ void Elevation::setElevation(qreal l)
 }
 
 /*!
-    \brief Returns the corners group.
-    \return CornersGroup representing the corner radii.
-*/
-const CornersGroup &Elevation::corners() const
-{
-    return m_corners;
-}
-
-/*!
-    \brief Sets the corners group.
-    \param c New CornersGroup representing the corner radii.
-*/
-void Elevation::setCorners(const CornersGroup &c)
-{
-    m_corners = c;
-    Q_EMIT cornersChanged(c);
-}
-
-/*!
     \brief Returns the current radius.
+
+    If any individual corner radius has been explicitly set, returns the maximum
+    of all four corner radii. Otherwise returns the uniform radius value.
+
     \return Radius as a qreal.
 */
 qreal Elevation::radius() const
 {
+    if (m_topLeftRadius.has_value() || m_topRightRadius.has_value()
+        || m_bottomLeftRadius.has_value() || m_bottomRightRadius.has_value()) {
+        return std::max(
+                { topLeftRadius(), topRightRadius(), bottomLeftRadius(), bottomRightRadius() });
+    }
     return m_radius;
 }
 
 /*!
     \brief Sets the radius for all corners.
+
+    Clears any individually overridden corner radii, so all four corners
+    will use this value. Individual radii set afterwards will override it.
+
     \param newRadius New radius value.
 */
 void Elevation::setRadius(qreal newRadius)
 {
-    if (qFuzzyCompare(m_radius, newRadius)) {
-        return;
-    }
+    const qreal oldTL = topLeftRadius();
+    const qreal oldTR = topRightRadius();
+    const qreal oldBL = bottomLeftRadius();
+    const qreal oldBR = bottomRightRadius();
 
+    const bool changed = !qFuzzyCompare(m_radius, newRadius);
     m_radius = newRadius;
-    setCorners(m_radius);
-    Q_EMIT radiusChanged(m_radius);
+
+    // Clear individual overrides — setRadius resets all corners to the same value
+    m_topLeftRadius.reset();
+    m_topRightRadius.reset();
+    m_bottomLeftRadius.reset();
+    m_bottomRightRadius.reset();
+
+    if (changed)
+        Q_EMIT radiusChanged(m_radius);
+    if (!qFuzzyCompare(oldTL, m_radius))
+        Q_EMIT topLeftRadiusChanged(m_radius);
+    if (!qFuzzyCompare(oldTR, m_radius))
+        Q_EMIT topRightRadiusChanged(m_radius);
+    if (!qFuzzyCompare(oldBL, m_radius))
+        Q_EMIT bottomLeftRadiusChanged(m_radius);
+    if (!qFuzzyCompare(oldBR, m_radius))
+        Q_EMIT bottomRightRadiusChanged(m_radius);
+}
+
+qreal Elevation::topLeftRadius() const
+{
+    return m_topLeftRadius.value_or(m_radius);
+}
+
+void Elevation::setTopLeftRadius(qreal newTopLeftRadius)
+{
+    if (qFuzzyCompare(topLeftRadius(), newTopLeftRadius))
+        return;
+
+    const qreal oldRadius = radius();
+    m_topLeftRadius = newTopLeftRadius;
+    Q_EMIT topLeftRadiusChanged(newTopLeftRadius);
+    if (!qFuzzyCompare(radius(), oldRadius))
+        Q_EMIT radiusChanged(radius());
+}
+
+qreal Elevation::topRightRadius() const
+{
+    return m_topRightRadius.value_or(m_radius);
+}
+
+void Elevation::setTopRightRadius(qreal newTopRightRadius)
+{
+    if (qFuzzyCompare(topRightRadius(), newTopRightRadius))
+        return;
+
+    const qreal oldRadius = radius();
+    m_topRightRadius = newTopRightRadius;
+    Q_EMIT topRightRadiusChanged(newTopRightRadius);
+    if (!qFuzzyCompare(radius(), oldRadius))
+        Q_EMIT radiusChanged(radius());
+}
+
+qreal Elevation::bottomLeftRadius() const
+{
+    return m_bottomLeftRadius.value_or(m_radius);
+}
+
+void Elevation::setBottomLeftRadius(qreal newBottomLeftRadius)
+{
+    if (qFuzzyCompare(bottomLeftRadius(), newBottomLeftRadius))
+        return;
+
+    const qreal oldRadius = radius();
+    m_bottomLeftRadius = newBottomLeftRadius;
+    Q_EMIT bottomLeftRadiusChanged(newBottomLeftRadius);
+    if (!qFuzzyCompare(radius(), oldRadius))
+        Q_EMIT radiusChanged(radius());
+}
+
+qreal Elevation::bottomRightRadius() const
+{
+    return m_bottomRightRadius.value_or(m_radius);
+}
+
+void Elevation::setBottomRightRadius(qreal newBottomRightRadius)
+{
+    if (qFuzzyCompare(bottomRightRadius(), newBottomRightRadius))
+        return;
+
+    const qreal oldRadius = radius();
+    m_bottomRightRadius = newBottomRightRadius;
+    Q_EMIT bottomRightRadiusChanged(newBottomRightRadius);
+    if (!qFuzzyCompare(radius(), oldRadius))
+        Q_EMIT radiusChanged(radius());
 }
 
 /*!
@@ -267,7 +334,8 @@ QSGNode *Elevation::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeDa
     }
     shadowNode->rect = boundingRect();
     shadowNode->elevation = m_elevation;
-    shadowNode->radius = m_corners.toVector4D();
+    shadowNode->radius = QVector4D{ (float)topLeftRadius(), (float)topRightRadius(),
+                                    (float)bottomLeftRadius(), (float)bottomRightRadius() };
     shadowNode->color = m_color.rgb();
     shadowNode->updateGeometry();
     return shadowNode;

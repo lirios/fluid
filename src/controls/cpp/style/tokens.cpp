@@ -208,6 +208,17 @@ int Tokens::durationExtraLong4() const
     return 1000;
 }
 
+// Motion tokens - Easing
+Easing Tokens::easing() const
+{
+    return m_easing;
+}
+
+Spring Tokens::spring() const
+{
+    return m_spring;
+}
+
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine)

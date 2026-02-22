@@ -17,6 +17,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "easing.h"
 #include "typescale.h"
 
 namespace Fluid {
@@ -95,6 +96,10 @@ class Tokens : public QObject
     Q_PROPERTY(int durationExtraLong3 READ durationExtraLong3 CONSTANT FINAL)
     Q_PROPERTY(int durationExtraLong4 READ durationExtraLong4 CONSTANT FINAL)
 
+    // Motion tokens - Easing and Spring
+    Q_PROPERTY(Fluid::Easing easing READ easing CONSTANT FINAL)
+    Q_PROPERTY(Fluid::Spring spring READ spring CONSTANT FINAL)
+
 public:
     explicit Tokens(QObject *parent = nullptr);
 
@@ -144,11 +149,17 @@ public:
     int durationExtraLong3() const;
     int durationExtraLong4() const;
 
+    // Motion tokens - Easing and Spring
+    Easing easing() const;
+    Spring spring() const;
+
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
     TypeScale *m_typescale = nullptr;
     EmphasizedTypeScale *m_emphasizedTypeScale = nullptr;
+    Easing m_easing;
+    Spring m_spring;
 };
 
 } // namespace Fluid

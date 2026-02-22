@@ -26,7 +26,6 @@ set(_sources
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/style/tokens.cpp cpp/style/tokens.h
     cpp/style/typescale.cpp cpp/style/typescale.h
-    cpp/utils/cornersgroup.cpp cpp/utils/cornersgroup.h
 )
 
 # QML and JavaScript files

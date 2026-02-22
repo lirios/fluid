@@ -14,10 +14,8 @@ set(_sources
     cpp/datetime/timeselector.cpp cpp/datetime/timeselector.h
     cpp/datetime/yearmodel.cpp cpp/datetime/yearmodel.h
     cpp/datetime/yearselector.cpp cpp/datetime/yearselector.h
-    cpp/items/rectangle.cpp cpp/items/rectangle.h
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h
-    cpp/scenegraph/rectanglematerial.cpp cpp/scenegraph/rectanglematerial.h
     cpp/style/color.cpp cpp/style/color.h
     cpp/style/easing.cpp cpp/style/easing.h
     cpp/style/elevation.cpp cpp/style/elevation.h
@@ -112,18 +110,10 @@ qt_install_qml_module(${LIBNAME})
 # ------------------------------------------------------------
 set(_common_glsl
     "${CMAKE_SOURCE_DIR}/assets/shaders/common.glsl"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/sdf.glsl"
 )
 set(_shaders
-    "${CMAKE_SOURCE_DIR}/assets/shaders/default.vert"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/round_clip.frag"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/sdf_rectangle.frag"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/shadow_.frag"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/rectangle.vert"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/rectangle.frag"
     "${CMAKE_SOURCE_DIR}/assets/shaders/shadow.vert"
     "${CMAKE_SOURCE_DIR}/assets/shaders/shadow.frag"
-    "${CMAKE_SOURCE_DIR}/assets/shaders/rect_glow.frag"
 )
 set(_shader_options BATCHABLE OPTIMIZED)
 if(CMAKE_BUILD_TYPE MATCHES Debug)

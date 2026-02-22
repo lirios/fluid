@@ -46,6 +46,10 @@ Window {
                     source: "Elevation.qml"
                 }
                 ListElement {
+                    name: qsTr("Typography")
+                    source: "Typography.qml"
+                }
+                ListElement {
                     name: "Symbols"
                     source: "Symbols.qml"
                 }

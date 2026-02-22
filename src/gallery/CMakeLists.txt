@@ -14,6 +14,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Elevation.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
+        qml/Typography.qml
 )
 
 set_target_properties(FluidGallery PROPERTIES

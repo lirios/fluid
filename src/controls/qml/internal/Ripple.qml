@@ -1,6 +1,8 @@
-// SPDX-FileCopyrightText: 2024-2025 hypengw (hypengwip@gmail.com)
+// SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-FileCopyrightText: 2024-2025 hypengw <hypengwip@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 //
-// SPDX-License-Identifier: MIT
+// Originally based on code by hypengw, licensed under the MIT license.
 
 pragma ComponentBehavior: Bound
 
@@ -19,12 +21,11 @@ Item {
     property real _circle_radius: 0
 
     property alias color: m_back.color
-    property alias corners: m_back.corners
     property alias radius: m_back.radius
 
     clip: false
 
-    MD.Rectangle {
+    Rectangle {
         id: m_back
         anchors.fill: parent
         color: "transparent"
@@ -66,49 +67,48 @@ Item {
                 }
             }
 
-            startX: m_back.corners.topLeft
-
+            startX: m_back.topLeftRadius
             startY: 0
 
             PathLine {
-                x: root.width - m_back.corners.topRight
+                x: root.width - m_back.topRightRadius
                 y: 0
             }
             PathArc {
-                relativeX: m_back.corners.topRight
-                relativeY: m_back.corners.topRight
-                radiusX: m_back.corners.topRight
-                radiusY: m_back.corners.topRight
+                relativeX: m_back.topRightRadius
+                relativeY: m_back.topRightRadius
+                radiusX: m_back.topRightRadius
+                radiusY: m_back.topRightRadius
             }
             PathLine {
                 x: root.width
-                y: root.height - m_back.corners.bottomRight
+                y: root.height - m_back.bottomRightRadius
             }
             PathArc {
-                relativeX: -m_back.corners.bottomRight
-                relativeY: m_back.corners.bottomRight
-                radiusX: m_back.corners.bottomRight
-                radiusY: m_back.corners.bottomRight
+                relativeX: -m_back.bottomRightRadius
+                relativeY: m_back.bottomRightRadius
+                radiusX: m_back.bottomRightRadius
+                radiusY: m_back.bottomRightRadius
             }
             PathLine {
-                x: m_back.corners.bottomLeft
+                x: m_back.bottomLeftRadius
                 y: root.height
             }
             PathArc {
-                relativeX: -m_back.corners.bottomLeft
-                relativeY: -m_back.corners.bottomLeft
-                radiusX: m_back.corners.bottomLeft
-                radiusY: m_back.corners.bottomLeft
+                relativeX: -m_back.bottomLeftRadius
+                relativeY: -m_back.bottomLeftRadius
+                radiusX: m_back.bottomLeftRadius
+                radiusY: m_back.bottomLeftRadius
             }
             PathLine {
                 x: 0
-                y: m_back.corners.topLeft
+                y: m_back.topLeftRadius
             }
             PathArc {
-                x: m_back.corners.topLeft
+                x: m_back.topLeftRadius
                 y: 0
-                radiusX: m_back.corners.topLeft
-                radiusY: m_back.corners.topLeft
+                radiusX: m_back.topLeftRadius
+                radiusY: m_back.topLeftRadius
             }
         }
     }
@@ -170,13 +170,13 @@ Item {
                 NumberAnimation {
                     target: m_back
                     to: root.stateOpacity
-                    property: 'opacity'
+                    property: "opacity"
                     duration: 200
                 }
                 SequentialAnimation {
                     NumberAnimation {
                         target: root
-                        property: '_circle_radius'
+                        property: "_circle_radius"
                         to: root.endRadius
                         duration: 200
                     }

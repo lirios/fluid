@@ -22,6 +22,7 @@ RUN pacman --noconfirm --noprogressbar -Syyu && \
       qt6-svg \
       qt6-wayland \
       qt6-shadertools \
+      qt6-doc \
       wayland-protocols \
       wayland && \
     # Install doxyqml via pipx

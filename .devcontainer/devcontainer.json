@@ -10,7 +10,8 @@
 				"TheQtCompany.qt-cpp-pack",
 				"Delgan.qml-format",
 				"xaver.clang-format",
-				"ms-python.python"
+				"ms-python.python",
+				"dvratil.vscode-qtdoc"
 			],
 			"settings": {
 				"qmlFormat.command": "/usr/lib/qt6/bin/qmlformat"

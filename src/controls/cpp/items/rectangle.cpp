@@ -71,14 +71,15 @@ Rectangle::~Rectangle()
 {
 }
 
-auto Rectangle::corners() const -> CornersGroup
+CornersGroup Rectangle::corners() const
 {
     return m_corners;
 }
+
 void Rectangle::setCorners(const CornersGroup &c)
 {
     m_corners = c;
-    cornersChanged();
+    emit cornersChanged();
 }
 
 qreal Rectangle::radius() const
@@ -93,7 +94,7 @@ void Rectangle::setRadius(qreal newRadius)
     }
     m_radius = newRadius;
     setCorners(m_radius);
-    radiusChanged();
+    emit radiusChanged();
 }
 
 QColor Rectangle::color() const
@@ -108,7 +109,7 @@ void Rectangle::setColor(const QColor &newColor)
     }
 
     m_color = newColor;
-    colorChanged();
+    emit colorChanged();
 }
 
 void Rectangle::componentComplete()
@@ -127,7 +128,7 @@ void Rectangle::itemChange(QQuickItem::ItemChange change, const QQuickItem::Item
 
 QSGNode *Rectangle::updatePaintNode(QSGNode *node, QQuickItem::UpdatePaintNodeData *data)
 {
-    Q_UNUSED(data);
+    Q_UNUSED(data)
 
     if (boundingRect().isEmpty()) {
         delete node;

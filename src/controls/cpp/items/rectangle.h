@@ -34,19 +34,21 @@ public:
     Rectangle(QQuickItem *parent = nullptr);
     ~Rectangle() override;
 
-    auto corners() const -> CornersGroup;
+    CornersGroup corners() const;
     void setCorners(const CornersGroup &);
-    Q_SIGNAL void cornersChanged();
 
     qreal radius() const;
     void setRadius(qreal newRadius);
-    Q_SIGNAL void radiusChanged();
 
     QColor color() const;
     void setColor(const QColor &newColor);
-    Q_SIGNAL void colorChanged();
 
     void componentComplete() override;
+
+Q_SIGNALS:
+    void cornersChanged();
+    void radiusChanged();
+    void colorChanged();
 
 protected:
     void itemChange(QQuickItem::ItemChange change,

@@ -12,9 +12,11 @@ qt_add_resources(FluidGallery "gallery"
         qml/main.qml
         qml/Components.qml
         qml/Elevation.qml
+        qml/IconButton.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/Typography.qml
+        qml/ValueCircle.qml
 )
 
 set_target_properties(FluidGallery PROPERTIES

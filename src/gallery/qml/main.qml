@@ -42,6 +42,10 @@ Window {
                     source: "Components.qml"
                 }
                 ListElement {
+                    name: qsTr("Icon Button")
+                    source: "IconButton.qml"
+                }
+                ListElement {
                     name: "Elevation"
                     source: "Elevation.qml"
                 }

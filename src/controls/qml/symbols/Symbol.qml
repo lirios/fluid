@@ -140,7 +140,6 @@ Item {
             }
         }
         font.variableAxes: {
-            const fillValues = [0, 0.25, 0.5, 0.75, 1];
             const gradeValues = [-25, 0, 200];
             const weightValues = [Font.Thin, Font.ExtraLight, Font.Light, Font.Normal, Font.Medium, Font.DemiBold, Font.Bold];
             const opticalSizes = [20, 24, 40, 48];
@@ -158,7 +157,7 @@ Item {
             }
 
             const variableAxes = {
-                "FILL": closestValue(fillValues, icon._fill),
+                "FILL": icon.fill ? 1 : 0,
                 "GRAD": closestValue(gradeValues, icon.grade),
                 "wght": closestValue(weightValues, icon.weight),
                 "opsz": closestValue(opticalSizes, icon.opticalSize)

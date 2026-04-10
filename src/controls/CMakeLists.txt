@@ -3,17 +3,7 @@ set(LIBNAME Fluid)
 # Source files
 set(_sources
     cpp/core/clipboard.cpp cpp/core/clipboard.h
-    cpp/core/device.cpp cpp/core/device.h
     cpp/core/inputregion.cpp cpp/core/inputregion.h
-    cpp/datetime/datepicker.cpp cpp/datetime/datepicker.h
-    cpp/datetime/dateselector.cpp cpp/datetime/dateselector.h
-    cpp/datetime/datetimepicker.cpp cpp/datetime/datetimepicker.h
-    cpp/datetime/dateutils.cpp cpp/datetime/dateutils.h
-    cpp/datetime/picker.cpp cpp/datetime/picker.h
-    cpp/datetime/timepicker.cpp cpp/datetime/timepicker.h
-    cpp/datetime/timeselector.cpp cpp/datetime/timeselector.h
-    cpp/datetime/yearmodel.cpp cpp/datetime/yearmodel.h
-    cpp/datetime/yearselector.cpp cpp/datetime/yearselector.h
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h
     cpp/style/color.cpp cpp/style/color.h

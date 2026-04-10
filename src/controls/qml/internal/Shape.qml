@@ -4,9 +4,9 @@
 //
 // Originally based on code by hypengw, licensed under the MIT license.
 
-import QtQuick.Shapes
+import QtQuick.Shapes as QQS
 
-Shape {
+QQS.Shape {
     asynchronous: false
-    preferredRendererType: Shape.CurveRenderer
+    preferredRendererType: QQS.Shape.CurveRenderer
 }

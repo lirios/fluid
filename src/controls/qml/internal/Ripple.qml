@@ -21,7 +21,12 @@ Item {
     property real _circle_radius: 0
 
     property alias color: m_back.color
+
     property alias radius: m_back.radius
+    property alias topLeftRadius: m_back.topLeftRadius
+    property alias topRightRadius: m_back.topRightRadius
+    property alias bottomLeftRadius: m_back.bottomLeftRadius
+    property alias bottomRightRadius: m_back.bottomRightRadius
 
     clip: false
 

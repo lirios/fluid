@@ -29,16 +29,22 @@ Window {
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: 24
-        spacing: 24
 
         ListView {
-            Layout.fillHeight: true
             Layout.preferredWidth: 200
+            Layout.fillHeight: true
 
             model: ListModel {
                 ListElement {
-                    name: "Components"
+                    name: qsTr("Elevation")
+                    source: "Elevation.qml"
+                }
+                ListElement {
+                    name: qsTr("Symbols")
+                    source: "Symbols.qml"
+                }
+                ListElement {
+                    name: qsTr("Components")
                     source: "Components.qml"
                 }
                 ListElement {
@@ -46,29 +52,24 @@ Window {
                     source: "IconButton.qml"
                 }
                 ListElement {
-                    name: "Elevation"
-                    source: "Elevation.qml"
+                    name: qsTr("Indicators")
+                    source: "Indicators.qml"
+                }
+                ListElement {
+                    name: qsTr("Lists")
+                    source: "Lists.qml"
                 }
                 ListElement {
                     name: qsTr("Typography")
                     source: "Typography.qml"
                 }
-                ListElement {
-                    name: "Symbols"
-                    source: "Symbols.qml"
-                }
             }
 
-            delegate: MD.Label {
+            delegate: MD.ListItem {
                 text: model.name
-                padding: 12
 
-                MouseArea {
-                    anchors.fill: parent
-
-                    onClicked: {
-                        loader.source = model.source;
-                    }
+                onClicked: {
+                    loader.source = model.source;
                 }
             }
         }

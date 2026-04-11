@@ -17,8 +17,6 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
-    // title: qsTr("Components")
-
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
     }
@@ -51,400 +49,404 @@ Item {
         }
     }
 
-    ColumnLayout {
-        anchors.centerIn: parent
-        spacing: 40
-
-        Headline {
-            text: qsTr("Buttons")
-        }
-
-        RowLayout {
-            spacing: 20
-
-            MD.Button {
-                objectName: "iconOnlyButton"
-                display: MD.Button.IconOnly
-                icon.name: "search"
-                text: qsTr("Icon Only")
-            }
-
-            MD.Button {
-                objectName: "textOnlyButton"
-                display: MD.Button.TextOnly
-                icon.name: "search"
-                text: qsTr("Text Only")
-            }
-
-            MD.Button {
-                objectName: "textBesideIconButton"
-                display: MD.Button.TextBesideIcon
-                icon.name: "search"
-                text: qsTr("Text Beside Icon")
-            }
-
-            MD.Button {
-                objectName: "textUnderIconButton"
-                display: MD.Button.TextUnderIcon
-                icon.name: "search"
-                text: qsTr("Text Under Icon")
-            }
-        }
-
-        Headline {
-            text: qsTr("Configurations")
-        }
-
-        RowLayout {
-            spacing: 20
-
-            ValueCircle {
-                number: "1"
-            }
-
-            MD.Button {
-                objectName: "extraSmallButton"
-                size: MD.Button.ExtraSmall
-                text: qsTr("Extra Small")
-            }
-
-            MD.Button {
-                objectName: "smallButton"
-                size: MD.Button.Small
-                text: qsTr("Small")
-            }
-
-            MD.Button {
-                objectName: "mediumButton"
-                size: MD.Button.Medium
-                text: qsTr("Medium")
-            }
-
-            MD.Button {
-                objectName: "largeButton"
-                size: MD.Button.Large
-                text: qsTr("Large")
-            }
-
-            MD.Button {
-                objectName: "extraLargeButton"
-                size: MD.Button.ExtraLarge
-                text: qsTr("Extra Large")
-            }
-        }
-
-        RowLayout {
-            spacing: 20
-
-            ValueCircle {
-                number: "2"
-            }
-
-            MD.Button {
-                objectName: "roundButton"
-                shape: MD.Button.Round
-                text: qsTr("Round")
-            }
-
-            MD.Button {
-                objectName: "squareButton"
-                shape: MD.Button.Square
-                text: qsTr("Square")
-            }
-        }
-
-        RowLayout {
-            spacing: 20
-
-            ValueCircle {
-                number: "3"
-            }
-
-            MD.Button {
-                objectName: "elevatedButton"
-                type: MD.Button.Elevated
-                text: qsTr("Elevated")
-            }
-
-            MD.Button {
-                objectName: "filledButton"
-                type: MD.Button.Filled
-                text: qsTr("Filled")
-            }
-
-            MD.Button {
-                objectName: "tonalButton"
-                type: MD.Button.Tonal
-                text: qsTr("Tonal")
-            }
-
-            MD.Button {
-                objectName: "outlinedButton"
-                type: MD.Button.Outlined
-                text: qsTr("Outlined")
-            }
-
-            MD.Button {
-                objectName: "textButton"
-                type: MD.Button.Text
-                text: qsTr("Text")
-            }
-        }
+    MD.ScrollView {
+        anchors.fill: parent
 
         ColumnLayout {
-            spacing: 40
+            anchors.centerIn: parent
+            spacing: MD.Tokens.spacingLarge
+
+            Headline {
+                text: qsTr("Buttons")
+            }
 
             RowLayout {
-                spacing: 16
+                spacing: MD.Tokens.spacingLarge
 
-                Headline {
-                    text: qsTr("Colors")
+                MD.Button {
+                    objectName: "iconOnlyButton"
+                    display: MD.Button.IconOnly
+                    icon.name: "search"
+                    text: qsTr("Icon Only")
                 }
 
-                MD.Switch {
-                    id: enabledSwitch
+                MD.Button {
+                    objectName: "textOnlyButton"
+                    display: MD.Button.TextOnly
+                    icon.name: "search"
+                    text: qsTr("Text Only")
+                }
 
-                    text: qsTr("Enabled")
-                    checked: true
+                MD.Button {
+                    objectName: "textBesideIconButton"
+                    display: MD.Button.TextBesideIcon
+                    icon.name: "search"
+                    text: qsTr("Text Beside Icon")
+                }
+
+                MD.Button {
+                    objectName: "textUnderIconButton"
+                    display: MD.Button.TextUnderIcon
+                    icon.name: "search"
+                    text: qsTr("Text Under Icon")
                 }
             }
 
-            GridLayout {
-                columns: 4
-                rows: 6
+            Headline {
+                text: qsTr("Configurations")
+            }
 
-                columnSpacing: 20
-                rowSpacing: 20
-
-                // Numbers and letters
+            RowLayout {
+                spacing: MD.Tokens.spacingLarge
 
                 ValueCircle {
-                    Layout.row: 0
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
                     number: "1"
                 }
 
-                ValueCircle {
-                    Layout.row: 0
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                MD.Button {
+                    objectName: "extraSmallButton"
+                    size: MD.Button.ExtraSmall
+                    text: qsTr("Extra Small")
+                }
 
+                MD.Button {
+                    objectName: "smallButton"
+                    size: MD.Button.Small
+                    text: qsTr("Small")
+                }
+
+                MD.Button {
+                    objectName: "mediumButton"
+                    size: MD.Button.Medium
+                    text: qsTr("Medium")
+                }
+
+                MD.Button {
+                    objectName: "largeButton"
+                    size: MD.Button.Large
+                    text: qsTr("Large")
+                }
+
+                MD.Button {
+                    objectName: "extraLargeButton"
+                    size: MD.Button.ExtraLarge
+                    text: qsTr("Extra Large")
+                }
+            }
+
+            RowLayout {
+                spacing: MD.Tokens.spacingLarge
+
+                ValueCircle {
                     number: "2"
                 }
 
-                ValueCircle {
-                    Layout.row: 0
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                MD.Button {
+                    objectName: "roundButton"
+                    shape: MD.Button.Round
+                    text: qsTr("Round")
+                }
 
+                MD.Button {
+                    objectName: "squareButton"
+                    shape: MD.Button.Square
+                    text: qsTr("Square")
+                }
+            }
+
+            RowLayout {
+                spacing: MD.Tokens.spacingLarge
+
+                ValueCircle {
                     number: "3"
                 }
 
-                ValueCircle {
-                    Layout.row: 1
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    number: "A"
-                }
-
-                ValueCircle {
-                    Layout.row: 2
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    number: "B"
-                }
-
-                ValueCircle {
-                    Layout.row: 3
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    number: "C"
-                }
-
-                ValueCircle {
-                    Layout.row: 4
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    number: "D"
-                }
-
-                ValueCircle {
-                    Layout.row: 5
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    number: "E"
-                }
-
-                // Column 1 (default)
-
                 MD.Button {
-                    Layout.row: 1
-                    Layout.column: 1
-
                     objectName: "elevatedButton"
                     type: MD.Button.Elevated
-                    icon.name: "edit"
-                    text: qsTr("Elevated button")
-                    enabled: enabledSwitch.checked
+                    text: qsTr("Elevated")
                 }
 
                 MD.Button {
-                    Layout.row: 2
-                    Layout.column: 1
-
                     objectName: "filledButton"
                     type: MD.Button.Filled
-                    icon.name: "edit"
-                    text: qsTr("Filled button")
-                    enabled: enabledSwitch.checked
+                    text: qsTr("Filled")
                 }
 
                 MD.Button {
-                    Layout.row: 3
-                    Layout.column: 1
-
                     objectName: "tonalButton"
                     type: MD.Button.Tonal
-                    icon.name: "edit"
-                    text: qsTr("Tonal button")
-                    enabled: enabledSwitch.checked
+                    text: qsTr("Tonal")
                 }
 
                 MD.Button {
-                    Layout.row: 4
-                    Layout.column: 1
-
                     objectName: "outlinedButton"
                     type: MD.Button.Outlined
-                    icon.name: "edit"
-                    text: qsTr("Outlined button")
-                    enabled: enabledSwitch.checked
+                    text: qsTr("Outlined")
                 }
 
                 MD.Button {
-                    Layout.row: 5
-                    Layout.column: 1
-
                     objectName: "textButton"
                     type: MD.Button.Text
-                    icon.name: "edit"
-                    text: qsTr("Text button")
-                    enabled: enabledSwitch.checked
+                    text: qsTr("Text")
+                }
+            }
+
+            ColumnLayout {
+                spacing: MD.Tokens.spacingExtraLarge
+
+                RowLayout {
+                    spacing: MD.Tokens.spacingLarge
+
+                    Headline {
+                        text: qsTr("Colors")
+                    }
+
+                    MD.Switch {
+                        id: enabledSwitch
+
+                        text: qsTr("Enabled")
+                        checked: true
+                    }
                 }
 
-                // Column 2 (toggle unselected)
+                GridLayout {
+                    columns: 4
+                    rows: 6
 
-                MD.Button {
-                    Layout.row: 1
-                    Layout.column: 2
+                    columnSpacing: MD.Tokens.spacingLarge
+                    rowSpacing: MD.Tokens.spacingLarge
 
-                    objectName: "elevatedButton"
-                    type: MD.Button.Elevated
-                    icon.name: "edit"
-                    text: qsTr("Elevated unselected")
-                    checkable: false
-                    checked: false
-                    enabled: enabledSwitch.checked
-                }
+                    // Numbers and letters
 
-                MD.Button {
-                    Layout.row: 2
-                    Layout.column: 2
+                    ValueCircle {
+                        Layout.row: 0
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                    objectName: "filledButton"
-                    type: MD.Button.Filled
-                    icon.name: "edit"
-                    text: qsTr("Filled unselected")
-                    checkable: false
-                    checked: false
-                    enabled: enabledSwitch.checked
-                }
+                        number: "1"
+                    }
 
-                MD.Button {
-                    Layout.row: 3
-                    Layout.column: 2
+                    ValueCircle {
+                        Layout.row: 0
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                    objectName: "tonalButton"
-                    type: MD.Button.Tonal
-                    icon.name: "edit"
-                    text: qsTr("Tonal unselected")
-                    checkable: false
-                    checked: false
-                    enabled: enabledSwitch.checked
-                }
+                        number: "2"
+                    }
 
-                MD.Button {
-                    Layout.row: 4
-                    Layout.column: 2
+                    ValueCircle {
+                        Layout.row: 0
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                    objectName: "outlinedButton"
-                    type: MD.Button.Outlined
-                    icon.name: "edit"
-                    text: qsTr("Outlined unselected")
-                    checkable: false
-                    checked: false
-                    enabled: enabledSwitch.checked
-                }
+                        number: "3"
+                    }
 
-                // Column 3 (toggle selected)
+                    ValueCircle {
+                        Layout.row: 1
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                MD.Button {
-                    Layout.row: 1
-                    Layout.column: 3
+                        number: "A"
+                    }
 
-                    objectName: "elevatedButton"
-                    type: MD.Button.Elevated
-                    icon.name: "edit"
-                    text: qsTr("Elevated selected")
-                    checkable: false
-                    checked: true
-                    enabled: enabledSwitch.checked
-                }
+                    ValueCircle {
+                        Layout.row: 2
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                MD.Button {
-                    Layout.row: 2
-                    Layout.column: 3
+                        number: "B"
+                    }
 
-                    objectName: "filledButton"
-                    type: MD.Button.Filled
-                    icon.name: "edit"
-                    text: qsTr("Filled selected")
-                    checkable: false
-                    checked: true
-                    enabled: enabledSwitch.checked
-                }
+                    ValueCircle {
+                        Layout.row: 3
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                MD.Button {
-                    Layout.row: 3
-                    Layout.column: 3
+                        number: "C"
+                    }
 
-                    objectName: "tonalButton"
-                    type: MD.Button.Tonal
-                    icon.name: "edit"
-                    text: qsTr("Tonal selected")
-                    checkable: false
-                    checked: true
-                    enabled: enabledSwitch.checked
-                }
+                    ValueCircle {
+                        Layout.row: 4
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                MD.Button {
-                    Layout.row: 4
-                    Layout.column: 3
+                        number: "D"
+                    }
 
-                    objectName: "outlinedButton"
-                    type: MD.Button.Outlined
-                    icon.name: "edit"
-                    text: qsTr("Outlined selected")
-                    checkable: false
-                    checked: true
-                    enabled: enabledSwitch.checked
+                    ValueCircle {
+                        Layout.row: 5
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
+                        number: "E"
+                    }
+
+                    // Column 1 (default)
+
+                    MD.Button {
+                        Layout.row: 1
+                        Layout.column: 1
+
+                        objectName: "elevatedButton"
+                        type: MD.Button.Elevated
+                        icon.name: "edit"
+                        text: qsTr("Elevated button")
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 2
+                        Layout.column: 1
+
+                        objectName: "filledButton"
+                        type: MD.Button.Filled
+                        icon.name: "edit"
+                        text: qsTr("Filled button")
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 3
+                        Layout.column: 1
+
+                        objectName: "tonalButton"
+                        type: MD.Button.Tonal
+                        icon.name: "edit"
+                        text: qsTr("Tonal button")
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 4
+                        Layout.column: 1
+
+                        objectName: "outlinedButton"
+                        type: MD.Button.Outlined
+                        icon.name: "edit"
+                        text: qsTr("Outlined button")
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 5
+                        Layout.column: 1
+
+                        objectName: "textButton"
+                        type: MD.Button.Text
+                        icon.name: "edit"
+                        text: qsTr("Text button")
+                        enabled: enabledSwitch.checked
+                    }
+
+                    // Column 2 (toggle unselected)
+
+                    MD.Button {
+                        Layout.row: 1
+                        Layout.column: 2
+
+                        objectName: "elevatedButton"
+                        type: MD.Button.Elevated
+                        icon.name: "edit"
+                        text: qsTr("Elevated unselected")
+                        checkable: false
+                        checked: false
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 2
+                        Layout.column: 2
+
+                        objectName: "filledButton"
+                        type: MD.Button.Filled
+                        icon.name: "edit"
+                        text: qsTr("Filled unselected")
+                        checkable: false
+                        checked: false
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 3
+                        Layout.column: 2
+
+                        objectName: "tonalButton"
+                        type: MD.Button.Tonal
+                        icon.name: "edit"
+                        text: qsTr("Tonal unselected")
+                        checkable: false
+                        checked: false
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 4
+                        Layout.column: 2
+
+                        objectName: "outlinedButton"
+                        type: MD.Button.Outlined
+                        icon.name: "edit"
+                        text: qsTr("Outlined unselected")
+                        checkable: false
+                        checked: false
+                        enabled: enabledSwitch.checked
+                    }
+
+                    // Column 3 (toggle selected)
+
+                    MD.Button {
+                        Layout.row: 1
+                        Layout.column: 3
+
+                        objectName: "elevatedButton"
+                        type: MD.Button.Elevated
+                        icon.name: "edit"
+                        text: qsTr("Elevated selected")
+                        checkable: false
+                        checked: true
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 2
+                        Layout.column: 3
+
+                        objectName: "filledButton"
+                        type: MD.Button.Filled
+                        icon.name: "edit"
+                        text: qsTr("Filled selected")
+                        checkable: false
+                        checked: true
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 3
+                        Layout.column: 3
+
+                        objectName: "tonalButton"
+                        type: MD.Button.Tonal
+                        icon.name: "edit"
+                        text: qsTr("Tonal selected")
+                        checkable: false
+                        checked: true
+                        enabled: enabledSwitch.checked
+                    }
+
+                    MD.Button {
+                        Layout.row: 4
+                        Layout.column: 3
+
+                        objectName: "outlinedButton"
+                        type: MD.Button.Outlined
+                        icon.name: "edit"
+                        text: qsTr("Outlined selected")
+                        checkable: false
+                        checked: true
+                        enabled: enabledSwitch.checked
+                    }
                 }
             }
         }

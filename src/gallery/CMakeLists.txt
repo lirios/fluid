@@ -13,6 +13,8 @@ qt_add_resources(FluidGallery "gallery"
         qml/Components.qml
         qml/Elevation.qml
         qml/IconButton.qml
+        qml/Indicators.qml
+        qml/Lists.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/Typography.qml

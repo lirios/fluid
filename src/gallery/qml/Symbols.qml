@@ -6,8 +6,6 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
-    // title: qsTr("Symbols")
-
     readonly property int symbolSize: 96
 
     component SymbolItem: MD.Control {
@@ -29,41 +27,45 @@ Item {
         }
     }
 
-    ColumnLayout {
+    MD.ScrollView {
         anchors.fill: parent
 
-        MD.ComboBox {
-            id: comboBox
+        ColumnLayout {
+            anchors.fill: parent
 
-            Layout.alignment: Qt.AlignHCenter
+            MD.ComboBox {
+                id: comboBox
 
-            model: ["Outlined", "Rounded", "Sharp"]
-        }
+                Layout.alignment: Qt.AlignHCenter
 
-        MD.ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+                model: ["Outlined", "Rounded", "Sharp"]
+            }
 
-            contentWidth: availableWidth
+            MD.ScrollView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-            GridLayout {
-                width: parent.width
-                columns: (parent.width - columnSpacing) / (symbolSize + columnSpacing)
-                rowSpacing: symbolSize / 2
-                columnSpacing: symbolSize / 2
+                contentWidth: availableWidth
 
-                Repeater {
-                    model: SymbolsModel {}
+                GridLayout {
+                    width: parent.width
+                    columns: (parent.width - columnSpacing) / (symbolSize + columnSpacing)
+                    rowSpacing: symbolSize / 2
+                    columnSpacing: symbolSize / 2
 
-                    delegate: SymbolItem {
-                        name: model.name
-                        style: {
-                            if (comboBox.currentIndex === 0)
-                                return MD.Symbol.Style.Outlined;
-                            else if (comboBox.currentIndex === 1)
-                                return MD.Symbol.Style.Rounded;
-                            else
-                                return MD.Symbol.Style.Sharp;
+                    Repeater {
+                        model: SymbolsModel {}
+
+                        delegate: SymbolItem {
+                            name: model.name
+                            style: {
+                                if (comboBox.currentIndex === 0)
+                                    return MD.Symbol.Style.Outlined;
+                                else if (comboBox.currentIndex === 1)
+                                    return MD.Symbol.Style.Rounded;
+                                else
+                                    return MD.Symbol.Style.Sharp;
+                            }
                         }
                     }
                 }

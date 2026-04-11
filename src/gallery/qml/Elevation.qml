@@ -17,8 +17,6 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
-    // title: qsTr("Elevation")
-
     component Elevation: MD.Elevation {
         Layout.fillWidth: true
         Layout.preferredWidth: 160
@@ -40,57 +38,61 @@ Item {
         }
     }
 
-    ColumnLayout {
-        anchors.centerIn: parent
-        spacing: 24
+    MD.ScrollView {
+        anchors.fill: parent
 
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: 16
+        ColumnLayout {
+            anchors.centerIn: parent
+            spacing: MD.Tokens.spacingLarge
 
-            MD.Label {
-                text: qsTr("Elevation: %1").arg(radiusSlider.value)
-            }
-
-            MD.Slider {
-                id: radiusSlider
-
+            RowLayout {
                 Layout.fillWidth: true
+                spacing: MD.Tokens.spacingLarge
 
-                from: 0
-                to: 80
-                stepSize: 2
-                value: 8
-            }
-        }
+                MD.Label {
+                    text: qsTr("Elevation: %1").arg(radiusSlider.value)
+                }
 
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: 36
+                MD.Slider {
+                    id: radiusSlider
 
-            Elevation {
-                elevation: MD.Tokens.elevationLevel0
-            }
-            Elevation {
-                elevation: MD.Tokens.elevationLevel1
-            }
-            Elevation {
-                elevation: MD.Tokens.elevationLevel2
-            }
-        }
+                    Layout.fillWidth: true
 
-        RowLayout {
-            Layout.fillWidth: true
-            spacing: 36
+                    from: 0
+                    to: 80
+                    stepSize: 2
+                    value: 8
+                }
+            }
 
-            Elevation {
-                elevation: MD.Tokens.elevationLevel3
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: MD.Tokens.spacingExtraLarge
+
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel0
+                }
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel1
+                }
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel2
+                }
             }
-            Elevation {
-                elevation: MD.Tokens.elevationLevel4
-            }
-            Elevation {
-                elevation: MD.Tokens.elevationLevel5
+
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: MD.Tokens.spacingExtraLarge
+
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel3
+                }
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel4
+                }
+                Elevation {
+                    elevation: MD.Tokens.elevationLevel5
+                }
             }
         }
     }

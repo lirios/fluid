@@ -17,13 +17,15 @@ Item {
     property color outlineColor
     property real outlineWidth
 
-    implicitWidth: 18
-    implicitHeight: 18
+    implicitWidth: 18 + MD.Tokens.spacingSmall
+    implicitHeight: 18 + MD.Tokens.spacingSmall
 
     Rectangle {
         id: container
 
-        anchors.fill: parent
+        anchors.centerIn: parent
+        implicitWidth: 18
+        implicitHeight: 18
         color: indicatorItem.backgroundColor
         radius: 2
         border.width: indicatorItem.outlineWidth
@@ -34,11 +36,13 @@ Item {
                 duration: MD.Tokens.durationShort2
             }
         }
+
         Behavior on border.color {
             ColorAnimation {
                 duration: MD.Tokens.durationShort2
             }
         }
+
         Behavior on border.width {
             NumberAnimation {
                 duration: MD.Tokens.durationShort2
@@ -53,8 +57,8 @@ Item {
 
             transform: [
                 Translate {
-                    x: -7 + (indicatorItem.width - 18) / 2
-                    y: -7 + (indicatorItem.height - 18) / 2
+                    x: -7
+                    y: -7
                 }
             ]
 
@@ -69,6 +73,7 @@ Item {
                     path: "M 14 18.2 L 11.4 15.6 L 10 17 L 14 21 L 22 13 L 20.6 11.6 L 14 18.2 "
                 }
             }
+
             ShapePath {
                 objectName: "svg_path:partially_checked"
                 strokeColor: "transparent"

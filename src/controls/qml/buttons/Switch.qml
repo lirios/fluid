@@ -198,6 +198,7 @@ T.Switch {
                             duration: MD.Tokens.durationShort2
                         }
                     }
+
                     Behavior on color {
                         ColorAnimation {
                             duration: MD.Tokens.durationShort2

@@ -5,8 +5,6 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
 				"TheQtCompany.qt-cpp-pack",
 				"Delgan.qml-format",
 				"xaver.clang-format",

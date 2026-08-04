@@ -4,6 +4,10 @@
             "file": ".github/commit-instructions.md"
         }
     ],
+    "chat.hookFilesLocations": {
+        ".claude/settings.json": true,
+        ".claude/settings.local.json": true
+    },
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.installPrefix": "${workspaceFolder}/build/install-root",
     "editor.formatOnSave": true,

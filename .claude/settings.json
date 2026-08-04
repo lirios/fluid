@@ -1,0 +1,28 @@
+{
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Write",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .claude/hooks/check-license-header.py",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .claude/hooks/audit-license-header.py",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ]
+    }
+}

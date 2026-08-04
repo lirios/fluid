@@ -1,0 +1,29 @@
+{
+    "description": "MPL-2.0 SPDX license header enforcement, ported from .github/hooks",
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "^apply_patch$",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .codex/hooks/check-license-header.py",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "^apply_patch$",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .codex/hooks/audit-license-header.py",
+                        "timeout": 10
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -7,6 +7,7 @@ add_executable(tst_fluid_controls
     tst_icon.qml
     tst_listitem.qml
     tst_ripple.qml
+    tst_slider.qml
     tst_typography.qml
     tst_utils.qml
 )

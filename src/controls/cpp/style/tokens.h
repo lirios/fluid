@@ -19,6 +19,7 @@
 
 #include "easing.h"
 #include "typescale.h"
+#include "slider.h"
 
 namespace Fluid {
 
@@ -100,6 +101,9 @@ class Tokens : public QObject
     Q_PROPERTY(Fluid::Easing easing READ easing CONSTANT FINAL)
     Q_PROPERTY(Fluid::Spring spring READ spring CONSTANT FINAL)
 
+    // Component tokens - Slider
+    Q_PROPERTY(Fluid::Slider slider READ slider CONSTANT FINAL)
+
 public:
     explicit Tokens(QObject *parent = nullptr);
 
@@ -153,6 +157,9 @@ public:
     Easing easing() const;
     Spring spring() const;
 
+    // Component tokens - Slider
+    Slider slider() const;
+
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
@@ -160,6 +167,7 @@ private:
     EmphasizedTypeScale *m_emphasizedTypeScale = nullptr;
     Easing m_easing;
     Spring m_spring;
+    Slider m_slider;
 };
 
 } // namespace Fluid

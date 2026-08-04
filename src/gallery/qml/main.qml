@@ -56,6 +56,10 @@ Window {
                     source: "Indicators.qml"
                 }
                 ListElement {
+                    name: qsTr("Slider")
+                    source: "Slider.qml"
+                }
+                ListElement {
                     name: qsTr("Lists")
                     source: "Lists.qml"
                 }

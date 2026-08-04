@@ -219,6 +219,12 @@ Spring Tokens::spring() const
     return m_spring;
 }
 
+// Component tokens - Slider
+Slider Tokens::slider() const
+{
+    return m_slider;
+}
+
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine)

@@ -14,6 +14,7 @@ set(_sources
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/style/tokens.cpp cpp/style/tokens.h
     cpp/style/typescale.cpp cpp/style/typescale.h
+    cpp/tokens/slider.cpp cpp/tokens/slider.h
 )
 
 # QML and JavaScript files
@@ -41,6 +42,7 @@ target_include_directories(${LIBNAME}
         "${CMAKE_CURRENT_SOURCE_DIR}/cpp/items"
         "${CMAKE_CURRENT_SOURCE_DIR}/cpp/scenegraph"
         "${CMAKE_CURRENT_SOURCE_DIR}/cpp/style"
+        "${CMAKE_CURRENT_SOURCE_DIR}/cpp/tokens"
         "${CMAKE_CURRENT_SOURCE_DIR}/cpp/utils"
 )
 target_link_libraries(${LIBNAME}

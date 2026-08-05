@@ -7,14 +7,14 @@ set(_sources
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h
     cpp/style/color.cpp cpp/style/color.h
-    cpp/style/easing.cpp cpp/style/easing.h
     cpp/style/elevation.cpp cpp/style/elevation.h
     cpp/style/palette.h
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
-    cpp/style/tokens.cpp cpp/style/tokens.h
-    cpp/style/typescale.cpp cpp/style/typescale.h
+    cpp/tokens/easing.cpp cpp/tokens/easing.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
+    cpp/tokens/tokens.cpp cpp/tokens/tokens.h
+    cpp/tokens/typescale.cpp cpp/tokens/typescale.h
 )
 
 # QML and JavaScript files

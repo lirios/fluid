@@ -24,8 +24,8 @@ defaults, and implicit size; delegates receive state explicitly.
 
 Key directories:
 
-- `src/controls/cpp/style/`: global tokens, theme, typography, palette.
-- `src/controls/cpp/tokens/`: component token gadgets.
+- `src/controls/cpp/style/`: theme, color, palette, elevation.
+- `src/controls/cpp/tokens/`: global and component token gadgets.
 - `src/controls/qml/`: public controls and delegates.
 - `src/private/`: internal helpers.
 - `src/gallery/`: showcases.

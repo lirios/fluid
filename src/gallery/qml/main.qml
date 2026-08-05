@@ -17,7 +17,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 import Fluid as MD
 
-Window {
+MD.ApplicationWindow {
     id: window
 
     visible: true

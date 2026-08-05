@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "fluid-gallery",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/install-root/bin/fluid-gallery",
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "${workspaceFolder}/build/install-root/bin:${env:PATH}"
+                },
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${workspaceFolder}/build/install-root/lib"
+                },
+                {
+                    "name": "QML2_IMPORT_PATH",
+                    "value": "${workspaceFolder}/build/install-root/lib/qml"
+                }
+            ]
+        }
+    ]
+}

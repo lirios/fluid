@@ -1,16 +1,5 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 #include "color.h"
 
@@ -21,7 +10,8 @@ Color::Color(QObject *parent)
 
 QColor Color::transparent(const QColor &color, qreal alpha)
 {
-    return QColor(color.red(), color.green(), color.blue(), int(qBound<qreal>(0.0, alpha, 1.0) * 255));
+    return QColor(color.red(), color.green(), color.blue(),
+                  int(qBound<qreal>(0.0, alpha, 1.0) * 255));
 }
 
 QColor Color::blend(const QColor &color1, const QColor &color2, qreal alpha)

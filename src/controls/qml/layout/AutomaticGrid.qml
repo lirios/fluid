@@ -1,17 +1,6 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-FileCopyrightText: 2018 Michael Spencer <sonrisesoftware@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 
@@ -89,7 +78,7 @@ Grid {
     property real minColumnSpacing
 
     columns: {
-        var flooredResult = Math.floor(widthOverride/cellWidth);
+        var flooredResult = Math.floor(widthOverride / cellWidth);
         if (flooredResult >= 1 && flooredResult <= repeater.count)
             if ((widthOverride - (flooredResult * cellWidth)) / (flooredResult + 1) < minColumnSpacing)
                 return flooredResult - 1;
@@ -102,7 +91,7 @@ Grid {
     }
 
     columnSpacing: (widthOverride - (columns * cellWidth)) / (columns + 1) < (minColumnSpacing / 2) ? (minColumnSpacing / 2) : (widthOverride - (columns * cellWidth)) / (columns + 1)
-    width: widthOverride - 2*columnSpacing
+    width: widthOverride - 2 * columnSpacing
 
     Repeater {
         id: repeater

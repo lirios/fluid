@@ -1,16 +1,5 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Michael Spencer <sonrisesoftware@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 import QtTest
@@ -30,30 +19,30 @@ TestCase {
     }
 
     function test_clipboard_works() {
-        var text = "Hello World"
+        var text = "Hello World";
 
-        clipboard.text = text
+        clipboard.text = text;
 
-        compare(clipboard.text, text)
+        compare(clipboard.text, text);
     }
 
     function tests_setting_text_should_fire_textChanged() {
-        clipboard.text = ""
+        clipboard.text = "";
 
-        textChangedSpy.clear()
+        textChangedSpy.clear();
 
-        clipboard.text = "Random Text"
+        clipboard.text = "Random Text";
 
-        compare(textChangedSpy.count, 1)
+        compare(textChangedSpy.count, 1);
     }
 
     function test_clear_should_fire_textChanged() {
-        clipboard.text = "Non empty text"
+        clipboard.text = "Non empty text";
 
-        textChangedSpy.clear()
+        textChangedSpy.clear();
 
-        clipboard.clear()
+        clipboard.clear();
 
-        compare(textChangedSpy.count, 1)
+        compare(textChangedSpy.count, 1);
     }
 }

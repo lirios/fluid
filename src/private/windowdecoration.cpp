@@ -1,16 +1,5 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 #include <QGuiApplication>
 #include <QPlatformSurfaceEvent>
@@ -32,8 +21,8 @@ WindowDecoration::WindowDecoration(QObject *parent)
 {
 #ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland")))
-        connect(s_decorationManager, &FluidDecorationManager::activeChanged,
-                this, &WindowDecoration::setServerSideDecorationColor);
+        connect(s_decorationManager, &FluidDecorationManager::activeChanged, this,
+                &WindowDecoration::setServerSideDecorationColor);
 #endif
 }
 
@@ -125,7 +114,8 @@ void WindowDecoration::updateDecorationColor()
 #ifdef FLUID_ENABLE_WAYLAND
     if (QGuiApplication::platformName().startsWith(QStringLiteral("wayland"))) {
         // Calculate text color automatically based on the decoration color
-        const qreal alpha = 1.0 - (0.299 * m_color.redF() + 0.587 * m_color.greenF() + 0.114 * m_color.blueF());
+        const qreal alpha =
+                1.0 - (0.299 * m_color.redF() + 0.587 * m_color.greenF() + 0.114 * m_color.blueF());
         const bool isDark = m_color.alphaF() > 0.0 && alpha >= 0.3;
         const QColor textColor = isDark ? QColor(255, 255, 255, 255) : QColor(0, 0, 0, 221);
 

@@ -1,17 +1,6 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Michael Spencer <sonrisesoftware@gmail.com>
- * Copyright (C) 2014 Bogdan Cuza <bogdan.cuza@hotmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Michael Spencer <sonrisesoftware@gmail.com>
+// SPDX-FileCopyrightText: 2014 Bogdan Cuza <bogdan.cuza@hotmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 import Qt5Compat.GraphicalEffects
@@ -58,8 +47,7 @@ Item {
     /*!
         This property holds the diameter of the completely open wave.
     */
-    property real diameter: 2 * Math.sqrt(Math.pow(Math.max(initialX, abstractWidth - initialX), 2)
-            + Math.pow(Math.max(initialY, abstractHeight - initialY), 2))
+    property real diameter: 2 * Math.sqrt(Math.pow(Math.max(initialX, abstractWidth - initialX), 2) + Math.pow(Math.max(initialY, abstractHeight - initialY), 2))
 
     /*!
         This signal is emitted, when the wave has finished opening or closing.
@@ -71,8 +59,8 @@ Item {
         Opens the wave centering the wave at (\a x, \a y).
     */
     function openWave(x, y) {
-        wave.initialX = x || parent.width/2;
-        wave.initialY = y || parent.height/2;
+        wave.initialX = x || parent.width / 2;
+        wave.initialY = y || parent.height / 2;
         wave.open = true;
     }
 
@@ -80,8 +68,8 @@ Item {
         Closes the wave centering the wave at (\a x, \a y).
     */
     function closeWave(x, y) {
-        wave.initialX = x || parent.width/2;
-        wave.initialY = y || parent.height/2;
+        wave.initialX = x || parent.width / 2;
+        wave.initialY = y || parent.height / 2;
         wave.open = false;
     }
 
@@ -92,11 +80,11 @@ Item {
             width: wave.width
             height: wave.height
             Rectangle {
-                x: initialX - size/2
-                y: initialY - size/2
+                x: initialX - size / 2
+                y: initialY - size / 2
                 width: size
                 height: size
-                radius: size/2
+                radius: size / 2
             }
         }
     }
@@ -118,7 +106,7 @@ Item {
 
         SequentialAnimation {
             ScriptAction {
-                script: wave.visible = wave.open;
+                script: wave.visible = wave.open
             }
             NumberAnimation {
                 property: "size"

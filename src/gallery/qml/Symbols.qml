@@ -1,5 +1,5 @@
-// Copyright (C) 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
-// SPDX-License-Identifier: MPL2
+// SPDX-FileCopyrightText: 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 import QtQuick.Layouts

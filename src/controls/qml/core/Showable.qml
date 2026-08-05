@@ -1,16 +1,5 @@
-/*
- * This file is part of Fluid.
- *
- * Copyright (C) 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
- *
- * $BEGIN_LICENSE:MPL2$
- *
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- *
- * $END_LICENSE$
- */
+// SPDX-FileCopyrightText: 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
 
@@ -18,6 +7,7 @@ import QtQuick
     \brief Showtable component.
 */
 FocusScope {
+    id: root
     /*!
         Animation to play to show the component.
     */
@@ -27,8 +17,6 @@ FocusScope {
         Animation to play to hide the component.
     */
     property var hideAnimation
-
-    id: root
     visible: false
     onHideAnimationChanged: {
         // Automatically set animation target when it's possible
@@ -39,7 +27,7 @@ FocusScope {
 
         // Hide the item when the animation is over
         if (hideAnimation) {
-            hideAnimation.runningChanged.connect(function() {
+            hideAnimation.runningChanged.connect(function () {
                 if (!hideAnimation.running)
                     root.visible = false;
             });

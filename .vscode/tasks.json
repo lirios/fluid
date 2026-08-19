@@ -1,0 +1,16 @@
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run FluidGallery",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-lc",
+                "source '${command:cmake.buildDirectory}/prefix.sh' && exec '${command:cmake.launchTargetPath}'"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

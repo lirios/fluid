@@ -214,6 +214,12 @@ Slider Tokens::slider() const
     return m_slider;
 }
 
+// Component tokens - Divider
+Divider Tokens::divider() const
+{
+    return m_divider;
+}
+
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine)

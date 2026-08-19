@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "divider.h"
 #include "easing.h"
 #include "typescale.h"
 #include "slider.h"
@@ -93,6 +94,9 @@ class Tokens : public QObject
     // Component tokens - Slider
     Q_PROPERTY(Fluid::Slider slider READ slider CONSTANT FINAL)
 
+    // Component tokens - Divider
+    Q_PROPERTY(Fluid::Divider divider READ divider CONSTANT FINAL)
+
 public:
     explicit Tokens(QObject *parent = nullptr);
 
@@ -149,6 +153,9 @@ public:
     // Component tokens - Slider
     Slider slider() const;
 
+    // Component tokens - Divider
+    Divider divider() const;
+
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
@@ -157,6 +164,7 @@ private:
     Easing m_easing;
     Spring m_spring;
     Slider m_slider;
+    Divider m_divider;
 };
 
 } // namespace Fluid

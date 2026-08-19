@@ -3,6 +3,7 @@ add_executable(tst_fluid_controls
     tst_clipboard.qml
     tst_color.qml
     tst_date.qml
+    tst_divider.qml
     tst_fab.qml
     tst_icon.qml
     tst_listitem.qml

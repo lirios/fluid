@@ -37,6 +37,10 @@ MD.ApplicationWindow {
                     source: "Components.qml"
                 }
                 ListElement {
+                    name: qsTr("Divider")
+                    source: "Divider.qml"
+                }
+                ListElement {
                     name: qsTr("Icon Button")
                     source: "IconButton.qml"
                 }

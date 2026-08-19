@@ -4,9 +4,8 @@ Applies to public components under `src/controls/qml/`.
 
 ## Placement
 
-- Put public controls in their category; generic controls in `controls/`.
-- Put substantial control-specific visuals in `delegates/`, small reusable visuals in
-  `indicators/`, low-level items in `internal/` or `items/`, and bases/helpers in `core/`.
+- Put public controls and reusable visuals in `components/`.
+- Put low-level items in `internal/`, visual effects in `effects/`, and bases/helpers in `core/`.
 - QML/JavaScript files are globbed; only singletons need explicit CMake marking.
 
 ## Public controls

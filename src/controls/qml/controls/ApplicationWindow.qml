@@ -10,7 +10,7 @@ T.ApplicationWindow {
     color: MD.Style.surfaceColor
 
     font.family: typescale.face === MD.Style.TypeFace.Brand ? MD.Style.brandFontFamily : MD.Style.plainFontFamily
-    font.pixelSize: typescale.size
-    font.weight: typescale.weight
-    font.letterSpacing: typescale.tracking
+    font.pixelSize: typescale && typescale.size !== undefined ? typescale.size : MD.Tokens.typescale.bodyMedium.fontSize
+    font.weight: typescale && typescale.weight !== undefined ? typescale.weight : MD.Tokens.typescale.bodyMedium.fontWeight
+    font.letterSpacing: typescale && typescale.tracking !== undefined ? typescale.tracking : MD.Tokens.typescale.bodyMedium.tracking
 }

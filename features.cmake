@@ -7,7 +7,7 @@
 include(FeatureSummary)
 
 # Documentation
-option(FLUID_WITH_DOCUMENTATION "Build documentation" ON)
+option(FLUID_WITH_DOCUMENTATION "Build documentation" OFF)
 if(FLUID_WITH_DOCUMENTATION)
     find_package(Doxygen QUIET)
     if(NOT DOXYGEN_FOUND)

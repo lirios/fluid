@@ -43,6 +43,6 @@ jobs:
             wayland
       - name: Build
         run: |
-          cmake -GNinja -B build
+          cmake -GNinja -B build -DFLUID_WITH_DOCUMENTATION=ON
           cmake --build build
           cmake --install build

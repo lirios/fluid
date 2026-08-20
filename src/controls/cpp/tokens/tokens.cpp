@@ -208,6 +208,12 @@ Spring Tokens::spring() const
     return m_spring;
 }
 
+// Component tokens - App bar
+AppBar Tokens::appBar() const
+{
+    return m_appBar;
+}
+
 // Component tokens - Slider
 Slider Tokens::slider() const
 {

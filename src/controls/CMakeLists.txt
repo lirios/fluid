@@ -11,6 +11,7 @@ set(_sources
     cpp/style/palette.h
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
+    cpp/tokens/appbar.cpp cpp/tokens/appbar.h
     cpp/tokens/divider.cpp cpp/tokens/divider.h
     cpp/tokens/easing.cpp cpp/tokens/easing.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h

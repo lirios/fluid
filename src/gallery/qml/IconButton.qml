@@ -18,6 +18,10 @@ Item {
         typescale: MD.Tokens.typescale.labelLarge
     }
 
+    component DemoIconButton: MD.IconButton {
+        text: icon.name.length > 0 ? icon.name.replace(/_/g, " ") : qsTr("Icon action")
+    }
+
     component Sizes: MD.GroupBox {
         title: qsTr("Sizes")
 
@@ -25,7 +29,7 @@ Item {
             anchors.centerIn: parent
             spacing: MD.Tokens.spacingLarge
 
-            MD.IconButton {
+            DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 type: MD.IconButton.Type.Filled
@@ -33,7 +37,7 @@ Item {
                 icon.name: "play_arrow"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 type: MD.IconButton.Type.Filled
@@ -41,7 +45,7 @@ Item {
                 icon.name: "play_arrow"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 type: MD.IconButton.Type.Filled
@@ -49,7 +53,7 @@ Item {
                 icon.name: "play_arrow"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 type: MD.IconButton.Type.Filled
@@ -57,7 +61,7 @@ Item {
                 icon.name: "play_arrow"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 type: MD.IconButton.Type.Filled
@@ -75,13 +79,13 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: MD.Tokens.spacingLarge
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Standard
                 shape: MD.IconButton.Shape.Round
                 icon.name: "share"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Standard
                 shape: MD.IconButton.Shape.Square
                 icon.name: "share"
@@ -97,22 +101,22 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: MD.Tokens.spacingLarge
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 icon.name: "video_camera_front"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Tonal
                 icon.name: "video_camera_front"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Outlined
                 icon.name: "video_camera_front"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Standard
                 icon.name: "video_camera_front"
             }
@@ -127,19 +131,19 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: MD.Tokens.spacingLarge
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Default
                 icon.name: "menu"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Narrow
                 icon.name: "menu"
             }
 
-            MD.IconButton {
+            DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Wide
                 icon.name: "menu"
@@ -261,7 +265,7 @@ Item {
 
                 // Column 1 (default)
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 1
                     Layout.column: 1
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -272,7 +276,7 @@ Item {
                     enabled: enabledSwitch.checked
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 2
                     Layout.column: 1
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -283,7 +287,7 @@ Item {
                     enabled: enabledSwitch.checked
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 3
                     Layout.column: 1
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -294,7 +298,7 @@ Item {
                     enabled: enabledSwitch.checked
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 4
                     Layout.column: 1
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -307,7 +311,7 @@ Item {
 
                 // Column 2 (toggle unselected)
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 1
                     Layout.column: 2
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -316,11 +320,11 @@ Item {
                     type: MD.IconButton.Type.Filled
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: false
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 2
                     Layout.column: 2
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -329,11 +333,11 @@ Item {
                     type: MD.IconButton.Type.Tonal
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: false
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 3
                     Layout.column: 2
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -342,11 +346,11 @@ Item {
                     type: MD.IconButton.Type.Outlined
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: false
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 4
                     Layout.column: 2
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -355,13 +359,13 @@ Item {
                     type: MD.IconButton.Type.Standard
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: false
                 }
 
                 // Column 3 (toggle selected)
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 1
                     Layout.column: 3
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -370,11 +374,11 @@ Item {
                     type: MD.IconButton.Type.Filled
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: true
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 2
                     Layout.column: 3
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -383,11 +387,11 @@ Item {
                     type: MD.IconButton.Type.Tonal
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: true
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 3
                     Layout.column: 3
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -396,11 +400,11 @@ Item {
                     type: MD.IconButton.Type.Outlined
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: true
                 }
 
-                MD.IconButton {
+                DemoIconButton {
                     Layout.row: 4
                     Layout.column: 3
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -409,7 +413,7 @@ Item {
                     type: MD.IconButton.Type.Standard
                     icon.name: "settings"
                     enabled: enabledSwitch.checked
-                    checkable: false
+                    checkable: true
                     checked: true
                 }
             }

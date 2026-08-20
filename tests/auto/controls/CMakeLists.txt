@@ -1,11 +1,13 @@
 add_executable(tst_fluid_controls
     controls.cpp
+    tst_appbar.qml
     tst_clipboard.qml
     tst_color.qml
     tst_date.qml
     tst_divider.qml
     tst_fab.qml
     tst_icon.qml
+    tst_iconbutton.qml
     tst_listitem.qml
     tst_ripple.qml
     tst_slider.qml

@@ -6,6 +6,7 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#include "appbar.h"
 #include "divider.h"
 #include "easing.h"
 #include "typescale.h"
@@ -91,6 +92,9 @@ class Tokens : public QObject
     Q_PROPERTY(Fluid::Easing easing READ easing CONSTANT FINAL)
     Q_PROPERTY(Fluid::Spring spring READ spring CONSTANT FINAL)
 
+    // Component tokens - App bar
+    Q_PROPERTY(Fluid::AppBar appBar READ appBar CONSTANT FINAL)
+
     // Component tokens - Slider
     Q_PROPERTY(Fluid::Slider slider READ slider CONSTANT FINAL)
 
@@ -150,6 +154,9 @@ public:
     Easing easing() const;
     Spring spring() const;
 
+    // Component tokens - App bar
+    AppBar appBar() const;
+
     // Component tokens - Slider
     Slider slider() const;
 
@@ -163,6 +170,7 @@ private:
     EmphasizedTypeScale *m_emphasizedTypeScale = nullptr;
     Easing m_easing;
     Spring m_spring;
+    AppBar m_appBar;
     Slider m_slider;
     Divider m_divider;
 };

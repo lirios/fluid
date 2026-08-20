@@ -34,7 +34,7 @@ endif()
 
 if(FLUID_WITH_QML_MODULES)
     ## Find Qt:
-    find_package(Qt6 6.8
+    find_package(Qt6 6.9
         REQUIRED
         COMPONENTS
             Core
@@ -51,15 +51,15 @@ if(FLUID_WITH_QML_MODULES)
         # GuiPrivate is supposed to be automatically found when finding Gui per
         # https://doc.qt.io/qt-6/qtguiprivate-module.html#details, but on Arch
         # Linux it is packaged differently.
-        find_package(Qt6 6.8 REQUIRED COMPONENTS GuiPrivate)
+        find_package(Qt6 6.9 REQUIRED COMPONENTS GuiPrivate)
     endif()
 
     if(BUILD_TESTING)
-        find_package(Qt6 6.8 OPTIONAL_COMPONENTS QuickTest)
+        find_package(Qt6 6.9 OPTIONAL_COMPONENTS QuickTest)
     endif()
     
     ## Standard project setup:
-    qt_standard_project_setup(REQUIRES 6.8)
+    qt_standard_project_setup(REQUIRES 6.9)
 
     ## Qt policies:
     if(QT_KNOWN_POLICY_QTP0004)

@@ -3,10 +3,27 @@
 
 import QtQuick
 import QtQuick.Templates as T
+import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 
+/*!
+    \brief A Material 3 Expressive button that presents an icon without a visible label.
+
+    Set \c text to a short, localized description of the action. The template uses it
+    as the accessible name even though the control only renders its icon.
+
+    A checkable button fills its Material Symbol when selected. Set \c checkedIcon
+    when the selected state needs a different symbol or source image instead.
+*/
 T.ToolButton {
     id: control
+
+    component IconData: QtObject {
+        property string name
+        property url source
+        property color color
+        property bool fill: false
+    }
 
     //! The type of button to display. This controls the default background and foreground colors.
     enum Type {
@@ -43,7 +60,7 @@ T.ToolButton {
 
     /*!
         The type of the button. This controls the background and foreground colors of the button.
-        The default is MD.IconButton.Color.Filled, which is the recommended color for most use cases.
+        The default is MD.IconButton.Type.Filled, which is the recommended color for most use cases.
         Use Tonal for a more subdued look, Outlined for a more minimal look, and Standard for a more neutral look.
     */
     property int type: IconButton.Type.Filled
@@ -65,10 +82,100 @@ T.ToolButton {
 
     /*!
             The width variant of the button. This controls the horizontal padding and overall width of the button.
-            The default is MD.IconButton.WidthVariant.Default, which is the recommended width for most use cases.
+            The default is MD.IconButton.Width.Default, which is the recommended width for most use cases.
             Use Narrow for buttons that need to be more compact, and Wide for buttons that need to be more prominent.
         */
     property int widthVariant: IconButton.Width.Default
+
+    /*!
+        Optional icon displayed while a checkable button is checked.
+
+        When neither \c name nor \c source is set, the normal icon remains visible
+        and a Material Symbol uses its filled variation.
+    */
+    property IconData checkedIcon: IconData {}
+
+    //! Whether the icon is horizontally mirrored in right-to-left layouts.
+    property bool mirrorIconInRtl: false
+
+    /*!
+        Whether source-based icons are tinted with their resolved foreground color.
+        Disable this for multicolor artwork or photographs.
+    */
+    property bool tintSourceIcon: true
+
+    /*!
+        The foreground color used by the icon in its normal interactive states.
+        By default this follows the selected type and checked state.
+    */
+    property color contentColor: {
+        switch (type) {
+        case IconButton.Type.Filled:
+            return checked ? MD.Style.onPrimaryColor : MD.Style.onSurfaceVariantColor;
+        case IconButton.Type.Tonal:
+            return checked ? MD.Style.onSecondaryColor : MD.Style.onSecondaryContainerColor;
+        case IconButton.Type.Outlined:
+            return checked ? MD.Style.inverseOnSurfaceColor : MD.Style.onSurfaceVariantColor;
+        case IconButton.Type.Standard:
+            return checked ? MD.Style.primaryColor : MD.Style.onSurfaceVariantColor;
+        }
+    }
+
+    /*!
+        The background color used in the normal interactive states.
+        By default this follows the selected type and checked state.
+    */
+    property color containerColor: {
+        switch (type) {
+        case IconButton.Type.Filled:
+            return checked ? MD.Style.primaryColor : MD.Style.surfaceContainerColor;
+        case IconButton.Type.Tonal:
+            return checked ? MD.Style.secondaryColor : MD.Style.secondaryContainerColor;
+        case IconButton.Type.Outlined:
+            return checked ? MD.Style.inverseSurfaceColor : "transparent";
+        case IconButton.Type.Standard:
+            return "transparent";
+        }
+    }
+
+    //! The foreground color used while the button is disabled.
+    property color disabledContentColor: MD.Style.onSurfaceColor
+
+    //! The background color used while a non-standard button is disabled.
+    property color disabledContainerColor: MD.Style.onSurfaceColor
+
+    //! The outline color used by an unselected outlined button.
+    property color outlineColor: MD.Style.outlineVariantColor
+
+    //! The resolved foreground color after interaction and disabled states.
+    readonly property color effectiveContentColor: state.contentColor
+
+    //! The resolved foreground opacity after interaction and disabled states.
+    readonly property real effectiveContentOpacity: state.contentOpacity
+
+    //! The resolved background color after interaction and disabled states.
+    readonly property color effectiveContainerColor: state.containerColor
+
+    //! Whether the optional checked-state icon is currently being used.
+    readonly property bool usingCheckedIcon: checked && (checkedIcon.name.length > 0 || checkedIcon.source.toString().length > 0)
+
+    //! The icon name resolved for the current checked state.
+    readonly property string effectiveIconName: usingCheckedIcon ? checkedIcon.name : icon.name
+
+    //! The icon source resolved for the current checked state.
+    readonly property url effectiveIconSource: usingCheckedIcon ? checkedIcon.source : icon.source
+
+    //! The icon color resolved for the current checked and interaction states.
+    readonly property color effectiveIconColor: {
+        const explicitColor = usingCheckedIcon ? checkedIcon.color : icon.color;
+        return explicitColor.a > 0 ? explicitColor : effectiveContentColor;
+    }
+
+    //! Whether the resolved Material Symbol uses its filled variation.
+    readonly property bool effectiveIconFill: checked && (usingCheckedIcon ? checkedIcon.fill : true)
+
+    //! Whether the icon is currently mirrored for a right-to-left layout.
+    readonly property bool effectiveIconMirrored: mirrorIconInRtl && mirrored
 
     icon.width: state.iconSize.width
     icon.height: state.iconSize.height
@@ -86,6 +193,7 @@ T.ToolButton {
     spacing: 0
 
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
 
     QtObject {
         id: state
@@ -182,60 +290,38 @@ T.ToolButton {
                 switch (control.size) {
                 case IconButton.Size.ExtraSmall:
                 case IconButton.Size.Small:
-                    return control.MD.Tokens.cornerRadiusSmall;
+                    return MD.Tokens.cornerRadiusSmall;
                 case IconButton.Size.Medium:
-                    return control.MD.Tokens.cornerRadiusMedium;
+                    return MD.Tokens.cornerRadiusMedium;
                 case IconButton.Size.Large:
                 case IconButton.Size.ExtraLarge:
-                    return control.MD.Tokens.cornerRadiusLarge;
+                    return MD.Tokens.cornerRadiusLarge;
                 }
             } else if (control.shape === IconButton.Shape.Round) {
                 // When not pressed and the shape is round, the radius is always full
-                return control.MD.Tokens.cornerRadiusFull;
+                return MD.Tokens.cornerRadiusFull;
             } else {
                 // When not pressed and the shape is square, the radius depends on the size
                 switch (control.size) {
                 case IconButton.Size.ExtraSmall:
                 case IconButton.Size.Small:
-                    return control.MD.Tokens.cornerRadiusMedium;
+                    return MD.Tokens.cornerRadiusMedium;
                 case IconButton.Size.Medium:
-                    return control.MD.Tokens.cornerRadiusLarge;
+                    return MD.Tokens.cornerRadiusLarge;
                 case IconButton.Size.Large:
                 case IconButton.Size.ExtraLarge:
-                    return control.MD.Tokens.cornerRadiusExtraLarge;
+                    return MD.Tokens.cornerRadiusExtraLarge;
                 }
             }
         }
 
-        property color containerColor: {
-            switch (control.type) {
-            case IconButton.Type.Filled:
-                return !control.checked ? control.MD.Style.surfaceContainerColor : control.MD.Style.primaryColor;
-            case IconButton.Type.Tonal:
-                return control.checked ? control.MD.Style.secondaryColor : control.MD.Style.secondaryContainerColor;
-            case IconButton.Type.Outlined:
-                return control.checked ? control.MD.Style.inverseSurfaceColor : "transparent";
-            case IconButton.Type.Standard:
-                return "transparent";
-            }
-        }
-        property color contentColor: {
-            switch (control.type) {
-            case IconButton.Type.Filled:
-                return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-            case IconButton.Type.Tonal:
-                return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-            case IconButton.Type.Outlined:
-                return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-            case IconButton.Type.Standard:
-                return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-            }
-        }
+        property color containerColor: control.containerColor
+        property color contentColor: control.contentColor
         property color stateLayerColor: "transparent"
 
         property real contentOpacity: 1.0
         property real containerOpacity: 1.0
-        property real stateLayerOpacity: 1.0
+        property real stateLayerOpacity: 0.0
     }
 
     states: [
@@ -244,97 +330,10 @@ T.ToolButton {
             when: !control.enabled
 
             PropertyChanges {
-                state {
-                    containerColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                        case IconButton.Type.Tonal:
-                        case IconButton.Type.Outlined:
-                            return control.MD.Style.onSurfaceColor;
-                        case IconButton.Type.Standard:
-                            return "transparent";
-                        }
-                    }
-                    contentColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                        case IconButton.Type.Tonal:
-                        case IconButton.Type.Outlined:
-                        case IconButton.Type.Standard:
-                            return control.MD.Style.onSurfaceColor;
-                        }
-                    }
-                    containerOpacity: 0.1
-                    contentOpacity: 0.38
-                }
-            }
-        },
-        State {
-            name: "hovered"
-            when: control.hovered && control.enabled
-
-            PropertyChanges {
-                state {
-                    contentColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerOpacity: 0.08
-                }
-            }
-        },
-        State {
-            name: "focused"
-            when: control.visualFocus && control.enabled
-
-            PropertyChanges {
-                state {
-                    contentColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerOpacity: 0.1
-                }
+                state.containerColor: control.type === IconButton.Type.Standard ? "transparent" : control.disabledContainerColor
+                state.contentColor: control.disabledContentColor
+                state.containerOpacity: 0.1
+                state.contentOpacity: 0.38
             }
         },
         State {
@@ -342,51 +341,68 @@ T.ToolButton {
             when: control.down && control.enabled
 
             PropertyChanges {
-                state {
-                    contentColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerColor: {
-                        switch (control.type) {
-                        case IconButton.Type.Filled:
-                            return !control.checked ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.onPrimaryColor;
-                        case IconButton.Type.Tonal:
-                            return control.checked ? control.MD.Style.onSecondaryColor : control.MD.Style.onSecondaryContainerColor;
-                        case IconButton.Type.Outlined:
-                            return control.checked ? control.MD.Style.inverseOnSurfaceColor : control.MD.Style.onSurfaceVariantColor;
-                        case IconButton.Type.Standard:
-                            return control.checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceVariantColor;
-                        }
-                    }
-                    stateLayerOpacity: 0.1
-                }
+                state.stateLayerColor: control.effectiveIconColor
+                state.stateLayerOpacity: 0.1
+            }
+        },
+        State {
+            name: "focused"
+            when: control.visualFocus && control.enabled
+
+            PropertyChanges {
+                state.stateLayerColor: control.effectiveIconColor
+                state.stateLayerOpacity: 0.1
+            }
+        },
+        State {
+            name: "hovered"
+            when: control.hovered && control.enabled
+
+            PropertyChanges {
+                state.stateLayerColor: control.effectiveIconColor
+                state.stateLayerOpacity: 0.08
             }
         }
     ]
 
-    contentItem: MD.Symbol {
-        name: control.icon.name
+    contentItem: Item {
+        id: iconContent
 
-        iconWidth: control.icon.width
-        iconHeight: control.icon.height
-        width: iconWidth
-        height: iconHeight
+        implicitWidth: control.icon.width
+        implicitHeight: control.icon.height
 
-        color: state.contentColor
-        opacity: state.contentOpacity
+        transform: Scale {
+            origin.x: iconContent.width / 2
+            origin.y: iconContent.height / 2
+            xScale: control.effectiveIconMirrored ? -1 : 1
+        }
 
-        fill: control.checked
+        TImpl.IconImage {
+            id: sourceIcon
 
-        visible: control.icon.name.length > 0
+            objectName: "iconButtonSourceImage"
+            anchors.centerIn: parent
+            width: control.icon.width
+            height: control.icon.height
+            source: control.effectiveIconSource
+            sourceSize: Qt.size(control.icon.width, control.icon.height)
+            fillMode: Image.PreserveAspectFit
+            color: control.tintSourceIcon ? control.effectiveIconColor : "transparent"
+            opacity: state.contentOpacity
+            visible: control.effectiveIconSource.toString().length > 0
+        }
+
+        MD.Symbol {
+            objectName: "iconButtonSymbol"
+            anchors.centerIn: parent
+            name: control.effectiveIconName
+            iconWidth: control.icon.width
+            iconHeight: control.icon.height
+            color: control.effectiveIconColor
+            opacity: state.contentOpacity
+            fill: control.effectiveIconFill
+            visible: control.effectiveIconSource.toString().length === 0 && name.length > 0
+        }
     }
 
     background: Rectangle {
@@ -402,8 +418,8 @@ T.ToolButton {
             }
         }
 
-        border.width: control.type == IconButton.Type.Outlined && !(control.checkable && !control.checked) ? 1 : 0
-        border.color: control.MD.Style.outlineVariantColor
+        border.width: control.type === IconButton.Type.Outlined && !control.checked ? 1 : 0
+        border.color: control.outlineColor
 
         opacity: state.containerOpacity
         color: state.containerColor

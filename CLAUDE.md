@@ -49,11 +49,19 @@ Always:
 ## Build and test
 
 ```sh
+# Update git submodules
 git submodule update --init
-cmake -S . -B build --config Debug --target install -DBUILD_TESTING=ON
+
+# Configure after cloning or changing CMake files
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+
+# Build all configured targets
 cmake --build build
+
+# Run tests
 ctest --test-dir build --output-on-failure
-cmake --build build --target Fluid_qmllint
+
+# Install all configured targets
 cmake --install build
 ```
 

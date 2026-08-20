@@ -16,5 +16,11 @@
     },
     "[qml]": {
         "editor.defaultFormatter": "Delgan.qml-format"
-    }
+    },
+    "qmlFormat.extraArguments": [
+        "--newline",
+        "unix",
+        "--semicolon-rule",
+        "always",
+    ]
 }

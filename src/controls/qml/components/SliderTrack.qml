@@ -43,12 +43,9 @@ Item {
     required property color trackIconInactiveColor
     required property real trackIconSize
 
-    readonly property real baseCrossSize: Math.max(
-        MD.Tokens.slider.minimumInteractiveSize, trackHeight, handleHeight)
-    implicitWidth: horizontal ? MD.Tokens.slider.defaultLength
-                              : baseCrossSize + labelSpace
-    implicitHeight: horizontal ? baseCrossSize + labelSpace
-                               : MD.Tokens.slider.defaultLength
+    readonly property real baseCrossSize: Math.max(MD.Tokens.slider.minimumInteractiveSize, trackHeight, handleHeight)
+    implicitWidth: horizontal ? MD.Tokens.slider.defaultLength : baseCrossSize + labelSpace
+    implicitHeight: horizontal ? baseCrossSize + labelSpace : MD.Tokens.slider.defaultLength
 
     readonly property real axisLength: horizontal ? width : height
     readonly property real crossLength: horizontal ? height : width
@@ -62,14 +59,10 @@ Item {
     readonly property real handleContainerSize: trackOuterCornerRadius * 2
     readonly property real handleTravel: Math.max(0, axisLength - handleContainerSize)
     readonly property real handleCenter: trackOuterCornerRadius + visualPosition * handleTravel
-    readonly property real secondHandleCenter: trackOuterCornerRadius
-                                                 + secondVisualPosition * handleTravel
-    readonly property real rangeStartHandleCenter: Math.min(handleCenter,
-                                                            secondHandleCenter)
-    readonly property real rangeEndHandleCenter: Math.max(handleCenter,
-                                                          secondHandleCenter)
-    readonly property real handleGap: effectiveHandleWidth / 2
-                                      + MD.Tokens.slider.activeHandleLeadingSpace
+    readonly property real secondHandleCenter: trackOuterCornerRadius + secondVisualPosition * handleTravel
+    readonly property real rangeStartHandleCenter: Math.min(handleCenter, secondHandleCenter)
+    readonly property real rangeEndHandleCenter: Math.max(handleCenter, secondHandleCenter)
+    readonly property real handleGap: effectiveHandleWidth / 2 + MD.Tokens.slider.activeHandleLeadingSpace
     readonly property real centerPosition: axisLength / 2
     readonly property real centerGap: MD.Tokens.slider.activeHandleLeadingSpace
     readonly property bool handleBeforeCenter: handleCenter < centerPosition
@@ -122,22 +115,18 @@ Item {
         return root.centerPosition + root.centerGap;
     }
     readonly property real trailingInactiveEnd: root.axisLength
-    readonly property real inactiveStart: mirroredHorizontal
-                                          ? leadingInactiveStart : trailingInactiveStart
-    readonly property real inactiveEnd: mirroredHorizontal
-                                        ? leadingInactiveEnd : trailingInactiveEnd
+    readonly property real inactiveStart: mirroredHorizontal ? leadingInactiveStart : trailingInactiveStart
+    readonly property real inactiveEnd: mirroredHorizontal ? leadingInactiveEnd : trailingInactiveEnd
 
     readonly property int desiredTickCount: {
         if (root.stepSize <= 0 || root.rangeTo <= root.rangeFrom)
             return 0;
-        return Math.floor((root.rangeTo - root.rangeFrom) / root.stepSize
-                          + Number.EPSILON) + 1;
+        return Math.floor((root.rangeTo - root.rangeFrom) / root.stepSize + Number.EPSILON) + 1;
     }
     readonly property real lastTickPosition: {
         if (root.desiredTickCount <= 1)
             return 0;
-        return (root.desiredTickCount - 1) * root.stepSize
-                / (root.rangeTo - root.rangeFrom);
+        return (root.desiredTickCount - 1) * root.stepSize / (root.rangeTo - root.rangeFrom);
     }
     readonly property real tickSpanLength: handleTravel * lastTickPosition
     readonly property int maxTickCount: {
@@ -153,27 +142,22 @@ Item {
         if (root.tickVisibilityMode === root.autoLimitMode)
             return Math.min(root.desiredTickCount, root.maxTickCount);
         if (root.tickVisibilityMode === root.autoHideMode)
-            return root.desiredTickCount <= root.maxTickCount
-                    ? root.desiredTickCount : 0;
+            return root.desiredTickCount <= root.maxTickCount ? root.desiredTickCount : 0;
         if (root.tickVisibilityMode === root.hiddenMode)
             return 0;
         return 0;
     }
-    readonly property bool iconsAllowed: stepSize <= 0 && !centered && !rangeMode
-                                         && trackIconSize > 0
-    readonly property real iconRequiredLength: trackIconSize
-                                               + MD.Tokens.slider.trackIconPadding * 2
+    readonly property bool iconsAllowed: stepSize <= 0 && !centered && !rangeMode && trackIconSize > 0
+    readonly property real iconRequiredLength: trackIconSize + MD.Tokens.slider.trackIconPadding * 2
 
     function tickStepIndex(displayIndex) {
         if (root.tickCount <= 1)
             return 0;
-        return Math.round(displayIndex * (root.desiredTickCount - 1)
-                          / (root.tickCount - 1));
+        return Math.round(displayIndex * (root.desiredTickCount - 1) / (root.tickCount - 1));
     }
 
     function tickAxisPosition(displayIndex) {
-        const logicalPosition = root.tickStepIndex(displayIndex) * root.stepSize
-                                / (root.rangeTo - root.rangeFrom);
+        const logicalPosition = root.tickStepIndex(displayIndex) * root.stepSize / (root.rangeTo - root.rangeFrom);
         const visual = root.mirroredHorizontal ? 1 - logicalPosition : logicalPosition;
         return root.trackOuterCornerRadius + visual * root.handleTravel;
     }
@@ -185,11 +169,9 @@ Item {
     function pointOverlapsGap(point) {
         if (Math.abs(point - root.handleCenter) < root.handleGap)
             return true;
-        if (root.rangeMode
-                && Math.abs(point - root.secondHandleCenter) < root.handleGap)
+        if (root.rangeMode && Math.abs(point - root.secondHandleCenter) < root.handleGap)
             return true;
-        return root.centered
-                && Math.abs(point - root.centerPosition) < root.centerGap;
+        return root.centered && Math.abs(point - root.centerPosition) < root.centerGap;
     }
 
     component TrackSegment: Rectangle {
@@ -199,12 +181,8 @@ Item {
         required property real endCornerRadius
 
         readonly property real segmentLength: Math.max(0, segmentEnd - segmentStart)
-        readonly property real boundedStartRadius: Math.min(startCornerRadius,
-                                                            segmentLength / 2,
-                                                            root.trackHeight / 2)
-        readonly property real boundedEndRadius: Math.min(endCornerRadius,
-                                                          segmentLength / 2,
-                                                          root.trackHeight / 2)
+        readonly property real boundedStartRadius: Math.min(startCornerRadius, segmentLength / 2, root.trackHeight / 2)
+        readonly property real boundedEndRadius: Math.min(endCornerRadius, segmentLength / 2, root.trackHeight / 2)
 
         visible: segmentLength > 0
         x: root.horizontal ? segmentStart : root.crossCenter - root.trackHeight / 2
@@ -246,12 +224,8 @@ Item {
         objectName: "activeTrack"
         segmentStart: root.activeStart
         segmentEnd: root.activeEnd
-        startCornerRadius: segmentStart <= 0
-                           ? root.trackOuterCornerRadius
-                           : MD.Tokens.slider.trackInsideCornerRadius
-        endCornerRadius: segmentEnd >= root.axisLength
-                         ? root.trackOuterCornerRadius
-                         : MD.Tokens.slider.trackInsideCornerRadius
+        startCornerRadius: segmentStart <= 0 ? root.trackOuterCornerRadius : MD.Tokens.slider.trackInsideCornerRadius
+        endCornerRadius: segmentEnd >= root.axisLength ? root.trackOuterCornerRadius : MD.Tokens.slider.trackInsideCornerRadius
         color: root.activeTrackColor
         opacity: root.activeTrackOpacity
     }
@@ -280,17 +254,12 @@ Item {
 
             objectName: "sliderTick"
             visible: !root.pointOverlapsGap(axisPosition)
-            x: root.horizontal
-               ? axisPosition - width / 2
-               : root.crossCenter - width / 2
-            y: root.horizontal
-               ? root.crossCenter - height / 2
-               : axisPosition - height / 2
+            x: root.horizontal ? axisPosition - width / 2 : root.crossCenter - width / 2
+            y: root.horizontal ? root.crossCenter - height / 2 : axisPosition - height / 2
             width: MD.Tokens.slider.tickSize
             height: MD.Tokens.slider.tickSize
             radius: width / 2
-            color: root.pointIsActive(axisPosition)
-                   ? root.activeTickColor : root.inactiveTickColor
+            color: root.pointIsActive(axisPosition) ? root.activeTickColor : root.inactiveTickColor
             opacity: MD.Tokens.slider.visibleOpacity
         }
     }
@@ -301,12 +270,8 @@ Item {
         width: MD.Tokens.slider.stopIndicatorSize
         height: MD.Tokens.slider.stopIndicatorSize
         radius: width / 2
-        x: root.horizontal
-           ? axisPosition - width / 2
-           : root.crossCenter - width / 2
-        y: root.horizontal
-           ? root.crossCenter - height / 2
-           : axisPosition - height / 2
+        x: root.horizontal ? axisPosition - width / 2 : root.crossCenter - width / 2
+        y: root.horizontal ? root.crossCenter - height / 2 : axisPosition - height / 2
         color: root.inactiveTickColor
         opacity: MD.Tokens.slider.visibleOpacity
     }
@@ -314,50 +279,38 @@ Item {
     StopIndicator {
         objectName: "startStopIndicator"
         axisPosition: root.trackOuterCornerRadius
-        visible: (root.centered || root.rangeMode)
-                 && !root.pointOverlapsGap(axisPosition)
+        visible: (root.centered || root.rangeMode) && !root.pointOverlapsGap(axisPosition)
     }
 
     StopIndicator {
         objectName: "endStopIndicator"
         axisPosition: root.axisLength - root.trackOuterCornerRadius
-        visible: (root.centered || root.rangeMode || !root.mirroredHorizontal)
-                 && !root.pointOverlapsGap(axisPosition)
+        visible: (root.centered || root.rangeMode || !root.mirroredHorizontal) && !root.pointOverlapsGap(axisPosition)
     }
 
     StopIndicator {
         objectName: "mirroredEndStopIndicator"
         axisPosition: root.trackOuterCornerRadius
-        visible: !root.centered && !root.rangeMode && root.mirroredHorizontal
-                 && !root.pointOverlapsGap(axisPosition)
+        visible: !root.centered && !root.rangeMode && root.mirroredHorizontal && !root.pointOverlapsGap(axisPosition)
     }
 
     component TrackIcon: MD.Symbol {
         required property bool activeSegment
         required property bool logicalStart
 
-        readonly property real segmentStart: activeSegment
-                                              ? root.activeStart : root.inactiveStart
-        readonly property real segmentEnd: activeSegment
-                                            ? root.activeEnd : root.inactiveEnd
+        readonly property real segmentStart: activeSegment ? root.activeStart : root.inactiveStart
+        readonly property real segmentEnd: activeSegment ? root.activeEnd : root.inactiveEnd
         readonly property bool logicalForward: !root.mirroredHorizontal
         readonly property real axisPosition: {
             const fromStart = logicalStart === logicalForward;
             if (fromStart)
-                return segmentStart + MD.Tokens.slider.trackIconPadding
-                        + root.trackIconSize / 2;
-            return segmentEnd - MD.Tokens.slider.trackIconPadding
-                    - root.trackIconSize / 2;
+                return segmentStart + MD.Tokens.slider.trackIconPadding + root.trackIconSize / 2;
+            return segmentEnd - MD.Tokens.slider.trackIconPadding - root.trackIconSize / 2;
         }
 
-        visible: root.iconsAllowed && name.length > 0
-                 && segmentEnd - segmentStart >= root.iconRequiredLength
-        x: root.horizontal
-           ? axisPosition - width / 2
-           : root.crossCenter - width / 2
-        y: root.horizontal
-           ? root.crossCenter - height / 2
-           : axisPosition - height / 2
+        visible: root.iconsAllowed && name.length > 0 && segmentEnd - segmentStart >= root.iconRequiredLength
+        x: root.horizontal ? axisPosition - width / 2 : root.crossCenter - width / 2
+        y: root.horizontal ? root.crossCenter - height / 2 : axisPosition - height / 2
         iconWidth: root.trackIconSize
         iconHeight: root.trackIconSize
     }

@@ -63,29 +63,21 @@ T.Slider {
     /*!
         Colors used by inset icons. They default to the corresponding tick colors.
     */
-    property color trackIconActiveColor: control.enabled
-                                         ? control.MD.Style.onPrimaryColor
-                                         : control.MD.Style.inverseOnSurfaceColor
-    property color trackIconInactiveColor: control.enabled
-                                           ? control.MD.Style.onSecondaryContainerColor
-                                           : control.MD.Style.onSurfaceColor
+    property color trackIconActiveColor: control.enabled ? control.MD.Style.onPrimaryColor : control.MD.Style.inverseOnSurfaceColor
+    property color trackIconInactiveColor: control.enabled ? control.MD.Style.onSecondaryContainerColor : control.MD.Style.onSurfaceColor
 
     /*!
         Text displayed in the value indicator. Whole numbers omit decimals;
         other values use two locale-aware decimal places.
     */
-    property string valueIndicatorText: control.value.toLocaleString(
-                                            Qt.locale(), "f",
-                                            Number.isInteger(control.value) ? 0 : 2)
+    property string valueIndicatorText: control.value.toLocaleString(Qt.locale(), "f", Number.isInteger(control.value) ? 0 : 2)
 
     value: centered ? (from + to) / 2 : from
     snapMode: T.Slider.SnapAlways
     hoverEnabled: true
 
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset,
-                            implicitHandleWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset,
-                             implicitHandleHeight + topPadding + bottomPadding)
+    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitHandleWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitHandleHeight + topPadding + bottomPadding)
 
     QtObject {
         id: metrics
@@ -150,48 +142,24 @@ T.Slider {
             return 0;
         }
 
-        readonly property real effectiveHandleWidth: control.pressed
-                                                     ? MD.Tokens.slider.pressedHandleWidth
-                                                     : (control.visualFocus
-                                                        ? MD.Tokens.slider.focusHandleWidth
-                                                        : MD.Tokens.slider.handleWidth)
+        readonly property real effectiveHandleWidth: control.pressed ? MD.Tokens.slider.pressedHandleWidth : (control.visualFocus ? MD.Tokens.slider.focusHandleWidth : MD.Tokens.slider.handleWidth)
         readonly property real handleContainerSize: trackOuterCornerRadius * 2
-        readonly property bool reservesLabelSpace:
-            control.labelBehavior === Slider.LabelBehavior.WithinBounds
-            || control.labelBehavior === Slider.LabelBehavior.Visible
+        readonly property bool reservesLabelSpace: control.labelBehavior === Slider.LabelBehavior.WithinBounds || control.labelBehavior === Slider.LabelBehavior.Visible
         readonly property real labelSpace: {
             if (!reservesLabelSpace)
                 return 0;
-            const indicatorSize = control.horizontal
-                                  ? sliderHandle.valueIndicatorHeight
-                                  : sliderHandle.valueIndicatorWidth;
+            const indicatorSize = control.horizontal ? sliderHandle.valueIndicatorHeight : sliderHandle.valueIndicatorWidth;
             return indicatorSize + MD.Tokens.slider.valueIndicatorActiveBottomSpace;
         }
 
-        readonly property color activeTrackColor: control.enabled
-                                                  ? control.MD.Style.primaryColor
-                                                  : control.MD.Style.onSurfaceColor
-        readonly property color inactiveTrackColor: control.enabled
-                                                    ? control.MD.Style.secondaryContainerColor
-                                                    : control.MD.Style.onSurfaceColor
-        readonly property color activeTickColor: control.enabled
-                                                 ? control.MD.Style.onPrimaryColor
-                                                 : control.MD.Style.inverseOnSurfaceColor
-        readonly property color inactiveTickColor: control.enabled
-                                                   ? control.MD.Style.onSecondaryContainerColor
-                                                   : control.MD.Style.onSurfaceColor
-        readonly property color handleColor: control.enabled
-                                             ? control.MD.Style.primaryColor
-                                             : control.MD.Style.onSurfaceColor
-        readonly property real activeTrackOpacity: control.enabled
-                                                   ? MD.Tokens.slider.visibleOpacity
-                                                   : MD.Tokens.slider.disabledActiveTrackOpacity
-        readonly property real inactiveTrackOpacity: control.enabled
-                                                     ? MD.Tokens.slider.visibleOpacity
-                                                     : MD.Tokens.slider.disabledInactiveTrackOpacity
-        readonly property real handleOpacity: control.enabled
-                                              ? MD.Tokens.slider.visibleOpacity
-                                              : MD.Tokens.slider.disabledHandleOpacity
+        readonly property color activeTrackColor: control.enabled ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
+        readonly property color inactiveTrackColor: control.enabled ? control.MD.Style.secondaryContainerColor : control.MD.Style.onSurfaceColor
+        readonly property color activeTickColor: control.enabled ? control.MD.Style.onPrimaryColor : control.MD.Style.inverseOnSurfaceColor
+        readonly property color inactiveTickColor: control.enabled ? control.MD.Style.onSecondaryContainerColor : control.MD.Style.onSurfaceColor
+        readonly property color handleColor: control.enabled ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
+        readonly property real activeTrackOpacity: control.enabled ? MD.Tokens.slider.visibleOpacity : MD.Tokens.slider.disabledActiveTrackOpacity
+        readonly property real inactiveTrackOpacity: control.enabled ? MD.Tokens.slider.visibleOpacity : MD.Tokens.slider.disabledInactiveTrackOpacity
+        readonly property real handleOpacity: control.enabled ? MD.Tokens.slider.visibleOpacity : MD.Tokens.slider.disabledHandleOpacity
     }
 
     background: MD.SliderTrack {
@@ -232,16 +200,8 @@ T.Slider {
     handle: MD.SliderHandle {
         id: sliderHandle
 
-        x: control.leftPadding + (control.horizontal
-           ? control.visualPosition * (control.availableWidth - width)
-           : (control.mirrored
-              ? (control.availableWidth - metrics.labelSpace - width) / 2
-              : metrics.labelSpace
-                + (control.availableWidth - metrics.labelSpace - width) / 2))
-        y: control.topPadding + (control.horizontal
-           ? metrics.labelSpace
-             + (control.availableHeight - metrics.labelSpace - height) / 2
-           : control.visualPosition * (control.availableHeight - height))
+        x: control.leftPadding + (control.horizontal ? control.visualPosition * (control.availableWidth - width) : (control.mirrored ? (control.availableWidth - metrics.labelSpace - width) / 2 : metrics.labelSpace + (control.availableWidth - metrics.labelSpace - width) / 2))
+        y: control.topPadding + (control.horizontal ? metrics.labelSpace + (control.availableHeight - metrics.labelSpace - height) / 2 : control.visualPosition * (control.availableHeight - height))
 
         valueIndicatorText: control.valueIndicatorText
         labelBehavior: control.labelBehavior

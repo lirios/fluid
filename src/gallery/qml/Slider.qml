@@ -30,10 +30,28 @@ MD.ScrollView {
 
                 Repeater {
                     model: [
-                        { label: qsTr("Continuous"), step: 0, centered: false },
-                        { label: qsTr("Stops"), step: 10, centered: false },
-                        { label: qsTr("Centered below midpoint"), step: 0, centered: true, value: 25 },
-                        { label: qsTr("Centered above midpoint"), step: 0, centered: true, value: 75 }
+                        {
+                            label: qsTr("Continuous"),
+                            step: 0,
+                            centered: false
+                        },
+                        {
+                            label: qsTr("Stops"),
+                            step: 10,
+                            centered: false
+                        },
+                        {
+                            label: qsTr("Centered below midpoint"),
+                            step: 0,
+                            centered: true,
+                            value: 25
+                        },
+                        {
+                            label: qsTr("Centered above midpoint"),
+                            step: 0,
+                            centered: true,
+                            value: 75
+                        }
                     ]
 
                     delegate: RowLayout {
@@ -90,11 +108,26 @@ MD.ScrollView {
 
                 Repeater {
                     model: [
-                        { label: qsTr("Extra Small"), sliderSize: MD.Slider.Size.ExtraSmall },
-                        { label: qsTr("Small"), sliderSize: MD.Slider.Size.Small },
-                        { label: qsTr("Medium"), sliderSize: MD.Slider.Size.Medium },
-                        { label: qsTr("Large"), sliderSize: MD.Slider.Size.Large },
-                        { label: qsTr("Extra Large"), sliderSize: MD.Slider.Size.ExtraLarge }
+                        {
+                            label: qsTr("Extra Small"),
+                            sliderSize: MD.Slider.Size.ExtraSmall
+                        },
+                        {
+                            label: qsTr("Small"),
+                            sliderSize: MD.Slider.Size.Small
+                        },
+                        {
+                            label: qsTr("Medium"),
+                            sliderSize: MD.Slider.Size.Medium
+                        },
+                        {
+                            label: qsTr("Large"),
+                            sliderSize: MD.Slider.Size.Large
+                        },
+                        {
+                            label: qsTr("Extra Large"),
+                            sliderSize: MD.Slider.Size.ExtraLarge
+                        }
                     ]
 
                     delegate: RowLayout {
@@ -132,9 +165,18 @@ MD.ScrollView {
 
                 Repeater {
                     model: [
-                        { label: qsTr("Medium"), sliderSize: MD.Slider.Size.Medium },
-                        { label: qsTr("Large"), sliderSize: MD.Slider.Size.Large },
-                        { label: qsTr("Extra Large"), sliderSize: MD.Slider.Size.ExtraLarge }
+                        {
+                            label: qsTr("Medium"),
+                            sliderSize: MD.Slider.Size.Medium
+                        },
+                        {
+                            label: qsTr("Large"),
+                            sliderSize: MD.Slider.Size.Large
+                        },
+                        {
+                            label: qsTr("Extra Large"),
+                            sliderSize: MD.Slider.Size.ExtraLarge
+                        }
                     ]
 
                     delegate: RowLayout {
@@ -176,10 +218,22 @@ MD.ScrollView {
 
                 Repeater {
                     model: [
-                        { label: qsTr("Floating"), behavior: MD.Slider.LabelBehavior.Floating },
-                        { label: qsTr("Within Bounds"), behavior: MD.Slider.LabelBehavior.WithinBounds },
-                        { label: qsTr("Visible"), behavior: MD.Slider.LabelBehavior.Visible },
-                        { label: qsTr("Gone"), behavior: MD.Slider.LabelBehavior.Gone }
+                        {
+                            label: qsTr("Floating"),
+                            behavior: MD.Slider.LabelBehavior.Floating
+                        },
+                        {
+                            label: qsTr("Within Bounds"),
+                            behavior: MD.Slider.LabelBehavior.WithinBounds
+                        },
+                        {
+                            label: qsTr("Visible"),
+                            behavior: MD.Slider.LabelBehavior.Visible
+                        },
+                        {
+                            label: qsTr("Gone"),
+                            behavior: MD.Slider.LabelBehavior.Gone
+                        }
                     ]
 
                     delegate: RowLayout {
@@ -309,9 +363,21 @@ MD.ScrollView {
 
                 Repeater {
                     model: [
-                        { label: qsTr("Auto Limit"), mode: MD.Slider.TickVisibilityMode.AutoLimit, step: 1 },
-                        { label: qsTr("Auto Hide"), mode: MD.Slider.TickVisibilityMode.AutoHide, step: 1 },
-                        { label: qsTr("Hidden"), mode: MD.Slider.TickVisibilityMode.Hidden, step: 10 }
+                        {
+                            label: qsTr("Auto Limit"),
+                            mode: MD.Slider.TickVisibilityMode.AutoLimit,
+                            step: 1
+                        },
+                        {
+                            label: qsTr("Auto Hide"),
+                            mode: MD.Slider.TickVisibilityMode.AutoHide,
+                            step: 1
+                        },
+                        {
+                            label: qsTr("Hidden"),
+                            mode: MD.Slider.TickVisibilityMode.Hidden,
+                            step: 10
+                        }
                     ]
 
                     delegate: RowLayout {

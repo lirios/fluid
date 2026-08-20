@@ -8,7 +8,8 @@ RUN pacman --noconfirm --noprogressbar -Syyu && \
       less \
       vim \
       python python-pipx python-requests \
-      ttf-roboto ttf-roboto-mono-nerd ttf-noto-nerd \
+      ttf-roboto ttf-roboto-mono-nerd \
+      noto-fonts noto-fonts-cjk noto-fonts-emoji noto-fonts-extra \
       base-devel \
       openssh \
       git \

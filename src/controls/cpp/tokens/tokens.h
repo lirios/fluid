@@ -12,6 +12,7 @@
 #include "dialog.h"
 #include "divider.h"
 #include "easing.h"
+#include "fab.h"
 #include "iconbutton.h"
 #include "listitem.h"
 #include "menu.h"
@@ -56,6 +57,7 @@ class Tokens : public QObject
     Q_PROPERTY(qreal cornerRadiusSmall READ cornerRadiusSmall CONSTANT FINAL)
     Q_PROPERTY(qreal cornerRadiusMedium READ cornerRadiusMedium CONSTANT FINAL)
     Q_PROPERTY(qreal cornerRadiusLarge READ cornerRadiusLarge CONSTANT FINAL)
+    Q_PROPERTY(qreal cornerRadiusLargeIncreased READ cornerRadiusLargeIncreased CONSTANT FINAL)
     Q_PROPERTY(qreal cornerRadiusExtraLarge READ cornerRadiusExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal cornerRadiusFull READ cornerRadiusFull CONSTANT FINAL)
 
@@ -112,6 +114,9 @@ class Tokens : public QObject
     // Component tokens - Dialog
     Q_PROPERTY(Fluid::Dialog dialog READ dialog CONSTANT FINAL)
 
+    // Component tokens - Floating action button
+    Q_PROPERTY(Fluid::Fab fab READ fab CONSTANT FINAL)
+
     // Component tokens - Icon button
     Q_PROPERTY(Fluid::IconButton iconButton READ iconButton CONSTANT FINAL)
 
@@ -142,6 +147,7 @@ public:
     qreal cornerRadiusSmall() const;
     qreal cornerRadiusMedium() const;
     qreal cornerRadiusLarge() const;
+    qreal cornerRadiusLargeIncreased() const;
     qreal cornerRadiusExtraLarge() const;
     qreal cornerRadiusFull() const;
 
@@ -198,6 +204,9 @@ public:
     // Component tokens - Dialog
     Dialog dialog() const;
 
+    // Component tokens - Floating action button
+    Fab fab() const;
+
     // Component tokens - Icon button
     IconButton iconButton() const;
 
@@ -230,6 +239,7 @@ private:
     Button m_button;
     CheckBox m_checkBox;
     Dialog m_dialog;
+    Fab m_fab;
     IconButton m_iconButton;
     ListItem m_listItem;
     Menu m_menu;

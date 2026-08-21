@@ -21,6 +21,12 @@ Item {
         icon.name: "add"
     }
 
+    MD.FAB {
+        id: metricFab
+        text: "Action"
+        icon.name: "add"
+    }
+
     MD.CheckBox {
         id: metricCheckBox
         text: "Option"
@@ -65,6 +71,13 @@ Item {
             compare(metricIconButton.background.implicitHeight, MD.Tokens.iconButton.containerHeightExtraLarge);
             metricIconButton.size = MD.IconButton.Size.Small;
             metricIconButton.widthVariant = MD.IconButton.Width.Default;
+
+            compare(metricFab.background.implicitWidth, MD.Tokens.fab.containerWidth);
+            compare(metricFab.background.implicitHeight, MD.Tokens.fab.containerHeight);
+            metricFab.size = MD.FAB.Size.Large;
+            compare(metricFab.background.implicitWidth, MD.Tokens.fab.largeContainerWidth);
+            compare(metricFab.background.implicitHeight, MD.Tokens.fab.largeContainerHeight);
+            metricFab.size = MD.FAB.Size.Default;
 
             compare(metricCheckBox.indicator.implicitWidth, MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall);
             compare(metricSwitch.indicator.implicitWidth, MD.Tokens.switch.trackWidth);
@@ -185,6 +198,25 @@ Item {
                 selectedContainerShapeRoundExtraLarge: 28,
                 selectedContainerShapeSquare: 9999,
                 disabledContainerOpacity: 0.1, disabledIconOpacity: 0.38,
+                hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
+                pressedStateLayerOpacity: 0.1
+            });
+        }
+
+        function test_fab() {
+            compare(MD.Tokens.cornerRadiusLargeIncreased, 20);
+            verifyValues(MD.Tokens.fab, {
+                containerHeight: 56, containerShape: 16, containerWidth: 56,
+                iconSize: 24,
+                mediumContainerHeight: 80, mediumContainerShape: 20,
+                mediumContainerWidth: 80, mediumIconSize: 28,
+                largeContainerHeight: 96, largeContainerShape: 28,
+                largeContainerWidth: 96, largeIconSize: 36,
+                containerElevation: 6, focusContainerElevation: 6,
+                hoverContainerElevation: 8, pressedContainerElevation: 6,
+                loweredContainerElevation: 1, loweredFocusContainerElevation: 1,
+                loweredHoverContainerElevation: 3,
+                loweredPressedContainerElevation: 1,
                 hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
                 pressedStateLayerOpacity: 0.1
             });

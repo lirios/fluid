@@ -14,6 +14,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Components.qml
         qml/Divider.qml
         qml/Elevation.qml
+        qml/FAB.qml
         qml/IconButton.qml
         qml/Indicators.qml
         qml/Slider.qml
@@ -22,6 +23,13 @@ qt_add_resources(FluidGallery "gallery"
         qml/SymbolsModel.qml
         qml/Typography.qml
         qml/ValueCircle.qml
+)
+
+qt_add_resources(FluidGallery "gallery-icons"
+    PREFIX /
+    BASE "${CMAKE_CURRENT_SOURCE_DIR}"
+    FILES
+        icons/32x32/apps/io.liri.Fluid.Gallery.png
 )
 
 set_target_properties(FluidGallery PROPERTIES

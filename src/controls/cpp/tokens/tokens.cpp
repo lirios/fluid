@@ -38,6 +38,11 @@ qreal Tokens::cornerRadiusLarge() const
     return 16.0;
 }
 
+qreal Tokens::cornerRadiusLargeIncreased() const
+{
+    return 20.0;
+}
+
 qreal Tokens::cornerRadiusExtraLarge() const
 {
     return 28.0;
@@ -230,6 +235,12 @@ CheckBox Tokens::checkBox() const
 Dialog Tokens::dialog() const
 {
     return m_dialog;
+}
+
+// Component tokens - Floating action button
+Fab Tokens::fab() const
+{
+    return m_fab;
 }
 
 // Component tokens - Icon button

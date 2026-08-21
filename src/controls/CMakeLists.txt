@@ -112,8 +112,11 @@ qt_install_qml_module(${LIBNAME})
 # ------------------------------------------------------------
 set(_common_glsl
     "${CMAKE_SOURCE_DIR}/assets/shaders/common.glsl"
+    "${CMAKE_SOURCE_DIR}/assets/shaders/sdf.glsl"
 )
 set(_shaders
+    "${CMAKE_SOURCE_DIR}/assets/shaders/default.vert"
+    "${CMAKE_SOURCE_DIR}/assets/shaders/ripple.frag"
     "${CMAKE_SOURCE_DIR}/assets/shaders/shadow.vert"
     "${CMAKE_SOURCE_DIR}/assets/shaders/shadow.frag"
 )

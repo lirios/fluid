@@ -6,6 +6,7 @@ import QtQuick.Controls
 import Fluid as Fluid
 
 /*!
+    \class AlertDialog
     \brief Alert dialogs are urgent interruptions to inform the user about a situation.
 
     An alert dialog is used to interrupt the user's workflow to inform them about
@@ -36,8 +37,8 @@ import Fluid as Fluid
     }
     \endcode
 
-    For more information you can read the
-    <a href="https://material.io/guidelines/components/dialogs.html">Material Design guidelines</a>.
+    For more information see the
+    <a href="https://m3.material.io/components/dialogs/overview">Material Design 3 dialog guidelines</a>.
 */
 Dialog {
     /*!

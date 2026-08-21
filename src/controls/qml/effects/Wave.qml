@@ -6,10 +6,11 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 
 /*!
+    \class Wave
     \brief Provides a wave animation for transitioning between views of content.
 
-    For more information you can read the
-    <a href="https://material.io/guidelines/motion/material-motion.html#material-motion-how-does-material-move">Material Design guidelines</a>.
+    Wave is a legacy Fluid transition utility rather than a standalone Material 3
+    component. Its original motion reference predates Material 3.
 */
 Item {
     id: wave

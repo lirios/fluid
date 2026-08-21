@@ -12,6 +12,14 @@ import Fluid as MD
 // Material You "realistic" ripple, ported from Skia's RippleShader.rts
 // (third_party/skia/resources/sksl/realistic/RippleShader.rts) and the
 // driver in third_party/skia/gm/rippleshadergm.cpp.
+/*!
+    \class Ripple
+    \internal
+    \brief Renders the press-state ripple used by Fluid controls.
+
+    Ripple is an internal visual helper. Its state-layer behavior supports
+    Material 3 interaction states but it is not a public standalone component.
+*/
 Item {
     id: root
 

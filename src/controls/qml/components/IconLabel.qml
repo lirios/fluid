@@ -4,6 +4,17 @@
 import QtQuick
 import Fluid as MD
 
+/*!
+    \class IconLabel
+    \brief Lays out an icon and text as a single reusable visual.
+
+    IconLabel supports icon-only, text-only, side-by-side, and stacked layouts.
+    It is useful as a content item for buttons and other controls.
+
+    For more information see the Material Design 3
+    <a href="https://m3.material.io/styles/icons/overview">icon</a> and
+    <a href="https://m3.material.io/styles/typography/overview">typography</a> guidelines.
+*/
 Item {
     id: root
 
@@ -24,12 +35,22 @@ Item {
         property color color
     }
 
+    //! The icon name, dimensions, and color.
     property IconData icon: IconData {}
+
+    //! The text displayed beside or below the icon.
     property alias text: label.text
+
+    //! The Material type scale used for the text.
     property alias typescale: label.typescale
+
+    //! The explicit text line height.
     property alias lineHeight: label.lineHeight
+
+    //! The text color.
     property alias color: label.color
 
+    //! Whether a side-by-side layout places the icon on the trailing edge.
     property bool mirrored: false
 
     /*!

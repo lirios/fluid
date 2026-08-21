@@ -5,12 +5,13 @@ import QtQuick
 import Fluid as MD
 
 /*!
+    \class Divider
     \brief A Material Design 3 divider.
 
     Dividers are thin lines that group content in lists or other containers.  A
     divider can be full-width, inset on one side, or inset on both sides by
-    setting \l leadingInset and \l trailingInset, and can be laid out
-    horizontally or vertically via \l orientation.
+    setting \c leadingInset and \c trailingInset, and can be laid out
+    horizontally or vertically via \c orientation.
 
     \code
     MD.Divider {
@@ -55,8 +56,7 @@ Item {
         \brief Inset applied after the divider line.
 
         For a horizontal divider this is a right margin, for a vertical
-        divider a bottom margin.  Defaults to \c 0.  Set alongside \l
-        leadingInset to \c MD.Tokens.divider.inset for a middle-inset divider.
+        divider a bottom margin.  Defaults to \c 0.  Set alongside \c leadingInset to \c MD.Tokens.divider.inset for a middle-inset divider.
     */
     property real trailingInset: 0
 

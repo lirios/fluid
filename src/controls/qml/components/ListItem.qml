@@ -7,6 +7,7 @@ import QtQuick.Templates as T
 import Fluid as MD
 
 /*!
+    \class ListItem
     \brief A Material Design 3 list item with leading, content, and trailing slots.
 
     A list item is composed of three slots: leading, content, and trailing.  The
@@ -32,6 +33,9 @@ import Fluid as MD
         }
     }
     \endcode
+
+    For more information see the
+    <a href="https://m3.material.io/components/lists/overview">Material Design 3 list guidelines</a>.
 */
 T.ItemDelegate {
     id: control

@@ -4,6 +4,16 @@
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class ScrollView
+    \brief A scrolling viewport with Material-themed horizontal and vertical scrollbars.
+
+    ScrollView supplies Fluid ScrollBar instances in both orientations and mirrors
+    the vertical bar automatically for right-to-left layouts.
+
+    Its scrolling behavior is provided by Qt Quick Controls, while its scrollbars
+    follow the <a href="https://m3.material.io/components/scrollbar/overview">Material Design 3 scrollbar guidelines</a>.
+*/
 T.ScrollView {
     id: control
 

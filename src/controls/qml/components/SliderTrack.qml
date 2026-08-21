@@ -6,6 +6,14 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Fluid as MD
 
+/*!
+    \class SliderTrack
+    \internal
+    \brief Renders the active, inactive, tick, stop, and icon segments of a slider track.
+
+    For the public control behavior see the
+    <a href="https://m3.material.io/components/sliders/overview">Material Design 3 slider guidelines</a>.
+*/
 Item {
     id: root
     objectName: "sliderTrack"

@@ -4,7 +4,11 @@
 import QtQuick
 
 /*!
-    \brief Loadable component.
+    \class Loadable
+    \brief Loads an item and coordinates its show and hide animations.
+
+    Loadable is a Fluid helper rather than a Material 3 component. Applications
+    can use Material 3 motion tokens when supplying its animations.
 */
 Item {
     id: root

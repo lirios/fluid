@@ -4,6 +4,14 @@
 // SPDX-License-Identifier: MPL-2.0
 .import Fluid as MD
 
+/*!
+    \file UiMetrics.js
+    \brief Provides shared geometry helpers for Fluid controls.
+
+    These helpers consume Material 3 component tokens and derive control metrics;
+    UiMetrics.js is an internal library utility, not a standalone M3 component.
+*/
+
 function buttonRadius(control) {
     const tokens = control.MD.Tokens.button;
     if (control.pressed) {

@@ -5,7 +5,12 @@
 import QtQuick
 
 /*!
+    \class ColumnFlow
     \brief Automatically position children in columns.
+
+    ColumnFlow is a Fluid layout utility rather than a Material 3 component.
+    Its delegates can be styled with Material 3 tokens and styles as appropriate
+    for the containing application.
 
     \code{.qml}
     import QtQuick
@@ -50,14 +55,14 @@ Item {
     /*!
         The model providing data to the column flow.
 
-        This property can be set to any of the supported \l {qml-data-models}{data models}.
+        This property can be set to any of the supported <a href="https://doc.qt.io/qt-6/qtquick-modelviewsdata-modelview.html">Qt Quick data models</a>.
 
         \sa Repeater::model
     */
     property alias model: repeater.model
 
     /*!
-        The delegate provides a template defining each item istantiated by the column flow.
+        The delegate provides a template defining each item instantiated by the column flow.
 
         \sa Repeater::delegate
     */
@@ -110,7 +115,7 @@ Item {
     function reEvalColumns() {
         if (!repeaterCompleted)
             return;
-        var i, j
+        var i, j;
         var columnHeights = new Array(columns);
         var lastItem = new Array(columns);
         var lastI = -1;
@@ -118,8 +123,7 @@ Item {
 
         // Add the first <column> elements
         for (i = 0; count < columns && i < columnFlow.children.length; i++) {
-            if (!columnFlow.children[i] || String(columnFlow.children[i]).indexOf("QQuickRepeater") == 0
-                    || !columnFlow.children[i].visible)
+            if (!columnFlow.children[i] || String(columnFlow.children[i]).indexOf("QQuickRepeater") == 0 || !columnFlow.children[i].visible)
                 continue;
 
             lastItem[count] = i;

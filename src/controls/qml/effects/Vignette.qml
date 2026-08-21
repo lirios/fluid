@@ -4,7 +4,11 @@
 import QtQuick
 
 /*!
-  \brief Vignette effect.
+    \class Vignette
+    \brief Applies a vignette shader effect to an item.
+
+    Vignette is a Fluid visual utility and is not specified as a standalone
+    Material 3 component.
 */
 Item {
     id: root

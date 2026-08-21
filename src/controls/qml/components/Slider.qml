@@ -7,9 +7,20 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class Slider
+    \brief A Material 3 Expressive control for selecting a value.
+
+    Slider supports horizontal and vertical orientations, five expressive sizes,
+    centered ranges, optional track icons, discrete ticks, and value indicators.
+
+    For more information see the
+    <a href="https://m3.material.io/components/sliders/overview">Material Design 3 slider guidelines</a>.
+*/
 T.Slider {
     id: control
 
+    //! Controls value-indicator visibility and whether layout reserves indicator space.
     enum LabelBehavior {
         Floating,
         WithinBounds,
@@ -17,12 +28,14 @@ T.Slider {
         Gone
     }
 
+    //! Controls whether discrete ticks are limited, hidden on overflow, or always hidden.
     enum TickVisibilityMode {
         AutoLimit,
         AutoHide,
         Hidden
     }
 
+    //! Selects one of the five Material 3 Expressive slider sizes.
     enum Size {
         ExtraSmall,
         Small,
@@ -51,19 +64,21 @@ T.Slider {
     */
     property bool centered: false
 
-    /*!
-        Material Symbol names placed at the logical start and end of the active
-        and inactive track segments.
-    */
+    //! The Material Symbol at the logical start of the active segment.
     property string trackIconActiveStart
+
+    //! The Material Symbol at the logical end of the active segment.
     property string trackIconActiveEnd
+
+    //! The Material Symbol at the logical start of the inactive segment.
     property string trackIconInactiveStart
+
+    //! The Material Symbol at the logical end of the inactive segment.
     property string trackIconInactiveEnd
 
-    /*!
-        Colors used by inset icons. They default to the corresponding tick colors.
-    */
+    //! The color used for icons in the active track segment.
     property color trackIconActiveColor: control.enabled ? control.MD.Style.onPrimaryColor : control.MD.Style.inverseOnSurfaceColor
+    //! The color used for icons in inactive track segments.
     property color trackIconInactiveColor: control.enabled ? control.MD.Style.onSecondaryContainerColor : control.MD.Style.onSurfaceColor
 
     /*!

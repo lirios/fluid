@@ -7,6 +7,7 @@ import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 
 /*!
+    \class IconButton
     \brief A Material 3 Expressive button that presents an icon without a visible label.
 
     Set \c text to a short, localized description of the action. The template uses it
@@ -14,6 +15,9 @@ import Fluid as MD
 
     A checkable button fills its Material Symbol when selected. Set \c checkedIcon
     when the selected state needs a different symbol or source image instead.
+
+    For more information see the
+    <a href="https://m3.material.io/components/icon-buttons/overview">Material Design 3 icon button guidelines</a>.
 */
 T.ToolButton {
     id: control

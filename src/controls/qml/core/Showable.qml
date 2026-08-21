@@ -4,7 +4,11 @@
 import QtQuick
 
 /*!
-    \brief Showtable component.
+    \class Showable
+    \brief Provides show and hide animations for a focus scope.
+
+    Showable is a Fluid helper rather than a Material 3 component. Applications
+    can use Material 3 motion tokens when supplying its animations.
 */
 FocusScope {
     id: root

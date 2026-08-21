@@ -23,6 +23,9 @@ import QtQuick.Templates as T
 
     Menu creates MenuItem instances for its actions automatically. Applications
     can also use MenuItem when constructing menu content explicitly.
+
+    For more information see the
+    <a href="https://m3.material.io/components/menus/overview">Material Design 3 menu guidelines</a>.
 */
 T.MenuItem {
     id: menuItem

@@ -5,6 +5,7 @@ import QtQuick
 import Fluid as MD
 
 /*!
+    \class Symbol
     \brief Displays an icon from the Material Symbols collection.
 
     To use an icon from the <a href="https://fonts.google.com/icons">Material Symbols collection</a>.
@@ -34,22 +35,28 @@ import Fluid as MD
         name: MD.SymbolNames.symbolShoppingCart
     }
     \endcode
+
+    For guidance on icon usage see the
+    <a href="https://m3.material.io/styles/icons/overview">Material Design 3 icon guidelines</a>.
 */
 Item {
     id: icon
 
+    //! Selects the outlined, rounded, or sharp Material Symbols font family.
     enum Style {
         Outlined,
         Rounded,
         Sharp
     }
 
+    //! Selects a low, normal, or high-emphasis symbol grade.
     enum Grade {
         LowEmphasis,
         NormalEmphasis,
         HighEmphasis
     }
 
+    //! Selects the optical-size axis used to render the symbol.
     enum OpticalSize {
         Small,
         Normal,
@@ -103,16 +110,20 @@ Item {
     */
     property int grade: Symbol.Grade.NormalEmphasis
 
-    /*
-        Automatically adjust the stroke weight when the symbol size is increased or decreased.
+    /*!
+        Automatically adjusts the stroke weight when the symbol size is increased or decreased.
         Optical size ranges from 20dp to 48dp.
         Defaults to OpticalSize.Normal.
-     */
+    */
     property int opticalSize: Symbol.OpticalSize.Normal
 
+    //! The horizontal alignment of the symbol inside its item.
     property alias horizontalAlignment: text.horizontalAlignment
+
+    //! The vertical alignment of the symbol inside its item.
     property alias verticalAlignment: text.verticalAlignment
 
+    //! \internal Animated numeric value of the fill axis.
     property real _fill: icon.fill ? 1.0 : 0.0
     Behavior on _fill {
         NumberAnimation {

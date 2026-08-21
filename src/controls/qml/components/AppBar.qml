@@ -41,6 +41,9 @@ import Fluid as MD
 
     Safe-area insets and right-to-left layout mirroring are applied
     automatically. The background and \c expandedBackground remain edge-to-edge.
+
+    For more information see the
+    <a href="https://m3.material.io/components/app-bars/overview">Material Design 3 app bar guidelines</a>.
 */
 MD.BaseAppBar {
     id: control

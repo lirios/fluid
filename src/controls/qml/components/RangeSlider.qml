@@ -7,9 +7,20 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class RangeSlider
+    \brief A Material 3 Expressive slider for selecting a value range.
+
+    RangeSlider provides two handles, horizontal and vertical orientations, five
+    expressive sizes, optional discrete tick marks, and configurable value indicators.
+
+    For more information see the
+    <a href="https://m3.material.io/components/sliders/overview">Material Design 3 slider guidelines</a>.
+*/
 T.RangeSlider {
     id: control
 
+    //! Controls value-indicator visibility and whether layout reserves indicator space.
     enum LabelBehavior {
         Floating,
         WithinBounds,
@@ -17,12 +28,14 @@ T.RangeSlider {
         Gone
     }
 
+    //! Controls whether discrete ticks are limited, hidden on overflow, or always hidden.
     enum TickVisibilityMode {
         AutoLimit,
         AutoHide,
         Hidden
     }
 
+    //! Selects one of the five Material 3 Expressive slider sizes.
     enum Size {
         ExtraSmall,
         Small,

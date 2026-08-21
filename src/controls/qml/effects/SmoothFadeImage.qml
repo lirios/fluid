@@ -4,7 +4,12 @@
 import QtQuick
 
 /*!
-    \brief Displays an image and smoothly fade when the source is changed.
+    \class SmoothFadeImage
+    \brief Displays an image and smoothly fades when its source changes.
+
+    SmoothFadeImage is a Fluid transition utility rather than a standalone
+    Material 3 component. Its fade duration can be selected from the application's
+    Material 3 motion tokens.
 
     This component can be used in place of an Image when a smooth fade animation
     between two sources is needed.
@@ -170,7 +175,7 @@ Item {
         This signal is emitted when the swap between the old source and the new
         one has happened.
     */
-    signal imageSwapped()
+    signal imageSwapped
 
     QtObject {
         id: __priv

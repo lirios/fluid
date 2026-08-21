@@ -40,6 +40,9 @@ import Fluid as MD
     Set \c text on every AppBarAction to provide an accessible name. Safe-area
     insets, keyboard activation, adaptive overflow, and right-to-left layout are
     handled automatically.
+
+    For more information see the
+    <a href="https://m3.material.io/components/search/overview">Material Design 3 search guidelines</a>.
 */
 MD.BaseAppBar {
     id: control

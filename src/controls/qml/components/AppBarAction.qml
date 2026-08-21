@@ -4,10 +4,14 @@
 import QtQuick.Templates as T
 
 /*!
+    \class AppBarAction
     \brief Describes an action shown by an AppBar or SearchAppBar.
 
     The text is both the accessible name of the action button and the label used
     by the overflow menu.
+
+    For more information see the
+    <a href="https://m3.material.io/components/app-bars/overview">Material Design 3 app bar guidelines</a>.
 */
 T.Action {
     /*!

@@ -6,6 +6,14 @@
 
 import QtQuick.Shapes as QQS
 
+/*!
+    \class Shape
+    \internal
+    \brief Provides the shared synchronous shape renderer for Fluid visuals.
+
+    Shape is an internal rendering wrapper used by Fluid controls and effects;
+    it has no standalone Material 3 component specification.
+*/
 QQS.Shape {
     asynchronous: false
     preferredRendererType: QQS.Shape.CurveRenderer

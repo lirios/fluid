@@ -5,6 +5,16 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class GroupBox
+    \brief Groups related controls under a shared title and outline.
+
+    GroupBox uses the inherited \c title and \c contentItem API. Its label and
+    outline automatically follow the current Material color and typography theme.
+
+    GroupBox is a Qt Quick Controls container styled by Fluid; Material 3 does
+    not define a standalone group box component.
+*/
 T.GroupBox {
     id: control
 

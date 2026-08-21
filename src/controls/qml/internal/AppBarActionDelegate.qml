@@ -16,6 +16,10 @@ import Fluid as MD
     focus, ripple, checked-state, and accessibility behavior. Filled actions use
     a text-capable tool button. The wrapper preserves a uniform interface for
     adaptive measurement and click forwarding.
+
+    The delegate implements presentation details for the
+    <a href="https://m3.material.io/components/app-bars/overview">Material Design 3 app bar guidelines</a>
+    and is not part of the public QML API.
 */
 Item {
     id: control

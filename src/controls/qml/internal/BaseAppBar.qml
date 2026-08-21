@@ -17,6 +17,10 @@ import QtQuick.Templates as T
     treatment, and overflow-menu interaction. AppBar and SearchAppBar provide
     their center content while exposing the relevant properties below as part
     of their inherited public API.
+
+    The implementation follows the
+    <a href="https://m3.material.io/components/app-bars/overview">Material Design 3 app bar guidelines</a>
+    and is not part of the public QML API.
 */
 T.ToolBar {
     id: control

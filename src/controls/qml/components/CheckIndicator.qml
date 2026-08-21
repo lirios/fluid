@@ -8,13 +8,33 @@ import QtQuick
 import QtQuick.Shapes
 import Fluid as MD
 
+/*!
+    \class CheckIndicator
+    \brief Draws the Material 3 checked, unchecked, or indeterminate checkbox indicator.
+
+    CheckIndicator is the visual delegate used by CheckBox. The \c control must
+    expose a Qt checkbox \c checkState; the remaining properties provide the
+    resolved colors and outline width for the current interaction state.
+
+    For more information see the
+    <a href="https://m3.material.io/components/checkbox/overview">Material Design 3 checkbox guidelines</a>.
+*/
 Item {
     id: indicatorItem
 
+    //! The checkbox whose \c checkState is rendered.
     property Item control
+
+    //! The checkmark or indeterminate-mark color.
     property color color
+
+    //! The checkbox container color.
     property color backgroundColor
+
+    //! The checkbox outline color.
     property color outlineColor
+
+    //! The checkbox outline width in pixels.
     property real outlineWidth
 
     implicitWidth: MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall

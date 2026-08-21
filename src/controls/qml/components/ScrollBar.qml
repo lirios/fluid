@@ -5,6 +5,16 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class ScrollBar
+    \brief An interactive scrollbar styled for the current Material 3 theme.
+
+    ScrollBar expands when hovered or pressed and fades after scrolling stops.
+    It supports horizontal and vertical orientations and the inherited policies.
+
+    For more information see the
+    <a href="https://m3.material.io/components/scrollbar/overview">Material Design 3 scrollbar guidelines</a>.
+*/
 T.ScrollBar {
     id: control
 

@@ -7,13 +7,14 @@ import QtQuick.Controls
 import Fluid as Fluid
 
 /*!
+    \class InputDialog
     \brief Input dialogs ask the user to input data with certain constraints.
 
     The dialog is automatically accepted when the Return or Enter key is pressed
     and the input in an acceptable state.
 
-    For more information you can read the
-    <a href="https://material.io/guidelines/components/dialogs.html">Material Design guidelines</a>.
+    For more information see the
+    <a href="https://m3.material.io/components/dialogs/overview">Material Design 3 dialog guidelines</a>.
 */
 Dialog {
     id: dialog

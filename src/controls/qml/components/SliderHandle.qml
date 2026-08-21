@@ -6,6 +6,14 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Fluid as MD
 
+/*!
+    \class SliderHandle
+    \internal
+    \brief Renders a Slider or RangeSlider handle and its value indicator.
+
+    For the public control behavior see the
+    <a href="https://m3.material.io/components/sliders/overview">Material Design 3 slider guidelines</a>.
+*/
 Item {
     id: root
 

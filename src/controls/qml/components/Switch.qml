@@ -7,6 +7,16 @@ import Fluid as MD
 import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
 
+/*!
+    \class Switch
+    \brief A Material 3 switch for toggling a setting on or off.
+
+    Switch supports optional selected and unselected handle icons. Set \c text to
+    a short label that describes the setting controlled by the switch.
+
+    For more information see the
+    <a href="https://m3.material.io/components/switch/overview">Material Design 3 switch guidelines</a>.
+*/
 T.Switch {
     id: control
 
@@ -22,6 +32,7 @@ T.Switch {
         BothIcons
     }
 
+    //! The Material type scale used by the switch label.
     property MD.typescale typescale: MD.Tokens.typescale.labelLarge
 
     /*!

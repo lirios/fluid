@@ -5,7 +5,12 @@
 import QtQuick
 
 /*!
+    \class AutomaticGrid
     \brief Lay out children in a grid that automatically fits the available space.
+
+    AutomaticGrid is a Fluid layout utility rather than a Material 3 component.
+    Its delegates can be styled with Material 3 tokens and styles as appropriate
+    for the containing application.
 
     \code{.qml}
     import QtQuick
@@ -37,7 +42,7 @@ Grid {
     id: grid
 
     /*!
-        The delegate provides a template defining each item istantiated by the grid.
+        The delegate provides a template defining each item instantiated by the grid.
 
         \sa Repeater::delegate
     */
@@ -56,7 +61,7 @@ Grid {
     /*!
         The model providing data to the grid.
 
-        This property can be set to any of the supported \l {qml-data-models}{data models}.
+        This property can be set to any of the supported <a href="https://doc.qt.io/qt-6/qtquick-modelviewsdata-modelview.html">Qt Quick data models</a>.
 
         \sa Repeater::model
     */

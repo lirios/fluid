@@ -5,6 +5,16 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class ScrollIndicator
+    \brief A non-interactive indicator of the visible portion of scrolling content.
+
+    ScrollIndicator follows the current Material 3 surface color and fades after
+    activity ends. Use ScrollBar when users must be able to drag the indicator.
+
+    For more information see the
+    <a href="https://m3.material.io/components/scrollbar/overview">Material Design 3 scrollbar guidelines</a>.
+*/
 T.ScrollIndicator {
     id: control
 

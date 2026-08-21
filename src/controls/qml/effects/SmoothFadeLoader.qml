@@ -4,7 +4,12 @@
 import QtQuick
 
 /*!
-    \brief Displays an item and smoothly fade when the source is changed.
+    \class SmoothFadeLoader
+    \brief Displays an item and smoothly fades when its source changes.
+
+    SmoothFadeLoader is a Fluid transition utility rather than a standalone
+    Material 3 component. Its fade duration can be selected from the application's
+    Material 3 motion tokens.
 
     This component loads an item with a Loader and smoothly fade to another item when
     the source URL is changed.
@@ -35,6 +40,7 @@ import QtQuick
     \endcode
 */
 Item {
+    id: root
     /*!
         The item being displayed.
 
@@ -52,8 +58,6 @@ Item {
         This property holds whether the fade animation is running or not.
     */
     readonly property bool running: animation.running
-
-    id: root
     onSourceChanged: {
         animation.running = false;
 

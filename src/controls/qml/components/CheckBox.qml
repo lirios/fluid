@@ -5,11 +5,23 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 
+/*!
+    \class CheckBox
+    \brief A Material 3 checkbox for independent or grouped selections.
+
+    CheckBox supports checked, unchecked, and partially checked states. Set \c error
+    when the current selection is invalid and provide a short label through \c text.
+
+    For more information see the
+    <a href="https://m3.material.io/components/checkbox/overview">Material Design 3 checkbox guidelines</a>.
+*/
 T.CheckBox {
     id: control
 
+    //! The Material type scale used by the checkbox label.
     property MD.typescale typescale: MD.Tokens.typescale.labelLarge
 
+    //! Whether the checkbox is displayed in its error state.
     property bool error: false
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)

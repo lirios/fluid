@@ -6,6 +6,17 @@ import Fluid as MD
 import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
 
+/*!
+    \class Button
+    \brief A Material 3 Expressive push button.
+
+    Button supports elevated, filled, tonal, outlined, and text appearances, five
+    expressive sizes, optional icons, checkable state, and round or square shapes.
+    Text and icon layout continue to use the inherited AbstractButton API.
+
+    For more information see the
+    <a href="https://m3.material.io/components/buttons/overview">Material Design 3 button guidelines</a>.
+*/
 P.BaseButton {
     id: control
 
@@ -23,7 +34,7 @@ P.BaseButton {
 
     /*!
         The size of the button. This controls the button's dimensions, padding, and font size.
-        The default is MD.Button.Small, which is the recommended size for most use cases.
+        The default is MD.Button.Size.Small, which is the recommended size for most use cases.
         Use larger sizes for buttons that need to be more prominent,
         and smaller sizes for buttons that are less important or used in tight spaces.
     */

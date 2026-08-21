@@ -5,9 +5,11 @@ import QtQuick
 import Fluid as MD
 
 /*!
-   \brief Material Design elevation effect.
+     \class Elevation
+     \brief Applies a Material 3 elevation shadow effect.
 
-   An effect for standard Material Design elevation shadows.
+     For more information see the
+     <a href="https://m3.material.io/styles/elevation/overview">Material Design 3 elevation guidelines</a>.
  */
 MD.ElevationImpl {
     color: MD.Style.shadowColor

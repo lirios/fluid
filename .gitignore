@@ -1,3 +1,4 @@
+.claude/settings.local.json
 .idea/
 build/
 __pycache__/

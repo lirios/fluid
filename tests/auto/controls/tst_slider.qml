@@ -120,7 +120,7 @@ TestCase {
         compare(token.trackIconSizeMedium, 24);
         compare(token.trackIconSizeLarge, 24);
         compare(token.trackIconSizeExtraLarge, 32);
-        compare(token.trackIconPadding, 10);
+        compare(token.trackIconPadding, token.trackIconPaddingMedium);
 
         compare(token.visibleOpacity, 1);
         compare(token.hiddenOpacity, 0);
@@ -397,24 +397,24 @@ TestCase {
         verify(inactiveStart.visible);
         verify(inactiveEnd.visible);
         compare(activeStart.width, 24);
-        compareReal(activeStart.x + activeStart.width / 2, 22);
-        compareReal(activeEnd.x + activeEnd.width / 2, 70);
-        compareReal(inactiveStart.x + inactiveStart.width / 2, 130);
-        compareReal(inactiveEnd.x + inactiveEnd.width / 2, 178);
+        compareReal(activeStart.x + activeStart.width / 2, 18);
+        compareReal(activeEnd.x + activeEnd.width / 2, 74);
+        compareReal(inactiveStart.x + inactiveStart.width / 2, 126);
+        compareReal(inactiveEnd.x + inactiveEnd.width / 2, 182);
         compare(activeStart.color, slider.trackIconActiveColor);
         compare(inactiveStart.color, slider.trackIconInactiveColor);
 
         slider.LayoutMirroring.enabled = true;
-        compareReal(activeStart.x + activeStart.width / 2, 178);
-        compareReal(activeEnd.x + activeEnd.width / 2, 130);
-        compareReal(inactiveStart.x + inactiveStart.width / 2, 70);
-        compareReal(inactiveEnd.x + inactiveEnd.width / 2, 22);
+        compareReal(activeStart.x + activeStart.width / 2, 182);
+        compareReal(activeEnd.x + activeEnd.width / 2, 126);
+        compareReal(inactiveStart.x + inactiveStart.width / 2, 74);
+        compareReal(inactiveEnd.x + inactiveEnd.width / 2, 18);
 
         slider.orientation = Qt.Vertical;
         slider.LayoutMirroring.enabled = false;
         slider.height = 200;
-        compareReal(activeStart.y + activeStart.height / 2, 22);
-        compareReal(activeEnd.y + activeEnd.height / 2, 70);
+        compareReal(activeStart.y + activeStart.height / 2, 18);
+        compareReal(activeEnd.y + activeEnd.height / 2, 74);
 
         slider.orientation = Qt.Horizontal;
         slider.size = MD.Slider.Size.Small;

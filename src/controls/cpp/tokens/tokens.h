@@ -7,11 +7,18 @@
 #include <QQmlEngine>
 
 #include "appbar.h"
+#include "button.h"
+#include "checkbox.h"
+#include "dialog.h"
 #include "divider.h"
 #include "easing.h"
+#include "iconbutton.h"
+#include "listitem.h"
 #include "menu.h"
 #include "typescale.h"
 #include "slider.h"
+#include "switch.h"
+#include "symbol.h"
 
 namespace Fluid {
 
@@ -96,6 +103,21 @@ class Tokens : public QObject
     // Component tokens - App bar
     Q_PROPERTY(Fluid::AppBar appBar READ appBar CONSTANT FINAL)
 
+    // Component tokens - Button
+    Q_PROPERTY(Fluid::Button button READ button CONSTANT FINAL)
+
+    // Component tokens - Check box
+    Q_PROPERTY(Fluid::CheckBox checkBox READ checkBox CONSTANT FINAL)
+
+    // Component tokens - Dialog
+    Q_PROPERTY(Fluid::Dialog dialog READ dialog CONSTANT FINAL)
+
+    // Component tokens - Icon button
+    Q_PROPERTY(Fluid::IconButton iconButton READ iconButton CONSTANT FINAL)
+
+    // Component tokens - List item
+    Q_PROPERTY(Fluid::ListItem listItem READ listItem CONSTANT FINAL)
+
     // Component tokens - Menu
     Q_PROPERTY(Fluid::Menu menu READ menu CONSTANT FINAL)
 
@@ -104,6 +126,12 @@ class Tokens : public QObject
 
     // Component tokens - Divider
     Q_PROPERTY(Fluid::Divider divider READ divider CONSTANT FINAL)
+
+    // Component tokens - Switch
+    Q_PROPERTY(Fluid::Switch switch READ switchControl CONSTANT FINAL)
+
+    // Component tokens - Symbol
+    Q_PROPERTY(Fluid::Symbol symbol READ symbol CONSTANT FINAL)
 
 public:
     explicit Tokens(QObject *parent = nullptr);
@@ -161,6 +189,21 @@ public:
     // Component tokens - App bar
     AppBar appBar() const;
 
+    // Component tokens - Button
+    Button button() const;
+
+    // Component tokens - Check box
+    CheckBox checkBox() const;
+
+    // Component tokens - Dialog
+    Dialog dialog() const;
+
+    // Component tokens - Icon button
+    IconButton iconButton() const;
+
+    // Component tokens - List item
+    ListItem listItem() const;
+
     // Component tokens - Menu
     Menu menu() const;
 
@@ -170,6 +213,12 @@ public:
     // Component tokens - Divider
     Divider divider() const;
 
+    // Component tokens - Switch
+    Switch switchControl() const;
+
+    // Component tokens - Symbol
+    Symbol symbol() const;
+
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
@@ -178,9 +227,16 @@ private:
     Easing m_easing;
     Spring m_spring;
     AppBar m_appBar;
+    Button m_button;
+    CheckBox m_checkBox;
+    Dialog m_dialog;
+    IconButton m_iconButton;
+    ListItem m_listItem;
     Menu m_menu;
     Slider m_slider;
     Divider m_divider;
+    Switch m_switch;
+    Symbol m_symbol;
 };
 
 } // namespace Fluid

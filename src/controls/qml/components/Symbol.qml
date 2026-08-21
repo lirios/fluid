@@ -65,12 +65,12 @@ Item {
     /*!
         The width of the icon. Defaults to 24px.
     */
-    property int iconWidth: 24
+    property int iconWidth: MD.Tokens.symbol.size
 
     /*!
         The height of the icon. Defaults to 24px.
     */
-    property int iconHeight: 24
+    property int iconHeight: MD.Tokens.symbol.size
 
     /*!
         The color of the icon.

@@ -142,6 +142,18 @@ T.Slider {
             return 0;
         }
 
+        readonly property real trackIconPadding: {
+            switch (control.size) {
+            case Slider.Size.Medium:
+                return MD.Tokens.slider.trackIconPaddingMedium;
+            case Slider.Size.Large:
+                return MD.Tokens.slider.trackIconPaddingLarge;
+            case Slider.Size.ExtraLarge:
+                return MD.Tokens.slider.trackIconPaddingExtraLarge;
+            }
+            return 0;
+        }
+
         readonly property real effectiveHandleWidth: control.pressed ? MD.Tokens.slider.pressedHandleWidth : (control.visualFocus ? MD.Tokens.slider.focusHandleWidth : MD.Tokens.slider.handleWidth)
         readonly property real handleContainerSize: trackOuterCornerRadius * 2
         readonly property bool reservesLabelSpace: control.labelBehavior === Slider.LabelBehavior.WithinBounds || control.labelBehavior === Slider.LabelBehavior.Visible
@@ -195,6 +207,7 @@ T.Slider {
         trackIconActiveColor: control.trackIconActiveColor
         trackIconInactiveColor: control.trackIconInactiveColor
         trackIconSize: metrics.trackIconSize
+        trackIconPadding: metrics.trackIconPadding
     }
 
     handle: MD.SliderHandle {

@@ -20,6 +20,7 @@ struct Menu
     QML_ANONYMOUS
 
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
+    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
     Q_PROPERTY(qreal containerRadius READ containerRadius CONSTANT FINAL)
     Q_PROPERTY(qreal topPadding READ topPadding CONSTANT FINAL)
     Q_PROPERTY(qreal bottomPadding READ bottomPadding CONSTANT FINAL)
@@ -43,9 +44,15 @@ public:
     }
 
     //! Corner radius of the menu surface.
-    constexpr qreal containerRadius() const
+    constexpr qreal containerShape() const
     {
         return 4.0;
+    }
+
+    //! Compatibility alias for containerShape.
+    constexpr qreal containerRadius() const
+    {
+        return containerShape();
     }
 
     //! Space above the first menu item.

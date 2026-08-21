@@ -40,8 +40,8 @@ T.Switch {
     hoverEnabled: true
 
     indicator: Item {
-        implicitWidth: 52
-        implicitHeight: 32
+        implicitWidth: MD.Tokens.switch.trackWidth
+        implicitHeight: MD.Tokens.switch.trackHeight
 
         x: control.text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
@@ -55,8 +55,8 @@ T.Switch {
                     return control.checked ? control.MD.Style.onSurfaceColor : control.MD.Style.surfaceContainerHighestColor;
                 return control.checked ? control.MD.Style.primaryColor : control.MD.Style.surfaceContainerHighestColor;
             }
-            property real trackOpacity: control.enabled ? 1.0 : 0.12
-            property real borderWidth: control.checked ? 0 : 2
+            property real trackOpacity: control.enabled ? 1.0 : MD.Tokens.switch.disabledTrackOpacity
+            property real borderWidth: control.checked ? 0 : MD.Tokens.switch.trackOutlineWidth
             property color borderColor: control.enabled ? control.MD.Style.outlineColor : control.MD.Style.onSurfaceColor
 
             // Handle
@@ -67,8 +67,8 @@ T.Switch {
                     return control.MD.Style.onPrimaryColor;
                 return control.iconConfiguration === Switch.IconConfiguration.BothIcons ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.outlineColor;
             }
-            property real handleSize: control.pressed ? 28 : (control.checked ? 24 : (control.iconConfiguration === Switch.IconConfiguration.BothIcons ? 24 : 16))
-            property real handleOpacity: (!control.enabled && !control.checked) ? 0.38 : 1.0
+            property real handleSize: control.pressed ? MD.Tokens.switch.pressedHandleSize : (control.checked ? MD.Tokens.switch.selectedHandleSize : (control.iconConfiguration === Switch.IconConfiguration.BothIcons ? MD.Tokens.switch.withIconHandleSize : MD.Tokens.switch.unselectedHandleSize))
+            property real handleOpacity: !control.enabled ? (control.checked ? MD.Tokens.switch.disabledSelectedHandleOpacity : MD.Tokens.switch.disabledUnselectedHandleOpacity) : 1.0
 
             // Icon
             property bool showIcon: control.iconConfiguration === Switch.IconConfiguration.BothIcons || (control.iconConfiguration === Switch.IconConfiguration.SelectedIcon && control.checked)
@@ -92,21 +92,21 @@ T.Switch {
                 name: "hovered"
                 when: control.hovered && control.enabled && !control.pressed
                 PropertyChanges {
-                    indicatorState.stateLayerOpacity: 0.08
+                    indicatorState.stateLayerOpacity: MD.Tokens.switch.hoverStateLayerOpacity
                 }
             },
             State {
                 name: "focused"
                 when: control.visualFocus && control.enabled && !control.pressed
                 PropertyChanges {
-                    indicatorState.stateLayerOpacity: 0.1
+                    indicatorState.stateLayerOpacity: MD.Tokens.switch.focusStateLayerOpacity
                 }
             },
             State {
                 name: "pressed"
                 when: control.pressed && control.enabled
                 PropertyChanges {
-                    indicatorState.stateLayerOpacity: 0.1
+                    indicatorState.stateLayerOpacity: MD.Tokens.switch.pressedStateLayerOpacity
                 }
             }
         ]
@@ -114,7 +114,7 @@ T.Switch {
         // Track
         Rectangle {
             anchors.fill: parent
-            radius: height / 2
+            radius: Math.min(MD.Tokens.switch.trackShape, height / 2)
             color: indicatorState.trackColor
             opacity: indicatorState.trackOpacity
             border.width: indicatorState.borderWidth
@@ -142,10 +142,10 @@ T.Switch {
         // Container x = handleCenter - 20
         Item {
             id: handleArea
-            width: 40
-            height: 40
+            width: MD.Tokens.switch.stateLayerSize
+            height: MD.Tokens.switch.stateLayerSize
             y: (parent.height - height) / 2
-            x: control.checked ? 16 : -4
+            x: control.checked ? parent.width - parent.height / 2 - width / 2 : parent.height / 2 - width / 2
 
             Behavior on x {
                 NumberAnimation {
@@ -187,8 +187,8 @@ T.Switch {
 
                 MD.Symbol {
                     anchors.centerIn: parent
-                    iconWidth: 16
-                    iconHeight: 16
+                    iconWidth: control.checked ? MD.Tokens.switch.selectedIconSize : MD.Tokens.switch.unselectedIconSize
+                    iconHeight: iconWidth
                     name: indicatorState.iconName
                     color: indicatorState.iconColor
                     opacity: indicatorState.showIcon ? 1.0 : 0.0

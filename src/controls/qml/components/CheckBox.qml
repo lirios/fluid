@@ -30,7 +30,7 @@ T.CheckBox {
         property color labelColor: control.MD.Style.onSurfaceColor
         property color stateLayerColor: "transparent"
 
-        property real outlineWidth: control.checkState == Qt.Checked ? 0 : 2
+        property real outlineWidth: control.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
 
         property real contentOpacity: 1.0
         property real containerOpacity: 1.0
@@ -47,9 +47,9 @@ T.CheckBox {
                 iconColor: control.MD.Style.surfaceColor
                 containerColor: control.checkState === Qt.Unchecked ? "transparent" : control.error ? control.MD.Style.errorColor : control.MD.Style.onSurfaceColor
                 outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
-                outlineWidth: control.checkState == Qt.Checked ? 0 : 2
-                contentOpacity: 0.38
-                containerOpacity: 0.38
+                outlineWidth: control.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
+                contentOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
+                containerOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
             }
         },
         State {
@@ -60,7 +60,7 @@ T.CheckBox {
                 target: state
                 outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
                 stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: 0.08
+                stateLayerOpacity: MD.Tokens.checkBox.hoverStateLayerOpacity
             }
         },
         State {
@@ -71,7 +71,7 @@ T.CheckBox {
                 target: state
                 outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
                 stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: 0.1
+                stateLayerOpacity: MD.Tokens.checkBox.focusStateLayerOpacity
             }
         },
         State {
@@ -82,7 +82,7 @@ T.CheckBox {
                 target: state
                 outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
                 stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: 0.1
+                stateLayerOpacity: MD.Tokens.checkBox.pressedStateLayerOpacity
             }
         }
     ]
@@ -100,9 +100,9 @@ T.CheckBox {
 
         MD.Ripple {
             anchors.centerIn: parent
-            width: 40
-            height: 40
-            radius: 20
+            width: MD.Tokens.checkBox.stateLayerSize
+            height: MD.Tokens.checkBox.stateLayerSize
+            radius: width / 2
             pressX: control.pressX
             pressY: control.pressY
             pressed: control.pressed

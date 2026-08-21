@@ -80,6 +80,41 @@ qreal Slider::activeHandleHeightExtraLarge() const
     return 108.0;
 }
 
+qreal Slider::activeHandlePadding() const
+{
+    return 6.0;
+}
+
+qreal Slider::activeHandleTrailingSpace() const
+{
+    return 6.0;
+}
+
+qreal Slider::activeStopIndicatorContainerOpacity() const
+{
+    return 1.0;
+}
+
+qreal Slider::inactiveStopIndicatorContainerOpacity() const
+{
+    return 1.0;
+}
+
+qreal Slider::disabledHandleWidth() const
+{
+    return 4.0;
+}
+
+qreal Slider::hoverHandleWidth() const
+{
+    return 4.0;
+}
+
+qreal Slider::stopIndicatorTrailingSpace() const
+{
+    return 4.0;
+}
+
 qreal Slider::handleWidth() const
 {
     return 4.0;
@@ -145,9 +180,24 @@ qreal Slider::trackIconSizeExtraLarge() const
     return 32.0;
 }
 
+qreal Slider::trackIconPaddingMedium() const
+{
+    return 6.0;
+}
+
+qreal Slider::trackIconPaddingLarge() const
+{
+    return 6.0;
+}
+
+qreal Slider::trackIconPaddingExtraLarge() const
+{
+    return 8.0;
+}
+
 qreal Slider::trackIconPadding() const
 {
-    return 10.0;
+    return trackIconPaddingMedium();
 }
 
 qreal Slider::minimumInteractiveSize() const

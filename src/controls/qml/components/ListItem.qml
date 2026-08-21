@@ -117,15 +117,14 @@ T.ItemDelegate {
     implicitWidth: Math.max(parent ? parent.width : 0, implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
-    // MD3 baseline padding: 8 dp vertical, 16 dp leading, 24 dp trailing.
-    topPadding: 8
-    bottomPadding: 8
-    leftPadding: 16
-    rightPadding: 24
-    spacing: 16
+    topPadding: MD.Tokens.listItem.topSpace
+    bottomPadding: MD.Tokens.listItem.bottomSpace
+    leftPadding: MD.Tokens.listItem.leadingSpace
+    rightPadding: MD.Tokens.listItem.trailingSpace
+    spacing: MD.Tokens.listItem.betweenSpace
 
-    topInset: control.segmented && !control._first ? 2 : 0
-    bottomInset: control.segmented && !control._last ? 2 : 0
+    topInset: control.segmented && !control._first ? MD.Tokens.listItem.segmentedGap : 0
+    bottomInset: control.segmented && !control._last ? MD.Tokens.listItem.segmentedGap : 0
 
     hoverEnabled: true
 
@@ -155,7 +154,7 @@ T.ItemDelegate {
                     labelColor: control.MD.Style.onSurfaceColor
                     overlineColor: control.MD.Style.onSurfaceColor
                     supportingTextColor: control.MD.Style.onSurfaceColor
-                    contentOpacity: 0.38
+                    contentOpacity: MD.Tokens.listItem.disabledContentOpacity
                 }
             }
         },
@@ -166,7 +165,7 @@ T.ItemDelegate {
             PropertyChanges {
                 _state {
                     stateLayerColor: control.MD.Style.onSurfaceColor
-                    stateLayerOpacity: 0.08
+                    stateLayerOpacity: MD.Tokens.listItem.hoverStateLayerOpacity
                 }
             }
         },
@@ -177,7 +176,7 @@ T.ItemDelegate {
             PropertyChanges {
                 _state {
                     stateLayerColor: control.MD.Style.onSurfaceColor
-                    stateLayerOpacity: 0.1
+                    stateLayerOpacity: MD.Tokens.listItem.focusStateLayerOpacity
                 }
             }
         },
@@ -188,7 +187,7 @@ T.ItemDelegate {
             PropertyChanges {
                 _state {
                     stateLayerColor: control.MD.Style.onSurfaceColor
-                    stateLayerOpacity: 0.1
+                    stateLayerOpacity: MD.Tokens.listItem.pressedStateLayerOpacity
                 }
             }
         }
@@ -309,22 +308,22 @@ T.ItemDelegate {
 
     // -------------------------------------------------------------------------
     // Background: surface container with an MD3 ripple state layer.
-    // implicitHeight encodes the MD3 baseline heights: 56 / 72 / 96 dp.
+    // implicitHeight encodes the MD3 baseline heights: 56 / 72 / 88 dp.
     // -------------------------------------------------------------------------
     background: Rectangle {
         implicitWidth: 64
         implicitHeight: {
             if (internal.lineCount >= 3)
-                return 96;
+                return MD.Tokens.listItem.threeLineContainerHeight;
             if (internal.lineCount === 2)
-                return 72;
-            return 56;
+                return MD.Tokens.listItem.twoLineContainerHeight;
+            return MD.Tokens.listItem.oneLineContainerHeight;
         }
 
-        topLeftRadius: control.segmented && control._first ? MD.Tokens.cornerRadiusExtraLarge : 0
-        topRightRadius: control.segmented && control._first ? MD.Tokens.cornerRadiusExtraLarge : 0
-        bottomLeftRadius: control.segmented && control._last ? MD.Tokens.cornerRadiusExtraLarge : 0
-        bottomRightRadius: control.segmented && control._last ? MD.Tokens.cornerRadiusExtraLarge : 0
+        topLeftRadius: control.segmented && control._first ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
+        topRightRadius: control.segmented && control._first ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
+        bottomLeftRadius: control.segmented && control._last ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
+        bottomRightRadius: control.segmented && control._last ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
 
         color: _state.containerColor
 

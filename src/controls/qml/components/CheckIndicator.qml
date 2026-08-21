@@ -17,17 +17,17 @@ Item {
     property color outlineColor
     property real outlineWidth
 
-    implicitWidth: 18 + MD.Tokens.spacingSmall
-    implicitHeight: 18 + MD.Tokens.spacingSmall
+    implicitWidth: MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall
+    implicitHeight: MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall
 
     Rectangle {
         id: container
 
         anchors.centerIn: parent
-        implicitWidth: 18
-        implicitHeight: 18
+        implicitWidth: MD.Tokens.checkBox.containerSize
+        implicitHeight: MD.Tokens.checkBox.containerSize
         color: indicatorItem.backgroundColor
-        radius: 2
+        radius: MD.Tokens.checkBox.containerShape
         border.width: indicatorItem.outlineWidth
         border.color: indicatorItem.outlineColor
 

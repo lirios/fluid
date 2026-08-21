@@ -167,6 +167,7 @@ T.RangeSlider {
         trackIconActiveColor: metrics.activeTickColor
         trackIconInactiveColor: metrics.inactiveTickColor
         trackIconSize: 0
+        trackIconPadding: 0
     }
 
     first.handle: MD.SliderHandle {

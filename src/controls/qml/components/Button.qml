@@ -99,7 +99,7 @@ P.BaseButton {
         }
         property color stateLayerColor: "transparent"
 
-        property real elevation: control.type === P.BaseButton.Type.Elevated ? control.MD.Tokens.elevationLevel1 : control.MD.Tokens.elevationLevel0
+        property real elevation: control.type === P.BaseButton.Type.Elevated ? MD.Tokens.button.elevatedContainerElevation : MD.Tokens.button.flatContainerElevation
 
         property real contentOpacity: 1.0
         property real containerOpacity: 1.0
@@ -137,9 +137,9 @@ P.BaseButton {
                             return control.MD.Style.onSurfaceColor;
                         }
                     }
-                    elevation: control.MD.Tokens.elevationLevel0
-                    containerOpacity: 0.1
-                    contentOpacity: 0.38
+                    elevation: MD.Tokens.button.flatContainerElevation
+                    containerOpacity: MD.Tokens.button.disabledContainerOpacity
+                    contentOpacity: MD.Tokens.button.disabledLabelTextOpacity
                 }
             }
         },
@@ -177,7 +177,7 @@ P.BaseButton {
                             return control.MD.Style.primaryColor;
                         }
                     }
-                    stateLayerOpacity: 0.08
+                    stateLayerOpacity: MD.Tokens.button.hoverStateLayerOpacity
                 }
             }
         },
@@ -215,8 +215,8 @@ P.BaseButton {
                             return control.MD.Style.primaryColor;
                         }
                     }
-                    elevation: control.type === P.BaseButton.Type.Elevated ? control.MD.Tokens.elevationLevel1 : control.MD.Tokens.elevationLevel0
-                    stateLayerOpacity: 0.1
+                    elevation: control.type === P.BaseButton.Type.Elevated ? MD.Tokens.button.elevatedContainerElevation : MD.Tokens.button.flatContainerElevation
+                    stateLayerOpacity: MD.Tokens.button.focusStateLayerOpacity
                 }
             }
         },
@@ -254,8 +254,8 @@ P.BaseButton {
                             return control.MD.Style.primaryColor;
                         }
                     }
-                    elevation: control.type === P.BaseButton.Type.Elevated ? control.MD.Tokens.elevationLevel1 : control.MD.Tokens.elevationLevel0
-                    stateLayerOpacity: 0.1
+                    elevation: control.type === P.BaseButton.Type.Elevated ? MD.Tokens.button.elevatedContainerElevation : MD.Tokens.button.flatContainerElevation
+                    stateLayerOpacity: MD.Tokens.button.pressedStateLayerOpacity
                 }
             }
         }
@@ -279,20 +279,7 @@ P.BaseButton {
 
     background: MD.ElevationRectangle {
         implicitWidth: 64
-        implicitHeight: {
-            switch (control.size) {
-            case P.BaseButton.Size.ExtraSmall:
-                return 32;
-            case P.BaseButton.Size.Small:
-                return 40;
-            case P.BaseButton.Size.Medium:
-                return 56;
-            case P.BaseButton.Size.Large:
-                return 96;
-            case P.BaseButton.Size.ExtraLarge:
-                return 136;
-            }
-        }
+        implicitHeight: UiMetrics.buttonHeight(control)
 
         radius: Math.min(UiMetrics.buttonRadius(control), control.height / 2)
 
@@ -303,7 +290,7 @@ P.BaseButton {
             }
         }
 
-        border.width: control.type == P.BaseButton.Type.Outlined ? 1 : 0
+        border.width: control.type == P.BaseButton.Type.Outlined ? UiMetrics.buttonOutlineWidth(control) : 0
         border.color: MD.Style.outlineVariantColor
 
         elevation: state.elevation

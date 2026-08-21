@@ -214,6 +214,36 @@ AppBar Tokens::appBar() const
     return m_appBar;
 }
 
+// Component tokens - Button
+Button Tokens::button() const
+{
+    return m_button;
+}
+
+// Component tokens - Check box
+CheckBox Tokens::checkBox() const
+{
+    return m_checkBox;
+}
+
+// Component tokens - Dialog
+Dialog Tokens::dialog() const
+{
+    return m_dialog;
+}
+
+// Component tokens - Icon button
+IconButton Tokens::iconButton() const
+{
+    return m_iconButton;
+}
+
+// Component tokens - List item
+ListItem Tokens::listItem() const
+{
+    return m_listItem;
+}
+
 // Component tokens - Menu
 Menu Tokens::menu() const
 {
@@ -230,6 +260,18 @@ Slider Tokens::slider() const
 Divider Tokens::divider() const
 {
     return m_divider;
+}
+
+// Component tokens - Switch
+Switch Tokens::switchControl() const
+{
+    return m_switch;
+}
+
+// Component tokens - Symbol
+Symbol Tokens::symbol() const
+{
+    return m_symbol;
 }
 
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)

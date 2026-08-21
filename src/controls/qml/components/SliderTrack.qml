@@ -42,6 +42,7 @@ Item {
     required property color trackIconActiveColor
     required property color trackIconInactiveColor
     required property real trackIconSize
+    required property real trackIconPadding
 
     readonly property real baseCrossSize: Math.max(MD.Tokens.slider.minimumInteractiveSize, trackHeight, handleHeight)
     implicitWidth: horizontal ? MD.Tokens.slider.defaultLength : baseCrossSize + labelSpace
@@ -148,7 +149,7 @@ Item {
         return 0;
     }
     readonly property bool iconsAllowed: stepSize <= 0 && !centered && !rangeMode && trackIconSize > 0
-    readonly property real iconRequiredLength: trackIconSize + MD.Tokens.slider.trackIconPadding * 2
+    readonly property real iconRequiredLength: trackIconSize + root.trackIconPadding * 2
 
     function tickStepIndex(displayIndex) {
         if (root.tickCount <= 1)
@@ -304,8 +305,8 @@ Item {
         readonly property real axisPosition: {
             const fromStart = logicalStart === logicalForward;
             if (fromStart)
-                return segmentStart + MD.Tokens.slider.trackIconPadding + root.trackIconSize / 2;
-            return segmentEnd - MD.Tokens.slider.trackIconPadding - root.trackIconSize / 2;
+                return segmentStart + root.trackIconPadding + root.trackIconSize / 2;
+            return segmentEnd - root.trackIconPadding - root.trackIconSize / 2;
         }
 
         visible: root.iconsAllowed && name.length > 0 && segmentEnd - segmentStart >= root.iconRequiredLength

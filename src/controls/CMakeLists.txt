@@ -12,10 +12,17 @@ set(_sources
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/tokens/appbar.cpp cpp/tokens/appbar.h
+    cpp/tokens/button.cpp cpp/tokens/button.h
+    cpp/tokens/checkbox.cpp cpp/tokens/checkbox.h
+    cpp/tokens/dialog.cpp cpp/tokens/dialog.h
     cpp/tokens/divider.cpp cpp/tokens/divider.h
     cpp/tokens/easing.cpp cpp/tokens/easing.h
+    cpp/tokens/iconbutton.cpp cpp/tokens/iconbutton.h
+    cpp/tokens/listitem.cpp cpp/tokens/listitem.h
     cpp/tokens/menu.cpp cpp/tokens/menu.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
+    cpp/tokens/switch.cpp cpp/tokens/switch.h
+    cpp/tokens/symbol.cpp cpp/tokens/symbol.h
     cpp/tokens/tokens.cpp cpp/tokens/tokens.h
     cpp/tokens/typescale.cpp cpp/tokens/typescale.h
 )

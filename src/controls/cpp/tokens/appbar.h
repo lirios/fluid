@@ -13,6 +13,13 @@ struct AppBar
     Q_GADGET
     QML_ANONYMOUS
 
+    Q_PROPERTY(qreal avatarSize READ avatarSize CONSTANT FINAL)
+    Q_PROPERTY(qreal iconButtonSpace READ iconButtonSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal leadingSpace READ leadingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal trailingSpace READ trailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
+    Q_PROPERTY(qreal mediumContainerHeight READ mediumContainerHeight CONSTANT FINAL)
+    Q_PROPERTY(qreal largeContainerHeight READ largeContainerHeight CONSTANT FINAL)
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
     Q_PROPERTY(qreal onScrollContainerElevation READ onScrollContainerElevation CONSTANT FINAL)
     Q_PROPERTY(qreal smallContainerHeight READ smallContainerHeight CONSTANT FINAL)
@@ -66,6 +73,34 @@ struct AppBar
     Q_PROPERTY(qreal disabledContentOpacity READ disabledContentOpacity CONSTANT FINAL)
 
 public:
+    constexpr qreal avatarSize() const
+    {
+        return 32.0;
+    }
+    constexpr qreal iconButtonSpace() const
+    {
+        return 0.0;
+    }
+    constexpr qreal leadingSpace() const
+    {
+        return 4.0;
+    }
+    constexpr qreal trailingSpace() const
+    {
+        return 4.0;
+    }
+    constexpr qreal containerShape() const
+    {
+        return 0.0;
+    }
+    constexpr qreal mediumContainerHeight() const
+    {
+        return 112.0;
+    }
+    constexpr qreal largeContainerHeight() const
+    {
+        return 152.0;
+    }
     constexpr qreal containerElevation() const
     {
         return 0.0;

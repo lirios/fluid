@@ -23,12 +23,12 @@ struct Slider
     Q_PROPERTY(qreal activeTrackHeightExtraLarge READ activeTrackHeightExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal activeTrackLeadingCornerRadiusExtraSmall READ
                        activeTrackLeadingCornerRadiusExtraSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusSmall READ
-                       activeTrackLeadingCornerRadiusSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusMedium READ
-                       activeTrackLeadingCornerRadiusMedium CONSTANT FINAL)
-    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusLarge READ
-                       activeTrackLeadingCornerRadiusLarge CONSTANT FINAL)
+    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusSmall READ activeTrackLeadingCornerRadiusSmall
+                       CONSTANT FINAL)
+    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusMedium READ activeTrackLeadingCornerRadiusMedium
+                       CONSTANT FINAL)
+    Q_PROPERTY(qreal activeTrackLeadingCornerRadiusLarge READ activeTrackLeadingCornerRadiusLarge
+                       CONSTANT FINAL)
     Q_PROPERTY(qreal activeTrackLeadingCornerRadiusExtraLarge READ
                        activeTrackLeadingCornerRadiusExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal activeHandleHeightExtraSmall READ activeHandleHeightExtraSmall CONSTANT FINAL)
@@ -37,6 +37,15 @@ struct Slider
     Q_PROPERTY(qreal activeHandleHeightLarge READ activeHandleHeightLarge CONSTANT FINAL)
     Q_PROPERTY(qreal activeHandleHeightExtraLarge READ activeHandleHeightExtraLarge CONSTANT FINAL)
 
+    Q_PROPERTY(qreal activeHandlePadding READ activeHandlePadding CONSTANT FINAL)
+    Q_PROPERTY(qreal activeHandleTrailingSpace READ activeHandleTrailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal activeStopIndicatorContainerOpacity READ activeStopIndicatorContainerOpacity
+                       CONSTANT FINAL)
+    Q_PROPERTY(qreal inactiveStopIndicatorContainerOpacity READ
+                       inactiveStopIndicatorContainerOpacity CONSTANT FINAL)
+    Q_PROPERTY(qreal disabledHandleWidth READ disabledHandleWidth CONSTANT FINAL)
+    Q_PROPERTY(qreal hoverHandleWidth READ hoverHandleWidth CONSTANT FINAL)
+    Q_PROPERTY(qreal stopIndicatorTrailingSpace READ stopIndicatorTrailingSpace CONSTANT FINAL)
     Q_PROPERTY(qreal handleWidth READ handleWidth CONSTANT FINAL)
     Q_PROPERTY(qreal pressedHandleWidth READ pressedHandleWidth CONSTANT FINAL)
     Q_PROPERTY(qreal focusHandleWidth READ focusHandleWidth CONSTANT FINAL)
@@ -52,6 +61,9 @@ struct Slider
     Q_PROPERTY(qreal trackIconSizeMedium READ trackIconSizeMedium CONSTANT FINAL)
     Q_PROPERTY(qreal trackIconSizeLarge READ trackIconSizeLarge CONSTANT FINAL)
     Q_PROPERTY(qreal trackIconSizeExtraLarge READ trackIconSizeExtraLarge CONSTANT FINAL)
+    Q_PROPERTY(qreal trackIconPaddingMedium READ trackIconPaddingMedium CONSTANT FINAL)
+    Q_PROPERTY(qreal trackIconPaddingLarge READ trackIconPaddingLarge CONSTANT FINAL)
+    Q_PROPERTY(qreal trackIconPaddingExtraLarge READ trackIconPaddingExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal trackIconPadding READ trackIconPadding CONSTANT FINAL)
 
     Q_PROPERTY(qreal minimumInteractiveSize READ minimumInteractiveSize CONSTANT FINAL)
@@ -67,9 +79,12 @@ struct Slider
 
     Q_PROPERTY(qreal valueIndicatorMinWidth READ valueIndicatorMinWidth CONSTANT FINAL)
     Q_PROPERTY(qreal valueIndicatorMinHeight READ valueIndicatorMinHeight CONSTANT FINAL)
-    Q_PROPERTY(qreal valueIndicatorHorizontalPadding READ valueIndicatorHorizontalPadding CONSTANT FINAL)
-    Q_PROPERTY(qreal valueIndicatorVerticalPadding READ valueIndicatorVerticalPadding CONSTANT FINAL)
-    Q_PROPERTY(qreal valueIndicatorActiveBottomSpace READ valueIndicatorActiveBottomSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal valueIndicatorHorizontalPadding READ valueIndicatorHorizontalPadding CONSTANT
+                       FINAL)
+    Q_PROPERTY(
+            qreal valueIndicatorVerticalPadding READ valueIndicatorVerticalPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal valueIndicatorActiveBottomSpace READ valueIndicatorActiveBottomSpace CONSTANT
+                       FINAL)
 
 public:
     qreal activeTrackHeightExtraSmall() const;
@@ -88,6 +103,13 @@ public:
     qreal activeHandleHeightLarge() const;
     qreal activeHandleHeightExtraLarge() const;
 
+    qreal activeHandlePadding() const;
+    qreal activeHandleTrailingSpace() const;
+    qreal activeStopIndicatorContainerOpacity() const;
+    qreal inactiveStopIndicatorContainerOpacity() const;
+    qreal disabledHandleWidth() const;
+    qreal hoverHandleWidth() const;
+    qreal stopIndicatorTrailingSpace() const;
     qreal handleWidth() const;
     qreal pressedHandleWidth() const;
     qreal focusHandleWidth() const;
@@ -103,6 +125,9 @@ public:
     qreal trackIconSizeMedium() const;
     qreal trackIconSizeLarge() const;
     qreal trackIconSizeExtraLarge() const;
+    qreal trackIconPaddingMedium() const;
+    qreal trackIconPaddingLarge() const;
+    qreal trackIconPaddingExtraLarge() const;
     qreal trackIconPadding() const;
 
     qreal minimumInteractiveSize() const;

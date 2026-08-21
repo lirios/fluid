@@ -198,120 +198,126 @@ T.ToolButton {
     QtObject {
         id: state
 
-        property size buttonSize: {
+        readonly property real currentContainerHeight: {
             switch (control.size) {
-            case IconButton.Size.ExtraSmall:
-                switch (control.widthVariant) {
-                case IconButton.Width.Default:
-                    return Qt.size(32, 32);
-                case IconButton.Width.Narrow:
-                    return Qt.size(28, 32);
-                case IconButton.Width.Wide:
-                    return Qt.size(32, 32);
-                }
-                break;
-            case IconButton.Size.Small:
-                switch (control.widthVariant) {
-                case IconButton.Width.Default:
-                    return Qt.size(40, 40);
-                case IconButton.Width.Narrow:
-                    return Qt.size(32, 40);
-                case IconButton.Width.Wide:
-                    return Qt.size(52, 40);
-                }
-                break;
-            case IconButton.Size.Medium:
-                switch (control.widthVariant) {
-                case IconButton.Width.Default:
-                    return Qt.size(56, 56);
-                case IconButton.Width.Narrow:
-                    return Qt.size(48, 56);
-                case IconButton.Width.Wide:
-                    return Qt.size(72, 56);
-                }
-                break;
-            case IconButton.Size.Large:
-                switch (control.widthVariant) {
-                case IconButton.Width.Default:
-                    return Qt.size(96, 96);
-                case IconButton.Width.Narrow:
-                    return Qt.size(64, 96);
-                case IconButton.Width.Wide:
-                    return Qt.size(128, 96);
-                }
-                break;
-            case IconButton.Size.ExtraLarge:
-                switch (control.widthVariant) {
-                case IconButton.Width.Default:
-                    return Qt.size(136, 136);
-                case IconButton.Width.Narrow:
-                    return Qt.size(104, 136);
-                case IconButton.Width.Wide:
-                    return Qt.size(184, 136);
-                }
-                break;
+            case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.containerHeightExtraSmall;
+            case IconButton.Size.Small: return MD.Tokens.iconButton.containerHeightSmall;
+            case IconButton.Size.Medium: return MD.Tokens.iconButton.containerHeightMedium;
+            case IconButton.Size.Large: return MD.Tokens.iconButton.containerHeightLarge;
+            case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.containerHeightExtraLarge;
             }
         }
-        property size iconSize: {
+        readonly property real currentIconSize: {
             switch (control.size) {
-            case IconButton.Size.ExtraSmall:
-                return Qt.size(20, 20);
-            case IconButton.Size.Small:
-            case IconButton.Size.Medium:
-                return Qt.size(24, 24);
-            case IconButton.Size.Large:
-                return Qt.size(32, 32);
-            case IconButton.Size.ExtraLarge:
-                return Qt.size(40, 40);
+            case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.iconSizeExtraSmall;
+            case IconButton.Size.Small: return MD.Tokens.iconButton.iconSizeSmall;
+            case IconButton.Size.Medium: return MD.Tokens.iconButton.iconSizeMedium;
+            case IconButton.Size.Large: return MD.Tokens.iconButton.iconSizeLarge;
+            case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.iconSizeExtraLarge;
             }
         }
+        readonly property real currentLeadingSpace: {
+            if (control.widthVariant === IconButton.Width.Narrow) {
+                switch (control.size) {
+                case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.narrowLeadingSpaceExtraSmall;
+                case IconButton.Size.Small: return MD.Tokens.iconButton.narrowLeadingSpaceSmall;
+                case IconButton.Size.Medium: return MD.Tokens.iconButton.narrowLeadingSpaceMedium;
+                case IconButton.Size.Large: return MD.Tokens.iconButton.narrowLeadingSpaceLarge;
+                case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.narrowLeadingSpaceExtraLarge;
+                }
+            }
+            if (control.widthVariant === IconButton.Width.Wide) {
+                switch (control.size) {
+                case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.wideLeadingSpaceExtraSmall;
+                case IconButton.Size.Small: return MD.Tokens.iconButton.wideLeadingSpaceSmall;
+                case IconButton.Size.Medium: return MD.Tokens.iconButton.wideLeadingSpaceMedium;
+                case IconButton.Size.Large: return MD.Tokens.iconButton.wideLeadingSpaceLarge;
+                case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.wideLeadingSpaceExtraLarge;
+                }
+            }
+            switch (control.size) {
+            case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.defaultLeadingSpaceExtraSmall;
+            case IconButton.Size.Small: return MD.Tokens.iconButton.defaultLeadingSpaceSmall;
+            case IconButton.Size.Medium: return MD.Tokens.iconButton.defaultLeadingSpaceMedium;
+            case IconButton.Size.Large: return MD.Tokens.iconButton.defaultLeadingSpaceLarge;
+            case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.defaultLeadingSpaceExtraLarge;
+            }
+        }
+        readonly property real currentTrailingSpace: {
+            if (control.widthVariant === IconButton.Width.Narrow) {
+                switch (control.size) {
+                case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.narrowTrailingSpaceExtraSmall;
+                case IconButton.Size.Small: return MD.Tokens.iconButton.narrowTrailingSpaceSmall;
+                case IconButton.Size.Medium: return MD.Tokens.iconButton.narrowTrailingSpaceMedium;
+                case IconButton.Size.Large: return MD.Tokens.iconButton.narrowTrailingSpaceLarge;
+                case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.narrowTrailingSpaceExtraLarge;
+                }
+            }
+            if (control.widthVariant === IconButton.Width.Wide) {
+                switch (control.size) {
+                case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.wideTrailingSpaceExtraSmall;
+                case IconButton.Size.Small: return MD.Tokens.iconButton.wideTrailingSpaceSmall;
+                case IconButton.Size.Medium: return MD.Tokens.iconButton.wideTrailingSpaceMedium;
+                case IconButton.Size.Large: return MD.Tokens.iconButton.wideTrailingSpaceLarge;
+                case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.wideTrailingSpaceExtraLarge;
+                }
+            }
+            switch (control.size) {
+            case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.defaultTrailingSpaceExtraSmall;
+            case IconButton.Size.Small: return MD.Tokens.iconButton.defaultTrailingSpaceSmall;
+            case IconButton.Size.Medium: return MD.Tokens.iconButton.defaultTrailingSpaceMedium;
+            case IconButton.Size.Large: return MD.Tokens.iconButton.defaultTrailingSpaceLarge;
+            case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.defaultTrailingSpaceExtraLarge;
+            }
+        }
+        readonly property real outlineWidth: {
+            switch (control.size) {
+            case IconButton.Size.ExtraSmall: return MD.Tokens.iconButton.outlinedOutlineWidthExtraSmall;
+            case IconButton.Size.Small: return MD.Tokens.iconButton.outlinedOutlineWidthSmall;
+            case IconButton.Size.Medium: return MD.Tokens.iconButton.outlinedOutlineWidthMedium;
+            case IconButton.Size.Large: return MD.Tokens.iconButton.outlinedOutlineWidthLarge;
+            case IconButton.Size.ExtraLarge: return MD.Tokens.iconButton.outlinedOutlineWidthExtraLarge;
+            }
+        }
+        property size buttonSize: Qt.size(currentIconSize + currentLeadingSpace + currentTrailingSpace, currentContainerHeight)
+        property size iconSize: Qt.size(currentIconSize, currentIconSize)
 
         property size inset: {
-            // Extra small and small icon buttons must have a target size of 48x48 to be accessible,
-            // except for wide small buttons that must be at least 52x48.
-            switch (control.size) {
-            case IconButton.Size.ExtraSmall:
-                return Qt.size(48 - state.buttonSize.width, 48 - state.buttonSize.height);
-            case IconButton.Size.Small:
-                if (control.widthVariant === IconButton.Width.Wide) {
-                    return Qt.size(52 - state.buttonSize.width, 48 - state.buttonSize.height);
-                }
-                return Qt.size(48 - state.buttonSize.width, 48 - state.buttonSize.height);
-            default:
-                return Qt.size(0, 0);
-            }
+            const minimum = MD.Tokens.iconButton.minimumInteractiveSize;
+            return Qt.size(Math.max(minimum, state.buttonSize.width) - state.buttonSize.width,
+                           Math.max(minimum, state.buttonSize.height) - state.buttonSize.height);
         }
 
         property real radius: {
-            // When pressed it morphs into a square shape, and when it's a selected toggle the shape morphs
-            // from round to square and vice versa
-            const isSquare = control.pressed || (control.checked && control.shape === IconButton.Shape.Round) || (!control.checked && control.shape === IconButton.Shape.Square);
-            if (isSquare) {
+            const tokens = MD.Tokens.iconButton;
+            if (control.pressed) {
                 switch (control.size) {
-                case IconButton.Size.ExtraSmall:
-                case IconButton.Size.Small:
-                    return MD.Tokens.cornerRadiusSmall;
-                case IconButton.Size.Medium:
-                    return MD.Tokens.cornerRadiusMedium;
-                case IconButton.Size.Large:
-                case IconButton.Size.ExtraLarge:
-                    return MD.Tokens.cornerRadiusLarge;
+                case IconButton.Size.ExtraSmall: return tokens.pressedContainerShapeExtraSmall;
+                case IconButton.Size.Small: return tokens.pressedContainerShapeSmall;
+                case IconButton.Size.Medium: return tokens.pressedContainerShapeMedium;
+                case IconButton.Size.Large: return tokens.pressedContainerShapeLarge;
+                case IconButton.Size.ExtraLarge: return tokens.pressedContainerShapeExtraLarge;
                 }
-            } else if (control.shape === IconButton.Shape.Round) {
-                // When not pressed and the shape is round, the radius is always full
-                return MD.Tokens.cornerRadiusFull;
-            } else {
-                // When not pressed and the shape is square, the radius depends on the size
+            }
+            if (control.checked) {
+                if (control.shape === IconButton.Shape.Square)
+                    return tokens.selectedContainerShapeSquare;
                 switch (control.size) {
-                case IconButton.Size.ExtraSmall:
-                case IconButton.Size.Small:
-                    return MD.Tokens.cornerRadiusMedium;
-                case IconButton.Size.Medium:
-                    return MD.Tokens.cornerRadiusLarge;
-                case IconButton.Size.Large:
-                case IconButton.Size.ExtraLarge:
-                    return MD.Tokens.cornerRadiusExtraLarge;
+                case IconButton.Size.ExtraSmall: return tokens.selectedContainerShapeRoundExtraSmall;
+                case IconButton.Size.Small: return tokens.selectedContainerShapeRoundSmall;
+                case IconButton.Size.Medium: return tokens.selectedContainerShapeRoundMedium;
+                case IconButton.Size.Large: return tokens.selectedContainerShapeRoundLarge;
+                case IconButton.Size.ExtraLarge: return tokens.selectedContainerShapeRoundExtraLarge;
                 }
+            }
+            if (control.shape === IconButton.Shape.Round)
+                return tokens.containerShapeRound;
+            switch (control.size) {
+            case IconButton.Size.ExtraSmall: return tokens.containerShapeSquareExtraSmall;
+            case IconButton.Size.Small: return tokens.containerShapeSquareSmall;
+            case IconButton.Size.Medium: return tokens.containerShapeSquareMedium;
+            case IconButton.Size.Large: return tokens.containerShapeSquareLarge;
+            case IconButton.Size.ExtraLarge: return tokens.containerShapeSquareExtraLarge;
             }
         }
 
@@ -332,8 +338,8 @@ T.ToolButton {
             PropertyChanges {
                 state.containerColor: control.type === IconButton.Type.Standard ? "transparent" : control.disabledContainerColor
                 state.contentColor: control.disabledContentColor
-                state.containerOpacity: 0.1
-                state.contentOpacity: 0.38
+                state.containerOpacity: MD.Tokens.iconButton.disabledContainerOpacity
+                state.contentOpacity: MD.Tokens.iconButton.disabledIconOpacity
             }
         },
         State {
@@ -342,7 +348,7 @@ T.ToolButton {
 
             PropertyChanges {
                 state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: 0.1
+                state.stateLayerOpacity: MD.Tokens.iconButton.pressedStateLayerOpacity
             }
         },
         State {
@@ -351,7 +357,7 @@ T.ToolButton {
 
             PropertyChanges {
                 state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: 0.1
+                state.stateLayerOpacity: MD.Tokens.iconButton.focusStateLayerOpacity
             }
         },
         State {
@@ -360,7 +366,7 @@ T.ToolButton {
 
             PropertyChanges {
                 state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: 0.08
+                state.stateLayerOpacity: MD.Tokens.iconButton.hoverStateLayerOpacity
             }
         }
     ]
@@ -418,7 +424,7 @@ T.ToolButton {
             }
         }
 
-        border.width: control.type === IconButton.Type.Outlined && !control.checked ? 1 : 0
+        border.width: control.type === IconButton.Type.Outlined && !control.checked ? state.outlineWidth : 0
         border.color: control.outlineColor
 
         opacity: state.containerOpacity

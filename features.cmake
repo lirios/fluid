@@ -33,6 +33,10 @@ endif()
 #### Dependencies
 
 if(FLUID_WITH_QML_MODULES)
+    # Fluid deliberately uses Qt's private GUI APIs for platform theme and
+    # window-decoration integration. This is an acknowledged Qt-version tie.
+    set(QT_NO_PRIVATE_MODULE_WARNING ON)
+
     ## Find Qt:
     find_package(Qt6 6.9
         REQUIRED

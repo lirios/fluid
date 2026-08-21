@@ -33,10 +33,10 @@ Item {
     property color filledContentColor: MD.Style.onPrimaryColor
 
     //! Whether the action uses the filled-button presentation.
-    readonly property bool isFilled: actionData.presentation === MD.AppBarAction.FilledButton
+    readonly property bool isFilled: actionData !== null && actionData.presentation === MD.AppBarAction.FilledButton
 
     //! Whether the action uses the avatar presentation.
-    readonly property bool isAvatar: actionData.presentation === MD.AppBarAction.Avatar
+    readonly property bool isAvatar: actionData !== null && actionData.presentation === MD.AppBarAction.Avatar
 
     //! \internal The currently instantiated interactive control.
     readonly property Item loadedAction: actionLoader.item as Item

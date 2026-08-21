@@ -9,6 +9,7 @@
 #include "appbar.h"
 #include "divider.h"
 #include "easing.h"
+#include "menu.h"
 #include "typescale.h"
 #include "slider.h"
 
@@ -95,6 +96,9 @@ class Tokens : public QObject
     // Component tokens - App bar
     Q_PROPERTY(Fluid::AppBar appBar READ appBar CONSTANT FINAL)
 
+    // Component tokens - Menu
+    Q_PROPERTY(Fluid::Menu menu READ menu CONSTANT FINAL)
+
     // Component tokens - Slider
     Q_PROPERTY(Fluid::Slider slider READ slider CONSTANT FINAL)
 
@@ -157,6 +161,9 @@ public:
     // Component tokens - App bar
     AppBar appBar() const;
 
+    // Component tokens - Menu
+    Menu menu() const;
+
     // Component tokens - Slider
     Slider slider() const;
 
@@ -171,6 +178,7 @@ private:
     Easing m_easing;
     Spring m_spring;
     AppBar m_appBar;
+    Menu m_menu;
     Slider m_slider;
     Divider m_divider;
 };

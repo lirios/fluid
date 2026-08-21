@@ -289,6 +289,19 @@ T.ToolBar {
 
         _visibleActions = visible;
         _overflowActions = overflow;
+        _syncOverflowMenu();
+    }
+
+    //! \internal Keeps the Menu's action model in adaptive overflow order.
+    function _syncOverflowMenu() {
+        for (let index = overflowMenu.count - 1; index >= 0; --index) {
+            const action = overflowMenu.actionAt(index);
+            if (action)
+                overflowMenu.removeAction(action);
+        }
+
+        for (const action of _overflowActions)
+            overflowMenu.addAction(action);
     }
 
     //! \internal
@@ -493,88 +506,12 @@ T.ToolBar {
         icon.name: MD.SymbolNames.symbolMoreVert
     }
 
-    T.Menu {
+    MD.Menu {
         id: overflowMenu
         objectName: "overflowMenu"
 
         parent: control
         modal: true
-        focus: true
-        closePolicy: T.Popup.CloseOnEscape | T.Popup.CloseOnPressOutsideParent
-        implicitWidth: Math.max(MD.Tokens.appBar.overflowMinimumWidth, Math.min(MD.Tokens.appBar.overflowMaximumWidth, contentItem.implicitWidth))
-        implicitHeight: contentItem.implicitHeight + topPadding + bottomPadding
-        topPadding: MD.Tokens.spacingExtraSmall
-        bottomPadding: MD.Tokens.spacingExtraSmall
-
-        contentItem: ListView {
-            implicitWidth: contentItem ? contentItem.childrenRect.width : 0
-            implicitHeight: contentHeight
-            model: overflowMenu.contentModel
-            currentIndex: overflowMenu.currentIndex
-            interactive: false
-        }
-
-        background: MD.ElevationRectangle {
-            color: control.MD.Style.surfaceContainerColor
-            radius: MD.Tokens.cornerRadiusExtraSmall
-            elevation: MD.Tokens.appBar.onScrollContainerElevation
-        }
-
-        Instantiator {
-            model: control._overflowActions
-
-            delegate: T.MenuItem {
-                id: menuItem
-
-                required property var modelData
-                action: modelData
-                implicitWidth: Math.max(MD.Tokens.appBar.overflowMinimumWidth, menuContent.implicitWidth + leftPadding + rightPadding)
-                implicitHeight: MD.Tokens.appBar.overflowItemHeight
-                leftPadding: MD.Tokens.appBar.overflowHorizontalPadding
-                rightPadding: MD.Tokens.appBar.overflowHorizontalPadding
-                spacing: MD.Tokens.appBar.overflowIconLabelGap
-                opacity: enabled ? 1 : MD.Tokens.appBar.disabledContentOpacity
-
-                contentItem: Row {
-                    id: menuContent
-
-                    spacing: menuItem.spacing
-
-                    MD.Symbol {
-                        anchors.verticalCenter: parent.verticalCenter
-                        name: menuItem.modelData.icon.name
-                        iconWidth: MD.Tokens.appBar.iconSize
-                        iconHeight: MD.Tokens.appBar.iconSize
-                        color: control.actionContentColor
-                        fill: menuItem.checked
-                        visible: name.length > 0
-                    }
-
-                    MD.Label {
-                        anchors.verticalCenter: parent.verticalCenter
-                        text: menuItem.modelData.text
-                        typescale: MD.Tokens.typescale.bodyLarge
-                        color: control.titleColor
-                    }
-                }
-
-                background: Rectangle {
-                    color: "transparent"
-
-                    MD.Ripple {
-                        anchors.fill: parent
-                        pressed: menuItem.pressed
-                        pressX: menuItem.pressX
-                        pressY: menuItem.pressY
-                        color: control.actionContentColor
-                        stateOpacity: menuItem.pressed ? MD.Tokens.appBar.pressedStateLayerOpacity : menuItem.visualFocus ? MD.Tokens.appBar.focusStateLayerOpacity : menuItem.hovered ? MD.Tokens.appBar.hoverStateLayerOpacity : 0
-                    }
-                }
-            }
-
-            onObjectAdded: (index, object) => overflowMenu.insertItem(index, object)
-            onObjectRemoved: (index, object) => overflowMenu.removeItem(object)
-        }
     }
 
     Connections {

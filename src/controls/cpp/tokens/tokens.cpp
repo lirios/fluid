@@ -214,6 +214,12 @@ AppBar Tokens::appBar() const
     return m_appBar;
 }
 
+// Component tokens - Menu
+Menu Tokens::menu() const
+{
+    return m_menu;
+}
+
 // Component tokens - Slider
 Slider Tokens::slider() const
 {

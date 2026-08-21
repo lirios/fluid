@@ -14,6 +14,7 @@ set(_sources
     cpp/tokens/appbar.cpp cpp/tokens/appbar.h
     cpp/tokens/divider.cpp cpp/tokens/divider.h
     cpp/tokens/easing.cpp cpp/tokens/easing.h
+    cpp/tokens/menu.cpp cpp/tokens/menu.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
     cpp/tokens/tokens.cpp cpp/tokens/tokens.h
     cpp/tokens/typescale.cpp cpp/tokens/typescale.h

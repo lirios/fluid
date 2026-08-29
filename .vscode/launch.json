@@ -5,21 +5,25 @@
             "name": "fluid-gallery",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/install-root/bin/fluid-gallery",
+            "program": "${command:cmake.launchTargetPath}",
             "cwd": "${workspaceFolder}",
-            "MIMode": "gdb",
+            "MIMode": "lldb",
             "environment": [
                 {
-                    "name": "PATH",
-                    "value": "${workspaceFolder}/build/install-root/bin:${env:PATH}"
-                },
-                {
-                    "name": "LD_LIBRARY_PATH",
-                    "value": "${workspaceFolder}/build/install-root/lib"
+                    "name": "QML_IMPORT_PATH",
+                    "value": "${command:cmake.buildDirectory}/qml_modules"
                 },
                 {
                     "name": "QML2_IMPORT_PATH",
-                    "value": "${workspaceFolder}/build/install-root/lib/qml"
+                    "value": "${command:cmake.buildDirectory}/qml_modules"
+                },
+                {
+                    "name": "DYLD_LIBRARY_PATH",
+                    "value": "${command:cmake.buildDirectory}/src/controls:${command:cmake.buildDirectory}/src/private"
+                },
+                {
+                    "name": "LD_LIBRARY_PATH",
+                    "value": "${command:cmake.buildDirectory}/src/controls:${command:cmake.buildDirectory}/src/private"
                 }
             ]
         }

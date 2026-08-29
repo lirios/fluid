@@ -243,6 +243,12 @@ Fab Tokens::fab() const
     return m_fab;
 }
 
+// Component tokens - FAB menu
+FabMenu Tokens::fabMenu() const
+{
+    return m_fabMenu;
+}
+
 // Component tokens - Icon button
 IconButton Tokens::iconButton() const
 {

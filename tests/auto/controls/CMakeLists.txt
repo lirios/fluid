@@ -7,6 +7,7 @@ add_executable(tst_fluid_controls
     tst_date.qml
     tst_divider.qml
     tst_fab.qml
+    tst_fabmenu.qml
     tst_icon.qml
     tst_iconbutton.qml
     tst_listitem.qml

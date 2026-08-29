@@ -13,6 +13,7 @@
 #include "divider.h"
 #include "easing.h"
 #include "fab.h"
+#include "fabmenu.h"
 #include "iconbutton.h"
 #include "listitem.h"
 #include "menu.h"
@@ -117,6 +118,9 @@ class Tokens : public QObject
     // Component tokens - Floating action button
     Q_PROPERTY(Fluid::Fab fab READ fab CONSTANT FINAL)
 
+    // Component tokens - FAB menu
+    Q_PROPERTY(Fluid::FabMenu fabMenu READ fabMenu CONSTANT FINAL)
+
     // Component tokens - Icon button
     Q_PROPERTY(Fluid::IconButton iconButton READ iconButton CONSTANT FINAL)
 
@@ -207,6 +211,9 @@ public:
     // Component tokens - Floating action button
     Fab fab() const;
 
+    // Component tokens - FAB menu
+    FabMenu fabMenu() const;
+
     // Component tokens - Icon button
     IconButton iconButton() const;
 
@@ -240,6 +247,7 @@ private:
     CheckBox m_checkBox;
     Dialog m_dialog;
     Fab m_fab;
+    FabMenu m_fabMenu;
     IconButton m_iconButton;
     ListItem m_listItem;
     Menu m_menu;

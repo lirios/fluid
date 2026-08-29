@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "TheQtCompany.qt-cpp-pack",
+        "theqtcompany.qt-cpp-pack",
         "xaver.clang-format",
         "ms-python.python"
     ]

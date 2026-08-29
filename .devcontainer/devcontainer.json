@@ -5,7 +5,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"TheQtCompany.qt-cpp-pack",
+				"theqtcompany.qt-cpp-pack",
 				"Delgan.qml-format",
 				"xaver.clang-format",
 				"ms-python.python",

@@ -71,3 +71,20 @@ if(FLUID_WITH_QML_MODULES)
         add_subdirectory(tests/auto)
     endif()
 endif()
+
+## Generate a shell script that sets up the environment to run binaries
+## straight out of the build tree (QML module lookup, shared libraries).
+if(UNIX)
+    set(_fluid_prefix_sh "#!/bin/sh\n")
+    string(APPEND _fluid_prefix_sh
+        "export QML_IMPORT_PATH=\"${QT_QML_OUTPUT_DIRECTORY}\"\n"
+        "export QML2_IMPORT_PATH=\"${QT_QML_OUTPUT_DIRECTORY}\"\n")
+    if(APPLE)
+        string(APPEND _fluid_prefix_sh
+            "export DYLD_LIBRARY_PATH=\"${CMAKE_BINARY_DIR}/src/controls:${CMAKE_BINARY_DIR}/src/private:$DYLD_LIBRARY_PATH\"\n")
+    else()
+        string(APPEND _fluid_prefix_sh
+            "export LD_LIBRARY_PATH=\"${CMAKE_BINARY_DIR}/src/controls:${CMAKE_BINARY_DIR}/src/private:$LD_LIBRARY_PATH\"\n")
+    endif()
+    file(GENERATE OUTPUT "${CMAKE_BINARY_DIR}/prefix.sh" CONTENT "${_fluid_prefix_sh}")
+endif()

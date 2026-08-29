@@ -27,6 +27,20 @@ Item {
         icon.name: "add"
     }
 
+    MD.FabMenu {
+        id: metricFabMenu
+        x: 400
+        y: 400
+        width: 300
+        height: 380
+
+        MD.FabMenuItem {
+            id: metricFabMenuItem
+            text: "Item"
+            icon.name: "add"
+        }
+    }
+
     MD.CheckBox {
         id: metricCheckBox
         text: "Option"
@@ -78,6 +92,15 @@ Item {
             compare(metricFab.background.implicitWidth, MD.Tokens.fab.largeContainerWidth);
             compare(metricFab.background.implicitHeight, MD.Tokens.fab.largeContainerHeight);
             metricFab.size = MD.FAB.Size.Default;
+
+            compare(metricFabMenu.margins, MD.Tokens.fabMenu.containerMargin);
+            compare(metricFabMenu.button.background.implicitWidth, MD.Tokens.fab.containerWidth);
+            compare(metricFabMenu.button.background.implicitHeight, MD.Tokens.fab.containerHeight);
+            compare(metricFabMenuItem.implicitHeight, MD.Tokens.fabMenu.listItemContainerHeight);
+            compare(metricFabMenuItem.background.implicitHeight, MD.Tokens.fabMenu.listItemContainerHeight);
+            compare(metricFabMenuItem.background.radius, MD.Tokens.fabMenu.listItemContainerShape);
+            compare(metricFabMenuItem.leftPadding, MD.Tokens.fabMenu.listItemLeadingSpace);
+            compare(metricFabMenuItem.rightPadding, MD.Tokens.fabMenu.listItemTrailingSpace);
 
             compare(metricCheckBox.indicator.implicitWidth, MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall);
             compare(metricSwitch.indicator.implicitWidth, MD.Tokens.switch.trackWidth);
@@ -219,6 +242,26 @@ Item {
                 loweredPressedContainerElevation: 1,
                 hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
                 pressedStateLayerOpacity: 0.1
+            });
+        }
+
+        function test_fabMenu() {
+            verifyValues(MD.Tokens.fabMenu, {
+                closeButtonContainerWidth: 56, closeButtonContainerHeight: 56,
+                closeButtonContainerShape: 28, closeButtonIconSize: 20,
+                closeButtonContainerElevation: 6,
+                closeButtonFocusContainerElevation: 6,
+                closeButtonHoverContainerElevation: 8,
+                closeButtonPressedContainerElevation: 6,
+                closeButtonBetweenSpace: 8,
+                listItemContainerHeight: 56, listItemContainerShape: 28,
+                listItemContainerElevation: 0, listItemIconSize: 24,
+                listItemIconLabelSpace: 8, listItemLeadingSpace: 24,
+                listItemTrailingSpace: 24, listItemBetweenSpace: 4,
+                listItemStaggerDelay: 30,
+                hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
+                pressedStateLayerOpacity: 0.1, disabledContentOpacity: 0.38,
+                scrimOpacity: 0.32, containerMargin: 16
             });
         }
 

@@ -18,6 +18,7 @@ set(_sources
     cpp/tokens/divider.cpp cpp/tokens/divider.h
     cpp/tokens/easing.cpp cpp/tokens/easing.h
     cpp/tokens/fab.cpp cpp/tokens/fab.h
+    cpp/tokens/fabmenu.cpp cpp/tokens/fabmenu.h
     cpp/tokens/iconbutton.cpp cpp/tokens/iconbutton.h
     cpp/tokens/listitem.cpp cpp/tokens/listitem.h
     cpp/tokens/menu.cpp cpp/tokens/menu.h

@@ -49,6 +49,10 @@ MD.ApplicationWindow {
                     source: "FAB.qml"
                 }
                 ListElement {
+                    name: qsTr("FAB Menu")
+                    source: "FabMenu.qml"
+                }
+                ListElement {
                     name: qsTr("App Bars")
                     source: "AppBars.qml"
                 }

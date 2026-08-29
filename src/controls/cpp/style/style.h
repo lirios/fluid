@@ -7,10 +7,10 @@
 #include <QtQml/QQmlEngine>
 #include <QtQuickControls2/QQuickAttachedPropertyPropagator>
 
-class Style : public QQuickAttachedPropertyPropagator
+class FluidStyle : public QQuickAttachedPropertyPropagator
 {
     Q_OBJECT
-    Q_DISABLE_COPY(Style)
+    Q_DISABLE_COPY(FluidStyle)
 
     Q_PROPERTY(Theme theme READ theme WRITE setTheme RESET resetTheme NOTIFY themeChanged FINAL)
     Q_PROPERTY(int elevation READ elevation WRITE setElevation RESET resetElevation NOTIFY
@@ -90,7 +90,7 @@ class Style : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(QColor shadowColor READ shadowColor NOTIFY themeChanged FINAL)
 
     QML_NAMED_ELEMENT(Style)
-    QML_ATTACHED(Style)
+    QML_ATTACHED(FluidStyle)
     QML_UNCREATABLE("")
     QML_ADDED_IN_VERSION(2, 0)
 public:
@@ -107,7 +107,7 @@ public:
     };
     Q_ENUM(TypeFace)
 
-    explicit Style(QObject *parent = nullptr);
+    explicit FluidStyle(QObject *parent = nullptr);
 
     Theme theme() const;
     void setTheme(Theme theme);
@@ -181,7 +181,7 @@ public:
     // Color getters - Shadow
     QColor shadowColor() const;
 
-    static Style *qmlAttachedProperties(QObject *object);
+    static FluidStyle *qmlAttachedProperties(QObject *object);
 
     static bool isDarkSystemTheme();
     static Theme effectiveTheme(Theme theme);
@@ -200,9 +200,9 @@ private:
 
     // Actual property values
     bool m_systemTheme = false;
-    Style::Theme m_theme = Style::Light;
+    FluidStyle::Theme m_theme = FluidStyle::Light;
     int m_elevation = 0;
 
-    void inheritTheme(Style::Theme theme);
+    void inheritTheme(FluidStyle::Theme theme);
     void propagateTheme();
 };

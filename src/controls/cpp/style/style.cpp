@@ -13,23 +13,23 @@ using namespace Qt::StringLiterals;
 
 // These are the default values used when no value was inherited from a parent
 // or explicitly set on the instance
-static Style::Theme globalTheme = Style::Light;
+static FluidStyle::Theme globalTheme = FluidStyle::Light;
 static int globalElevation = 0;
 
-Style::Style(QObject *parent)
+FluidStyle::FluidStyle(QObject *parent)
     : QQuickAttachedPropertyPropagator(parent)
-    , m_systemTheme(globalTheme == Style::System)
+    , m_systemTheme(globalTheme == FluidStyle::System)
     , m_theme(effectiveTheme(globalTheme))
 {
     QQuickAttachedPropertyPropagator::initialize();
 }
 
-Style::Theme Style::theme() const
+FluidStyle::Theme FluidStyle::theme() const
 {
     return m_theme;
 }
 
-void Style::setTheme(Theme theme)
+void FluidStyle::setTheme(Theme theme)
 {
     // Keep track that the theme was explicitly set on this instance
     m_explicitTheme = true;
@@ -47,23 +47,23 @@ void Style::setTheme(Theme theme)
     Q_EMIT themeChanged();
 }
 
-void Style::resetTheme()
+void FluidStyle::resetTheme()
 {
     if (!m_explicitTheme)
         return;
 
     m_explicitTheme = false;
 
-    Style *style = qobject_cast<Style *>(attachedParent());
+    FluidStyle *style = qobject_cast<FluidStyle *>(attachedParent());
     inheritTheme(style ? style->theme() : globalTheme);
 }
 
-int Style::elevation() const
+int FluidStyle::elevation() const
 {
     return m_elevation;
 }
 
-void Style::setElevation(int elevation)
+void FluidStyle::setElevation(int elevation)
 {
     if (m_elevation != elevation) {
         m_elevation = elevation;
@@ -71,150 +71,150 @@ void Style::setElevation(int elevation)
     }
 }
 
-void Style::resetElevation()
+void FluidStyle::resetElevation()
 {
     setElevation(globalElevation);
 }
 
 // Font getters
-QString Style::brandFontFamily() const
+QString FluidStyle::brandFontFamily() const
 {
     return "Roboto"_L1;
 }
 
-QString Style::plainFontFamily() const
+QString FluidStyle::plainFontFamily() const
 {
     return "Roboto"_L1;
 }
 
 // Color getters - Primary
-QColor Style::primaryColor() const
+QColor FluidStyle::primaryColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Primary]
                                [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
 }
 
-QColor Style::onPrimaryColor() const
+QColor FluidStyle::onPrimaryColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Primary]
                                [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
 }
 
-QColor Style::primaryContainerColor() const
+QColor FluidStyle::primaryContainerColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Primary]
                                [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
 }
 
-QColor Style::onPrimaryContainerColor() const
+QColor FluidStyle::onPrimaryContainerColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Primary]
                                [m_theme == Dark ? Palette::Tone80 : Palette::Tone10]);
 }
 
-QColor Style::primaryFixedColor() const
+QColor FluidStyle::primaryFixedColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone90]);
 }
 
-QColor Style::primaryFixedDimColor() const
+QColor FluidStyle::primaryFixedDimColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone80]);
 }
 
-QColor Style::onPrimaryFixedColor() const
+QColor FluidStyle::onPrimaryFixedColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone10]);
 }
 
-QColor Style::onPrimaryFixedVariantColor() const
+QColor FluidStyle::onPrimaryFixedVariantColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone30]);
 }
 
 // Color getters - Secondary
-QColor Style::secondaryColor() const
+QColor FluidStyle::secondaryColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Secondary]
                                [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
 }
 
-QColor Style::onSecondaryColor() const
+QColor FluidStyle::onSecondaryColor() const
 {
     return m_theme == Dark ? QColor("#332D41") : QColor("#FFFFFF");
 }
 
-QColor Style::secondaryContainerColor() const
+QColor FluidStyle::secondaryContainerColor() const
 {
     return m_theme == Dark ? QColor("#4A4458") : QColor("#E8DEF8");
 }
 
-QColor Style::onSecondaryContainerColor() const
+QColor FluidStyle::onSecondaryContainerColor() const
 {
     return m_theme == Dark ? QColor("#E8DEF8") : QColor("#1D192B");
 }
 
 // Color getters - Tertiary
-QColor Style::tertiaryColor() const
+QColor FluidStyle::tertiaryColor() const
 {
     return m_theme == Dark ? QColor("#EFB8C8") : QColor("#7D5260");
 }
 
-QColor Style::onTertiaryColor() const
+QColor FluidStyle::onTertiaryColor() const
 {
     return m_theme == Dark ? QColor("#492532") : QColor("#FFFFFF");
 }
 
-QColor Style::tertiaryContainerColor() const
+QColor FluidStyle::tertiaryContainerColor() const
 {
     return m_theme == Dark ? QColor("#633B48") : QColor("#FFD8E4");
 }
 
-QColor Style::onTertiaryContainerColor() const
+QColor FluidStyle::onTertiaryContainerColor() const
 {
     return m_theme == Dark ? QColor("#FFD8E4") : QColor("#31111D");
 }
 
 // Color getters - Error
-QColor Style::errorColor() const
+QColor FluidStyle::errorColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
                                                                                 : Palette::Tone40]);
 }
 
-QColor Style::onErrorColor() const
+QColor FluidStyle::onErrorColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Error]
                                [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
 }
 
-QColor Style::errorContainerColor() const
+QColor FluidStyle::errorContainerColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone30
                                                                                 : Palette::Tone90]);
 }
 
-QColor Style::onErrorContainerColor() const
+QColor FluidStyle::onErrorContainerColor() const
 {
     return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
                                                                                 : Palette::Tone10]);
 }
 
 // Color getters - Background
-QColor Style::backgroundColor() const
+QColor FluidStyle::backgroundColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
 }
 
-QColor Style::onBackgroundColor() const
+QColor FluidStyle::onBackgroundColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
@@ -222,77 +222,77 @@ QColor Style::onBackgroundColor() const
 }
 
 // Color getters - Surface
-QColor Style::surfaceColor() const
+QColor FluidStyle::surfaceColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
 }
 
-QColor Style::onSurfaceColor() const
+QColor FluidStyle::onSurfaceColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone90 : Palette::Tone10]);
 }
 
-QColor Style::surfaceBrightColor() const
+QColor FluidStyle::surfaceBrightColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone24 : Palette::Tone98]);
 }
 
-QColor Style::surfaceDimColor() const
+QColor FluidStyle::surfaceDimColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone6 : Palette::Tone87]);
 }
 
-QColor Style::surfaceVariantColor() const
+QColor FluidStyle::surfaceVariantColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
 }
 
-QColor Style::onSurfaceVariantColor() const
+QColor FluidStyle::onSurfaceVariantColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone80 : Palette::Tone30]);
 }
 
-QColor Style::surfaceContainerLowestColor() const
+QColor FluidStyle::surfaceContainerLowestColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone4 : Palette::Tone100]);
 }
 
-QColor Style::surfaceContainerLowColor() const
+QColor FluidStyle::surfaceContainerLowColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone10 : Palette::Tone96]);
 }
 
-QColor Style::surfaceContainerColor() const
+QColor FluidStyle::surfaceContainerColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone12 : Palette::Tone94]);
 }
 
-QColor Style::surfaceContainerHighColor() const
+QColor FluidStyle::surfaceContainerHighColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
                                [m_theme == Dark ? Palette::Tone17 : Palette::Tone92]);
 }
 
-QColor Style::surfaceContainerHighestColor() const
+QColor FluidStyle::surfaceContainerHighestColor() const
 {
     return QColor::fromRgba(
             Palette::refPalette[Palette::Neutral]
@@ -300,61 +300,61 @@ QColor Style::surfaceContainerHighestColor() const
 }
 
 // Color getters - Outline
-QColor Style::outlineColor() const
+QColor FluidStyle::outlineColor() const
 {
     return m_theme == Dark ? QColor("#938F99") : QColor("#79747E");
 }
 
-QColor Style::outlineVariantColor() const
+QColor FluidStyle::outlineVariantColor() const
 {
     return m_theme == Dark ? QColor("#49454F") : QColor("#CAC4D0");
 }
 
 // Color getters - Inverse
-QColor Style::inverseSurfaceColor() const
+QColor FluidStyle::inverseSurfaceColor() const
 {
     return m_theme == Dark ? QColor("#E6E1E5") : QColor("#313033");
 }
 
-QColor Style::inverseOnSurfaceColor() const
+QColor FluidStyle::inverseOnSurfaceColor() const
 {
     return m_theme == Dark ? QColor("#313033") : QColor("#F4EFF4");
 }
 
-QColor Style::inversePrimaryColor() const
+QColor FluidStyle::inversePrimaryColor() const
 {
     return m_theme == Dark ? QColor("#6750A4") : QColor("#D0BCFF");
 }
 
 // Color getters - Scrim
-QColor Style::scrimColor() const
+QColor FluidStyle::scrimColor() const
 {
     return QColor("#000000");
 }
 
 // Color getters - Shadow
-QColor Style::shadowColor() const
+QColor FluidStyle::shadowColor() const
 {
     return QColor("#000000");
 }
 
-Style *Style::qmlAttachedProperties(QObject *object)
+FluidStyle *FluidStyle::qmlAttachedProperties(QObject *object)
 {
-    return new Style(object);
+    return new FluidStyle(object);
 }
 
-void Style::attachedParentChange(QQuickAttachedPropertyPropagator *newParent,
-                                 QQuickAttachedPropertyPropagator *oldParent)
+void FluidStyle::attachedParentChange(QQuickAttachedPropertyPropagator *newParent,
+                                      QQuickAttachedPropertyPropagator *oldParent)
 {
     Q_UNUSED(oldParent);
 
-    Style *parentStyle = qobject_cast<Style *>(newParent);
+    FluidStyle *parentStyle = qobject_cast<FluidStyle *>(newParent);
     if (parentStyle) {
         inheritTheme(parentStyle->theme());
     }
 }
 
-bool Style::isDarkSystemTheme()
+bool FluidStyle::isDarkSystemTheme()
 {
     if (const QPlatformTheme *theme = QGuiApplicationPrivate::platformTheme()) {
         if (theme->colorScheme() == Qt::ColorScheme::Unknown)
@@ -365,14 +365,14 @@ bool Style::isDarkSystemTheme()
     return false;
 }
 
-Style::Theme Style::effectiveTheme(Style::Theme theme)
+FluidStyle::Theme FluidStyle::effectiveTheme(FluidStyle::Theme theme)
 {
-    if (theme == Style::System)
-        theme = Style::isDarkSystemTheme() ? Style::Dark : Style::Light;
+    if (theme == FluidStyle::System)
+        theme = FluidStyle::isDarkSystemTheme() ? FluidStyle::Dark : FluidStyle::Light;
     return theme;
 }
 
-void Style::inheritTheme(Style::Theme theme)
+void FluidStyle::inheritTheme(FluidStyle::Theme theme)
 {
     const bool systemThemeChanged = (m_systemTheme != (theme == System));
     const bool hasThemeChanged = systemThemeChanged || (m_theme != effectiveTheme(theme));
@@ -386,11 +386,11 @@ void Style::inheritTheme(Style::Theme theme)
     Q_EMIT themeChanged();
 }
 
-void Style::propagateTheme()
+void FluidStyle::propagateTheme()
 {
     const auto styles = attachedChildren();
     for (QQuickAttachedPropertyPropagator *child : styles) {
-        Style *childStyle = qobject_cast<Style *>(child);
+        FluidStyle *childStyle = qobject_cast<FluidStyle *>(child);
         if (childStyle)
             childStyle->inheritTheme(m_systemTheme ? System : m_theme);
     }

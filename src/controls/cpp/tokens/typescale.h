@@ -32,7 +32,7 @@ struct TypeScaleValue
     QML_ELEMENT
     QML_VALUE_TYPE(typescale)
 
-    Q_PROPERTY(Style::TypeFace face MEMBER face CONSTANT FINAL)
+    Q_PROPERTY(FluidStyle::TypeFace face MEMBER face CONSTANT FINAL)
     Q_PROPERTY(qint32 fontSize MEMBER fontSize CONSTANT FINAL)
     Q_PROPERTY(qint32 lineHeight MEMBER lineHeight CONSTANT FINAL)
     Q_PROPERTY(QFont::Weight fontWeight MEMBER fontWeight CONSTANT FINAL)
@@ -47,7 +47,7 @@ struct TypeScaleValue
     Q_PROPERTY(qint32 fill READ fill CONSTANT FINAL)
     Q_PROPERTY(qint32 hexp READ hexp CONSTANT FINAL)
 public:
-    Style::TypeFace face = Style::TypeFace::Plain;
+    FluidStyle::TypeFace face = FluidStyle::TypeFace::Plain;
     qint32 fontSize = 14;
     qint32 lineHeight = 24;
     QFont::Weight fontWeight = QFont::Weight::Normal;

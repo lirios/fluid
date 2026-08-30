@@ -517,6 +517,36 @@ TestCase {
         verify(point.x + indicator.width <= slider.width);
     }
 
+    function test_value_indicator_text_is_rendered_verbatim() {
+        const slider = createSlider({ labelBehavior: MD.Slider.LabelBehavior.Visible });
+        const indicatorLabel = findChild(slider.handle, "valueIndicatorLabel");
+
+        slider.value = 40.25;
+        compare(indicatorLabel.text, slider.valueIndicatorText);
+
+        mousePress(slider, slider.handle.x + slider.handle.width / 2,
+                   slider.handle.y + slider.handle.height / 2);
+        mouseMove(slider, 137, slider.handle.y + slider.handle.height / 2);
+        compare(indicatorLabel.text, slider.valueIndicatorText);
+        verify(indicatorLabel.text !== "NaN");
+        mouseRelease(slider, 137, slider.handle.y + slider.handle.height / 2);
+
+        const decimalCommaText = slider.value.toLocaleString(Qt.locale("it_IT"), "f", 2);
+        verify(decimalCommaText.indexOf(",") !== -1);
+        slider.valueIndicatorText = decimalCommaText;
+        compare(indicatorLabel.text, decimalCommaText);
+        verify(indicatorLabel.text !== "NaN");
+
+        slider.valueIndicatorText = "Custom";
+        compare(indicatorLabel.text, "Custom");
+
+        const rangeSlider = createRangeSlider({ labelBehavior: MD.RangeSlider.LabelBehavior.Visible });
+        rangeSlider.firstValueIndicatorText = "Minimum";
+        rangeSlider.secondValueIndicatorText = "Maximum";
+        compare(findChild(rangeSlider.first.handle, "valueIndicatorLabel").text, "Minimum");
+        compare(findChild(rangeSlider.second.handle, "valueIndicatorLabel").text, "Maximum");
+    }
+
     Component {
         id: rangeSliderComponent
 

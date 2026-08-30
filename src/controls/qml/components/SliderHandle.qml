@@ -122,7 +122,7 @@ Item {
                 objectName: "valueIndicatorLabel"
 
                 anchors.centerIn: parent
-                text: Math.round(root.valueIndicatorText)
+                text: root.valueIndicatorText
                 typescale: MD.Tokens.typescale.labelLarge
                 font.weight: MD.Tokens.typescale.bodyLarge.fontWeight
                 font.letterSpacing: MD.Tokens.typescale.bodyLarge.tracking

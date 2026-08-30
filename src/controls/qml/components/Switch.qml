@@ -51,8 +51,12 @@ T.Switch {
     hoverEnabled: true
 
     indicator: Item {
+        id: switchIndicator
+
         implicitWidth: MD.Tokens.switch.trackWidth
         implicitHeight: MD.Tokens.switch.trackHeight
+
+        readonly property real handleCenterX: height / 2 + control.visualPosition * (width - height)
 
         x: control.text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
         y: control.topPadding + (control.availableHeight - height) / 2
@@ -164,7 +168,7 @@ T.Switch {
             width: MD.Tokens.switch.stateLayerSize
             height: MD.Tokens.switch.stateLayerSize
             y: (parent.height - height) / 2
-            x: control.checked ? parent.width - parent.height / 2 - width / 2 : parent.height / 2 - width / 2
+            x: switchIndicator.handleCenterX - width / 2
 
             Behavior on x {
                 NumberAnimation {

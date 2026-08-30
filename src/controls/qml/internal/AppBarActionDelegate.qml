@@ -6,6 +6,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
 
 /*!
     \class AppBarActionDelegate
@@ -102,7 +103,14 @@ Item {
                     anchors.centerIn: parent
                     width: MD.Tokens.appBar.searchAvatarSize
                     height: width
-                    radius: MD.Tokens.cornerRadiusFull
+                    topLeftRadius: UiMetrics.resolveShapeRadius(
+                                           MD.Tokens.shape.cornerFull.topLeft, width, height)
+                    topRightRadius: UiMetrics.resolveShapeRadius(
+                                            MD.Tokens.shape.cornerFull.topRight, width, height)
+                    bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                              MD.Tokens.shape.cornerFull.bottomLeft, width, height)
+                    bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                               MD.Tokens.shape.cornerFull.bottomRight, width, height)
                     clip: true
                     color: control.MD.Style.surfaceContainerHighestColor
 
@@ -172,12 +180,22 @@ Item {
             background: Rectangle {
                 implicitWidth: filledButton.implicitWidth
                 implicitHeight: filledButton.implicitHeight
-                radius: MD.Tokens.cornerRadiusFull
+                topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.shape.cornerFull.topLeft,
+                                                            width, height)
+                topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.shape.cornerFull.topRight,
+                                                             width, height)
+                bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                          MD.Tokens.shape.cornerFull.bottomLeft, width, height)
+                bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                           MD.Tokens.shape.cornerFull.bottomRight, width, height)
                 color: control.filledContainerColor
 
                 MD.Ripple {
                     anchors.fill: parent
-                    radius: parent.radius
+                    topLeftRadius: parent.topLeftRadius
+                    topRightRadius: parent.topRightRadius
+                    bottomLeftRadius: parent.bottomLeftRadius
+                    bottomRightRadius: parent.bottomRightRadius
                     pressed: filledButton.pressed
                     pressX: filledButton.pressX
                     pressY: filledButton.pressY

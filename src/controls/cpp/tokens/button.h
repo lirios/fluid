@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// Button*Tokens.kt and ButtonSmallTokens.kt through ButtonXlargeTokens.kt.
+
 namespace Fluid {
 
 /*! \brief Material Design 3 Expressive button tokens. */
@@ -47,32 +55,43 @@ struct Button
     Q_PROPERTY(qreal outlinedOutlineWidthLarge READ outlinedOutlineWidthLarge CONSTANT FINAL)
     Q_PROPERTY(
             qreal outlinedOutlineWidthExtraLarge READ outlinedOutlineWidthExtraLarge CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShapeRound READ containerShapeRound CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShapeRound READ containerShapeRound CONSTANT FINAL)
     Q_PROPERTY(
-            qreal containerShapeSquareExtraSmall READ containerShapeSquareExtraSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShapeSquareSmall READ containerShapeSquareSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShapeSquareMedium READ containerShapeSquareMedium CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShapeSquareLarge READ containerShapeSquareLarge CONSTANT FINAL)
+            Fluid::ShapeValue containerShapeSquareExtraSmall READ containerShapeSquareExtraSmall CONSTANT
+                    FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShapeSquareSmall READ containerShapeSquareSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShapeSquareMedium READ containerShapeSquareMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShapeSquareLarge READ containerShapeSquareLarge CONSTANT FINAL)
     Q_PROPERTY(
-            qreal containerShapeSquareExtraLarge READ containerShapeSquareExtraLarge CONSTANT FINAL)
-    Q_PROPERTY(qreal pressedContainerShapeExtraSmall READ pressedContainerShapeExtraSmall CONSTANT
+            Fluid::ShapeValue containerShapeSquareExtraLarge READ containerShapeSquareExtraLarge CONSTANT
+                    FINAL)
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerShapeExtraSmall READ pressedContainerShapeExtraSmall CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal pressedContainerShapeSmall READ pressedContainerShapeSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal pressedContainerShapeMedium READ pressedContainerShapeMedium CONSTANT FINAL)
-    Q_PROPERTY(qreal pressedContainerShapeLarge READ pressedContainerShapeLarge CONSTANT FINAL)
-    Q_PROPERTY(qreal pressedContainerShapeExtraLarge READ pressedContainerShapeExtraLarge CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerShapeSmall READ pressedContainerShapeSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerShapeMedium READ pressedContainerShapeMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerShapeLarge READ pressedContainerShapeLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerShapeExtraLarge READ pressedContainerShapeExtraLarge CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeRoundExtraSmall READ
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeRoundExtraSmall READ
                        selectedContainerShapeRoundExtraSmall CONSTANT FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeRoundSmall READ selectedContainerShapeRoundSmall CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeRoundSmall READ selectedContainerShapeRoundSmall CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeRoundMedium READ selectedContainerShapeRoundMedium
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeRoundMedium READ selectedContainerShapeRoundMedium
                        CONSTANT FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeRoundLarge READ selectedContainerShapeRoundLarge CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeRoundLarge READ selectedContainerShapeRoundLarge CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeRoundExtraLarge READ
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeRoundExtraLarge READ
                        selectedContainerShapeRoundExtraLarge CONSTANT FINAL)
-    Q_PROPERTY(qreal selectedContainerShapeSquare READ selectedContainerShapeSquare CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeSquareExtraSmall READ
+                       selectedContainerShapeSquareExtraSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeSquareSmall READ selectedContainerShapeSquareSmall
+                       CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeSquareMedium READ selectedContainerShapeSquareMedium
+                       CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeSquareLarge READ selectedContainerShapeSquareLarge
+                       CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerShapeSquareExtraLarge READ
+                       selectedContainerShapeSquareExtraLarge CONSTANT FINAL)
     Q_PROPERTY(qreal disabledContainerOpacity READ disabledContainerOpacity CONSTANT FINAL)
     Q_PROPERTY(qreal disabledIconOpacity READ disabledIconOpacity CONSTANT FINAL)
     Q_PROPERTY(qreal disabledLabelTextOpacity READ disabledLabelTextOpacity CONSTANT FINAL)
@@ -129,7 +148,7 @@ public:
     }
     constexpr qreal leadingSpaceExtraSmall() const
     {
-        return 12.0;
+        return 16.0;
     }
     constexpr qreal leadingSpaceSmall() const
     {
@@ -149,7 +168,7 @@ public:
     }
     constexpr qreal trailingSpaceExtraSmall() const
     {
-        return 12.0;
+        return 16.0;
     }
     constexpr qreal trailingSpaceSmall() const
     {
@@ -207,73 +226,89 @@ public:
     {
         return 3.0;
     }
-    constexpr qreal containerShapeRound() const
+    constexpr ShapeValue containerShapeRound() const
     {
-        return 9999.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal containerShapeSquareExtraSmall() const
+    constexpr ShapeValue containerShapeSquareExtraSmall() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerMedium();
     }
-    constexpr qreal containerShapeSquareSmall() const
+    constexpr ShapeValue containerShapeSquareSmall() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerMedium();
     }
-    constexpr qreal containerShapeSquareMedium() const
+    constexpr ShapeValue containerShapeSquareMedium() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
-    constexpr qreal containerShapeSquareLarge() const
+    constexpr ShapeValue containerShapeSquareLarge() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerExtraLarge();
     }
-    constexpr qreal containerShapeSquareExtraLarge() const
+    constexpr ShapeValue containerShapeSquareExtraLarge() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerExtraLarge();
     }
-    constexpr qreal pressedContainerShapeExtraSmall() const
+    constexpr ShapeValue pressedContainerShapeExtraSmall() const
     {
-        return 8.0;
+        return ShapeTokens{ }.cornerSmall();
     }
-    constexpr qreal pressedContainerShapeSmall() const
+    constexpr ShapeValue pressedContainerShapeSmall() const
     {
-        return 8.0;
+        return ShapeTokens{ }.cornerSmall();
     }
-    constexpr qreal pressedContainerShapeMedium() const
+    constexpr ShapeValue pressedContainerShapeMedium() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerMedium();
     }
-    constexpr qreal pressedContainerShapeLarge() const
+    constexpr ShapeValue pressedContainerShapeLarge() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
-    constexpr qreal pressedContainerShapeExtraLarge() const
+    constexpr ShapeValue pressedContainerShapeExtraLarge() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
-    constexpr qreal selectedContainerShapeRoundExtraSmall() const
+    constexpr ShapeValue selectedContainerShapeRoundExtraSmall() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal selectedContainerShapeRoundSmall() const
+    constexpr ShapeValue selectedContainerShapeRoundSmall() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal selectedContainerShapeRoundMedium() const
+    constexpr ShapeValue selectedContainerShapeRoundMedium() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal selectedContainerShapeRoundLarge() const
+    constexpr ShapeValue selectedContainerShapeRoundLarge() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal selectedContainerShapeRoundExtraLarge() const
+    constexpr ShapeValue selectedContainerShapeRoundExtraLarge() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerFull();
     }
-    constexpr qreal selectedContainerShapeSquare() const
+    constexpr ShapeValue selectedContainerShapeSquareExtraSmall() const
     {
-        return 9999.0;
+        return ShapeTokens{ }.cornerMedium();
+    }
+    constexpr ShapeValue selectedContainerShapeSquareSmall() const
+    {
+        return ShapeTokens{ }.cornerMedium();
+    }
+    constexpr ShapeValue selectedContainerShapeSquareMedium() const
+    {
+        return ShapeTokens{ }.cornerLarge();
+    }
+    constexpr ShapeValue selectedContainerShapeSquareLarge() const
+    {
+        return ShapeTokens{ }.cornerExtraLarge();
+    }
+    constexpr ShapeValue selectedContainerShapeSquareExtraLarge() const
+    {
+        return ShapeTokens{ }.cornerExtraLarge();
     }
     constexpr qreal disabledContainerOpacity() const
     {
@@ -289,23 +324,23 @@ public:
     }
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
     constexpr qreal elevatedContainerElevation() const
     {
-        return 1.0;
+        return ElevationTokens{ }.level1();
     }
     constexpr qreal flatContainerElevation() const
     {
-        return 0.0;
+        return ElevationTokens{ }.level0();
     }
 };
 

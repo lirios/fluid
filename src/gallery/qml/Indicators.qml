@@ -6,10 +6,15 @@ import QtQuick.Layouts
 import Fluid as MD
 
 MD.ScrollView {
+    id: page
+
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: MD.Tokens.spacingLarge
-        spacing: MD.Tokens.spacingLarge
+        anchors.margins: page.sectionSpacing
+        spacing: page.sectionSpacing
 
         MD.GroupBox {
             Layout.fillWidth: true
@@ -19,9 +24,9 @@ MD.ScrollView {
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: MD.Tokens.spacingLarge
-                columnSpacing: MD.Tokens.spacingMedium
-                rowSpacing: MD.Tokens.spacingMedium
+                anchors.margins: page.sectionSpacing
+                columnSpacing: page.contentSpacing
+                rowSpacing: page.contentSpacing
 
                 columns: 3
                 rows: 4
@@ -181,9 +186,9 @@ MD.ScrollView {
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: MD.Tokens.spacingLarge
-                columnSpacing: MD.Tokens.spacingMedium
-                rowSpacing: MD.Tokens.spacingMedium
+                anchors.margins: page.sectionSpacing
+                columnSpacing: page.contentSpacing
+                rowSpacing: page.contentSpacing
 
                 columns: 4
                 rows: 3

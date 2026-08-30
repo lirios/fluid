@@ -27,8 +27,8 @@ T.CheckBox {
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding, implicitIndicatorHeight + topPadding + bottomPadding)
 
-    spacing: MD.Tokens.spacingSmall
-    padding: MD.Tokens.spacingSmall
+    spacing: MD.Tokens.checkBox.contentSpacing
+    padding: MD.Tokens.checkBox.contentPadding
     verticalPadding: padding + 7
 
     hoverEnabled: true

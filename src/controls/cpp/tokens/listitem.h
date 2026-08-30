@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// ListTokens.kt and ListItemTokens.kt.
+
 namespace Fluid {
 
 /*! \brief Material Design 3 Expressive list item tokens. */
@@ -23,15 +31,15 @@ struct ListItem
     Q_PROPERTY(qreal bottomSpace READ bottomSpace CONSTANT FINAL)
     Q_PROPERTY(qreal betweenSpace READ betweenSpace CONSTANT FINAL)
     Q_PROPERTY(qreal segmentedGap READ segmentedGap CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
-    Q_PROPERTY(qreal containerExpressiveShape READ containerExpressiveShape CONSTANT FINAL)
-    Q_PROPERTY(qreal hoveredContainerExpressiveShape READ hoveredContainerExpressiveShape CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue containerShape READ containerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerExpressiveShape READ containerExpressiveShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue hoveredContainerExpressiveShape READ hoveredContainerExpressiveShape CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal focusedContainerExpressiveShape READ focusedContainerExpressiveShape CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue focusedContainerExpressiveShape READ focusedContainerExpressiveShape CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal pressedContainerExpressiveShape READ pressedContainerExpressiveShape CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue pressedContainerExpressiveShape READ pressedContainerExpressiveShape CONSTANT
                        FINAL)
-    Q_PROPERTY(qreal selectedContainerExpressiveShape READ selectedContainerExpressiveShape CONSTANT
+    Q_PROPERTY(Fluid::ShapeValue selectedContainerExpressiveShape READ selectedContainerExpressiveShape CONSTANT
                        FINAL)
     Q_PROPERTY(qreal leadingIconSize READ leadingIconSize CONSTANT FINAL)
     Q_PROPERTY(qreal trailingIconSize READ trailingIconSize CONSTANT FINAL)
@@ -83,29 +91,29 @@ public:
     {
         return 2.0;
     }
-    constexpr qreal containerShape() const
+    constexpr ShapeValue containerShape() const
     {
-        return 0.0;
+        return ShapeTokens{ }.cornerNone();
     }
-    constexpr qreal containerExpressiveShape() const
+    constexpr ShapeValue containerExpressiveShape() const
     {
-        return 4.0;
+        return ShapeTokens{ }.cornerExtraSmall();
     }
-    constexpr qreal hoveredContainerExpressiveShape() const
+    constexpr ShapeValue hoveredContainerExpressiveShape() const
     {
-        return 12.0;
+        return ShapeTokens{ }.cornerMedium();
     }
-    constexpr qreal focusedContainerExpressiveShape() const
+    constexpr ShapeValue focusedContainerExpressiveShape() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
-    constexpr qreal pressedContainerExpressiveShape() const
+    constexpr ShapeValue pressedContainerExpressiveShape() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
-    constexpr qreal selectedContainerExpressiveShape() const
+    constexpr ShapeValue selectedContainerExpressiveShape() const
     {
-        return 16.0;
+        return ShapeTokens{ }.cornerLarge();
     }
     constexpr qreal leadingIconSize() const
     {
@@ -133,27 +141,27 @@ public:
     }
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
     constexpr qreal draggedStateLayerOpacity() const
     {
-        return 0.16;
+        return StateTokens{ }.draggedStateLayerOpacity();
     }
     constexpr qreal containerElevation() const
     {
-        return 0.0;
+        return ElevationTokens{ }.level0();
     }
     constexpr qreal draggedContainerElevation() const
     {
-        return 8.0;
+        return ElevationTokens{ }.level4();
     }
 };
 

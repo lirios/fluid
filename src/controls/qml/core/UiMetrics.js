@@ -12,7 +12,17 @@
     UiMetrics.js is an internal library utility, not a standalone M3 component.
 */
 
-function buttonRadius(control) {
+function resolveShapeRadius(shape, width, height) {
+    if (width <= 0 || height <= 0)
+        return 0;
+
+    if (shape !== MD.Tokens.shape.cornerValueFull)
+        return shape;
+
+    return Math.min(width, height) / 2;
+}
+
+function buttonShape(control) {
     const tokens = control.MD.Tokens.button;
     if (control.pressed) {
         switch (control.size) {
@@ -27,15 +37,15 @@ function buttonRadius(control) {
     const round = control.shape === MD.Button.Shape.Round;
     switch (control.size) {
     case MD.Button.Size.ExtraSmall:
-        return round ? (control.checked ? tokens.selectedContainerShapeRoundExtraSmall : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquare : tokens.containerShapeSquareExtraSmall);
+        return round ? (control.checked ? tokens.selectedContainerShapeRoundExtraSmall : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquareExtraSmall : tokens.containerShapeSquareExtraSmall);
     case MD.Button.Size.Small:
-        return round ? (control.checked ? tokens.selectedContainerShapeRoundSmall : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquare : tokens.containerShapeSquareSmall);
+        return round ? (control.checked ? tokens.selectedContainerShapeRoundSmall : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquareSmall : tokens.containerShapeSquareSmall);
     case MD.Button.Size.Medium:
-        return round ? (control.checked ? tokens.selectedContainerShapeRoundMedium : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquare : tokens.containerShapeSquareMedium);
+        return round ? (control.checked ? tokens.selectedContainerShapeRoundMedium : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquareMedium : tokens.containerShapeSquareMedium);
     case MD.Button.Size.Large:
-        return round ? (control.checked ? tokens.selectedContainerShapeRoundLarge : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquare : tokens.containerShapeSquareLarge);
+        return round ? (control.checked ? tokens.selectedContainerShapeRoundLarge : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquareLarge : tokens.containerShapeSquareLarge);
     case MD.Button.Size.ExtraLarge:
-        return round ? (control.checked ? tokens.selectedContainerShapeRoundExtraLarge : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquare : tokens.containerShapeSquareExtraLarge);
+        return round ? (control.checked ? tokens.selectedContainerShapeRoundExtraLarge : tokens.containerShapeRound) : (control.checked ? tokens.selectedContainerShapeSquareExtraLarge : tokens.containerShapeSquareExtraLarge);
     }
 }
 

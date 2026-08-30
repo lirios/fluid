@@ -10,6 +10,10 @@ import Fluid as MD
 Item {
     id: page
 
+    readonly property int compactSpacing: 8
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
     }
@@ -20,7 +24,7 @@ Item {
     }
 
     component DemoFAB: MD.FAB {
-        Layout.margins: MD.Tokens.spacingSmall
+        Layout.margins: page.compactSpacing
         text: icon.name.length > 0 ? icon.name.replace(/_/g, " ") : qsTr("FAB action")
     }
 
@@ -29,7 +33,7 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             Headline {
                 text: qsTr("Floating Action Button")
@@ -40,10 +44,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -57,7 +61,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -71,7 +75,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -91,10 +95,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -108,7 +112,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -122,7 +126,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -136,7 +140,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -156,10 +160,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -172,7 +176,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFAB {
                             Layout.alignment: Qt.AlignHCenter
@@ -192,10 +196,10 @@ Item {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingMedium
+                    spacing: page.contentSpacing
 
                     RowLayout {
-                        spacing: MD.Tokens.spacingMedium
+                        spacing: page.contentSpacing
 
                         MD.Switch {
                             id: enabledSwitch
@@ -226,7 +230,7 @@ Item {
                     }
 
                     RowLayout {
-                        spacing: MD.Tokens.spacingMedium
+                        spacing: page.contentSpacing
 
                         MD.Switch {
                             id: mirrorSwitch

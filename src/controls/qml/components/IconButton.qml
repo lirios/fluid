@@ -5,6 +5,8 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl as TImpl
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class IconButton
@@ -292,7 +294,7 @@ T.ToolButton {
                            Math.max(minimum, state.buttonSize.height) - state.buttonSize.height);
         }
 
-        property real radius: {
+        property MD.shapeValue containerShape: {
             const tokens = MD.Tokens.iconButton;
             if (control.pressed) {
                 switch (control.size) {
@@ -419,12 +421,37 @@ T.ToolButton {
         implicitWidth: state.buttonSize.width
         implicitHeight: state.buttonSize.height
 
-        radius: Math.min(state.radius, control.height / 2)
+        topLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.topLeft, width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.topRight, width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomRight, width, height)
 
-        Behavior on radius {
+        Behavior on topLeftRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on topRightRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on bottomLeftRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on bottomRightRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
 
@@ -437,7 +464,10 @@ T.ToolButton {
         MD.Ripple {
             anchors.fill: parent
 
-            radius: parent.radius
+            topLeftRadius: parent.topLeftRadius
+            topRightRadius: parent.topRightRadius
+            bottomLeftRadius: parent.bottomLeftRadius
+            bottomRightRadius: parent.bottomRightRadius
 
             pressed: control.pressed
             pressX: control.pressX

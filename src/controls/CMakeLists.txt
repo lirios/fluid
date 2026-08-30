@@ -8,21 +8,26 @@ set(_sources
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h
     cpp/style/color.cpp cpp/style/color.h
     cpp/style/elevation.cpp cpp/style/elevation.h
-    cpp/style/palette.h
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/tokens/appbar.cpp cpp/tokens/appbar.h
     cpp/tokens/button.cpp cpp/tokens/button.h
     cpp/tokens/checkbox.cpp cpp/tokens/checkbox.h
+    cpp/tokens/colordark.cpp cpp/tokens/colordark.h
+    cpp/tokens/colorlight.cpp cpp/tokens/colorlight.h
     cpp/tokens/dialog.cpp cpp/tokens/dialog.h
     cpp/tokens/divider.cpp cpp/tokens/divider.h
-    cpp/tokens/easing.cpp cpp/tokens/easing.h
+    cpp/tokens/elevationtokens.cpp cpp/tokens/elevationtokens.h
     cpp/tokens/fab.cpp cpp/tokens/fab.h
     cpp/tokens/fabmenu.cpp cpp/tokens/fabmenu.h
     cpp/tokens/iconbutton.cpp cpp/tokens/iconbutton.h
     cpp/tokens/listitem.cpp cpp/tokens/listitem.h
     cpp/tokens/menu.cpp cpp/tokens/menu.h
+    cpp/tokens/motiontokens.cpp cpp/tokens/motiontokens.h
+    cpp/tokens/palette.cpp cpp/tokens/palette.h
+    cpp/tokens/shapetokens.cpp cpp/tokens/shapetokens.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
+    cpp/tokens/statetokens.cpp cpp/tokens/statetokens.h
     cpp/tokens/switch.cpp cpp/tokens/switch.h
     cpp/tokens/symbol.cpp cpp/tokens/symbol.h
     cpp/tokens/tokens.cpp cpp/tokens/tokens.h
@@ -79,6 +84,9 @@ set_source_files_properties(qml/core/Units.qml PROPERTIES
 )
 set_source_files_properties(qml/core/Utils.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
+)
+set_source_files_properties(qml/internal/MotionAnimation.js PROPERTIES
+    QT_QML_SKIP_QMLDIR_ENTRY TRUE
 )
 
 qt_add_qml_module(${LIBNAME}

@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
-import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class Switch
@@ -45,8 +45,8 @@ T.Switch {
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding, implicitIndicatorHeight + topPadding + bottomPadding)
 
-    padding: MD.Tokens.spacingSmall
-    spacing: MD.Tokens.spacingSmall
+    padding: MD.Tokens.switch.contentPadding
+    spacing: MD.Tokens.switch.contentSpacing
 
     hoverEnabled: true
 
@@ -124,8 +124,16 @@ T.Switch {
 
         // Track
         Rectangle {
+            objectName: "switchTrack"
             anchors.fill: parent
-            radius: Math.min(MD.Tokens.switch.trackShape, height / 2)
+            topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.switch.trackShape.topLeft,
+                                                        width, height)
+            topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.switch.trackShape.topRight,
+                                                         width, height)
+            bottomLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.switch.trackShape.bottomLeft,
+                                                           width, height)
+            bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                       MD.Tokens.switch.trackShape.bottomRight, width, height)
             color: indicatorState.trackColor
             opacity: indicatorState.trackOpacity
             border.width: indicatorState.borderWidth
@@ -133,17 +141,17 @@ T.Switch {
 
             Behavior on color {
                 ColorAnimation {
-                    duration: MD.Tokens.durationShort2
+                    duration: MD.Tokens.motion.duration.short2
                 }
             }
             Behavior on border.color {
                 ColorAnimation {
-                    duration: MD.Tokens.durationShort2
+                    duration: MD.Tokens.motion.duration.short2
                 }
             }
             Behavior on border.width {
                 NumberAnimation {
-                    duration: MD.Tokens.durationShort2
+                    duration: MD.Tokens.motion.duration.short2
                 }
             }
         }
@@ -160,14 +168,24 @@ T.Switch {
 
             Behavior on x {
                 NumberAnimation {
-                    easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                    duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                    easing.type: Easing.BezierSpline
+                    easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                    duration: MotionAnimation.expressiveFastSpatialDuration
                 }
             }
 
             MD.Ripple {
+                objectName: "switchStateLayer"
                 anchors.fill: parent
-                radius: width / 2
+                topLeftRadius: UiMetrics.resolveShapeRadius(
+                                       MD.Tokens.switch.stateLayerShape.topLeft, width, height)
+                topRightRadius: UiMetrics.resolveShapeRadius(
+                                        MD.Tokens.switch.stateLayerShape.topRight, width, height)
+                bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                          MD.Tokens.switch.stateLayerShape.bottomLeft, width, height)
+                bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                           MD.Tokens.switch.stateLayerShape.bottomRight, width,
+                                           height)
                 pressed: control.pressed
                 pressX: width / 2
                 pressY: height / 2
@@ -176,23 +194,32 @@ T.Switch {
             }
 
             Rectangle {
+                objectName: "switchHandle"
                 anchors.centerIn: parent
                 width: indicatorState.handleSize
                 height: width
-                radius: width / 2
+                topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.switch.handleShape.topLeft,
+                                                            width, height)
+                topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.switch.handleShape.topRight,
+                                                             width, height)
+                bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                          MD.Tokens.switch.handleShape.bottomLeft, width, height)
+                bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                           MD.Tokens.switch.handleShape.bottomRight, width, height)
                 color: indicatorState.handleColor
                 opacity: indicatorState.handleOpacity
 
                 Behavior on width {
                     NumberAnimation {
-                        easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                        duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                        duration: MotionAnimation.expressiveFastSpatialDuration
                     }
                 }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: MD.Tokens.durationShort2
+                        duration: MD.Tokens.motion.duration.short2
                     }
                 }
 
@@ -206,13 +233,13 @@ T.Switch {
 
                     Behavior on opacity {
                         NumberAnimation {
-                            duration: MD.Tokens.durationShort2
+                            duration: MD.Tokens.motion.duration.short2
                         }
                     }
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: MD.Tokens.durationShort2
+                            duration: MD.Tokens.motion.duration.short2
                         }
                     }
                 }

@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// AppBarTokens.kt, TopAppBarTokens.kt, and SearchBarTokens.kt.
+
 namespace Fluid {
 
 struct AppBar
@@ -17,7 +25,7 @@ struct AppBar
     Q_PROPERTY(qreal iconButtonSpace READ iconButtonSpace CONSTANT FINAL)
     Q_PROPERTY(qreal leadingSpace READ leadingSpace CONSTANT FINAL)
     Q_PROPERTY(qreal trailingSpace READ trailingSpace CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShape READ containerShape CONSTANT FINAL)
     Q_PROPERTY(qreal mediumContainerHeight READ mediumContainerHeight CONSTANT FINAL)
     Q_PROPERTY(qreal largeContainerHeight READ largeContainerHeight CONSTANT FINAL)
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
@@ -89,9 +97,9 @@ public:
     {
         return 4.0;
     }
-    constexpr qreal containerShape() const
+    constexpr ShapeValue containerShape() const
     {
-        return 0.0;
+        return ShapeTokens{ }.cornerNone();
     }
     constexpr qreal mediumContainerHeight() const
     {
@@ -103,11 +111,11 @@ public:
     }
     constexpr qreal containerElevation() const
     {
-        return 0.0;
+        return ElevationTokens{ }.level0();
     }
     constexpr qreal onScrollContainerElevation() const
     {
-        return 3.0;
+        return ElevationTokens{ }.level2();
     }
     constexpr qreal smallContainerHeight() const
     {
@@ -259,15 +267,15 @@ public:
     }
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
     constexpr qreal disabledContentOpacity() const
     {

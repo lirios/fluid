@@ -22,6 +22,10 @@ import Fluid as MD
 Item {
     id: page
 
+    readonly property int compactSpacing: 8
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
     }
@@ -38,7 +42,10 @@ Item {
         implicitHeight: 300
 
         color: MD.Style.surfaceContainerLowColor
-        radius: MD.Tokens.cornerRadiusLarge
+        topLeftRadius: MD.Tokens.shape.cornerLarge.topLeft
+        topRightRadius: MD.Tokens.shape.cornerLarge.topRight
+        bottomLeftRadius: MD.Tokens.shape.cornerLarge.bottomLeft
+        bottomRightRadius: MD.Tokens.shape.cornerLarge.bottomRight
         clip: true
     }
 
@@ -47,7 +54,7 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             Headline {
                 text: qsTr("FAB Menu")
@@ -58,10 +65,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -93,7 +100,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -125,7 +132,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -163,10 +170,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -198,7 +205,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -236,10 +243,10 @@ Item {
 
                 RowLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -266,7 +273,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             MD.FabMenu {
@@ -293,7 +300,7 @@ Item {
                     }
 
                     ColumnLayout {
-                        spacing: MD.Tokens.spacingSmall
+                        spacing: page.compactSpacing
 
                         DemoFrame {
                             LayoutMirroring.enabled: true
@@ -329,7 +336,7 @@ Item {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingSmall
+                    spacing: page.compactSpacing
 
                     DemoFrame {
                         implicitHeight: 360
@@ -376,10 +383,10 @@ Item {
 
                 ColumnLayout {
                     anchors.centerIn: parent
-                    spacing: MD.Tokens.spacingMedium
+                    spacing: page.contentSpacing
 
                     RowLayout {
-                        spacing: MD.Tokens.spacingMedium
+                        spacing: page.contentSpacing
 
                         MD.Switch {
                             id: enabledSwitch

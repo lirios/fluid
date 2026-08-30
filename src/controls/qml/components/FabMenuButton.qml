@@ -6,6 +6,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class FabMenuButton
@@ -113,7 +115,7 @@ T.ToolButton {
                 return MD.Tokens.fab.largeContainerHeight;
             }
         }
-        readonly property real collapsedContainerShape: {
+        readonly property MD.shapeValue collapsedContainerShape: {
             switch (control.size) {
             case FabMenuButton.Size.Default:
                 return MD.Tokens.fab.containerShape;
@@ -136,7 +138,19 @@ T.ToolButton {
 
         property real containerWidth: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerWidth : state.collapsedContainerWidth
         property real containerHeight: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerHeight : state.collapsedContainerHeight
-        property real containerShape: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerShape : state.collapsedContainerShape
+        readonly property MD.shapeValue containerShape: control.expanded
+                                                        ? MD.Tokens.fabMenu.closeButtonContainerShape
+                                                        : state.collapsedContainerShape
+        property real topLeftRadius: UiMetrics.resolveShapeRadius(
+                                         containerShape.topLeft, containerWidth, containerHeight)
+        property real topRightRadius: UiMetrics.resolveShapeRadius(
+                                          containerShape.topRight, containerWidth, containerHeight)
+        property real bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                            containerShape.bottomLeft, containerWidth,
+                                            containerHeight)
+        property real bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                             containerShape.bottomRight, containerWidth,
+                                             containerHeight)
         property real iconSize: control.expanded ? MD.Tokens.fabMenu.closeButtonIconSize : state.collapsedIconSize
 
         property color containerColor: control.containerColor
@@ -149,8 +163,9 @@ T.ToolButton {
         Behavior on containerWidth {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
                 // qmllint enable unresolved-type
             }
         }
@@ -158,17 +173,49 @@ T.ToolButton {
         Behavior on containerHeight {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
                 // qmllint enable unresolved-type
             }
         }
 
-        Behavior on containerShape {
+        Behavior on topLeftRadius {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                // qmllint enable unresolved-type
+            }
+        }
+
+        Behavior on topRightRadius {
+            NumberAnimation {
+                // qmllint disable unresolved-type
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                // qmllint enable unresolved-type
+            }
+        }
+
+        Behavior on bottomLeftRadius {
+            NumberAnimation {
+                // qmllint disable unresolved-type
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                // qmllint enable unresolved-type
+            }
+        }
+
+        Behavior on bottomRightRadius {
+            NumberAnimation {
+                // qmllint disable unresolved-type
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
                 // qmllint enable unresolved-type
             }
         }
@@ -176,8 +223,9 @@ T.ToolButton {
         Behavior on iconSize {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
                 // qmllint enable unresolved-type
             }
         }
@@ -233,7 +281,7 @@ T.ToolButton {
 
             Behavior on opacity {
                 NumberAnimation {
-                    duration: MD.Tokens.durationShort4
+                    duration: MD.Tokens.motion.duration.short4
                 }
             }
         }
@@ -251,7 +299,7 @@ T.ToolButton {
 
             Behavior on opacity {
                 NumberAnimation {
-                    duration: MD.Tokens.durationShort4
+                    duration: MD.Tokens.motion.duration.short4
                 }
             }
         }
@@ -260,7 +308,10 @@ T.ToolButton {
     background: MD.ElevationRectangle {
         implicitWidth: state.containerWidth
         implicitHeight: state.containerHeight
-        radius: state.containerShape
+        topLeftRadius: state.topLeftRadius
+        topRightRadius: state.topRightRadius
+        bottomLeftRadius: state.bottomLeftRadius
+        bottomRightRadius: state.bottomRightRadius
         color: state.containerColor
         elevation: state.elevation
 
@@ -268,7 +319,10 @@ T.ToolButton {
             objectName: "fabMenuButtonRipple"
 
             anchors.fill: parent
-            radius: parent.radius
+            topLeftRadius: parent.topLeftRadius
+            topRightRadius: parent.topRightRadius
+            bottomLeftRadius: parent.bottomLeftRadius
+            bottomRightRadius: parent.bottomRightRadius
             pressed: control.pressed
             pressX: control.pressX
             pressY: control.pressY

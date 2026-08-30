@@ -6,10 +6,13 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
+    readonly property int sectionSpacing: 24
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: MD.Tokens.spacingLarge
+        anchors.margins: page.sectionSpacing
 
         MD.Switch {
             id: segmentedSwitch
@@ -21,7 +24,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             MD.ScrollView {
                 Layout.preferredWidth: 200

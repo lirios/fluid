@@ -6,6 +6,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
 
 /*!
     \class FAB
@@ -140,7 +141,7 @@ T.ToolButton {
                 return MD.Tokens.fab.largeContainerHeight;
             }
         }
-        readonly property real containerShape: {
+        readonly property MD.shapeValue containerShape: {
             switch (control.size) {
             case FAB.Size.Default:
                 return MD.Tokens.fab.containerShape;
@@ -241,14 +242,21 @@ T.ToolButton {
     background: MD.ElevationRectangle {
         implicitWidth: state.containerWidth
         implicitHeight: state.containerHeight
-        radius: state.containerShape
+        topLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.topLeft, width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.topRight, width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomRight, width,
+                                                        height)
         color: state.containerColor
         elevation: state.elevation
 
         MD.Ripple {
             objectName: "fabRipple"
             anchors.fill: parent
-            radius: parent.radius
+            topLeftRadius: parent.topLeftRadius
+            topRightRadius: parent.topRightRadius
+            bottomLeftRadius: parent.bottomLeftRadius
+            bottomRightRadius: parent.bottomRightRadius
             pressed: control.pressed
             pressX: control.pressX
             pressY: control.pressY

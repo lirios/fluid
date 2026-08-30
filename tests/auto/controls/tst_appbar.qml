@@ -155,6 +155,23 @@ TestCase {
         return createTemporaryObject(searchBarComponent, testCase, properties || {});
     }
 
+    function resolvedCornerRadius(value, width, height) {
+        return value === MD.Tokens.shape.cornerValueFull
+                ? Math.min(width, height) / 2 : value;
+    }
+
+    function verifyRectangleShape(rectangle, shape) {
+        verify(rectangle);
+        compare(rectangle.topLeftRadius,
+                resolvedCornerRadius(shape.topLeft, rectangle.width, rectangle.height));
+        compare(rectangle.topRightRadius,
+                resolvedCornerRadius(shape.topRight, rectangle.width, rectangle.height));
+        compare(rectangle.bottomLeftRadius,
+                resolvedCornerRadius(shape.bottomLeft, rectangle.width, rectangle.height));
+        compare(rectangle.bottomRightRadius,
+                resolvedCornerRadius(shape.bottomRight, rectangle.width, rectangle.height));
+    }
+
     function test_tokens() {
         const token = MD.Tokens.appBar;
         compare(token.containerElevation, 0);
@@ -231,6 +248,8 @@ TestCase {
         compare(small.scrollBehavior, MD.BaseAppBar.Pinned);
         compare(small.implicitHeight, MD.Tokens.appBar.smallContainerHeight);
         compare(small.collapsedFraction, 1);
+        verifyRectangleShape(findChild(small, "appBarBackground"),
+                             MD.Tokens.appBar.containerShape);
 
         const medium = createAppBar({
             width: 480,
@@ -386,6 +405,12 @@ TestCase {
         verify(wideCapsule);
         verify(launcherButton);
         tryCompare(wideCapsule, "width", 388);
+        const wideRadius = Math.min(wideCapsule.width, wideCapsule.height) / 2;
+        compare(wideCapsule.topLeftRadius, wideRadius);
+        compare(wideCapsule.topRightRadius, wideRadius);
+        compare(wideCapsule.bottomLeftRadius, wideRadius);
+        compare(wideCapsule.bottomRightRadius, wideRadius);
+        verify(Number.isFinite(wideCapsule.topLeftRadius));
 
         signalSpy.target = launcher;
         signalSpy.signalName = "activated";
@@ -400,6 +425,11 @@ TestCase {
         const narrowCapsule = findChild(narrow, "searchCapsule");
         verify(narrowCapsule);
         tryCompare(narrowCapsule, "width", 276);
+        const narrowRadius = Math.min(narrowCapsule.width, narrowCapsule.height) / 2;
+        compare(narrowCapsule.topLeftRadius, narrowRadius);
+        compare(narrowCapsule.topRightRadius, narrowRadius);
+        compare(narrowCapsule.bottomLeftRadius, narrowRadius);
+        compare(narrowCapsule.bottomRightRadius, narrowRadius);
 
         const editable = createSearchBar({
             width: 480,

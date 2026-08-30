@@ -6,6 +6,8 @@ project("Fluid"
     LANGUAGES CXX C
 )
 
+include(CTest)
+
 ## Add some paths to check for CMake modules:
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 

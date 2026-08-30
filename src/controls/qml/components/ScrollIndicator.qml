@@ -46,11 +46,11 @@ T.ScrollIndicator {
 
                 SequentialAnimation {
                     PauseAnimation {
-                        duration: MD.Tokens.durationLong1
+                        duration: MD.Tokens.motion.duration.long1
                     }
                     NumberAnimation {
                         target: control.contentItem
-                        duration: MD.Tokens.durationShort4
+                        duration: MD.Tokens.motion.duration.short4
                         property: "opacity"
                         to: 0.0
                     }

@@ -270,7 +270,7 @@ T.Pane {
 
             Behavior on opacity {
                 NumberAnimation {
-                    duration: MD.Tokens.durationShort4
+                    duration: MD.Tokens.motion.duration.short4
                 }
             }
 

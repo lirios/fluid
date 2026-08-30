@@ -6,6 +6,11 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
     }
@@ -27,7 +32,7 @@ Item {
 
         RowLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -77,7 +82,7 @@ Item {
         ColumnLayout {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             DemoIconButton {
                 type: MD.IconButton.Type.Standard
@@ -99,7 +104,7 @@ Item {
         ColumnLayout {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
@@ -129,7 +134,7 @@ Item {
         ColumnLayout {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
@@ -156,17 +161,17 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             ColumnLayout {
-                spacing: MD.Tokens.spacingMedium
+                spacing: page.contentSpacing
 
                 Headline {
                     text: qsTr("Configurations")
                 }
 
                 RowLayout {
-                    spacing: MD.Tokens.spacingMedium
+                    spacing: page.contentSpacing
 
                     Sizes {
                         Layout.fillHeight: true
@@ -184,7 +189,7 @@ Item {
             }
 
             RowLayout {
-                spacing: MD.Tokens.spacingMedium
+                spacing: page.contentSpacing
 
                 Headline {
                     text: qsTr("Colors")

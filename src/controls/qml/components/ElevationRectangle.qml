@@ -43,6 +43,6 @@ Rectangle {
         width: root.width
         height: root.height
 
-        visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0) && root.color.a > 0
+        visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevation.level0) && root.color.a > 0
     }
 }

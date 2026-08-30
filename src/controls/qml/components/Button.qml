@@ -3,6 +3,7 @@
 
 import QtQuick
 import Fluid as MD
+import "../internal/MotionAnimation.js" as MotionAnimation
 import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
 
@@ -292,12 +293,39 @@ P.BaseButton {
         implicitWidth: 64
         implicitHeight: UiMetrics.buttonHeight(control)
 
-        radius: Math.min(UiMetrics.buttonRadius(control), control.height / 2)
+        readonly property MD.shapeValue containerShape: UiMetrics.buttonShape(control)
 
-        Behavior on radius {
+        topLeftRadius: UiMetrics.resolveShapeRadius(containerShape.topLeft, width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(containerShape.topRight, width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(containerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(containerShape.bottomRight, width, height)
+
+        Behavior on topLeftRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on topRightRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on bottomLeftRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+            }
+        }
+        Behavior on bottomRightRadius {
+            NumberAnimation {
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
 
@@ -305,7 +333,7 @@ P.BaseButton {
         border.color: MD.Style.outlineVariantColor
 
         elevation: state.elevation
-        elevationVisible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0) && !control.flat && color.a > 0
+        elevationVisible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevation.level0) && !control.flat && color.a > 0
 
         opacity: state.containerOpacity
         color: state.containerColor
@@ -313,7 +341,10 @@ P.BaseButton {
         MD.Ripple {
             anchors.fill: parent
 
-            radius: parent.radius
+            topLeftRadius: parent.topLeftRadius
+            topRightRadius: parent.topRightRadius
+            bottomLeftRadius: parent.bottomLeftRadius
+            bottomRightRadius: parent.bottomRightRadius
 
             pressed: control.pressed
             pressX: control.pressX

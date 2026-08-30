@@ -103,7 +103,7 @@ Item {
         function test_sizes() {
             const sizes = [MD.FAB.Size.Default, MD.FAB.Size.Medium, MD.FAB.Size.Large];
             const containers = [56, 80, 96];
-            const icons = [24, 28, 36];
+            const icons = [24, 28, 32];
             const shapes = [16, 20, 28];
             const symbol = findChild(primaryFab, "fabSymbol");
             verify(symbol !== null);
@@ -116,7 +116,10 @@ Item {
                 compare(primaryFab.background.implicitHeight, containers[index]);
                 compare(primaryFab.background.width, containers[index]);
                 compare(primaryFab.background.height, containers[index]);
-                compare(primaryFab.background.radius, shapes[index]);
+                compare(primaryFab.background.topLeftRadius, shapes[index]);
+                compare(primaryFab.background.topRightRadius, shapes[index]);
+                compare(primaryFab.background.bottomLeftRadius, shapes[index]);
+                compare(primaryFab.background.bottomRightRadius, shapes[index]);
                 compare(primaryFab.icon.width, icons[index]);
                 compare(primaryFab.icon.height, icons[index]);
                 compare(primaryFab.contentItem.implicitWidth, icons[index]);

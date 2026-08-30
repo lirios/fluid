@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// FabMenuTokens.kt, FabMenuCloseButtonTokens.kt, and FabMenuItemTokens.kt.
+
 namespace Fluid {
 
 /*!
@@ -22,7 +30,8 @@ struct FabMenu
 
     Q_PROPERTY(qreal closeButtonContainerWidth READ closeButtonContainerWidth CONSTANT FINAL)
     Q_PROPERTY(qreal closeButtonContainerHeight READ closeButtonContainerHeight CONSTANT FINAL)
-    Q_PROPERTY(qreal closeButtonContainerShape READ closeButtonContainerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue closeButtonContainerShape READ closeButtonContainerShape CONSTANT
+                       FINAL)
     Q_PROPERTY(qreal closeButtonIconSize READ closeButtonIconSize CONSTANT FINAL)
     Q_PROPERTY(
             qreal closeButtonContainerElevation READ closeButtonContainerElevation CONSTANT FINAL)
@@ -34,7 +43,7 @@ struct FabMenu
                        CONSTANT FINAL)
     Q_PROPERTY(qreal closeButtonBetweenSpace READ closeButtonBetweenSpace CONSTANT FINAL)
     Q_PROPERTY(qreal listItemContainerHeight READ listItemContainerHeight CONSTANT FINAL)
-    Q_PROPERTY(qreal listItemContainerShape READ listItemContainerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue listItemContainerShape READ listItemContainerShape CONSTANT FINAL)
     Q_PROPERTY(qreal listItemContainerElevation READ listItemContainerElevation CONSTANT FINAL)
     Q_PROPERTY(qreal listItemIconSize READ listItemIconSize CONSTANT FINAL)
     Q_PROPERTY(qreal listItemIconLabelSpace READ listItemIconLabelSpace CONSTANT FINAL)
@@ -63,9 +72,9 @@ public:
     }
 
     //! Fully rounded corner radius of the expanded close button.
-    constexpr qreal closeButtonContainerShape() const
+    constexpr ShapeValue closeButtonContainerShape() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerFull();
     }
 
     //! Size of the close button icon.
@@ -77,25 +86,25 @@ public:
     //! Resting elevation of the close button.
     constexpr qreal closeButtonContainerElevation() const
     {
-        return 6.0;
+        return ElevationTokens{ }.level3();
     }
 
     //! Elevation of the focused close button.
     constexpr qreal closeButtonFocusContainerElevation() const
     {
-        return 6.0;
+        return ElevationTokens{ }.level3();
     }
 
     //! Elevation of the hovered close button.
     constexpr qreal closeButtonHoverContainerElevation() const
     {
-        return 8.0;
+        return ElevationTokens{ }.level4();
     }
 
     //! Elevation of the pressed close button.
     constexpr qreal closeButtonPressedContainerElevation() const
     {
-        return 6.0;
+        return ElevationTokens{ }.level3();
     }
 
     //! Space between the close button and the nearest list item.
@@ -111,15 +120,15 @@ public:
     }
 
     //! Fully rounded corner radius of a list item.
-    constexpr qreal listItemContainerShape() const
+    constexpr ShapeValue listItemContainerShape() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerFull();
     }
 
     //! Resting elevation of a list item.
     constexpr qreal listItemContainerElevation() const
     {
-        return 0.0;
+        return ElevationTokens{ }.level0();
     }
 
     //! Size of the leading list item icon.
@@ -161,19 +170,19 @@ public:
     //! Opacity of the hover state layer.
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
 
     //! Opacity of the keyboard-focus state layer.
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
 
     //! Opacity of the pressed state layer.
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
 
     //! Opacity of disabled list item content.

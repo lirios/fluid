@@ -11,6 +11,7 @@ qt_add_resources(FluidGallery "gallery"
     FILES
         qml/main.qml
         qml/AppBars.qml
+        qml/Colors.qml
         qml/Components.qml
         qml/Divider.qml
         qml/Elevation.qml

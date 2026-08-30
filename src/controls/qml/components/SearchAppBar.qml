@@ -6,6 +6,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class SearchAppBar
@@ -284,14 +286,22 @@ MD.BaseAppBar {
                 y: (control.collapsedHeight - height) / 2
                 width: Math.max(0, Math.min(searchArea.availableWidth, searchArea.desiredWidth))
                 height: MD.Tokens.appBar.searchContainerHeight
-                radius: MD.Tokens.cornerRadiusFull
+                topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.shape.cornerFull.topLeft,
+                                                            width, height)
+                topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.shape.cornerFull.topRight,
+                                                             width, height)
+                bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                          MD.Tokens.shape.cornerFull.bottomLeft, width, height)
+                bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                           MD.Tokens.shape.cornerFull.bottomRight, width, height)
                 color: control.lifted ? control.scrolledSearchContainerColor : control.searchContainerColor
                 clip: true
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: MD.Tokens.spring.expressiveFastEffects.duration
-                        easing: MD.Tokens.spring.expressiveFastEffects.easing
+                        duration: MotionAnimation.expressiveFastEffectsDuration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
                     }
                 }
 

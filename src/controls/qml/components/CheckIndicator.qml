@@ -7,6 +7,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
 
 /*!
     \class CheckIndicator
@@ -37,8 +38,8 @@ Item {
     //! The checkbox outline width in pixels.
     property real outlineWidth
 
-    implicitWidth: MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall
-    implicitHeight: MD.Tokens.checkBox.containerSize + MD.Tokens.spacingSmall
+    implicitWidth: MD.Tokens.checkBox.containerSize + MD.Tokens.checkBox.containerPadding * 2
+    implicitHeight: MD.Tokens.checkBox.containerSize + MD.Tokens.checkBox.containerPadding * 2
 
     Rectangle {
         id: container
@@ -47,25 +48,32 @@ Item {
         implicitWidth: MD.Tokens.checkBox.containerSize
         implicitHeight: MD.Tokens.checkBox.containerSize
         color: indicatorItem.backgroundColor
-        radius: MD.Tokens.checkBox.containerShape
+        topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.checkBox.containerShape.topLeft,
+                                                    width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.checkBox.containerShape.topRight,
+                                                     width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                  MD.Tokens.checkBox.containerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                   MD.Tokens.checkBox.containerShape.bottomRight, width, height)
         border.width: indicatorItem.outlineWidth
         border.color: indicatorItem.outlineColor
 
         Behavior on color {
             ColorAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 
         Behavior on border.color {
             ColorAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 
         Behavior on border.width {
             NumberAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 

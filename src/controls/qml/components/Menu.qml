@@ -4,6 +4,8 @@
 pragma ComponentBehavior: Bound
 
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 import QtQuick
 import QtQuick.Templates as T
@@ -117,7 +119,14 @@ T.Menu {
         implicitWidth: MD.Tokens.menu.minimumWidth
         implicitHeight: MD.Tokens.menu.itemHeight
         color: control.MD.Style.surfaceContainerColor
-        radius: Math.min(MD.Tokens.menu.containerRadius, Math.min(control.width, control.height) / 2)
+        topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.topLeft,
+                                                    width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.topRight,
+                                                     width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.bottomLeft,
+                                                       width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.bottomRight,
+                                                        width, height)
         elevation: MD.Tokens.menu.containerElevation
     }
 
@@ -126,15 +135,17 @@ T.Menu {
             property: "scale"
             from: 0.94
             to: 1
-            duration: MD.Tokens.spring.expressiveFastSpatial.duration
-            easing: MD.Tokens.spring.expressiveFastSpatial.easing
+            duration: MotionAnimation.expressiveFastSpatialDuration
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
         }
         NumberAnimation {
             property: "opacity"
             from: 0
             to: 1
-            duration: MD.Tokens.spring.expressiveFastEffects.duration
-            easing: MD.Tokens.spring.expressiveFastEffects.easing
+            duration: MotionAnimation.expressiveFastEffectsDuration
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
         }
     }
 
@@ -143,15 +154,17 @@ T.Menu {
             property: "scale"
             from: 1
             to: 0.94
-            duration: MD.Tokens.spring.expressiveFastSpatial.duration
-            easing: MD.Tokens.spring.expressiveFastSpatial.easing
+            duration: MotionAnimation.expressiveFastSpatialDuration
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
         }
         NumberAnimation {
             property: "opacity"
             from: 1
             to: 0
-            duration: MD.Tokens.spring.expressiveFastEffects.duration
-            easing: MD.Tokens.spring.expressiveFastEffects.easing
+            duration: MotionAnimation.expressiveFastEffectsDuration
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
         }
     }
 }

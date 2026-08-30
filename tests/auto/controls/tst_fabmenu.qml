@@ -17,6 +17,28 @@ TestCase {
     visible: true
     when: windowShown
 
+    function compareShape(actual, expected, name) {
+        compare(actual.topLeft, expected.topLeft, name + ".topLeft");
+        compare(actual.topRight, expected.topRight, name + ".topRight");
+        compare(actual.bottomLeft, expected.bottomLeft, name + ".bottomLeft");
+        compare(actual.bottomRight, expected.bottomRight, name + ".bottomRight");
+    }
+
+    function compareRectangleShape(rectangle, shape, name) {
+        const full = MD.Tokens.shape.cornerValueFull;
+        const maximum = Math.min(rectangle.width, rectangle.height) / 2;
+        compare(rectangle.topLeftRadius,
+                shape.topLeft === full ? maximum : shape.topLeft, name + ".topLeftRadius");
+        compare(rectangle.topRightRadius,
+                shape.topRight === full ? maximum : shape.topRight, name + ".topRightRadius");
+        compare(rectangle.bottomLeftRadius,
+                shape.bottomLeft === full ? maximum : shape.bottomLeft,
+                name + ".bottomLeftRadius");
+        compare(rectangle.bottomRightRadius,
+                shape.bottomRight === full ? maximum : shape.bottomRight,
+                name + ".bottomRightRadius");
+    }
+
     Item {
         id: focusSink
 
@@ -207,16 +229,18 @@ TestCase {
         const token = MD.Tokens.fabMenu;
         compare(token.closeButtonContainerWidth, 56);
         compare(token.closeButtonContainerHeight, 56);
-        compare(token.closeButtonContainerShape, 28);
+        compareShape(token.closeButtonContainerShape, MD.Tokens.shape.cornerFull,
+                     "closeButtonContainerShape");
         compare(token.closeButtonIconSize, 20);
-        compare(token.closeButtonContainerElevation, 6);
-        compare(token.closeButtonFocusContainerElevation, 6);
-        compare(token.closeButtonHoverContainerElevation, 8);
-        compare(token.closeButtonPressedContainerElevation, 6);
+        compare(token.closeButtonContainerElevation, MD.Tokens.elevation.level3);
+        compare(token.closeButtonFocusContainerElevation, MD.Tokens.elevation.level3);
+        compare(token.closeButtonHoverContainerElevation, MD.Tokens.elevation.level4);
+        compare(token.closeButtonPressedContainerElevation, MD.Tokens.elevation.level3);
         compare(token.closeButtonBetweenSpace, 8);
+        compareShape(token.listItemContainerShape, MD.Tokens.shape.cornerFull,
+                     "listItemContainerShape");
+        compare(token.listItemContainerElevation, MD.Tokens.elevation.level3);
         compare(token.listItemContainerHeight, 56);
-        compare(token.listItemContainerShape, 28);
-        compare(token.listItemContainerElevation, 0);
         compare(token.listItemIconSize, 24);
         compare(token.listItemIconLabelSpace, 8);
         compare(token.listItemLeadingSpace, 24);
@@ -292,7 +316,8 @@ TestCase {
 
         compare(button.implicitWidth, MD.Tokens.fab.containerWidth);
         compare(button.implicitHeight, MD.Tokens.fab.containerHeight);
-        compare(button.background.radius, MD.Tokens.fab.containerShape);
+        compareRectangleShape(button.background, MD.Tokens.fab.containerShape,
+                              "collapsedButtonBackground");
         compare(button.effectiveElevation, MD.Tokens.fab.containerElevation);
         compare(collapsedSymbol.opacity, 1);
         compare(collapsedSymbol.visible, true);
@@ -303,9 +328,17 @@ TestCase {
 
         menu.open();
         tryCompare(menu, "expanded", true);
+        wait(50);
+        verify(Number.isFinite(button.background.topLeftRadius));
+        verify(button.background.topLeftRadius < MD.Tokens.shape.cornerValueFull);
         tryCompare(button, "implicitWidth", MD.Tokens.fabMenu.closeButtonContainerWidth);
         tryCompare(button, "implicitHeight", MD.Tokens.fabMenu.closeButtonContainerHeight);
-        tryCompare(button.background, "radius", MD.Tokens.fabMenu.closeButtonContainerShape);
+        const expandedRadius = Math.min(MD.Tokens.fabMenu.closeButtonContainerWidth,
+                                        MD.Tokens.fabMenu.closeButtonContainerHeight) / 2;
+        tryCompare(button.background, "topLeftRadius", expandedRadius);
+        tryCompare(button.background, "topRightRadius", expandedRadius);
+        tryCompare(button.background, "bottomLeftRadius", expandedRadius);
+        tryCompare(button.background, "bottomRightRadius", expandedRadius);
         tryCompare(button, "effectiveElevation", MD.Tokens.fabMenu.closeButtonContainerElevation);
         tryCompare(collapsedSymbol, "opacity", 0);
         tryVerify(() => expandedSymbol.visible && expandedSymbol.opacity === 1);
@@ -322,7 +355,8 @@ TestCase {
         for (let i = 0; i < items.length; ++i) {
             const item = items[i];
             compare(item.height, MD.Tokens.fabMenu.listItemContainerHeight);
-            compare(item.background.radius, MD.Tokens.fabMenu.listItemContainerShape);
+            compareRectangleShape(item.background, MD.Tokens.fabMenu.listItemContainerShape,
+                                  "itemBackground" + i);
             compare(item.leftPadding, MD.Tokens.fabMenu.listItemLeadingSpace);
             compare(item.rightPadding, MD.Tokens.fabMenu.listItemTrailingSpace);
 

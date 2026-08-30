@@ -5,6 +5,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Fluid as MD
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class SliderHandle
@@ -132,15 +133,16 @@ Item {
         Behavior on scale {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
                 // qmllint enable unresolved-type
             }
         }
 
         Behavior on opacity {
             NumberAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
     }
@@ -159,8 +161,9 @@ Item {
         Behavior on width {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
                 // qmllint enable unresolved-type
             }
         }
@@ -168,21 +171,22 @@ Item {
         Behavior on height {
             NumberAnimation {
                 // qmllint disable unresolved-type
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
                 // qmllint enable unresolved-type
             }
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 
         Behavior on opacity {
             NumberAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
     }

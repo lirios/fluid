@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// DialogTokens.kt.
+
 namespace Fluid {
 
 /*! \brief Material Design 3 dialog tokens. */
@@ -15,7 +23,7 @@ struct Dialog
     QML_ANONYMOUS
 
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShape READ containerShape CONSTANT FINAL)
     Q_PROPERTY(qreal withIconIconSize READ withIconIconSize CONSTANT FINAL)
     Q_PROPERTY(qreal actionHoverStateLayerOpacity READ actionHoverStateLayerOpacity CONSTANT FINAL)
     Q_PROPERTY(qreal actionFocusStateLayerOpacity READ actionFocusStateLayerOpacity CONSTANT FINAL)
@@ -25,11 +33,11 @@ struct Dialog
 public:
     constexpr qreal containerElevation() const
     {
-        return 6.0;
+        return ElevationTokens{ }.level3();
     }
-    constexpr qreal containerShape() const
+    constexpr ShapeValue containerShape() const
     {
-        return 28.0;
+        return ShapeTokens{ }.cornerExtraLarge();
     }
     constexpr qreal withIconIconSize() const
     {
@@ -37,15 +45,15 @@ public:
     }
     constexpr qreal actionHoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
     constexpr qreal actionFocusStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
     constexpr qreal actionPressedStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
 };
 

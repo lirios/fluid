@@ -6,16 +6,20 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
+    readonly property int sectionSpacing: 24
+
     MD.ScrollView {
         anchors.fill: parent
 
         ColumnLayout {
             width: parent.width
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             MD.Label {
                 Layout.fillWidth: true
-                Layout.margins: MD.Tokens.spacingLarge
+                Layout.margins: page.sectionSpacing
 
                 text: qsTr("Full-width")
             }
@@ -26,7 +30,7 @@ Item {
 
             MD.Label {
                 Layout.fillWidth: true
-                Layout.margins: MD.Tokens.spacingLarge
+                Layout.margins: page.sectionSpacing
 
                 text: qsTr("Inset")
             }
@@ -39,7 +43,7 @@ Item {
 
             MD.Label {
                 Layout.fillWidth: true
-                Layout.margins: MD.Tokens.spacingLarge
+                Layout.margins: page.sectionSpacing
 
                 text: qsTr("Middle-inset")
             }
@@ -53,17 +57,17 @@ Item {
 
             MD.Label {
                 Layout.fillWidth: true
-                Layout.margins: MD.Tokens.spacingLarge
+                Layout.margins: page.sectionSpacing
 
                 text: qsTr("Vertical")
             }
 
             RowLayout {
                 Layout.fillWidth: true
-                Layout.margins: MD.Tokens.spacingLarge
+                Layout.margins: page.sectionSpacing
                 Layout.preferredHeight: 64
 
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 MD.Label {
                     text: qsTr("Left")

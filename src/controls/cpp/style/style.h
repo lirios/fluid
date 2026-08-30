@@ -39,6 +39,11 @@ class FluidStyle : public QQuickAttachedPropertyPropagator
             QColor secondaryContainerColor READ secondaryContainerColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor onSecondaryContainerColor READ onSecondaryContainerColor NOTIFY themeChanged
                        FINAL)
+    Q_PROPERTY(QColor secondaryFixedColor READ secondaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor secondaryFixedDimColor READ secondaryFixedDimColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSecondaryFixedColor READ onSecondaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onSecondaryFixedVariantColor READ onSecondaryFixedVariantColor NOTIFY
+                       themeChanged FINAL)
 
     // Color properties - Tertiary
     Q_PROPERTY(QColor tertiaryColor READ tertiaryColor NOTIFY themeChanged FINAL)
@@ -46,6 +51,11 @@ class FluidStyle : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(QColor tertiaryContainerColor READ tertiaryContainerColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(
             QColor onTertiaryContainerColor READ onTertiaryContainerColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor tertiaryFixedColor READ tertiaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor tertiaryFixedDimColor READ tertiaryFixedDimColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onTertiaryFixedColor READ onTertiaryFixedColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor onTertiaryFixedVariantColor READ onTertiaryFixedVariantColor NOTIFY
+                       themeChanged FINAL)
 
     // Color properties - Error
     Q_PROPERTY(QColor errorColor READ errorColor NOTIFY themeChanged FINAL)
@@ -64,6 +74,7 @@ class FluidStyle : public QQuickAttachedPropertyPropagator
     Q_PROPERTY(QColor surfaceDimColor READ surfaceDimColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor surfaceVariantColor READ surfaceVariantColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor onSurfaceVariantColor READ onSurfaceVariantColor NOTIFY themeChanged FINAL)
+    Q_PROPERTY(QColor surfaceTintColor READ surfaceTintColor NOTIFY themeChanged FINAL)
     Q_PROPERTY(QColor surfaceContainerLowestColor READ surfaceContainerLowestColor NOTIFY
                        themeChanged FINAL)
     Q_PROPERTY(
@@ -136,12 +147,20 @@ public:
     QColor onSecondaryColor() const;
     QColor secondaryContainerColor() const;
     QColor onSecondaryContainerColor() const;
+    QColor secondaryFixedColor() const;
+    QColor secondaryFixedDimColor() const;
+    QColor onSecondaryFixedColor() const;
+    QColor onSecondaryFixedVariantColor() const;
 
     // Color getters - Tertiary
     QColor tertiaryColor() const;
     QColor onTertiaryColor() const;
     QColor tertiaryContainerColor() const;
     QColor onTertiaryContainerColor() const;
+    QColor tertiaryFixedColor() const;
+    QColor tertiaryFixedDimColor() const;
+    QColor onTertiaryFixedColor() const;
+    QColor onTertiaryFixedVariantColor() const;
 
     // Color getters - Error
     QColor errorColor() const;
@@ -160,6 +179,7 @@ public:
     QColor surfaceDimColor() const;
     QColor surfaceVariantColor() const;
     QColor onSurfaceVariantColor() const;
+    QColor surfaceTintColor() const;
     QColor surfaceContainerLowestColor() const;
     QColor surfaceContainerLowColor() const;
     QColor surfaceContainerColor() const;

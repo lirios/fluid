@@ -3,6 +3,8 @@
 
 pragma ComponentBehavior: Bound
 import Fluid as MD
+import "MotionAnimation.js" as MotionAnimation
+import "../core/UiMetrics.js" as UiMetrics
 
 import QtQuick
 import QtQuick.Templates as T
@@ -392,13 +394,24 @@ T.ToolBar {
     }
 
     background: MD.ElevationRectangle {
+        objectName: "appBarBackground"
+
         color: control.lifted ? control.scrolledContainerColor : control.containerColor
         elevation: control.lifted ? MD.Tokens.appBar.onScrollContainerElevation : MD.Tokens.appBar.containerElevation
+        topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.appBar.containerShape.topLeft,
+                                                    width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.appBar.containerShape.topRight,
+                                                     width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.appBar.containerShape.bottomLeft,
+                                                       width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.appBar.containerShape.bottomRight,
+                                                        width, height)
 
         Behavior on color {
             ColorAnimation {
-                duration: MD.Tokens.spring.expressiveFastEffects.duration
-                easing: MD.Tokens.spring.expressiveFastEffects.easing
+                duration: MotionAnimation.expressiveFastEffectsDuration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
             }
         }
     }
@@ -560,7 +573,8 @@ T.ToolBar {
 
         target: control
         property: "_heightOffset"
-        duration: MD.Tokens.spring.expressiveFastSpatial.duration
-        easing: MD.Tokens.spring.expressiveFastSpatial.easing
+        duration: MotionAnimation.expressiveFastSpatialDuration
+        easing.type: Easing.BezierSpline
+        easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
     }
 }

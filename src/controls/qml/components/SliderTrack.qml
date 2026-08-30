@@ -206,13 +206,13 @@ Item {
 
         Behavior on color {
             ColorAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 
         Behavior on opacity {
             NumberAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
     }

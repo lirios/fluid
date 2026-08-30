@@ -2,6 +2,11 @@
 // SPDX-License-Identifier: MPL-2.0
 
 #include "slider.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// SliderTokens.kt and SliderXsmallTokens.kt through SliderXlargeTokens.kt.
 
 namespace Fluid {
 
@@ -222,17 +227,17 @@ qreal Slider::hiddenOpacity() const
 
 qreal Slider::hoverStateLayerOpacity() const
 {
-    return 0.08;
+    return StateTokens{ }.hoverStateLayerOpacity();
 }
 
 qreal Slider::focusStateLayerOpacity() const
 {
-    return 0.10;
+    return StateTokens{ }.focusStateLayerOpacity();
 }
 
 qreal Slider::pressedStateLayerOpacity() const
 {
-    return 0.10;
+    return StateTokens{ }.pressedStateLayerOpacity();
 }
 
 qreal Slider::disabledActiveTrackOpacity() const

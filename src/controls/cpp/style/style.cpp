@@ -6,8 +6,14 @@
 #include <QtGui/private/qguiapplication_p.h>
 #include <QtGui/qpa/qplatformtheme.h>
 
-#include "palette.h"
+#include "../tokens/colordark.h"
+#include "../tokens/colorlight.h"
+#include "../tokens/palette.h"
 #include "style.h"
+
+// Active theme colors resolve the AndroidX Material 3 ColorLightTokens.kt and
+// ColorDarkTokens.kt mappings (VERSION: v0_210) from the pinned token set:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
 
 using namespace Qt::StringLiterals;
 
@@ -87,255 +93,68 @@ QString FluidStyle::plainFontFamily() const
     return "Roboto"_L1;
 }
 
-// Color getters - Primary
-QColor FluidStyle::primaryColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Primary]
-                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
-}
+// Color getters
+#define FLUID_STYLE_COLOR(getter, token)                            \
+    QColor FluidStyle::getter() const                               \
+    {                                                               \
+        return m_theme == Dark ? Fluid::ColorDarkTokens().token()   \
+                               : Fluid::ColorLightTokens().token(); \
+    }
 
-QColor FluidStyle::onPrimaryColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Primary]
-                               [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
-}
+FLUID_STYLE_COLOR(primaryColor, primary)
+FLUID_STYLE_COLOR(onPrimaryColor, onPrimary)
+FLUID_STYLE_COLOR(primaryContainerColor, primaryContainer)
+FLUID_STYLE_COLOR(onPrimaryContainerColor, onPrimaryContainer)
+FLUID_STYLE_COLOR(primaryFixedColor, primaryFixed)
+FLUID_STYLE_COLOR(primaryFixedDimColor, primaryFixedDim)
+FLUID_STYLE_COLOR(onPrimaryFixedColor, onPrimaryFixed)
+FLUID_STYLE_COLOR(onPrimaryFixedVariantColor, onPrimaryFixedVariant)
+FLUID_STYLE_COLOR(secondaryColor, secondary)
+FLUID_STYLE_COLOR(onSecondaryColor, onSecondary)
+FLUID_STYLE_COLOR(secondaryContainerColor, secondaryContainer)
+FLUID_STYLE_COLOR(onSecondaryContainerColor, onSecondaryContainer)
+FLUID_STYLE_COLOR(secondaryFixedColor, secondaryFixed)
+FLUID_STYLE_COLOR(secondaryFixedDimColor, secondaryFixedDim)
+FLUID_STYLE_COLOR(onSecondaryFixedColor, onSecondaryFixed)
+FLUID_STYLE_COLOR(onSecondaryFixedVariantColor, onSecondaryFixedVariant)
+FLUID_STYLE_COLOR(tertiaryColor, tertiary)
+FLUID_STYLE_COLOR(onTertiaryColor, onTertiary)
+FLUID_STYLE_COLOR(tertiaryContainerColor, tertiaryContainer)
+FLUID_STYLE_COLOR(onTertiaryContainerColor, onTertiaryContainer)
+FLUID_STYLE_COLOR(tertiaryFixedColor, tertiaryFixed)
+FLUID_STYLE_COLOR(tertiaryFixedDimColor, tertiaryFixedDim)
+FLUID_STYLE_COLOR(onTertiaryFixedColor, onTertiaryFixed)
+FLUID_STYLE_COLOR(onTertiaryFixedVariantColor, onTertiaryFixedVariant)
+FLUID_STYLE_COLOR(errorColor, error)
+FLUID_STYLE_COLOR(onErrorColor, onError)
+FLUID_STYLE_COLOR(errorContainerColor, errorContainer)
+FLUID_STYLE_COLOR(onErrorContainerColor, onErrorContainer)
+FLUID_STYLE_COLOR(backgroundColor, background)
+FLUID_STYLE_COLOR(onBackgroundColor, onBackground)
+FLUID_STYLE_COLOR(surfaceColor, surface)
+FLUID_STYLE_COLOR(onSurfaceColor, onSurface)
+FLUID_STYLE_COLOR(surfaceBrightColor, surfaceBright)
+FLUID_STYLE_COLOR(surfaceDimColor, surfaceDim)
+FLUID_STYLE_COLOR(surfaceVariantColor, surfaceVariant)
+FLUID_STYLE_COLOR(onSurfaceVariantColor, onSurfaceVariant)
+FLUID_STYLE_COLOR(surfaceTintColor, surfaceTint)
+FLUID_STYLE_COLOR(surfaceContainerLowestColor, surfaceContainerLowest)
+FLUID_STYLE_COLOR(surfaceContainerLowColor, surfaceContainerLow)
+FLUID_STYLE_COLOR(surfaceContainerColor, surfaceContainer)
+FLUID_STYLE_COLOR(surfaceContainerHighColor, surfaceContainerHigh)
+FLUID_STYLE_COLOR(surfaceContainerHighestColor, surfaceContainerHighest)
+FLUID_STYLE_COLOR(outlineColor, outline)
+FLUID_STYLE_COLOR(outlineVariantColor, outlineVariant)
+FLUID_STYLE_COLOR(inverseSurfaceColor, inverseSurface)
+FLUID_STYLE_COLOR(inverseOnSurfaceColor, inverseOnSurface)
+FLUID_STYLE_COLOR(inversePrimaryColor, inversePrimary)
+FLUID_STYLE_COLOR(scrimColor, scrim)
 
-QColor FluidStyle::primaryContainerColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Primary]
-                               [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
-}
+#undef FLUID_STYLE_COLOR
 
-QColor FluidStyle::onPrimaryContainerColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Primary]
-                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone10]);
-}
-
-QColor FluidStyle::primaryFixedColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone90]);
-}
-
-QColor FluidStyle::primaryFixedDimColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone80]);
-}
-
-QColor FluidStyle::onPrimaryFixedColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone10]);
-}
-
-QColor FluidStyle::onPrimaryFixedVariantColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Primary][Palette::Tone30]);
-}
-
-// Color getters - Secondary
-QColor FluidStyle::secondaryColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Secondary]
-                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone40]);
-}
-
-QColor FluidStyle::onSecondaryColor() const
-{
-    return m_theme == Dark ? QColor("#332D41") : QColor("#FFFFFF");
-}
-
-QColor FluidStyle::secondaryContainerColor() const
-{
-    return m_theme == Dark ? QColor("#4A4458") : QColor("#E8DEF8");
-}
-
-QColor FluidStyle::onSecondaryContainerColor() const
-{
-    return m_theme == Dark ? QColor("#E8DEF8") : QColor("#1D192B");
-}
-
-// Color getters - Tertiary
-QColor FluidStyle::tertiaryColor() const
-{
-    return m_theme == Dark ? QColor("#EFB8C8") : QColor("#7D5260");
-}
-
-QColor FluidStyle::onTertiaryColor() const
-{
-    return m_theme == Dark ? QColor("#492532") : QColor("#FFFFFF");
-}
-
-QColor FluidStyle::tertiaryContainerColor() const
-{
-    return m_theme == Dark ? QColor("#633B48") : QColor("#FFD8E4");
-}
-
-QColor FluidStyle::onTertiaryContainerColor() const
-{
-    return m_theme == Dark ? QColor("#FFD8E4") : QColor("#31111D");
-}
-
-// Color getters - Error
-QColor FluidStyle::errorColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
-                                                                                : Palette::Tone40]);
-}
-
-QColor FluidStyle::onErrorColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Error]
-                               [m_theme == Dark ? Palette::Tone20 : Palette::Tone100]);
-}
-
-QColor FluidStyle::errorContainerColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone30
-                                                                                : Palette::Tone90]);
-}
-
-QColor FluidStyle::onErrorContainerColor() const
-{
-    return QColor::fromRgba(Palette::refPalette[Palette::Error][m_theme == Dark ? Palette::Tone80
-                                                                                : Palette::Tone10]);
-}
-
-// Color getters - Background
-QColor FluidStyle::backgroundColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
-}
-
-QColor FluidStyle::onBackgroundColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone90 : Palette::Tone10]);
-}
-
-// Color getters - Surface
-QColor FluidStyle::surfaceColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone99]);
-}
-
-QColor FluidStyle::onSurfaceColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone90 : Palette::Tone10]);
-}
-
-QColor FluidStyle::surfaceBrightColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone24 : Palette::Tone98]);
-}
-
-QColor FluidStyle::surfaceDimColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone6 : Palette::Tone87]);
-}
-
-QColor FluidStyle::surfaceVariantColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone30 : Palette::Tone90]);
-}
-
-QColor FluidStyle::onSurfaceVariantColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone80 : Palette::Tone30]);
-}
-
-QColor FluidStyle::surfaceContainerLowestColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone4 : Palette::Tone100]);
-}
-
-QColor FluidStyle::surfaceContainerLowColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone10 : Palette::Tone96]);
-}
-
-QColor FluidStyle::surfaceContainerColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone12 : Palette::Tone94]);
-}
-
-QColor FluidStyle::surfaceContainerHighColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone17 : Palette::Tone92]);
-}
-
-QColor FluidStyle::surfaceContainerHighestColor() const
-{
-    return QColor::fromRgba(
-            Palette::refPalette[Palette::Neutral]
-                               [m_theme == Dark ? Palette::Tone22 : Palette::Tone90]);
-}
-
-// Color getters - Outline
-QColor FluidStyle::outlineColor() const
-{
-    return m_theme == Dark ? QColor("#938F99") : QColor("#79747E");
-}
-
-QColor FluidStyle::outlineVariantColor() const
-{
-    return m_theme == Dark ? QColor("#49454F") : QColor("#CAC4D0");
-}
-
-// Color getters - Inverse
-QColor FluidStyle::inverseSurfaceColor() const
-{
-    return m_theme == Dark ? QColor("#E6E1E5") : QColor("#313033");
-}
-
-QColor FluidStyle::inverseOnSurfaceColor() const
-{
-    return m_theme == Dark ? QColor("#313033") : QColor("#F4EFF4");
-}
-
-QColor FluidStyle::inversePrimaryColor() const
-{
-    return m_theme == Dark ? QColor("#6750A4") : QColor("#D0BCFF");
-}
-
-// Color getters - Scrim
-QColor FluidStyle::scrimColor() const
-{
-    return QColor("#000000");
-}
-
-// Color getters - Shadow
 QColor FluidStyle::shadowColor() const
 {
-    return QColor("#000000");
+    return Fluid::PaletteTokens().black();
 }
 
 FluidStyle *FluidStyle::qmlAttachedProperties(QObject *object)

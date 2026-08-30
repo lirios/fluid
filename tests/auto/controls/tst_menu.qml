@@ -139,7 +139,10 @@ TestCase {
     function test_tokens() {
         const token = MD.Tokens.menu;
         compare(token.containerElevation, 3);
-        compare(token.containerRadius, 4);
+        compare(token.containerShape.topLeft, 4);
+        compare(token.containerShape.topRight, 4);
+        compare(token.containerShape.bottomLeft, 4);
+        compare(token.containerShape.bottomRight, 4);
         compare(token.topPadding, 8);
         compare(token.bottomPadding, 8);
         compare(token.viewportMargin, 8);

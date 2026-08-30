@@ -6,6 +6,12 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+    readonly property int spaciousSpacing: 32
+
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
     }
@@ -43,14 +49,14 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             Headline {
                 text: qsTr("Buttons")
             }
 
             RowLayout {
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 MD.Button {
                     objectName: "iconOnlyButton"
@@ -86,7 +92,7 @@ Item {
             }
 
             RowLayout {
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 ValueCircle {
                     number: "1"
@@ -124,7 +130,7 @@ Item {
             }
 
             RowLayout {
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 ValueCircle {
                     number: "2"
@@ -144,7 +150,7 @@ Item {
             }
 
             RowLayout {
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 ValueCircle {
                     number: "3"
@@ -182,10 +188,10 @@ Item {
             }
 
             ColumnLayout {
-                spacing: MD.Tokens.spacingExtraLarge
+                spacing: page.spaciousSpacing
 
                 RowLayout {
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: page.sectionSpacing
 
                     Headline {
                         text: qsTr("Colors")
@@ -203,8 +209,8 @@ Item {
                     columns: 4
                     rows: 6
 
-                    columnSpacing: MD.Tokens.spacingLarge
-                    rowSpacing: MD.Tokens.spacingLarge
+                    columnSpacing: page.sectionSpacing
+                    rowSpacing: page.sectionSpacing
 
                     // Numbers and letters
 

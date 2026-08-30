@@ -6,6 +6,13 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens where available:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// SwitchTokens.kt; system references are provided by ShapeTokens.kt and StateTokens.kt.
+
 namespace Fluid {
 
 /*! \brief Material Design 3 switch tokens. */
@@ -16,15 +23,17 @@ struct Switch
 
     Q_PROPERTY(qreal trackWidth READ trackWidth CONSTANT FINAL)
     Q_PROPERTY(qreal trackHeight READ trackHeight CONSTANT FINAL)
-    Q_PROPERTY(qreal trackShape READ trackShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue trackShape READ trackShape CONSTANT FINAL)
     Q_PROPERTY(qreal trackOutlineWidth READ trackOutlineWidth CONSTANT FINAL)
     Q_PROPERTY(qreal stateLayerSize READ stateLayerSize CONSTANT FINAL)
-    Q_PROPERTY(qreal stateLayerShape READ stateLayerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue stateLayerShape READ stateLayerShape CONSTANT FINAL)
+    Q_PROPERTY(qreal contentPadding READ contentPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal contentSpacing READ contentSpacing CONSTANT FINAL)
     Q_PROPERTY(qreal selectedHandleSize READ selectedHandleSize CONSTANT FINAL)
     Q_PROPERTY(qreal unselectedHandleSize READ unselectedHandleSize CONSTANT FINAL)
     Q_PROPERTY(qreal withIconHandleSize READ withIconHandleSize CONSTANT FINAL)
     Q_PROPERTY(qreal pressedHandleSize READ pressedHandleSize CONSTANT FINAL)
-    Q_PROPERTY(qreal handleShape READ handleShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue handleShape READ handleShape CONSTANT FINAL)
     Q_PROPERTY(qreal selectedIconSize READ selectedIconSize CONSTANT FINAL)
     Q_PROPERTY(qreal unselectedIconSize READ unselectedIconSize CONSTANT FINAL)
     Q_PROPERTY(qreal disabledTrackOpacity READ disabledTrackOpacity CONSTANT FINAL)
@@ -48,9 +57,9 @@ public:
     {
         return 32.0;
     }
-    constexpr qreal trackShape() const
+    constexpr ShapeValue trackShape() const
     {
-        return 9999.0;
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr qreal trackOutlineWidth() const
     {
@@ -60,9 +69,18 @@ public:
     {
         return 40.0;
     }
-    constexpr qreal stateLayerShape() const
+    constexpr ShapeValue stateLayerShape() const
     {
-        return 9999.0;
+        return ShapeTokens{ }.cornerFull();
+    }
+    // Fluid label/layout metrics; AndroidX SwitchTokens has no label composition tokens.
+    constexpr qreal contentPadding() const
+    {
+        return 8.0;
+    }
+    constexpr qreal contentSpacing() const
+    {
+        return 8.0;
     }
     constexpr qreal selectedHandleSize() const
     {
@@ -80,9 +98,9 @@ public:
     {
         return 28.0;
     }
-    constexpr qreal handleShape() const
+    constexpr ShapeValue handleShape() const
     {
-        return 9999.0;
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr qreal selectedIconSize() const
     {
@@ -114,15 +132,15 @@ public:
     }
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.1;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
 };
 

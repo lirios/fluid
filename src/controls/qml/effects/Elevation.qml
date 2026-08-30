@@ -13,11 +13,11 @@ import Fluid as MD
  */
 MD.ElevationImpl {
     color: MD.Style.shadowColor
-    visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevationLevel0)
+    visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevation.level0)
 
     Behavior on elevation {
         NumberAnimation {
-            duration: MD.Tokens.durationMedium1
+            duration: MD.Tokens.motion.duration.medium1
         }
     }
 }

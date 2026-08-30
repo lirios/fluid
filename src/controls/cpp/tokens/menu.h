@@ -6,6 +6,14 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "elevationtokens.h"
+#include "shapetokens.h"
+#include "statetokens.h"
+
+// Component values map to the AndroidX Material 3 generated tokens:
+// https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
+// MenuTokens.kt and MenuItemTokens.kt.
+
 namespace Fluid {
 
 /*!
@@ -20,8 +28,7 @@ struct Menu
     QML_ANONYMOUS
 
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
-    Q_PROPERTY(qreal containerShape READ containerShape CONSTANT FINAL)
-    Q_PROPERTY(qreal containerRadius READ containerRadius CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue containerShape READ containerShape CONSTANT FINAL)
     Q_PROPERTY(qreal topPadding READ topPadding CONSTANT FINAL)
     Q_PROPERTY(qreal bottomPadding READ bottomPadding CONSTANT FINAL)
     Q_PROPERTY(qreal viewportMargin READ viewportMargin CONSTANT FINAL)
@@ -40,19 +47,13 @@ public:
     //! Elevation of the temporary menu surface.
     constexpr qreal containerElevation() const
     {
-        return 3.0;
+        return ElevationTokens{ }.level2();
     }
 
     //! Corner radius of the menu surface.
-    constexpr qreal containerShape() const
+    constexpr ShapeValue containerShape() const
     {
-        return 4.0;
-    }
-
-    //! Compatibility alias for containerShape.
-    constexpr qreal containerRadius() const
-    {
-        return containerShape();
+        return ShapeTokens{ }.cornerExtraSmall();
     }
 
     //! Space above the first menu item.
@@ -112,19 +113,19 @@ public:
     //! Opacity of the hover state layer.
     constexpr qreal hoverStateLayerOpacity() const
     {
-        return 0.08;
+        return StateTokens{ }.hoverStateLayerOpacity();
     }
 
     //! Opacity of the keyboard-focus state layer.
     constexpr qreal focusStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.focusStateLayerOpacity();
     }
 
     //! Opacity of the pressed state layer.
     constexpr qreal pressedStateLayerOpacity() const
     {
-        return 0.10;
+        return StateTokens{ }.pressedStateLayerOpacity();
     }
 
     //! Opacity of disabled menu-item content.

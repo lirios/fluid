@@ -6,6 +6,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
+import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class FabMenuItem
@@ -145,16 +147,18 @@ T.AbstractButton {
                         target: control
                         properties: "scale,_entranceOffset"
                         // qmllint disable unresolved-type
-                        easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                        duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                        duration: MotionAnimation.expressiveFastSpatialDuration
                         // qmllint enable unresolved-type
                     }
                     NumberAnimation {
                         target: control
                         property: "opacity"
                         // qmllint disable unresolved-type
-                        easing: MD.Tokens.spring.expressiveFastEffects.easing
-                        duration: MD.Tokens.spring.expressiveFastEffects.duration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
+                        duration: MotionAnimation.expressiveFastEffectsDuration
                         // qmllint enable unresolved-type
                     }
                 }
@@ -180,16 +184,18 @@ T.AbstractButton {
                         target: control
                         properties: "scale,_entranceOffset"
                         // qmllint disable unresolved-type
-                        easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                        duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                        duration: MotionAnimation.expressiveFastSpatialDuration
                         // qmllint enable unresolved-type
                     }
                     NumberAnimation {
                         target: control
                         property: "opacity"
                         // qmllint disable unresolved-type
-                        easing: MD.Tokens.spring.expressiveFastEffects.easing
-                        duration: MD.Tokens.spring.expressiveFastEffects.duration
+                        easing.type: Easing.BezierSpline
+                        easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
+                        duration: MotionAnimation.expressiveFastEffectsDuration
                         // qmllint enable unresolved-type
                     }
                 }
@@ -260,7 +266,15 @@ T.AbstractButton {
 
     background: MD.ElevationRectangle {
         implicitHeight: MD.Tokens.fabMenu.listItemContainerHeight
-        radius: MD.Tokens.fabMenu.listItemContainerShape
+        topLeftRadius: UiMetrics.resolveShapeRadius(
+                               MD.Tokens.fabMenu.listItemContainerShape.topLeft, width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(
+                                MD.Tokens.fabMenu.listItemContainerShape.topRight, width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(
+                                  MD.Tokens.fabMenu.listItemContainerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(
+                                   MD.Tokens.fabMenu.listItemContainerShape.bottomRight, width,
+                                   height)
         color: control.effectiveContainerColor
         elevation: MD.Tokens.fabMenu.listItemContainerElevation
 
@@ -268,7 +282,10 @@ T.AbstractButton {
             objectName: "fabMenuItemRipple"
 
             anchors.fill: parent
-            radius: parent.radius
+            topLeftRadius: parent.topLeftRadius
+            topRightRadius: parent.topRightRadius
+            bottomLeftRadius: parent.bottomLeftRadius
+            bottomRightRadius: parent.bottomRightRadius
             pressed: control.pressed
             pressX: control.pressX
             pressY: control.pressY

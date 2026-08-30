@@ -8,13 +8,16 @@ import Fluid as MD
 MD.ScrollView {
     id: scrollView
 
+    readonly property int contentSpacing: 16
+    readonly property int sectionSpacing: 24
+
     Flow {
         id: flow
 
-        x: MD.Tokens.spacingLarge
-        y: MD.Tokens.spacingLarge
-        width: scrollView.availableWidth - MD.Tokens.spacingLarge * 2
-        spacing: MD.Tokens.spacingLarge
+        x: scrollView.sectionSpacing
+        y: scrollView.sectionSpacing
+        width: scrollView.availableWidth - scrollView.sectionSpacing * 2
+        spacing: scrollView.sectionSpacing
 
         readonly property int minCardWidth: 420
         readonly property int columns: Math.max(1, Math.floor((width + spacing) / (minCardWidth + spacing)))
@@ -26,7 +29,7 @@ MD.ScrollView {
 
             ColumnLayout {
                 width: parent.width
-                spacing: MD.Tokens.spacingMedium
+                spacing: scrollView.contentSpacing
 
                 Repeater {
                     model: [
@@ -60,7 +63,7 @@ MD.ScrollView {
                         required property var modelData
 
                         Layout.fillWidth: true
-                        spacing: MD.Tokens.spacingLarge
+                        spacing: scrollView.sectionSpacing
 
                         MD.Label {
                             Layout.preferredWidth: 200
@@ -80,7 +83,7 @@ MD.ScrollView {
 
                 RowLayout {
                     Layout.fillWidth: true
-                    spacing: MD.Tokens.spacingLarge
+                    spacing: scrollView.sectionSpacing
 
                     MD.Label {
                         Layout.preferredWidth: 200
@@ -104,7 +107,7 @@ MD.ScrollView {
 
             ColumnLayout {
                 width: parent.width
-                spacing: MD.Tokens.spacingMedium
+                spacing: scrollView.contentSpacing
 
                 Repeater {
                     model: [
@@ -136,7 +139,7 @@ MD.ScrollView {
                         required property var modelData
 
                         Layout.fillWidth: true
-                        spacing: MD.Tokens.spacingLarge
+                        spacing: scrollView.sectionSpacing
 
                         MD.Label {
                             Layout.preferredWidth: 200
@@ -161,7 +164,7 @@ MD.ScrollView {
 
             ColumnLayout {
                 width: parent.width
-                spacing: MD.Tokens.spacingMedium
+                spacing: scrollView.contentSpacing
 
                 Repeater {
                     model: [
@@ -185,7 +188,7 @@ MD.ScrollView {
                         required property var modelData
 
                         Layout.fillWidth: true
-                        spacing: MD.Tokens.spacingLarge
+                        spacing: scrollView.sectionSpacing
 
                         MD.Label {
                             Layout.preferredWidth: 200
@@ -214,7 +217,7 @@ MD.ScrollView {
 
             ColumnLayout {
                 width: parent.width
-                spacing: MD.Tokens.spacingMedium
+                spacing: scrollView.contentSpacing
 
                 Repeater {
                     model: [
@@ -242,7 +245,7 @@ MD.ScrollView {
                         required property var modelData
 
                         Layout.fillWidth: true
-                        spacing: MD.Tokens.spacingLarge
+                        spacing: scrollView.sectionSpacing
 
                         MD.Label {
                             Layout.preferredWidth: 200
@@ -268,8 +271,8 @@ MD.ScrollView {
             GridLayout {
                 width: parent.width
                 columns: 4
-                columnSpacing: MD.Tokens.spacingLarge
-                rowSpacing: MD.Tokens.spacingMedium
+                columnSpacing: scrollView.sectionSpacing
+                rowSpacing: scrollView.contentSpacing
 
                 MD.Label {
                     text: qsTr("LTR")
@@ -359,7 +362,7 @@ MD.ScrollView {
 
             ColumnLayout {
                 width: parent.width
-                spacing: MD.Tokens.spacingMedium
+                spacing: scrollView.contentSpacing
 
                 Repeater {
                     model: [
@@ -386,7 +389,7 @@ MD.ScrollView {
                         required property var modelData
 
                         Layout.fillWidth: true
-                        spacing: MD.Tokens.spacingLarge
+                        spacing: scrollView.sectionSpacing
 
                         MD.Label {
                             Layout.preferredWidth: 200

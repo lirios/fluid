@@ -6,6 +6,11 @@ import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
+    readonly property int sectionSpacing: 24
+    readonly property int spaciousSpacing: 32
+
     component Elevation: MD.Elevation {
         Layout.fillWidth: true
         Layout.preferredWidth: 160
@@ -32,11 +37,11 @@ Item {
 
         ColumnLayout {
             anchors.centerIn: parent
-            spacing: MD.Tokens.spacingLarge
+            spacing: page.sectionSpacing
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: MD.Tokens.spacingLarge
+                spacing: page.sectionSpacing
 
                 MD.Label {
                     text: qsTr("Elevation: %1").arg(radiusSlider.value)
@@ -56,31 +61,31 @@ Item {
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: MD.Tokens.spacingExtraLarge
+                spacing: page.spaciousSpacing
 
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel0
+                    elevation: MD.Tokens.elevation.level0
                 }
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel1
+                    elevation: MD.Tokens.elevation.level1
                 }
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel2
+                    elevation: MD.Tokens.elevation.level2
                 }
             }
 
             RowLayout {
                 Layout.fillWidth: true
-                spacing: MD.Tokens.spacingExtraLarge
+                spacing: page.spaciousSpacing
 
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel3
+                    elevation: MD.Tokens.elevation.level3
                 }
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel4
+                    elevation: MD.Tokens.elevation.level4
                 }
                 Elevation {
-                    elevation: MD.Tokens.elevationLevel5
+                    elevation: MD.Tokens.elevation.level5
                 }
             }
         }

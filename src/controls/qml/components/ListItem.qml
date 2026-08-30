@@ -5,6 +5,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Templates as T
 import Fluid as MD
+import "../internal/MotionAnimation.js" as MotionAnimation
+import "../core/UiMetrics.js" as UiMetrics
 
 /*!
     \class ListItem
@@ -324,41 +326,57 @@ T.ItemDelegate {
             return MD.Tokens.listItem.oneLineContainerHeight;
         }
 
-        topLeftRadius: control.segmented && control._first ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
-        topRightRadius: control.segmented && control._first ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
-        bottomLeftRadius: control.segmented && control._last ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
-        bottomRightRadius: control.segmented && control._last ? MD.Tokens.listItem.selectedContainerExpressiveShape : 0
+        topLeftRadius: control.segmented && control._first
+                       ? UiMetrics.resolveShapeRadius(
+                             MD.Tokens.listItem.selectedContainerExpressiveShape.topLeft,
+                             width, height) : 0
+        topRightRadius: control.segmented && control._first
+                        ? UiMetrics.resolveShapeRadius(
+                              MD.Tokens.listItem.selectedContainerExpressiveShape.topRight,
+                              width, height) : 0
+        bottomLeftRadius: control.segmented && control._last
+                          ? UiMetrics.resolveShapeRadius(
+                                MD.Tokens.listItem.selectedContainerExpressiveShape.bottomLeft,
+                                width, height) : 0
+        bottomRightRadius: control.segmented && control._last
+                           ? UiMetrics.resolveShapeRadius(
+                                 MD.Tokens.listItem.selectedContainerExpressiveShape.bottomRight,
+                                 width, height) : 0
 
         color: _state.containerColor
 
         Behavior on topLeftRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
         Behavior on topRightRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
         Behavior on bottomLeftRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
         Behavior on bottomRightRadius {
             NumberAnimation {
-                easing: MD.Tokens.spring.expressiveFastSpatial.easing
-                duration: MD.Tokens.spring.expressiveFastSpatial.duration
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
             }
         }
 
         Behavior on color {
             ColorAnimation {
-                duration: MD.Tokens.durationShort2
+                duration: MD.Tokens.motion.duration.short2
             }
         }
 

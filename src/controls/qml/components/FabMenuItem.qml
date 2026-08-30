@@ -122,6 +122,10 @@ T.AbstractButton {
 
     states: [
         State {
+            name: "expanded"
+            when: control._animated && control.menu.expanded
+        },
+        State {
             name: "collapsed"
             when: control._animated && !control.menu.expanded
 
@@ -136,6 +140,7 @@ T.AbstractButton {
 
     transitions: [
         Transition {
+            from: "expanded"
             to: "collapsed"
 
             SequentialAnimation {
@@ -170,6 +175,7 @@ T.AbstractButton {
         },
         Transition {
             from: "collapsed"
+            to: "expanded"
 
             SequentialAnimation {
                 PropertyAction {

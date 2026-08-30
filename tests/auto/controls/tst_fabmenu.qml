@@ -279,6 +279,20 @@ TestCase {
         tryVerify(() => Math.abs(button.x - menu.margins) < 1);
     }
 
+    function test_initiallyCollapsedWithoutAnimation() {
+        const host = createHost(menuComponent);
+        const items = [host.firstItem, host.secondItem, host.thirdItem];
+
+        for (let i = 0; i < items.length; ++i) {
+            const item = items[i];
+            compare(item.state, "collapsed");
+            compare(item.visible, false);
+            compare(item.opacity, 0);
+            compare(item.scale, item._collapsedScale);
+            compare(item._entranceOffset, item._collapsedOffset);
+        }
+    }
+
     function test_openCloseToggle() {
         const host = createHost(menuComponent);
         const menu = host.menu;
@@ -569,6 +583,8 @@ TestCase {
         const menu = host.menu;
         const button = menu.button;
         const items = [host.firstItem, host.secondItem, host.thirdItem];
+
+        expand(menu, items);
 
         compare(menu.alignment, Qt.AlignRight);
 

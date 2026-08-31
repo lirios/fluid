@@ -125,21 +125,21 @@ class TypeScale : public QObject
     QML_ELEMENT
     QML_SINGLETON
 
-    Q_PROPERTY(TypeScaleValue displayLarge READ displayLarge CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue displayMedium READ displayMedium CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue displaySmall READ displaySmall CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue headlineLarge READ headlineLarge CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue headlineMedium READ headlineMedium CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue headlineSmall READ headlineSmall CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue titleLarge READ titleLarge CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue titleMedium READ titleMedium CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue titleSmall READ titleSmall CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue bodyLarge READ bodyLarge CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue bodyMedium READ bodyMedium CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue bodySmall READ bodySmall CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue labelLarge READ labelLarge CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue labelMedium READ labelMedium CONSTANT FINAL)
-    Q_PROPERTY(TypeScaleValue labelSmall READ labelSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue displayLarge READ displayLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue displayMedium READ displayMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue displaySmall READ displaySmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue headlineLarge READ headlineLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue headlineMedium READ headlineMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue headlineSmall READ headlineSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue titleLarge READ titleLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue titleMedium READ titleMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue titleSmall READ titleSmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue bodyLarge READ bodyLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue bodyMedium READ bodyMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue bodySmall READ bodySmall CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue labelLarge READ labelLarge CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue labelMedium READ labelMedium CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScaleValue labelSmall READ labelSmall CONSTANT FINAL)
 public:
     explicit TypeScale(QObject *parent = nullptr);
 

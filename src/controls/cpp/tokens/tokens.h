@@ -70,8 +70,9 @@ class Tokens : public QObject
     Q_PROPERTY(Fluid::ColorDarkTokens dark READ dark CONSTANT FINAL)
 
     // Typography tokens
-    Q_PROPERTY(TypeScale *typescale READ typescale CONSTANT FINAL)
-    Q_PROPERTY(EmphasizedTypeScale *emphasizedTypeScale READ emphasizedTypeScale CONSTANT FINAL)
+    Q_PROPERTY(Fluid::TypeScale *typescale READ typescale CONSTANT FINAL)
+    Q_PROPERTY(
+            Fluid::EmphasizedTypeScale *emphasizedTypeScale READ emphasizedTypeScale CONSTANT FINAL)
 
     // Component tokens - App bar
     Q_PROPERTY(Fluid::AppBar appBar READ appBar CONSTANT FINAL)

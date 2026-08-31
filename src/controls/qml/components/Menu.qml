@@ -52,11 +52,46 @@ import QtQuick.Window
 T.Menu {
     id: control
 
+    //! Selects the menu geometry specification.
+    enum Variant {
+        //! Material 3 Expressive vertically segmented menu geometry.
+        Vertical,
+        //! Original Material 3 baseline menu geometry.
+        Baseline
+    }
+
+    //! Selects the semantic menu color family.
+    enum ColorStyle {
+        //! Neutral surface container with tertiary selection.
+        Standard,
+        //! Tertiary container with a stronger tertiary selection.
+        Vibrant
+    }
+
+    /*!
+        \brief Geometry specification used by the menu.
+
+        The default is \c Menu.Vertical. Set this to \c Menu.Baseline to retain
+        the original Material 3 menu geometry.
+    */
+    property int variant: Menu.Vertical
+
+    /*!
+        \brief Semantic color family used by the menu and its default items.
+
+        The default is \c Menu.Standard.
+    */
+    property int colorStyle: Menu.Standard
+
     //! \internal Width available inside the window's popup viewport.
-    readonly property real _viewportWidth: parent && parent.Window.window && parent.Window.window.width > 0 ? parent.Window.window.width - margins * 2 : MD.Tokens.menu.maximumWidth
+    readonly property real _viewportWidth: parent && parent.Window.window && parent.Window.window.width > 0
+                                           ? parent.Window.window.width - leftMargin - rightMargin
+                                           : MD.Tokens.menu.maximumWidth
 
     //! \internal Height available inside the window's popup viewport.
-    readonly property real _viewportHeight: parent && parent.Window.window && parent.Window.window.height > 0 ? parent.Window.window.height - margins * 2 : Number.POSITIVE_INFINITY
+    readonly property real _viewportHeight: parent && parent.Window.window && parent.Window.window.height > 0
+                                            ? parent.Window.window.height - topMargin - bottomMargin
+                                            : Number.POSITIVE_INFINITY
 
     //! \internal Effective direction from the popup, locale, or anchor item.
     readonly property bool _layoutMirrored: mirrored || locale.textDirection === Qt.RightToLeft || (parent && parent.LayoutMirroring.enabled)
@@ -72,20 +107,35 @@ T.Menu {
         return itemWidth;
     }
 
+    //! \internal Combined delegate height using the active ListView spacing.
+    readonly property real _itemsImplicitHeight: {
+        let itemHeight = 0;
+        for (let index = 0; index < count; ++index) {
+            const item = itemAt(index);
+            if (item)
+                itemHeight += item.implicitHeight;
+        }
+        return itemHeight + Math.max(0, count - 1) * menuList.spacing;
+    }
+
     //! \internal Natural width before Material and viewport constraints.
     readonly property real _naturalWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, _itemsImplicitWidth + leftPadding + rightPadding)
 
     //! \internal Natural height before the viewport constraint.
-    readonly property real _naturalHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
+    readonly property real _naturalHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, _itemsImplicitHeight + topPadding + bottomPadding)
 
     implicitWidth: Math.max(0, Math.min(_viewportWidth, Math.max(MD.Tokens.menu.minimumWidth, Math.min(MD.Tokens.menu.maximumWidth, _naturalWidth))))
     implicitHeight: Math.max(0, Math.min(_viewportHeight, _naturalHeight))
 
-    margins: MD.Tokens.menu.viewportMargin
-    topPadding: MD.Tokens.menu.topPadding
-    bottomPadding: MD.Tokens.menu.bottomPadding
-    leftPadding: 0
-    rightPadding: 0
+    margins: 0
+    leftMargin: variant === Menu.Vertical ? MD.Tokens.menu.horizontalViewportMargin : MD.Tokens.menu.viewportMargin
+    rightMargin: leftMargin
+    topMargin: variant === Menu.Vertical ? MD.Tokens.menu.verticalViewportMargin : MD.Tokens.menu.viewportMargin
+    bottomMargin: topMargin
+    topPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : MD.Tokens.menu.topPadding
+    bottomPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : MD.Tokens.menu.bottomPadding
+    leftPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : 0
+    rightPadding: leftPadding
     overlap: 0
 
     modal: false
@@ -94,6 +144,23 @@ T.Menu {
     transformOrigin: cascade ? (_layoutMirrored ? Item.TopRight : Item.TopLeft) : Item.Top
 
     delegate: MD.MenuItem {
+        id: menuDelegate
+
+        //! \internal Position of this delegate in the menu content model.
+        readonly property int _menuIndex: {
+            for (let itemIndex = 0; itemIndex < control.count; ++itemIndex) {
+                if (control.itemAt(itemIndex) === menuDelegate)
+                    return itemIndex;
+            }
+            return -1;
+        }
+
+        variant: control.variant === Menu.Vertical ? MD.MenuItem.Vertical : MD.MenuItem.Baseline
+        colorStyle: control.colorStyle === Menu.Vibrant ? MD.MenuItem.Vibrant : MD.MenuItem.Standard
+        groupPosition: control.count <= 1 ? MD.MenuItem.Only
+                       : _menuIndex === 0 ? MD.MenuItem.First
+                       : _menuIndex === control.count - 1 ? MD.MenuItem.Last
+                       : MD.MenuItem.Middle
         LayoutMirroring.enabled: control._layoutMirrored
         LayoutMirroring.childrenInherit: true
     }
@@ -103,11 +170,12 @@ T.Menu {
         objectName: "menuListView"
 
         implicitWidth: control._itemsImplicitWidth
-        implicitHeight: contentHeight
+        implicitHeight: control._itemsImplicitHeight
         model: control.contentModel
         currentIndex: control.currentIndex
         interactive: contentHeight + control.topPadding + control.bottomPadding > control.height
         boundsBehavior: Flickable.StopAtBounds
+        spacing: control.variant === Menu.Vertical ? MD.Tokens.menu.verticalSegmentedGap : 0
         clip: true
 
         ScrollIndicator.vertical: MD.ScrollIndicator {}
@@ -117,15 +185,23 @@ T.Menu {
         objectName: "menuBackground"
 
         implicitWidth: MD.Tokens.menu.minimumWidth
-        implicitHeight: MD.Tokens.menu.itemHeight
-        color: control.MD.Style.surfaceContainerColor
-        topLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.topLeft,
+        readonly property var containerShape: control.variant === Menu.Vertical
+                                              ? MD.Tokens.menu.verticalContainerShape
+                                              : MD.Tokens.menu.containerShape
+
+        implicitHeight: control.variant === Menu.Vertical ? MD.Tokens.menu.verticalItemHeight : MD.Tokens.menu.itemHeight
+        color: control.colorStyle === Menu.Vibrant
+               ? control.MD.Style.tertiaryContainerColor
+               : control.variant === Menu.Vertical
+                 ? control.MD.Style.surfaceContainerLowColor
+                 : control.MD.Style.surfaceContainerColor
+        topLeftRadius: UiMetrics.resolveShapeRadius(containerShape.topLeft,
                                                     width, height)
-        topRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.topRight,
+        topRightRadius: UiMetrics.resolveShapeRadius(containerShape.topRight,
                                                      width, height)
-        bottomLeftRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.bottomLeft,
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(containerShape.bottomLeft,
                                                        width, height)
-        bottomRightRadius: UiMetrics.resolveShapeRadius(MD.Tokens.menu.containerShape.bottomRight,
+        bottomRightRadius: UiMetrics.resolveShapeRadius(containerShape.bottomRight,
                                                         width, height)
         elevation: MD.Tokens.menu.containerElevation
     }
@@ -133,7 +209,7 @@ T.Menu {
     enter: Transition {
         NumberAnimation {
             property: "scale"
-            from: 0.94
+            from: control.variant === Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
             to: 1
             duration: MotionAnimation.expressiveFastSpatialDuration
             easing.type: Easing.BezierSpline
@@ -153,7 +229,7 @@ T.Menu {
         NumberAnimation {
             property: "scale"
             from: 1
-            to: 0.94
+            to: control.variant === Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
             duration: MotionAnimation.expressiveFastSpatialDuration
             easing.type: Easing.BezierSpline
             easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve

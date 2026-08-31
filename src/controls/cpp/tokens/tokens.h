@@ -14,6 +14,7 @@
 #include "dialog.h"
 #include "divider.h"
 #include "elevationtokens.h"
+#include "exposeddropdownmenu.h"
 #include "fab.h"
 #include "fabmenu.h"
 #include "iconbutton.h"
@@ -101,6 +102,10 @@ class Tokens : public QObject
     // Component tokens - Menu
     Q_PROPERTY(Fluid::Menu menu READ menu CONSTANT FINAL)
 
+    // Component tokens - Exposed dropdown menu
+    Q_PROPERTY(
+            Fluid::ExposedDropdownMenu exposedDropdownMenu READ exposedDropdownMenu CONSTANT FINAL)
+
     // Component tokens - Slider
     Q_PROPERTY(Fluid::Slider slider READ slider CONSTANT FINAL)
 
@@ -155,6 +160,10 @@ public:
     // Component tokens - Menu
     Menu menu() const;
 
+    // Component tokens - Exposed dropdown menu
+    //! Returns the immutable exposed-dropdown-menu component token group.
+    ExposedDropdownMenu exposedDropdownMenu() const;
+
     // Component tokens - Slider
     Slider slider() const;
 
@@ -188,6 +197,7 @@ private:
     IconButton m_iconButton;
     ListItem m_listItem;
     Menu m_menu;
+    ExposedDropdownMenu m_exposedDropdownMenu;
     Slider m_slider;
     Divider m_divider;
     Switch m_switch;

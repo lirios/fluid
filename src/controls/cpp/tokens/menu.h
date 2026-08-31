@@ -42,6 +42,30 @@ struct Menu
     Q_PROPERTY(qreal focusStateLayerOpacity READ focusStateLayerOpacity CONSTANT FINAL)
     Q_PROPERTY(qreal pressedStateLayerOpacity READ pressedStateLayerOpacity CONSTANT FINAL)
     Q_PROPERTY(qreal disabledContentOpacity READ disabledContentOpacity CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalContainerShape READ verticalContainerShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalGroupShape READ verticalGroupShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalItemShape READ verticalItemShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalOnlyItemShape READ verticalOnlyItemShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalFirstItemShape READ verticalFirstItemShape CONSTANT FINAL)
+    Q_PROPERTY(
+            Fluid::ShapeValue verticalMiddleItemShape READ verticalMiddleItemShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalLastItemShape READ verticalLastItemShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalSelectedItemShape READ verticalSelectedItemShape CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalInactiveItemShape READ verticalInactiveItemShape CONSTANT
+                       FINAL)
+    Q_PROPERTY(qreal verticalItemHeight READ verticalItemHeight CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalGroupPadding READ verticalGroupPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalSegmentedGap READ verticalSegmentedGap CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalItemTopPadding READ verticalItemTopPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalItemBottomPadding READ verticalItemBottomPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalItemLeadingSpace READ verticalItemLeadingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalItemTrailingSpace READ verticalItemTrailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalItemBetweenSpace READ verticalItemBetweenSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalIconSize READ verticalIconSize CONSTANT FINAL)
+    Q_PROPERTY(qreal closedScale READ closedScale CONSTANT FINAL)
+    Q_PROPERTY(qreal horizontalViewportMargin READ horizontalViewportMargin CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalViewportMargin READ verticalViewportMargin CONSTANT FINAL)
 
 public:
     //! Elevation of the temporary menu surface.
@@ -132,6 +156,134 @@ public:
     constexpr qreal disabledContentOpacity() const
     {
         return 0.38;
+    }
+
+    //! Shape of an Expressive vertical menu surface.
+    constexpr ShapeValue verticalContainerShape() const
+    {
+        return ShapeTokens{ }.cornerLarge();
+    }
+
+    //! Shape of a group within an Expressive vertical menu.
+    constexpr ShapeValue verticalGroupShape() const
+    {
+        return ShapeTokens{ }.cornerSmall();
+    }
+
+    //! Base shape of an Expressive vertical menu item.
+    constexpr ShapeValue verticalItemShape() const
+    {
+        return ShapeTokens{ }.cornerExtraSmall();
+    }
+
+    //! Shape of an item that is the only member of a group.
+    constexpr ShapeValue verticalOnlyItemShape() const
+    {
+        return ShapeTokens{ }.cornerMedium();
+    }
+
+    //! Shape of the first item in a group.
+    constexpr ShapeValue verticalFirstItemShape() const
+    {
+        return { ShapeTokens{ }.cornerValueMedium(), ShapeTokens{ }.cornerValueMedium(),
+                 ShapeTokens{ }.cornerValueExtraSmall(), ShapeTokens{ }.cornerValueExtraSmall() };
+    }
+
+    //! Shape of a middle item in a group.
+    constexpr ShapeValue verticalMiddleItemShape() const
+    {
+        return ShapeTokens{ }.cornerExtraSmall();
+    }
+
+    //! Shape of the last item in a group.
+    constexpr ShapeValue verticalLastItemShape() const
+    {
+        return { ShapeTokens{ }.cornerValueExtraSmall(), ShapeTokens{ }.cornerValueExtraSmall(),
+                 ShapeTokens{ }.cornerValueMedium(), ShapeTokens{ }.cornerValueMedium() };
+    }
+
+    //! Shape of a selected Expressive menu item.
+    constexpr ShapeValue verticalSelectedItemShape() const
+    {
+        return ShapeTokens{ }.cornerMedium();
+    }
+
+    //! Shape used for an inactive Expressive menu item group.
+    constexpr ShapeValue verticalInactiveItemShape() const
+    {
+        return ShapeTokens{ }.cornerSmall();
+    }
+
+    //! Height of an Expressive vertical menu item.
+    constexpr qreal verticalItemHeight() const
+    {
+        return 44.0;
+    }
+
+    //! Padding between an Expressive menu surface and its item groups.
+    constexpr qreal verticalGroupPadding() const
+    {
+        return 4.0;
+    }
+
+    //! Gap between adjacent segments in an Expressive item group.
+    constexpr qreal verticalSegmentedGap() const
+    {
+        return 2.0;
+    }
+
+    //! Top content padding of an Expressive menu item.
+    constexpr qreal verticalItemTopPadding() const
+    {
+        return 8.0;
+    }
+
+    //! Bottom content padding of an Expressive menu item.
+    constexpr qreal verticalItemBottomPadding() const
+    {
+        return 8.0;
+    }
+
+    //! Logical leading content space of an Expressive menu item.
+    constexpr qreal verticalItemLeadingSpace() const
+    {
+        return 16.0;
+    }
+
+    //! Logical trailing content space of an Expressive menu item.
+    constexpr qreal verticalItemTrailingSpace() const
+    {
+        return 16.0;
+    }
+
+    //! Space between content elements in an Expressive menu item.
+    constexpr qreal verticalItemBetweenSpace() const
+    {
+        return 12.0;
+    }
+
+    //! Size of icons in an Expressive menu item.
+    constexpr qreal verticalIconSize() const
+    {
+        return 20.0;
+    }
+
+    //! Scale at which an Expressive menu starts and ends its motion.
+    constexpr qreal closedScale() const
+    {
+        return 0.8;
+    }
+
+    //! Minimum horizontal distance from a menu to the viewport edge.
+    constexpr qreal horizontalViewportMargin() const
+    {
+        return 8.0;
+    }
+
+    //! Minimum vertical distance from a menu to the viewport edge.
+    constexpr qreal verticalViewportMargin() const
+    {
+        return 48.0;
     }
 };
 

@@ -377,7 +377,30 @@ Item {
                 trailingSpace: 4, containerShape: [0, 0, 0, 0],
                 mediumContainerHeight: 112, largeContainerHeight: 152
             });
-            verifyShape(MD.Tokens.menu.containerShape, [4, 4, 4, 4], "menu.containerShape");
+            verifyValues(MD.Tokens.menu, {
+                containerShape: [4, 4, 4, 4],
+                verticalContainerShape: [16, 16, 16, 16],
+                verticalGroupShape: [8, 8, 8, 8],
+                verticalItemShape: [4, 4, 4, 4],
+                verticalOnlyItemShape: [12, 12, 12, 12],
+                verticalFirstItemShape: [12, 12, 4, 4],
+                verticalMiddleItemShape: [4, 4, 4, 4],
+                verticalLastItemShape: [4, 4, 12, 12],
+                verticalSelectedItemShape: [12, 12, 12, 12],
+                verticalInactiveItemShape: [8, 8, 8, 8],
+                verticalItemHeight: 44,
+                verticalGroupPadding: 4,
+                verticalSegmentedGap: 2,
+                verticalItemTopPadding: 8,
+                verticalItemBottomPadding: 8,
+                verticalItemLeadingSpace: 16,
+                verticalItemTrailingSpace: 16,
+                verticalItemBetweenSpace: 12,
+                verticalIconSize: 20,
+                closedScale: 0.8,
+                horizontalViewportMargin: 8,
+                verticalViewportMargin: 48
+            });
             verifyValues(MD.Tokens.slider, {
                 activeHandlePadding: 6, activeHandleTrailingSpace: 6,
                 activeStopIndicatorContainerOpacity: 1,
@@ -388,6 +411,38 @@ Item {
                 trackIconPaddingExtraLarge: 8
             });
             compare(MD.Tokens.symbol.size, 24);
+        }
+
+        function test_exposedDropdownMenu() {
+            verifyValues(MD.Tokens.exposedDropdownMenu, {
+                fieldHeight: 56,
+                minimumWidth: 280,
+                preferredWidth: 280,
+                horizontalPadding: 16,
+                contentVerticalPadding: 8,
+                labelInputTextSpace: 4,
+                supportingTextTopSpace: 4,
+                filledContainerShape: [4, 4, 0, 0],
+                filledLeadingIconSize: 20,
+                filledActiveIndicatorHeight: 1,
+                filledHoverActiveIndicatorHeight: 1,
+                filledFocusActiveIndicatorHeight: 2,
+                filledDisabledContainerOpacity: 0.04,
+                outlinedContainerShape: [4, 4, 4, 4],
+                outlinedLeadingIconSize: 24,
+                outlinedOutlineWidth: 1,
+                outlinedHoverOutlineWidth: 1,
+                outlinedFocusOutlineWidth: 2,
+                outlinedDisabledOutlineOpacity: 0.12,
+                outlinedLabelHorizontalPadding: 4,
+                trailingIconSize: 24,
+                leadingIconContentSpace: 16,
+                trailingIconContentSpace: 12,
+                disabledContentOpacity: 0.38,
+                popupAnchorGap: 4,
+                popupContainerShape: [16, 16, 16, 16],
+                popupContainerElevation: 3
+            });
         }
 
         function test_componentToSystemMappings() {
@@ -522,7 +577,22 @@ Item {
                 containerElevation: elevation.level2,
                 hoverStateLayerOpacity: state.hoverStateLayerOpacity,
                 focusStateLayerOpacity: state.focusStateLayerOpacity,
-                pressedStateLayerOpacity: state.pressedStateLayerOpacity
+                pressedStateLayerOpacity: state.pressedStateLayerOpacity,
+                verticalContainerShape: shape.cornerLarge,
+                verticalGroupShape: shape.cornerSmall,
+                verticalItemShape: shape.cornerExtraSmall,
+                verticalOnlyItemShape: shape.cornerMedium,
+                verticalFirstItemShape: [12, 12, 4, 4],
+                verticalMiddleItemShape: shape.cornerExtraSmall,
+                verticalLastItemShape: [4, 4, 12, 12],
+                verticalSelectedItemShape: shape.cornerMedium,
+                verticalInactiveItemShape: shape.cornerSmall
+            });
+            verifyValues(MD.Tokens.exposedDropdownMenu, {
+                filledContainerShape: shape.cornerExtraSmallTop,
+                outlinedContainerShape: shape.cornerExtraSmall,
+                popupContainerShape: shape.cornerLarge,
+                popupContainerElevation: elevation.level2
             });
             verifyValues(MD.Tokens.slider, {
                 hoverStateLayerOpacity: state.hoverStateLayerOpacity,

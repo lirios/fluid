@@ -33,11 +33,12 @@ Item {
         ColumnLayout {
             anchors.fill: parent
 
-            MD.ComboBox {
+            MD.ExposedDropdownMenu {
                 id: comboBox
 
                 Layout.alignment: Qt.AlignHCenter
 
+                label: qsTr("Symbol style")
                 model: ["Outlined", "Rounded", "Sharp"]
             }
 

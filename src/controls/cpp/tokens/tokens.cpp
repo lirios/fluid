@@ -112,6 +112,12 @@ Menu Tokens::menu() const
     return m_menu;
 }
 
+// Component tokens - Exposed dropdown menu
+ExposedDropdownMenu Tokens::exposedDropdownMenu() const
+{
+    return m_exposedDropdownMenu;
+}
+
 // Component tokens - Slider
 Slider Tokens::slider() const
 {

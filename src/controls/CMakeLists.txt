@@ -18,6 +18,7 @@ set(_sources
     cpp/tokens/dialog.cpp cpp/tokens/dialog.h
     cpp/tokens/divider.cpp cpp/tokens/divider.h
     cpp/tokens/elevationtokens.cpp cpp/tokens/elevationtokens.h
+    cpp/tokens/exposeddropdownmenu.cpp cpp/tokens/exposeddropdownmenu.h
     cpp/tokens/fab.cpp cpp/tokens/fab.h
     cpp/tokens/fabmenu.cpp cpp/tokens/fabmenu.h
     cpp/tokens/iconbutton.cpp cpp/tokens/iconbutton.h

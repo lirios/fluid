@@ -24,6 +24,7 @@ set(_sources
     cpp/tokens/fabmenu.cpp cpp/tokens/fabmenu.h
     cpp/tokens/iconbutton.cpp cpp/tokens/iconbutton.h
     cpp/tokens/listitem.cpp cpp/tokens/listitem.h
+    cpp/tokens/measurementtokens.cpp cpp/tokens/measurementtokens.h
     cpp/tokens/menu.cpp cpp/tokens/menu.h
     cpp/tokens/motiontokens.cpp cpp/tokens/motiontokens.h
     cpp/tokens/palette.cpp cpp/tokens/palette.h

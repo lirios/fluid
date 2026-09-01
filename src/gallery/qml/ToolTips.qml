@@ -11,8 +11,8 @@ import QtQuick.Layouts
 Item {
     id: page
 
-    readonly property int sectionSpacing: 24
-    readonly property int itemSpacing: 16
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
+    readonly property real itemSpacing: MD.Tokens.measurement.space200
 
     component SectionTitle: MD.Label {
         typescale: MD.Tokens.typescale.headlineSmall

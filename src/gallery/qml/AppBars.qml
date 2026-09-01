@@ -69,9 +69,9 @@ Flickable {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: 16
+            margins: MD.Tokens.measurement.space200
         }
-        spacing: 20
+        spacing: MD.Tokens.measurement.space250
 
         MD.Label {
             text: qsTr("Material 3 Expressive app bars")
@@ -188,7 +188,7 @@ Flickable {
                             required property int index
                             width: demoContent.width
                             height: 48
-                            leftPadding: 16
+                            leftPadding: MD.Tokens.measurement.space200
                             verticalAlignment: Text.AlignVCenter
                             text: qsTr("Scrollable item %1").arg(index + 1)
                             color: MD.Style.onSurfaceColor

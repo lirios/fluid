@@ -8,8 +8,8 @@ import Fluid as MD
 Item {
     id: page
 
-    readonly property int sectionSpacing: 24
-    readonly property int spaciousSpacing: 32
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
+    readonly property real spaciousSpacing: MD.Tokens.measurement.space400
 
     component Elevation: MD.Elevation {
         Layout.fillWidth: true

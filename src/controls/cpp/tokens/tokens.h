@@ -19,6 +19,7 @@
 #include "fabmenu.h"
 #include "iconbutton.h"
 #include "listitem.h"
+#include "measurementtokens.h"
 #include "menu.h"
 #include "motiontokens.h"
 #include "palette.h"
@@ -47,6 +48,8 @@ namespace Fluid {
         bottomLeftRadius: MD.Tokens.shape.cornerMedium.bottomLeft
         bottomRightRadius: MD.Tokens.shape.cornerMedium.bottomRight
 
+        anchors.margins: MD.Tokens.measurement.space200
+
         Text {
             font.pixelSize: MD.Tokens.typescale.titleLarge.fontSize
         }
@@ -67,6 +70,7 @@ class Tokens : public QObject
     Q_PROPERTY(Fluid::ElevationTokens elevation READ elevation CONSTANT FINAL)
     Q_PROPERTY(Fluid::StateTokens state READ state CONSTANT FINAL)
     Q_PROPERTY(Fluid::MotionTokens motion READ motion CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MeasurementTokens measurement READ measurement CONSTANT FINAL)
     Q_PROPERTY(Fluid::PaletteTokens palette READ palette CONSTANT FINAL)
     Q_PROPERTY(Fluid::ColorLightTokens light READ light CONSTANT FINAL)
     Q_PROPERTY(Fluid::ColorDarkTokens dark READ dark CONSTANT FINAL)
@@ -129,6 +133,7 @@ public:
     ElevationTokens elevation() const;
     StateTokens state() const;
     MotionTokens motion() const;
+    MeasurementTokens measurement() const;
     PaletteTokens palette() const;
     ColorLightTokens light() const;
     ColorDarkTokens dark() const;
@@ -192,6 +197,7 @@ private:
     ElevationTokens m_elevation;
     StateTokens m_state;
     MotionTokens m_motion;
+    MeasurementTokens m_measurement;
     PaletteTokens m_palette;
     ColorLightTokens m_light;
     ColorDarkTokens m_dark;

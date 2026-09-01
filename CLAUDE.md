@@ -13,7 +13,7 @@ Directory rules:
 public QML control
   ├─ API, template integration, sizing, themed colors
   ├─ bound delegates for complex visuals and geometry
-  ├─ MD.Tokens.{shape,elevation,state,motion} → immutable system metrics
+  ├─ MD.Tokens.{shape,elevation,state,motion,measurement} → immutable system metrics
   ├─ MD.Tokens.{palette,light,dark}          → immutable color tokens
   ├─ MD.Tokens.<component> → immutable C++ metrics
   └─ control.MD.Style      → theme-dependent colors
@@ -52,8 +52,10 @@ Always:
 6. Cover variants in the gallery and assert tokens, geometry, and interaction.
 7. Introduce no component-specific lint diagnostics.
 
-System groups are `MD.Tokens.shape`, `.elevation`, `.state`, `.motion`, `.palette`, `.light`, and
-`.dark`. Do not introduce `MD.Tokens.system`, flat system-token aliases, or a generic spacing scale.
+System groups are `MD.Tokens.shape`, `.elevation`, `.state`, `.motion`, `.measurement`, `.palette`,
+`.light`, and `.dark`. Use `MD.Tokens.measurement` for generic layout padding, margins, and gaps;
+keep component-specific metrics in `MD.Tokens.<component>`. Do not introduce `MD.Tokens.system`,
+flat system-token aliases, legacy spacing aliases, or another ad hoc spacing scale.
 
 ## Build and test
 

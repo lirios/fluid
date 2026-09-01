@@ -10,9 +10,9 @@ import Fluid as MD
 Item {
     id: root
 
-    readonly property int compactSpacing: 8
-    readonly property int contentSpacing: 16
-    readonly property int spaciousSpacing: 32
+    readonly property real compactSpacing: MD.Tokens.measurement.space100
+    readonly property real contentSpacing: MD.Tokens.measurement.space200
+    readonly property real spaciousSpacing: MD.Tokens.measurement.space400
 
     readonly property var paletteNames: [
         "black",
@@ -91,7 +91,7 @@ Item {
         Column {
             anchors.fill: parent
             anchors.margins: root.compactSpacing
-            spacing: 2
+            spacing: MD.Tokens.measurement.space25
 
             Text {
                 width: parent.width

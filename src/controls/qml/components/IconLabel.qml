@@ -90,7 +90,7 @@ Item {
     /*!
         The spacing between the icon and text.
     */
-    property real spacing: 8
+    property real spacing: MD.Tokens.measurement.space100
 
     /*!
         The effective spacing between the icon and text, which is 0 when either is not shown.

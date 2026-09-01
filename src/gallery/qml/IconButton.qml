@@ -8,8 +8,8 @@ import Fluid as MD
 Item {
     id: page
 
-    readonly property int contentSpacing: 16
-    readonly property int sectionSpacing: 24
+    readonly property real contentSpacing: MD.Tokens.measurement.space200
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium
@@ -207,8 +207,8 @@ Item {
                 columns: 4
                 rows: 5
 
-                columnSpacing: 20
-                rowSpacing: 20
+                columnSpacing: MD.Tokens.measurement.space250
+                rowSpacing: MD.Tokens.measurement.space250
 
                 // Numbers and letters
 

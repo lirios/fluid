@@ -90,6 +90,65 @@ Item {
             });
         }
 
+        function test_measurement() {
+            const measurement = MD.Tokens.measurement;
+            const multipliers = {
+                space0: 0,
+                space25: 0.25,
+                space50: 0.5,
+                space75: 0.75,
+                space100: 1,
+                space125: 1.25,
+                space150: 1.5,
+                space175: 1.75,
+                space200: 2,
+                space250: 2.5,
+                space300: 3,
+                space400: 4,
+                space450: 4.5,
+                space500: 5,
+                space600: 6,
+                space700: 7,
+                space800: 8,
+                space900: 9
+            };
+            const expected = {
+                space0: 0,
+                space25: 2,
+                space50: 4,
+                space75: 6,
+                space100: 8,
+                space125: 10,
+                space150: 12,
+                space175: 14,
+                space200: 16,
+                space250: 20,
+                space300: 24,
+                space400: 32,
+                space450: 36,
+                space500: 40,
+                space600: 48,
+                space700: 56,
+                space800: 64,
+                space900: 72
+            };
+
+            verifyValues(measurement, expected);
+            for (const propertyName in multipliers) {
+                compare(measurement[propertyName],
+                        measurement.space100 * multipliers[propertyName],
+                        propertyName + " multiplier");
+            }
+        }
+
+        function test_nonMaterialMeasurementPropertiesAreAbsent() {
+            const unsupportedProperties = [
+                "space225", "space350", "space550", "space1000"
+            ];
+            for (const propertyName of unsupportedProperties)
+                compare(MD.Tokens.measurement[propertyName], undefined, propertyName);
+        }
+
         function test_state() {
             verifyValues(MD.Tokens.state, {
                 draggedStateLayerOpacity: 0.16,

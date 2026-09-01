@@ -8,7 +8,7 @@ import Fluid as MD
 Item {
     id: page
 
-    readonly property int sectionSpacing: 24
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
     MD.ScrollView {
         anchors.fill: parent

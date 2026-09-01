@@ -8,9 +8,9 @@ import Fluid as MD
 Item {
     id: page
 
-    readonly property int contentSpacing: 16
-    readonly property int sectionSpacing: 24
-    readonly property int spaciousSpacing: 32
+    readonly property real contentSpacing: MD.Tokens.measurement.space200
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
+    readonly property real spaciousSpacing: MD.Tokens.measurement.space400
 
     component Headline: MD.Label {
         typescale: MD.Tokens.typescale.headlineMedium

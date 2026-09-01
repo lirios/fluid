@@ -22,7 +22,7 @@ T.GroupBox {
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
     label: MD.Label {
-        x: Math.max(control.leftPadding, MD.Tokens.shape.cornerValueExtraSmall)
+        x: Math.max(control.leftPadding, MD.Tokens.measurement.space50)
 
         width: control.availableWidth
 

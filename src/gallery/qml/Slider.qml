@@ -8,8 +8,8 @@ import Fluid as MD
 MD.ScrollView {
     id: scrollView
 
-    readonly property int contentSpacing: 16
-    readonly property int sectionSpacing: 24
+    readonly property real contentSpacing: MD.Tokens.measurement.space200
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
     Flow {
         id: flow

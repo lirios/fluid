@@ -16,8 +16,9 @@ Applies to public components under `src/controls/qml/`.
    `QtQuick.Controls`; build on `QtQuick.Templates` directly.
 3. Document public APIs and derive implicit size from content, background, insets, padding,
    minimum target, and reserved indicator space.
-4. Read system metrics from `MD.Tokens.shape`, `.elevation`, `.state`, or `.motion`; component
-   metrics from `MD.Tokens.<component>`; and active colors from `control.MD.Style`.
+4. Read system metrics from `MD.Tokens.shape`, `.elevation`, `.state`, `.motion`, or
+   `.measurement`; component metrics from `MD.Tokens.<component>`; and active colors from
+   `control.MD.Style`.
 5. Derive state from template properties, orientation, and direction.
 6. Extract complex geometry into bound delegates; bind every dependency explicitly.
 7. Add ripple, halo, focus treatment, or elevation only when specified.
@@ -30,9 +31,10 @@ Applies to public components under `src/controls/qml/`.
 Add missing component metrics to C++ first. Keep colors in Style and public color defaults
 semantic. QML literals are allowed only for algebra, normalized positions, indices,
 enum/sentinel logic, and formatting precision. Dimensions, gaps, padding, radii, opacity, and
-visual timing in controls must be tokenized. Never approximate a missing component token with a
-generic one or recreate a generic spacing scale. Gallery pages may use named local semantic layout
-constants for showcase composition.
+visual timing in controls must be tokenized. Use `MD.Tokens.measurement` for generic layout
+padding, margins, and gaps, but never approximate a missing component token with it or create
+another ad hoc spacing scale. Gallery pages may use named local semantic layout constants that
+alias measurement tokens for showcase composition.
 
 Apply system and component `*Shape` values to Rectangle through `topLeftRadius`, `topRightRadius`,
 `bottomLeftRadius`, and `bottomRightRadius`. Use the corresponding system `cornerValue*` property

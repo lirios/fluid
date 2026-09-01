@@ -32,6 +32,11 @@ MotionTokens Tokens::motion() const
     return m_motion;
 }
 
+MeasurementTokens Tokens::measurement() const
+{
+    return m_measurement;
+}
+
 PaletteTokens Tokens::palette() const
 {
     return m_palette;

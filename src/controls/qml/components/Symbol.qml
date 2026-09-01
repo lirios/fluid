@@ -123,14 +123,6 @@ Item {
     //! The vertical alignment of the symbol inside its item.
     property alias verticalAlignment: text.verticalAlignment
 
-    //! \internal Animated numeric value of the fill axis.
-    property real _fill: icon.fill ? 1.0 : 0.0
-    Behavior on _fill {
-        NumberAnimation {
-            duration: MD.Tokens.motion.duration.medium1
-        }
-    }
-
     implicitWidth: iconWidth
     implicitHeight: iconHeight
 

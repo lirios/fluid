@@ -186,9 +186,9 @@ function(download_material_symbols_font name)
     endif()
 endfunction()
 
-download_material_symbols_font("MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2")
-download_material_symbols_font("MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2")
-download_material_symbols_font("MaterialSymbolsSharp[FILL,GRAD,opsz,wght].woff2")
+download_material_symbols_font("MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf")
+download_material_symbols_font("MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf")
+download_material_symbols_font("MaterialSymbolsSharp[FILL,GRAD,opsz,wght].ttf")
 
 qt_add_resources(${LIBNAME} "assets/fonts"
     PREFIX
@@ -196,7 +196,7 @@ qt_add_resources(${LIBNAME} "assets/fonts"
     BASE
         "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts"
     FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2"
-        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2"
-        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsSharp[FILL,GRAD,opsz,wght].woff2"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf"
+        "${CMAKE_CURRENT_BINARY_DIR}/assets/fonts/MaterialSymbolsSharp[FILL,GRAD,opsz,wght].ttf"
 )

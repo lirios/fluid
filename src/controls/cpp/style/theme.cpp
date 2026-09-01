@@ -41,13 +41,13 @@ void Theme::registerFonts()
 {
     if (m_symbolsOutlinedFontId == -1)
         m_symbolsOutlinedFontId = QFontDatabase::addApplicationFont(
-                ":/Fluid/assets/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2");
+                ":/Fluid/assets/fonts/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf");
     if (m_symbolsRoundedFontId == -1)
         m_symbolsRoundedFontId = QFontDatabase::addApplicationFont(
-                ":/Fluid/assets/fonts/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2");
+                ":/Fluid/assets/fonts/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf");
     if (m_symbolsSharpFontId == -1)
         m_symbolsSharpFontId = QFontDatabase::addApplicationFont(
-                ":/Fluid/assets/fonts/MaterialSymbolsSharp[FILL,GRAD,opsz,wght].woff2");
+                ":/Fluid/assets/fonts/MaterialSymbolsSharp[FILL,GRAD,opsz,wght].ttf");
 }
 
 void Theme::unregisterFonts()

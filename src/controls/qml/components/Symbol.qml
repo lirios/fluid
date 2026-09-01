@@ -127,7 +127,7 @@ Item {
     property real _fill: icon.fill ? 1.0 : 0.0
     Behavior on _fill {
         NumberAnimation {
-            duration: 250
+            duration: MD.Tokens.motion.duration.medium1
         }
     }
 

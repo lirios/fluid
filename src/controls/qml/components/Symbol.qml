@@ -139,6 +139,13 @@ Item {
 
         anchors.fill: parent
 
+        // Force the OS native layout engine when FILL axis is set to 1 since
+        // distance field algorithms struggle with overlapping vector geometry,
+        // dynamic geometric modifications, and shifting path outlines that
+        // happen when completely solidifying or modifying standard glyphs
+        // (like transitioning an outline icon font into a solid shape)
+        renderType: icon.fill ? Text.NativeRendering : Text.QtRendering
+
         font.family: {
             switch (icon.style) {
             case Symbol.Style.Rounded:

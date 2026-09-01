@@ -90,6 +90,7 @@ T.Slider {
     value: centered ? (from + to) / 2 : from
     snapMode: T.Slider.SnapAlways
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitHandleWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitHandleHeight + topPadding + bottomPadding)

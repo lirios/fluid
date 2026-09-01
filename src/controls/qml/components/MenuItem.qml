@@ -136,6 +136,7 @@ T.MenuItem {
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
     LayoutMirroring.childrenInherit: true
+    Accessible.description: supportingText
 
     contentItem: Item {
         id: menuContent

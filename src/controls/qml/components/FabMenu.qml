@@ -5,6 +5,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Templates as T
+import QtQuick.Window
 import Fluid as MD
 
 /*!
@@ -28,10 +29,11 @@ import Fluid as MD
     first child. The \c alignment property is logical and accepts
     \c Qt.AlignLeft or \c Qt.AlignRight; it flips in right-to-left locales.
 
-    Activating an item or pressing Escape closes an expanded menu. Expanding the menu moves the active
-    focus to it unless the toggle button already holds it, so a menu opened
-    programmatically with \c open() can be dismissed with Escape as well, while a
-    menu toggled by a click leaves the focus ring on its button.
+    Expanding the menu moves focus to its first enabled action. Up and Down move
+    through enabled actions and the toggle button in visual order, Home and End
+    jump to the visual boundaries, and navigation wraps. Activating an action or
+    pressing Escape closes the menu and restores the item that held focus before
+    it opened, falling back to the toggle button when necessary.
 
     \code{.qml}
     MD.FabMenu {
@@ -161,6 +163,14 @@ T.Pane {
     //! \internal Space reserved for the button on its side of the item list.
     readonly property real _buttonMargin: margins + MD.Tokens.fabMenu.closeButtonContainerHeight + MD.Tokens.fabMenu.closeButtonBetweenSpace
 
+    /*!
+        \internal
+        Item that held focus before the menu opened. Keeping the original item
+        rather than always returning to the toggle preserves programmatic open()
+        workflows; the toggle remains the safe fallback if no item was focused.
+    */
+    property Item _restoreFocusItem: null
+
     //! Shows the list of items.
     function open() {
         control.expanded = true;
@@ -174,6 +184,66 @@ T.Pane {
     //! Shows the list of items if it is hidden, and hides it otherwise.
     function toggle() {
         control.expanded = !control.expanded;
+    }
+
+    /*!
+        \internal
+        Returns enabled actions and the toggle in visual top-to-bottom order.
+        The toggle changes ends when the menu grows down instead of up, while
+        disabled actions are omitted so every keyboard step has a valid target.
+    */
+    function _focusSequence() {
+        const items = [];
+        for (let index = 0; index < control.contentChildren.length; ++index) {
+            const item = control.contentChildren[index];
+            if (item && item.menu === control && item.enabled)
+                items.push(item);
+        }
+        if (control.direction === FabMenu.Direction.Down)
+            items.unshift(fabMenuButton);
+        else
+            items.push(fabMenuButton);
+        return items;
+    }
+
+    /*!
+        \internal
+        Focuses the first enabled action after opening. An empty or fully
+        disabled menu falls back to the toggle, ensuring Escape is still routed
+        through a focused descendant and can close the menu.
+    */
+    function _focusFirstAction() {
+        for (let index = 0; index < control.contentChildren.length; ++index) {
+            const item = control.contentChildren[index];
+            if (item && item.menu === control && item.enabled) {
+                item.forceActiveFocus(Qt.PopupFocusReason);
+                return;
+            }
+        }
+        fabMenuButton.forceActiveFocus(Qt.PopupFocusReason);
+    }
+
+    /*!
+        \internal
+        Moves focus through the visual sequence and wraps at either boundary.
+        Window.activeFocusItem is used because the pane itself intentionally is
+        not a tab stop; focus always belongs to an actionable descendant.
+    */
+    function _moveFocus(direction) {
+        const sequence = control._focusSequence();
+        if (sequence.length === 0)
+            return;
+        let index = sequence.indexOf(Window.window ? Window.window.activeFocusItem : null);
+        index = index < 0 ? (direction > 0 ? -1 : 0) : index;
+        sequence[(index + direction + sequence.length) % sequence.length]
+                .forceActiveFocus(Qt.TabFocusReason);
+    }
+
+    //! \internal Implements Home and End against the same visual focus sequence.
+    function _focusBoundary(last) {
+        const sequence = control._focusSequence();
+        if (sequence.length > 0)
+            sequence[last ? sequence.length - 1 : 0].forceActiveFocus(Qt.TabFocusReason);
     }
 
     /*!
@@ -217,24 +287,55 @@ T.Pane {
     topPadding: direction === FabMenu.Direction.Up ? margins : _buttonMargin
     bottomPadding: direction === FabMenu.Direction.Up ? _buttonMargin : margins
 
+    // Only the toggle participates in normal Tab traversal. Menu actions use
+    // programmatic focus while expanded, and the non-actionable pane remains
+    // transparent to both keyboard traversal and the accessibility tree.
+    focusPolicy: Qt.NoFocus
+    Accessible.ignored: true
+
     onContentChildrenChanged: control._bindItems()
 
-    // Escape is only delivered to a menu that holds the active focus itself or
-    // through a descendant. Clicking the toggle button already satisfies that,
-    // so focus is only taken when it does not, which keeps the focus ring on a
-    // clicked button while making a programmatically opened menu dismissible.
+    // Capture focus before entering the menu, then wait until the expansion
+    // state has made its animated actions visible before focusing one. Closing
+    // reverses that transfer so pointer, keyboard, and programmatic openings all
+    // return focus consistently.
     onExpandedChanged: {
-        if (control.expanded && !fabMenuButton.activeFocus)
-            control.forceActiveFocus();
+        if (control.expanded) {
+            control._restoreFocusItem = Window.window ? Window.window.activeFocusItem : null;
+            Qt.callLater(control._focusFirstAction);
+        } else {
+            const restoreItem = control._restoreFocusItem || fabMenuButton;
+            if (restoreItem)
+                restoreItem.forceActiveFocus(Qt.PopupFocusReason);
+            control._restoreFocusItem = null;
+        }
     }
 
     Component.onCompleted: control._bindItems()
 
+    // Key events from the focused toggle or action bubble to the pane. Keeping
+    // the handlers here gives every item identical wrapping and dismissal rules
+    // without duplicating navigation logic in FabMenuItem.
     Keys.onEscapePressed: event => {
         if (control.expanded)
             control.close();
         else
             event.accepted = false;
+    }
+    Keys.onUpPressed: control._moveFocus(-1)
+    Keys.onDownPressed: control._moveFocus(1)
+    Keys.onPressed: event => {
+        if (!control.expanded) {
+            event.accepted = false;
+        } else if (event.key === Qt.Key_Home) {
+            control._focusBoundary(false);
+            event.accepted = true;
+        } else if (event.key === Qt.Key_End) {
+            control._focusBoundary(true);
+            event.accepted = true;
+        } else {
+            event.accepted = false;
+        }
     }
 
     contentItem: Column {

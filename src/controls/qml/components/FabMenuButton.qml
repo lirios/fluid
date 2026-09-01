@@ -91,6 +91,8 @@ T.ToolButton {
 
     Accessible.name: text
     Accessible.role: Accessible.Button
+    Accessible.checkable: true
+    Accessible.checked: expanded
 
     QtObject {
         id: state

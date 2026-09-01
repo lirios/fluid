@@ -18,6 +18,9 @@ import Fluid as MD
 T.GroupBox {
     id: control
 
+    Accessible.role: Accessible.Grouping
+    Accessible.name: title
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding, implicitLabelWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
@@ -28,6 +31,7 @@ T.GroupBox {
 
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
+        Accessible.ignored: true
     }
 
     background: Item {

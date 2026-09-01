@@ -18,6 +18,8 @@ import Fluid as MD
 T.ScrollIndicator {
     id: control
 
+    Accessible.ignored: true
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 

@@ -41,6 +41,7 @@ import QtQuick
 */
 Item {
     id: root
+    Accessible.ignored: true
     /*!
         The item being displayed.
 

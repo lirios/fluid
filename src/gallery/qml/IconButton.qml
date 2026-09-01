@@ -24,7 +24,7 @@ Item {
     }
 
     component DemoIconButton: MD.IconButton {
-        text: icon.name.length > 0 ? icon.name.replace(/_/g, " ") : qsTr("Icon action")
+        text: qsTr("Icon action")
     }
 
     component Sizes: MD.GroupBox {

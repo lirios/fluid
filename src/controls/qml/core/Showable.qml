@@ -12,6 +12,7 @@ import QtQuick
 */
 FocusScope {
     id: root
+    Accessible.ignored: true
     /*!
         Animation to play to show the component.
     */

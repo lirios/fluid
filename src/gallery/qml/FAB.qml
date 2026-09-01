@@ -25,7 +25,7 @@ Item {
 
     component DemoFAB: MD.FAB {
         Layout.margins: page.compactSpacing
-        text: icon.name.length > 0 ? icon.name.replace(/_/g, " ") : qsTr("FAB action")
+        text: qsTr("FAB action")
     }
 
     MD.ScrollView {

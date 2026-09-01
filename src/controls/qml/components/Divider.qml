@@ -36,6 +36,8 @@ import Fluid as MD
 Item {
     id: control
 
+    Accessible.role: Accessible.Separator
+
     /*!
         \brief The orientation of the divider.
 

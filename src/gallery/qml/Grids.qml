@@ -308,6 +308,7 @@ Item {
 
                     MD.Slider {
                         id: referenceWidthSlider
+                        Accessible.name: qsTr("Reference width")
 
                         Layout.fillWidth: true
                         from: 320

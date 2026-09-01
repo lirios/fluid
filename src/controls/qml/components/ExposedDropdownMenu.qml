@@ -194,6 +194,10 @@ T.ComboBox {
     focusPolicy: Qt.StrongFocus
     hoverEnabled: true
 
+    Accessible.name: label.length > 0 ? label : placeholderText
+    Accessible.description: error && errorText.length > 0 ? errorText : supportingText
+    Accessible.editable: editable
+
     delegate: T.ItemDelegate {
         id: optionDelegate
         required property int index
@@ -444,6 +448,7 @@ T.ComboBox {
                     : 0
         bottomPadding: 0
         background: Item {}
+        Accessible.ignored: true
 
         Rectangle {
             objectName: "exposedDropdownLabelNotch"
@@ -630,6 +635,7 @@ T.ComboBox {
             horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
             elide: Text.ElideRight
             visible: !control.error && text.length > 0
+            Accessible.ignored: true
         }
 
         MD.Label {
@@ -644,6 +650,7 @@ T.ComboBox {
             horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
             elide: Text.ElideRight
             visible: control.error && text.length > 0
+            Accessible.ignored: true
         }
     }
 

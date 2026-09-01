@@ -39,6 +39,7 @@ import QtQuick
 */
 Item {
     id: columnFlow
+    Accessible.ignored: true
 
     /*!
         Column width.

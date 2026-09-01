@@ -31,6 +31,9 @@ Item {
     //! Foreground color for icon and avatar presentations.
     property color contentColor: MD.Style.onSurfaceVariantColor
 
+    //! Whether the instantiated action is decorative in this composition.
+    property bool accessibilityIgnored: false
+
     //! Container color for the filled-button presentation.
     property color filledContainerColor: MD.Style.primaryColor
 
@@ -53,6 +56,7 @@ Item {
     implicitHeight: loadedAction ? loadedAction.implicitHeight : MD.Tokens.appBar.minimumInteractiveSize
     width: implicitWidth
     height: implicitHeight
+    Accessible.ignored: true
 
     Loader {
         id: actionLoader
@@ -76,6 +80,8 @@ Item {
             size: MD.IconButton.Size.Small
             contentColor: control.contentColor
             disabledContentColor: control.contentColor
+            focusPolicy: control.accessibilityIgnored ? Qt.NoFocus : Qt.StrongFocus
+            Accessible.ignored: control.accessibilityIgnored
 
             onClicked: control.clicked()
         }
@@ -93,6 +99,8 @@ Item {
             size: MD.IconButton.Size.Small
             contentColor: control.contentColor
             disabledContentColor: control.contentColor
+            focusPolicy: control.accessibilityIgnored ? Qt.NoFocus : Qt.StrongFocus
+            Accessible.ignored: control.accessibilityIgnored
 
             onClicked: control.clicked()
 
@@ -142,7 +150,8 @@ Item {
 
             action: control.actionData
             hoverEnabled: true
-            focusPolicy: Qt.StrongFocus
+            focusPolicy: control.accessibilityIgnored ? Qt.NoFocus : Qt.StrongFocus
+            Accessible.ignored: control.accessibilityIgnored
             padding: 0
             spacing: MD.Tokens.appBar.searchIconLabelGap
 

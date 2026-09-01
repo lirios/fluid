@@ -12,6 +12,7 @@ import Fluid as MD
      <a href="https://m3.material.io/styles/elevation/overview">Material Design 3 elevation guidelines</a>.
  */
 MD.ElevationImpl {
+    Accessible.ignored: true
     color: MD.Style.shadowColor
     visible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevation.level0)
 

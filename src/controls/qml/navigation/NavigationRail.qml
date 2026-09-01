@@ -142,6 +142,46 @@ T.Container {
         return total + Math.max(0, count - 1) * _itemSpacing;
     }
 
+    /*! \internal The enabled destination that forms the rail's single tab stop.
+
+        Use the selected destination when possible, otherwise the first enabled
+        one. Each NavigationRailItem derives its focus policy from this index so
+        Tab enters the group once while arrow keys move within it.
+    */
+    readonly property int _tabStopIndex: {
+        const selected = itemAt(currentIndex);
+        if (selected && selected.enabled)
+            return currentIndex;
+        for (let index = 0; index < count; ++index) {
+            const item = itemAt(index);
+            if (item && item.enabled)
+                return index;
+        }
+        return -1;
+    }
+
+    //! \internal The instantiated header, used by modal focus trapping.
+    readonly property Item _headerItem: headerLoader.item as Item
+
+    /*! \internal Finds the first keyboard-focusable control in the header.
+
+        Headers are arbitrary components, so modal focus trapping recursively
+        locates their first visible, enabled control instead of assuming a shape.
+    */
+    function _headerFocusItem(item) {
+        const candidate = item || control._headerItem;
+        if (!candidate || !candidate.visible || !candidate.enabled)
+            return null;
+        if (candidate.focusPolicy !== undefined && candidate.focusPolicy !== Qt.NoFocus)
+            return candidate;
+        for (let index = 0; index < candidate.children.length; ++index) {
+            const descendant = control._headerFocusItem(candidate.children[index]);
+            if (descendant)
+                return descendant;
+        }
+        return null;
+    }
+
     //! \internal Space reserved below the fixed header for top and bottom arrangements.
     readonly property real _headerOffset: {
         const headerItem = headerLoader.item as Item;
@@ -255,7 +295,11 @@ T.Container {
         return true;
     }
 
-    //! \internal Moves selection by one enabled destination, wrapping at the ends.
+    /*! \internal Moves selection by one enabled destination, wrapping at the ends.
+
+        Vertical navigation has the same logical direction in left-to-right and
+        right-to-left layouts; disabled destinations are skipped in both modes.
+    */
     function _moveSelection(direction) {
         if (control.count <= 0)
             return;
@@ -291,9 +335,14 @@ T.Container {
     rightInset: 0
     topInset: 0
     bottomInset: 0
-    focusPolicy: Qt.StrongFocus
+
+    // Destinations, rather than the container, own keyboard focus. This creates
+    // one Tab entry point while retaining a PageTabList node for screen readers.
+    focusPolicy: Qt.NoFocus
     clip: true
     LayoutMirroring.childrenInherit: true
+
+    Accessible.role: Accessible.PageTabList
 
     Behavior on _layoutProgress {
         NumberAnimation {
@@ -308,6 +357,8 @@ T.Container {
     onExpandedChanged: control._bindItems()
     Component.onCompleted: control._bindItems()
 
+    // These handlers also cover the rare case where the modal wrapper focuses
+    // an empty rail; instantiated destinations provide the same key contract.
     Keys.onUpPressed: control._moveSelection(-1)
     Keys.onDownPressed: control._moveSelection(1)
     Keys.onPressed: event => {
@@ -340,6 +391,10 @@ T.Container {
         active: control.header !== null
         LayoutMirroring.enabled: control.mirrored
         LayoutMirroring.childrenInherit: true
+
+        // The loader is structural only. Its accessible header descendants stay
+        // available, while the wrapper itself does not add a redundant node.
+        Accessible.ignored: true
     }
 
     background: MD.ElevationRectangle {

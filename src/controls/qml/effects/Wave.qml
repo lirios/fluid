@@ -14,6 +14,7 @@ import Qt5Compat.GraphicalEffects
 */
 Item {
     id: wave
+    Accessible.ignored: true
 
     /*!
         This property holds whether the wave is open.

@@ -12,6 +12,7 @@ import QtQuick
 */
 Item {
     id: root
+    Accessible.ignored: true
 
     /*!
         This property defines the source item that is going to be used as source

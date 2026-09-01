@@ -145,6 +145,9 @@ T.ToolTip {
         id: contentColumn
         objectName: "richToolTipContent"
         width: control.availableWidth
+        Accessible.role: Accessible.ToolTip
+        Accessible.name: control.headline.length > 0 ? control.headline : control.text
+        Accessible.description: control.headline.length > 0 ? control.text : ""
 
         Item {
             id: headlineSlot
@@ -167,6 +170,7 @@ T.ToolTip {
                 horizontalAlignment: control._layoutMirrored ? Text.AlignRight : Text.AlignLeft
                 wrapMode: Text.Wrap
                 elide: Text.ElideNone
+                Accessible.ignored: true
             }
         }
 
@@ -194,6 +198,7 @@ T.ToolTip {
                 horizontalAlignment: control._layoutMirrored ? Text.AlignRight : Text.AlignLeft
                 wrapMode: Text.Wrap
                 elide: Text.ElideNone
+                Accessible.ignored: true
             }
         }
 
@@ -231,7 +236,8 @@ T.ToolTip {
                     display: MD.Button.TextOnly
                     typescale: MD.Tokens.typescale.labelLarge
                     visible: control._displayedActionCount > 0
-                    KeyNavigation.tab: secondActionButton.visible ? secondActionButton : null
+                    KeyNavigation.tab: secondActionButton.visible ? secondActionButton : firstActionButton
+                    KeyNavigation.backtab: secondActionButton.visible ? secondActionButton : firstActionButton
                     Accessible.role: Accessible.Button
                     Accessible.name: action ? action.text : text
 
@@ -248,6 +254,7 @@ T.ToolTip {
                     display: MD.Button.TextOnly
                     typescale: MD.Tokens.typescale.labelLarge
                     visible: control._displayedActionCount > 1
+                    KeyNavigation.tab: firstActionButton
                     KeyNavigation.backtab: firstActionButton.visible ? firstActionButton : null
                     Accessible.role: Accessible.Button
                     Accessible.name: action ? action.text : text

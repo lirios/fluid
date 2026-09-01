@@ -17,6 +17,7 @@ import Fluid as MD
 */
 Item {
     id: root
+    Accessible.ignored: true
 
     /*!
         This property determines how the icon and text are laid out.

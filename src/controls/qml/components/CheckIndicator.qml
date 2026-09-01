@@ -22,6 +22,7 @@ import "../core/UiMetrics.js" as UiMetrics
 */
 Item {
     id: indicatorItem
+    Accessible.ignored: true
 
     //! The checkbox whose \c checkState is rendered.
     property Item control

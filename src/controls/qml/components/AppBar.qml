@@ -48,6 +48,10 @@ import Fluid as MD
 MD.BaseAppBar {
     id: control
 
+    Accessible.role: Accessible.ToolBar
+    Accessible.name: title
+    Accessible.description: subtitle
+
     /*!
         Selects the app bar's size and expansion behavior.
 
@@ -176,6 +180,7 @@ MD.BaseAppBar {
                 maximumLineCount: Math.max(1, control.titleMaximumLineCount)
                 wrapMode: Text.Wrap
                 elide: Text.ElideRight
+                Accessible.ignored: true
             }
 
             MD.Label {
@@ -188,6 +193,7 @@ MD.BaseAppBar {
                 maximumLineCount: Math.max(1, control.subtitleMaximumLineCount)
                 wrapMode: Text.Wrap
                 elide: Text.ElideRight
+                Accessible.ignored: true
             }
 
             Binding {
@@ -222,6 +228,7 @@ MD.BaseAppBar {
                     wrapMode: Text.Wrap
                     elide: Text.ElideRight
                     horizontalAlignment: control._centeredTitle ? Text.AlignHCenter : control.layoutMirrored ? Text.AlignRight : Text.AlignLeft
+                    Accessible.ignored: true
                 }
 
                 MD.Label {
@@ -236,6 +243,7 @@ MD.BaseAppBar {
                     elide: Text.ElideRight
                     horizontalAlignment: control._centeredTitle ? Text.AlignHCenter : control.layoutMirrored ? Text.AlignRight : Text.AlignLeft
                     visible: control._hasSubtitle
+                    Accessible.ignored: true
                 }
             }
         }

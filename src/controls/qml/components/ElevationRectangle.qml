@@ -19,6 +19,7 @@ import Fluid as MD
 */
 Rectangle {
     id: root
+    Accessible.ignored: true
 
     //! The elevation level used to render the shadow.
     property alias elevation: shadow.elevation

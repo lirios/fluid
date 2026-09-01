@@ -167,6 +167,7 @@ Item {
                         segmented: segmentedSwitch.checked
                         text: model.text
                         trailing: MD.CheckBox {
+                            Accessible.name: model.text
                             checked: false
                             checkable: true
                         }
@@ -200,6 +201,7 @@ Item {
                         segmented: segmentedSwitch.checked
                         text: model.text
                         trailing: MD.Switch {
+                            Accessible.name: model.text
                             checked: false
                             checkable: true
                         }

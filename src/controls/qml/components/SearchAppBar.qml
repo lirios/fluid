@@ -49,6 +49,9 @@ import "../internal/MotionAnimation.js" as MotionAnimation
 MD.BaseAppBar {
     id: control
 
+    Accessible.role: Accessible.ToolBar
+    Accessible.name: qsTr("Search")
+
     /*!
         Selects the search capsule interaction.
 
@@ -316,6 +319,9 @@ MD.BaseAppBar {
                     focusPolicy: Qt.StrongFocus
                     background: Item {}
 
+                    Accessible.role: Accessible.Button
+                    Accessible.name: text
+
                     onClicked: control.activated()
                     Keys.onPressed: event => {
                         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter || event.key === Qt.Key_Space) {
@@ -334,6 +340,8 @@ MD.BaseAppBar {
                     actionData: control.searchNavigationAction || defaultSearchAction
                     contentColor: control.searchContentColor
                     visible: control.searchNavigationAction !== null && control.searchNavigationAction.visible
+                    accessibilityIgnored: control.mode === SearchAppBar.Launcher
+                                          && control.searchNavigationAction === defaultSearchAction
                     z: 2
                 }
 
@@ -412,6 +420,7 @@ MD.BaseAppBar {
                     maximumLineCount: 1
                     elide: Text.ElideRight
                     visible: control.mode === SearchAppBar.Launcher
+                    Accessible.ignored: true
                 }
 
                 T.TextField {
@@ -448,6 +457,10 @@ MD.BaseAppBar {
                     focusPolicy: Qt.StrongFocus
                     visible: control.mode === SearchAppBar.Editable
                     background: Item {}
+
+                    Accessible.role: Accessible.EditableText
+                    Accessible.name: control.placeholderText
+                    Accessible.searchEdit: true
 
                     onTextEdited: control.text = text
                     onAccepted: control.accepted()

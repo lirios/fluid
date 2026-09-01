@@ -1,5 +1,6 @@
 add_executable(tst_fluid_controls
     controls.cpp
+    tst_accessibility.qml
     tst_action.qml
     tst_adaptivegrid.qml
     tst_appbar.qml
@@ -44,3 +45,24 @@ add_test(NAME tst_fluid_controls
 set_tests_properties(tst_fluid_controls PROPERTIES
     ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
 )
+
+if (TARGET Qt6::Test)
+    add_executable(tst_fluid_accessibility
+        accessibility.cpp
+    )
+    target_compile_definitions(tst_fluid_accessibility PRIVATE
+        FLUID_QML_IMPORT_PATH="${QT_QML_OUTPUT_DIRECTORY}"
+    )
+    target_link_libraries(tst_fluid_accessibility PRIVATE
+        Qt6::Gui
+        Qt6::Qml
+        Qt6::Quick
+        Qt6::Test
+    )
+    add_test(NAME tst_fluid_accessibility
+             COMMAND tst_fluid_accessibility
+             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+    set_tests_properties(tst_fluid_accessibility PROPERTIES
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen"
+    )
+endif()

@@ -12,6 +12,7 @@ import QtQuick
 */
 Item {
     id: root
+    Accessible.ignored: true
     /*!
         Component to load.
     */

@@ -40,6 +40,7 @@ import QtQuick
 */
 Grid {
     id: grid
+    Accessible.ignored: true
 
     /*!
         The delegate provides a template defining each item instantiated by the grid.

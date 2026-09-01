@@ -19,6 +19,7 @@ import "MotionAnimation.js" as MotionAnimation
 */
 Rectangle {
     id: indicator
+    Accessible.ignored: true
 
     //! \internal Whether the destination is selected.
     property bool selected: false

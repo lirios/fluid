@@ -32,6 +32,7 @@ T.CheckBox {
     verticalPadding: padding + 7
 
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
 
     QtObject {
         id: state

@@ -49,6 +49,7 @@ T.Switch {
     spacing: MD.Tokens.switch.contentSpacing
 
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
 
     indicator: Item {
         id: switchIndicator

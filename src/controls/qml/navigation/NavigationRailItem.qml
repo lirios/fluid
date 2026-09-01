@@ -67,6 +67,9 @@ T.ItemDelegate {
     //! \internal Whether the owning rail currently uses expanded geometry.
     readonly property bool _railExpanded: rail ? rail.expanded : false
 
+    //! \internal Whether this destination is the owning rail's single tab stop.
+    readonly property bool _tabStop: !rail || rail._tabStopIndex === _railIndex
+
     //! \internal Single normalized progress coordinating collapsed and expanded geometry.
     readonly property real _positionProgress: rail ? rail._layoutProgress
                                                    : (_railExpanded ? 1 : 0)
@@ -108,13 +111,18 @@ T.ItemDelegate {
     checkable: true
     autoExclusive: true
     hoverEnabled: true
-    focusPolicy: Qt.StrongFocus
+    focusPolicy: _tabStop || activeFocus ? Qt.StrongFocus : Qt.ClickFocus
     padding: 0
     spacing: _railExpanded ? MD.Tokens.navigationRail.horizontalIconLabelSpace
                            : MD.Tokens.navigationRail.verticalIconLabelSpace
 
     icon.width: MD.Tokens.navigationRail.iconSize
     icon.height: MD.Tokens.navigationRail.iconSize
+
+    Accessible.role: Accessible.PageTab
+    Accessible.name: text
+    Accessible.selectable: true
+    Accessible.selected: checked
 
     //! \internal Natural width of the expanded endpoint, independent of transition state.
     readonly property real _expandedImplicitWidth:
@@ -310,6 +318,7 @@ T.ItemDelegate {
             horizontalAlignment: control._expandedPlacement
                                  ? (control.mirrored ? Text.AlignRight : Text.AlignLeft)
                                  : Text.AlignHCenter
+            Accessible.ignored: true
 
         }
     }

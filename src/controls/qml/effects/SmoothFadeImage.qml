@@ -47,6 +47,11 @@ import QtQuick
 Item {
     id: root
 
+    // Images are decorative by default. Set Accessible.name (and optionally
+    // role/ignored) on this item when the image conveys content.
+    Accessible.role: Accessible.Graphic
+    Accessible.ignored: Accessible.name.length === 0
+
     /*!
         The image being displayed.
         SmoothFadeImage can handle any image format supported by Qt, loaded
@@ -268,6 +273,7 @@ Item {
         smooth: root.smooth
         clip: root.clip
         z: 1
+        Accessible.ignored: true
     }
 
     Image {
@@ -279,6 +285,7 @@ Item {
         smooth: root.smooth
         clip: root.clip
         z: 0
+        Accessible.ignored: true
     }
 
     NumberAnimation {

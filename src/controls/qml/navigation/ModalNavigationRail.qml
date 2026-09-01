@@ -118,7 +118,12 @@ T.Control {
         control.expanded = !control.expanded;
     }
 
-    //! \internal Moves focus to the selected or first enabled destination.
+    /*! \internal Moves focus into the modal surface after it opens.
+
+        Prefer the selected enabled destination, fall back to the first enabled
+        destination, and finally focus the rail itself when it has no usable
+        destinations. The deferred caller lets delegates finish instantiating.
+    */
     function _focusRail() {
         let index = control.currentIndex;
         if (index >= 0) {
@@ -138,29 +143,80 @@ T.Control {
         rail.forceActiveFocus(Qt.PopupFocusReason);
     }
 
+    //! \internal Returns the selected or first enabled destination.
+    function _focusDestination() {
+        const selected = rail.itemAt(rail._tabStopIndex);
+        if (selected) {
+            selected.forceActiveFocus(Qt.TabFocusReason);
+            return true;
+        }
+        return false;
+    }
+
+    /*! \internal Keeps Tab and Backtab within the expanded modal surface.
+
+        The rail exposes one destination tab stop, so modal traversal alternates
+        between that destination and the optional focusable header control.
+    */
+    function _moveModalTab(backward) {
+        const headerItem = rail._headerFocusItem();
+        const headerFocusable = headerItem !== null;
+        if (headerFocusable && !headerItem.activeFocus) {
+            headerItem.forceActiveFocus(backward ? Qt.BacktabFocusReason : Qt.TabFocusReason);
+            return;
+        }
+        if (!control._focusDestination() && headerFocusable)
+            headerItem.forceActiveFocus(backward ? Qt.BacktabFocusReason : Qt.TabFocusReason);
+    }
+
     implicitWidth: rail.implicitWidth
     implicitHeight: rail.implicitHeight
     padding: 0
     focusPolicy: Qt.StrongFocus
     LayoutMirroring.childrenInherit: true
 
+    // The page-sized host exists for input, focus trapping, and the scrim. Keep
+    // it out of the accessibility tree and expose the contained tab-list instead.
+    Accessible.ignored: true
+
     onExpandedChanged: {
         if (expanded) {
+            // Capture the invoking control before moving focus into the modal.
             _restoreFocusItem = Window.window ? Window.window.activeFocusItem : null;
             Qt.callLater(control._focusRail);
         } else {
             _dragOffset = 0;
+            // Return keyboard focus after every dismissal path: Escape, scrim,
+            // drag, or an external expanded-property change.
             if (_restoreFocusItem)
                 _restoreFocusItem.forceActiveFocus(Qt.PopupFocusReason);
             _restoreFocusItem = null;
         }
     }
 
+    // Only consume modal-navigation keys while expanded. When collapsed, allow
+    // ancestors and neighboring controls to handle normal application traversal.
     Keys.onEscapePressed: event => {
         if (control.expanded)
             control.collapse();
         else
             event.accepted = false;
+    }
+    Keys.onTabPressed: event => {
+        if (control.expanded) {
+            control._moveModalTab(false);
+            event.accepted = true;
+        } else {
+            event.accepted = false;
+        }
+    }
+    Keys.onBacktabPressed: event => {
+        if (control.expanded) {
+            control._moveModalTab(true);
+            event.accepted = true;
+        } else {
+            event.accepted = false;
+        }
     }
 
     contentItem: Item {
@@ -206,6 +262,10 @@ T.Control {
             expanded: control.hideOnCollapse || control.expanded
             containerColor: control.containerColor
             _modal: true
+
+            // Forward the caller-provided name to the actual PageTabList node;
+            // the ignored overlay host must not become a duplicate announcement.
+            Accessible.name: control.Accessible.name
             LayoutMirroring.enabled: control.mirrored
             LayoutMirroring.childrenInherit: true
 

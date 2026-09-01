@@ -68,6 +68,7 @@ P.BaseButton {
     flat: control.type === P.BaseButton.Type.Text || control.type === P.BaseButton.Type.Outlined
 
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
 
     spacing: UiMetrics.buttonSpacing(control)
 

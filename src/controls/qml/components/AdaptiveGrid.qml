@@ -35,6 +35,7 @@ import Fluid as MD
 */
 Item {
     id: control
+    Accessible.ignored: true
 
     /*!
         The objects managed by the internal GridLayout.

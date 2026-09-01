@@ -42,6 +42,11 @@ import Fluid as MD
 Item {
     id: icon
 
+    // Symbols are decorative unless the caller opts in with the native
+    // Accessible attached properties.
+    Accessible.role: Accessible.Graphic
+    Accessible.ignored: Accessible.name.length === 0
+
     //! Selects the outlined, rounded, or sharp Material Symbols font family.
     enum Style {
         Outlined,
@@ -187,5 +192,6 @@ Item {
         // scale: 1.0 / MD.Tokens.calculateCurveScale(Screen.devicePixelRatio)
 
         color: icon.color
+        Accessible.ignored: true
     }
 }

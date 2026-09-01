@@ -113,7 +113,7 @@ T.AbstractButton {
     spacing: MD.Tokens.fabMenu.listItemIconLabelSpace
 
     hoverEnabled: true
-    focusPolicy: Qt.StrongFocus
+    focusPolicy: menu ? Qt.ClickFocus : Qt.StrongFocus
     LayoutMirroring.childrenInherit: true
 
     transform: Translate {

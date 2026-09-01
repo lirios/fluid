@@ -14,6 +14,11 @@ import Fluid as MD
     RangeSlider provides two handles, horizontal and vertical orientations, five
     expressive sizes, optional discrete tick marks, and configurable value indicators.
 
+    Qt Quick Templates gives RangeSlider one root slider accessibility node even
+    though keyboard focus moves between two handles. Fluid suppresses that
+    incomplete root node and exposes each handle as a slider with its own name,
+    focus state, constrained value range, step, and increase/decrease actions.
+
     For more information see the
     <a href="https://m3.material.io/components/sliders/overview">Material Design 3 slider guidelines</a>.
 */
@@ -68,10 +73,28 @@ T.RangeSlider {
     */
     property string secondValueIndicatorText: control.second.value.toLocaleString(Qt.locale(), "f", Number.isInteger(control.second.value) ? 0 : 2)
 
+    /*!
+        The accessible name announced for the first handle. By default it is
+        derived from the range slider's Accessible.name.
+    */
+    property string firstAccessibleName: control.Accessible.name.length > 0 ? qsTr("%1 minimum").arg(control.Accessible.name) : qsTr("Minimum value")
+
+    /*!
+        The accessible name announced for the second handle. By default it is
+        derived from the range slider's Accessible.name.
+    */
+    property string secondAccessibleName: control.Accessible.name.length > 0 ? qsTr("%1 maximum").arg(control.Accessible.name) : qsTr("Maximum value")
+
     first.value: from
     second.value: to
     snapMode: T.RangeSlider.SnapAlways
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
+
+    // The template's single node cannot identify which handle its value and
+    // actions describe. Keep it out of the accessibility tree; ignored items
+    // promote accessible descendants, so the two handle nodes remain visible.
+    Accessible.ignored: true
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, first.implicitHandleWidth + leftPadding + rightPadding, second.implicitHandleWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, first.implicitHandleHeight + topPadding + bottomPadding, second.implicitHandleHeight + topPadding + bottomPadding)
@@ -185,13 +208,31 @@ T.RangeSlider {
 
     first.handle: MD.SliderHandle {
         id: firstSliderHandle
+        objectName: "rangeSliderFirstHandle"
 
         x: control.leftPadding + (control.horizontal ? control.first.visualPosition * (control.availableWidth - width) : (control.mirrored ? (control.availableWidth - metrics.labelSpace - width) / 2 : metrics.labelSpace + (control.availableWidth - metrics.labelSpace - width) / 2))
         y: control.topPadding + (control.horizontal ? metrics.labelSpace + (control.availableHeight - metrics.labelSpace - height) / 2 : control.first.visualPosition * (control.availableHeight - height))
 
         valueIndicatorText: control.firstValueIndicatorText
         labelBehavior: control.labelBehavior
-        handleHasFocus: control.visualFocus
+        // SliderHandle uses these conventional property names to provide Qt's
+        // QAccessibleValueInterface. The first handle cannot move beyond the
+        // second, so its accessible maximum follows the second handle's value.
+        accessibilityEnabled: true
+        accessibleName: control.firstAccessibleName
+        value: control.first.value
+        minimumValue: Math.min(control.from, control.second.value)
+        maximumValue: Math.max(control.from, control.second.value)
+        stepSize: control.stepSize === 0 ? 0.1 : Math.abs(control.stepSize)
+
+        // Delegate accessibility requests to the same template node methods
+        // used by keyboard interaction, preserving snapping and range ordering.
+        accessibilityIncreaseAction: function() { control.first.increase(); }
+        accessibilityDecreaseAction: function() { control.first.decrease(); }
+
+        // Qt moves active focus between the actual handle items when Tab and
+        // Backtab are used, so report focus per handle instead of on the root.
+        handleHasFocus: activeFocus
         handlePressed: control.first.pressed
         handleHovered: control.first.hovered
         controlEnabled: control.enabled
@@ -210,13 +251,27 @@ T.RangeSlider {
 
     second.handle: MD.SliderHandle {
         id: secondSliderHandle
+        objectName: "rangeSliderSecondHandle"
 
         x: control.leftPadding + (control.horizontal ? control.second.visualPosition * (control.availableWidth - width) : (control.mirrored ? (control.availableWidth - metrics.labelSpace - width) / 2 : metrics.labelSpace + (control.availableWidth - metrics.labelSpace - width) / 2))
         y: control.topPadding + (control.horizontal ? metrics.labelSpace + (control.availableHeight - metrics.labelSpace - height) / 2 : control.second.visualPosition * (control.availableHeight - height))
 
         valueIndicatorText: control.secondValueIndicatorText
         labelBehavior: control.labelBehavior
-        handleHasFocus: control.visualFocus
+        // Mirror the first handle's value contract, constraining the accessible
+        // minimum to the first handle so assistive actions cannot cross it.
+        accessibilityEnabled: true
+        accessibleName: control.secondAccessibleName
+        value: control.second.value
+        minimumValue: Math.min(control.first.value, control.to)
+        maximumValue: Math.max(control.first.value, control.to)
+        stepSize: control.stepSize === 0 ? 0.1 : Math.abs(control.stepSize)
+
+        // Use the native node operations for identical pointer, keyboard, and
+        // assistive-technology value changes.
+        accessibilityIncreaseAction: function() { control.second.increase(); }
+        accessibilityDecreaseAction: function() { control.second.decrease(); }
+        handleHasFocus: activeFocus
         handlePressed: control.second.pressed
         handleHovered: control.second.hovered
         controlEnabled: control.enabled

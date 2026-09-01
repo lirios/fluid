@@ -72,6 +72,7 @@ MD.ScrollView {
 
                         MD.Slider {
                             Layout.fillWidth: true
+                            Accessible.name: variantRow.modelData.label
                             from: 0
                             to: 100
                             value: variantRow.modelData.value ?? 40
@@ -92,6 +93,7 @@ MD.ScrollView {
 
                     MD.RangeSlider {
                         Layout.fillWidth: true
+                        Accessible.name: qsTr("Selected range")
                         from: 0
                         to: 100
                         first.value: 25
@@ -148,6 +150,7 @@ MD.ScrollView {
 
                         MD.Slider {
                             Layout.fillWidth: true
+                            Accessible.name: sizeRow.modelData.label
                             from: 0
                             to: 100
                             value: 40
@@ -197,6 +200,7 @@ MD.ScrollView {
 
                         MD.Slider {
                             Layout.fillWidth: true
+                            Accessible.name: qsTr("%1 track icons").arg(iconRow.modelData.label)
                             from: 0
                             to: 100
                             value: 50
@@ -254,6 +258,7 @@ MD.ScrollView {
 
                         MD.Slider {
                             Layout.fillWidth: true
+                            Accessible.name: labelRow.modelData.label
                             from: 0
                             to: 100
                             value: 42.5
@@ -280,6 +285,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.fillWidth: true
+                    Accessible.name: qsTr("Left-to-right value")
                     from: 0
                     to: 100
                     value: 40
@@ -292,6 +298,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.fillWidth: true
+                    Accessible.name: qsTr("Right-to-left value")
                     from: 0
                     to: 100
                     value: 40
@@ -305,6 +312,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.preferredHeight: 200
+                    Accessible.name: qsTr("Vertical left-to-right value")
                     orientation: Qt.Vertical
                     from: 0
                     to: 100
@@ -319,6 +327,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.preferredHeight: 200
+                    Accessible.name: qsTr("Vertical right-to-left value")
                     orientation: Qt.Vertical
                     from: 0
                     to: 100
@@ -334,6 +343,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.fillWidth: true
+                    Accessible.name: qsTr("Disabled value")
                     from: 0
                     to: 100
                     value: 40
@@ -347,6 +357,7 @@ MD.ScrollView {
 
                 MD.Slider {
                     Layout.fillWidth: true
+                    Accessible.name: qsTr("Disabled centered value")
                     from: 0
                     to: 100
                     value: 75
@@ -398,6 +409,7 @@ MD.ScrollView {
 
                         MD.Slider {
                             Layout.fillWidth: true
+                            Accessible.name: tickRow.modelData.label
                             from: 0
                             to: 100
                             value: 40

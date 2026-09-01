@@ -49,6 +49,7 @@ Item {
 
                 MD.Slider {
                     id: radiusSlider
+                    Accessible.name: qsTr("Corner radius")
 
                     Layout.fillWidth: true
 

@@ -17,6 +17,7 @@ import Fluid as MD
 Item {
     id: root
     objectName: "sliderTrack"
+    Accessible.ignored: true
 
     required property bool horizontal
     required property bool mirrored

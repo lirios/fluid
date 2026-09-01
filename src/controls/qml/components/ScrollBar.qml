@@ -18,20 +18,23 @@ import Fluid as MD
 T.ScrollBar {
     id: control
 
+    readonly property bool _visuallyExpanded: hovered || pressed || visualFocus
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
-    padding: control.interactive ? 1 : 2
+    padding: control._visuallyExpanded ? 1 : 2
 
     minimumSize: orientation === Qt.Horizontal ? height / width : width / height
 
-    interactive: hovered || pressed
+    interactive: true
+    focusPolicy: Qt.StrongFocus
 
     visible: control.policy !== T.ScrollBar.AlwaysOff
 
     contentItem: Rectangle {
-        implicitWidth: control.interactive ? 6 : 2
-        implicitHeight: control.interactive ? 6 : 2
+        implicitWidth: control._visuallyExpanded ? 6 : 2
+        implicitHeight: control._visuallyExpanded ? 6 : 2
 
         color: MD.Utils.transparent(control.MD.Style.onSurfaceColor, control.pressed ? 0.8 : 0.38)
         radius: control.orientation === Qt.Horizontal ? height / 2.0 : width / 2.0
@@ -39,13 +42,13 @@ T.ScrollBar {
     }
 
     background: Rectangle {
-        implicitWidth: control.interactive ? 4 : 2
-        implicitHeight: control.interactive ? 4 : 2
+        implicitWidth: control._visuallyExpanded ? 4 : 2
+        implicitHeight: control._visuallyExpanded ? 4 : 2
 
         color: MD.Utils.transparent(control.MD.Style.onSurfaceColor, 0.12)
         radius: control.orientation === Qt.Horizontal ? height / 2.0 : width / 2.0
         opacity: 0.0
-        visible: control.interactive
+        visible: control._visuallyExpanded
     }
 
     states: [

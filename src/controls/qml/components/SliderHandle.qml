@@ -18,6 +18,27 @@ import "../internal/MotionAnimation.js" as MotionAnimation
 Item {
     id: root
 
+    // Opt in only for RangeSlider, whose template exposes one incomplete root
+    // accessibility node for two independently focusable handles. A Slider keeps
+    // this visual helper silent and relies on its complete template-provided node.
+    property bool accessibilityEnabled: false
+
+    // RangeSlider supplies a distinct localized name for each handle so screen
+    // readers can identify which end of the selected interval is being changed.
+    property string accessibleName: ""
+
+    // These conventional property names are intentionally kept on the accessible
+    // item: Qt discovers them when constructing its QAccessibleValueInterface.
+    property real value: 0
+    property real minimumValue: 0
+    property real maximumValue: 1
+    property real stepSize: 0
+
+    // The owner provides the template handle operations so accessibility actions
+    // use the same stepping, snapping, and range-order constraints as the keyboard.
+    property var accessibilityIncreaseAction: null
+    property var accessibilityDecreaseAction: null
+
     required property string valueIndicatorText
     required property int labelBehavior
     required property bool handleHasFocus
@@ -48,6 +69,25 @@ Item {
 
     implicitWidth: horizontal ? handleContainerSize : handleHeight
     implicitHeight: horizontal ? handleHeight : handleContainerSize
+
+    // Publish the visual helper as an independent slider node only when opted in.
+    // Focus mirrors the real template handle rather than creating another focus
+    // target, while ignored prevents a duplicate node for ordinary Slider usage.
+    Accessible.role: Accessible.Slider
+    Accessible.name: accessibleName
+    Accessible.focusable: accessibilityEnabled
+    Accessible.focused: handleHasFocus
+    Accessible.ignored: !accessibilityEnabled
+
+    // Bridge assistive-technology value actions back to the owning template node.
+    Accessible.onIncreaseAction: {
+        if (root.accessibilityIncreaseAction)
+            root.accessibilityIncreaseAction();
+    }
+    Accessible.onDecreaseAction: {
+        if (root.accessibilityDecreaseAction)
+            root.accessibilityDecreaseAction();
+    }
 
     function __valueIndicatorOffset(preferred, alternative, handleOffset, indicatorSize, controlSize) {
         if (root.labelBehavior !== MD.Slider.LabelBehavior.WithinBounds)

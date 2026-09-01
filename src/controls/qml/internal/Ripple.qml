@@ -22,6 +22,7 @@ import Fluid as MD
 */
 Item {
     id: root
+    Accessible.ignored: true
 
     // ---- Public Ripple API ----
     property real stateOpacity: 0

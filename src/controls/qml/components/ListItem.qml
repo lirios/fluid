@@ -133,6 +133,9 @@ T.ItemDelegate {
     bottomInset: control.segmented && !control._last ? MD.Tokens.listItem.segmentedGap : 0
 
     hoverEnabled: true
+    focusPolicy: Qt.StrongFocus
+    Accessible.name: text
+    Accessible.description: supportingText
 
     // -------------------------------------------------------------------------
     // State object — holds all interaction-driven visual values in one place
@@ -267,6 +270,7 @@ T.ItemDelegate {
                     // font.letterSpacing: MD.Tokens.typescale.labelSmall.tracking
                     elide: Text.ElideRight
                     visible: control.overline.length > 0
+                    Accessible.ignored: true
                 }
 
                 // Label — required, bodyLarge typescale
@@ -275,6 +279,7 @@ T.ItemDelegate {
 
                     typescale: MD.Tokens.typescale.bodyLarge
                     text: control.text
+                    Accessible.ignored: true
                     color: _state.labelColor
                     opacity: _state.contentOpacity
                     // font.pixelSize: MD.Tokens.typescale.bodyLarge.fontSize
@@ -298,6 +303,7 @@ T.ItemDelegate {
                     wrapMode: Text.WordWrap
                     elide: Text.ElideRight
                     visible: control.supportingText.length > 0
+                    Accessible.ignored: true
                 }
             }
 

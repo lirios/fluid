@@ -4,6 +4,7 @@
 //
 // Originally based on code by hypengw, licensed under the MIT license.
 
+import QtQuick
 import QtQuick.Shapes as QQS
 
 /*!
@@ -17,4 +18,5 @@ import QtQuick.Shapes as QQS
 QQS.Shape {
     asynchronous: false
     preferredRendererType: QQS.Shape.CurveRenderer
+    Accessible.ignored: true
 }

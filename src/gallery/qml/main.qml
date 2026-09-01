@@ -96,6 +96,7 @@ MD.ApplicationWindow {
             MD.NavigationRail {
                 id: categoryRail
                 objectName: "galleryCategoryRail"
+                Accessible.name: qsTr("Gallery categories")
 
                 anchors.left: parent.left
                 anchors.top: parent.top

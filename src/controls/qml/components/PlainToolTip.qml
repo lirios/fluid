@@ -91,6 +91,7 @@ T.ToolTip {
         horizontalAlignment: control._layoutMirrored ? Text.AlignRight : Text.AlignLeft
         wrapMode: Text.Wrap
         elide: Text.ElideNone
+        Accessible.ignored: true
     }
 
     background: Rectangle {

@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+import QtQuick
 import QtQuick.Templates as T
 
 /*!
@@ -11,4 +12,6 @@ import QtQuick.Templates as T
 	styling system. Concrete controls use their attached style and token objects
 	for theme-dependent colors and numeric metrics.
 */
-T.Control {}
+T.Control {
+    Accessible.ignored: true
+}

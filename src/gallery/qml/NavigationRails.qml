@@ -86,6 +86,7 @@ Item {
                             implicitWidth: 220
 
                             MD.NavigationRail {
+                                Accessible.name: qsTr("Primary navigation")
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 anchors.bottom: parent.bottom
@@ -114,6 +115,7 @@ Item {
 
                         DemoFrame {
                             MD.NavigationRail {
+                                Accessible.name: qsTr("Primary navigation")
                                 anchors.left: parent.left
                                 anchors.top: parent.top
                                 anchors.bottom: parent.bottom
@@ -164,6 +166,7 @@ Item {
                                 implicitWidth: 280
 
                                 MD.NavigationRail {
+                                    Accessible.name: qsTr("Primary navigation")
                                     anchors.left: parent.left
                                     anchors.top: parent.top
                                     anchors.bottom: parent.bottom
@@ -200,6 +203,7 @@ Item {
                     LayoutMirroring.childrenInherit: true
 
                     MD.NavigationRail {
+                        Accessible.name: qsTr("Primary navigation")
                         anchors.left: parent.left
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
@@ -242,6 +246,7 @@ Item {
 
                             MD.ModalNavigationRail {
                                 id: retainedModal
+                                Accessible.name: qsTr("Primary navigation")
                                 anchors.fill: parent
                                 expanded: true
                                 hideOnCollapse: false
@@ -292,6 +297,7 @@ Item {
 
                             MD.ModalNavigationRail {
                                 id: dismissibleModal
+                                Accessible.name: qsTr("Primary navigation")
                                 anchors.fill: parent
                                 expanded: true
                                 hideOnCollapse: true

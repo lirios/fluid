@@ -6,7 +6,6 @@ pragma ComponentBehavior: Bound
 import Fluid as MD
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Templates as T
 
 Item {
     id: page
@@ -90,30 +89,30 @@ Item {
     MD.Menu {
         id: standardMenu
 
-        T.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        T.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
-        T.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
+        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
+        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
+        MD.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
     }
 
     MD.Menu {
         id: dividerMenu
 
-        T.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        T.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
+        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
+        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
         MD.MenuDivider {}
-        T.Action { text: qsTr("Select all"); icon.name: MD.SymbolNames.symbolSelectAll }
+        MD.Action { text: qsTr("Select all"); icon.name: MD.SymbolNames.symbolSelectAll }
     }
 
     MD.Menu {
         id: gapMenu
 
-        T.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        T.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
-        T.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
+        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
+        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
+        MD.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
         MD.MenuGap {}
         MD.MenuSectionLabel { text: qsTr("Sharing") }
-        T.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
-        T.Action { text: qsTr("Download"); icon.name: MD.SymbolNames.symbolDownload }
+        MD.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
+        MD.Action { text: qsTr("Download"); icon.name: MD.SymbolNames.symbolDownload }
     }
 
     MD.Menu {
@@ -121,14 +120,14 @@ Item {
         colorStyle: MD.Menu.Vibrant
 
         MD.MenuSectionLabel { text: qsTr("Document") }
-        T.Action {
+        MD.Action {
             text: qsTr("Edit")
-            // supportingText: qsTr("Open the document editor")
+            supportingText: qsTr("Open the document editor")
             icon.name: MD.SymbolNames.symbolEdit
             shortcut: "Meta+E"
         }
         MD.MenuDivider {}
-        MD.MenuItem {
+        MD.Action {
             text: qsTr("Settings")
             icon.name: MD.SymbolNames.symbolSettings
             badgeContent: qsTr("New")
@@ -138,21 +137,21 @@ Item {
     MD.Menu {
         id: contextMenu
 
-        T.Action {
+        MD.Action {
             text: qsTr("Copy")
             icon.name: MD.SymbolNames.symbolContentCopy
             shortcut: StandardKey.Copy
         }
-        T.Action {
+        MD.Action {
             text: qsTr("Paste")
             icon.name: MD.SymbolNames.symbolContentPaste
             shortcut: StandardKey.Paste
         }
         MD.MenuGap {}
         MD.MenuSectionLabel { text: qsTr("File") }
-        T.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
+        MD.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
         MD.MenuDivider {}
-        T.Action {
+        MD.Action {
             text: qsTr("Delete")
             icon.name: MD.SymbolNames.symbolDelete
             shortcut: StandardKey.Delete

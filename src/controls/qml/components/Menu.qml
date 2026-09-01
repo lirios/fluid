@@ -15,9 +15,15 @@ import QtQuick.Window
     \class Menu
     \brief A Material Design 3 Expressive menu.
 
-    Menu presents a temporary list of actions. Actions declared as children are
-    represented by accessible menu-item delegates with Material typography,
-    selection, icon, shortcut, disabled, pointer, and keyboard-focus states.
+    Menu presents a temporary list of actions. \l Action objects declared as
+    children are represented by accessible menu-item delegates with Material
+    typography, selection, icon, shortcut, disabled, pointer, and
+    keyboard-focus states.
+    The default delegate also maps the action's \c supportingText,
+    \c trailingText, and \c badgeContent properties to \l MenuItem. A custom
+    delegate must map these extended fields explicitly when it needs them.
+    Actions not derived from \l Action still render their inherited action
+    fields, but the extended fields remain empty.
 
     The surface grows to fit its content between the Material minimum and
     maximum widths. On compact windows it may become narrower than the preferred
@@ -39,28 +45,31 @@ import QtQuick.Window
     MD.Menu {
         id: editMenu
 
-        Action {
+        MD.Action {
             text: qsTr("Copy")
             icon.name: MD.SymbolNames.symbolContentCopy
             onTriggered: copySelection()
         }
 
-        Action {
+        MD.Action {
             text: qsTr("Show formatting")
             checkable: true
+            supportingText: qsTr("Use rich text styles")
         }
 
         MD.MenuDivider {}
 
-        Action {
+        MD.Action {
             text: qsTr("Select all")
         }
 
         MD.MenuGap {}
         MD.MenuSectionLabel { text: qsTr("Sharing") }
 
-        Action {
+        MD.Action {
             text: qsTr("Share")
+            trailingText: qsTr("Team")
+            badgeContent: qsTr("New")
         }
     }
     \endcode
@@ -276,6 +285,10 @@ T.Menu {
     delegate: MD.MenuItem {
         id: menuDelegate
 
+        //! \internal Typed access to the Material fields exposed by MD.Action.
+        readonly property MD.Action _materialAction: action instanceof MD.Action
+                                                      ? (action as MD.Action) : null
+
         //! \internal Position of this delegate in the menu content model.
         readonly property int _menuIndex: {
             for (let itemIndex = 0; itemIndex < control.count; ++itemIndex) {
@@ -288,6 +301,9 @@ T.Menu {
         variant: control.variant === Menu.Vertical ? MD.MenuItem.Vertical : MD.MenuItem.Baseline
         colorStyle: control.colorStyle === Menu.Vibrant ? MD.MenuItem.Vibrant : MD.MenuItem.Standard
         groupPosition: control._itemGroupPosition(_menuIndex)
+        supportingText: _materialAction ? _materialAction.supportingText : ""
+        trailingText: _materialAction ? _materialAction.trailingText : ""
+        badgeContent: _materialAction ? _materialAction.badgeContent : ""
         LayoutMirroring.enabled: control._layoutMirrored
         LayoutMirroring.childrenInherit: true
     }

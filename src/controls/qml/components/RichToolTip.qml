@@ -20,10 +20,10 @@ import QtQuick.Templates as T
     ignored with a warning. The second button wraps when both do not fit.
 
     The inherited \c text property stores the body and is also exposed as
-    \c body. Actions use \c QtQuick.Templates.Action so their text, enabled
-    state, shortcuts, and triggered signal remain reusable. Fluid renders them
-    as Material text buttons, gives the first enabled action focus when the
-    popup opens, and closes the tooltip after activation.
+    \c body. Actions use \l Action so their text, enabled state, shortcuts,
+    and triggered signal remain reusable. Fluid renders them as Material text
+    buttons, gives the first enabled action focus when the popup opens, and
+    closes the tooltip after activation.
 
     \code{.qml}
     MD.RichToolTip {
@@ -32,8 +32,8 @@ import QtQuick.Templates as T
         headline: qsTr("Formatting")
         body: qsTr("Choose how the selected text is emphasized.")
         actions: [
-            Action { text: qsTr("Learn more"); onTriggered: openHelp() },
-            Action { text: qsTr("Dismiss") }
+            MD.Action { text: qsTr("Learn more"); onTriggered: openHelp() },
+            MD.Action { text: qsTr("Dismiss") }
         ]
     }
     \endcode
@@ -56,10 +56,11 @@ T.ToolTip {
     /*!
         Ordered actions rendered as zero, one, or two Material text buttons.
 
-        Additional actions are ignored. Use short localized labels so two
-        actions can normally fit within the Material maximum width.
+        Each entry must be an \l Action. Additional actions are ignored. Use
+        short localized labels so two actions can normally fit within the
+        Material maximum width.
     */
-    property list<T.Action> actions
+    property list<MD.Action> actions
 
     //! \internal Number of actions that can be displayed.
     readonly property int _displayedActionCount: Math.min(actions.length, 2)

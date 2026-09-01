@@ -6,7 +6,6 @@ pragma ComponentBehavior: Bound
 import Fluid as MD
 
 import QtQuick
-import QtQuick.Templates as T
 import QtTest
 
 TestCase {
@@ -105,19 +104,19 @@ TestCase {
                 height: 48
             }
 
-            T.Action {
+            MD.Action {
                 id: firstAction
                 text: "Learn more"
                 onTriggered: fixture.firstTriggerCount += 1
             }
 
-            T.Action {
+            MD.Action {
                 id: secondAction
                 text: "Dismiss"
                 onTriggered: fixture.secondTriggerCount += 1
             }
 
-            T.Action {
+            MD.Action {
                 id: thirdAction
                 text: "Ignored"
             }

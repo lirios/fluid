@@ -1,19 +1,20 @@
 // SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
-import QtQuick.Templates as T
+import Fluid as MD
 
 /*!
     \class AppBarAction
     \brief Describes an action shown by an AppBar or SearchAppBar.
 
-    The text is both the accessible name of the action button and the label used
-    by the overflow menu.
+    AppBarAction extends \l Action with app-bar visibility, overflow, priority,
+    and presentation settings. The inherited \c text is both the accessible
+    name of the action button and the label used by the overflow menu.
 
     For more information see the
     <a href="https://m3.material.io/components/app-bars/overview">Material Design 3 app bar guidelines</a>.
 */
-T.Action {
+MD.Action {
     /*!
         Controls whether an action may be moved to the overflow menu.
 

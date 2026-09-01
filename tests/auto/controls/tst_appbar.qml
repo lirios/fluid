@@ -223,9 +223,19 @@ TestCase {
         const action = createTemporaryQmlObject('import Fluid as MD; MD.AppBarAction {}', testCase);
         verify(action);
         compare(action.visible, true);
+        compare(action.supportingText, "");
+        compare(action.trailingText, "");
+        compare(action.badgeContent, "");
         compare(action.priority, 0);
         compare(action.overflowPolicy, MD.AppBarAction.AutoOverflow);
         compare(action.presentation, MD.AppBarAction.IconButton);
+
+        action.supportingText = "Supporting";
+        action.trailingText = "Trailing";
+        action.badgeContent = "New";
+        compare(action.supportingText, "Supporting");
+        compare(action.trailingText, "Trailing");
+        compare(action.badgeContent, "New");
     }
 
     function test_appbar_defaults_and_heights() {

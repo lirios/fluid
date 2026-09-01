@@ -7,7 +7,6 @@ import Fluid as MD
 
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Templates as T
 
 Item {
     id: page
@@ -23,17 +22,17 @@ Item {
         type: MD.Button.Outlined
     }
 
-    T.Action {
+    MD.Action {
         id: learnMoreAction
         text: qsTr("Learn more")
     }
 
-    T.Action {
+    MD.Action {
         id: dismissAction
         text: qsTr("Dismiss")
     }
 
-    T.Action {
+    MD.Action {
         id: enableAction
         text: qsTr("Enable")
     }

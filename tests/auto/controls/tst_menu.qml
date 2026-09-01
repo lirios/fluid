@@ -6,7 +6,6 @@ pragma ComponentBehavior: Bound
 import Fluid as MD
 
 import QtQuick
-import QtQuick.Templates as T
 import QtTest
 
 TestCase {
@@ -26,20 +25,20 @@ TestCase {
             property alias checkedAction: checkedAction
             property alias disabledAction: disabledAction
 
-            T.Action {
+            MD.Action {
                 id: plainAction
                 text: "Copy"
                 icon.name: MD.SymbolNames.symbolContentCopy
             }
 
-            T.Action {
+            MD.Action {
                 id: checkedAction
                 text: "Show formatting"
                 checkable: true
                 checked: true
             }
 
-            T.Action {
+            MD.Action {
                 id: disabledAction
                 text: "Unavailable"
                 enabled: false
@@ -53,19 +52,19 @@ TestCase {
         MD.Menu {
             height: MD.Tokens.menu.itemHeight * 2
 
-            T.Action {
+            MD.Action {
                 text: "One"
             }
-            T.Action {
+            MD.Action {
                 text: "Two"
             }
-            T.Action {
+            MD.Action {
                 text: "Three"
             }
-            T.Action {
+            MD.Action {
                 text: "Four"
             }
-            T.Action {
+            MD.Action {
                 text: "Five"
             }
         }
@@ -75,7 +74,7 @@ TestCase {
         id: longMenuComponent
 
         MD.Menu {
-            T.Action {
+            MD.Action {
                 text: "A deliberately long menu action that must be constrained"
             }
         }
@@ -89,26 +88,43 @@ TestCase {
             property alias explicitAction: explicitAction
             property alias metaAction: metaAction
 
-            T.Action {
+            MD.Action {
                 id: standardAction
                 text: "Action"
                 shortcut: StandardKey.Copy
             }
 
-            T.Action {
+            MD.Action {
                 id: explicitAction
                 text: "Action"
                 shortcut: "Ctrl+Alt+K"
             }
 
-            T.Action {
+            MD.Action {
                 id: metaAction
                 text: "Action"
                 shortcut: "Meta+Shift+K"
             }
 
-            T.Action {
+            MD.Action {
                 text: "Action"
+            }
+        }
+    }
+
+    Component {
+        id: extendedActionMenuComponent
+
+        MD.Menu {
+            property alias extendedAction: extendedAction
+
+            MD.Action {
+                id: extendedAction
+                text: "Move"
+                supportingText: "Move this file"
+                trailingText: "Cloud"
+                badgeContent: "New"
+                shortcut: "Ctrl+M"
             }
         }
     }
@@ -117,13 +133,13 @@ TestCase {
         id: alignedIconMenuComponent
 
         MD.Menu {
-            T.Action {
+            MD.Action {
                 text: "Favorite"
                 icon.name: MD.SymbolNames.symbolFavorite
                 checkable: true
             }
 
-            T.Action {
+            MD.Action {
                 text: "Share"
                 icon.name: MD.SymbolNames.symbolShare
             }
@@ -143,12 +159,12 @@ TestCase {
             property alias fourthAction: fourthAction
             property alias fifthAction: fifthAction
 
-            T.Action {
+            MD.Action {
                 id: firstAction
                 text: "Cut"
             }
 
-            T.Action {
+            MD.Action {
                 id: secondAction
                 text: "Copy"
             }
@@ -157,7 +173,7 @@ TestCase {
                 id: divider
             }
 
-            T.Action {
+            MD.Action {
                 id: thirdAction
                 text: "Paste"
             }
@@ -171,12 +187,12 @@ TestCase {
                 text: "Sharing"
             }
 
-            T.Action {
+            MD.Action {
                 id: fourthAction
                 text: "Share"
             }
 
-            T.Action {
+            MD.Action {
                 id: fifthAction
                 text: "Export"
             }
@@ -229,7 +245,7 @@ TestCase {
             MD.Menu {
                 id: menu
 
-                T.Action {
+                MD.Action {
                     text: "Copy"
                     icon.name: MD.SymbolNames.symbolContentCopy
                 }
@@ -252,12 +268,12 @@ TestCase {
             MD.Menu {
                 id: menu
 
-                T.Action { text: "Copy" }
+                MD.Action { text: "Copy" }
                 MD.MenuDivider {}
-                T.Action { text: "Paste" }
+                MD.Action { text: "Paste" }
                 MD.MenuGap {}
                 MD.MenuSectionLabel { id: sectionLabel; text: "Sharing" }
-                T.Action { text: "Share" }
+                MD.Action { text: "Share" }
             }
         }
     }
@@ -406,6 +422,78 @@ TestCase {
 
         menu.metaAction.shortcut = "Meta+M";
         tryCompare(metaLabel, "text", "⌘M");
+    }
+
+    function test_material_action_extended_fields_map_and_render() {
+        const menu = createMenu(extendedActionMenuComponent);
+        verify(menu);
+        tryCompare(menu, "count", 1);
+
+        const item = menu.itemAt(0);
+        verify(item);
+        compare(item.supportingText, menu.extendedAction.supportingText);
+        compare(item.trailingText, menu.extendedAction.trailingText);
+        compare(item.badgeContent, menu.extendedAction.badgeContent);
+        verify(item.implicitHeight > MD.Tokens.menu.verticalItemHeight);
+
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+
+        const supportingLabel = findChild(item, "menuItemSupportingText");
+        const trailingLabel = findChild(item, "menuItemTrailingText");
+        const badgeLabel = findChild(item, "menuItemBadge");
+        const shortcutLabel = findChild(item, "menuItemShortcut");
+        verify(supportingLabel);
+        verify(trailingLabel);
+        verify(badgeLabel);
+        verify(shortcutLabel);
+        compare(supportingLabel.text, "Move this file");
+        compare(trailingLabel.text, "Cloud");
+        compare(badgeLabel.text, "New");
+        compare(shortcutLabel.text, "Ctrl+M");
+        compare(supportingLabel.visible, true);
+        compare(trailingLabel.visible, true);
+        compare(badgeLabel.visible, true);
+        compare(shortcutLabel.visible, true);
+    }
+
+    function test_material_action_extended_fields_are_reactive_and_clear() {
+        const menu = createMenu(extendedActionMenuComponent);
+        verify(menu);
+        tryCompare(menu, "count", 1);
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+
+        const item = menu.itemAt(0);
+        const supportingLabel = findChild(item, "menuItemSupportingText");
+        const trailingLabel = findChild(item, "menuItemTrailingText");
+        const badgeLabel = findChild(item, "menuItemBadge");
+        verify(item);
+        verify(supportingLabel);
+        verify(trailingLabel);
+        verify(badgeLabel);
+
+        menu.extendedAction.supportingText = "Updated detail";
+        menu.extendedAction.trailingText = "Local";
+        menu.extendedAction.badgeContent = 0;
+        tryCompare(item, "supportingText", "Updated detail");
+        tryCompare(item, "trailingText", "Local");
+        tryCompare(item, "badgeContent", 0);
+        tryCompare(supportingLabel, "text", "Updated detail");
+        tryCompare(trailingLabel, "text", "Local");
+        tryCompare(badgeLabel, "text", "0");
+        compare(badgeLabel.visible, true);
+
+        menu.extendedAction.supportingText = "";
+        menu.extendedAction.trailingText = "";
+        menu.extendedAction.badgeContent = "";
+        tryCompare(item, "supportingText", "");
+        tryCompare(item, "trailingText", "");
+        tryCompare(item, "badgeContent", "");
+        tryCompare(supportingLabel, "visible", false);
+        tryCompare(trailingLabel, "visible", false);
+        tryCompare(badgeLabel, "visible", false);
+        tryCompare(item, "implicitHeight", MD.Tokens.menu.verticalItemHeight);
     }
 
     function test_vertical_default_geometry() {

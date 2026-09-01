@@ -1,72 +1,80 @@
 // SPDX-FileCopyrightText: 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Fluid as MD
 
 Item {
+    id: page
+
     readonly property int symbolSize: 96
+    readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
     component SymbolItem: MD.Control {
-        property string name: ""
+        id: symbolItem
+
+        required property string name
         property int style: MD.Symbol.Style.Outlined
 
-        Layout.preferredWidth: symbolSize
-        Layout.preferredHeight: symbolSize
+        Layout.columnSpan: 2
+        Layout.fillWidth: true
+        Layout.preferredHeight: page.symbolSize
 
         MD.ToolTip.visible: hovered
         MD.ToolTip.text: name
 
         contentItem: MD.Symbol {
-            name: parent.name
-            iconWidth: symbolSize
-            iconHeight: symbolSize
-            style: parent.style
-            opticalSize: symbolSize > 48 ? MD.Symbol.OpticalSize.Large : MD.Symbol.OpticalSize.Normal
+            name: symbolItem.name
+            iconWidth: page.symbolSize
+            iconHeight: page.symbolSize
+            style: symbolItem.style
+            opticalSize: page.symbolSize > 48 ? MD.Symbol.OpticalSize.Large
+                                               : MD.Symbol.OpticalSize.Normal
         }
     }
 
     MD.ScrollView {
+        id: scrollView
+
         anchors.fill: parent
+        clip: true
+        contentWidth: availableWidth
 
         ColumnLayout {
-            anchors.fill: parent
+            width: scrollView.availableWidth
+            spacing: page.sectionSpacing
 
             MD.ExposedDropdownMenu {
                 id: comboBox
 
                 Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: page.sectionSpacing
 
                 label: qsTr("Symbol style")
                 model: ["Outlined", "Rounded", "Sharp"]
             }
 
-            MD.ScrollView {
+            MD.AdaptiveGrid {
+                id: symbolGrid
+
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.bottomMargin: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
 
-                contentWidth: availableWidth
+                Repeater {
+                    model: SymbolsModel {}
 
-                GridLayout {
-                    width: parent.width
-                    columns: (parent.width - columnSpacing) / (symbolSize + columnSpacing)
-                    rowSpacing: symbolSize / 2
-                    columnSpacing: symbolSize / 2
-
-                    Repeater {
-                        model: SymbolsModel {}
-
-                        delegate: SymbolItem {
-                            name: model.name
-                            style: {
-                                if (comboBox.currentIndex === 0)
-                                    return MD.Symbol.Style.Outlined;
-                                else if (comboBox.currentIndex === 1)
-                                    return MD.Symbol.Style.Rounded;
-                                else
-                                    return MD.Symbol.Style.Sharp;
-                            }
+                    delegate: SymbolItem {
+                        style: {
+                            if (comboBox.currentIndex === 0)
+                                return MD.Symbol.Style.Outlined;
+                            else if (comboBox.currentIndex === 1)
+                                return MD.Symbol.Style.Rounded;
+                            else
+                                return MD.Symbol.Style.Sharp;
                         }
                     }
                 }

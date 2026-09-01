@@ -57,6 +57,10 @@ MD.ApplicationWindow {
                     source: "Menus.qml"
                 }
                 ListElement {
+                    name: qsTr("Navigation Rails")
+                    source: "NavigationRails.qml"
+                }
+                ListElement {
                     name: qsTr("Icon Button")
                     source: "IconButton.qml"
                 }

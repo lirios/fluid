@@ -24,6 +24,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Slider.qml
         qml/Lists.qml
         qml/Menus.qml
+        qml/NavigationRails.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/Typography.qml

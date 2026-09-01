@@ -27,6 +27,7 @@ set(_sources
     cpp/tokens/measurementtokens.cpp cpp/tokens/measurementtokens.h
     cpp/tokens/menu.cpp cpp/tokens/menu.h
     cpp/tokens/motiontokens.cpp cpp/tokens/motiontokens.h
+    cpp/tokens/navigationrail.cpp cpp/tokens/navigationrail.h
     cpp/tokens/palette.cpp cpp/tokens/palette.h
     cpp/tokens/shapetokens.cpp cpp/tokens/shapetokens.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h

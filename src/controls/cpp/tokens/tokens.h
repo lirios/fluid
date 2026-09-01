@@ -22,6 +22,7 @@
 #include "measurementtokens.h"
 #include "menu.h"
 #include "motiontokens.h"
+#include "navigationrail.h"
 #include "palette.h"
 #include "shapetokens.h"
 #include "typescale.h"
@@ -107,6 +108,9 @@ class Tokens : public QObject
     // Component tokens - Menu
     Q_PROPERTY(Fluid::Menu menu READ menu CONSTANT FINAL)
 
+    // Component tokens - Navigation rail
+    Q_PROPERTY(Fluid::NavigationRail navigationRail READ navigationRail CONSTANT FINAL)
+
     // Component tokens - Exposed dropdown menu
     Q_PROPERTY(
             Fluid::ExposedDropdownMenu exposedDropdownMenu READ exposedDropdownMenu CONSTANT FINAL)
@@ -169,6 +173,10 @@ public:
     // Component tokens - Menu
     Menu menu() const;
 
+    // Component tokens - Navigation rail
+    //! Returns the immutable navigation-rail component token group.
+    NavigationRail navigationRail() const;
+
     // Component tokens - Exposed dropdown menu
     //! Returns the immutable exposed-dropdown-menu component token group.
     ExposedDropdownMenu exposedDropdownMenu() const;
@@ -210,6 +218,7 @@ private:
     IconButton m_iconButton;
     ListItem m_listItem;
     Menu m_menu;
+    NavigationRail m_navigationRail;
     ExposedDropdownMenu m_exposedDropdownMenu;
     Slider m_slider;
     Divider m_divider;

@@ -117,6 +117,12 @@ Menu Tokens::menu() const
     return m_menu;
 }
 
+// Component tokens - Navigation rail
+NavigationRail Tokens::navigationRail() const
+{
+    return m_navigationRail;
+}
+
 // Component tokens - Exposed dropdown menu
 ExposedDropdownMenu Tokens::exposedDropdownMenu() const
 {

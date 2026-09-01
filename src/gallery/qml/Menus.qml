@@ -121,11 +121,11 @@ Item {
         colorStyle: MD.Menu.Vibrant
 
         MD.MenuSectionLabel { text: qsTr("Document") }
-        MD.MenuItem {
+        T.Action {
             text: qsTr("Edit")
-            supportingText: qsTr("Open the document editor")
+            // supportingText: qsTr("Open the document editor")
             icon.name: MD.SymbolNames.symbolEdit
-            trailingText: qsTr("⌘E")
+            shortcut: "Meta+E"
         }
         MD.MenuDivider {}
         MD.MenuItem {
@@ -138,12 +138,24 @@ Item {
     MD.Menu {
         id: contextMenu
 
-        T.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
-        T.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
+        T.Action {
+            text: qsTr("Copy")
+            icon.name: MD.SymbolNames.symbolContentCopy
+            shortcut: StandardKey.Copy
+        }
+        T.Action {
+            text: qsTr("Paste")
+            icon.name: MD.SymbolNames.symbolContentPaste
+            shortcut: StandardKey.Paste
+        }
         MD.MenuGap {}
         MD.MenuSectionLabel { text: qsTr("File") }
         T.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
         MD.MenuDivider {}
-        T.Action { text: qsTr("Delete"); icon.name: MD.SymbolNames.symbolDelete }
+        T.Action {
+            text: qsTr("Delete")
+            icon.name: MD.SymbolNames.symbolDelete
+            shortcut: StandardKey.Delete
+        }
     }
 }

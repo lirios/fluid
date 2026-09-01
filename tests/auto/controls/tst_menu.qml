@@ -82,6 +82,38 @@ TestCase {
     }
 
     Component {
+        id: shortcutMenuComponent
+
+        MD.Menu {
+            property alias standardAction: standardAction
+            property alias explicitAction: explicitAction
+            property alias metaAction: metaAction
+
+            T.Action {
+                id: standardAction
+                text: "Action"
+                shortcut: StandardKey.Copy
+            }
+
+            T.Action {
+                id: explicitAction
+                text: "Action"
+                shortcut: "Ctrl+Alt+K"
+            }
+
+            T.Action {
+                id: metaAction
+                text: "Action"
+                shortcut: "Meta+Shift+K"
+            }
+
+            T.Action {
+                text: "Action"
+            }
+        }
+    }
+
+    Component {
         id: alignedIconMenuComponent
 
         MD.Menu {
@@ -329,6 +361,51 @@ TestCase {
         compare(plainIcon.visible, true);
         compare(label.text, menu.disabledAction.text);
         compare(label.opacity, MD.Tokens.menu.disabledContentOpacity);
+    }
+
+    function test_action_shortcuts_use_shortcut_label() {
+        const menu = createMenu(shortcutMenuComponent);
+        verify(menu);
+        tryCompare(menu, "count", 4);
+
+        const standardItem = menu.itemAt(0);
+        const explicitItem = menu.itemAt(1);
+        const metaItem = menu.itemAt(2);
+        const emptyItem = menu.itemAt(3);
+        verify(standardItem);
+        verify(explicitItem);
+        verify(metaItem);
+        verify(emptyItem);
+
+        compare(standardItem.trailingText, "");
+        compare(explicitItem.trailingText, "");
+        compare(metaItem.trailingText, "");
+        compare(emptyItem.trailingText, "");
+
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+
+        const standardLabel = findChild(standardItem, "menuItemShortcut");
+        const explicitLabel = findChild(explicitItem, "menuItemShortcut");
+        const metaLabel = findChild(metaItem, "menuItemShortcut");
+        const emptyLabel = findChild(emptyItem, "menuItemShortcut");
+        verify(standardLabel);
+        verify(explicitLabel);
+        verify(metaLabel);
+        verify(emptyLabel);
+        verify(standardLabel.text.length > 0);
+        verify(isNaN(Number(standardLabel.text)));
+        verify(standardLabel.text.endsWith("C"));
+        compare(explicitLabel.text, "Ctrl+Alt+K");
+        compare(metaLabel.text, "⌘Shift+K");
+        verify(metaLabel.text.indexOf("Meta+") < 0);
+        verify(metaLabel.text.indexOf("⌘") >= 0);
+        compare(emptyLabel.text, "");
+        compare(emptyLabel.visible, false);
+        verify(explicitItem.implicitContentWidth > emptyItem.implicitContentWidth);
+
+        menu.metaAction.shortcut = "Meta+M";
+        tryCompare(metaLabel, "text", "⌘M");
     }
 
     function test_vertical_default_geometry() {

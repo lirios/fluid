@@ -4,6 +4,7 @@
 pragma ComponentBehavior: Bound
 
 import Fluid as MD
+import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
 import QtQuick
 import QtQuick.Templates as T
@@ -70,9 +71,11 @@ T.MenuItem {
     readonly property bool _hasSourceIcon: icon.source.toString().length > 0
     //! \internal Whether either supported icon type is present.
     readonly property bool _hasIcon: _hasNamedIcon || _hasSourceIcon
+    //! \internal Formatted shortcut text supplied by the associated action.
+    readonly property string _shortcutText: action !== null
+                                            ? P.ShortcutUtils.text(action.shortcut) : ""
     //! \internal Whether the associated action supplies shortcut text.
-    readonly property bool _hasShortcut: action !== null && action.shortcut !== undefined
-                                         && action.shortcut.toString().length > 0
+    readonly property bool _hasShortcut: _shortcutText.length > 0
     //! \internal Whether badge content is present.
     readonly property bool _hasBadge: badgeContent !== undefined && badgeContent !== null
                                       && badgeContent.toString().length > 0
@@ -251,7 +254,7 @@ T.MenuItem {
                 id: shortcutLabel
                 objectName: "menuItemShortcut"
                 anchors.verticalCenter: parent.verticalCenter
-                text: menuItem._hasShortcut ? menuItem.action.shortcut.toString() : ""
+                text: menuItem._shortcutText
                 typescale: MD.Tokens.typescale.labelLarge
                 color: menuItem._secondaryColor
                 opacity: menuItem._contentOpacity

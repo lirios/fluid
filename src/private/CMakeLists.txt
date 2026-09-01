@@ -2,6 +2,7 @@ set(LIBNAME FluidPrivate)
 
 # Source files
 set(_sources
+    shortcututils.cpp shortcututils.h
     windowdecoration.cpp windowdecoration.h
 )
 

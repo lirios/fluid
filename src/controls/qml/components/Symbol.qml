@@ -180,7 +180,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
 
-        text: MD.SymbolMappings.getSymbolName(icon.name) ?? "\u2753"
+        text: icon.name
         textFormat: Text.PlainText
 
         lineHeight: MD.Tokens.typescale.labelLarge.lineHeight

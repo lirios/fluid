@@ -84,6 +84,10 @@ MD.ApplicationWindow {
                     name: qsTr("Typography")
                     source: "Typography.qml"
                 }
+                ListElement {
+                    name: qsTr("Tooltips")
+                    source: "ToolTips.qml"
+                }
             }
 
             delegate: MD.ListItem {

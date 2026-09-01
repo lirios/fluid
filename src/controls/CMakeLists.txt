@@ -4,6 +4,7 @@ set(LIBNAME Fluid)
 set(_sources
     cpp/core/clipboard.cpp cpp/core/clipboard.h
     cpp/core/inputregion.cpp cpp/core/inputregion.h
+    cpp/core/tooltipattached.cpp cpp/core/tooltipattached.h
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h
     cpp/scenegraph/geometry.cpp cpp/scenegraph/geometry.h
     cpp/style/color.cpp cpp/style/color.h
@@ -31,6 +32,7 @@ set(_sources
     cpp/tokens/statetokens.cpp cpp/tokens/statetokens.h
     cpp/tokens/switch.cpp cpp/tokens/switch.h
     cpp/tokens/symbol.cpp cpp/tokens/symbol.h
+    cpp/tokens/tooltip.cpp cpp/tokens/tooltip.h
     cpp/tokens/tokens.cpp cpp/tokens/tokens.h
     cpp/tokens/typescale.cpp cpp/tokens/typescale.h
 )

@@ -142,6 +142,12 @@ Symbol Tokens::symbol() const
     return m_symbol;
 }
 
+// Component tokens - Tool tip
+ToolTip Tokens::toolTip() const
+{
+    return m_toolTip;
+}
+
 Tokens *Tokens::create(QQmlEngine *engine, QJSEngine *jsEngine)
 {
     Q_UNUSED(engine)

@@ -28,6 +28,7 @@
 #include "statetokens.h"
 #include "switch.h"
 #include "symbol.h"
+#include "tooltip.h"
 
 namespace Fluid {
 
@@ -118,6 +119,9 @@ class Tokens : public QObject
     // Component tokens - Symbol
     Q_PROPERTY(Fluid::Symbol symbol READ symbol CONSTANT FINAL)
 
+    // Component tokens - Tool tip
+    Q_PROPERTY(Fluid::ToolTip toolTip READ toolTip CONSTANT FINAL)
+
 public:
     explicit Tokens(QObject *parent = nullptr);
 
@@ -176,6 +180,9 @@ public:
     // Component tokens - Symbol
     Symbol symbol() const;
 
+    // Component tokens - Tool tip
+    ToolTip toolTip() const;
+
     static Tokens *create(QQmlEngine *engine, QJSEngine *jsEngine);
 
 private:
@@ -202,6 +209,7 @@ private:
     Divider m_divider;
     Switch m_switch;
     Symbol m_symbol;
+    ToolTip m_toolTip;
 };
 
 } // namespace Fluid

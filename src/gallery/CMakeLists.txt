@@ -26,6 +26,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/Typography.qml
+        qml/ToolTips.qml
         qml/ValueCircle.qml
 )
 

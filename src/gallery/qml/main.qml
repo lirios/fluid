@@ -29,6 +29,10 @@ MD.ApplicationWindow {
                     source: "Elevation.qml"
                 }
                 ListElement {
+                    name: qsTr("Grids")
+                    source: "Grids.qml"
+                }
+                ListElement {
                     name: qsTr("Symbols")
                     source: "Symbols.qml"
                 }

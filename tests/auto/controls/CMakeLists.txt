@@ -1,6 +1,7 @@
 add_executable(tst_fluid_controls
     controls.cpp
     tst_action.qml
+    tst_adaptivegrid.qml
     tst_appbar.qml
     tst_clipboard.qml
     tst_color.qml

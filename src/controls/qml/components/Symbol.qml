@@ -167,13 +167,12 @@ Item {
                 return arr[arr.length - 1];
             }
 
-            const variableAxes = {
+            return {
                 "FILL": icon.fill ? 1 : 0,
                 "GRAD": closestValue(gradeValues, icon.grade),
                 "wght": closestValue(weightValues, icon.weight),
                 "opsz": closestValue(opticalSizes, icon.opticalSize)
             };
-            return variableAxes;
         }
         font.pixelSize: Math.max(icon.iconWidth, icon.iconHeight) / scale
 

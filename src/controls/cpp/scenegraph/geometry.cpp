@@ -254,8 +254,10 @@ void SceneGraph::updateShadowGeometry(QSGGeometry *geo, const ShadowParams &para
     bool transparent = (params.flags & ShadowFlags::TransparentOccluder_ShadowFlag);
     bool directional = (params.flags & ShadowFlags::DirectionalLight_ShadowFlag);
     auto devLightPos = params.light_pos;
-    auto max_radius = std::min(rect.height(), rect.height()) / 2.0;
-    bool is_oval = params.radius.x() >= max_radius && qFuzzyCompare(rect.width(), rect.height());
+    auto max_radius = std::min(rect.width(), rect.height()) / 2.0;
+    bool is_oval = params.radius.x() >= max_radius && params.radius.y() >= max_radius
+            && params.radius.z() >= max_radius && params.radius.w() >= max_radius
+            && qFuzzyCompare(rect.width(), rect.height());
 
     std::array<std::optional<Skia::ShadowCircularRRectOp>, 2> ops;
 
@@ -268,13 +270,15 @@ void SceneGraph::updateShadowGeometry(QSGGeometry *geo, const ShadowParams &para
         scalar ambientPathOutset = devSpaceInsetWidth; // * devToSrcScale;
         QRectF ambientRRect = rect.adjusted(-ambientPathOutset, -ambientPathOutset,
                                             ambientPathOutset, ambientPathOutset);
-        auto ambientRadius = std::min<float>(params.radius.x() + ambientPathOutset, max_radius);
+        QVector4D ambientRadii;
+        for (int i = 0; i < 4; ++i)
+            ambientRadii[i] = std::min<float>(params.radius[i] + ambientPathOutset, max_radius);
 
         if (transparent) {
             // set a large inset to force a fill
             devSpaceInsetWidth = ambientRRect.width();
         }
-        ops[0] = Skia::ShadowCircularRRectOp(params.ambient_color, ambientRRect, ambientRadius,
+        ops[0] = Skia::ShadowCircularRRectOp(params.ambient_color, ambientRRect, ambientRadii,
                                              is_oval, devSpaceAmbientBlur, devSpaceInsetWidth);
     }
 
@@ -314,7 +318,7 @@ void SceneGraph::updateShadowGeometry(QSGGeometry *geo, const ShadowParams &para
         // SkMatrix shadowTransform;
         // shadowTransform.setScaleTranslate(spotScale, spotScale, spotOffset.fX, spotOffset.fY);
         // rrect.transform(shadowTransform, &spotShadowRRect);
-        QVector4D spotRadius = params.radius * spotScale; // spotShadowRRect.getSimpleRadii().fX;
+        QVector4D spotRadii = params.radius * spotScale;
 
         // Compute the insetWidth
         scalar blurOutset = srcSpaceSpotBlur;
@@ -344,7 +348,9 @@ void SceneGraph::updateShadowGeometry(QSGGeometry *geo, const ShadowParams &para
                                      std::max(std::abs(spotShadowRRect.right() - rect.right()),
                                               std::abs(spotShadowRRect.bottom() - rect.bottom())));
             } else {
-                scalar dr = spotRadius.x() - params.radius.x();
+                scalar dr = 0;
+                for (int i = 0; i < 4; ++i)
+                    dr = std::max(dr, spotRadii[i] - params.radius[i]);
                 QVector2D upperLeftOffset = QVector2D(spotShadowRRect.left() - rect.left() + dr,
                                                       spotShadowRRect.top() - rect.top() + dr);
                 QVector2D lowerRightOffset =
@@ -359,9 +365,9 @@ void SceneGraph::updateShadowGeometry(QSGGeometry *geo, const ShadowParams &para
 
         // Outset the shadow rrect to the border of the penumbra
         spotShadowRRect.adjust(-blurOutset, -blurOutset, blurOutset, blurOutset);
-        spotRadius += QVector4D(blurOutset, blurOutset, blurOutset, blurOutset);
+        spotRadii += QVector4D(blurOutset, blurOutset, blurOutset, blurOutset);
 
-        ops[1] = Skia::ShadowCircularRRectOp(params.spot_color, spotShadowRRect, spotRadius.x(),
+        ops[1] = Skia::ShadowCircularRRectOp(params.spot_color, spotShadowRRect, spotRadii,
                                              is_oval, 2.0f * devSpaceSpotBlur, insetWidth);
     }
 

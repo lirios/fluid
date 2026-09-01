@@ -22,6 +22,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Indicators.qml
         qml/Slider.qml
         qml/Lists.qml
+        qml/Menus.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/Typography.qml

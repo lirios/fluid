@@ -117,40 +117,45 @@ public:
         kOverstroke_RRectType,
     };
     // An insetWidth > 1/2 rect width or height indicates a simple fill.
-    ShadowCircularRRectOp(QRgb color, const QRectF &devRect, float devRadius, bool isCircle,
+    ShadowCircularRRectOp(QRgb color, const QRectF &devRect, QVector4D devRadii, bool isCircle,
                           float blurRadius, float insetWidth)
         : fIndexPtr(nullptr)
     {
         QRectF bounds = devRect;
         Q_ASSERT(insetWidth > 0);
-        scalar innerRadius = 0.0f;
-        scalar outerRadius = devRadius;
-        scalar umbraInset;
+        QVector4D innerRadii;
+        QVector4D umbraInsets;
 
         RRectType type = kFill_RRectType;
         if (isCircle) {
-            umbraInset = 0;
+            umbraInsets = QVector4D(0, 0, 0, 0);
         } else {
-            umbraInset = std::max(outerRadius, blurRadius);
+            for (int i = 0; i < 4; ++i)
+                umbraInsets[i] = std::max(devRadii[i], blurRadius);
         }
 
         // If stroke is greater than width or height, this is still a fill,
         // otherwise we compute stroke params.
         if (isCircle) {
-            innerRadius = devRadius - insetWidth;
-            type = innerRadius > 0 ? kStroke_RRectType : kFill_RRectType;
+            const scalar innerRadius = devRadii.x() - insetWidth;
+            innerRadii = QVector4D(innerRadius, innerRadius, innerRadius, innerRadius);
+            type = innerRadii.x() > 0 ? kStroke_RRectType : kFill_RRectType;
         } else {
             if (insetWidth <= 0.5f * std::min(devRect.width(), devRect.height())) {
                 // We don't worry about a real inner radius, we just need to know if we
                 // need to create overstroke vertices.
-                innerRadius = std::max(insetWidth - umbraInset, 0.0f);
-                type = innerRadius > 0 ? kOverstroke_RRectType : kStroke_RRectType;
+                bool hasInnerRadius = false;
+                for (int i = 0; i < 4; ++i) {
+                    innerRadii[i] = std::max(insetWidth - umbraInsets[i], 0.0f);
+                    hasInnerRadius |= innerRadii[i] > 0;
+                }
+                type = hasInnerRadius ? kOverstroke_RRectType : kStroke_RRectType;
             }
         }
 
         // this->setBounds(bounds, HasAABloat::kNo, IsHairline::kNo);
 
-        fGeoData = (Geometry{ color, outerRadius, umbraInset, innerRadius, blurRadius, bounds, type,
+        fGeoData = (Geometry{ color, devRadii, umbraInsets, innerRadii, blurRadius, bounds, type,
                               isCircle });
         if (isCircle) {
             fVertCount = circle_type_to_vert_count(kStroke_RRectType == type);
@@ -165,9 +170,9 @@ public:
     struct Geometry
     {
         QRgb color;
-        scalar outer_radius;
-        scalar umbra_inset;
-        scalar inner_radius;
+        QVector4D outer_radii;
+        QVector4D umbra_insets;
+        QVector4D inner_radii;
         scalar blur_radius;
         QRectF dev_bounds;
         RRectType type;
@@ -302,8 +307,8 @@ public:
     {
         const auto &args = this->fGeoData;
         QRgb color = args.color;
-        scalar outerRadius = args.outer_radius;
-        scalar innerRadius = args.inner_radius;
+        scalar outerRadius = args.outer_radii.x();
+        scalar innerRadius = args.inner_radii.x();
         scalar blurRadius = args.blur_radius;
         scalar distanceCorrection = outerRadius / blurRadius;
 
@@ -378,7 +383,7 @@ public:
             // cosine and sine of pi/8
             scalar c = 0.923579533f;
             scalar s = 0.382683432f;
-            scalar r = args.inner_radius;
+            scalar r = args.inner_radii.x();
             v->setPoint(center + QVector2D(-s * r, -c * r));
             v->setColor(color);
             v->setOffset({ -s * innerRadius, -c * innerRadius });
@@ -448,32 +453,33 @@ public:
     {
         const Geometry &args = this->fGeoData;
         QRgb color = args.color;
-        scalar outer_radius = args.outer_radius;
-
         const QRectF &bounds = args.dev_bounds;
 
-        scalar umbra_inset = args.umbra_inset;
         scalar min_dim = 0.5f * std::min(bounds.width(), bounds.height());
-        if (umbra_inset > min_dim) {
-            umbra_inset = min_dim;
+        QVector4D umbraInsets = args.umbra_insets;
+        for (int i = 0; i < 4; ++i) {
+            if (umbraInsets[i] > min_dim)
+                umbraInsets[i] = min_dim;
         }
 
-        scalar xInner[4] = { (float)bounds.left() + umbra_inset,
-                             (float)bounds.right() - umbra_inset,
-                             (float)bounds.left() + umbra_inset,
-                             (float)bounds.right() - umbra_inset };
-        scalar xMid[4] = { (float)bounds.left() + outer_radius,
-                           (float)bounds.right() - outer_radius,
-                           (float)bounds.left() + outer_radius,
-                           (float)bounds.right() - outer_radius };
+        scalar xInner[4] = { (float)bounds.left() + umbraInsets[0],
+                             (float)bounds.right() - umbraInsets[1],
+                             (float)bounds.left() + umbraInsets[2],
+                             (float)bounds.right() - umbraInsets[3] };
+        scalar xMid[4] = { (float)bounds.left() + args.outer_radii[0],
+                           (float)bounds.right() - args.outer_radii[1],
+                           (float)bounds.left() + args.outer_radii[2],
+                           (float)bounds.right() - args.outer_radii[3] };
         scalar xOuter[4] = { (float)bounds.left(), (float)bounds.right(), (float)bounds.left(),
                              (float)bounds.right() };
-        scalar yInner[4] = { (float)bounds.top() + umbra_inset, (float)bounds.top() + umbra_inset,
-                             (float)bounds.bottom() - umbra_inset,
-                             (float)bounds.bottom() - umbra_inset };
-        scalar yMid[4] = { (float)bounds.top() + outer_radius, (float)bounds.top() + outer_radius,
-                           (float)bounds.bottom() - outer_radius,
-                           (float)bounds.bottom() - outer_radius };
+        scalar yInner[4] = { (float)bounds.top() + umbraInsets[0],
+                             (float)bounds.top() + umbraInsets[1],
+                             (float)bounds.bottom() - umbraInsets[2],
+                             (float)bounds.bottom() - umbraInsets[3] };
+        scalar yMid[4] = { (float)bounds.top() + args.outer_radii[0],
+                           (float)bounds.top() + args.outer_radii[1],
+                           (float)bounds.bottom() - args.outer_radii[2],
+                           (float)bounds.bottom() - args.outer_radii[3] };
         scalar yOuter[4] = { (float)bounds.top(), (float)bounds.top(), (float)bounds.bottom(),
                              (float)bounds.bottom() };
 
@@ -489,56 +495,57 @@ public:
         //   a) umbraInset == outerRadius produces an orthogonal vector
         //   b) outerRadius == 0 produces a diagonal vector
         // And visually the corner looks correct.
-        QVector2D outerVec = QVector2D(outer_radius - umbra_inset, -outer_radius - umbra_inset);
-        outerVec.normalize();
-        // We want the circle edge to fall fractionally along the diagonal at
-        //      (sqrt(2)*(umbraInset - outerRadius) + outerRadius)/sqrt(2)*umbraInset
-        //
-        // Setting the components of the diagonal offset to the following value will give us that.
-        scalar diag_val =
-                umbra_inset / (SK_FloatSqrt2 * (outer_radius - umbra_inset) - outer_radius);
-        QVector2D diag_vec = QVector2D(diag_val, diag_val);
-        scalar distance_correction = umbra_inset / blurRadius;
-
         auto v = vp[0];
         // build corner by corner
         for (int i = 0; i < 4; ++i) {
+            const scalar outerRadius = args.outer_radii[i];
+            const scalar umbraInset = umbraInsets[i];
+            QVector2D outerVec = QVector2D(outerRadius - umbraInset,
+                                           -outerRadius - umbraInset);
+            outerVec.normalize();
+            // We want the circle edge to fall fractionally along the diagonal at
+            // (sqrt(2)*(umbraInset - outerRadius) + outerRadius)/sqrt(2)*umbraInset.
+            const scalar diagValue = umbraInset
+                    / (SK_FloatSqrt2 * (outerRadius - umbraInset) - outerRadius);
+            const QVector2D diagVec = QVector2D(diagValue, diagValue);
+            const scalar distanceCorrection = umbraInset / blurRadius;
+
             // inner point
             v->setPoint(xInner[i], yInner[i]);
             v->setColor(color);
             v->setOffset({ 0, 0 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = distanceCorrection;
             v++;
 
             // outer points
             v->setPoint(xOuter[i], yInner[i]);
             v->setColor(color);
             v->setOffset({ 0, -1 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = distanceCorrection;
             v++;
 
             v->setPoint(xOuter[i], yMid[i]);
             v->setColor(color);
             v->setOffset(outerVec);
-            v->distance_correction = distance_correction;
+            v->distance_correction = distanceCorrection;
             v++;
 
             v->setPoint(xOuter[i], yOuter[i]);
             v->setColor(color);
-            v->setOffset(diag_vec);
-            v->distance_correction = distance_correction;
+            v->setOffset(diagVec);
+            v->distance_correction = distanceCorrection;
             v++;
 
             v->setPoint(xMid[i], yOuter[i]);
             v->setColor(color);
             v->setOffset(outerVec);
-            v->distance_correction = distance_correction;
+            v->distance_correction = distanceCorrection;
             v++;
 
             v->setPoint(xInner[i], yOuter[i]);
             v->setColor(color);
             v->setOffset({ 0, -1 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = distanceCorrection;
             v++;
         }
 
@@ -547,36 +554,38 @@ public:
         // parameters equal to those in the center of the 9-patch. This will
         // give constant values across this inner ring.
         if (kOverstroke_RRectType == args.type) {
-            Q_ASSERT(args.inner_radius > 0.0f);
-
-            scalar inset = umbra_inset + args.inner_radius;
+            Q_ASSERT(args.inner_radii.lengthSquared() > 0.0f);
 
             // TL
-            v->setPoint(bounds.left() + inset, bounds.top() + inset);
+            v->setPoint(bounds.left() + umbraInsets[0] + args.inner_radii[0],
+                        bounds.top() + umbraInsets[0] + args.inner_radii[0]);
             v->setColor(color);
             v->setOffset({ 0, 0 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = umbraInsets[0] / blurRadius;
             v++;
 
             // TR
-            v->setPoint(bounds.right() - inset, bounds.top() + inset);
+            v->setPoint(bounds.right() - umbraInsets[1] - args.inner_radii[1],
+                        bounds.top() + umbraInsets[1] + args.inner_radii[1]);
             v->setColor(color);
             v->setOffset({ 0, 0 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = umbraInsets[1] / blurRadius;
             v++;
 
             // BL
-            v->setPoint(bounds.left() + inset, bounds.bottom() - inset);
+            v->setPoint(bounds.left() + umbraInsets[2] + args.inner_radii[2],
+                        bounds.bottom() - umbraInsets[2] - args.inner_radii[2]);
             v->setColor(color);
             v->setOffset({ 0, 0 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = umbraInsets[2] / blurRadius;
             v++;
 
             // BR
-            v->setPoint(bounds.right() - inset, bounds.bottom() - inset);
+            v->setPoint(bounds.right() - umbraInsets[3] - args.inner_radii[3],
+                        bounds.bottom() - umbraInsets[3] - args.inner_radii[3]);
             v->setColor(color);
             v->setOffset({ 0, 0 });
-            v->distance_correction = distance_correction;
+            v->distance_correction = umbraInsets[3] / blurRadius;
             v++;
         }
 

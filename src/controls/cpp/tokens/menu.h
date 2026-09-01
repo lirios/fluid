@@ -44,6 +44,10 @@ struct Menu
     Q_PROPERTY(qreal disabledContentOpacity READ disabledContentOpacity CONSTANT FINAL)
     Q_PROPERTY(Fluid::ShapeValue verticalContainerShape READ verticalContainerShape CONSTANT FINAL)
     Q_PROPERTY(Fluid::ShapeValue verticalGroupShape READ verticalGroupShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalFirstGroupShape READ verticalFirstGroupShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalMiddleGroupShape READ verticalMiddleGroupShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalLastGroupShape READ verticalLastGroupShape CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ShapeValue verticalOnlyGroupShape READ verticalOnlyGroupShape CONSTANT FINAL)
     Q_PROPERTY(Fluid::ShapeValue verticalItemShape READ verticalItemShape CONSTANT FINAL)
     Q_PROPERTY(Fluid::ShapeValue verticalOnlyItemShape READ verticalOnlyItemShape CONSTANT FINAL)
     Q_PROPERTY(Fluid::ShapeValue verticalFirstItemShape READ verticalFirstItemShape CONSTANT FINAL)
@@ -56,7 +60,14 @@ struct Menu
                        FINAL)
     Q_PROPERTY(qreal verticalItemHeight READ verticalItemHeight CONSTANT FINAL)
     Q_PROPERTY(qreal verticalGroupPadding READ verticalGroupPadding CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalGroupContentPadding READ verticalGroupContentPadding CONSTANT FINAL)
     Q_PROPERTY(qreal verticalSegmentedGap READ verticalSegmentedGap CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalDividerInset READ verticalDividerInset CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalSectionLabelHeight READ verticalSectionLabelHeight CONSTANT FINAL)
+    Q_PROPERTY(qreal verticalSectionLabelLeadingSpace READ verticalSectionLabelLeadingSpace CONSTANT
+                       FINAL)
+    Q_PROPERTY(qreal verticalSectionLabelTrailingSpace READ verticalSectionLabelTrailingSpace CONSTANT
+                       FINAL)
     Q_PROPERTY(qreal verticalItemTopPadding READ verticalItemTopPadding CONSTANT FINAL)
     Q_PROPERTY(qreal verticalItemBottomPadding READ verticalItemBottomPadding CONSTANT FINAL)
     Q_PROPERTY(qreal verticalItemLeadingSpace READ verticalItemLeadingSpace CONSTANT FINAL)
@@ -170,6 +181,32 @@ public:
         return ShapeTokens{ }.cornerSmall();
     }
 
+    //! Shape of the first surface in a grouped Expressive vertical menu.
+    constexpr ShapeValue verticalFirstGroupShape() const
+    {
+        return { ShapeTokens{ }.cornerValueLarge(), ShapeTokens{ }.cornerValueLarge(),
+                 ShapeTokens{ }.cornerValueSmall(), ShapeTokens{ }.cornerValueSmall() };
+    }
+
+    //! Shape of a middle surface in a grouped Expressive vertical menu.
+    constexpr ShapeValue verticalMiddleGroupShape() const
+    {
+        return verticalGroupShape();
+    }
+
+    //! Shape of the last surface in a grouped Expressive vertical menu.
+    constexpr ShapeValue verticalLastGroupShape() const
+    {
+        return { ShapeTokens{ }.cornerValueSmall(), ShapeTokens{ }.cornerValueSmall(),
+                 ShapeTokens{ }.cornerValueLarge(), ShapeTokens{ }.cornerValueLarge() };
+    }
+
+    //! Shape of the only surface in an Expressive vertical menu.
+    constexpr ShapeValue verticalOnlyGroupShape() const
+    {
+        return verticalContainerShape();
+    }
+
     //! Base shape of an Expressive vertical menu item.
     constexpr ShapeValue verticalItemShape() const
     {
@@ -226,10 +263,40 @@ public:
         return 4.0;
     }
 
-    //! Gap between adjacent segments in an Expressive item group.
+    //! Vertical content padding inside an Expressive menu group surface.
+    constexpr qreal verticalGroupContentPadding() const
+    {
+        return 2.0;
+    }
+
+    //! Gap between adjacent surfaces in an Expressive grouped menu.
     constexpr qreal verticalSegmentedGap() const
     {
         return 2.0;
+    }
+
+    //! Horizontal inset of a divider within an Expressive menu group.
+    constexpr qreal verticalDividerInset() const
+    {
+        return 12.0;
+    }
+
+    //! Minimum height of an Expressive menu section label.
+    constexpr qreal verticalSectionLabelHeight() const
+    {
+        return 32.0;
+    }
+
+    //! Logical leading padding of an Expressive menu section label.
+    constexpr qreal verticalSectionLabelLeadingSpace() const
+    {
+        return 12.0;
+    }
+
+    //! Logical trailing padding of an Expressive menu section label.
+    constexpr qreal verticalSectionLabelTrailingSpace() const
+    {
+        return 4.0;
     }
 
     //! Top content padding of an Expressive menu item.

@@ -29,6 +29,12 @@ import QtQuick.Window
     accessible names are provided by Qt Quick Templates. Give every action a
     short, localized \c text value so it has a meaningful accessible name.
 
+    Vertical menu actions can be organized with \l MenuDivider and \l MenuGap.
+    A divider separates action groups within one surface; a gap starts a new
+    elevated surface. \l MenuSectionLabel adds an optional non-interactive
+    label to the surrounding surface. The same grouping is used whether the
+    menu is opened from an anchor or at a context-menu position.
+
     \code{.qml}
     MD.Menu {
         id: editMenu
@@ -42,6 +48,19 @@ import QtQuick.Window
         Action {
             text: qsTr("Show formatting")
             checkable: true
+        }
+
+        MD.MenuDivider {}
+
+        Action {
+            text: qsTr("Select all")
+        }
+
+        MD.MenuGap {}
+        MD.MenuSectionLabel { text: qsTr("Sharing") }
+
+        Action {
+            text: qsTr("Share")
         }
     }
     \endcode
@@ -96,6 +115,117 @@ T.Menu {
     //! \internal Effective direction from the popup, locale, or anchor item.
     readonly property bool _layoutMirrored: mirrored || locale.textDirection === Qt.RightToLeft || (parent && parent.LayoutMirroring.enabled)
 
+    //! \internal Content groups separated by MenuGap instances.
+    property var _surfaceGroups: []
+
+    //! \internal Rebuilds the surface model after content or delegate changes.
+    function _updateSurfaceGroups() {
+        if (variant !== Menu.Vertical) {
+            _surfaceGroups = [];
+            return;
+        }
+        const groups = [];
+        let firstItem = null;
+        let lastItem = null;
+        for (let index = 0; index < count; ++index) {
+            const item = itemAt(index);
+            if (!item)
+                continue;
+            if (_contentType(item) === 2) {
+                if (firstItem)
+                    groups.push({ first: firstItem, last: lastItem });
+                firstItem = null;
+                lastItem = null;
+            } else {
+                if (!firstItem)
+                    firstItem = item;
+                lastItem = item;
+            }
+        }
+        if (firstItem)
+            groups.push({ first: firstItem, last: lastItem });
+        _surfaceGroups = groups;
+    }
+
+    //! \internal Coalesces delegate-driven regrouping without retaining a destroyed menu.
+    function _scheduleSurfaceUpdate() {
+        Qt.callLater(() => {
+            if (control)
+                control._updateSurfaceGroups();
+        });
+    }
+
+    //! \internal Identifies built-in menu content primitives without relying on object names.
+    function _contentType(item) {
+        return item && item._menuContentType !== undefined ? item._menuContentType : -1;
+    }
+
+    //! \internal Returns whether an item terminates item-shape grouping.
+    function _isItemGroupBoundary(item) {
+        const contentType = _contentType(item);
+        return contentType === 1 || contentType === 2;
+    }
+
+    //! \internal Calculates an action's position between the nearest divider or gap boundaries.
+    function _itemGroupPosition(menuIndex) {
+        if (menuIndex < 0)
+            return MD.MenuItem.Only;
+
+        let firstAction = -1;
+        let lastAction = -1;
+        for (let index = menuIndex; index >= 0; --index) {
+            const item = itemAt(index);
+            if (_isItemGroupBoundary(item))
+                break;
+            if (_contentType(item) === 0)
+                firstAction = index;
+        }
+        for (let index = menuIndex; index < count; ++index) {
+            const item = itemAt(index);
+            if (_isItemGroupBoundary(item))
+                break;
+            if (_contentType(item) === 0)
+                lastAction = index;
+        }
+
+        if (firstAction < 0 || firstAction === lastAction)
+            return MD.MenuItem.Only;
+        if (menuIndex === firstAction)
+            return MD.MenuItem.First;
+        if (menuIndex === lastAction)
+            return MD.MenuItem.Last;
+        return MD.MenuItem.Middle;
+    }
+
+    //! \internal Shape for a gap-delimited surface at index in the current menu.
+    function _surfaceShape(index, surfaceCount) {
+        if (surfaceCount <= 1)
+            return MD.Tokens.menu.verticalOnlyGroupShape;
+        if (index === 0)
+            return MD.Tokens.menu.verticalFirstGroupShape;
+        if (index === surfaceCount - 1)
+            return MD.Tokens.menu.verticalLastGroupShape;
+        return MD.Tokens.menu.verticalMiddleGroupShape;
+    }
+
+    //! \internal Top coordinate of a gap-delimited surface.
+    function _surfaceY(index, group) {
+        return index === 0 ? 0 : topPadding + group.first.y;
+    }
+
+    //! \internal Height of a gap-delimited surface.
+    function _surfaceHeight(index, group) {
+        return group.last.y + group.last.height - group.first.y
+               + (index === 0 ? topPadding : 0)
+               + (index === _surfaceGroups.length - 1 ? bottomPadding : 0);
+    }
+
+    onCountChanged: control._scheduleSurfaceUpdate()
+    onVariantChanged: control._updateSurfaceGroups()
+    onAboutToShow: control._updateSurfaceGroups()
+    onOpened: control._updateSurfaceGroups()
+    Component.onCompleted: control._scheduleSurfaceUpdate()
+
     //! \internal Widest action delegate before the menu constrains its width.
     readonly property real _itemsImplicitWidth: {
         let itemWidth = 0;
@@ -132,8 +262,8 @@ T.Menu {
     rightMargin: leftMargin
     topMargin: variant === Menu.Vertical ? MD.Tokens.menu.verticalViewportMargin : MD.Tokens.menu.viewportMargin
     bottomMargin: topMargin
-    topPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : MD.Tokens.menu.topPadding
-    bottomPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : MD.Tokens.menu.bottomPadding
+    topPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.topPadding
+    bottomPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.bottomPadding
     leftPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : 0
     rightPadding: leftPadding
     overlap: 0
@@ -157,10 +287,7 @@ T.Menu {
 
         variant: control.variant === Menu.Vertical ? MD.MenuItem.Vertical : MD.MenuItem.Baseline
         colorStyle: control.colorStyle === Menu.Vibrant ? MD.MenuItem.Vibrant : MD.MenuItem.Standard
-        groupPosition: control.count <= 1 ? MD.MenuItem.Only
-                       : _menuIndex === 0 ? MD.MenuItem.First
-                       : _menuIndex === control.count - 1 ? MD.MenuItem.Last
-                       : MD.MenuItem.Middle
+        groupPosition: control._itemGroupPosition(_menuIndex)
         LayoutMirroring.enabled: control._layoutMirrored
         LayoutMirroring.childrenInherit: true
     }
@@ -175,8 +302,15 @@ T.Menu {
         currentIndex: control.currentIndex
         interactive: contentHeight + control.topPadding + control.bottomPadding > control.height
         boundsBehavior: Flickable.StopAtBounds
-        spacing: control.variant === Menu.Vertical ? MD.Tokens.menu.verticalSegmentedGap : 0
+        spacing: 0
         clip: true
+        LayoutMirroring.enabled: control._layoutMirrored
+        LayoutMirroring.childrenInherit: true
+
+        onContentHeightChanged: {
+            if (control)
+                control._updateSurfaceGroups();
+        }
 
         ScrollIndicator.vertical: MD.ScrollIndicator {}
     }
@@ -190,10 +324,10 @@ T.Menu {
                                               : MD.Tokens.menu.containerShape
 
         implicitHeight: control.variant === Menu.Vertical ? MD.Tokens.menu.verticalItemHeight : MD.Tokens.menu.itemHeight
-        color: control.colorStyle === Menu.Vibrant
-               ? control.MD.Style.tertiaryContainerColor
-               : control.variant === Menu.Vertical
-                 ? control.MD.Style.surfaceContainerLowColor
+        color: control.variant === Menu.Vertical
+               ? "transparent"
+               : control.colorStyle === Menu.Vibrant
+                 ? control.MD.Style.tertiaryContainerColor
                  : control.MD.Style.surfaceContainerColor
         topLeftRadius: UiMetrics.resolveShapeRadius(containerShape.topLeft,
                                                     width, height)
@@ -204,6 +338,34 @@ T.Menu {
         bottomRightRadius: UiMetrics.resolveShapeRadius(containerShape.bottomRight,
                                                         width, height)
         elevation: MD.Tokens.menu.containerElevation
+
+        Repeater {
+            model: control._surfaceGroups
+
+            delegate: MD.ElevationRectangle {
+                required property int index
+                required property var modelData
+
+                objectName: "menuGroupSurface" + index
+                readonly property var groupShape: control._surfaceShape(index,
+                                                                         control._surfaceGroups.length)
+
+                // Following surfaces overlay preceding surfaces at the seam.
+                z: index
+                x: 0
+                y: control._surfaceY(index, modelData)
+                width: parent.width
+                height: control._surfaceHeight(index, modelData)
+                color: control.colorStyle === Menu.Vibrant
+                       ? control.MD.Style.tertiaryContainerColor
+                       : control.MD.Style.surfaceContainerLowColor
+                topLeftRadius: UiMetrics.resolveShapeRadius(groupShape.topLeft, width, height)
+                topRightRadius: UiMetrics.resolveShapeRadius(groupShape.topRight, width, height)
+                bottomLeftRadius: UiMetrics.resolveShapeRadius(groupShape.bottomLeft, width, height)
+                bottomRightRadius: UiMetrics.resolveShapeRadius(groupShape.bottomRight, width, height)
+                elevation: MD.Tokens.menu.containerElevation
+            }
+        }
     }
 
     enter: Transition {

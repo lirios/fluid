@@ -49,6 +49,10 @@ MD.ApplicationWindow {
                     source: "ExposedDropdownMenus.qml"
                 }
                 ListElement {
+                    name: qsTr("Menus")
+                    source: "Menus.qml"
+                }
+                ListElement {
                     name: qsTr("Icon Button")
                     source: "IconButton.qml"
                 }

@@ -99,6 +99,59 @@ TestCase {
     }
 
     Component {
+        id: groupedMenuComponent
+
+        MD.Menu {
+            property alias firstAction: firstAction
+            property alias secondAction: secondAction
+            property alias divider: divider
+            property alias thirdAction: thirdAction
+            property alias gap: gap
+            property alias sectionLabel: sectionLabel
+            property alias fourthAction: fourthAction
+            property alias fifthAction: fifthAction
+
+            T.Action {
+                id: firstAction
+                text: "Cut"
+            }
+
+            T.Action {
+                id: secondAction
+                text: "Copy"
+            }
+
+            MD.MenuDivider {
+                id: divider
+            }
+
+            T.Action {
+                id: thirdAction
+                text: "Paste"
+            }
+
+            MD.MenuGap {
+                id: gap
+            }
+
+            MD.MenuSectionLabel {
+                id: sectionLabel
+                text: "Sharing"
+            }
+
+            T.Action {
+                id: fourthAction
+                text: "Share"
+            }
+
+            T.Action {
+                id: fifthAction
+                text: "Export"
+            }
+        }
+    }
+
+    Component {
         id: standaloneMenuItemComponent
 
         MD.MenuItem {
@@ -152,6 +205,31 @@ TestCase {
         }
     }
 
+    Component {
+        id: rtlGroupedMenuComponent
+
+        Item {
+            property alias menu: menu
+            property alias sectionLabel: sectionLabel
+
+            width: 320
+            height: 320
+            LayoutMirroring.enabled: true
+            LayoutMirroring.childrenInherit: true
+
+            MD.Menu {
+                id: menu
+
+                T.Action { text: "Copy" }
+                MD.MenuDivider {}
+                T.Action { text: "Paste" }
+                MD.MenuGap {}
+                MD.MenuSectionLabel { id: sectionLabel; text: "Sharing" }
+                T.Action { text: "Share" }
+            }
+        }
+    }
+
     function createMenu(component, properties) {
         return createTemporaryObject(component || menuComponent, testCase, properties || {});
     }
@@ -176,6 +254,20 @@ TestCase {
         compare(token.focusStateLayerOpacity, 0.10);
         compare(token.pressedStateLayerOpacity, 0.10);
         compare(token.disabledContentOpacity, 0.38);
+        compare(token.verticalFirstGroupShape.topLeft, 16);
+        compare(token.verticalFirstGroupShape.bottomLeft, 8);
+        compare(token.verticalMiddleGroupShape.topLeft, 8);
+        compare(token.verticalMiddleGroupShape.bottomRight, 8);
+        compare(token.verticalLastGroupShape.topLeft, 8);
+        compare(token.verticalLastGroupShape.bottomLeft, 16);
+        compare(token.verticalOnlyGroupShape.topLeft, 16);
+        compare(token.verticalOnlyGroupShape.bottomRight, 16);
+        compare(token.verticalGroupContentPadding, 2);
+        compare(token.verticalSegmentedGap, 2);
+        compare(token.verticalDividerInset, 12);
+        compare(token.verticalSectionLabelHeight, 32);
+        compare(token.verticalSectionLabelLeadingSpace, 12);
+        compare(token.verticalSectionLabelTrailingSpace, 4);
     }
 
     function test_presentation_variants() {
@@ -188,6 +280,13 @@ TestCase {
         compare(menu.variant, MD.Menu.Baseline);
         menu.colorStyle = MD.Menu.Vibrant;
         compare(menu.colorStyle, MD.Menu.Vibrant);
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+        const background = findChild(menu, "menuBackground");
+        verify(background);
+        compare(background.color, menu.MD.Style.tertiaryContainerColor);
+        compare(background.elevation, MD.Tokens.menu.containerElevation);
+        compare(menu._surfaceGroups.length, 0);
     }
 
     function test_defaults_and_action_delegates() {
@@ -236,15 +335,14 @@ TestCase {
         const menu = createMenu();
         verify(menu);
         compare(menu.variant, MD.Menu.Vertical);
-        compare(menu.topPadding, MD.Tokens.menu.verticalGroupPadding);
-        compare(menu.bottomPadding, MD.Tokens.menu.verticalGroupPadding);
+        compare(menu.topPadding, MD.Tokens.menu.verticalGroupContentPadding);
+        compare(menu.bottomPadding, MD.Tokens.menu.verticalGroupContentPadding);
         compare(menu.leftPadding, MD.Tokens.menu.verticalGroupPadding);
         compare(menu.rightPadding, MD.Tokens.menu.verticalGroupPadding);
         tryCompare(menu, "count", 3);
         compare(menu.implicitHeight,
                 MD.Tokens.menu.verticalItemHeight * 3
-                + MD.Tokens.menu.verticalGroupPadding * 2
-                + MD.Tokens.menu.verticalSegmentedGap * 2);
+                + MD.Tokens.menu.verticalGroupContentPadding * 2);
 
         menu.popup(testCase, 0, 0);
         tryCompare(menu, "visible", true);
@@ -253,7 +351,7 @@ TestCase {
         const background = findChild(menu, "menuBackground");
         verify(list);
         verify(background);
-        compare(list.spacing, MD.Tokens.menu.verticalSegmentedGap);
+        compare(list.spacing, 0);
         compare(background.topLeftRadius, MD.Tokens.menu.verticalContainerShape.topLeft);
         compare(background.topRightRadius, MD.Tokens.menu.verticalContainerShape.topRight);
         compare(background.bottomLeftRadius, MD.Tokens.menu.verticalContainerShape.bottomLeft);
@@ -261,6 +359,14 @@ TestCase {
         compare(menu.itemAt(0).groupPosition, MD.MenuItem.First);
         compare(menu.itemAt(1).groupPosition, MD.MenuItem.Middle);
         compare(menu.itemAt(2).groupPosition, MD.MenuItem.Last);
+
+        tryVerify(() => menu._surfaceGroups.length === 1);
+        tryVerify(() => findChild(menu.background, "menuGroupSurface0") !== null);
+        const surface = findChild(menu.background, "menuGroupSurface0");
+        compare(surface.topLeftRadius, MD.Tokens.menu.verticalOnlyGroupShape.topLeft);
+        compare(surface.bottomRightRadius, MD.Tokens.menu.verticalOnlyGroupShape.bottomRight);
+        compare(surface.elevation, MD.Tokens.menu.containerElevation);
+        compare(surface.color, menu.MD.Style.surfaceContainerLowColor);
     }
 
     function test_adapts_to_compact_viewport_and_long_content() {
@@ -397,12 +503,128 @@ TestCase {
         compare(gap.implicitHeight, MD.Tokens.menu.verticalSegmentedGap);
         verify(!gap.focus);
         verify(divider.implicitHeight > 0);
-        compare(divider.leadingInset, MD.Tokens.menu.verticalItemLeadingSpace);
-        compare(divider.trailingInset, MD.Tokens.menu.verticalItemTrailingSpace);
+        compare(divider.leadingInset, MD.Tokens.menu.verticalDividerInset);
+        compare(divider.trailingInset, MD.Tokens.menu.verticalDividerInset);
+        verify(!divider.enabled);
         verify(!divider.focus);
         compare(sectionLabel.text, "Clipboard");
-        compare(sectionLabel.implicitHeight, MD.Tokens.menu.verticalItemHeight);
+        compare(sectionLabel.implicitHeight, MD.Tokens.menu.verticalSectionLabelHeight);
+        verify(!sectionLabel.enabled);
         verify(!sectionLabel.focus);
+    }
+
+    function test_dividers_and_gaps_form_groups() {
+        const menu = createMenu(groupedMenuComponent);
+        verify(menu);
+        tryCompare(menu, "count", 8);
+        compare(menu.implicitHeight,
+                MD.Tokens.menu.verticalItemHeight * 5
+                + MD.Tokens.divider.thickness
+                + MD.Tokens.menu.verticalSegmentedGap
+                + MD.Tokens.menu.verticalSectionLabelHeight
+                + MD.Tokens.menu.verticalGroupContentPadding * 2);
+
+        compare(menu.itemAt(0).groupPosition, MD.MenuItem.First);
+        compare(menu.itemAt(1).groupPosition, MD.MenuItem.Last);
+        compare(menu.itemAt(3).groupPosition, MD.MenuItem.Only);
+        compare(menu.itemAt(6).groupPosition, MD.MenuItem.First);
+        compare(menu.itemAt(7).groupPosition, MD.MenuItem.Last);
+
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+        tryVerify(() => menu._surfaceGroups.length === 2);
+        tryVerify(() => findChild(menu.background, "menuGroupSurface0") !== null);
+        tryVerify(() => findChild(menu.background, "menuGroupSurface1") !== null);
+
+        const firstSurface = findChild(menu.background, "menuGroupSurface0");
+        const lastSurface = findChild(menu.background, "menuGroupSurface1");
+        compare(firstSurface.topLeftRadius, MD.Tokens.menu.verticalFirstGroupShape.topLeft);
+        compare(firstSurface.bottomLeftRadius, MD.Tokens.menu.verticalFirstGroupShape.bottomLeft);
+        compare(lastSurface.topLeftRadius, MD.Tokens.menu.verticalLastGroupShape.topLeft);
+        compare(lastSurface.bottomLeftRadius, MD.Tokens.menu.verticalLastGroupShape.bottomLeft);
+        compare(firstSurface.elevation, MD.Tokens.menu.containerElevation);
+        compare(lastSurface.elevation, MD.Tokens.menu.containerElevation);
+        verify(lastSurface.z > firstSurface.z);
+        compare(lastSurface.y - firstSurface.y - firstSurface.height,
+                MD.Tokens.menu.verticalSegmentedGap);
+    }
+
+    function test_grouped_vibrant_and_context_menu() {
+        const menu = createMenu(groupedMenuComponent, { colorStyle: MD.Menu.Vibrant });
+        verify(menu);
+        menu.popup(testCase, 96, 48);
+        tryCompare(menu, "visible", true);
+        tryVerify(() => menu._surfaceGroups.length === 2);
+        tryVerify(() => findChild(menu.background, "menuGroupSurface0") !== null);
+        tryVerify(() => findChild(menu.background, "menuGroupSurface1") !== null);
+
+        const firstSurface = findChild(menu.background, "menuGroupSurface0");
+        const lastSurface = findChild(menu.background, "menuGroupSurface1");
+        compare(firstSurface.color, menu.MD.Style.tertiaryContainerColor);
+        compare(lastSurface.color, menu.MD.Style.tertiaryContainerColor);
+        verify(Math.abs(menu.x - 96) < 1);
+        verify(Math.abs(menu.y - 48) < 1);
+    }
+
+    function test_grouped_keyboard_navigation_skips_non_actions() {
+        const menu = createMenu(groupedMenuComponent);
+        verify(menu);
+        menu.thirdAction.enabled = false;
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+
+        keyClick(Qt.Key_Down);
+        tryCompare(menu, "currentIndex", 0);
+        keyClick(Qt.Key_Down);
+        tryCompare(menu, "currentIndex", 1);
+        keyClick(Qt.Key_Down);
+        tryCompare(menu, "currentIndex", 6);
+        keyClick(Qt.Key_Down);
+        tryCompare(menu, "currentIndex", 7);
+        keyClick(Qt.Key_Return);
+        tryCompare(menu, "visible", false);
+    }
+
+    function test_dynamic_gap_regroups_menu() {
+        const menu = createMenu(menuComponent);
+        const gap = createTemporaryObject(menuGapComponent, testCase);
+        verify(menu);
+        verify(gap);
+        tryCompare(menu, "count", 3);
+
+        menu.insertItem(1, gap);
+        tryCompare(menu, "count", 4);
+        compare(menu.itemAt(0).groupPosition, MD.MenuItem.Only);
+        compare(menu.itemAt(2).groupPosition, MD.MenuItem.First);
+        compare(menu.itemAt(3).groupPosition, MD.MenuItem.Last);
+
+        menu.popup(testCase, 0, 0);
+        tryCompare(menu, "visible", true);
+        tryVerify(() => menu._surfaceGroups.length === 2);
+
+        menu.removeItem(gap);
+        tryCompare(menu, "count", 3);
+        tryVerify(() => menu._surfaceGroups.length === 1);
+        compare(menu.itemAt(0).groupPosition, MD.MenuItem.First);
+        compare(menu.itemAt(1).groupPosition, MD.MenuItem.Middle);
+        compare(menu.itemAt(2).groupPosition, MD.MenuItem.Last);
+    }
+
+    function test_grouped_menu_rtl() {
+        const wrapper = createTemporaryObject(rtlGroupedMenuComponent, testCase);
+        verify(wrapper);
+        const menu = wrapper.menu;
+        tryCompare(menu, "count", 6);
+        menu.popup(wrapper, 0, 48);
+        tryCompare(menu, "visible", true);
+        tryVerify(() => menu._surfaceGroups.length === 2);
+
+        compare(menu.itemAt(0).mirrored, true);
+        compare(menu.itemAt(2).mirrored, true);
+        compare(menu.itemAt(5).mirrored, true);
+        const label = findChild(wrapper.sectionLabel, "menuSectionLabelText");
+        verify(label);
+        compare(label.horizontalAlignment, Text.AlignRight);
     }
 
     function test_rtl_mirrors_items() {

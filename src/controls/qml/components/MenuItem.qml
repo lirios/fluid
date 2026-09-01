@@ -21,6 +21,7 @@ import QtQuick.Templates as T
 T.MenuItem {
     id: menuItem
     objectName: "menuItem"
+    readonly property int _menuContentType: 0
 
     //! Selects the menu-item geometry specification.
     enum Variant {

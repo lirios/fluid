@@ -8,20 +8,25 @@ import QtQuick
     \class MenuSectionLabel
     \brief A non-interactive label identifying a menu section.
 
-    Section labels use the menu's logical outer spacing and do not participate
-    in menu keyboard navigation.
+    Section labels use the menu's logical outer spacing, belong to the
+    surrounding gap-delimited surface, and do not participate in menu keyboard
+    navigation.
 */
 Item {
     id: control
     objectName: "menuSectionLabel"
+    readonly property int _menuContentType: 3
 
     //! Localized text displayed by the section label.
     property string text: ""
 
-    implicitWidth: label.implicitWidth + MD.Tokens.menu.verticalItemLeadingSpace
-                   + MD.Tokens.menu.verticalItemTrailingSpace
-    implicitHeight: MD.Tokens.menu.verticalItemHeight
+    implicitWidth: label.implicitWidth + MD.Tokens.menu.verticalSectionLabelLeadingSpace
+                   + MD.Tokens.menu.verticalSectionLabelTrailingSpace
+    implicitHeight: MD.Tokens.menu.verticalSectionLabelHeight
+    enabled: false
     focus: false
+    Accessible.role: Accessible.StaticText
+    Accessible.name: text
 
     MD.Label {
         id: label
@@ -29,8 +34,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: MD.Tokens.menu.verticalItemLeadingSpace
-        anchors.rightMargin: MD.Tokens.menu.verticalItemTrailingSpace
+        anchors.leftMargin: MD.Tokens.menu.verticalSectionLabelLeadingSpace
+        anchors.rightMargin: MD.Tokens.menu.verticalSectionLabelTrailingSpace
         text: control.text
         typescale: MD.Tokens.typescale.labelLarge
         color: control.MD.Style.onSurfaceVariantColor

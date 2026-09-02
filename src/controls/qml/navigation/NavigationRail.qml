@@ -16,7 +16,7 @@ import "../internal/MotionAnimation.js" as MotionAnimation
 
     NavigationRail provides access to primary application destinations on
     medium, expanded, large, and extra-large windows. Applications choose when
-    to show it with \l Breakpoints; the control does not hide or expand itself
+    to show it with \ref Breakpoints; the control does not hide or expand itself
     in response to window-size changes.
 
     The rail is collapsed by default. Collapsed destinations place their icons

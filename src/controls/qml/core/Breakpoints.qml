@@ -28,11 +28,11 @@ QtObject {
     /*!
         Material 3 width breakpoint ranges.
 
-        \value Compact Widths from 0 up to, but excluding, 600 dp.
-        \value Medium Widths from 600 up to, but excluding, 840 dp.
-        \value Expanded Widths from 840 up to, but excluding, 1200 dp.
-        \value Large Widths from 1200 up to, but excluding, 1600 dp.
-        \value ExtraLarge Widths of 1600 dp and greater.
+        - `Compact`: Widths from 0 up to, but excluding, 600 dp.
+        - `Medium`: Widths from 600 up to, but excluding, 840 dp.
+        - `Expanded`: Widths from 840 up to, but excluding, 1200 dp.
+        - `Large`: Widths from 1200 up to, but excluding, 1600 dp.
+        - `ExtraLarge`: Widths of 1600 dp and greater.
     */
     enum Breakpoint {
         Compact,

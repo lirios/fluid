@@ -42,7 +42,7 @@ import "../internal/MotionAnimation.js" as MotionAnimation
     \endcode
 
     This control is intended for medium, expanded, large, and extra-large
-    windows. Applications select it explicitly using \l Breakpoints.
+    windows. Applications select it explicitly using \ref Breakpoints.
 
     For more information see the
     <a href="https://m3.material.io/components/navigation-rail/overview">Material Design 3 navigation rail guidelines</a>.

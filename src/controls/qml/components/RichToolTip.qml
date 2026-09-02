@@ -20,7 +20,7 @@ import QtQuick.Templates as T
     ignored with a warning. The second button wraps when both do not fit.
 
     The inherited \c text property stores the body and is also exposed as
-    \c body. Actions use \l Action so their text, enabled state, shortcuts,
+    \c body. Actions use \ref Action so their text, enabled state, shortcuts,
     and triggered signal remain reusable. Fluid renders them as Material text
     buttons, gives the first enabled action focus when the popup opens, and
     closes the tooltip after activation.
@@ -56,7 +56,7 @@ T.ToolTip {
     /*!
         Ordered actions rendered as zero, one, or two Material text buttons.
 
-        Each entry must be an \l Action. Additional actions are ignored. Use
+        Each entry must be an \ref Action. Additional actions are ignored. Use
         short localized labels so two actions can normally fit within the
         Material maximum width.
     */

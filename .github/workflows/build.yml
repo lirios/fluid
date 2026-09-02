@@ -32,6 +32,8 @@ jobs:
             cmake \
             ninja \
             pkgconf \
+            python \
+            python-pip \
             qt6-base \
             qt6-declarative \
             qt6-5compat \
@@ -41,6 +43,11 @@ jobs:
             qt6-5compat \
             wayland-protocols \
             wayland
+      - name: Install QML documentation filter
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install doxyqml==0.5.3
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
       - name: Build
         run: |
           cmake -GNinja -B build -DFLUID_WITH_DOCUMENTATION=ON

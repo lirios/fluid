@@ -34,7 +34,7 @@ Item {
     property alias asynchronous: loader.asynchronous
 
     /*!
-        Item created after \l Loadable::component is loaded.
+        Item created after \ref Loadable::component is loaded.
     */
     property alias item: loader.item
     visible: false

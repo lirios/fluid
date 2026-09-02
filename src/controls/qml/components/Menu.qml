@@ -15,14 +15,14 @@ import QtQuick.Window
     \class Menu
     \brief A Material Design 3 Expressive menu.
 
-    Menu presents a temporary list of actions. \l Action objects declared as
+    Menu presents a temporary list of actions. \ref Action objects declared as
     children are represented by accessible menu-item delegates with Material
     typography, selection, icon, shortcut, disabled, pointer, and
     keyboard-focus states.
     The default delegate also maps the action's \c supportingText,
-    \c trailingText, and \c badgeContent properties to \l MenuItem. A custom
+    \c trailingText, and \c badgeContent properties to \ref MenuItem. A custom
     delegate must map these extended fields explicitly when it needs them.
-    Actions not derived from \l Action still render their inherited action
+    Actions not derived from \ref Action still render their inherited action
     fields, but the extended fields remain empty.
 
     The surface grows to fit its content between the Material minimum and
@@ -35,9 +35,9 @@ import QtQuick.Window
     accessible names are provided by Qt Quick Templates. Give every action a
     short, localized \c text value so it has a meaningful accessible name.
 
-    Vertical menu actions can be organized with \l MenuDivider and \l MenuGap.
+    Vertical menu actions can be organized with \ref MenuDivider and \ref MenuGap.
     A divider separates action groups within one surface; a gap starts a new
-    elevated surface. \l MenuSectionLabel adds an optional non-interactive
+    elevated surface. \ref MenuSectionLabel adds an optional non-interactive
     label to the surrounding surface. The same grouping is used whether the
     menu is opened from an anchor or at a context-menu position.
 

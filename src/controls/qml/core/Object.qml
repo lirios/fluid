@@ -5,9 +5,9 @@ import QtQuick
 
 /*!
     \class Object
-    \brief A \l QtObject with children.
+    \brief A `QtObject` with children.
 
-    The \l Object type is a non-visual element that extends \l QtObject
+    The \ref Object type is a non-visual element that extends `QtObject`
     with the ability to hold children objects.
 
     Object is a Fluid infrastructure type and has no standalone Material 3

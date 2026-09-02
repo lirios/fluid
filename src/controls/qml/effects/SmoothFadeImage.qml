@@ -65,15 +65,17 @@ Item {
         Set this property to define what happens when the source image has a
         different size than the item.
 
-        \list
-        \li Image.Stretch - the image is scaled to fit (default)
-        \li Image.PreserveAspectFit - the image is scaled uniformly to fit without cropping
-        \li Image.PreserveAspectCrop - the image is scaled uniformly to fill, cropping if necessary
-        \li Image.Tile - the image is duplicated horizontally and vertically
-        \li Image.TileVertically - the image is stretched horizontally and tiled vertically
-        \li Image.TileHorizontally - the image is stretched vertically and tiled horizontally
-        \li Image.Pad - the image is not transformed
-        \endlist
+        - `Image.Stretch`: The image is scaled to fit (default).
+        - `Image.PreserveAspectFit`: The image is scaled uniformly to fit
+          without cropping.
+        - `Image.PreserveAspectCrop`: The image is scaled uniformly to fill,
+          cropping if necessary.
+        - `Image.Tile`: The image is duplicated horizontally and vertically.
+        - `Image.TileVertically`: The image is stretched horizontally and
+          tiled vertically.
+        - `Image.TileHorizontally`: The image is stretched vertically and
+          tiled horizontally.
+        - `Image.Pad`: The image is not transformed.
 
         Defaults to \c Image.Stretch.
 
@@ -155,12 +157,10 @@ Item {
     /*!
         This property holds the status of image loading. It can be one of:
 
-        \list
-        \li Image.Null - no image has been set
-        \li Image.Ready - the image has been loaded
-        \li Image.Loading - the image is currently being loaded
-        \li Image.Error - an error occurred while loading the image
-        \endlist
+        - `Image.Null`: No image has been set.
+        - `Image.Ready`: The image has been loaded.
+        - `Image.Loading`: The image is currently being loaded.
+        - `Image.Error`: An error occurred while loading the image.
     */
     readonly property int status: __priv.loadingImage ? __priv.loadingImage.status : Image.Null
 

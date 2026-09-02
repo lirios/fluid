@@ -7,7 +7,7 @@ import Fluid as MD
     \class AppBarAction
     \brief Describes an action shown by an AppBar or SearchAppBar.
 
-    AppBarAction extends \l Action with app-bar visibility, overflow, priority,
+    AppBarAction extends \ref Action with app-bar visibility, overflow, priority,
     and presentation settings. The inherited \c text is both the accessible
     name of the action button and the label used by the overflow menu.
 

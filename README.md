@@ -59,7 +59,7 @@ Default is `/usr/local`.
 You can also append the following options to the `cmake` command:
 
  * `-DFLUID_USE_SYSTEM_LCS:BOOL=ON`: Use a system-wide copy of LiriCMakeShared.
- * `-DFLUID_WITH_DOCUMENTATION:BOOL=OFF`: Do not build the documentation.
+ * `-DFLUID_WITH_DOCUMENTATION:BOOL=ON`: Build the Doxygen documentation.
  * `-DFLUID_WITH_DEMO:BOOL=OFF`: Do not build the demo application.
  * `-DFLUID_WITH_QML_MODULES:BOOL=OFF`: Do not build QML modules.
 
@@ -71,8 +71,10 @@ as explained in [this guide](https://doc.qt.io/qtcreator/creator-build-settings.
 
 ### Documentation
 
-The HTML documentation is built unless `-DFLUID_WITH_DOCUMENTATION:BOOL=OFF` is
-passed to cmake and it's installed into `<prefix>/share/doc/fluid/html`.
+The HTML documentation is built when `-DFLUID_WITH_DOCUMENTATION:BOOL=ON` is
+passed to CMake. Doxygen and
+[doxyqml](https://invent.kde.org/sdk/doxyqml) are required. The generated files
+are installed into `<prefix>/share/doc/fluid/html`.
 
 Open `<prefix>/share/doc/fluid/html/index.html` with a browser to read it.
 

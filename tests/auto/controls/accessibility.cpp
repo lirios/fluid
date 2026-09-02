@@ -35,7 +35,80 @@ class FluidAccessibilityTest : public QObject
 
 private slots:
     void rangeSliderHandlesAreRealAccessibleNodes();
+    void textFieldIsAnEditableAccessibleNode();
 };
+
+void FluidAccessibilityTest::textFieldIsAnEditableAccessibleNode()
+{
+    QAccessible::setActive(true);
+
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+
+        Window {
+            width: 480
+            height: 240
+            visible: true
+
+            MD.TextField {
+                id: passwordField
+                objectName: "passwordField"
+                width: 320
+                label: "Password"
+                text: "secret"
+                supportingText: "At least eight characters"
+                echoMode: TextInput.Password
+
+                trailing: MD.IconButton {
+                    objectName: "revealPasswordButton"
+                    text: "Reveal password"
+                    type: MD.IconButton.Standard
+                    icon.name: "visibility"
+                }
+            }
+        }
+    )", QUrl(QStringLiteral("inline:textfield-accessibility.qml")));
+
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    QVERIFY(window);
+    QCoreApplication::processEvents();
+
+    auto *field = root->findChild<QObject *>(QStringLiteral("passwordField"));
+    auto *revealButton =
+            root->findChild<QObject *>(QStringLiteral("revealPasswordButton"));
+    QVERIFY(field);
+    QVERIFY(revealButton);
+    auto *fieldInterface = QAccessible::queryAccessibleInterface(field);
+    auto *revealInterface = QAccessible::queryAccessibleInterface(revealButton);
+    QVERIFY(fieldInterface);
+    QVERIFY(revealInterface);
+    QCOMPARE(fieldInterface->role(), QAccessible::EditableText);
+    QCOMPARE(fieldInterface->text(QAccessible::Description),
+             QStringLiteral("At least eight characters"));
+    QVERIFY(fieldInterface->state().focusable);
+    QVERIFY(fieldInterface->state().passwordEdit);
+    QVERIFY(!fieldInterface->state().readOnly);
+    QVERIFY(fieldInterface->textInterface());
+    QCOMPARE(fieldInterface->textInterface()->characterCount(), 6);
+    QCOMPARE(revealInterface->role(), QAccessible::Button);
+
+    field->setProperty("errorText", QStringLiteral("Enter a longer password"));
+    field->setProperty("error", true);
+    field->setProperty("readOnly", true);
+    QCoreApplication::processEvents();
+    QCOMPARE(fieldInterface->text(QAccessible::Description),
+             QStringLiteral("Enter a longer password"));
+    QVERIFY(fieldInterface->state().readOnly);
+}
 
 void FluidAccessibilityTest::rangeSliderHandlesAreRealAccessibleNodes()
 {

@@ -36,6 +36,7 @@ TestCase {
             property alias sliderTrack: sliderTrack
             property alias checkIndicator: checkIndicator
             property alias radioIndicator: radioIndicator
+            property alias textField: textField
 
             width: 800
             height: 700
@@ -185,6 +186,16 @@ TestCase {
                 control: Item { property bool checked: true }
                 color: "blue"
             }
+
+            MD.TextField {
+                id: textField
+                x: 300
+                y: 520
+                width: 280
+                label: "Email address"
+                placeholderText: "name@example.com"
+                supportingText: "Used for account notifications"
+            }
         }
     }
 
@@ -262,6 +273,14 @@ TestCase {
         host.dropdown.error = true;
         host.dropdown.errorText = "Choose a valid country";
         compare(host.dropdown.Accessible.description, "Choose a valid country");
+
+        compare(host.textField.Accessible.role, Accessible.EditableText);
+        compare(host.textField.Accessible.name, "Email address");
+        compare(host.textField.Accessible.description, "Used for account notifications");
+        verify(host.textField.Accessible.editable);
+        host.textField.errorText = "Enter a valid email address";
+        host.textField.error = true;
+        compare(host.textField.Accessible.description, "Enter a valid email address");
 
         compare(host.groupBox.Accessible.role, Accessible.Grouping);
         compare(host.groupBox.Accessible.name, "Options");

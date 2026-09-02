@@ -35,6 +35,7 @@ set(_sources
     cpp/tokens/statetokens.cpp cpp/tokens/statetokens.h
     cpp/tokens/switch.cpp cpp/tokens/switch.h
     cpp/tokens/symbol.cpp cpp/tokens/symbol.h
+    cpp/tokens/textfield.cpp cpp/tokens/textfield.h
     cpp/tokens/tooltip.cpp cpp/tokens/tooltip.h
     cpp/tokens/tokens.cpp cpp/tokens/tokens.h
     cpp/tokens/typescale.cpp cpp/tokens/typescale.h

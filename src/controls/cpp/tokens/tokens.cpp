@@ -159,6 +159,12 @@ Symbol Tokens::symbol() const
     return m_symbol;
 }
 
+// Component tokens - Text field
+TextField Tokens::textField() const
+{
+    return m_textField;
+}
+
 // Component tokens - Tool tip
 ToolTip Tokens::toolTip() const
 {

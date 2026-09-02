@@ -479,10 +479,44 @@ Item {
             });
         }
 
+        function test_textField() {
+            verifyValues(MD.Tokens.textField, {
+                minimumWidth: 280,
+                containerHeight: 56,
+                horizontalPadding: 16,
+                contentVerticalPadding: 8,
+                supportingTextTopSpace: 4,
+                supportingTextMinimumHeight: 16,
+                prefixSuffixTextSpace: 2,
+                iconSize: 24,
+                iconTargetSize: 48,
+                filledContainerShape: [4, 4, 0, 0],
+                filledActiveIndicatorHeight: 1,
+                filledHoverActiveIndicatorHeight: 1,
+                filledDisabledActiveIndicatorHeight: 1,
+                filledFocusActiveIndicatorHeight: 2,
+                filledDisabledActiveIndicatorOpacity: 0.38,
+                filledDisabledContainerOpacity: 0.04,
+                outlinedContainerShape: [4, 4, 4, 4],
+                outlinedOutlineWidth: 1,
+                outlinedHoverOutlineWidth: 1,
+                outlinedDisabledOutlineWidth: 1,
+                outlinedFocusOutlineWidth: 2,
+                outlinedDisabledOutlineOpacity: 0.12,
+                outlinedLabelHorizontalPadding: 4,
+                disabledContentOpacity: 0.38
+            });
+        }
+
         function test_componentToSystemMappings() {
             const shape = MD.Tokens.shape;
             const elevation = MD.Tokens.elevation;
             const state = MD.Tokens.state;
+
+            verifyValues(MD.Tokens.textField, {
+                filledContainerShape: shape.cornerExtraSmallTop,
+                outlinedContainerShape: shape.cornerExtraSmall
+            });
 
             verifyValues(MD.Tokens.button, {
                 containerShapeRound: shape.cornerFull,

@@ -31,6 +31,7 @@
 #include "statetokens.h"
 #include "switch.h"
 #include "symbol.h"
+#include "textfield.h"
 #include "tooltip.h"
 
 namespace Fluid {
@@ -131,6 +132,9 @@ class Tokens : public QObject
     // Component tokens - Symbol
     Q_PROPERTY(Fluid::Symbol symbol READ symbol CONSTANT FINAL)
 
+    // Component tokens - Text field
+    Q_PROPERTY(Fluid::TextField textField READ textField CONSTANT FINAL)
+
     // Component tokens - Tool tip
     Q_PROPERTY(Fluid::ToolTip toolTip READ toolTip CONSTANT FINAL)
 
@@ -200,6 +204,10 @@ public:
     // Component tokens - Symbol
     Symbol symbol() const;
 
+    // Component tokens - Text field
+    //! Returns the immutable text-field component token group.
+    TextField textField() const;
+
     // Component tokens - Tool tip
     ToolTip toolTip() const;
 
@@ -232,6 +240,7 @@ private:
     Divider m_divider;
     Switch m_switch;
     Symbol m_symbol;
+    TextField m_textField;
     ToolTip m_toolTip;
 };
 

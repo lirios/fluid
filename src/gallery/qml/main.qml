@@ -43,6 +43,7 @@ MD.ApplicationWindow {
                 { "name": qsTr("App Bars"), "source": "AppBars.qml" },
                 { "name": qsTr("Indicators"), "source": "Indicators.qml" },
                 { "name": qsTr("Slider"), "source": "Slider.qml" },
+                { "name": qsTr("Text Fields"), "source": "TextFields.qml" },
                 { "name": qsTr("Lists"), "source": "Lists.qml" },
                 { "name": qsTr("Tooltips"), "source": "ToolTips.qml" }
             ]

@@ -4,7 +4,7 @@
 pragma ComponentBehavior: Bound
 
 import Fluid as MD
-import "../core/UiMetrics.js" as UiMetrics
+import Fluid.Private as P
 import "../internal/MotionAnimation.js" as MotionAnimation
 import QtQuick
 import QtQuick.Templates as T
@@ -115,26 +115,10 @@ T.TextField {
     readonly property bool _filledField: fieldStyle === MD.TextField.Filled
     //! \internal Whether the outlined presentation is selected.
     readonly property bool _outlinedField: fieldStyle === MD.TextField.Outlined
-    //! \internal Whether the label uses its floated presentation.
-    readonly property bool _labelFloated: label.length > 0
-                                          && (activeFocus || text.length > 0)
     //! \internal Whether focus should emphasize the field.
     readonly property bool _fieldActive: enabled && activeFocus
-    //! \internal Whether affixes and the placeholder can be displayed.
-    readonly property bool _inputDecorationVisible: label.length === 0 || _labelFloated
-    //! \internal Whether supporting or error content is present.
-    readonly property bool _hasSupportingContent: error
-                                                  ? errorText.length > 0
-                                                  : supportingText.length > 0
     //! \internal Height reserved below the field container.
-    readonly property real _supportingAreaHeight: _hasSupportingContent
-                                                   ? MD.Tokens.textField.supportingTextTopSpace
-                                                     + Math.max(
-                                                         MD.Tokens.textField.supportingTextMinimumHeight,
-                                                         error
-                                                         ? decoration.errorImplicitHeight
-                                                         : decoration.supportingImplicitHeight)
-                                                   : 0
+    readonly property real _supportingAreaHeight: decoration.supportingAreaHeight
     //! \internal Width at the logical leading edge before affix text.
     readonly property real _leadingBaseReservation: leading !== null
                                                      ? Math.max(
@@ -150,19 +134,20 @@ T.TextField {
     //! \internal Total logical leading reservation used by the editable text.
     readonly property real _leadingReservation: _leadingBaseReservation
                                                 + (prefixText.length > 0
-                                                   ? prefixMetrics.advanceWidth(prefixText)
+                                                   ? decoration.prefixImplicitWidth
                                                      + MD.Tokens.textField.prefixSuffixTextSpace
                                                    : 0)
     //! \internal Total logical trailing reservation used by the editable text.
     readonly property real _trailingReservation: _trailingBaseReservation
                                                  + (suffixText.length > 0
-                                                    ? suffixMetrics.advanceWidth(suffixText)
+                                                    ? decoration.suffixImplicitWidth
                                                       + MD.Tokens.textField.prefixSuffixTextSpace
                                                     : 0)
     //! \internal Center line shared by input text, placeholder, and affixes.
     readonly property real _inputCenterY: MD.Tokens.textField.containerHeight / 2
-                                          + (_filledField && _labelFloated
+                                          + (_filledField
                                              ? MD.Tokens.typescale.bodySmall.lineHeight / 2
+                                               * decoration.labelProgress
                                              : 0)
     //! \internal Effective field label color.
     readonly property color _labelColor: !enabled
@@ -201,9 +186,10 @@ T.TextField {
     implicitHeight: MD.Tokens.textField.containerHeight + _supportingAreaHeight
     leftPadding: mirrored ? _trailingReservation : _leadingReservation
     rightPadding: mirrored ? _leadingReservation : _trailingReservation
-    topPadding: _filledField && _labelFloated
-                ? MD.Tokens.typescale.bodySmall.lineHeight
-                  + MD.Tokens.textField.contentVerticalPadding
+    topPadding: _filledField
+                ? (MD.Tokens.typescale.bodySmall.lineHeight
+                   + MD.Tokens.textField.contentVerticalPadding)
+                  * decoration.labelProgress
                 : 0
     bottomPadding: _supportingAreaHeight
     hoverEnabled: true
@@ -231,132 +217,36 @@ T.TextField {
     Accessible.readOnly: readOnly
     Accessible.passwordEdit: echoMode !== TextInput.Normal
 
-    Behavior on color {
-        ColorAnimation {
-            duration: MotionAnimation.expressiveFastEffectsDuration
-            easing.type: Easing.BezierSpline
-            easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
-        }
+    background: Loader {
+        sourceComponent: decoration.backgroundComponent
     }
 
-    FontMetrics {
-        id: prefixMetrics
-        font: control.font
-    }
-
-    FontMetrics {
-        id: suffixMetrics
-        font: control.font
-    }
-
-    background: Item {
-        implicitWidth: MD.Tokens.textField.minimumWidth
-        implicitHeight: MD.Tokens.textField.containerHeight
-                        + control._supportingAreaHeight
-
-        Rectangle {
-            objectName: "textFieldContainer"
-            width: parent.width
-            height: MD.Tokens.textField.containerHeight
-
-            readonly property var fieldShape: control._filledField
-                                              ? MD.Tokens.textField.filledContainerShape
-                                              : MD.Tokens.textField.outlinedContainerShape
-            //! \internal Observable outline color, including transitions.
-            readonly property color effectiveBorderColor: border.color
-            //! \internal Observable outline width, including transitions.
-            readonly property real effectiveBorderWidth: border.width
-
-            color: control._filledField
-                   ? control.enabled
-                     ? control.MD.Style.surfaceContainerHighestColor
-                     : MD.Color.transparent(
-                           control.MD.Style.onSurfaceColor,
-                           MD.Tokens.textField.filledDisabledContainerOpacity)
-                   : "transparent"
-            border.color: control.enabled
-                          ? control._indicatorColor
-                          : MD.Color.transparent(
-                                control.MD.Style.onSurfaceColor,
-                                MD.Tokens.textField.outlinedDisabledOutlineOpacity)
-            border.width: control._outlinedField
-                          ? !control.enabled
-                            ? MD.Tokens.textField.outlinedDisabledOutlineWidth
-                            : control._fieldActive
-                              ? MD.Tokens.textField.outlinedFocusOutlineWidth
-                              : control.hovered
-                                ? MD.Tokens.textField.outlinedHoverOutlineWidth
-                                : MD.Tokens.textField.outlinedOutlineWidth
-                          : 0
-            topLeftRadius: UiMetrics.resolveShapeRadius(fieldShape.topLeft, width, height)
-            topRightRadius: UiMetrics.resolveShapeRadius(fieldShape.topRight, width, height)
-            bottomLeftRadius: UiMetrics.resolveShapeRadius(fieldShape.bottomLeft, width, height)
-            bottomRightRadius: UiMetrics.resolveShapeRadius(fieldShape.bottomRight, width, height)
-
-            Behavior on color {
-                ColorAnimation {
-                    duration: MotionAnimation.expressiveFastEffectsDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
-                }
-            }
-
-            Behavior on border.color {
-                ColorAnimation {
-                    duration: MotionAnimation.expressiveFastEffectsDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
-                }
-            }
-
-            Rectangle {
-                objectName: "textFieldActiveIndicator"
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: !control.enabled
-                        ? MD.Tokens.textField.filledDisabledActiveIndicatorHeight
-                        : control._fieldActive
-                          ? MD.Tokens.textField.filledFocusActiveIndicatorHeight
-                          : control.hovered
-                            ? MD.Tokens.textField.filledHoverActiveIndicatorHeight
-                            : MD.Tokens.textField.filledActiveIndicatorHeight
-                color: control._indicatorColor
-                opacity: control.enabled
-                         ? 1
-                         : MD.Tokens.textField.filledDisabledActiveIndicatorOpacity
-                visible: control._filledField
-                Accessible.ignored: true
-
-                Behavior on height {
-                    NumberAnimation {
-                        duration: MotionAnimation.expressiveFastSpatialDuration
-                        easing.type: Easing.BezierSpline
-                        easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
-                    }
-                }
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: MotionAnimation.expressiveFastEffectsDuration
-                        easing.type: Easing.BezierSpline
-                        easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
-                    }
-                }
-            }
-        }
-    }
-
-    MD.TextFieldDecoration {
+    P.FieldDecoration {
         id: decoration
+        objectName: "textFieldDecoration"
         anchors.fill: parent
 
+        containerObjectName: "textFieldContainer"
+        activeIndicatorObjectName: "textFieldActiveIndicator"
+        labelNotchObjectName: "textFieldLabelNotch"
+        labelObjectName: "textFieldLabel"
+        placeholderObjectName: "textFieldPlaceholder"
+        prefixObjectName: "textFieldPrefix"
+        suffixObjectName: "textFieldSuffix"
+        leadingSlotObjectName: "textFieldLeadingSlot"
+        trailingSlotObjectName: "textFieldTrailingSlot"
+        supportingObjectName: "textFieldSupportingText"
+        errorObjectName: "textFieldErrorText"
         mirrored: control.mirrored
         outlined: control._outlinedField
-        labelFloated: control._labelFloated
-        inputDecorationVisible: control._inputDecorationVisible
+        fieldFocused: control.activeFocus
         fieldEnabled: control.enabled
         error: control.error
+        containerTransitionsEnabled: true
+        labelTransitionsEnabled: true
+        indicatorTransitionsEnabled: control.enabled
+        applySlotDisabledOpacity: true
+        backgroundImplicitWidth: MD.Tokens.textField.minimumWidth
         containerHeight: MD.Tokens.textField.containerHeight
         horizontalPadding: MD.Tokens.textField.horizontalPadding
         contentVerticalPadding: MD.Tokens.textField.contentVerticalPadding
@@ -364,12 +254,18 @@ T.TextField {
         supportingTextMinimumHeight: MD.Tokens.textField.supportingTextMinimumHeight
         outlinedLabelHorizontalPadding: MD.Tokens.textField.outlinedLabelHorizontalPadding
         disabledContentOpacity: MD.Tokens.textField.disabledContentOpacity
-        iconTargetSize: MD.Tokens.textField.iconTargetSize
+        leadingSlotMinimumSize: MD.Tokens.textField.iconTargetSize
+        trailingSlotMinimumSize: MD.Tokens.textField.iconTargetSize
         inputCenterY: control._inputCenterY
+        inputBaselineY: control.baselineOffset
+        alignInputDecorationsToBaseline: true
         leadingReservation: control._leadingBaseReservation
         trailingReservation: control._trailingBaseReservation
         inputLeftPadding: control.leftPadding
         inputRightPadding: control.rightPadding
+        labelLeadingPosition: control._leadingBaseReservation
+        labelTrailingPosition: control._trailingBaseReservation
+        fullShapeValue: MD.Tokens.shape.cornerValueFull
         labelText: control.label
         placeholderText: control.placeholderText
         inputText: control.text
@@ -377,11 +273,59 @@ T.TextField {
         suffixText: control.suffixText
         supportingText: control.supportingText
         errorText: control.errorText
+        containerColor: control._filledField
+                        ? control.enabled
+                          ? control.MD.Style.surfaceContainerHighestColor
+                          : MD.Color.transparent(
+                                control.MD.Style.onSurfaceColor,
+                                MD.Tokens.textField.filledDisabledContainerOpacity)
+                        : "transparent"
+        outlineColor: control.enabled
+                      ? control._indicatorColor
+                      : MD.Color.transparent(
+                            control.MD.Style.onSurfaceColor,
+                            MD.Tokens.textField.outlinedDisabledOutlineOpacity)
+        indicatorColor: control._indicatorColor
         labelColor: control._labelColor
+        inputDecorationColor: control.enabled
+                              ? control.MD.Style.onSurfaceVariantColor
+                              : control.MD.Style.onSurfaceColor
         supportingColor: control._supportingColor
         notchColor: control.MD.Style.surfaceColor
+        containerShape: control._filledField
+                        ? MD.Tokens.textField.filledContainerShape
+                        : MD.Tokens.textField.outlinedContainerShape
+        outlineWidth: control._outlinedField
+                      ? !control.enabled
+                        ? MD.Tokens.textField.outlinedDisabledOutlineWidth
+                        : control._fieldActive
+                          ? MD.Tokens.textField.outlinedFocusOutlineWidth
+                          : control.hovered
+                            ? MD.Tokens.textField.outlinedHoverOutlineWidth
+                            : MD.Tokens.textField.outlinedOutlineWidth
+                      : 0
+        activeIndicatorVisible: control._filledField
+        activeIndicatorHeight: !control.enabled
+                               ? MD.Tokens.textField.filledDisabledActiveIndicatorHeight
+                               : control._fieldActive
+                                 ? MD.Tokens.textField.filledFocusActiveIndicatorHeight
+                                 : control.hovered
+                                   ? MD.Tokens.textField.filledHoverActiveIndicatorHeight
+                                   : MD.Tokens.textField.filledActiveIndicatorHeight
+        activeIndicatorOpacity: control.enabled
+                                ? 1
+                                : MD.Tokens.textField.filledDisabledActiveIndicatorOpacity
+        fontFamily: control.MD.Style.plainFontFamily
         bodyLargeTypeScale: MD.Tokens.typescale.bodyLarge
         bodySmallTypeScale: MD.Tokens.typescale.bodySmall
+        supportingWrapMode: Text.Wrap
+        supportingElide: Text.ElideNone
+        effectsDuration: MotionAnimation.expressiveFastEffectsDuration
+        slowEffectsDuration: MotionAnimation.expressiveSlowEffectsDuration
+        spatialDuration: MotionAnimation.expressiveFastSpatialDuration
+        effectsCurve: MotionAnimation.expressiveFastEffectsCurve
+        slowEffectsCurve: MotionAnimation.expressiveSlowEffectsCurve
+        spatialCurve: MotionAnimation.expressiveFastSpatialCurve
         leading: control.leading
         trailing: control.trailing
     }

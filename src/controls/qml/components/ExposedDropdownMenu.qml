@@ -4,6 +4,7 @@
 pragma ComponentBehavior: Bound
 
 import Fluid as MD
+import Fluid.Private as P
 import "../core/UiMetrics.js" as UiMetrics
 import "../internal/MotionAnimation.js" as MotionAnimation
 import QtQuick
@@ -88,10 +89,6 @@ T.ComboBox {
     //! \internal Whether the field has either supported leading icon form.
     readonly property bool _hasLeadingIcon: leadingIconName.length > 0
                                             || leadingIconSource.toString().length > 0
-    //! \internal Whether the label uses its floated presentation.
-    readonly property bool _labelFloated: label.length > 0
-                                          && (displayText.length > 0 || editText.length > 0
-                                              || activeFocus || popup.visible)
     //! \internal Whether the field or its popup currently owns focus state.
     readonly property bool _fieldActive: activeFocus || popup.visible
     //! \internal Effective input text color.
@@ -141,11 +138,7 @@ T.ComboBox {
                                                  + MD.Tokens.exposedDropdownMenu.trailingIconSize
                                                  + MD.Tokens.exposedDropdownMenu.trailingIconContentSpace
     //! \internal Height reserved below the field for supporting or error text.
-    readonly property real _supportingAreaHeight: (error && errorText.length > 0)
-                                                   || (!error && supportingText.length > 0)
-                                                   ? MD.Tokens.exposedDropdownMenu.supportingTextTopSpace
-                                                     + supportingLabel.implicitHeight
-                                                   : 0
+    readonly property real _supportingAreaHeight: fieldDecoration.supportingAreaHeight
 
     //! \internal Returns a model role value without requiring a particular model type.
     function _roleValue(row, roleName, rowModel) {
@@ -442,78 +435,14 @@ T.ComboBox {
         verticalAlignment: Text.AlignVCenter
         leftPadding: 0
         rightPadding: 0
-        topPadding: control._labelFloated
-                    && control._filledField
-                    ? fieldLabel.implicitHeight + MD.Tokens.exposedDropdownMenu.labelInputTextSpace
+        topPadding: control._filledField
+                    ? (fieldDecoration.labelImplicitHeight
+                       + MD.Tokens.exposedDropdownMenu.labelInputTextSpace)
+                      * fieldDecoration.labelProgress
                     : 0
         bottomPadding: 0
         background: Item {}
         Accessible.ignored: true
-
-        Rectangle {
-            objectName: "exposedDropdownLabelNotch"
-            x: fieldLabel.x - MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
-            y: fieldLabel.y
-            width: fieldLabel.width
-                   + MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding * 2
-            height: fieldLabel.height
-            color: control.MD.Style.surfaceColor
-            visible: control._labelFloated
-                     && control._outlinedField
-        }
-
-        MD.Label {
-            id: fieldLabel
-            objectName: "exposedDropdownLabel"
-            readonly property bool outlinedFloating: control._labelFloated
-                                                     && control._outlinedField
-            x: outlinedFloating
-               ? control.mirrored
-                 ? parent.width - width
-                   - MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
-                 : MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
-               : 0
-            y: outlinedFloating ? -height / 2
-               : control._labelFloated ? MD.Tokens.exposedDropdownMenu.contentVerticalPadding
-               : (parent.height - height) / 2
-            width: outlinedFloating
-                   ? Math.min(fieldLabelFontMetrics.advanceWidth(text),
-                              parent.width
-                              - MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding * 2)
-                   : parent.width
-            text: control.label
-            typescale: control._labelFloated ? MD.Tokens.typescale.bodySmall
-                                             : MD.Tokens.typescale.bodyLarge
-            color: control._labelColor
-            opacity: control.enabled ? 1
-                                     : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
-            horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
-            wrapMode: Text.NoWrap
-            elide: Text.ElideRight
-            visible: text.length > 0
-
-            FontMetrics {
-                id: fieldLabelFontMetrics
-                font: fieldLabel.font
-            }
-        }
-
-        MD.Label {
-            objectName: "exposedDropdownPlaceholder"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.baseline: parent.baseline
-            text: control.placeholderText
-            typescale: MD.Tokens.typescale.bodyLarge
-            color: control.enabled ? control.MD.Style.onSurfaceVariantColor
-                                   : control.MD.Style.onSurfaceColor
-            opacity: control.enabled ? 1
-                                     : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
-            horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
-            elide: Text.ElideRight
-            visible: field.text.length === 0 && text.length > 0
-                     && (control.label.length === 0 || control._labelFloated)
-        }
     }
 
     indicator: Item {
@@ -527,82 +456,30 @@ T.ComboBox {
         opacity: control.enabled ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
 
         MD.Symbol {
+            objectName: "exposedDropdownTrailingIcon"
             anchors.fill: parent
             name: MD.SymbolNames.symbolArrowDropDown
             iconWidth: parent.width
             iconHeight: parent.height
             color: control._trailingIconColor
             rotation: control.popup.visible ? 180 : 0
-            Behavior on rotation {
-                NumberAnimation {
-                    duration: MotionAnimation.expressiveFastEffectsDuration
-                    easing.type: Easing.BezierSpline
-                    easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
-                }
-            }
         }
     }
 
-    background: Item {
-        Rectangle {
-            id: fieldContainer
-            objectName: "exposedDropdownBackground"
-            width: parent.width
-            height: MD.Tokens.exposedDropdownMenu.fieldHeight
-            readonly property var fieldShape: control._filledField
-                                              ? MD.Tokens.exposedDropdownMenu.filledContainerShape
-                                              : MD.Tokens.exposedDropdownMenu.outlinedContainerShape
-            color: control.flat || control._outlinedField
-                   ? "transparent"
-                   : !control.enabled
-                     ? MD.Color.transparent(
-                           control.MD.Style.onSurfaceColor,
-                           MD.Tokens.exposedDropdownMenu.filledDisabledContainerOpacity)
-                     : control.MD.Style.surfaceContainerHighestColor
-            border.color: !control.enabled
-                            ? MD.Color.transparent(
-                                  control.MD.Style.onSurfaceColor,
-                                  MD.Tokens.exposedDropdownMenu.outlinedDisabledOutlineOpacity)
-                            : control._indicatorColor
-            border.width: control._outlinedField && !control.flat
-                          ? control._fieldActive
-                            ? MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth
-                            : control.hovered
-                              ? MD.Tokens.exposedDropdownMenu.outlinedHoverOutlineWidth
-                              : MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth
-                          : 0
-            topLeftRadius: UiMetrics.resolveShapeRadius(fieldShape.topLeft, width, height)
-            topRightRadius: UiMetrics.resolveShapeRadius(fieldShape.topRight, width, height)
-            bottomLeftRadius: UiMetrics.resolveShapeRadius(fieldShape.bottomLeft, width, height)
-            bottomRightRadius: UiMetrics.resolveShapeRadius(fieldShape.bottomRight, width, height)
+    background: Loader {
+        sourceComponent: fieldDecoration.backgroundComponent
+    }
 
-            Rectangle {
-                objectName: "exposedDropdownActiveIndicator"
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                height: control._fieldActive
-                        ? MD.Tokens.exposedDropdownMenu.filledFocusActiveIndicatorHeight
-                        : control.hovered
-                          ? MD.Tokens.exposedDropdownMenu.filledHoverActiveIndicatorHeight
-                          : MD.Tokens.exposedDropdownMenu.filledActiveIndicatorHeight
-                color: control._indicatorColor
-                opacity: control.enabled ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
-                visible: control._filledField && !control.flat
-            }
-        }
+    Component {
+        id: exposedDropdownLeadingIcon
 
         Item {
-            id: leadingIcon
             objectName: "exposedDropdownLeadingIcon"
-            x: control.mirrored
-               ? parent.width - width - MD.Tokens.exposedDropdownMenu.horizontalPadding
-               : MD.Tokens.exposedDropdownMenu.horizontalPadding
-            y: (MD.Tokens.exposedDropdownMenu.fieldHeight - height) / 2
             width: control._leadingIconSize
             height: width
-            visible: control._hasLeadingIcon
-            opacity: control.enabled ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
+            opacity: control.enabled
+                     ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
+
             Image {
                 anchors.fill: parent
                 source: control.leadingIconSource
@@ -610,48 +487,131 @@ T.ComboBox {
                 fillMode: Image.PreserveAspectFit
                 visible: source.toString().length > 0
             }
+
             MD.Symbol {
                 anchors.fill: parent
                 name: control.leadingIconName
                 iconWidth: parent.width
                 iconHeight: parent.height
-                    color: control._leadingIconColor
+                color: control._leadingIconColor
                 visible: control.leadingIconSource.toString().length === 0
                          && control.leadingIconName.length > 0
             }
         }
+    }
 
-        MD.Label {
-            id: supportingLabel
-            objectName: "exposedDropdownSupportingText"
-            x: MD.Tokens.exposedDropdownMenu.horizontalPadding
-            y: MD.Tokens.exposedDropdownMenu.fieldHeight
-               + MD.Tokens.exposedDropdownMenu.supportingTextTopSpace
-            width: parent.width - MD.Tokens.exposedDropdownMenu.horizontalPadding * 2
-            text: control.supportingText
-            typescale: MD.Tokens.typescale.bodySmall
-            color: control._supportingColor
-            opacity: control.enabled ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
-            horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
-            elide: Text.ElideRight
-            visible: !control.error && text.length > 0
-            Accessible.ignored: true
-        }
+    P.FieldDecoration {
+        id: fieldDecoration
+        objectName: "exposedDropdownFieldDecoration"
+        anchors.fill: parent
 
-        MD.Label {
-            objectName: "exposedDropdownErrorText"
-            x: supportingLabel.x
-            y: supportingLabel.y
-            width: supportingLabel.width
-            text: control.errorText
-            typescale: MD.Tokens.typescale.bodySmall
-            color: control._supportingColor
-            opacity: control.enabled ? 1 : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
-            horizontalAlignment: control.mirrored ? Text.AlignRight : Text.AlignLeft
-            elide: Text.ElideRight
-            visible: control.error && text.length > 0
-            Accessible.ignored: true
-        }
+        containerObjectName: "exposedDropdownBackground"
+        activeIndicatorObjectName: "exposedDropdownActiveIndicator"
+        labelNotchObjectName: "exposedDropdownLabelNotch"
+        labelObjectName: "exposedDropdownLabel"
+        placeholderObjectName: "exposedDropdownPlaceholder"
+        prefixObjectName: "exposedDropdownPrefix"
+        suffixObjectName: "exposedDropdownSuffix"
+        leadingSlotObjectName: "exposedDropdownLeadingSlot"
+        trailingSlotObjectName: "exposedDropdownTrailingSlot"
+        supportingObjectName: "exposedDropdownSupportingText"
+        errorObjectName: "exposedDropdownErrorText"
+        mirrored: control.mirrored
+        outlined: control._outlinedField
+        fieldFocused: control._fieldActive
+        fieldEnabled: control.enabled
+        error: control.error
+        containerTransitionsEnabled: true
+        labelTransitionsEnabled: true
+        indicatorTransitionsEnabled: control.enabled
+        applySlotDisabledOpacity: false
+        backgroundImplicitWidth: Math.max(
+                                     MD.Tokens.exposedDropdownMenu.minimumWidth,
+                                     MD.Tokens.exposedDropdownMenu.preferredWidth)
+        containerHeight: MD.Tokens.exposedDropdownMenu.fieldHeight
+        horizontalPadding: MD.Tokens.exposedDropdownMenu.horizontalPadding
+        contentVerticalPadding: MD.Tokens.exposedDropdownMenu.contentVerticalPadding
+        supportingTextTopSpace: MD.Tokens.exposedDropdownMenu.supportingTextTopSpace
+        supportingTextMinimumHeight: 0
+        outlinedLabelHorizontalPadding: MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
+        disabledContentOpacity: MD.Tokens.exposedDropdownMenu.disabledContentOpacity
+        leadingSlotMinimumSize: control._leadingIconSize
+        trailingSlotMinimumSize: 0
+        inputCenterY: MD.Tokens.exposedDropdownMenu.fieldHeight / 2
+        inputBaselineY: field.baselineOffset
+        alignInputDecorationsToBaseline: true
+        leadingReservation: control._leadingReservation
+        trailingReservation: control._trailingReservation
+        inputLeftPadding: control.leftPadding
+        inputRightPadding: control.rightPadding
+        labelLeadingPosition: control._leadingReservation
+                              + (control._outlinedField
+                                 ? MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
+                                   * labelProgress
+                                 : 0)
+        labelTrailingPosition: control._trailingReservation
+                               + (control._outlinedField
+                                  ? MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding
+                                    * labelProgress
+                                  : 0)
+        fullShapeValue: MD.Tokens.shape.cornerValueFull
+        labelText: control.label
+        placeholderText: control.placeholderText
+        inputText: field.text
+        prefixText: ""
+        suffixText: ""
+        supportingText: control.supportingText
+        errorText: control.errorText
+        containerColor: control.flat || control._outlinedField
+                        ? "transparent"
+                        : !control.enabled
+                          ? MD.Color.transparent(
+                                control.MD.Style.onSurfaceColor,
+                                MD.Tokens.exposedDropdownMenu.filledDisabledContainerOpacity)
+                          : control.MD.Style.surfaceContainerHighestColor
+        outlineColor: !control.enabled
+                      ? MD.Color.transparent(
+                            control.MD.Style.onSurfaceColor,
+                            MD.Tokens.exposedDropdownMenu.outlinedDisabledOutlineOpacity)
+                      : control._indicatorColor
+        indicatorColor: control._indicatorColor
+        labelColor: control._labelColor
+        inputDecorationColor: control.enabled
+                              ? control.MD.Style.onSurfaceVariantColor
+                              : control.MD.Style.onSurfaceColor
+        supportingColor: control._supportingColor
+        notchColor: control.MD.Style.surfaceColor
+        containerShape: control._filledField
+                        ? MD.Tokens.exposedDropdownMenu.filledContainerShape
+                        : MD.Tokens.exposedDropdownMenu.outlinedContainerShape
+        outlineWidth: control._outlinedField && !control.flat
+                      ? control._fieldActive
+                        ? MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth
+                        : control.hovered
+                          ? MD.Tokens.exposedDropdownMenu.outlinedHoverOutlineWidth
+                          : MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth
+                      : 0
+        activeIndicatorVisible: control._filledField && !control.flat
+        activeIndicatorHeight: control._fieldActive
+                               ? MD.Tokens.exposedDropdownMenu.filledFocusActiveIndicatorHeight
+                               : control.hovered
+                                 ? MD.Tokens.exposedDropdownMenu.filledHoverActiveIndicatorHeight
+                                 : MD.Tokens.exposedDropdownMenu.filledActiveIndicatorHeight
+        activeIndicatorOpacity: control.enabled
+                                ? 1
+                                : MD.Tokens.exposedDropdownMenu.disabledContentOpacity
+        fontFamily: control.MD.Style.plainFontFamily
+        bodyLargeTypeScale: MD.Tokens.typescale.bodyLarge
+        bodySmallTypeScale: MD.Tokens.typescale.bodySmall
+        supportingWrapMode: Text.Wrap
+        supportingElide: Text.ElideRight
+        effectsDuration: MotionAnimation.expressiveFastEffectsDuration
+        slowEffectsDuration: MotionAnimation.expressiveSlowEffectsDuration
+        spatialDuration: MotionAnimation.expressiveFastSpatialDuration
+        effectsCurve: MotionAnimation.expressiveFastEffectsCurve
+        slowEffectsCurve: MotionAnimation.expressiveSlowEffectsCurve
+        spatialCurve: MotionAnimation.expressiveFastSpatialCurve
+        leading: control._hasLeadingIcon ? exposedDropdownLeadingIcon : null
     }
 
     popup: T.Popup {

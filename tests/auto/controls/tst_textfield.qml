@@ -134,6 +134,7 @@ TestCase {
         compare(field.leading, null);
         compare(field.trailing, null);
         compare(field.focusPolicy, Qt.StrongFocus);
+        verify(findChild(field, "textFieldDecoration"));
         compare(field.Accessible.role, Accessible.EditableText);
         compare(field.Accessible.name, "Name");
         compare(field.Accessible.description, "Shown to other people");
@@ -162,8 +163,102 @@ TestCase {
         field.fieldStyle = MD.TextField.Outlined;
         tryCompare(indicator, "visible", false);
         verifyShape(container, MD.Tokens.textField.outlinedContainerShape);
-        compare(container.border.width, MD.Tokens.textField.outlinedFocusOutlineWidth);
+        tryCompare(container.border, "width", MD.Tokens.textField.outlinedFocusOutlineWidth);
         tryCompare(container, "color", Qt.rgba(0, 0, 0, 0));
+    }
+
+    function test_expressive_input_phase_transitions() {
+        const field = createField(adornedFieldComponent, {
+            "placeholderText": "0.00"
+        });
+        const decoration = findChild(field, "textFieldDecoration");
+        const label = findChild(field, "textFieldLabel");
+        const placeholder = findChild(field, "textFieldPlaceholder");
+        const prefix = findChild(field, "textFieldPrefix");
+        const suffix = findChild(field, "textFieldSuffix");
+        const indicator = findChild(field, "textFieldActiveIndicator");
+        verify(decoration);
+        verify(label);
+        verify(placeholder);
+        verify(prefix);
+        verify(suffix);
+        verify(indicator);
+        compare(decoration.labelProgress, 0);
+        compare(decoration.placeholderOpacity, 0);
+        compare(decoration.affixOpacity, 0);
+        compare(label.font.pixelSize, MD.Tokens.typescale.bodyLarge.fontSize);
+
+        field.forceActiveFocus(Qt.TabFocusReason);
+        tryCompare(field, "activeFocus", true);
+        wait(40);
+        verify(decoration.labelProgress > 0 && decoration.labelProgress < 1);
+        verify(decoration.placeholderOpacity > 0 && decoration.placeholderOpacity < 1);
+        verify(decoration.affixOpacity > 0 && decoration.affixOpacity < 1);
+        verify(indicator.height > MD.Tokens.textField.filledActiveIndicatorHeight
+               && indicator.height < MD.Tokens.textField.filledFocusActiveIndicatorHeight);
+        compare(label.font.pixelSize,
+                Math.round(MD.Tokens.typescale.bodyLarge.fontSize
+                           + (MD.Tokens.typescale.bodySmall.fontSize
+                              - MD.Tokens.typescale.bodyLarge.fontSize)
+                             * decoration.labelProgress));
+        verify(placeholder.visible);
+        verify(prefix.visible);
+        verify(suffix.visible);
+
+        tryCompare(decoration, "labelProgress", 1);
+        tryCompare(decoration, "placeholderOpacity", 1);
+        tryCompare(decoration, "affixOpacity", 1);
+        tryCompare(indicator, "height",
+                   MD.Tokens.textField.filledFocusActiveIndicatorHeight);
+        compare(label.font.pixelSize, MD.Tokens.typescale.bodySmall.fontSize);
+
+        testCase.forceActiveFocus();
+        tryCompare(field, "activeFocus", false);
+        wait(40);
+        verify(decoration.labelProgress > 0 && decoration.labelProgress < 1);
+        verify(decoration.placeholderOpacity > 0 && decoration.placeholderOpacity < 1);
+        verify(decoration.affixOpacity > 0 && decoration.affixOpacity < 1);
+        verify(placeholder.visible);
+        verify(prefix.visible);
+        verify(suffix.visible);
+        tryCompare(decoration, "placeholderOpacity", 0);
+        tryCompare(decoration, "affixOpacity", 0);
+        tryCompare(decoration, "labelProgress", 0);
+        verify(!placeholder.visible);
+        verify(!prefix.visible);
+        verify(!suffix.visible);
+
+        field.text = "25";
+        wait(40);
+        verify(decoration.labelProgress > 0 && decoration.labelProgress < 1);
+        verify(decoration.affixOpacity > 0 && decoration.affixOpacity < 1);
+        verify(!placeholder.visible);
+        tryCompare(decoration, "labelProgress", 1);
+        tryCompare(decoration, "affixOpacity", 1);
+        field.text = "";
+        wait(40);
+        verify(decoration.labelProgress > 0 && decoration.labelProgress < 1);
+        verify(decoration.affixOpacity > 0 && decoration.affixOpacity < 1);
+        tryCompare(decoration, "labelProgress", 0);
+        tryCompare(decoration, "affixOpacity", 0);
+
+        const unlabeled = createField(fieldComponent, {
+            "label": "",
+            "text": "Value",
+            "placeholderText": "Slow reveal",
+            "supportingText": ""
+        });
+        const unlabeledDecoration = findChild(unlabeled, "textFieldDecoration");
+        const unlabeledPlaceholder = findChild(unlabeled, "textFieldPlaceholder");
+        verify(unlabeledDecoration);
+        verify(unlabeledPlaceholder);
+        compare(unlabeledDecoration.placeholderOpacity, 0);
+        unlabeled.text = "";
+        wait(180);
+        verify(unlabeledDecoration.placeholderOpacity > 0
+               && unlabeledDecoration.placeholderOpacity < 1);
+        verify(unlabeledPlaceholder.visible);
+        tryCompare(unlabeledDecoration, "placeholderOpacity", 1);
     }
 
     function test_label_placeholder_and_affix_visibility() {
@@ -200,8 +295,58 @@ TestCase {
             "supportingText": ""
         });
         const unlabeledPlaceholder = findChild(unlabeled, "textFieldPlaceholder");
+        const unlabeledDecoration = findChild(unlabeled, "textFieldDecoration");
         verify(unlabeledPlaceholder);
+        verify(unlabeledDecoration);
         verify(unlabeledPlaceholder.visible);
+        compare(unlabeledDecoration.labelProgress, 0);
+        compare(unlabeled.topPadding, 0);
+    }
+
+    function test_input_decoration_baselines_data() {
+        return [
+            { "tag": "filled", "fieldStyle": MD.TextField.Filled },
+            { "tag": "outlined", "fieldStyle": MD.TextField.Outlined }
+        ];
+    }
+
+    function test_input_decoration_baselines(data) {
+        const field = createField(adornedFieldComponent, {
+            "fieldStyle": data.fieldStyle,
+            "placeholderText": "0.00",
+            "supportingText": "",
+            "text": "25"
+        });
+        const decoration = findChild(field, "textFieldDecoration");
+        const placeholder = findChild(field, "textFieldPlaceholder");
+        const prefix = findChild(field, "textFieldPrefix");
+        const suffix = findChild(field, "textFieldSuffix");
+        verify(decoration);
+        verify(placeholder);
+        verify(prefix);
+        verify(suffix);
+
+        tryCompare(decoration, "labelProgress", 1);
+        verify(prefix.visible);
+        verify(suffix.visible);
+        compare(prefix.mapToItem(field, 0, prefix.baselineOffset).y,
+                field.baselineOffset);
+        compare(suffix.mapToItem(field, 0, suffix.baselineOffset).y,
+                field.baselineOffset);
+        compare(field.leftPadding
+                - prefix.mapToItem(field, prefix.width, 0).x,
+                MD.Tokens.textField.prefixSuffixTextSpace);
+        compare(suffix.mapToItem(field, 0, 0).x
+                - (field.width - field.rightPadding),
+                MD.Tokens.textField.prefixSuffixTextSpace);
+
+        field.forceActiveFocus(Qt.TabFocusReason);
+        tryCompare(field, "activeFocus", true);
+        field.text = "";
+        tryCompare(decoration, "placeholderOpacity", 1);
+        verify(placeholder.visible);
+        compare(placeholder.mapToItem(field, 0, placeholder.baselineOffset).y,
+                field.baselineOffset);
     }
 
     function test_hover_readonly_and_error_visual_states() {
@@ -343,12 +488,21 @@ TestCase {
                > trailing.mapToItem(field, 0, 0).x);
         verify(prefix.mapToItem(field, 0, 0).x
                > suffix.mapToItem(field, 0, 0).x);
+        compare(prefix.mapToItem(field, 0, 0).x
+                - (field.width - field.rightPadding),
+                MD.Tokens.textField.prefixSuffixTextSpace);
+        compare(field.leftPadding
+                - suffix.mapToItem(field, suffix.width, 0).x,
+                MD.Tokens.textField.prefixSuffixTextSpace);
         compare(field.horizontalAlignment, Text.AlignRight);
         const label = findChild(field, "textFieldLabel");
         const notch = findChild(field, "textFieldLabelNotch");
+        const decoration = findChild(field, "textFieldDecoration");
         verify(label);
         verify(notch);
-        verify(notch.visible);
+        verify(decoration);
+        tryCompare(decoration, "labelProgress", 1);
+        tryCompare(notch, "visible", true);
         verify(notch.x <= label.x);
         verify(notch.x + notch.width >= label.x + label.width);
 

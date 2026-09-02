@@ -147,6 +147,37 @@ TestCase {
         }
     }
 
+    Component {
+        id: sharedFieldHostComponent
+
+        Item {
+            property alias textField: textField
+            property alias dropdown: dropdown
+
+            width: 580
+            height: 120
+
+            MD.TextField {
+                id: textField
+
+                width: 280
+                label: "Shared field"
+                text: "Value"
+                supportingText: "Supporting text"
+            }
+
+            MD.ExposedDropdownMenu {
+                id: dropdown
+
+                x: 300
+                width: 280
+                label: "Shared field"
+                supportingText: "Supporting text"
+                model: ["Value"]
+            }
+        }
+    }
+
     function createMenu(component, properties) {
         return createTemporaryObject(component || menuComponent, testCase, properties || {});
     }
@@ -183,6 +214,7 @@ TestCase {
         verify(!menu.error);
         verify(menu.popup);
         compare(menu.focusPolicy, Qt.StrongFocus);
+        verify(findChild(menu, "exposedDropdownFieldDecoration"));
         const label = findChild(menu, "exposedDropdownLabel");
         const placeholder = findChild(menu, "exposedDropdownPlaceholder");
         const supporting = findChild(menu, "exposedDropdownSupportingText");
@@ -192,6 +224,68 @@ TestCase {
         compare(label.text, menu.label);
         compare(placeholder.text, menu.placeholderText);
         compare(supporting.text, menu.supportingText);
+    }
+
+    function test_shared_field_decoration_parity() {
+        const host = createMenu(sharedFieldHostComponent);
+        verify(host);
+        const textField = host.textField;
+        const dropdown = host.dropdown;
+        const textContainer = findChild(textField, "textFieldContainer");
+        const dropdownContainer = findChild(dropdown, "exposedDropdownBackground");
+        const textIndicator = findChild(textField, "textFieldActiveIndicator");
+        const dropdownIndicator = findChild(dropdown, "exposedDropdownActiveIndicator");
+        const textLabel = findChild(textField, "textFieldLabel");
+        const dropdownLabel = findChild(dropdown, "exposedDropdownLabel");
+        const textSupporting = findChild(textField, "textFieldSupportingText");
+        const dropdownSupporting = findChild(dropdown, "exposedDropdownSupportingText");
+        verify(textContainer);
+        verify(dropdownContainer);
+        verify(textIndicator);
+        verify(dropdownIndicator);
+        verify(textLabel);
+        verify(dropdownLabel);
+        verify(textSupporting);
+        verify(dropdownSupporting);
+
+        compare(textContainer.color, dropdownContainer.color);
+        compare(textContainer.topLeftRadius, dropdownContainer.topLeftRadius);
+        compare(textContainer.topRightRadius, dropdownContainer.topRightRadius);
+        compare(textContainer.bottomLeftRadius, dropdownContainer.bottomLeftRadius);
+        compare(textContainer.bottomRightRadius, dropdownContainer.bottomRightRadius);
+        compare(textIndicator.height, dropdownIndicator.height);
+        compare(textIndicator.color, dropdownIndicator.color);
+        compare(textLabel.mapToItem(host, 0, 0).x,
+                dropdownLabel.mapToItem(host, 0, 0).x - dropdown.x);
+        compare(textLabel.mapToItem(host, 0, 0).y,
+                dropdownLabel.mapToItem(host, 0, 0).y);
+        compare(textSupporting.y, dropdownSupporting.y);
+
+        textField.fieldStyle = MD.TextField.Outlined;
+        dropdown.fieldStyle = MD.ExposedDropdownMenu.Outlined;
+        tryCompare(textIndicator, "visible", false);
+        tryCompare(dropdownIndicator, "visible", false);
+        tryCompare(textContainer.border, "width",
+                   MD.Tokens.textField.outlinedOutlineWidth);
+        tryCompare(dropdownContainer.border, "width",
+                   MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth);
+        tryVerify(() => Math.abs(
+                      dropdownLabel.mapToItem(host, 0, 0).x - dropdown.x
+                      - textLabel.mapToItem(host, 0, 0).x
+                      - MD.Tokens.exposedDropdownMenu.outlinedLabelHorizontalPadding) < 0.01);
+
+        textField.enabled = false;
+        dropdown.enabled = false;
+        tryCompare(textLabel, "opacity", MD.Tokens.textField.disabledContentOpacity);
+        tryCompare(dropdownLabel, "opacity",
+                   MD.Tokens.exposedDropdownMenu.disabledContentOpacity);
+
+        dropdown.enabled = true;
+        dropdown.fieldStyle = MD.ExposedDropdownMenu.Filled;
+        dropdown.flat = true;
+        tryCompare(dropdownContainer, "color", Qt.rgba(0, 0, 0, 0));
+        tryCompare(dropdownContainer.border, "width", 0);
+        compare(dropdownIndicator.visible, false);
     }
 
     function test_leading_icon_name_and_source() {
@@ -214,6 +308,9 @@ TestCase {
         compare(field.height, MD.Tokens.exposedDropdownMenu.fieldHeight);
         compare(field.mapToItem(menu, 0, field.height / 2).y,
                 icon.mapToItem(menu, 0, icon.height / 2).y);
+
+        menu.enabled = false;
+        compare(icon.opacity, MD.Tokens.exposedDropdownMenu.disabledContentOpacity);
     }
 
     function test_filled_floating_label_and_placeholder_geometry() {
@@ -224,19 +321,92 @@ TestCase {
         });
         verify(menu);
         const field = findChild(menu, "exposedDropdownField");
+        const decoration = findChild(menu, "exposedDropdownFieldDecoration");
         const label = findChild(menu, "exposedDropdownLabel");
         const placeholder = findChild(menu, "exposedDropdownPlaceholder");
         verify(field);
+        verify(decoration);
         verify(label);
         verify(placeholder);
 
         menu.forceActiveFocus(Qt.TabFocusReason);
         tryCompare(menu, "activeFocus", true);
         tryCompare(placeholder, "visible", true);
+        tryCompare(decoration, "labelProgress", 1);
+        tryCompare(decoration, "placeholderOpacity", 1);
         compare(placeholder.mapToItem(menu, 0, placeholder.baselineOffset).y,
                 field.mapToItem(menu, 0, field.baselineOffset).y);
         verify(placeholder.mapToItem(menu, 0, 0).y
                >= label.mapToItem(menu, 0, label.height).y);
+    }
+
+    function test_expressive_field_transitions_and_trailing_icon() {
+        const menu = createMenu(menuComponent, {
+            "currentIndex": -1,
+            "fieldStyle": MD.ExposedDropdownMenu.Outlined
+        });
+        verify(menu);
+        const decoration = findChild(menu, "exposedDropdownFieldDecoration");
+        const label = findChild(menu, "exposedDropdownLabel");
+        const placeholder = findChild(menu, "exposedDropdownPlaceholder");
+        const background = findChild(menu, "exposedDropdownBackground");
+        const trailingIcon = findChild(menu, "exposedDropdownTrailingIcon");
+        verify(decoration);
+        verify(label);
+        verify(placeholder);
+        verify(background);
+        verify(trailingIcon);
+        compare(decoration.labelProgress, 0);
+        compare(decoration.placeholderOpacity, 0);
+        compare(label.font.pixelSize, MD.Tokens.typescale.bodyLarge.fontSize);
+        compare(background.border.width,
+                MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth);
+        compare(trailingIcon.rotation, 0);
+
+        menu.forceActiveFocus(Qt.TabFocusReason);
+        tryCompare(menu, "activeFocus", true);
+        wait(40);
+        verify(decoration.labelProgress > 0 && decoration.labelProgress < 1);
+        verify(decoration.placeholderOpacity > 0 && decoration.placeholderOpacity < 1);
+        verify(background.border.width
+               > MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth);
+        verify(background.border.width
+               < MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth);
+        compare(label.font.pixelSize,
+                Math.round(MD.Tokens.typescale.bodyLarge.fontSize
+                           + (MD.Tokens.typescale.bodySmall.fontSize
+                              - MD.Tokens.typescale.bodyLarge.fontSize)
+                             * decoration.labelProgress));
+        tryCompare(decoration, "labelProgress", 1);
+        tryCompare(decoration, "placeholderOpacity", 1);
+        tryCompare(background.border, "width",
+                   MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth);
+
+        mouseClick(menu, menu.width / 2, menu.height / 2);
+        compare(menu.popup.visible, true);
+        compare(trailingIcon.rotation, 180);
+        keyClick(Qt.Key_Escape);
+        tryCompare(menu.popup, "visible", false);
+        compare(trailingIcon.rotation, 0);
+    }
+
+    function test_unlabeled_field_remains_centered() {
+        const menu = createMenu(menuComponent, {
+            "currentIndex": -1,
+            "label": "",
+            "placeholderText": "Choose fruit"
+        });
+        verify(menu);
+        const decoration = findChild(menu, "exposedDropdownFieldDecoration");
+        const field = findChild(menu, "exposedDropdownField");
+        const placeholder = findChild(menu, "exposedDropdownPlaceholder");
+        verify(decoration);
+        verify(field);
+        verify(placeholder);
+        compare(decoration.labelProgress, 0);
+        compare(field.topPadding, 0);
+        compare(placeholder.mapToItem(menu, 0, placeholder.baselineOffset).y,
+                field.mapToItem(menu, 0, field.baselineOffset).y);
     }
 
     function test_model_roles_current_text_and_value() {
@@ -378,16 +548,17 @@ TestCase {
 
         menu.fieldStyle = MD.ExposedDropdownMenu.Outlined;
         compare(menu.fieldStyle, MD.ExposedDropdownMenu.Outlined);
-        compare(background.border.width, MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth);
+        tryCompare(background.border, "width",
+                   MD.Tokens.exposedDropdownMenu.outlinedOutlineWidth);
         compare(activeIndicator.visible, false);
-        verify(fieldLabel.y < 0);
-        compare(labelNotch.visible, true);
+        tryVerify(() => fieldLabel.y < 0);
+        tryCompare(labelNotch, "visible", true);
 
         menu.forceActiveFocus(Qt.TabFocusReason);
         tryCompare(menu, "activeFocus", true);
-        compare(background.border.width,
-                MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth);
-        compare(fieldLabel.color, menu.MD.Style.primaryColor);
+        tryCompare(background.border, "width",
+                   MD.Tokens.exposedDropdownMenu.outlinedFocusOutlineWidth);
+        tryCompare(fieldLabel, "color", menu.MD.Style.primaryColor);
 
         menu.menuColorStyle = MD.ExposedDropdownMenu.Vibrant;
         compare(menu.menuColorStyle, MD.ExposedDropdownMenu.Vibrant);
@@ -399,30 +570,32 @@ TestCase {
         compare(errorLabel.visible, true);
         compare(errorLabel.text, menu.errorText);
         compare(field.color, menu.MD.Style.onSurfaceColor);
-        compare(fieldLabel.color, menu.MD.Style.errorColor);
+        tryCompare(fieldLabel, "color", menu.MD.Style.errorColor);
 
         testCase.forceActiveFocus();
         mouseMove(menu, menu.width / 2, menu.height / 2);
         tryCompare(menu, "hovered", true);
-        compare(fieldLabel.color, menu.MD.Style.onErrorContainerColor);
-        compare(background.border.color, menu.MD.Style.onErrorContainerColor);
+        tryCompare(fieldLabel, "color", menu.MD.Style.onErrorContainerColor);
+        tryCompare(background.border, "color", menu.MD.Style.onErrorContainerColor);
 
         menu.fieldStyle = MD.ExposedDropdownMenu.Filled;
         compare(activeIndicator.visible, true);
 
         menu.flat = true;
-        compare(background.color, Qt.rgba(0, 0, 0, 0));
-        compare(background.border.width, 0);
+        tryCompare(background, "color", Qt.rgba(0, 0, 0, 0));
+        tryCompare(background.border, "width", 0);
         compare(activeIndicator.visible, false);
         menu.flat = false;
 
         menu.enabled = false;
         verify(!menu.enabled);
         compare(background.opacity, 1);
-        compare(background.color,
-                MD.Color.transparent(menu.MD.Style.onSurfaceColor,
-                                     MD.Tokens.exposedDropdownMenu.filledDisabledContainerOpacity));
-        compare(fieldLabel.opacity, MD.Tokens.exposedDropdownMenu.disabledContentOpacity);
+        tryCompare(background, "color",
+                   MD.Color.transparent(
+                       menu.MD.Style.onSurfaceColor,
+                       MD.Tokens.exposedDropdownMenu.filledDisabledContainerOpacity));
+        tryCompare(fieldLabel, "opacity",
+                   MD.Tokens.exposedDropdownMenu.disabledContentOpacity);
         mouseClick(menu, menu.width / 2, menu.height / 2);
         verify(!menu.popup.visible);
     }

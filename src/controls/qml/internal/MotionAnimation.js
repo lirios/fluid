@@ -12,3 +12,5 @@ var expressiveDefaultSpatialCurve = [0.38, 1.21, 0.22, 1.00, 1.0, 1.0]
 var expressiveDefaultSpatialDuration = 400
 var expressiveFastEffectsCurve = [0.31, 0.94, 0.34, 1.00, 1.0, 1.0]
 var expressiveFastEffectsDuration = 150
+var expressiveSlowEffectsCurve = [0.34, 0.88, 0.34, 1.00, 1.0, 1.0]
+var expressiveSlowEffectsDuration = 300

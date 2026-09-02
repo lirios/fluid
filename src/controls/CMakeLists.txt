@@ -84,7 +84,7 @@ target_link_libraries(${LIBNAME}
 set_source_files_properties(qml/components/SymbolNames.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
-set_source_files_properties(qml/components/Breakpoints.qml PROPERTIES
+set_source_files_properties(qml/core/Breakpoints.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 set_source_files_properties(qml/core/Units.qml PROPERTIES

@@ -46,6 +46,11 @@ Item {
         text: "Option"
     }
 
+    MD.RadioButton {
+        id: metricRadioButton
+        text: "Option"
+    }
+
     MD.Switch {
         id: metricSwitch
         text: "Option"
@@ -145,6 +150,23 @@ Item {
 
             compare(metricCheckBox.indicator.implicitWidth,
                     MD.Tokens.checkBox.containerSize + MD.Tokens.checkBox.containerPadding * 2);
+            compare(metricRadioButton.implicitHeight,
+                    MD.Tokens.radioButton.minimumInteractiveSize);
+            compare(metricRadioButton.indicator.implicitWidth,
+                    MD.Tokens.radioButton.iconSize
+                    + MD.Tokens.radioButton.indicatorPadding * 2);
+            compare(metricRadioButton.indicator.implicitHeight,
+                    MD.Tokens.radioButton.iconSize
+                    + MD.Tokens.radioButton.indicatorPadding * 2);
+            const radioOuterRing = findChild(metricRadioButton, "radioOuterRing");
+            const radioStateLayer = findChild(metricRadioButton, "radioStateLayer");
+            verify(radioOuterRing);
+            verify(radioStateLayer);
+            compare(radioOuterRing.width, MD.Tokens.radioButton.iconSize);
+            compare(radioOuterRing.height, MD.Tokens.radioButton.iconSize);
+            compare(radioOuterRing.border.width, MD.Tokens.radioButton.outlineWidth);
+            compare(radioStateLayer.width, MD.Tokens.radioButton.stateLayerSize);
+            compare(radioStateLayer.height, MD.Tokens.radioButton.stateLayerSize);
             compare(metricSwitch.indicator.implicitWidth, MD.Tokens.switch.trackWidth);
             compare(metricSwitch.indicator.implicitHeight, MD.Tokens.switch.trackHeight);
             const switchTrack = findChild(metricSwitch, "switchTrack");
@@ -225,6 +247,18 @@ Item {
                 contentPadding: 8, contentSpacing: 8, containerPadding: 4,
                 unselectedOutlineWidth: 2, selectedDisabledContainerOpacity: 0.38,
                 unselectedDisabledContainerOpacity: 0.38,
+                hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
+                pressedStateLayerOpacity: 0.1
+            });
+        }
+
+        function test_radioButton() {
+            verifyValues(MD.Tokens.radioButton, {
+                minimumInteractiveSize: 48, iconSize: 20, stateLayerSize: 40,
+                indicatorPadding: 2, outlineWidth: 2,
+                contentPadding: 8, contentSpacing: 8,
+                selectedDisabledIconOpacity: 0.38,
+                unselectedDisabledIconOpacity: 0.38,
                 hoverStateLayerOpacity: 0.08, focusStateLayerOpacity: 0.1,
                 pressedStateLayerOpacity: 0.1
             });
@@ -503,6 +537,11 @@ Item {
             });
 
             verifyValues(MD.Tokens.checkBox, {
+                hoverStateLayerOpacity: state.hoverStateLayerOpacity,
+                focusStateLayerOpacity: state.focusStateLayerOpacity,
+                pressedStateLayerOpacity: state.pressedStateLayerOpacity
+            });
+            verifyValues(MD.Tokens.radioButton, {
                 hoverStateLayerOpacity: state.hoverStateLayerOpacity,
                 focusStateLayerOpacity: state.focusStateLayerOpacity,
                 pressedStateLayerOpacity: state.pressedStateLayerOpacity

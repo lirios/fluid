@@ -24,6 +24,7 @@
 #include "motiontokens.h"
 #include "navigationrail.h"
 #include "palette.h"
+#include "radiobutton.h"
 #include "shapetokens.h"
 #include "typescale.h"
 #include "slider.h"
@@ -90,6 +91,9 @@ class Tokens : public QObject
     // Component tokens - Check box
     Q_PROPERTY(Fluid::CheckBox checkBox READ checkBox CONSTANT FINAL)
 
+    // Component tokens - Radio button
+    Q_PROPERTY(Fluid::RadioButton radioButton READ radioButton CONSTANT FINAL)
+
     // Component tokens - Dialog
     Q_PROPERTY(Fluid::Dialog dialog READ dialog CONSTANT FINAL)
 
@@ -155,6 +159,9 @@ public:
     // Component tokens - Check box
     CheckBox checkBox() const;
 
+    // Component tokens - Radio button
+    RadioButton radioButton() const;
+
     // Component tokens - Dialog
     Dialog dialog() const;
 
@@ -212,6 +219,7 @@ private:
     AppBar m_appBar;
     Button m_button;
     CheckBox m_checkBox;
+    RadioButton m_radioButton;
     Dialog m_dialog;
     Fab m_fab;
     FabMenu m_fabMenu;

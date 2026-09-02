@@ -81,6 +81,12 @@ CheckBox Tokens::checkBox() const
     return m_checkBox;
 }
 
+// Component tokens - Radio button
+RadioButton Tokens::radioButton() const
+{
+    return m_radioButton;
+}
+
 // Component tokens - Dialog
 Dialog Tokens::dialog() const
 {

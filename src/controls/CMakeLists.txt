@@ -29,6 +29,7 @@ set(_sources
     cpp/tokens/motiontokens.cpp cpp/tokens/motiontokens.h
     cpp/tokens/navigationrail.cpp cpp/tokens/navigationrail.h
     cpp/tokens/palette.cpp cpp/tokens/palette.h
+    cpp/tokens/radiobutton.cpp cpp/tokens/radiobutton.h
     cpp/tokens/shapetokens.cpp cpp/tokens/shapetokens.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
     cpp/tokens/statetokens.cpp cpp/tokens/statetokens.h

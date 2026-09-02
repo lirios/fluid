@@ -35,6 +35,7 @@ TestCase {
             property alias scrollIndicator: scrollIndicator
             property alias sliderTrack: sliderTrack
             property alias checkIndicator: checkIndicator
+            property alias radioIndicator: radioIndicator
 
             width: 800
             height: 700
@@ -176,6 +177,14 @@ TestCase {
                 outlineColor: "blue"
                 outlineWidth: 0
             }
+
+            MD.RadioIndicator {
+                id: radioIndicator
+                x: 620
+                y: 160
+                control: Item { property bool checked: true }
+                color: "blue"
+            }
         }
     }
 
@@ -185,6 +194,7 @@ TestCase {
         Item {
             property alias button: button
             property alias checkBox: checkBox
+            property alias radioButton: radioButton
             property alias switchControl: switchControl
             property alias slider: slider
             property alias scrollBar: scrollBar
@@ -199,10 +209,11 @@ TestCase {
 
             MD.Button { id: button; text: "Save" }
             MD.CheckBox { id: checkBox; y: 60; text: "Remember"; checked: true }
-            MD.Switch { id: switchControl; y: 120; text: "Notifications" }
+            MD.RadioButton { id: radioButton; y: 120; text: "Daily"; checked: true }
+            MD.Switch { id: switchControl; y: 180; text: "Notifications" }
             MD.Slider {
                 id: slider
-                y: 180
+                y: 240
                 width: 200
                 Accessible.name: "Volume"
             }
@@ -274,6 +285,7 @@ TestCase {
         verify(host.scrollIndicator.Accessible.ignored);
         verify(host.sliderTrack.Accessible.ignored);
         verify(host.checkIndicator.Accessible.ignored);
+        verify(host.radioIndicator.Accessible.ignored);
 
         host.symbol.Accessible.name = "Home illustration";
         host.image.Accessible.name = "Profile photo";
@@ -290,6 +302,13 @@ TestCase {
         compare(host.button.focusPolicy, Qt.StrongFocus);
         verify(host.checkBox.checked);
         compare(host.checkBox.focusPolicy, Qt.StrongFocus);
+        compare(host.radioButton.Accessible.role, Accessible.RadioButton);
+        compare(host.radioButton.Accessible.name, "Daily");
+        verify(host.radioButton.Accessible.checked);
+        verify(host.radioButton.Accessible.checkable);
+        verify(host.radioButton.Accessible.focusable);
+        verify(host.radioButton.contentItem.Accessible.ignored);
+        compare(host.radioButton.focusPolicy, Qt.StrongFocus);
         compare(host.switchControl.text, "Notifications");
         compare(host.slider.focusPolicy, Qt.StrongFocus);
         compare(host.slider.Accessible.name, "Volume");

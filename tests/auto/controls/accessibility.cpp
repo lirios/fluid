@@ -34,9 +34,48 @@ class FluidAccessibilityTest : public QObject
     Q_OBJECT
 
 private slots:
+    void extendedFabInheritsButtonAccessibility();
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
 };
+
+void FluidAccessibilityTest::extendedFabInheritsButtonAccessibility()
+{
+    QAccessible::setActive(true);
+
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+
+        Window {
+            width: 320
+            height: 160
+            visible: true
+
+            MD.ExtendedFAB {
+                objectName: "extendedFab"
+                text: "Create"
+                icon.name: "add"
+            }
+        }
+    )", QUrl(QStringLiteral("inline:extended-fab-accessibility.qml")));
+
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *extendedFab = root->findChild<QObject *>(QStringLiteral("extendedFab"));
+    QVERIFY(extendedFab);
+
+    auto *interface = QAccessible::queryAccessibleInterface(extendedFab);
+    QVERIFY(interface);
+    QCOMPARE(interface->role(), QAccessible::Button);
+    QCOMPARE(interface->text(QAccessible::Name), QStringLiteral("Create"));
+}
 
 void FluidAccessibilityTest::textFieldIsAnEditableAccessibleNode()
 {

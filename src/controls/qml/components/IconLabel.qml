@@ -51,6 +51,9 @@ Item {
     //! The text color.
     property alias color: label.color
 
+    //! The opacity applied to the text independently of the icon.
+    property real textOpacity: 1.0
+
     //! Whether a side-by-side layout places the icon on the trailing edge.
     property bool mirrored: false
 
@@ -123,11 +126,9 @@ Item {
         }
     }
 
-    LayoutMirroring.enabled: mirrored
-    LayoutMirroring.childrenInherit: true
-
     MD.Symbol {
         id: iconItem
+        objectName: "iconLabelIcon"
 
         name: root.icon.name
         iconWidth: root.icon.width
@@ -138,6 +139,7 @@ Item {
 
     MD.Label {
         id: label
+        objectName: "iconLabelText"
 
         font.pixelSize: typescale.fontSize
         font.weight: typescale.fontWeight
@@ -145,7 +147,8 @@ Item {
 
         wrapMode: MD.Label.NoWrap
         elide: MD.Label.ElideRight
-        visible: root.showText
+        opacity: root.textOpacity
+        visible: root.showText && opacity > 0
     }
 
     states: [

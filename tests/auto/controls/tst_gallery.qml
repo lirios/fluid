@@ -93,7 +93,7 @@ TestCase {
     }
 
     function test_galleryPages_data() {
-        const pages = [["app-bars", "AppBars.qml"], ["colors", "Colors.qml"], ["components", "Components.qml"], ["divider", "Divider.qml"], ["elevation", "Elevation.qml"], ["exposed-dropdown-menus", "ExposedDropdownMenus.qml"], ["fab", "FAB.qml"], ["fab-menu", "FabMenu.qml"], ["grids", "Grids.qml"], ["icon-button", "IconButton.qml"], ["indicators", "Indicators.qml"], ["slider", "Slider.qml"], ["lists", "Lists.qml"], ["menus", "Menus.qml"], ["navigation-rails", "NavigationRails.qml"], ["symbols", "Symbols.qml"], ["text-fields", "TextFields.qml"], ["typography", "Typography.qml"], ["tooltips", "ToolTips.qml"]];
+        const pages = [["app-bars", "AppBars.qml"], ["colors", "Colors.qml"], ["components", "Components.qml"], ["divider", "Divider.qml"], ["elevation", "Elevation.qml"], ["exposed-dropdown-menus", "ExposedDropdownMenus.qml"], ["fab", "FAB.qml"], ["extended-fab", "ExtendedFAB.qml"], ["fab-menu", "FabMenu.qml"], ["grids", "Grids.qml"], ["icon-button", "IconButton.qml"], ["indicators", "Indicators.qml"], ["slider", "Slider.qml"], ["lists", "Lists.qml"], ["menus", "Menus.qml"], ["navigation-rails", "NavigationRails.qml"], ["symbols", "Symbols.qml"], ["text-fields", "TextFields.qml"], ["typography", "Typography.qml"], ["tooltips", "ToolTips.qml"]];
 
         const rows = [];
         for (const page of pages) {
@@ -139,6 +139,74 @@ TestCase {
         compare(grid.columns, data.columns);
         verify(headline && headline.text.length > 0);
         verify(description && description.text.length > 0);
+    }
+
+    function test_extendedFabPropertiesLayout_data() {
+        return [
+            { tag: "compact", width: 480 },
+            { tag: "medium", width: 720 },
+            { tag: "large", width: 1280 }
+        ];
+    }
+
+    function test_extendedFabPropertiesLayout(data) {
+        const component = Qt.createComponent(
+                            Qt.resolvedUrl("../../../src/gallery/qml/ExtendedFAB.qml"));
+        tryCompare(component, "status", Component.Ready);
+        if (component.status !== Component.Ready)
+            fail(component.errorString());
+
+        const page = createTemporaryObject(component, testCase, {
+            width: data.width,
+            height: 700
+        });
+        verify(page);
+        wait(0);
+
+        const controlsGrid = findChild(page, "extendedFabPropertyControlsGrid");
+        const examplesGrid = findChild(page, "extendedFabPropertyExamplesGrid");
+        verify(controlsGrid);
+        verify(examplesGrid);
+
+        const controls = [
+            "extendedFabEnabledSwitch",
+            "extendedFabLoweredSwitch",
+            "extendedFabInteractiveExample",
+            "extendedFabActivationCount"
+        ];
+        const examples = [
+            "extendedFabCustomColorsExample",
+            "extendedFabTextOnlyExample",
+            "extendedFabRtlExample"
+        ];
+
+        for (const objectName of controls)
+            verifyItemContained(findChild(page, objectName), controlsGrid, objectName);
+        for (const objectName of examples)
+            verifyItemContained(findChild(page, objectName), examplesGrid, objectName);
+
+        const firstControl = findChild(page, controls[0]);
+        const activationCount = findChild(page, "extendedFabActivationCount");
+        compare(activationCount.lineCount, 1);
+        const firstPosition = firstControl.mapToItem(controlsGrid, 0, 0);
+        const rowCenter = firstPosition.y + firstControl.height / 2;
+        for (const objectName of controls.slice(1)) {
+            const item = findChild(page, objectName);
+            const position = item.mapToItem(controlsGrid, 0, 0);
+            verify(Math.abs(position.y + item.height / 2 - rowCenter) <= 0.5,
+                   objectName + " is not in the controls row");
+        }
+    }
+
+    function verifyItemContained(item, container, name) {
+        verify(item, name + " exists");
+        const position = item.mapToItem(container, 0, 0);
+        verify(position.x >= 0, name + " starts before its grid");
+        verify(position.y >= 0, name + " starts above its grid");
+        verify(position.x + item.width <= container.width,
+               name + " extends past its grid width");
+        verify(position.y + item.height <= container.height,
+               name + " extends past its grid height");
     }
 
     function test_dividerGalleryLayout() {

@@ -22,6 +22,78 @@ function resolveShapeRadius(shape, width, height) {
     return Math.min(width, height) / 2;
 }
 
+function extendedFabContainerWidth(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.containerWidth;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerWidth;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerWidth;
+    }
+}
+
+function extendedFabContainerHeight(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.containerHeight;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerHeight;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerHeight;
+    }
+}
+
+function extendedFabContainerShape(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.containerShape;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerShape;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerShape;
+    }
+}
+
+function extendedFabIconSize(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.iconSize;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumIconSize;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeIconSize;
+    }
+}
+
+function extendedFabLeadingSpace(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.leadingSpace;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumLeadingSpace;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeLeadingSpace;
+    }
+}
+
+function extendedFabTrailingSpace(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.trailingSpace;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumTrailingSpace;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeTrailingSpace;
+    }
+}
+
+function extendedFabSpacing(control) {
+    const tokens = control.MD.Tokens.fab;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.iconLabelSpace;
+    case MD.ExtendedFAB.Size.Medium: return tokens.mediumIconLabelSpace;
+    case MD.ExtendedFAB.Size.Large: return tokens.largeIconLabelSpace;
+    }
+}
+
+function extendedFabTypescale(control) {
+    const tokens = control.MD.Tokens.typescale;
+    switch (control.size) {
+    case MD.ExtendedFAB.Size.Default: return tokens.titleMedium;
+    case MD.ExtendedFAB.Size.Medium: return tokens.titleLarge;
+    case MD.ExtendedFAB.Size.Large: return tokens.headlineSmall;
+    }
+}
+
 function buttonShape(control) {
     const tokens = control.MD.Tokens.button;
     if (control.pressed) {

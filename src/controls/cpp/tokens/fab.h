@@ -12,7 +12,11 @@
 
 // Component values map to the AndroidX Material 3 generated tokens:
 // https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
-// FabPrimaryTokens.kt, FabMediumTokens.kt, and FabLargeTokens.kt.
+// FabBaselineTokens.kt, FabMediumTokens.kt, FabLargeTokens.kt, and
+// FabPrimaryContainerTokens.kt (VERSION: v0_14_0); ExtendedFabPrimaryTokens.kt
+// (VERSION: v0_103); ExtendedFabSmallTokens.kt, ExtendedFabMediumTokens.kt, and
+// ExtendedFabLargeTokens.kt (VERSION: v0_14_0); and ../FloatingActionButton.kt for
+// the corrected Medium and Large Extended FAB icon-label spacing.
 
 namespace Fluid {
 
@@ -34,6 +38,15 @@ struct Fab
     Q_PROPERTY(Fluid::ShapeValue largeContainerShape READ largeContainerShape CONSTANT FINAL)
     Q_PROPERTY(qreal largeContainerWidth READ largeContainerWidth CONSTANT FINAL)
     Q_PROPERTY(qreal largeIconSize READ largeIconSize CONSTANT FINAL)
+    Q_PROPERTY(qreal leadingSpace READ leadingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal mediumLeadingSpace READ mediumLeadingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal largeLeadingSpace READ largeLeadingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal trailingSpace READ trailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal mediumTrailingSpace READ mediumTrailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal largeTrailingSpace READ largeTrailingSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal iconLabelSpace READ iconLabelSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal mediumIconLabelSpace READ mediumIconLabelSpace CONSTANT FINAL)
+    Q_PROPERTY(qreal largeIconLabelSpace READ largeIconLabelSpace CONSTANT FINAL)
     Q_PROPERTY(qreal containerElevation READ containerElevation CONSTANT FINAL)
     Q_PROPERTY(qreal focusContainerElevation READ focusContainerElevation CONSTANT FINAL)
     Q_PROPERTY(qreal hoverContainerElevation READ hoverContainerElevation CONSTANT FINAL)
@@ -97,6 +110,51 @@ public:
     constexpr qreal largeIconSize() const
     {
         return 32.0;
+    }
+    //! Leading space of a default-size Extended FAB.
+    constexpr qreal leadingSpace() const
+    {
+        return 16.0;
+    }
+    //! Leading space of a medium Extended FAB.
+    constexpr qreal mediumLeadingSpace() const
+    {
+        return 26.0;
+    }
+    //! Leading space of a large Extended FAB.
+    constexpr qreal largeLeadingSpace() const
+    {
+        return 28.0;
+    }
+    //! Trailing space of a default-size Extended FAB.
+    constexpr qreal trailingSpace() const
+    {
+        return 16.0;
+    }
+    //! Trailing space of a medium Extended FAB.
+    constexpr qreal mediumTrailingSpace() const
+    {
+        return 26.0;
+    }
+    //! Trailing space of a large Extended FAB.
+    constexpr qreal largeTrailingSpace() const
+    {
+        return 28.0;
+    }
+    //! Space between the icon and label of a default-size Extended FAB.
+    constexpr qreal iconLabelSpace() const
+    {
+        return 8.0;
+    }
+    //! Space between the icon and label of a medium Extended FAB.
+    constexpr qreal mediumIconLabelSpace() const
+    {
+        return 12.0;
+    }
+    //! Space between the icon and label of a large Extended FAB.
+    constexpr qreal largeIconLabelSpace() const
+    {
+        return 16.0;
     }
     constexpr qreal containerElevation() const
     {

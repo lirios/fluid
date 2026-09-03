@@ -21,8 +21,14 @@ T.GroupBox {
     Accessible.role: Accessible.Grouping
     Accessible.name: title
 
+    /*! The typographic scale of the group box label. */
+    property MD.typescale typescale: MD.Tokens.typescale.labelMedium
+
     /*! The corner radius of the group box outline. */
     property real radius: MD.Tokens.shape.cornerValueMedium
+
+    /*! Whether the group box outline is visible. */
+    property bool outlineVisible: true
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding, implicitLabelWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
@@ -38,6 +44,7 @@ T.GroupBox {
 
         width: control.availableWidth
 
+        typescale: control.typescale
         text: control.title
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
@@ -54,7 +61,7 @@ T.GroupBox {
 
         color: "transparent"
         radius: control.radius
-        border.width: 1
+        border.width: control.outlineVisible ? 1 : 0
         border.color: control.MD.Style.outlineVariantColor
     }
 }

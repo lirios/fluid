@@ -39,6 +39,7 @@ TestCase {
         compare(groupBox.spacing, MD.Tokens.measurement.space75);
         compare(groupBox.padding, MD.Tokens.measurement.space150);
         compare(groupBox.radius, MD.Tokens.shape.cornerValueMedium);
+        compare(groupBox.outlineVisible, true);
         compare(groupBox.topPadding,
                 groupBox.padding + groupBox.implicitLabelHeight);
         compare(groupBox.label.text, groupBox.title);
@@ -60,6 +61,16 @@ TestCase {
 
         compare(groupBox.radius, 20);
         compare(groupBox.background.radius, 20);
+    }
+
+    function test_outlineVisibility() {
+        const groupBox = createGroupBox({ outlineVisible: false });
+        verify(groupBox);
+
+        compare(groupBox.background.border.width, 0);
+
+        groupBox.outlineVisible = true;
+        compare(groupBox.background.border.width, 1);
     }
 
     function test_emptyTitleUsesRegularPadding() {

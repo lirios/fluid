@@ -48,17 +48,22 @@ Item {
     /*!
         \brief Inset applied before the divider line.
 
-        For a horizontal divider this is a left margin, for a vertical divider
-        a top margin.  Defaults to \c 0, meaning a full-width divider.  Set to
-        \c MD.Tokens.divider.inset to align it with leading list item content.
+        For a horizontal divider this is a margin at the leading edge (left in
+        left-to-right layouts and right in right-to-left layouts); for a
+        vertical divider it is a top margin.  Defaults to \c 0, meaning a
+        full-width divider.  Set to \c MD.Tokens.divider.inset to align it with
+        leading list item content.
     */
     property real leadingInset: 0
 
     /*!
         \brief Inset applied after the divider line.
 
-        For a horizontal divider this is a right margin, for a vertical
-        divider a bottom margin.  Defaults to \c 0.  Set alongside \c leadingInset to \c MD.Tokens.divider.inset for a middle-inset divider.
+        For a horizontal divider this is a margin at the trailing edge (right
+        in left-to-right layouts and left in right-to-left layouts); for a
+        vertical divider it is a bottom margin.  Defaults to \c 0.  Set
+        alongside \c leadingInset to \c MD.Tokens.divider.inset for a
+        middle-inset divider.
     */
     property real trailingInset: 0
 
@@ -69,11 +74,16 @@ Item {
     */
     property color color: control.MD.Style.outlineVariantColor
 
+    readonly property bool _mirrored: LayoutMirroring.enabled
+                                      || Qt.locale().textDirection === Qt.RightToLeft
+
     implicitWidth: control.orientation === Qt.Vertical ? MD.Tokens.divider.thickness : 0
     implicitHeight: control.orientation === Qt.Horizontal ? MD.Tokens.divider.thickness : 0
 
     Rectangle {
         objectName: "dividerLine"
+
+        LayoutMirroring.enabled: control._mirrored
 
         anchors.fill: parent
         anchors.leftMargin: control.orientation === Qt.Horizontal ? control.leadingInset : 0

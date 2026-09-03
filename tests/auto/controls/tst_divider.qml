@@ -57,6 +57,7 @@ TestCase {
 
     function test_horizontal_insets() {
         const divider = createDivider({
+            width: 100,
             leadingInset: 16,
             trailingInset: 8
         });
@@ -67,6 +68,23 @@ TestCase {
         compare(line.anchors.rightMargin, 8);
         compare(line.anchors.topMargin, 0);
         compare(line.anchors.bottomMargin, 0);
+        compare(line.x, 16);
+        compare(line.width, 76);
+    }
+
+    function test_horizontal_insets_mirrored() {
+        const divider = createDivider({
+            width: 100,
+            leadingInset: 16,
+            trailingInset: 8
+        });
+        const line = lineFor(divider);
+        verify(line);
+
+        divider.LayoutMirroring.enabled = true;
+
+        compare(line.x, 8);
+        compare(line.width, 76);
     }
 
     function test_vertical_insets() {

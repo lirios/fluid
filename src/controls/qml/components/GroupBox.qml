@@ -21,23 +21,40 @@ T.GroupBox {
     Accessible.role: Accessible.Grouping
     Accessible.name: title
 
+    /*! The corner radius of the group box outline. */
+    property real radius: MD.Tokens.shape.cornerValueMedium
+
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding, implicitLabelWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
 
+    spacing: MD.Tokens.measurement.space75
+    padding: MD.Tokens.measurement.space150
+    topPadding: padding + (implicitLabelWidth > 0 ? implicitLabelHeight : 0)
+
     label: MD.Label {
+        objectName: "groupBoxLabel"
+
         x: Math.max(control.leftPadding, MD.Tokens.measurement.space50)
 
         width: control.availableWidth
 
+        text: control.title
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
         Accessible.ignored: true
     }
 
-    background: Item {
+    background: Rectangle {
+        objectName: "groupBoxBackground"
+
         y: control.topPadding - control.bottomPadding
 
         width: parent.width
         height: parent.height - control.topPadding + control.bottomPadding
+
+        color: "transparent"
+        radius: control.radius
+        border.width: 1
+        border.color: control.MD.Style.outlineVariantColor
     }
 }

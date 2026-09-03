@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Fluid as MD
@@ -11,14 +13,6 @@ Item {
     readonly property real contentSpacing: MD.Tokens.measurement.space200
     readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
-    component Headline: MD.Label {
-        typescale: MD.Tokens.typescale.headlineMedium
-    }
-
-    component Headline2: MD.Label {
-        typescale: MD.Tokens.typescale.headlineSmall
-    }
-
     component LargeLabel: MD.Label {
         typescale: MD.Tokens.typescale.labelLarge
     }
@@ -27,12 +21,15 @@ Item {
         text: qsTr("Icon action")
     }
 
-    component Sizes: MD.GroupBox {
+    component Sizes: GalleryCard {
+        gridColumns: galleryPage.columns
         title: qsTr("Sizes")
 
-        RowLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        GridLayout {
+            width: parent.width
+            columns: Math.max(1, Math.min(5, Math.floor(width / 72)))
+            columnSpacing: page.sectionSpacing
+            rowSpacing: page.sectionSpacing
 
             DemoIconButton {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -76,7 +73,8 @@ Item {
         }
     }
 
-    component Shapes: MD.GroupBox {
+    component Shapes: GalleryCard {
+        gridColumns: galleryPage.columns
         title: qsTr("Shapes")
 
         ColumnLayout {
@@ -98,7 +96,8 @@ Item {
         }
     }
 
-    component ColorStyles: MD.GroupBox {
+    component ColorStyles: GalleryCard {
+        gridColumns: galleryPage.columns
         title: qsTr("Color Styles")
 
         ColumnLayout {
@@ -128,7 +127,8 @@ Item {
         }
     }
 
-    component Widths: MD.GroupBox {
+    component Widths: GalleryCard {
+        gridColumns: galleryPage.columns
         title: qsTr("Widths")
 
         ColumnLayout {
@@ -156,44 +156,26 @@ Item {
         }
     }
 
-    MD.ScrollView {
-        anchors.fill: parent
+    GalleryPage {
+        id: galleryPage
 
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        anchors.fill: parent
+        headline: qsTr("Icon buttons")
+        description: qsTr("Icon buttons provide compact actions with multiple sizes, shapes, widths, colors, and selection states.")
+
+        Sizes {}
+        Shapes {}
+        ColorStyles {}
+        Widths {}
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Colors")
 
             ColumnLayout {
+                width: parent.width
                 spacing: page.contentSpacing
-
-                Headline {
-                    text: qsTr("Configurations")
-                }
-
-                RowLayout {
-                    spacing: page.contentSpacing
-
-                    Sizes {
-                        Layout.fillHeight: true
-                    }
-                    Shapes {
-                        Layout.fillHeight: true
-                    }
-                    ColorStyles {
-                        Layout.fillHeight: true
-                    }
-                    Widths {
-                        Layout.fillHeight: true
-                    }
-                }
-            }
-
-            RowLayout {
-                spacing: page.contentSpacing
-
-                Headline {
-                    text: qsTr("Colors")
-                }
 
                 MD.Switch {
                     id: enabledSwitch
@@ -201,225 +183,225 @@ Item {
                     text: qsTr("Enabled")
                     checked: true
                 }
-            }
+                GridLayout {
+                    Layout.alignment: Qt.AlignHCenter
+                    columns: 4
+                    rows: 5
 
-            GridLayout {
-                columns: 4
-                rows: 5
+                    columnSpacing: MD.Tokens.measurement.space250
+                    rowSpacing: MD.Tokens.measurement.space250
 
-                columnSpacing: MD.Tokens.measurement.space250
-                rowSpacing: MD.Tokens.measurement.space250
+                    // Numbers and letters
 
-                // Numbers and letters
+                    LargeLabel {
+                        Layout.row: 0
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 0
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Default")
+                    }
 
-                    text: qsTr("Default")
-                }
+                    LargeLabel {
+                        Layout.row: 0
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 0
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Unselected")
+                    }
 
-                    text: qsTr("Unselected")
-                }
+                    LargeLabel {
+                        Layout.row: 0
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 0
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Selected")
+                    }
 
-                    text: qsTr("Selected")
-                }
+                    LargeLabel {
+                        Layout.row: 1
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 1
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Filled")
+                    }
 
-                    text: qsTr("Filled")
-                }
+                    LargeLabel {
+                        Layout.row: 2
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 2
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Tonal")
+                    }
 
-                    text: qsTr("Tonal")
-                }
+                    LargeLabel {
+                        Layout.row: 3
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 3
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Outlined")
+                    }
 
-                    text: qsTr("Outlined")
-                }
+                    LargeLabel {
+                        Layout.row: 4
+                        Layout.column: 0
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                LargeLabel {
-                    Layout.row: 4
-                    Layout.column: 0
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        text: qsTr("Standard")
+                    }
 
-                    text: qsTr("Standard")
-                }
+                    // Column 1 (default)
 
-                // Column 1 (default)
+                    DemoIconButton {
+                        Layout.row: 1
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 1
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "filledButton"
+                        type: MD.IconButton.Type.Filled
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                    }
 
-                    objectName: "filledButton"
-                    type: MD.IconButton.Type.Filled
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                }
+                    DemoIconButton {
+                        Layout.row: 2
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 2
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "tonalButton"
+                        type: MD.IconButton.Type.Tonal
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                    }
 
-                    objectName: "tonalButton"
-                    type: MD.IconButton.Type.Tonal
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                }
+                    DemoIconButton {
+                        Layout.row: 3
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 3
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "outlinedButton"
+                        type: MD.IconButton.Type.Outlined
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                    }
 
-                    objectName: "outlinedButton"
-                    type: MD.IconButton.Type.Outlined
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                }
+                    DemoIconButton {
+                        Layout.row: 4
+                        Layout.column: 1
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 4
-                    Layout.column: 1
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "standardButton"
+                        type: MD.IconButton.Type.Standard
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                    }
 
-                    objectName: "standardButton"
-                    type: MD.IconButton.Type.Standard
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                }
+                    // Column 2 (toggle unselected)
 
-                // Column 2 (toggle unselected)
+                    DemoIconButton {
+                        Layout.row: 1
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 1
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "filledUnselectedButton"
+                        type: MD.IconButton.Type.Filled
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: false
+                    }
 
-                    objectName: "filledUnselectedButton"
-                    type: MD.IconButton.Type.Filled
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: false
-                }
+                    DemoIconButton {
+                        Layout.row: 2
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 2
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "tonalUnselectedButton"
+                        type: MD.IconButton.Type.Tonal
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: false
+                    }
 
-                    objectName: "tonalUnselectedButton"
-                    type: MD.IconButton.Type.Tonal
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: false
-                }
+                    DemoIconButton {
+                        Layout.row: 3
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 3
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "outlinedUnselectedButton"
+                        type: MD.IconButton.Type.Outlined
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: false
+                    }
 
-                    objectName: "outlinedUnselectedButton"
-                    type: MD.IconButton.Type.Outlined
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: false
-                }
+                    DemoIconButton {
+                        Layout.row: 4
+                        Layout.column: 2
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 4
-                    Layout.column: 2
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "standardUnselectedButton"
+                        type: MD.IconButton.Type.Standard
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: false
+                    }
 
-                    objectName: "standardUnselectedButton"
-                    type: MD.IconButton.Type.Standard
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: false
-                }
+                    // Column 3 (toggle selected)
 
-                // Column 3 (toggle selected)
+                    DemoIconButton {
+                        Layout.row: 1
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 1
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "filledSelectedButton"
+                        type: MD.IconButton.Type.Filled
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: true
+                    }
 
-                    objectName: "filledSelectedButton"
-                    type: MD.IconButton.Type.Filled
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: true
-                }
+                    DemoIconButton {
+                        Layout.row: 2
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 2
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "tonalSelectedButton"
+                        type: MD.IconButton.Type.Tonal
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: true
+                    }
 
-                    objectName: "tonalSelectedButton"
-                    type: MD.IconButton.Type.Tonal
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: true
-                }
+                    DemoIconButton {
+                        Layout.row: 3
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 3
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        objectName: "outlinedSelectedButton"
+                        type: MD.IconButton.Type.Outlined
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: true
+                    }
 
-                    objectName: "outlinedSelectedButton"
-                    type: MD.IconButton.Type.Outlined
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: true
-                }
+                    DemoIconButton {
+                        Layout.row: 4
+                        Layout.column: 3
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                DemoIconButton {
-                    Layout.row: 4
-                    Layout.column: 3
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                    objectName: "standardSelectedButton"
-                    type: MD.IconButton.Type.Standard
-                    icon.name: "settings"
-                    enabled: enabledSwitch.checked
-                    checkable: true
-                    checked: true
+                        objectName: "standardSelectedButton"
+                        type: MD.IconButton.Type.Standard
+                        icon.name: "settings"
+                        enabled: enabledSwitch.checked
+                        checkable: true
+                        checked: true
+                    }
                 }
             }
         }

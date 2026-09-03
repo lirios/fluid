@@ -13,74 +13,69 @@ Item {
     readonly property real contentSpacing: MD.Tokens.measurement.space200
     readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
-    component Headline: MD.Label {
-        typescale: MD.Tokens.typescale.headlineMedium
-    }
+    GalleryPage {
+        id: galleryPage
 
-    MD.ScrollView {
         anchors.fill: parent
+        headline: qsTr("Menus")
+        description: qsTr("Menus present temporary lists of actions with grouped, divided, contextual, and vibrant presentations.")
 
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Vertical menu grouping")
 
-            Headline {
-                text: qsTr("Menus")
-            }
+            GridLayout {
+                width: parent.width
+                columns: width >= 560 ? 4 : width >= 280 ? 2 : 1
+                columnSpacing: page.contentSpacing
+                rowSpacing: page.contentSpacing
 
-            MD.GroupBox {
-                title: qsTr("Vertical menu grouping")
+                MD.Button {
+                    text: qsTr("Standard")
+                    onClicked: standardMenu.popup(this, 0, height)
+                }
 
-                RowLayout {
-                    anchors.centerIn: parent
-                    spacing: page.contentSpacing
+                MD.Button {
+                    text: qsTr("With divider")
+                    onClicked: dividerMenu.popup(this, 0, height)
+                }
 
-                    MD.Button {
-                        text: qsTr("Standard")
-                        onClicked: standardMenu.popup(this, 0, height)
-                    }
+                MD.Button {
+                    text: qsTr("With gap")
+                    onClicked: gapMenu.popup(this, 0, height)
+                }
 
-                    MD.Button {
-                        text: qsTr("With divider")
-                        onClicked: dividerMenu.popup(this, 0, height)
-                    }
-
-                    MD.Button {
-                        text: qsTr("With gap")
-                        onClicked: gapMenu.popup(this, 0, height)
-                    }
-
-                    MD.Button {
-                        text: qsTr("Vibrant groups")
-                        onClicked: vibrantMenu.popup(this, 0, height)
-                    }
+                MD.Button {
+                    text: qsTr("Vibrant groups")
+                    onClicked: vibrantMenu.popup(this, 0, height)
                 }
             }
+        }
 
-            MD.GroupBox {
-                title: qsTr("Context menu")
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Context menu")
 
-                Rectangle {
-                    id: contextArea
+            Rectangle {
+                id: contextArea
 
+                anchors.centerIn: parent
+                width: Math.min(480, parent.width)
+                implicitHeight: 144
+                radius: MD.Tokens.shape.cornerMedium.topLeft
+                color: page.MD.Style.surfaceContainerColor
+
+                MD.Label {
                     anchors.centerIn: parent
-                    implicitWidth: 480
-                    implicitHeight: 144
-                    radius: MD.Tokens.shape.cornerMedium.topLeft
-                    color: page.MD.Style.surfaceContainerColor
+                    text: qsTr("Right-click anywhere in this area")
+                    color: page.MD.Style.onSurfaceVariantColor
+                }
 
-                    MD.Label {
-                        anchors.centerIn: parent
-                        text: qsTr("Right-click anywhere in this area")
-                        color: page.MD.Style.onSurfaceVariantColor
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.RightButton
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: mouse => contextMenu.popup(contextArea, mouse.x, mouse.y)
-                    }
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.RightButton
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: mouse => contextMenu.popup(contextArea, mouse.x, mouse.y)
                 }
             }
         }
@@ -89,37 +84,74 @@ Item {
     MD.Menu {
         id: standardMenu
 
-        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
-        MD.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
+        MD.Action {
+            text: qsTr("Cut")
+            icon.name: MD.SymbolNames.symbolContentCut
+        }
+        MD.Action {
+            text: qsTr("Copy")
+            icon.name: MD.SymbolNames.symbolContentCopy
+        }
+        MD.Action {
+            text: qsTr("Paste")
+            icon.name: MD.SymbolNames.symbolContentPaste
+        }
     }
 
     MD.Menu {
         id: dividerMenu
 
-        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
+        MD.Action {
+            text: qsTr("Cut")
+            icon.name: MD.SymbolNames.symbolContentCut
+        }
+        MD.Action {
+            text: qsTr("Copy")
+            icon.name: MD.SymbolNames.symbolContentCopy
+        }
         MD.MenuDivider {}
-        MD.Action { text: qsTr("Select all"); icon.name: MD.SymbolNames.symbolSelectAll }
+        MD.Action {
+            text: qsTr("Select all")
+            icon.name: MD.SymbolNames.symbolSelectAll
+        }
     }
 
     MD.Menu {
         id: gapMenu
 
-        MD.Action { text: qsTr("Cut"); icon.name: MD.SymbolNames.symbolContentCut }
-        MD.Action { text: qsTr("Copy"); icon.name: MD.SymbolNames.symbolContentCopy }
-        MD.Action { text: qsTr("Paste"); icon.name: MD.SymbolNames.symbolContentPaste }
+        MD.Action {
+            text: qsTr("Cut")
+            icon.name: MD.SymbolNames.symbolContentCut
+        }
+        MD.Action {
+            text: qsTr("Copy")
+            icon.name: MD.SymbolNames.symbolContentCopy
+        }
+        MD.Action {
+            text: qsTr("Paste")
+            icon.name: MD.SymbolNames.symbolContentPaste
+        }
         MD.MenuGap {}
-        MD.MenuSectionLabel { text: qsTr("Sharing") }
-        MD.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
-        MD.Action { text: qsTr("Download"); icon.name: MD.SymbolNames.symbolDownload }
+        MD.MenuSectionLabel {
+            text: qsTr("Sharing")
+        }
+        MD.Action {
+            text: qsTr("Share")
+            icon.name: MD.SymbolNames.symbolShare
+        }
+        MD.Action {
+            text: qsTr("Download")
+            icon.name: MD.SymbolNames.symbolDownload
+        }
     }
 
     MD.Menu {
         id: vibrantMenu
         colorStyle: MD.Menu.Vibrant
 
-        MD.MenuSectionLabel { text: qsTr("Document") }
+        MD.MenuSectionLabel {
+            text: qsTr("Document")
+        }
         MD.Action {
             text: qsTr("Edit")
             supportingText: qsTr("Open the document editor")
@@ -148,8 +180,13 @@ Item {
             shortcut: StandardKey.Paste
         }
         MD.MenuGap {}
-        MD.MenuSectionLabel { text: qsTr("File") }
-        MD.Action { text: qsTr("Share"); icon.name: MD.SymbolNames.symbolShare }
+        MD.MenuSectionLabel {
+            text: qsTr("File")
+        }
+        MD.Action {
+            text: qsTr("Share")
+            icon.name: MD.SymbolNames.symbolShare
+        }
         MD.MenuDivider {}
         MD.Action {
             text: qsTr("Delete")

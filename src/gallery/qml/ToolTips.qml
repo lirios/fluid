@@ -14,10 +14,6 @@ Item {
     readonly property real sectionSpacing: MD.Tokens.measurement.space300
     readonly property real itemSpacing: MD.Tokens.measurement.space200
 
-    component SectionTitle: MD.Label {
-        typescale: MD.Tokens.typescale.headlineSmall
-    }
-
     component ExampleButton: MD.Button {
         type: MD.Button.Outlined
     }
@@ -37,19 +33,22 @@ Item {
         text: qsTr("Enable")
     }
 
-    MD.ScrollView {
+    GalleryPage {
+        id: galleryPage
+
         anchors.fill: parent
+        headline: qsTr("Tooltips")
+        description: qsTr("Tooltips identify controls or provide concise supporting information through plain and rich presentations.")
 
-        ColumnLayout {
-            width: Math.max(implicitWidth, page.width)
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Plain tooltips")
 
-            SectionTitle {
-                text: qsTr("Plain tooltips")
-            }
-
-            RowLayout {
-                spacing: page.itemSpacing
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.floor(width / 160))
+                columnSpacing: page.itemSpacing
+                rowSpacing: page.itemSpacing
 
                 ExampleButton {
                     text: qsTr("Hover or focus")
@@ -67,13 +66,15 @@ Item {
                     MD.ToolTip.visible: pressed
                 }
             }
+        }
 
-            SectionTitle {
-                text: qsTr("Rich tooltip configurations")
-            }
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Rich tooltip configurations")
 
             GridLayout {
-                columns: 3
+                width: parent.width
+                columns: Math.max(1, Math.min(3, Math.floor(width / 160)))
                 columnSpacing: page.itemSpacing
                 rowSpacing: page.itemSpacing
 
@@ -113,13 +114,17 @@ Item {
                     onClicked: completeTip.open()
                 }
             }
+        }
 
-            SectionTitle {
-                text: qsTr("Wrapping, themes, and RTL")
-            }
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Wrapping, themes, and RTL")
 
-            RowLayout {
-                spacing: page.itemSpacing
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.floor(width / 196))
+                columnSpacing: page.itemSpacing
+                rowSpacing: page.itemSpacing
 
                 ExampleButton {
                     id: narrowAnchor

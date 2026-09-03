@@ -7,17 +7,14 @@ import QtQuick
 import QtQuick.Layouts
 import Fluid as MD
 
-MD.ScrollView {
+GalleryPage {
     id: page
 
-    readonly property real contentSpacing: MD.Tokens.measurement.space200
-    readonly property real sectionSpacing: MD.Tokens.measurement.space300
     readonly property real preferredCardWidth: 400
+    readonly property real cardContentWidth: Math.max(1, width - 2 * MD.Breakpoints.margin(breakpoint) - MD.Tokens.measurement.space400)
 
-    component ControlHeading: MD.Label {
-        width: parent.width
-        typescale: MD.Tokens.typescale.titleLarge
-    }
+    headline: qsTr("Indicators")
+    description: qsTr("Checkboxes, radio buttons, and switches communicate selection and on/off states across enabled, disabled, and error configurations.")
 
     component StaticCheckBox: MD.CheckBox {
         checkable: false
@@ -35,26 +32,23 @@ MD.ScrollView {
         checkable: false
     }
 
-    Column {
-        id: content
+    component BorderlessGalleryCard: GalleryCard {
+        typescale: MD.Tokens.typescale.titleLarge
+        outlineVisible: false
+    }
 
-        x: page.sectionSpacing
-        y: page.sectionSpacing
-        width: Math.max(0, page.availableWidth - page.sectionSpacing * 2)
-        spacing: page.sectionSpacing
-
-        ControlHeading {
-            text: qsTr("CheckBox")
-        }
+    BorderlessGalleryCard {
+        gridColumns: page.columns
+        fullWidth: true
+        title: qsTr("Checkbox")
 
         MD.AutomaticGrid {
             id: checkBoxGrid
 
             anchors.horizontalCenter: parent.horizontalCenter
-            cellWidth: Math.min(page.preferredCardWidth,
-                                Math.max(1, widthOverride - minColumnSpacing * 2))
+            cellWidth: Math.min(page.preferredCardWidth, Math.max(1, widthOverride - minColumnSpacing * 2))
             cellHeight: 216
-            widthOverride: content.width
+            widthOverride: page.cardContentWidth
             minColumnSpacing: page.contentSpacing
             rowSpacing: page.contentSpacing
             model: 4
@@ -103,19 +97,20 @@ MD.ScrollView {
                 }
             }
         }
+    }
 
-        ControlHeading {
-            text: qsTr("RadioButton")
-        }
+    BorderlessGalleryCard {
+        gridColumns: page.columns
+        fullWidth: true
+        title: qsTr("Radio button")
 
         MD.AutomaticGrid {
             id: radioButtonGrid
 
             anchors.horizontalCenter: parent.horizontalCenter
-            cellWidth: Math.min(page.preferredCardWidth,
-                                Math.max(1, widthOverride - minColumnSpacing * 2))
+            cellWidth: Math.min(page.preferredCardWidth, Math.max(1, widthOverride - minColumnSpacing * 2))
             cellHeight: 216
-            widthOverride: content.width
+            widthOverride: page.cardContentWidth
             minColumnSpacing: page.contentSpacing
             rowSpacing: page.contentSpacing
             model: 2
@@ -135,14 +130,12 @@ MD.ScrollView {
                     spacing: 0
 
                     MD.RadioButton {
-                        text: radioButtonSection.controlsEnabled
-                              ? qsTr("First option") : qsTr("Unselected")
+                        text: radioButtonSection.controlsEnabled ? qsTr("First option") : qsTr("Unselected")
                         enabled: radioButtonSection.controlsEnabled
                     }
 
                     MD.RadioButton {
-                        text: radioButtonSection.controlsEnabled
-                              ? qsTr("Second option") : qsTr("Selected")
+                        text: radioButtonSection.controlsEnabled ? qsTr("Second option") : qsTr("Selected")
                         checked: true
                         enabled: radioButtonSection.controlsEnabled
                     }
@@ -154,19 +147,20 @@ MD.ScrollView {
                 }
             }
         }
+    }
 
-        ControlHeading {
-            text: qsTr("Switch")
-        }
+    BorderlessGalleryCard {
+        gridColumns: page.columns
+        fullWidth: true
+        title: qsTr("Switch")
 
         MD.AutomaticGrid {
             id: switchGrid
 
             anchors.horizontalCenter: parent.horizontalCenter
-            cellWidth: Math.min(page.preferredCardWidth,
-                                Math.max(1, widthOverride - minColumnSpacing * 2))
+            cellWidth: Math.min(page.preferredCardWidth, Math.max(1, widthOverride - minColumnSpacing * 2))
             cellHeight: 264
-            widthOverride: content.width
+            widthOverride: page.cardContentWidth
             minColumnSpacing: page.contentSpacing
             rowSpacing: page.contentSpacing
             model: 2
@@ -250,11 +244,6 @@ MD.ScrollView {
                     }
                 }
             }
-        }
-
-        Item {
-            width: 1
-            height: page.sectionSpacing
         }
     }
 }

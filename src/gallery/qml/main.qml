@@ -11,8 +11,11 @@ MD.ApplicationWindow {
 
     visible: true
 
-    width: 1024
-    height: 800
+    width: MD.Breakpoints.largeLowerBound
+    height: MD.Breakpoints.expandedLowerBound
+
+    minimumWidth: MD.Breakpoints.mediumLowerBound
+    minimumHeight: MD.Breakpoints.mediumLowerBound
 
     title: qsTr("Fluid Gallery")
 
@@ -21,31 +24,88 @@ MD.ApplicationWindow {
             "name": qsTr("Foundations"),
             "icon": MD.SymbolNames.symbolFoundation,
             "items": [
-                { "name": qsTr("Elevation"), "source": "Elevation.qml" },
-                { "name": qsTr("Grids"), "source": "Grids.qml" },
-                { "name": qsTr("Symbols"), "source": "Symbols.qml" },
-                { "name": qsTr("Colors"), "source": "Colors.qml" },
-                { "name": qsTr("Typography"), "source": "Typography.qml" }
+                {
+                    "name": qsTr("Elevation"),
+                    "source": "Elevation.qml"
+                },
+                {
+                    "name": qsTr("Grids"),
+                    "source": "Grids.qml"
+                },
+                {
+                    "name": qsTr("Symbols"),
+                    "source": "Symbols.qml"
+                },
+                {
+                    "name": qsTr("Colors"),
+                    "source": "Colors.qml"
+                },
+                {
+                    "name": qsTr("Typography"),
+                    "source": "Typography.qml"
+                }
             ]
         },
         {
             "name": qsTr("Components"),
             "icon": MD.SymbolNames.symbolWidgets,
             "items": [
-                { "name": qsTr("Components overview"), "source": "Components.qml" },
-                { "name": qsTr("Divider"), "source": "Divider.qml" },
-                { "name": qsTr("Exposed Dropdown Menus"), "source": "ExposedDropdownMenus.qml" },
-                { "name": qsTr("Menus"), "source": "Menus.qml" },
-                { "name": qsTr("Navigation Rails"), "source": "NavigationRails.qml" },
-                { "name": qsTr("Icon Button"), "source": "IconButton.qml" },
-                { "name": qsTr("FAB"), "source": "FAB.qml" },
-                { "name": qsTr("FAB Menu"), "source": "FabMenu.qml" },
-                { "name": qsTr("App Bars"), "source": "AppBars.qml" },
-                { "name": qsTr("Indicators"), "source": "Indicators.qml" },
-                { "name": qsTr("Slider"), "source": "Slider.qml" },
-                { "name": qsTr("Text Fields"), "source": "TextFields.qml" },
-                { "name": qsTr("Lists"), "source": "Lists.qml" },
-                { "name": qsTr("Tooltips"), "source": "ToolTips.qml" }
+                {
+                    "name": qsTr("Components overview"),
+                    "source": "Components.qml"
+                },
+                {
+                    "name": qsTr("Divider"),
+                    "source": "Divider.qml"
+                },
+                {
+                    "name": qsTr("Exposed Dropdown Menus"),
+                    "source": "ExposedDropdownMenus.qml"
+                },
+                {
+                    "name": qsTr("Menus"),
+                    "source": "Menus.qml"
+                },
+                {
+                    "name": qsTr("Navigation Rails"),
+                    "source": "NavigationRails.qml"
+                },
+                {
+                    "name": qsTr("Icon Button"),
+                    "source": "IconButton.qml"
+                },
+                {
+                    "name": qsTr("FAB"),
+                    "source": "FAB.qml"
+                },
+                {
+                    "name": qsTr("FAB Menu"),
+                    "source": "FabMenu.qml"
+                },
+                {
+                    "name": qsTr("App Bars"),
+                    "source": "AppBars.qml"
+                },
+                {
+                    "name": qsTr("Indicators"),
+                    "source": "Indicators.qml"
+                },
+                {
+                    "name": qsTr("Slider"),
+                    "source": "Slider.qml"
+                },
+                {
+                    "name": qsTr("Text Fields"),
+                    "source": "TextFields.qml"
+                },
+                {
+                    "name": qsTr("Lists"),
+                    "source": "Lists.qml"
+                },
+                {
+                    "name": qsTr("Tooltips"),
+                    "source": "ToolTips.qml"
+                }
             ]
         }
     ]
@@ -177,8 +237,7 @@ MD.ApplicationWindow {
                                 required property int index
                                 required property var modelData
 
-                                readonly property bool selected:
-                                    destinationItem.modelData.source === window.selectedSource
+                                readonly property bool selected: destinationItem.modelData.source === window.selectedSource
 
                                 width: ListView.view.width
                                 text: destinationItem.modelData.name

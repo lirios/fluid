@@ -91,11 +91,9 @@ Item {
         Layout.preferredWidth: 156
         implicitHeight: 116
 
-        color: active ? page.MD.Style.primaryContainerColor
-                      : page.MD.Style.surfaceContainerLowColor
+        color: active ? page.MD.Style.primaryContainerColor : page.MD.Style.surfaceContainerLowColor
         border.width: active ? 2 : 1
-        border.color: active ? page.MD.Style.primaryColor
-                             : page.MD.Style.outlineVariantColor
+        border.color: active ? page.MD.Style.primaryColor : page.MD.Style.outlineVariantColor
         topLeftRadius: MD.Tokens.shape.cornerMedium.topLeft
         topRightRadius: MD.Tokens.shape.cornerMedium.topRight
         bottomLeftRadius: MD.Tokens.shape.cornerMedium.bottomLeft
@@ -110,25 +108,20 @@ Item {
                 Layout.fillWidth: true
                 text: breakpointCard.breakpointLabel
                 typescale: MD.Tokens.typescale.titleMedium
-                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor
-                                             : page.MD.Style.onSurfaceColor
+                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor : page.MD.Style.onSurfaceColor
             }
 
             MD.Label {
                 Layout.fillWidth: true
                 text: breakpointCard.breakpointRange
-                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor
-                                             : page.MD.Style.onSurfaceVariantColor
+                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor : page.MD.Style.onSurfaceVariantColor
             }
 
             MD.Label {
                 Layout.fillWidth: true
-                text: qsTr("%1 columns · %2 spacing")
-                          .arg(breakpointCard.columnCount)
-                          .arg(breakpointCard.gridSpacing)
+                text: qsTr("%1 columns · %2 spacing").arg(breakpointCard.columnCount).arg(breakpointCard.gridSpacing)
                 typescale: MD.Tokens.typescale.labelMedium
-                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor
-                                             : page.MD.Style.onSurfaceVariantColor
+                color: breakpointCard.active ? page.MD.Style.onPrimaryContainerColor : page.MD.Style.onSurfaceVariantColor
             }
         }
     }
@@ -176,8 +169,7 @@ Item {
         property bool emphasized: false
 
         implicitHeight: 72
-        color: emphasized ? page.MD.Style.primaryColor
-                          : page.MD.Style.secondaryContainerColor
+        color: emphasized ? page.MD.Style.primaryColor : page.MD.Style.secondaryContainerColor
         topLeftRadius: MD.Tokens.shape.cornerSmall.topLeft
         topRightRadius: MD.Tokens.shape.cornerSmall.topRight
         bottomLeftRadius: MD.Tokens.shape.cornerSmall.bottomLeft
@@ -189,157 +181,122 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             text: contentBlock.blockLabel
             typescale: MD.Tokens.typescale.labelLarge
-            color: contentBlock.emphasized ? page.MD.Style.onPrimaryColor
-                                           : page.MD.Style.onSecondaryContainerColor
+            color: contentBlock.emphasized ? page.MD.Style.onPrimaryColor : page.MD.Style.onSecondaryContainerColor
         }
     }
 
-    MD.ScrollView {
-        id: scrollView
-
+    GalleryPage {
+        id: galleryPage
         anchors.fill: parent
-        clip: true
-        contentWidth: availableWidth
+        headline: qsTr("Adaptive grids and spacing")
+        description: qsTr("Material layouts use equal columns, margins, and gutters that adapt as the available width crosses a breakpoint.")
 
-        ColumnLayout {
-            id: content
-
-            x: page.sectionSpacing
-            width: Math.max(0, scrollView.availableWidth - page.sectionSpacing * 2)
-            spacing: page.spaciousSpacing
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                spacing: page.compactSpacing
-
-                MD.Label {
-                    Layout.fillWidth: true
-                    text: qsTr("Adaptive grids and spacing")
-                    typescale: MD.Tokens.typescale.headlineMedium
-                    color: page.MD.Style.onSurfaceColor
-                }
-
-                MD.Label {
-                    Layout.fillWidth: true
-                    text: qsTr("Material layouts use equal columns, margins, and gutters that adapt as the available width crosses a breakpoint.")
-                    typescale: MD.Tokens.typescale.bodyLarge
-                    color: page.MD.Style.onSurfaceVariantColor
-                    wrapMode: Text.WordWrap
-                }
-            }
-
-            ColumnLayout {
-                Layout.fillWidth: true
-                spacing: page.contentSpacing
-
-                MD.Label {
-                    text: qsTr("Breakpoint reference")
-                    typescale: MD.Tokens.typescale.titleLarge
-                    color: page.MD.Style.onSurfaceColor
-                }
-
-                GridLayout {
-                    Layout.fillWidth: true
-                    columns: Math.max(1, Math.min(5, Math.floor(width / 168)))
-                    columnSpacing: page.contentSpacing
-                    rowSpacing: page.contentSpacing
-
-                    Repeater {
-                        model: page.breakpointEntries
-
-                        delegate: BreakpointCard {
-                            required property var modelData
-
-                            breakpoint: modelData.breakpoint
-                            breakpointLabel: modelData.name
-                            breakpointRange: modelData.range
-                            columnCount: modelData.columns
-                            gridSpacing: modelData.spacing
-                        }
-                    }
-                }
-            }
-
-            Rectangle {
-                Layout.fillWidth: true
-                implicitHeight: widthControls.implicitHeight + page.sectionSpacing * 2
-
-                color: page.MD.Style.surfaceContainerLowColor
-                topLeftRadius: MD.Tokens.shape.cornerLarge.topLeft
-                topRightRadius: MD.Tokens.shape.cornerLarge.topRight
-                bottomLeftRadius: MD.Tokens.shape.cornerLarge.bottomLeft
-                bottomRightRadius: MD.Tokens.shape.cornerLarge.bottomRight
-
-                ColumnLayout {
-                    id: widthControls
-
-                    anchors.fill: parent
-                    anchors.margins: page.sectionSpacing
-                    spacing: page.contentSpacing
-
-                    RowLayout {
-                        Layout.fillWidth: true
-                        spacing: page.contentSpacing
-
-                        ColumnLayout {
-                            Layout.fillWidth: true
-                            spacing: MD.Tokens.measurement.space25
-
-                            MD.Label {
-                                text: qsTr("Simulated reference width")
-                                typescale: MD.Tokens.typescale.titleMedium
-                                color: page.MD.Style.onSurfaceColor
-                            }
-
-                            MD.Label {
-                                Layout.fillWidth: true
-                                text: qsTr("Drag through every breakpoint; the preview is fitted to the gallery pane.")
-                                color: page.MD.Style.onSurfaceVariantColor
-                                wrapMode: Text.WordWrap
-                            }
-                        }
-
-                        MD.Label {
-                            text: qsTr("%1 dp").arg(Math.round(referenceWidthSlider.value))
-                            typescale: MD.Tokens.typescale.titleLarge
-                            color: page.MD.Style.primaryColor
-                        }
-                    }
-
-                    MD.Slider {
-                        id: referenceWidthSlider
-                        Accessible.name: qsTr("Reference width")
-
-                        Layout.fillWidth: true
-                        from: 320
-                        to: 1800
-                        stepSize: 10
-                        value: 1024
-                        labelBehavior: MD.Slider.LabelBehavior.Gone
-                    }
-
-                    RowLayout {
-                        Layout.fillWidth: true
-
-                        MD.Label {
-                            text: qsTr("320 dp")
-                            typescale: MD.Tokens.typescale.labelSmall
-                        }
-
-                        Item {
-                            Layout.fillWidth: true
-                        }
-
-                        MD.Label {
-                            text: qsTr("1800 dp")
-                            typescale: MD.Tokens.typescale.labelSmall
-                        }
-                    }
-                }
-            }
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Breakpoint reference")
 
             GridLayout {
-                Layout.fillWidth: true
+                width: parent.width
+                columns: Math.max(1, Math.min(5, Math.floor(width / 168)))
+                columnSpacing: page.contentSpacing
+                rowSpacing: page.contentSpacing
+
+                Repeater {
+                    model: page.breakpointEntries
+
+                    delegate: BreakpointCard {
+                        required property var modelData
+
+                        breakpoint: modelData.breakpoint
+                        breakpointLabel: modelData.name
+                        breakpointRange: modelData.range
+                        columnCount: modelData.columns
+                        gridSpacing: modelData.spacing
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Reference width")
+
+            ColumnLayout {
+                id: widthControls
+
+                width: parent.width
+                spacing: page.contentSpacing
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: page.contentSpacing
+
+                    ColumnLayout {
+                        Layout.fillWidth: true
+                        spacing: MD.Tokens.measurement.space25
+
+                        MD.Label {
+                            text: qsTr("Simulated reference width")
+                            typescale: MD.Tokens.typescale.titleMedium
+                            color: page.MD.Style.onSurfaceColor
+                        }
+
+                        MD.Label {
+                            Layout.fillWidth: true
+                            text: qsTr("Drag through every breakpoint; the preview is fitted to the gallery pane.")
+                            color: page.MD.Style.onSurfaceVariantColor
+                            wrapMode: Text.WordWrap
+                        }
+                    }
+
+                    MD.Label {
+                        text: qsTr("%1 dp").arg(Math.round(referenceWidthSlider.value))
+                        typescale: MD.Tokens.typescale.titleLarge
+                        color: page.MD.Style.primaryColor
+                    }
+                }
+
+                MD.Slider {
+                    id: referenceWidthSlider
+                    Accessible.name: qsTr("Reference width")
+
+                    Layout.fillWidth: true
+                    from: 320
+                    to: 1800
+                    stepSize: 10
+                    value: 1024
+                    labelBehavior: MD.Slider.LabelBehavior.Gone
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+
+                    MD.Label {
+                        text: qsTr("320 dp")
+                        typescale: MD.Tokens.typescale.labelSmall
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    MD.Label {
+                        text: qsTr("1800 dp")
+                        typescale: MD.Tokens.typescale.labelSmall
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Current metrics")
+
+            GridLayout {
+                width: parent.width
                 columns: Math.max(1, Math.min(5, Math.floor(width / 160)))
                 columnSpacing: page.contentSpacing
                 rowSpacing: page.contentSpacing
@@ -369,16 +326,16 @@ Item {
                     metricValue: qsTr("%1 dp").arg(previewGrid.columnSpacing)
                 }
             }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Live adaptive layout")
 
             ColumnLayout {
-                Layout.fillWidth: true
+                width: parent.width
                 spacing: page.contentSpacing
-
-                MD.Label {
-                    text: qsTr("Live adaptive layout")
-                    typescale: MD.Tokens.typescale.titleLarge
-                    color: page.MD.Style.onSurfaceColor
-                }
 
                 MD.Label {
                     Layout.fillWidth: true
@@ -410,8 +367,7 @@ Item {
 
                             x: previewGrid.columnLeft(index)
                             y: previewGrid.margins
-                            width: Math.max(0, previewGrid.columnRight(index)
-                                               - previewGrid.columnLeft(index))
+                            width: Math.max(0, previewGrid.columnRight(index) - previewGrid.columnLeft(index))
                             height: Math.max(0, preview.height - previewGrid.margins * 2)
                             color: Qt.alpha(page.MD.Style.primaryContainerColor, 0.42)
                         }
@@ -437,9 +393,7 @@ Item {
                             Layout.column: 0
                             Layout.columnSpan: previewGrid.columns >= 12 ? 8 : previewGrid.columns
                             implicitHeight: 112
-                            blockLabel: previewGrid.columns >= 12
-                                        ? qsTr("Main content · 8 columns")
-                                        : qsTr("Main content · full span")
+                            blockLabel: previewGrid.columns >= 12 ? qsTr("Main content · 8 columns") : qsTr("Main content · full span")
                         }
 
                         ContentBlock {
@@ -466,19 +420,13 @@ Item {
                         }
 
                         ContentBlock {
-                            Layout.row: previewGrid.columns >= 12 ? 2
-                                                                  : previewGrid.columns === 8 ? 3 : 4
+                            Layout.row: previewGrid.columns >= 12 ? 2 : previewGrid.columns === 8 ? 3 : 4
                             Layout.column: previewGrid.columns >= 12 ? 8 : 0
                             Layout.columnSpan: 4
                             blockLabel: qsTr("Card C · 4 columns")
                         }
                     }
                 }
-            }
-
-            Item {
-                Layout.fillWidth: true
-                implicitHeight: page.sectionSpacing
             }
         }
     }

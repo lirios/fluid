@@ -1,5 +1,7 @@
-// SPDX-FileCopyrightText: 2025 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-FileCopyrightText: 2025-2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
+
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -8,21 +10,10 @@ import Fluid as MD
 Item {
     id: page
 
-    readonly property real sectionSpacing: MD.Tokens.measurement.space300
-    readonly property real spaciousSpacing: MD.Tokens.measurement.space400
-
     component Elevation: MD.Elevation {
-        Layout.fillWidth: true
-        Layout.preferredWidth: 160
-        Layout.preferredHeight: width
-        Layout.maximumWidth: 160
-        Layout.maximumHeight: 160
-
-        implicitWidth: 40
-        implicitHeight: width
-
+        implicitWidth: 160
+        implicitHeight: implicitWidth
         radius: radiusSlider.value
-
         visible: true
 
         Rectangle {
@@ -32,61 +23,72 @@ Item {
         }
     }
 
-    MD.ScrollView {
+    GalleryPage {
+        id: galleryPage
+
         anchors.fill: parent
+        headline: qsTr("Elevation")
+        description: qsTr("Elevation communicates the relative distance between surfaces with tonal shadows ranging from level 0 through level 5.")
 
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Elevation levels")
 
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: page.sectionSpacing
+            ColumnLayout {
+                width: parent.width
+                spacing: galleryPage.sectionSpacing
 
-                MD.Label {
-                    text: qsTr("Elevation: %1").arg(radiusSlider.value)
-                }
-
-                MD.Slider {
-                    id: radiusSlider
-                    Accessible.name: qsTr("Corner radius")
-
+                RowLayout {
                     Layout.fillWidth: true
+                    spacing: galleryPage.sectionSpacing
 
-                    from: 0
-                    to: 80
-                    stepSize: 2
-                    value: 8
-                }
-            }
+                    MD.Label {
+                        text: qsTr("Corner radius: %1").arg(radiusSlider.value)
+                    }
 
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: page.spaciousSpacing
+                    MD.Slider {
+                        id: radiusSlider
+                        Accessible.name: qsTr("Corner radius")
 
-                Elevation {
-                    elevation: MD.Tokens.elevation.level0
+                        Layout.fillWidth: true
+                        from: 0
+                        to: 80
+                        stepSize: 2
+                        value: 8
+                    }
                 }
-                Elevation {
-                    elevation: MD.Tokens.elevation.level1
-                }
-                Elevation {
-                    elevation: MD.Tokens.elevation.level2
-                }
-            }
 
-            RowLayout {
-                Layout.fillWidth: true
-                spacing: page.spaciousSpacing
+                Item {
+                    Layout.fillWidth: true
+                    implicitHeight: elevationGrid.height
 
-                Elevation {
-                    elevation: MD.Tokens.elevation.level3
-                }
-                Elevation {
-                    elevation: MD.Tokens.elevation.level4
-                }
-                Elevation {
-                    elevation: MD.Tokens.elevation.level5
+                    MD.AutomaticGrid {
+                        id: elevationGrid
+
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        cellWidth: Math.min(160, Math.max(1, widthOverride - minColumnSpacing * 2))
+                        cellHeight: cellWidth
+                        widthOverride: parent.width
+                        minColumnSpacing: galleryPage.spaciousSpacing
+                        rowSpacing: galleryPage.spaciousSpacing
+                        model: [
+                            MD.Tokens.elevation.level0,
+                            MD.Tokens.elevation.level1,
+                            MD.Tokens.elevation.level2,
+                            MD.Tokens.elevation.level3,
+                            MD.Tokens.elevation.level4,
+                            MD.Tokens.elevation.level5
+                        ]
+
+                        delegate: Elevation {
+                            required property real modelData
+
+                            width: elevationGrid.cellWidth
+                            height: elevationGrid.cellHeight
+                            elevation: modelData
+                        }
+                    }
                 }
             }
         }

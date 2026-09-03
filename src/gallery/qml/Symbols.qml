@@ -19,9 +19,8 @@ Item {
         required property string name
         property int style: MD.Symbol.Style.Outlined
 
-        Layout.columnSpan: 2
-        Layout.fillWidth: true
-        Layout.preferredHeight: page.symbolSize
+        implicitWidth: page.symbolSize
+        implicitHeight: page.symbolSize
 
         MD.ToolTip.visible: hovered
         MD.ToolTip.text: name
@@ -31,50 +30,60 @@ Item {
             iconWidth: page.symbolSize
             iconHeight: page.symbolSize
             style: symbolItem.style
-            opticalSize: page.symbolSize > 48 ? MD.Symbol.OpticalSize.Large
-                                               : MD.Symbol.OpticalSize.Normal
+            opticalSize: page.symbolSize > 48 ? MD.Symbol.OpticalSize.Large : MD.Symbol.OpticalSize.Normal
         }
     }
 
-    MD.ScrollView {
-        id: scrollView
-
+    GalleryPage {
+        id: galleryPage
         anchors.fill: parent
-        clip: true
-        contentWidth: availableWidth
+        headline: qsTr("Symbols")
+        description: qsTr("Symbols provide scalable Material icons in outlined, rounded, and sharp styles.")
 
-        ColumnLayout {
-            width: scrollView.availableWidth
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Symbol catalog")
 
-            MD.ExposedDropdownMenu {
-                id: comboBox
+            ColumnLayout {
+                width: parent.width
+                spacing: galleryPage.sectionSpacing
 
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: page.sectionSpacing
+                MD.ExposedDropdownMenu {
+                    id: comboBox
 
-                label: qsTr("Symbol style")
-                model: ["Outlined", "Rounded", "Sharp"]
-            }
+                    Layout.alignment: Qt.AlignHCenter
 
-            MD.AdaptiveGrid {
-                id: symbolGrid
+                    label: qsTr("Symbol style")
+                    model: ["Outlined", "Rounded", "Sharp"]
+                }
 
-                Layout.fillWidth: true
-                Layout.bottomMargin: page.sectionSpacing
-                rowSpacing: page.sectionSpacing
+                Item {
+                    Layout.fillWidth: true
+                    implicitHeight: symbolGrid.height
 
-                Repeater {
-                    model: SymbolsModel {}
+                    MD.AutomaticGrid {
+                        id: symbolGrid
 
-                    delegate: SymbolItem {
-                        style: {
-                            if (comboBox.currentIndex === 0)
-                                return MD.Symbol.Style.Outlined;
-                            else if (comboBox.currentIndex === 1)
-                                return MD.Symbol.Style.Rounded;
-                            else
-                                return MD.Symbol.Style.Sharp;
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        cellWidth: Math.min(page.symbolSize, Math.max(1, widthOverride - minColumnSpacing * 2))
+                        cellHeight: cellWidth
+                        widthOverride: parent.width
+                        minColumnSpacing: page.sectionSpacing
+                        rowSpacing: page.sectionSpacing
+                        model: SymbolsModel {}
+
+                        delegate: SymbolItem {
+                            width: symbolGrid.cellWidth
+                            height: symbolGrid.cellHeight
+                            style: {
+                                if (comboBox.currentIndex === 0)
+                                    return MD.Symbol.Style.Outlined;
+                                else if (comboBox.currentIndex === 1)
+                                    return MD.Symbol.Style.Rounded;
+                                else
+                                    return MD.Symbol.Style.Sharp;
+                            }
                         }
                     }
                 }

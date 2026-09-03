@@ -13,6 +13,7 @@ add_executable(tst_fluid_controls
     tst_exposeddropdownmenu.qml
     tst_fab.qml
     tst_fabmenu.qml
+    tst_gallery.qml
     tst_icon.qml
     tst_iconbutton.qml
     tst_listitem.qml

@@ -2,18 +2,26 @@
 // SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
+import QtQuick.Layouts
 import Fluid as MD
 
-Item {
-    MD.ScrollView {
-        anchors.fill: parent
+GalleryPage {
+    id: page
 
-        Column {
-            anchors.fill: parent
+    headline: qsTr("Typography")
+    description: qsTr("Type scales organize display, headline, title, body, and label text, with optional emphasized variants.")
+
+    GalleryCard {
+        gridColumns: page.columns
+        fullWidth: true
+        title: qsTr("Type scale")
+
+        ColumnLayout {
+            width: parent.width
+            spacing: page.contentSpacing
 
             MD.Switch {
                 id: emphasizedSwitch
-
                 text: qsTr("Use emphasized typescales")
             }
 
@@ -82,8 +90,10 @@ Item {
                 }
 
                 MD.Label {
-                    typescale: emphasizedSwitch ? MD.Tokens.emphasizedTypeScale[model.name] : MD.Tokens.typescale[model.name]
+                    Layout.fillWidth: true
+                    typescale: emphasizedSwitch.checked ? MD.Tokens.emphasizedTypeScale[model.name] : MD.Tokens.typescale[model.name]
                     text: model.label
+                    wrapMode: Text.WordWrap
                 }
             }
         }

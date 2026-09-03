@@ -14,10 +14,6 @@ Item {
     readonly property real contentSpacing: MD.Tokens.measurement.space200
     readonly property real sectionSpacing: MD.Tokens.measurement.space300
 
-    component Headline: MD.Label {
-        typescale: MD.Tokens.typescale.headlineMedium
-    }
-
     component LargeLabel: MD.Label {
         Layout.alignment: Qt.AlignHCenter
         typescale: MD.Tokens.typescale.labelLarge
@@ -28,235 +24,246 @@ Item {
         text: qsTr("FAB action")
     }
 
-    MD.ScrollView {
+    GalleryPage {
+        id: galleryPage
+
         anchors.fill: parent
+        headline: qsTr("Floating action buttons")
+        description: qsTr("Floating action buttons emphasize a high-priority action with size, color, elevation, and extended-label options.")
 
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Sizes")
 
-            Headline {
-                text: qsTr("Floating Action Button")
-            }
-
-            MD.GroupBox {
-                title: qsTr("Sizes")
-
-                RowLayout {
-                    anchors.centerIn: parent
-                    spacing: page.sectionSpacing
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            size: MD.FAB.Size.Default
-                            icon.name: "add"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("FAB")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            size: MD.FAB.Size.Medium
-                            icon.name: "add"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Medium FAB")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            size: MD.FAB.Size.Large
-                            icon.name: "add"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Large FAB")
-                        }
-                    }
-                }
-            }
-
-            MD.GroupBox {
-                title: qsTr("Color variants")
-
-                RowLayout {
-                    anchors.centerIn: parent
-                    spacing: page.sectionSpacing
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            variant: MD.FAB.Variant.Surface
-                            icon.name: "edit"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Surface")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            variant: MD.FAB.Variant.Primary
-                            icon.name: "edit"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Primary")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            variant: MD.FAB.Variant.Secondary
-                            icon.name: "edit"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Secondary")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            variant: MD.FAB.Variant.Tertiary
-                            icon.name: "edit"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Tertiary")
-                        }
-                    }
-                }
-            }
-
-            MD.GroupBox {
-                title: qsTr("Elevation")
-
-                RowLayout {
-                    anchors.centerIn: parent
-                    spacing: page.sectionSpacing
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            icon.name: "navigation"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Default")
-                        }
-                    }
-
-                    ColumnLayout {
-                        spacing: page.compactSpacing
-
-                        DemoFAB {
-                            Layout.alignment: Qt.AlignHCenter
-                            lowered: true
-                            icon.name: "navigation"
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Lowered")
-                        }
-                    }
-                }
-            }
-
-            MD.GroupBox {
-                title: qsTr("Properties")
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.min(3, Math.floor(width / 112)))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
 
                 ColumnLayout {
-                    anchors.centerIn: parent
-                    spacing: page.contentSpacing
+                    spacing: page.compactSpacing
 
-                    RowLayout {
-                        spacing: page.contentSpacing
-
-                        MD.Switch {
-                            id: enabledSwitch
-
-                            text: qsTr("Enabled")
-                            checked: true
-                        }
-
-                        MD.Switch {
-                            id: loweredSwitch
-
-                            text: qsTr("Lowered")
-                        }
-
-                        DemoFAB {
-                            id: interactiveFAB
-
-                            enabled: enabledSwitch.checked
-                            lowered: loweredSwitch.checked
-                            icon.name: "add"
-
-                            onClicked: page.clickCount++
-                        }
-
-                        LargeLabel {
-                            text: qsTr("Activated %1 time(s)").arg(page.clickCount)
-                        }
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        size: MD.FAB.Size.Default
+                        icon.name: "add"
                     }
 
-                    RowLayout {
-                        spacing: page.contentSpacing
+                    LargeLabel {
+                        text: qsTr("FAB")
+                    }
+                }
 
-                        MD.Switch {
-                            id: mirrorSwitch
+                ColumnLayout {
+                    spacing: page.compactSpacing
 
-                            text: qsTr("Mirror icon in RTL")
-                            checked: true
-                        }
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        size: MD.FAB.Size.Medium
+                        icon.name: "add"
+                    }
 
-                        DemoFAB {
-                            text: qsTr("Custom colors")
-                            containerColor: MD.Style.errorContainerColor
-                            contentColor: MD.Style.onErrorContainerColor
-                            icon.name: "priority_high"
-                        }
+                    LargeLabel {
+                        text: qsTr("Medium FAB")
+                    }
+                }
 
-                        DemoFAB {
-                            text: qsTr("Source image")
-                            icon.source: "qrc:/icons/32x32/apps/io.liri.Fluid.Gallery.png"
-                        }
+                ColumnLayout {
+                    spacing: page.compactSpacing
 
-                        DemoFAB {
-                            text: qsTr("Forward")
-                            mirrorIconInRtl: mirrorSwitch.checked
-                            icon.name: "arrow_forward"
-                            LayoutMirroring.enabled: true
-                        }
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        size: MD.FAB.Size.Large
+                        icon.name: "add"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Large FAB")
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Color variants")
+
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.min(4, Math.floor(width / 104)))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        variant: MD.FAB.Variant.Surface
+                        icon.name: "edit"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Surface")
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        variant: MD.FAB.Variant.Primary
+                        icon.name: "edit"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Primary")
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        variant: MD.FAB.Variant.Secondary
+                        icon.name: "edit"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Secondary")
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        variant: MD.FAB.Variant.Tertiary
+                        icon.name: "edit"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Tertiary")
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Elevation")
+
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.min(2, Math.floor(width / 112)))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        icon.name: "navigation"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Default")
+                    }
+                }
+
+                ColumnLayout {
+                    spacing: page.compactSpacing
+
+                    DemoFAB {
+                        Layout.alignment: Qt.AlignHCenter
+                        lowered: true
+                        icon.name: "navigation"
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Lowered")
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Properties")
+
+            ColumnLayout {
+                width: parent.width
+                spacing: page.contentSpacing
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: Math.max(1, Math.floor(width / 160))
+                    columnSpacing: page.contentSpacing
+                    rowSpacing: page.contentSpacing
+
+                    MD.Switch {
+                        id: enabledSwitch
+
+                        text: qsTr("Enabled")
+                        checked: true
+                    }
+
+                    MD.Switch {
+                        id: loweredSwitch
+
+                        text: qsTr("Lowered")
+                    }
+
+                    DemoFAB {
+                        id: interactiveFAB
+
+                        enabled: enabledSwitch.checked
+                        lowered: loweredSwitch.checked
+                        icon.name: "add"
+
+                        onClicked: page.clickCount++
+                    }
+
+                    LargeLabel {
+                        text: qsTr("Activated %1 time(s)").arg(page.clickCount)
+                    }
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: Math.max(1, Math.floor(width / 160))
+                    columnSpacing: page.contentSpacing
+                    rowSpacing: page.contentSpacing
+
+                    MD.Switch {
+                        id: mirrorSwitch
+
+                        text: qsTr("Mirror icon in RTL")
+                        checked: true
+                    }
+
+                    DemoFAB {
+                        text: qsTr("Custom colors")
+                        containerColor: MD.Style.errorContainerColor
+                        contentColor: MD.Style.onErrorContainerColor
+                        icon.name: "priority_high"
+                    }
+
+                    DemoFAB {
+                        text: qsTr("Source image")
+                        icon.source: "qrc:/icons/32x32/apps/io.liri.Fluid.Gallery.png"
+                    }
+
+                    DemoFAB {
+                        text: qsTr("Forward")
+                        mirrorIconInRtl: mirrorSwitch.checked
+                        icon.name: "arrow_forward"
+                        LayoutMirroring.enabled: true
                     }
                 }
             }

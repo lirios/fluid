@@ -5,82 +5,191 @@ import QtQuick
 import QtQuick.Layouts
 import Fluid as MD
 
-Item {
+GalleryPage {
     id: page
 
-    readonly property real sectionSpacing: MD.Tokens.measurement.space300
+    headline: qsTr("Dividers")
+    description: qsTr("Dividers separate related content with full-width, inset, middle-inset, and vertical treatments.")
 
-    MD.ScrollView {
-        anchors.fill: parent
+    GalleryCard {
+        gridColumns: page.columns
+        title: qsTr("Horizontal")
 
         ColumnLayout {
-            width: parent.width
+            id: horizontalExamples
+
+            readonly property real labelWidth: Math.max(fullWidthLabel.implicitWidth,
+                                                        insetLabel.implicitWidth,
+                                                        middleInsetLabel.implicitWidth)
+
+            anchors.fill: parent
             spacing: page.sectionSpacing
 
-            MD.Label {
-                Layout.fillWidth: true
-                Layout.margins: page.sectionSpacing
-
-                text: qsTr("Full-width")
-            }
-
-            MD.Divider {
-                Layout.fillWidth: true
-            }
-
-            MD.Label {
-                Layout.fillWidth: true
-                Layout.margins: page.sectionSpacing
-
-                text: qsTr("Inset")
-            }
-
-            MD.Divider {
-                Layout.fillWidth: true
-
-                leadingInset: MD.Tokens.divider.inset
-            }
-
-            MD.Label {
-                Layout.fillWidth: true
-                Layout.margins: page.sectionSpacing
-
-                text: qsTr("Middle-inset")
-            }
-
-            MD.Divider {
-                Layout.fillWidth: true
-
-                leadingInset: MD.Tokens.divider.inset
-                trailingInset: MD.Tokens.divider.inset
-            }
-
-            MD.Label {
-                Layout.fillWidth: true
-                Layout.margins: page.sectionSpacing
-
-                text: qsTr("Vertical")
-            }
-
+            // Full-width
             RowLayout {
                 Layout.fillWidth: true
-                Layout.margins: page.sectionSpacing
-                Layout.preferredHeight: 64
-
-                spacing: page.sectionSpacing
+                spacing: page.contentSpacing
 
                 MD.Label {
-                    text: qsTr("Left")
+                    id: fullWidthLabel
+                    objectName: "fullWidthHorizontalDividerLabel"
+
+                    Layout.preferredWidth: horizontalExamples.labelWidth
+                    text: qsTr("Full-width")
                 }
 
                 MD.Divider {
-                    Layout.fillHeight: true
-
-                    orientation: Qt.Vertical
+                    objectName: "fullWidthHorizontalDivider"
+                    Layout.fillWidth: true
                 }
+            }
+
+            // Inset
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: page.contentSpacing
 
                 MD.Label {
-                    text: qsTr("Right")
+                    id: insetLabel
+                    objectName: "insetHorizontalDividerLabel"
+
+                    Layout.preferredWidth: horizontalExamples.labelWidth
+                    text: qsTr("Inset")
+                }
+
+                MD.Divider {
+                    objectName: "insetHorizontalDivider"
+                    Layout.fillWidth: true
+                    leadingInset: MD.Tokens.divider.inset
+                }
+            }
+
+            // Middle-inset
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: page.contentSpacing
+
+                MD.Label {
+                    id: middleInsetLabel
+                    objectName: "middleInsetHorizontalDividerLabel"
+
+                    Layout.preferredWidth: horizontalExamples.labelWidth
+                    text: qsTr("Middle-inset")
+                }
+
+                MD.Divider {
+                    objectName: "middleInsetHorizontalDivider"
+                    Layout.fillWidth: true
+                    leadingInset: MD.Tokens.divider.inset
+                    trailingInset: MD.Tokens.divider.inset
+                }
+            }
+        }
+    }
+
+    GalleryCard {
+        gridColumns: page.columns
+        title: qsTr("Vertical")
+
+        RowLayout {
+            objectName: "verticalDividerRow"
+
+            anchors.fill: parent
+            spacing: page.sectionSpacing
+
+            // Full-width
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                spacing: page.contentSpacing
+
+                MD.Label {
+                    objectName: "fullHeightVerticalDividerLabel"
+
+                    Layout.alignment: Qt.AlignHCenter
+                    text: qsTr("Full-width")
+                }
+
+                Item {
+                    objectName: "fullHeightVerticalDividerSample"
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    implicitHeight: MD.Tokens.measurement.space800
+
+                    MD.Divider {
+                        objectName: "fullHeightVerticalDivider"
+
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        orientation: Qt.Vertical
+                    }
+                }
+            }
+
+            // Inset
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                spacing: page.contentSpacing
+
+                MD.Label {
+                    objectName: "insetVerticalDividerLabel"
+
+                    Layout.alignment: Qt.AlignHCenter
+                    text: qsTr("Inset")
+                }
+
+                Item {
+                    objectName: "insetVerticalDividerSample"
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    implicitHeight: MD.Tokens.measurement.space800
+
+                    MD.Divider {
+                        objectName: "insetVerticalDivider"
+
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        leadingInset: MD.Tokens.divider.inset
+                        orientation: Qt.Vertical
+                    }
+                }
+            }
+
+            // Middle-inset
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                spacing: page.contentSpacing
+
+                MD.Label {
+                    objectName: "middleInsetVerticalDividerLabel"
+
+                    Layout.alignment: Qt.AlignHCenter
+                    text: qsTr("Middle-inset")
+                }
+
+                Item {
+                    objectName: "middleInsetVerticalDividerSample"
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    implicitHeight: MD.Tokens.measurement.space800
+
+                    MD.Divider {
+                        objectName: "middleInsetVerticalDivider"
+
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        leadingInset: MD.Tokens.divider.inset
+                        trailingInset: MD.Tokens.divider.inset
+                        orientation: Qt.Vertical
+                    }
                 }
             }
         }

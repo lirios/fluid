@@ -18,6 +18,8 @@ qt_add_resources(FluidGallery "gallery"
         qml/ExposedDropdownMenus.qml
         qml/FAB.qml
         qml/FabMenu.qml
+        qml/GalleryCard.qml
+        qml/GalleryPage.qml
         qml/Grids.qml
         qml/IconButton.qml
         qml/Indicators.qml

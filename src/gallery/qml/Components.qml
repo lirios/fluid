@@ -12,10 +12,6 @@ Item {
     readonly property real sectionSpacing: MD.Tokens.measurement.space300
     readonly property real spaciousSpacing: MD.Tokens.measurement.space400
 
-    component Headline: MD.Label {
-        typescale: MD.Tokens.typescale.headlineMedium
-    }
-
     component ValueCircle: Rectangle {
         property alias number: label.text
 
@@ -44,19 +40,22 @@ Item {
         }
     }
 
-    MD.ScrollView {
+    GalleryPage {
+        id: galleryPage
+
         anchors.fill: parent
+        headline: qsTr("Buttons")
+        description: qsTr("Buttons help people take actions with sizes, shapes, colors, and icon arrangements for different levels of emphasis.")
 
-        ColumnLayout {
-            anchors.centerIn: parent
-            spacing: page.sectionSpacing
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Content arrangements")
 
-            Headline {
-                text: qsTr("Buttons")
-            }
-
-            RowLayout {
-                spacing: page.sectionSpacing
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.floor(width / 144))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
 
                 MD.Button {
                     objectName: "iconOnlyButton"
@@ -86,116 +85,134 @@ Item {
                     text: qsTr("Text Under Icon")
                 }
             }
+        }
 
-            Headline {
-                text: qsTr("Configurations")
-            }
-
-            RowLayout {
-                spacing: page.sectionSpacing
-
-                ValueCircle {
-                    number: "1"
-                }
-
-                MD.Button {
-                    objectName: "extraSmallButton"
-                    size: MD.Button.ExtraSmall
-                    text: qsTr("Extra Small")
-                }
-
-                MD.Button {
-                    objectName: "smallButton"
-                    size: MD.Button.Small
-                    text: qsTr("Small")
-                }
-
-                MD.Button {
-                    objectName: "mediumButton"
-                    size: MD.Button.Medium
-                    text: qsTr("Medium")
-                }
-
-                MD.Button {
-                    objectName: "largeButton"
-                    size: MD.Button.Large
-                    text: qsTr("Large")
-                }
-
-                MD.Button {
-                    objectName: "extraLargeButton"
-                    size: MD.Button.ExtraLarge
-                    text: qsTr("Extra Large")
-                }
-            }
-
-            RowLayout {
-                spacing: page.sectionSpacing
-
-                ValueCircle {
-                    number: "2"
-                }
-
-                MD.Button {
-                    objectName: "roundButton"
-                    shape: MD.Button.Round
-                    text: qsTr("Round")
-                }
-
-                MD.Button {
-                    objectName: "squareButton"
-                    shape: MD.Button.Square
-                    text: qsTr("Square")
-                }
-            }
-
-            RowLayout {
-                spacing: page.sectionSpacing
-
-                ValueCircle {
-                    number: "3"
-                }
-
-                MD.Button {
-                    objectName: "elevatedButton"
-                    type: MD.Button.Elevated
-                    text: qsTr("Elevated")
-                }
-
-                MD.Button {
-                    objectName: "filledButton"
-                    type: MD.Button.Filled
-                    text: qsTr("Filled")
-                }
-
-                MD.Button {
-                    objectName: "tonalButton"
-                    type: MD.Button.Tonal
-                    text: qsTr("Tonal")
-                }
-
-                MD.Button {
-                    objectName: "outlinedButton"
-                    type: MD.Button.Outlined
-                    text: qsTr("Outlined")
-                }
-
-                MD.Button {
-                    objectName: "textButton"
-                    type: MD.Button.Text
-                    text: qsTr("Text")
-                }
-            }
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Configurations")
 
             ColumnLayout {
+                width: parent.width
+                spacing: page.sectionSpacing
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: Math.max(1, Math.floor(width / 112))
+                    columnSpacing: page.sectionSpacing
+                    rowSpacing: page.sectionSpacing
+
+                    ValueCircle {
+                        number: "1"
+                    }
+
+                    MD.Button {
+                        objectName: "extraSmallButton"
+                        size: MD.Button.ExtraSmall
+                        text: qsTr("Extra Small")
+                    }
+
+                    MD.Button {
+                        objectName: "smallButton"
+                        size: MD.Button.Small
+                        text: qsTr("Small")
+                    }
+
+                    MD.Button {
+                        objectName: "mediumButton"
+                        size: MD.Button.Medium
+                        text: qsTr("Medium")
+                    }
+
+                    MD.Button {
+                        objectName: "largeButton"
+                        size: MD.Button.Large
+                        text: qsTr("Large")
+                    }
+
+                    MD.Button {
+                        objectName: "extraLargeButton"
+                        size: MD.Button.ExtraLarge
+                        text: qsTr("Extra Large")
+                    }
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: Math.max(1, Math.floor(width / 112))
+                    columnSpacing: page.sectionSpacing
+                    rowSpacing: page.sectionSpacing
+
+                    ValueCircle {
+                        number: "2"
+                    }
+
+                    MD.Button {
+                        objectName: "roundButton"
+                        shape: MD.Button.Round
+                        text: qsTr("Round")
+                    }
+
+                    MD.Button {
+                        objectName: "squareButton"
+                        shape: MD.Button.Square
+                        text: qsTr("Square")
+                    }
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    columns: Math.max(1, Math.floor(width / 112))
+                    columnSpacing: page.sectionSpacing
+                    rowSpacing: page.sectionSpacing
+
+                    ValueCircle {
+                        number: "3"
+                    }
+
+                    MD.Button {
+                        objectName: "elevatedButton"
+                        type: MD.Button.Elevated
+                        text: qsTr("Elevated")
+                    }
+
+                    MD.Button {
+                        objectName: "filledButton"
+                        type: MD.Button.Filled
+                        text: qsTr("Filled")
+                    }
+
+                    MD.Button {
+                        objectName: "tonalButton"
+                        type: MD.Button.Tonal
+                        text: qsTr("Tonal")
+                    }
+
+                    MD.Button {
+                        objectName: "outlinedButton"
+                        type: MD.Button.Outlined
+                        text: qsTr("Outlined")
+                    }
+
+                    MD.Button {
+                        objectName: "textButton"
+                        type: MD.Button.Text
+                        text: qsTr("Text")
+                    }
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            fullWidth: true
+            title: qsTr("Colors")
+
+            ColumnLayout {
+                width: parent.width
                 spacing: page.spaciousSpacing
 
                 RowLayout {
                     spacing: page.sectionSpacing
-
-                    Headline {
-                        text: qsTr("Colors")
-                    }
 
                     MD.Switch {
                         id: enabledSwitch

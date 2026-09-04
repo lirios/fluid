@@ -16,7 +16,7 @@
 // FabPrimaryContainerTokens.kt (VERSION: v0_14_0); ExtendedFabPrimaryTokens.kt
 // (VERSION: v0_103); ExtendedFabSmallTokens.kt, ExtendedFabMediumTokens.kt, and
 // ExtendedFabLargeTokens.kt (VERSION: v0_14_0); and ../FloatingActionButton.kt for
-// the corrected Medium and Large Extended FAB icon-label spacing.
+// the corrected Medium and Large labeled FAB icon-label spacing.
 
 namespace Fluid {
 
@@ -111,47 +111,47 @@ public:
     {
         return 32.0;
     }
-    //! Leading space of a default-size Extended FAB.
+    //! Leading space of a default-size labeled FAB.
     constexpr qreal leadingSpace() const
     {
         return 16.0;
     }
-    //! Leading space of a medium Extended FAB.
+    //! Leading space of a medium labeled FAB.
     constexpr qreal mediumLeadingSpace() const
     {
         return 26.0;
     }
-    //! Leading space of a large Extended FAB.
+    //! Leading space of a large labeled FAB.
     constexpr qreal largeLeadingSpace() const
     {
         return 28.0;
     }
-    //! Trailing space of a default-size Extended FAB.
+    //! Trailing space of a default-size labeled FAB.
     constexpr qreal trailingSpace() const
     {
         return 16.0;
     }
-    //! Trailing space of a medium Extended FAB.
+    //! Trailing space of a medium labeled FAB.
     constexpr qreal mediumTrailingSpace() const
     {
         return 26.0;
     }
-    //! Trailing space of a large Extended FAB.
+    //! Trailing space of a large labeled FAB.
     constexpr qreal largeTrailingSpace() const
     {
         return 28.0;
     }
-    //! Space between the icon and label of a default-size Extended FAB.
+    //! Space between the icon and label of a default-size labeled FAB.
     constexpr qreal iconLabelSpace() const
     {
         return 8.0;
     }
-    //! Space between the icon and label of a medium Extended FAB.
+    //! Space between the icon and label of a medium labeled FAB.
     constexpr qreal mediumIconLabelSpace() const
     {
         return 12.0;
     }
-    //! Space between the icon and label of a large Extended FAB.
+    //! Space between the icon and label of a large labeled FAB.
     constexpr qreal largeIconLabelSpace() const
     {
         return 16.0;

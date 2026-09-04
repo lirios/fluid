@@ -34,12 +34,12 @@ class FluidAccessibilityTest : public QObject
     Q_OBJECT
 
 private slots:
-    void extendedFabInheritsButtonAccessibility();
+    void labeledFabInheritsButtonAccessibility();
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
 };
 
-void FluidAccessibilityTest::extendedFabInheritsButtonAccessibility()
+void FluidAccessibilityTest::labeledFabInheritsButtonAccessibility()
 {
     QAccessible::setActive(true);
 
@@ -55,23 +55,23 @@ void FluidAccessibilityTest::extendedFabInheritsButtonAccessibility()
             height: 160
             visible: true
 
-            MD.ExtendedFAB {
-                objectName: "extendedFab"
+            MD.FAB {
+                objectName: "labeledFab"
                 text: "Create"
                 icon.name: MD.Symbols.add
             }
         }
-    )", QUrl(QStringLiteral("inline:extended-fab-accessibility.qml")));
+    )", QUrl(QStringLiteral("inline:labeled-fab-accessibility.qml")));
 
     QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
     QVERIFY2(component.isReady(), qPrintable(component.errorString()));
 
     QScopedPointer<QObject> root(component.create());
     QVERIFY2(root, qPrintable(component.errorString()));
-    auto *extendedFab = root->findChild<QObject *>(QStringLiteral("extendedFab"));
-    QVERIFY(extendedFab);
+    auto *labeledFab = root->findChild<QObject *>(QStringLiteral("labeledFab"));
+    QVERIFY(labeledFab);
 
-    auto *interface = QAccessible::queryAccessibleInterface(extendedFab);
+    auto *interface = QAccessible::queryAccessibleInterface(labeledFab);
     QVERIFY(interface);
     QCOMPARE(interface->role(), QAccessible::Button);
     QCOMPARE(interface->text(QAccessible::Name), QStringLiteral("Create"));

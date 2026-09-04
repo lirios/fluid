@@ -22,75 +22,75 @@ function resolveShapeRadius(shape, width, height) {
     return Math.min(width, height) / 2;
 }
 
-function extendedFabContainerWidth(control) {
+function fabContainerWidth(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.containerWidth;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerWidth;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerWidth;
+    case MD.FAB.Size.Default: return tokens.containerWidth;
+    case MD.FAB.Size.Medium: return tokens.mediumContainerWidth;
+    case MD.FAB.Size.Large: return tokens.largeContainerWidth;
     }
 }
 
-function extendedFabContainerHeight(control) {
+function fabContainerHeight(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.containerHeight;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerHeight;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerHeight;
+    case MD.FAB.Size.Default: return tokens.containerHeight;
+    case MD.FAB.Size.Medium: return tokens.mediumContainerHeight;
+    case MD.FAB.Size.Large: return tokens.largeContainerHeight;
     }
 }
 
-function extendedFabContainerShape(control) {
+function fabContainerShape(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.containerShape;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumContainerShape;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeContainerShape;
+    case MD.FAB.Size.Default: return tokens.containerShape;
+    case MD.FAB.Size.Medium: return tokens.mediumContainerShape;
+    case MD.FAB.Size.Large: return tokens.largeContainerShape;
     }
 }
 
-function extendedFabIconSize(control) {
+function fabIconSize(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.iconSize;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumIconSize;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeIconSize;
+    case MD.FAB.Size.Default: return tokens.iconSize;
+    case MD.FAB.Size.Medium: return tokens.mediumIconSize;
+    case MD.FAB.Size.Large: return tokens.largeIconSize;
     }
 }
 
-function extendedFabLeadingSpace(control) {
+function fabLeadingSpace(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.leadingSpace;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumLeadingSpace;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeLeadingSpace;
+    case MD.FAB.Size.Default: return tokens.leadingSpace;
+    case MD.FAB.Size.Medium: return tokens.mediumLeadingSpace;
+    case MD.FAB.Size.Large: return tokens.largeLeadingSpace;
     }
 }
 
-function extendedFabTrailingSpace(control) {
+function fabTrailingSpace(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.trailingSpace;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumTrailingSpace;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeTrailingSpace;
+    case MD.FAB.Size.Default: return tokens.trailingSpace;
+    case MD.FAB.Size.Medium: return tokens.mediumTrailingSpace;
+    case MD.FAB.Size.Large: return tokens.largeTrailingSpace;
     }
 }
 
-function extendedFabSpacing(control) {
+function fabSpacing(control) {
     const tokens = control.MD.Tokens.fab;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.iconLabelSpace;
-    case MD.ExtendedFAB.Size.Medium: return tokens.mediumIconLabelSpace;
-    case MD.ExtendedFAB.Size.Large: return tokens.largeIconLabelSpace;
+    case MD.FAB.Size.Default: return tokens.iconLabelSpace;
+    case MD.FAB.Size.Medium: return tokens.mediumIconLabelSpace;
+    case MD.FAB.Size.Large: return tokens.largeIconLabelSpace;
     }
 }
 
-function extendedFabTypescale(control) {
+function fabTypescale(control) {
     const tokens = control.MD.Tokens.typescale;
     switch (control.size) {
-    case MD.ExtendedFAB.Size.Default: return tokens.titleMedium;
-    case MD.ExtendedFAB.Size.Medium: return tokens.titleLarge;
-    case MD.ExtendedFAB.Size.Large: return tokens.headlineSmall;
+    case MD.FAB.Size.Default: return tokens.titleMedium;
+    case MD.FAB.Size.Medium: return tokens.titleLarge;
+    case MD.FAB.Size.Large: return tokens.headlineSmall;
     }
 }
 

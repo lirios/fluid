@@ -13,7 +13,6 @@ add_executable(tst_fluid_controls
     tst_date.qml
     tst_divider.qml
     tst_exposeddropdownmenu.qml
-    tst_extendedfab.qml
     tst_fab.qml
     tst_fabmenu.qml
     tst_gallery.qml

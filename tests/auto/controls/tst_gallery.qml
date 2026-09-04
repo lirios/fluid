@@ -93,7 +93,7 @@ TestCase {
     }
 
     function test_galleryPages_data() {
-        const pages = [["app-bars", "AppBars.qml"], ["button-groups", "ButtonGroups.qml"], ["colors", "Colors.qml"], ["components", "Components.qml"], ["divider", "Divider.qml"], ["elevation", "Elevation.qml"], ["exposed-dropdown-menus", "ExposedDropdownMenus.qml"], ["fab", "FAB.qml"], ["extended-fab", "ExtendedFAB.qml"], ["fab-menu", "FabMenu.qml"], ["grids", "Grids.qml"], ["icon-button", "IconButton.qml"], ["indicators", "Indicators.qml"], ["slider", "Slider.qml"], ["lists", "Lists.qml"], ["menus", "Menus.qml"], ["navigation-rails", "NavigationRails.qml"], ["symbols", "Symbols.qml"], ["text-fields", "TextFields.qml"], ["typography", "Typography.qml"], ["tooltips", "ToolTips.qml"]];
+        const pages = [["app-bars", "AppBars.qml"], ["button-groups", "ButtonGroups.qml"], ["colors", "Colors.qml"], ["components", "Components.qml"], ["divider", "Divider.qml"], ["elevation", "Elevation.qml"], ["exposed-dropdown-menus", "ExposedDropdownMenus.qml"], ["fab", "FAB.qml"], ["fab-menu", "FabMenu.qml"], ["grids", "Grids.qml"], ["icon-button", "IconButton.qml"], ["indicators", "Indicators.qml"], ["slider", "Slider.qml"], ["lists", "Lists.qml"], ["menus", "Menus.qml"], ["navigation-rails", "NavigationRails.qml"], ["symbols", "Symbols.qml"], ["text-fields", "TextFields.qml"], ["typography", "Typography.qml"], ["tooltips", "ToolTips.qml"]];
 
         const rows = [];
         for (const page of pages) {
@@ -141,7 +141,7 @@ TestCase {
         verify(description && description.text.length > 0);
     }
 
-    function test_extendedFabPropertiesLayout_data() {
+    function test_fabPropertiesLayout_data() {
         return [
             { tag: "compact", width: 480 },
             { tag: "medium", width: 720 },
@@ -149,9 +149,9 @@ TestCase {
         ];
     }
 
-    function test_extendedFabPropertiesLayout(data) {
+    function test_fabPropertiesLayout(data) {
         const component = Qt.createComponent(
-                            Qt.resolvedUrl("../../../src/gallery/qml/ExtendedFAB.qml"));
+                            Qt.resolvedUrl("../../../src/gallery/qml/FAB.qml"));
         tryCompare(component, "status", Component.Ready);
         if (component.status !== Component.Ready)
             fail(component.errorString());
@@ -163,21 +163,25 @@ TestCase {
         verify(page);
         wait(0);
 
-        const controlsGrid = findChild(page, "extendedFabPropertyControlsGrid");
-        const examplesGrid = findChild(page, "extendedFabPropertyExamplesGrid");
+        const controlsGrid = findChild(page, "fabPropertyControlsGrid");
+        const examplesGrid = findChild(page, "fabPropertyExamplesGrid");
         verify(controlsGrid);
         verify(examplesGrid);
 
         const controls = [
-            "extendedFabEnabledSwitch",
-            "extendedFabLoweredSwitch",
-            "extendedFabInteractiveExample",
-            "extendedFabActivationCount"
+            "fabEnabledSwitch",
+            "fabLoweredSwitch",
+            "fabInteractiveExample",
+            "fabActivationCount"
         ];
         const examples = [
-            "extendedFabCustomColorsExample",
-            "extendedFabTextOnlyExample",
-            "extendedFabRtlExample"
+            "fabCustomColorsExample",
+            "fabSourceImageExample",
+            "fabMirroredIconExample",
+            "fabLabeledSourceImageExample",
+            "fabRtlLabelExample",
+            "fabTextOnlyExample",
+            "fabDisabledExample"
         ];
 
         for (const objectName of controls)
@@ -186,7 +190,7 @@ TestCase {
             verifyItemContained(findChild(page, objectName), examplesGrid, objectName);
 
         const firstControl = findChild(page, controls[0]);
-        const activationCount = findChild(page, "extendedFabActivationCount");
+        const activationCount = findChild(page, "fabActivationCount");
         compare(activationCount.lineCount, 1);
         const firstPosition = firstControl.mapToItem(controlsGrid, 0, 0);
         const rowCenter = firstPosition.y + firstControl.height / 2;

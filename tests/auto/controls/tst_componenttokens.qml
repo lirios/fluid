@@ -23,7 +23,7 @@ Item {
 
     MD.FAB {
         id: metricFab
-        text: "Action"
+        Accessible.name: "Action"
         icon.name: MD.Symbols.add
     }
 

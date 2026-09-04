@@ -31,12 +31,13 @@ Item {
 
     component IconData: QtObject {
         property string name
+        property url source
         property real width: -1
         property real height: -1
         property color color
     }
 
-    //! The icon name, dimensions, and color.
+    //! The icon name or image source, dimensions, and color.
     property IconData icon: IconData {}
 
     //! The text displayed beside or below the icon.
@@ -57,10 +58,13 @@ Item {
     //! Whether a side-by-side layout places the icon on the trailing edge.
     property bool mirrored: false
 
+    //! Whether the icon graphic is horizontally mirrored with the layout.
+    property bool mirrorIconInRtl: false
+
     /*!
         Whether the button has an icon. This is used to determine padding and layout.
     */
-    readonly property bool hasIcon: icon.name.length > 0
+    readonly property bool hasIcon: icon.name.length > 0 || icon.source.toString().length > 0
 
     /*!
         Whether the icon should be shown. This is used to determine padding and layout.
@@ -70,7 +74,7 @@ Item {
     /*!
         Whether the text should be shown. This is used to determine padding and layout.
     */
-    readonly property bool showText: display !== IconLabel.IconOnly
+    readonly property bool showText: text.length > 0 && display !== IconLabel.IconOnly
 
     /*!
         The display mode of the icon label.
@@ -83,9 +87,10 @@ Item {
     readonly property int effectiveDisplay: {
         switch (display) {
         case IconLabel.TextBesideIcon:
-            return showIcon ? display : IconLabel.TextOnly;
         case IconLabel.TextUnderIcon:
-            return showIcon ? display : IconLabel.TextOnly;
+            if (showIcon && showText)
+                return display;
+            return showIcon ? IconLabel.IconOnly : IconLabel.TextOnly;
         default:
             return display;
         }
@@ -126,15 +131,39 @@ Item {
         }
     }
 
-    MD.Symbol {
+    Item {
         id: iconItem
         objectName: "iconLabelIcon"
 
-        name: root.icon.name
-        iconWidth: root.icon.width
-        iconHeight: root.icon.height
-        color: root.icon.color.a > 0 ? root.icon.color : label.color
+        implicitWidth: root.icon.width
+        implicitHeight: root.icon.height
         visible: root.showIcon
+
+        transform: Scale {
+            objectName: "iconLabelMirrorTransform"
+            origin.x: iconItem.width / 2
+            origin.y: iconItem.height / 2
+            xScale: root.mirrorIconInRtl && root.mirrored ? -1 : 1
+        }
+
+        Image {
+            objectName: "iconLabelSourceImage"
+            anchors.fill: parent
+            source: root.icon.source
+            sourceSize: Qt.size(root.icon.width, root.icon.height)
+            fillMode: Image.PreserveAspectFit
+            visible: root.icon.source.toString().length > 0
+        }
+
+        MD.Symbol {
+            objectName: "iconLabelSymbol"
+            anchors.fill: parent
+            name: root.icon.name
+            iconWidth: root.icon.width
+            iconHeight: root.icon.height
+            color: root.icon.color.a > 0 ? root.icon.color : label.color
+            visible: root.icon.source.toString().length === 0 && name.length > 0
+        }
     }
 
     MD.Label {

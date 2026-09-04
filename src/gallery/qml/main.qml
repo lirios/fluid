@@ -83,10 +83,6 @@ MD.ApplicationWindow {
                     "source": "FAB.qml"
                 },
                 {
-                    "name": qsTr("Extended FAB"),
-                    "source": "ExtendedFAB.qml"
-                },
-                {
                     "name": qsTr("FAB Menu"),
                     "source": "FabMenu.qml"
                 },

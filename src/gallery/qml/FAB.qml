@@ -21,7 +21,7 @@ Item {
 
     component DemoFAB: MD.FAB {
         Layout.margins: page.compactSpacing
-        text: qsTr("FAB action")
+        Accessible.name: text.length > 0 ? text : qsTr("FAB action")
     }
 
     GalleryPage {
@@ -33,7 +33,7 @@ Item {
 
         GalleryCard {
             gridColumns: galleryPage.columns
-            title: qsTr("Sizes")
+            title: qsTr("Icon-only sizes")
 
             GridLayout {
                 width: parent.width
@@ -87,7 +87,7 @@ Item {
 
         GalleryCard {
             gridColumns: galleryPage.columns
-            title: qsTr("Color variants")
+            title: qsTr("Icon-only color variants")
 
             GridLayout {
                 width: parent.width
@@ -155,6 +155,98 @@ Item {
 
         GalleryCard {
             gridColumns: galleryPage.columns
+            title: qsTr("Labeled sizes")
+
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.min(3, Math.floor(width / 200)))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
+
+                DemoFAB {
+                    Layout.alignment: Qt.AlignHCenter
+                    size: MD.FAB.Size.Default
+                    text: qsTr("Create")
+                    icon.name: MD.Symbols.add
+                }
+
+                DemoFAB {
+                    Layout.alignment: Qt.AlignHCenter
+                    size: MD.FAB.Size.Medium
+                    text: qsTr("Create")
+                    icon.name: MD.Symbols.add
+                }
+
+                DemoFAB {
+                    Layout.alignment: Qt.AlignHCenter
+                    size: MD.FAB.Size.Large
+                    text: qsTr("Create")
+                    icon.name: MD.Symbols.add
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Labeled color variants")
+
+            GridLayout {
+                width: parent.width
+                columns: Math.max(1, Math.min(4, Math.floor(width / 176)))
+                columnSpacing: page.sectionSpacing
+                rowSpacing: page.sectionSpacing
+
+                DemoFAB {
+                    text: qsTr("Surface")
+                    variant: MD.FAB.Variant.Surface
+                    icon.name: MD.Symbols.edit
+                }
+
+                DemoFAB {
+                    text: qsTr("Primary")
+                    variant: MD.FAB.Variant.Primary
+                    icon.name: MD.Symbols.edit
+                }
+
+                DemoFAB {
+                    text: qsTr("Secondary")
+                    variant: MD.FAB.Variant.Secondary
+                    icon.name: MD.Symbols.edit
+                }
+
+                DemoFAB {
+                    text: qsTr("Tertiary")
+                    variant: MD.FAB.Variant.Tertiary
+                    icon.name: MD.Symbols.edit
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
+            title: qsTr("Expansion")
+
+            RowLayout {
+                width: parent.width
+                spacing: page.contentSpacing
+
+                MD.Switch {
+                    id: expandedSwitch
+
+                    text: qsTr("Expanded")
+                    checked: true
+                }
+
+                DemoFAB {
+                    expanded: expandedSwitch.checked
+                    text: qsTr("Compose")
+                    icon.name: MD.Symbols.edit
+                }
+            }
+        }
+
+        GalleryCard {
+            gridColumns: galleryPage.columns
             title: qsTr("Elevation")
 
             GridLayout {
@@ -193,21 +285,24 @@ Item {
         }
 
         GalleryCard {
+            id: propertiesCard
+            objectName: "fabPropertiesCard"
             gridColumns: galleryPage.columns
+            fullWidth: true
             title: qsTr("Properties")
 
             ColumnLayout {
                 width: parent.width
                 spacing: page.contentSpacing
 
-                GridLayout {
+                RowLayout {
+                    objectName: "fabPropertyControlsGrid"
                     Layout.fillWidth: true
-                    columns: Math.max(1, Math.floor(width / 160))
-                    columnSpacing: page.contentSpacing
-                    rowSpacing: page.contentSpacing
+                    spacing: page.compactSpacing
 
                     MD.Switch {
                         id: enabledSwitch
+                        objectName: "fabEnabledSwitch"
 
                         text: qsTr("Enabled")
                         checked: true
@@ -215,12 +310,14 @@ Item {
 
                     MD.Switch {
                         id: loweredSwitch
+                        objectName: "fabLoweredSwitch"
 
                         text: qsTr("Lowered")
                     }
 
                     DemoFAB {
                         id: interactiveFAB
+                        objectName: "fabInteractiveExample"
 
                         enabled: enabledSwitch.checked
                         lowered: loweredSwitch.checked
@@ -230,11 +327,17 @@ Item {
                     }
 
                     LargeLabel {
+                        objectName: "fabActivationCount"
+                        Layout.fillWidth: true
                         text: qsTr("Activated %1 time(s)").arg(page.clickCount)
+                        wrapMode: Text.NoWrap
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignLeft
                     }
                 }
 
                 GridLayout {
+                    objectName: "fabPropertyExamplesGrid"
                     Layout.fillWidth: true
                     columns: Math.max(1, Math.floor(width / 160))
                     columnSpacing: page.contentSpacing
@@ -248,22 +351,51 @@ Item {
                     }
 
                     DemoFAB {
-                        text: qsTr("Custom colors")
+                        objectName: "fabCustomColorsExample"
+                        Accessible.name: qsTr("Custom colors")
                         containerColor: MD.Style.errorContainerColor
                         contentColor: MD.Style.onErrorContainerColor
                         icon.name: MD.Symbols.priorityHigh
                     }
 
                     DemoFAB {
+                        objectName: "fabSourceImageExample"
+                        Accessible.name: qsTr("Source image")
+                        icon.source: "qrc:/icons/32x32/apps/io.liri.Fluid.Gallery.png"
+                    }
+
+                    DemoFAB {
+                        objectName: "fabMirroredIconExample"
+                        Accessible.name: qsTr("Forward")
+                        mirrorIconInRtl: mirrorSwitch.checked
+                        icon.name: MD.Symbols.arrowForward
+                        LayoutMirroring.enabled: true
+                    }
+
+                    DemoFAB {
+                        objectName: "fabLabeledSourceImageExample"
                         text: qsTr("Source image")
                         icon.source: "qrc:/icons/32x32/apps/io.liri.Fluid.Gallery.png"
                     }
 
                     DemoFAB {
+                        objectName: "fabRtlLabelExample"
                         text: qsTr("Forward")
-                        mirrorIconInRtl: mirrorSwitch.checked
                         icon.name: MD.Symbols.arrowForward
                         LayoutMirroring.enabled: true
+                    }
+
+                    DemoFAB {
+                        objectName: "fabTextOnlyExample"
+                        text: qsTr("Text only stays extended")
+                        expanded: false
+                    }
+
+                    DemoFAB {
+                        objectName: "fabDisabledExample"
+                        text: qsTr("Disabled")
+                        icon.name: MD.Symbols.block
+                        enabled: false
                     }
                 }
             }

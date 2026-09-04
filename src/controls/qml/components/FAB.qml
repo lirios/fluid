@@ -7,15 +7,18 @@ import QtQuick
 import QtQuick.Templates as T
 import Fluid as MD
 import "../core/UiMetrics.js" as UiMetrics
+import "../internal/MotionAnimation.js" as MotionAnimation
 
 /*!
     \class FAB
     \brief A Material Design 3 Expressive floating action button.
 
-    A FAB represents the most important action on a screen. Set \c text to a
-    short, localized description of the action; it is used as the accessible
-    name while the control renders only its icon. Material Symbols use the
-    resolved content color, while source images preserve their intrinsic colors.
+    A FAB represents the most important action on a screen. When \c text is
+    empty, the control renders as a square icon-only FAB. Setting \c text adds
+    a visible label and gives the control its natural extended width. Labeled
+    FABs can animate between their extended and square forms with \c expanded.
+    Material Symbols use the resolved content color, while source images
+    preserve their intrinsic colors.
 
     For more information see the
     <a href="https://m3.material.io/components/floating-action-button/overview">Material Design 3 FAB guidelines</a>.
@@ -47,8 +50,23 @@ T.ToolButton {
     //! Whether the FAB uses the lower-emphasis elevation treatment.
     property bool lowered: false
 
+    /*!
+        Whether a labeled FAB displays its label and natural labeled width.
+
+        Setting this property to \c false collapses a labeled control with an
+        \c icon.name to the corresponding square FAB. A text-only control stays
+        extended so its action remains visible.
+    */
+    property bool expanded: true
+
+    //! The Material type scale used for the label, selected from \c size by default.
+    property MD.typescale typescale: UiMetrics.fabTypescale(control)
+
     //! Whether the icon is horizontally mirrored in right-to-left layouts.
     property bool mirrorIconInRtl: false
+
+    //! Whether \c icon.name provides a Material Symbol for this FAB.
+    readonly property bool hasIcon: icon.name.length > 0
 
     //! The background color used in normal interactive states.
     property color containerColor: {
@@ -99,18 +117,53 @@ T.ToolButton {
     //! Whether the icon is currently mirrored for a right-to-left layout.
     readonly property bool effectiveIconMirrored: mirrorIconInRtl && mirrored
 
+    //! \internal Whether the label must remain visible for the current content.
+    readonly property bool _effectiveExpanded: expanded || !hasIcon
+
+    //! \internal The square FAB width for the current size.
+    readonly property real _collapsedWidth: UiMetrics.fabContainerWidth(control)
+
+    //! \internal The FAB's natural labeled width.
+    readonly property real _expandedWidth: Math.max(_collapsedWidth,
+                                                    state.expandedLeadingSpace
+                                                    + contentItem.implicitWidth
+                                                    + state.expandedTrailingSpace)
+
+    //! \internal Expansion progress derived solely from the animated container width.
+    readonly property real _layoutProgress: {
+        const distance = _expandedWidth - _collapsedWidth;
+        if (distance <= 0)
+            return _effectiveExpanded ? 1 : 0;
+        return Math.max(0, Math.min(1, (state.containerWidth - _collapsedWidth) / distance));
+    }
+
+    //! \internal Logical leading padding interpolated from the centered icon endpoint.
+    readonly property real _leadingPadding: state.collapsedIconPadding
+                                             + (state.expandedLeadingSpace
+                                                - state.collapsedIconPadding)
+                                             * _layoutProgress
+
+    //! \internal Logical trailing padding interpolated from the centered icon endpoint.
+    readonly property real _trailingPadding: state.collapsedIconPadding
+                                              + (state.expandedTrailingSpace
+                                                 - state.collapsedIconPadding)
+                                              * _layoutProgress
+
     icon.width: state.iconSize
     icon.height: state.iconSize
 
-    implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
-    implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
+    implicitWidth: state.containerWidth
+    implicitHeight: state.containerHeight
 
     leftInset: 0
     rightInset: 0
     topInset: 0
     bottomInset: 0
-    padding: 0
-    spacing: 0
+    leftPadding: mirrored ? _trailingPadding : _leadingPadding
+    rightPadding: mirrored ? _leadingPadding : _trailingPadding
+    topPadding: 0
+    bottomPadding: 0
+    spacing: state.iconLabelSpacing
 
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
@@ -121,53 +174,33 @@ T.ToolButton {
     QtObject {
         id: state
 
-        readonly property real containerWidth: {
-            switch (control.size) {
-            case FAB.Size.Default:
-                return MD.Tokens.fab.containerWidth;
-            case FAB.Size.Medium:
-                return MD.Tokens.fab.mediumContainerWidth;
-            case FAB.Size.Large:
-                return MD.Tokens.fab.largeContainerWidth;
-            }
-        }
-        readonly property real containerHeight: {
-            switch (control.size) {
-            case FAB.Size.Default:
-                return MD.Tokens.fab.containerHeight;
-            case FAB.Size.Medium:
-                return MD.Tokens.fab.mediumContainerHeight;
-            case FAB.Size.Large:
-                return MD.Tokens.fab.largeContainerHeight;
-            }
-        }
-        readonly property MD.shapeValue containerShape: {
-            switch (control.size) {
-            case FAB.Size.Default:
-                return MD.Tokens.fab.containerShape;
-            case FAB.Size.Medium:
-                return MD.Tokens.fab.mediumContainerShape;
-            case FAB.Size.Large:
-                return MD.Tokens.fab.largeContainerShape;
-            }
-        }
-        readonly property real iconSize: {
-            switch (control.size) {
-            case FAB.Size.Default:
-                return MD.Tokens.fab.iconSize;
-            case FAB.Size.Medium:
-                return MD.Tokens.fab.mediumIconSize;
-            case FAB.Size.Large:
-                return MD.Tokens.fab.largeIconSize;
-            }
-        }
+        readonly property real containerHeight: UiMetrics.fabContainerHeight(control)
+        readonly property MD.shapeValue containerShape: UiMetrics.fabContainerShape(control)
+        readonly property real iconSize: UiMetrics.fabIconSize(control)
+        readonly property real expandedLeadingSpace: UiMetrics.fabLeadingSpace(control)
+        readonly property real expandedTrailingSpace: UiMetrics.fabTrailingSpace(control)
+        readonly property real iconLabelSpacing: UiMetrics.fabSpacing(control)
+        readonly property real collapsedIconPadding: (control._collapsedWidth - iconSize) / 2
 
+        property real containerWidth: control._effectiveExpanded ? control._expandedWidth : control._collapsedWidth
         property color containerColor: control.containerColor
         property color contentColor: control.contentColor
         property color stateLayerColor: "transparent"
 
         property real elevation: control.lowered ? MD.Tokens.fab.loweredContainerElevation : MD.Tokens.fab.containerElevation
         property real stateLayerOpacity: 0
+
+        Behavior on containerWidth {
+            enabled: control.text.length > 0
+
+            NumberAnimation {
+                // qmllint disable unresolved-type
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+                duration: MotionAnimation.expressiveFastSpatialDuration
+                // qmllint enable unresolved-type
+            }
+        }
     }
 
     states: [
@@ -203,39 +236,33 @@ T.ToolButton {
         }
     ]
 
-    contentItem: Item {
-        id: iconContent
+    contentItem: MD.IconLabel {
+        id: iconLabel
+        objectName: "fabContent"
 
-        implicitWidth: control.icon.width
-        implicitHeight: control.icon.height
+        clip: true
+        text: control.text
+        display: MD.IconLabel.TextBesideIcon
+        mirrored: control.mirrored
+        mirrorIconInRtl: control.mirrorIconInRtl
+        spacing: state.iconLabelSpacing
+        typescale: control.typescale
+        color: control.effectiveContentColor
+        textOpacity: control._effectiveExpanded ? 1 : 0
+        icon.name: control.effectiveIconName
+        icon.source: control.effectiveIconSource
+        icon.width: state.iconSize
+        icon.height: state.iconSize
+        icon.color: control.effectiveIconColor
 
-        transform: Scale {
-            origin.x: iconContent.width / 2
-            origin.y: iconContent.height / 2
-            xScale: control.effectiveIconMirrored ? -1 : 1
-        }
-
-        Image {
-            id: sourceIcon
-
-            objectName: "fabSourceImage"
-            anchors.centerIn: parent
-            width: control.icon.width
-            height: control.icon.height
-            source: control.effectiveIconSource
-            sourceSize: Qt.size(control.icon.width, control.icon.height)
-            fillMode: Image.PreserveAspectFit
-            visible: control.effectiveIconSource.toString().length > 0
-        }
-
-        MD.Symbol {
-            objectName: "fabSymbol"
-            anchors.centerIn: parent
-            name: control.effectiveIconName
-            iconWidth: control.icon.width
-            iconHeight: control.icon.height
-            color: control.effectiveIconColor
-            visible: control.effectiveIconSource.toString().length === 0 && name.length > 0
+        Behavior on textOpacity {
+            NumberAnimation {
+                // qmllint disable unresolved-type
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: MotionAnimation.expressiveFastEffectsCurve
+                duration: MotionAnimation.expressiveFastEffectsDuration
+                // qmllint enable unresolved-type
+            }
         }
     }
 

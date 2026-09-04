@@ -119,7 +119,7 @@ GalleryPage {
                 fieldStyle: MD.ExposedDropdownMenu.Filled
                 label: qsTr("Language")
                 placeholderText: qsTr("Select a language")
-                leadingIconName: MD.SymbolNames.symbolLanguage
+                leadingIconName: MD.Symbols.language
                 model: [qsTr("English"), qsTr("Italian"), qsTr("Japanese")]
                 currentIndex: -1
             }
@@ -174,7 +174,7 @@ GalleryPage {
                 fieldStyle: MD.ExposedDropdownMenu.Filled
                 label: qsTr("Destination")
                 placeholderText: qsTr("Choose from 30 destinations")
-                leadingIconName: MD.SymbolNames.symbolTravelExplore
+                leadingIconName: MD.Symbols.travelExplore
                 model: page.destinations
                 currentIndex: -1
             }
@@ -208,7 +208,7 @@ GalleryPage {
                     fieldStyle: MD.ExposedDropdownMenu.Outlined
                     label: qsTr("الوجهة")
                     placeholderText: qsTr("اختر وجهة")
-                    leadingIconName: MD.SymbolNames.symbolLocationOn
+                    leadingIconName: MD.Symbols.locationOn
                     model: [qsTr("القاهرة"), qsTr("دبي"), qsTr("الدوحة")]
                     currentIndex: -1
                 }

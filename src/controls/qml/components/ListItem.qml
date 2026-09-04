@@ -27,11 +27,11 @@ import "../core/UiMetrics.js" as UiMetrics
         supportingText: "Supporting line"
 
         leading: MD.Icon {
-            name: "account_circle"
+            name: MD.Symbols.accountCircle
         }
 
         trailing: MD.Icon {
-            name: "chevron_right"
+            name: MD.Symbols.chevronRight
         }
     }
     \endcode

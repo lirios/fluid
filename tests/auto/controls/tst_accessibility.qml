@@ -93,7 +93,7 @@ TestCase {
                 MD.NavigationRailItem {
                     id: railItem
                     text: "Home"
-                    icon.name: "home"
+                    icon.name: MD.Symbols.home
                 }
             }
 
@@ -113,7 +113,7 @@ TestCase {
             MD.Symbol {
                 id: symbol
                 x: 580
-                name: "home"
+                name: MD.Symbols.home
             }
 
             MD.SmoothFadeImage {

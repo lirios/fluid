@@ -47,7 +47,7 @@ import QtQuick.Window
 
         MD.Action {
             text: qsTr("Copy")
-            icon.name: MD.SymbolNames.symbolContentCopy
+            icon.name: MD.Symbols.contentCopy
             onTriggered: copySelection()
         }
 

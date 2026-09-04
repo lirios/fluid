@@ -28,7 +28,7 @@ TestCase {
             MD.Action {
                 id: plainAction
                 text: "Copy"
-                icon.name: MD.SymbolNames.symbolContentCopy
+                icon.name: MD.Symbols.contentCopy
             }
 
             MD.Action {
@@ -135,13 +135,13 @@ TestCase {
         MD.Menu {
             MD.Action {
                 text: "Favorite"
-                icon.name: MD.SymbolNames.symbolFavorite
+                icon.name: MD.Symbols.favorite
                 checkable: true
             }
 
             MD.Action {
                 text: "Share"
-                icon.name: MD.SymbolNames.symbolShare
+                icon.name: MD.Symbols.share
             }
         }
     }
@@ -205,7 +205,7 @@ TestCase {
         MD.MenuItem {
             width: 200
             text: "Standalone item"
-            icon.name: MD.SymbolNames.symbolShare
+            icon.name: MD.Symbols.share
             checkable: true
             LayoutMirroring.enabled: true
         }
@@ -247,7 +247,7 @@ TestCase {
 
                 MD.Action {
                     text: "Copy"
-                    icon.name: MD.SymbolNames.symbolContentCopy
+                    icon.name: MD.Symbols.contentCopy
                 }
             }
         }

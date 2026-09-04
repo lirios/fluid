@@ -31,7 +31,7 @@ import "../internal/MotionAnimation.js" as MotionAnimation
         searchActions: [
             MD.AppBarAction {
                 text: qsTr("Voice search")
-                icon.name: "mic"
+                icon.name: MD.Symbols.mic
             }
         ]
 
@@ -258,7 +258,7 @@ MD.BaseAppBar {
         id: defaultSearchAction
 
         text: qsTr("Search")
-        icon.name: MD.SymbolNames.symbolSearch
+        icon.name: MD.Symbols.search
         overflowPolicy: MD.AppBarAction.NeverOverflow
         onTriggered: control.activated()
     }

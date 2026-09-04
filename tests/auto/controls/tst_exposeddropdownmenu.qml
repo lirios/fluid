@@ -31,7 +31,7 @@ TestCase {
                     "name": "Apple",
                     "value": "apple",
                     "enabled": true,
-                    "icon": MD.SymbolNames.symbolFavorite,
+                    "icon": MD.Symbols.favorite,
                     "supporting": "Crisp",
                     "trailing": "1",
                     "badge": "New"
@@ -40,7 +40,7 @@ TestCase {
                     "name": "Banana",
                     "value": "banana",
                     "enabled": true,
-                    "icon": MD.SymbolNames.symbolStar,
+                    "icon": MD.Symbols.star,
                     "supporting": "Sweet",
                     "trailing": "2",
                     "badge": ""
@@ -49,7 +49,7 @@ TestCase {
                     "name": "Cherry",
                     "value": "cherry",
                     "enabled": false,
-                    "icon": MD.SymbolNames.symbolFavorite,
+                    "icon": MD.Symbols.favorite,
                     "supporting": "Tart",
                     "trailing": "3",
                     "badge": "Limited"
@@ -291,8 +291,8 @@ TestCase {
     function test_leading_icon_name_and_source() {
         const menu = createMenu();
         verify(menu);
-        menu.leadingIconName = MD.SymbolNames.symbolSearch;
-        compare(menu.leadingIconName, MD.SymbolNames.symbolSearch);
+        menu.leadingIconName = MD.Symbols.search;
+        compare(menu.leadingIconName, MD.Symbols.search);
         const icon = findChild(menu, "exposedDropdownLeadingIcon");
         verify(icon);
         compare(icon.visible, true);
@@ -317,7 +317,7 @@ TestCase {
         const menu = createMenu(menuComponent, {
             "currentIndex": -1,
             "fieldStyle": MD.ExposedDropdownMenu.Filled,
-            "leadingIconName": MD.SymbolNames.symbolLanguage
+            "leadingIconName": MD.Symbols.language
         });
         verify(menu);
         const field = findChild(menu, "exposedDropdownField");

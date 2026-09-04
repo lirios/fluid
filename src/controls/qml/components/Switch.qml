@@ -90,11 +90,11 @@ T.Switch {
             property bool showIcon: control.iconConfiguration === Switch.IconConfiguration.BothIcons || (control.iconConfiguration === Switch.IconConfiguration.SelectedIcon && control.checked)
             property string iconName: {
                 if (control.checked)
-                    return control.icon.name.length > 0 ? control.icon.name : "check";
+                    return control.icon.name.length > 0 ? control.icon.name : MD.Symbols.check;
                 if (control.iconConfiguration === Switch.IconConfiguration.BothIcons)
-                    return "close";
+                    return MD.Symbols.close;
                 // SelectedIcon + unselected: keep the check name while fading out
-                return control.icon.name.length > 0 ? control.icon.name : "check";
+                return control.icon.name.length > 0 ? control.icon.name : MD.Symbols.check;
             }
             property color iconColor: control.checked ? control.MD.Style.primaryColor : control.MD.Style.surfaceContainerHighestColor
 

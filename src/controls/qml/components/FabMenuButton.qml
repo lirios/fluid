@@ -59,10 +59,10 @@ T.ToolButton {
     property color contentColor: control.MD.Style.onPrimaryContainerColor
 
     //! The Material Symbol shown while the button is collapsed.
-    property string collapsedIconName: MD.SymbolNames.symbolAdd
+    property string collapsedIconName: MD.Symbols.add
 
     //! The Material Symbol shown while the button is expanded.
-    property string expandedIconName: MD.SymbolNames.symbolClose
+    property string expandedIconName: MD.Symbols.close
 
     //! The resolved background color after interaction states.
     readonly property color effectiveContainerColor: state.containerColor

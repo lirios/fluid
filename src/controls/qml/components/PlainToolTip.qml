@@ -28,7 +28,7 @@ import QtQuick.Templates as T
     \code{.qml}
     MD.IconButton {
         text: qsTr("Search")
-        icon.name: MD.SymbolNames.symbolSearch
+        icon.name: MD.Symbols.search
 
         MD.ToolTip.text: qsTr("Search")
         MD.ToolTip.visible: hovered || visualFocus

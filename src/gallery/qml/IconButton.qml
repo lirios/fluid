@@ -36,7 +36,7 @@ Item {
 
                 type: MD.IconButton.Type.Filled
                 size: MD.IconButton.Size.ExtraSmall
-                icon.name: "play_arrow"
+                icon.name: MD.Symbols.playArrow
             }
 
             DemoIconButton {
@@ -44,7 +44,7 @@ Item {
 
                 type: MD.IconButton.Type.Filled
                 size: MD.IconButton.Size.Small
-                icon.name: "play_arrow"
+                icon.name: MD.Symbols.playArrow
             }
 
             DemoIconButton {
@@ -52,7 +52,7 @@ Item {
 
                 type: MD.IconButton.Type.Filled
                 size: MD.IconButton.Size.Medium
-                icon.name: "play_arrow"
+                icon.name: MD.Symbols.playArrow
             }
 
             DemoIconButton {
@@ -60,7 +60,7 @@ Item {
 
                 type: MD.IconButton.Type.Filled
                 size: MD.IconButton.Size.Large
-                icon.name: "play_arrow"
+                icon.name: MD.Symbols.playArrow
             }
 
             DemoIconButton {
@@ -68,7 +68,7 @@ Item {
 
                 type: MD.IconButton.Type.Filled
                 size: MD.IconButton.Size.ExtraLarge
-                icon.name: "play_arrow"
+                icon.name: MD.Symbols.playArrow
             }
         }
     }
@@ -85,13 +85,13 @@ Item {
             DemoIconButton {
                 type: MD.IconButton.Type.Standard
                 shape: MD.IconButton.Shape.Round
-                icon.name: "share"
+                icon.name: MD.Symbols.share
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Standard
                 shape: MD.IconButton.Shape.Square
-                icon.name: "share"
+                icon.name: MD.Symbols.share
             }
         }
     }
@@ -107,22 +107,22 @@ Item {
 
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
-                icon.name: "video_camera_front"
+                icon.name: MD.Symbols.videoCameraFront
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Tonal
-                icon.name: "video_camera_front"
+                icon.name: MD.Symbols.videoCameraFront
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Outlined
-                icon.name: "video_camera_front"
+                icon.name: MD.Symbols.videoCameraFront
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Standard
-                icon.name: "video_camera_front"
+                icon.name: MD.Symbols.videoCameraFront
             }
         }
     }
@@ -139,19 +139,19 @@ Item {
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Default
-                icon.name: "menu"
+                icon.name: MD.Symbols.menu
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Narrow
-                icon.name: "menu"
+                icon.name: MD.Symbols.menu
             }
 
             DemoIconButton {
                 type: MD.IconButton.Type.Filled
                 widthVariant: MD.IconButton.Width.Wide
-                icon.name: "menu"
+                icon.name: MD.Symbols.menu
             }
         }
     }
@@ -258,7 +258,7 @@ Item {
 
                         objectName: "filledButton"
                         type: MD.IconButton.Type.Filled
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                     }
 
@@ -269,7 +269,7 @@ Item {
 
                         objectName: "tonalButton"
                         type: MD.IconButton.Type.Tonal
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                     }
 
@@ -280,7 +280,7 @@ Item {
 
                         objectName: "outlinedButton"
                         type: MD.IconButton.Type.Outlined
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                     }
 
@@ -291,7 +291,7 @@ Item {
 
                         objectName: "standardButton"
                         type: MD.IconButton.Type.Standard
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                     }
 
@@ -304,7 +304,7 @@ Item {
 
                         objectName: "filledUnselectedButton"
                         type: MD.IconButton.Type.Filled
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: false
@@ -317,7 +317,7 @@ Item {
 
                         objectName: "tonalUnselectedButton"
                         type: MD.IconButton.Type.Tonal
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: false
@@ -330,7 +330,7 @@ Item {
 
                         objectName: "outlinedUnselectedButton"
                         type: MD.IconButton.Type.Outlined
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: false
@@ -343,7 +343,7 @@ Item {
 
                         objectName: "standardUnselectedButton"
                         type: MD.IconButton.Type.Standard
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: false
@@ -358,7 +358,7 @@ Item {
 
                         objectName: "filledSelectedButton"
                         type: MD.IconButton.Type.Filled
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: true
@@ -371,7 +371,7 @@ Item {
 
                         objectName: "tonalSelectedButton"
                         type: MD.IconButton.Type.Tonal
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: true
@@ -384,7 +384,7 @@ Item {
 
                         objectName: "outlinedSelectedButton"
                         type: MD.IconButton.Type.Outlined
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: true
@@ -397,7 +397,7 @@ Item {
 
                         objectName: "standardSelectedButton"
                         type: MD.IconButton.Type.Standard
-                        icon.name: "settings"
+                        icon.name: MD.Symbols.settings
                         enabled: enabledSwitch.checked
                         checkable: true
                         checked: true

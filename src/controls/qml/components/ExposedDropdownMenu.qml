@@ -277,7 +277,7 @@ T.ComboBox {
                 MD.Symbol {
                     objectName: "menuItemSelection"
                     anchors.fill: parent
-                    name: MD.SymbolNames.symbolCheck
+                    name: MD.Symbols.check
                     iconWidth: parent.width
                     iconHeight: parent.height
                     color: optionDelegate.secondaryColor
@@ -458,7 +458,7 @@ T.ComboBox {
         MD.Symbol {
             objectName: "exposedDropdownTrailingIcon"
             anchors.fill: parent
-            name: MD.SymbolNames.symbolArrowDropDown
+            name: MD.Symbols.arrowDropDown
             iconWidth: parent.width
             iconHeight: parent.height
             color: control._trailingIconColor

@@ -520,7 +520,7 @@ T.ToolBar {
     MD.AppBarAction {
         id: overflowAction
         text: qsTr("More options")
-        icon.name: MD.SymbolNames.symbolMoreVert
+        icon.name: MD.Symbols.moreVert
     }
 
     MD.Menu {

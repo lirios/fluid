@@ -47,7 +47,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         size: MD.FAB.Size.Default
-                        icon.name: "add"
+                        icon.name: MD.Symbols.add
                     }
 
                     LargeLabel {
@@ -61,7 +61,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         size: MD.FAB.Size.Medium
-                        icon.name: "add"
+                        icon.name: MD.Symbols.add
                     }
 
                     LargeLabel {
@@ -75,7 +75,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         size: MD.FAB.Size.Large
-                        icon.name: "add"
+                        icon.name: MD.Symbols.add
                     }
 
                     LargeLabel {
@@ -101,7 +101,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         variant: MD.FAB.Variant.Surface
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                     }
 
                     LargeLabel {
@@ -115,7 +115,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         variant: MD.FAB.Variant.Primary
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                     }
 
                     LargeLabel {
@@ -129,7 +129,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         variant: MD.FAB.Variant.Secondary
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                     }
 
                     LargeLabel {
@@ -143,7 +143,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         variant: MD.FAB.Variant.Tertiary
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                     }
 
                     LargeLabel {
@@ -168,7 +168,7 @@ Item {
 
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
-                        icon.name: "navigation"
+                        icon.name: MD.Symbols.navigation
                     }
 
                     LargeLabel {
@@ -182,7 +182,7 @@ Item {
                     DemoFAB {
                         Layout.alignment: Qt.AlignHCenter
                         lowered: true
-                        icon.name: "navigation"
+                        icon.name: MD.Symbols.navigation
                     }
 
                     LargeLabel {
@@ -224,7 +224,7 @@ Item {
 
                         enabled: enabledSwitch.checked
                         lowered: loweredSwitch.checked
-                        icon.name: "add"
+                        icon.name: MD.Symbols.add
 
                         onClicked: page.clickCount++
                     }
@@ -251,7 +251,7 @@ Item {
                         text: qsTr("Custom colors")
                         containerColor: MD.Style.errorContainerColor
                         contentColor: MD.Style.onErrorContainerColor
-                        icon.name: "priority_high"
+                        icon.name: MD.Symbols.priorityHigh
                     }
 
                     DemoFAB {
@@ -262,7 +262,7 @@ Item {
                     DemoFAB {
                         text: qsTr("Forward")
                         mirrorIconInRtl: mirrorSwitch.checked
-                        icon.name: "arrow_forward"
+                        icon.name: MD.Symbols.arrowForward
                         LayoutMirroring.enabled: true
                     }
                 }

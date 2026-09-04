@@ -32,7 +32,7 @@ import "../internal/MotionAnimation.js" as MotionAnimation
     \code{.qml}
     MD.ExtendedFAB {
         text: qsTr("Create")
-        icon.name: "add"
+        icon.name: MD.Symbols.add
         onClicked: createDocument()
     }
     \endcode

@@ -86,15 +86,15 @@ Item {
 
         MD.Action {
             text: qsTr("Cut")
-            icon.name: MD.SymbolNames.symbolContentCut
+            icon.name: MD.Symbols.contentCut
         }
         MD.Action {
             text: qsTr("Copy")
-            icon.name: MD.SymbolNames.symbolContentCopy
+            icon.name: MD.Symbols.contentCopy
         }
         MD.Action {
             text: qsTr("Paste")
-            icon.name: MD.SymbolNames.symbolContentPaste
+            icon.name: MD.Symbols.contentPaste
         }
     }
 
@@ -103,16 +103,16 @@ Item {
 
         MD.Action {
             text: qsTr("Cut")
-            icon.name: MD.SymbolNames.symbolContentCut
+            icon.name: MD.Symbols.contentCut
         }
         MD.Action {
             text: qsTr("Copy")
-            icon.name: MD.SymbolNames.symbolContentCopy
+            icon.name: MD.Symbols.contentCopy
         }
         MD.MenuDivider {}
         MD.Action {
             text: qsTr("Select all")
-            icon.name: MD.SymbolNames.symbolSelectAll
+            icon.name: MD.Symbols.selectAll
         }
     }
 
@@ -121,15 +121,15 @@ Item {
 
         MD.Action {
             text: qsTr("Cut")
-            icon.name: MD.SymbolNames.symbolContentCut
+            icon.name: MD.Symbols.contentCut
         }
         MD.Action {
             text: qsTr("Copy")
-            icon.name: MD.SymbolNames.symbolContentCopy
+            icon.name: MD.Symbols.contentCopy
         }
         MD.Action {
             text: qsTr("Paste")
-            icon.name: MD.SymbolNames.symbolContentPaste
+            icon.name: MD.Symbols.contentPaste
         }
         MD.MenuGap {}
         MD.MenuSectionLabel {
@@ -137,11 +137,11 @@ Item {
         }
         MD.Action {
             text: qsTr("Share")
-            icon.name: MD.SymbolNames.symbolShare
+            icon.name: MD.Symbols.share
         }
         MD.Action {
             text: qsTr("Download")
-            icon.name: MD.SymbolNames.symbolDownload
+            icon.name: MD.Symbols.download
         }
     }
 
@@ -155,13 +155,13 @@ Item {
         MD.Action {
             text: qsTr("Edit")
             supportingText: qsTr("Open the document editor")
-            icon.name: MD.SymbolNames.symbolEdit
+            icon.name: MD.Symbols.edit
             shortcut: "Meta+E"
         }
         MD.MenuDivider {}
         MD.Action {
             text: qsTr("Settings")
-            icon.name: MD.SymbolNames.symbolSettings
+            icon.name: MD.Symbols.settings
             badgeContent: qsTr("New")
         }
     }
@@ -171,12 +171,12 @@ Item {
 
         MD.Action {
             text: qsTr("Copy")
-            icon.name: MD.SymbolNames.symbolContentCopy
+            icon.name: MD.Symbols.contentCopy
             shortcut: StandardKey.Copy
         }
         MD.Action {
             text: qsTr("Paste")
-            icon.name: MD.SymbolNames.symbolContentPaste
+            icon.name: MD.Symbols.contentPaste
             shortcut: StandardKey.Paste
         }
         MD.MenuGap {}
@@ -185,12 +185,12 @@ Item {
         }
         MD.Action {
             text: qsTr("Share")
-            icon.name: MD.SymbolNames.symbolShare
+            icon.name: MD.Symbols.share
         }
         MD.MenuDivider {}
         MD.Action {
             text: qsTr("Delete")
-            icon.name: MD.SymbolNames.symbolDelete
+            icon.name: MD.Symbols.deleteIcon
             shortcut: StandardKey.Delete
         }
     }

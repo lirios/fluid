@@ -43,13 +43,13 @@ import Fluid as MD
 
         MD.FabMenuItem {
             text: qsTr("New document")
-            icon.name: MD.SymbolNames.symbolDescription
+            icon.name: MD.Symbols.description
             onClicked: createDocument()
         }
 
         MD.FabMenuItem {
             text: qsTr("New folder")
-            icon.name: MD.SymbolNames.symbolFolder
+            icon.name: MD.Symbols.folder
             onClicked: createFolder()
         }
     }
@@ -117,7 +117,7 @@ T.Pane {
         The specification morphs the toggle button into a close button while the
         menu is expanded, so this symbol cross-fades into \c expandedIconName.
     */
-    property string collapsedIconName: MD.SymbolNames.symbolAdd
+    property string collapsedIconName: MD.Symbols.add
 
     /*!
         The Material Symbol shown while the menu is expanded.
@@ -125,7 +125,7 @@ T.Pane {
         This is the close-button symbol of the morph described by
         \c collapsedIconName.
     */
-    property string expandedIconName: MD.SymbolNames.symbolClose
+    property string expandedIconName: MD.Symbols.close
 
     //! The toggle button of the menu.
     readonly property alias button: fabMenuButton

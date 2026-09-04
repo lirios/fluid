@@ -58,7 +58,7 @@ void FluidAccessibilityTest::extendedFabInheritsButtonAccessibility()
             MD.ExtendedFAB {
                 objectName: "extendedFab"
                 text: "Create"
-                icon.name: "add"
+                icon.name: MD.Symbols.add
             }
         }
     )", QUrl(QStringLiteral("inline:extended-fab-accessibility.qml")));
@@ -106,7 +106,7 @@ void FluidAccessibilityTest::textFieldIsAnEditableAccessibleNode()
                     objectName: "revealPasswordButton"
                     text: "Reveal password"
                     type: MD.IconButton.Standard
-                    icon.name: "visibility"
+                    icon.name: MD.Symbols.visibility
                 }
             }
         }
@@ -172,7 +172,7 @@ void FluidAccessibilityTest::rangeSliderHandlesAreRealAccessibleNodes()
                 subtitle: "Recently added"
                 navigationAction: MD.AppBarAction {
                     text: "Back"
-                    icon.name: "arrow_back"
+                    icon.name: MD.Symbols.arrowBack
                 }
             }
 

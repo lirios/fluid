@@ -25,7 +25,7 @@ Item {
         Layout.alignment: Qt.AlignHCenter
         Layout.margins: page.compactSpacing
         text: qsTr("Create")
-        icon.name: MD.SymbolNames.symbolAdd
+        icon.name: MD.Symbols.add
     }
 
     GalleryPage {
@@ -96,25 +96,25 @@ Item {
                 DemoExtendedFAB {
                     text: qsTr("Surface")
                     variant: MD.ExtendedFAB.Variant.Surface
-                    icon.name: MD.SymbolNames.symbolEdit
+                    icon.name: MD.Symbols.edit
                 }
 
                 DemoExtendedFAB {
                     text: qsTr("Primary")
                     variant: MD.ExtendedFAB.Variant.Primary
-                    icon.name: MD.SymbolNames.symbolEdit
+                    icon.name: MD.Symbols.edit
                 }
 
                 DemoExtendedFAB {
                     text: qsTr("Secondary")
                     variant: MD.ExtendedFAB.Variant.Secondary
-                    icon.name: MD.SymbolNames.symbolEdit
+                    icon.name: MD.Symbols.edit
                 }
 
                 DemoExtendedFAB {
                     text: qsTr("Tertiary")
                     variant: MD.ExtendedFAB.Variant.Tertiary
-                    icon.name: MD.SymbolNames.symbolEdit
+                    icon.name: MD.Symbols.edit
                 }
             }
         }
@@ -137,7 +137,7 @@ Item {
                 DemoExtendedFAB {
                     expanded: expandedSwitch.checked
                     text: qsTr("Compose")
-                    icon.name: MD.SymbolNames.symbolEdit
+                    icon.name: MD.Symbols.edit
                 }
             }
         }
@@ -206,7 +206,7 @@ Item {
                         text: qsTr("Custom colors")
                         containerColor: MD.Style.errorContainerColor
                         contentColor: MD.Style.onErrorContainerColor
-                        icon.name: MD.SymbolNames.symbolPriorityHigh
+                        icon.name: MD.Symbols.priorityHigh
                     }
 
                     DemoExtendedFAB {
@@ -219,7 +219,7 @@ Item {
                     DemoExtendedFAB {
                         objectName: "extendedFabRtlExample"
                         text: qsTr("Forward")
-                        icon.name: MD.SymbolNames.symbolArrowForward
+                        icon.name: MD.Symbols.arrowForward
                         LayoutMirroring.enabled: true
                     }
                 }

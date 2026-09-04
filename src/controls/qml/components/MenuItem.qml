@@ -172,7 +172,7 @@ T.MenuItem {
                 MD.Symbol {
                     objectName: "menuItemSelection"
                     anchors.centerIn: parent
-                    name: MD.SymbolNames.symbolCheck
+                    name: MD.Symbols.check
                     iconWidth: menuItem._iconSize
                     iconHeight: menuItem._iconSize
                     color: menuItem._secondaryColor
@@ -265,7 +265,7 @@ T.MenuItem {
                 id: submenuArrow
                 objectName: "menuItemSubmenuArrow"
                 anchors.verticalCenter: parent.verticalCenter
-                name: MD.SymbolNames.symbolChevronRight
+                name: MD.Symbols.chevronRight
                 iconWidth: menuItem._iconSize
                 iconHeight: menuItem._iconSize
                 color: menuItem._secondaryColor

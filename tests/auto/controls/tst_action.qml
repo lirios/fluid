@@ -74,14 +74,14 @@ TestCase {
         action.enabled = false;
         action.checkable = true;
         action.checked = true;
-        action.icon.name = "favorite";
+        action.icon.name = MD.Symbols.favorite;
         action.icon.source = source;
 
         compare(action.text, "Favorite");
         compare(action.enabled, false);
         compare(action.checkable, true);
         compare(action.checked, true);
-        compare(action.icon.name, "favorite");
+        compare(action.icon.name, MD.Symbols.favorite);
         compare(action.icon.source, source);
     }
 

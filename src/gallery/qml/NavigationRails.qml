@@ -33,7 +33,7 @@ Item {
 
         MD.IconButton {
             anchors.centerIn: parent
-            icon.name: "menu"
+            icon.name: MD.Symbols.menu
             text: qsTr("Toggle rail")
         }
     }
@@ -86,15 +86,15 @@ Item {
 
                             MD.NavigationRailItem {
                                 text: qsTr("Home")
-                                icon.name: "home"
+                                icon.name: MD.Symbols.home
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Explore")
-                                icon.name: "explore"
+                                icon.name: MD.Symbols.explore
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Favorites")
-                                icon.name: "favorite"
+                                icon.name: MD.Symbols.favorite
                             }
                         }
                     }
@@ -118,15 +118,15 @@ Item {
 
                             MD.NavigationRailItem {
                                 text: qsTr("Home")
-                                icon.name: "home"
+                                icon.name: MD.Symbols.home
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Explore")
-                                icon.name: "explore"
+                                icon.name: MD.Symbols.explore
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Favorites")
-                                icon.name: "favorite"
+                                icon.name: MD.Symbols.favorite
                             }
                         }
                     }
@@ -183,16 +183,16 @@ Item {
 
                                 MD.NavigationRailItem {
                                     text: qsTr("Inbox")
-                                    icon.name: "inbox"
+                                    icon.name: MD.Symbols.inbox
                                 }
                                 MD.NavigationRailItem {
                                     text: qsTr("Starred")
-                                    icon.name: "star"
+                                    icon.name: MD.Symbols.star
                                     enabled: false
                                 }
                                 MD.NavigationRailItem {
                                     text: ""
-                                    icon.name: "settings"
+                                    icon.name: MD.Symbols.settings
                                     Accessible.name: qsTr("Settings")
                                 }
                             }
@@ -225,15 +225,15 @@ Item {
 
                     MD.NavigationRailItem {
                         text: qsTr("Home")
-                        icon.name: "home"
+                        icon.name: MD.Symbols.home
                     }
                     MD.NavigationRailItem {
                         text: qsTr("Messages")
-                        icon.name: "chat"
+                        icon.name: MD.Symbols.chat
                     }
                     MD.NavigationRailItem {
                         text: qsTr("Profile")
-                        icon.name: "person"
+                        icon.name: MD.Symbols.person
                     }
                 }
             }
@@ -271,15 +271,15 @@ Item {
 
                             MD.NavigationRailItem {
                                 text: qsTr("Home")
-                                icon.name: "home"
+                                icon.name: MD.Symbols.home
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Search")
-                                icon.name: "search"
+                                icon.name: MD.Symbols.search
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Account")
-                                icon.name: "account_circle"
+                                icon.name: MD.Symbols.accountCircle
                             }
                         }
                     }
@@ -324,15 +324,15 @@ Item {
 
                             MD.NavigationRailItem {
                                 text: qsTr("Home")
-                                icon.name: "home"
+                                icon.name: MD.Symbols.home
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Search")
-                                icon.name: "search"
+                                icon.name: MD.Symbols.search
                             }
                             MD.NavigationRailItem {
                                 text: qsTr("Account")
-                                icon.name: "account_circle"
+                                icon.name: MD.Symbols.accountCircle
                             }
                         }
                     }

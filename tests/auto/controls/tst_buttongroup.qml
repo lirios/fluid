@@ -16,7 +16,7 @@ TestCase {
         id: groupComponent
         MD.ButtonGroup {
             MD.Button { text: "One" }
-            MD.IconButton { text: "Two"; icon.name: MD.SymbolNames.symbolStar }
+            MD.IconButton { text: "Two"; icon.name: MD.Symbols.star }
             MD.Button { text: "Three" }
         }
     }

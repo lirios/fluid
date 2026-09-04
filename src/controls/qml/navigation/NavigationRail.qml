@@ -41,17 +41,17 @@ import "../internal/MotionAnimation.js" as MotionAnimation
         header: Component {
             MD.IconButton {
                 text: qsTr("Toggle navigation rail")
-                icon.name: MD.SymbolNames.symbolMenu
+                icon.name: MD.Symbols.menu
             }
         }
 
         MD.NavigationRailItem {
             text: qsTr("Home")
-            icon.name: MD.SymbolNames.symbolHome
+            icon.name: MD.Symbols.home
         }
         MD.NavigationRailItem {
             text: qsTr("Settings")
-            icon.name: MD.SymbolNames.symbolSettings
+            icon.name: MD.Symbols.settings
         }
     }
     \endcode

@@ -27,13 +27,13 @@ import Fluid as MD
 
         navigationAction: MD.AppBarAction {
             text: qsTr("Back")
-            icon.name: "arrow_back"
+            icon.name: MD.Symbols.arrowBack
         }
 
         actions: [
             MD.AppBarAction {
                 text: qsTr("Favorite")
-                icon.name: "favorite"
+                icon.name: MD.Symbols.favorite
             }
         ]
     }

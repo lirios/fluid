@@ -43,20 +43,20 @@ TestCase {
             MD.AppBarAction {
                 id: highAction
                 text: "High"
-                icon.name: MD.SymbolNames.symbolFavorite
+                icon.name: MD.Symbols.favorite
                 priority: 20
                 checkable: true
             }
             MD.AppBarAction {
                 id: lowAction
                 text: "Low"
-                icon.name: MD.SymbolNames.symbolShare
+                icon.name: MD.Symbols.share
                 priority: 1
             }
             MD.AppBarAction {
                 id: forcedAction
                 text: "Forced overflow"
-                icon.name: MD.SymbolNames.symbolDelete
+                icon.name: MD.Symbols.deleteIcon
                 overflowPolicy: MD.AppBarAction.AlwaysOverflow
                 enabled: false
             }
@@ -135,12 +135,12 @@ TestCase {
                 titleAlignment: MD.AppBar.Start
                 navigationAction: MD.AppBarAction {
                     text: "Back"
-                    icon.name: MD.SymbolNames.symbolArrowBack
+                    icon.name: MD.Symbols.arrowBack
                 }
                 actions: [
                     MD.AppBarAction {
                         text: "Favorite"
-                        icon.name: MD.SymbolNames.symbolFavorite
+                        icon.name: MD.Symbols.favorite
                     }
                 ]
             }

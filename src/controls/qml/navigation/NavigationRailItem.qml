@@ -26,7 +26,7 @@ import "../internal" as Internal
     \code{.qml}
     MD.NavigationRailItem {
         text: qsTr("Home")
-        icon.name: MD.SymbolNames.symbolHome
+        icon.name: MD.Symbols.home
         onClicked: stack.currentIndex = 0
     }
     \endcode

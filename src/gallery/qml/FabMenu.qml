@@ -75,17 +75,17 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Share")
-                                icon.name: "share"
+                                icon.name: MD.Symbols.share
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Edit")
-                                icon.name: "edit"
+                                icon.name: MD.Symbols.edit
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Delete")
-                                icon.name: "delete"
+                                icon.name: MD.Symbols.deleteIcon
                             }
                         }
                     }
@@ -107,17 +107,17 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Share")
-                                icon.name: "share"
+                                icon.name: MD.Symbols.share
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Edit")
-                                icon.name: "edit"
+                                icon.name: MD.Symbols.edit
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Delete")
-                                icon.name: "delete"
+                                icon.name: MD.Symbols.deleteIcon
                             }
                         }
                     }
@@ -139,17 +139,17 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Share")
-                                icon.name: "share"
+                                icon.name: MD.Symbols.share
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Edit")
-                                icon.name: "edit"
+                                icon.name: MD.Symbols.edit
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Delete")
-                                icon.name: "delete"
+                                icon.name: MD.Symbols.deleteIcon
                             }
                         }
                     }
@@ -184,17 +184,17 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Photo")
-                                icon.name: "photo_camera"
+                                icon.name: MD.Symbols.photoCamera
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Video")
-                                icon.name: "videocam"
+                                icon.name: MD.Symbols.videocam
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Audio")
-                                icon.name: "mic"
+                                icon.name: MD.Symbols.mic
                             }
                         }
                     }
@@ -216,17 +216,17 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Photo")
-                                icon.name: "photo_camera"
+                                icon.name: MD.Symbols.photoCamera
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Video")
-                                icon.name: "videocam"
+                                icon.name: MD.Symbols.videocam
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Audio")
-                                icon.name: "mic"
+                                icon.name: MD.Symbols.mic
                             }
                         }
                     }
@@ -261,12 +261,12 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Reply")
-                                icon.name: "reply"
+                                icon.name: MD.Symbols.reply
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Forward")
-                                icon.name: "forward"
+                                icon.name: MD.Symbols.forward
                             }
                         }
                     }
@@ -288,12 +288,12 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Reply")
-                                icon.name: "reply"
+                                icon.name: MD.Symbols.reply
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Forward")
-                                icon.name: "forward"
+                                icon.name: MD.Symbols.forward
                             }
                         }
                     }
@@ -318,12 +318,12 @@ Item {
 
                             MD.FabMenuItem {
                                 text: qsTr("Reply")
-                                icon.name: "reply"
+                                icon.name: MD.Symbols.reply
                             }
 
                             MD.FabMenuItem {
                                 text: qsTr("Forward")
-                                icon.name: "forward"
+                                icon.name: MD.Symbols.forward
                             }
                         }
                     }
@@ -354,12 +354,12 @@ Item {
 
                         MD.FabMenuItem {
                             text: qsTr("Enabled")
-                            icon.name: "check_circle"
+                            icon.name: MD.Symbols.checkCircle
                         }
 
                         MD.FabMenuItem {
                             text: qsTr("Disabled")
-                            icon.name: "block"
+                            icon.name: MD.Symbols.block
                             enabled: false
                         }
 
@@ -370,7 +370,7 @@ Item {
 
                         MD.FabMenuItem {
                             text: qsTr("Custom colors")
-                            icon.name: "priority_high"
+                            icon.name: MD.Symbols.priorityHigh
                             containerColor: MD.Style.errorContainerColor
                             contentColor: MD.Style.onErrorContainerColor
                         }
@@ -443,19 +443,19 @@ Item {
 
                         MD.FabMenuItem {
                             text: qsTr("Activate")
-                            icon.name: "add"
+                            icon.name: MD.Symbols.add
 
                             onClicked: page.clickCount++
                         }
 
                         MD.FabMenuItem {
                             text: qsTr("Edit")
-                            icon.name: "edit"
+                            icon.name: MD.Symbols.edit
                         }
 
                         MD.FabMenuItem {
                             text: qsTr("Share")
-                            icon.name: "share"
+                            icon.name: MD.Symbols.share
                         }
                     }
                 }

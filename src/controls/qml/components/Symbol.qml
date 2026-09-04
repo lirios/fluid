@@ -19,7 +19,7 @@ import Fluid as MD
     import Fluid as MD
 
     MD.Symbol {
-        name: MD.SymbolNames.symbolShoppingCart
+        name: MD.Symbols.shoppingCart
     }
     \endcode
 
@@ -32,7 +32,7 @@ import Fluid as MD
     MD.Symbol {
         MD.Style.theme: MD.Style.Dark
 
-        name: MD.SymbolNames.symbolShoppingCart
+        name: MD.Symbols.shoppingCart
     }
     \endcode
 

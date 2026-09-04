@@ -14,7 +14,7 @@ Item {
 
         text: "Search"
         type: MD.IconButton.Type.Standard
-        icon.name: "search"
+        icon.name: MD.Symbols.search
         checkable: true
     }
 
@@ -22,7 +22,7 @@ Item {
         id: sourceButton
 
         text: "Source action"
-        icon.name: "search"
+        icon.name: MD.Symbols.search
         icon.source: Qt.resolvedUrl("../../../src/gallery/icons/32x32/apps/io.liri.Fluid.Gallery.png")
     }
 
@@ -32,7 +32,7 @@ Item {
         text: "Favorite"
         type: MD.IconButton.Type.Outlined
         checkable: true
-        icon.name: "favorite"
+        icon.name: MD.Symbols.favorite
     }
 
     MD.IconButton {
@@ -40,7 +40,7 @@ Item {
 
         text: "More options"
         type: MD.IconButton.Type.Standard
-        icon.name: "more_vert"
+        icon.name: MD.Symbols.moreVert
         contentColor: "#ff0000"
         disabledContentColor: "#0000ff"
         containerColor: "#00ff00"
@@ -51,8 +51,8 @@ Item {
 
         text: "Mute"
         type: MD.IconButton.Type.Standard
-        icon.name: "volume_up"
-        checkedIcon.name: "volume_off"
+        icon.name: MD.Symbols.volumeUp
+        checkedIcon.name: MD.Symbols.volumeOff
         checkedIcon.color: "#ff0000"
         checkable: true
     }
@@ -62,7 +62,7 @@ Item {
 
         text: "Forward"
         type: MD.IconButton.Type.Standard
-        icon.name: "arrow_forward"
+        icon.name: MD.Symbols.arrowForward
         mirrorIconInRtl: true
         LayoutMirroring.enabled: true
     }
@@ -151,11 +151,11 @@ Item {
             const alternateSymbol = findChild(alternateIconButton, "iconButtonSymbol");
             const standardSymbol = findChild(standardButton, "iconButtonSymbol");
 
-            compare(alternateIconButton.effectiveIconName, "volume_up");
+            compare(alternateIconButton.effectiveIconName, MD.Symbols.volumeUp);
             verify(!alternateIconButton.usingCheckedIcon);
             alternateIconButton.checked = true;
             verify(alternateIconButton.usingCheckedIcon);
-            compare(alternateIconButton.effectiveIconName, "volume_off");
+            compare(alternateIconButton.effectiveIconName, MD.Symbols.volumeOff);
             compare(alternateIconButton.effectiveIconColor, "#ff0000");
             verify(!alternateSymbol.fill);
 

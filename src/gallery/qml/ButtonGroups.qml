@@ -20,15 +20,15 @@ GalleryPage {
             MD.ButtonGroup {
                 MD.Button {
                     text: qsTr("Undo")
-                    icon.name: MD.SymbolNames.symbolUndo
+                    icon.name: MD.Symbols.undo
                 }
                 MD.Button {
                     text: qsTr("Redo")
-                    icon.name: MD.SymbolNames.symbolRedo
+                    icon.name: MD.Symbols.redo
                 }
                 MD.IconButton {
                     text: qsTr("Share")
-                    icon.name: MD.SymbolNames.symbolShare
+                    icon.name: MD.Symbols.share
                 }
             }
             MD.ButtonGroup {
@@ -49,7 +49,7 @@ GalleryPage {
                 }
                 MD.IconButton {
                     text: qsTr("Favorite")
-                    icon.name: MD.SymbolNames.symbolFavorite
+                    icon.name: MD.Symbols.favorite
                 }
             }
             MD.ButtonGroup {
@@ -68,11 +68,11 @@ GalleryPage {
 
                 MD.IconButton {
                     text: qsTr("Previous")
-                    icon.name: MD.SymbolNames.symbolSkipPrevious
+                    icon.name: MD.Symbols.skipPrevious
                 }
                 MD.IconButton {
                     text: qsTr("Next")
-                    icon.name: MD.SymbolNames.symbolSkipNext
+                    icon.name: MD.Symbols.skipNext
                 }
             }
         }
@@ -98,7 +98,7 @@ GalleryPage {
                 }
                 MD.IconButton {
                     text: qsTr("List")
-                    icon.name: MD.SymbolNames.symbolViewList
+                    icon.name: MD.Symbols.viewList
                 }
             }
             MD.ButtonGroup {
@@ -125,15 +125,15 @@ GalleryPage {
 
                 MD.IconButton {
                     text: qsTr("Bold")
-                    icon.name: MD.SymbolNames.symbolFormatBold
+                    icon.name: MD.Symbols.formatBold
                 }
                 MD.IconButton {
                     text: qsTr("Italic")
-                    icon.name: MD.SymbolNames.symbolFormatItalic
+                    icon.name: MD.Symbols.formatItalic
                 }
                 MD.IconButton {
                     text: qsTr("Underline")
-                    icon.name: MD.SymbolNames.symbolFormatUnderlined
+                    icon.name: MD.Symbols.formatUnderlined
                 }
             }
         }

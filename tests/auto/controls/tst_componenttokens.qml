@@ -18,13 +18,13 @@ Item {
     MD.IconButton {
         id: metricIconButton
         text: "Action"
-        icon.name: "add"
+        icon.name: MD.Symbols.add
     }
 
     MD.FAB {
         id: metricFab
         text: "Action"
-        icon.name: "add"
+        icon.name: MD.Symbols.add
     }
 
     MD.FabMenu {
@@ -37,7 +37,7 @@ Item {
         MD.FabMenuItem {
             id: metricFabMenuItem
             text: "Item"
-            icon.name: "add"
+            icon.name: MD.Symbols.add
         }
     }
 
@@ -64,7 +64,7 @@ Item {
 
     MD.Symbol {
         id: metricSymbol
-        name: "add"
+        name: MD.Symbols.add
     }
 
     TestCase {

@@ -195,10 +195,10 @@ GalleryPage {
                         to: 100
                         value: 50
                         size: iconRow.modelData.sliderSize
-                        trackIconActiveStart: MD.SymbolNames.symbolVolumeUp
-                        trackIconActiveEnd: MD.SymbolNames.symbolAdd
-                        trackIconInactiveStart: MD.SymbolNames.symbolRemove
-                        trackIconInactiveEnd: MD.SymbolNames.symbolVolumeOff
+                        trackIconActiveStart: MD.Symbols.volumeUp
+                        trackIconActiveEnd: MD.Symbols.add
+                        trackIconInactiveStart: MD.Symbols.remove
+                        trackIconInactiveEnd: MD.Symbols.volumeOff
                     }
                 }
             }

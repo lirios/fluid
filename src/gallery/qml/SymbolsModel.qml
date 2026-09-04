@@ -731,6 +731,7 @@ ListModel {
 	ListElement { name: "car_mirror_heat"; codepoint: "\uf335"; }
 	ListElement { name: "car_rental"; codepoint: "\uea55"; }
 	ListElement { name: "car_repair"; codepoint: "\uea56"; }
+	ListElement { name: "car_seat_off"; codepoint: "\uffebe"; }
 	ListElement { name: "car_tag"; codepoint: "\uf4e3"; }
 	ListElement { name: "card_giftcard"; codepoint: "\ue8f6"; }
 	ListElement { name: "card_membership"; codepoint: "\ue8f7"; }
@@ -3618,6 +3619,7 @@ ListModel {
 	ListElement { name: "stay_current_portrait"; codepoint: "\ue7ba"; }
 	ListElement { name: "stay_primary_landscape"; codepoint: "\ued3e"; }
 	ListElement { name: "stay_primary_portrait"; codepoint: "\uf2d3"; }
+	ListElement { name: "steering_wheel_cool"; codepoint: "\uffebd"; }
 	ListElement { name: "steering_wheel_heat"; codepoint: "\uf32b"; }
 	ListElement { name: "step"; codepoint: "\uf6fe"; }
 	ListElement { name: "step_into"; codepoint: "\uf701"; }

@@ -60,28 +60,28 @@ Item {
                 MD.Button {
                     objectName: "iconOnlyButton"
                     display: MD.Button.IconOnly
-                    icon.name: "search"
+                    icon.name: MD.Symbols.search
                     text: qsTr("Icon Only")
                 }
 
                 MD.Button {
                     objectName: "textOnlyButton"
                     display: MD.Button.TextOnly
-                    icon.name: "search"
+                    icon.name: MD.Symbols.search
                     text: qsTr("Text Only")
                 }
 
                 MD.Button {
                     objectName: "textBesideIconButton"
                     display: MD.Button.TextBesideIcon
-                    icon.name: "search"
+                    icon.name: MD.Symbols.search
                     text: qsTr("Text Beside Icon")
                 }
 
                 MD.Button {
                     objectName: "textUnderIconButton"
                     display: MD.Button.TextUnderIcon
-                    icon.name: "search"
+                    icon.name: MD.Symbols.search
                     text: qsTr("Text Under Icon")
                 }
             }
@@ -303,7 +303,7 @@ Item {
 
                         objectName: "elevatedButton"
                         type: MD.Button.Elevated
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Elevated button")
                         enabled: enabledSwitch.checked
                     }
@@ -314,7 +314,7 @@ Item {
 
                         objectName: "filledButton"
                         type: MD.Button.Filled
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Filled button")
                         enabled: enabledSwitch.checked
                     }
@@ -325,7 +325,7 @@ Item {
 
                         objectName: "tonalButton"
                         type: MD.Button.Tonal
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Tonal button")
                         enabled: enabledSwitch.checked
                     }
@@ -336,7 +336,7 @@ Item {
 
                         objectName: "outlinedButton"
                         type: MD.Button.Outlined
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Outlined button")
                         enabled: enabledSwitch.checked
                     }
@@ -347,7 +347,7 @@ Item {
 
                         objectName: "textButton"
                         type: MD.Button.Text
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Text button")
                         enabled: enabledSwitch.checked
                     }
@@ -360,7 +360,7 @@ Item {
 
                         objectName: "elevatedButton"
                         type: MD.Button.Elevated
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Elevated unselected")
                         checkable: false
                         checked: false
@@ -373,7 +373,7 @@ Item {
 
                         objectName: "filledButton"
                         type: MD.Button.Filled
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Filled unselected")
                         checkable: false
                         checked: false
@@ -386,7 +386,7 @@ Item {
 
                         objectName: "tonalButton"
                         type: MD.Button.Tonal
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Tonal unselected")
                         checkable: false
                         checked: false
@@ -399,7 +399,7 @@ Item {
 
                         objectName: "outlinedButton"
                         type: MD.Button.Outlined
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Outlined unselected")
                         checkable: false
                         checked: false
@@ -414,7 +414,7 @@ Item {
 
                         objectName: "elevatedButton"
                         type: MD.Button.Elevated
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Elevated selected")
                         checkable: false
                         checked: true
@@ -427,7 +427,7 @@ Item {
 
                         objectName: "filledButton"
                         type: MD.Button.Filled
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Filled selected")
                         checkable: false
                         checked: true
@@ -440,7 +440,7 @@ Item {
 
                         objectName: "tonalButton"
                         type: MD.Button.Tonal
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Tonal selected")
                         checkable: false
                         checked: true
@@ -453,7 +453,7 @@ Item {
 
                         objectName: "outlinedButton"
                         type: MD.Button.Outlined
-                        icon.name: "edit"
+                        icon.name: MD.Symbols.edit
                         text: qsTr("Outlined selected")
                         checkable: false
                         checked: true

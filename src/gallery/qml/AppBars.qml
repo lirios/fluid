@@ -21,40 +21,40 @@ Item {
     MD.AppBarAction {
         id: backAction
         text: qsTr("Back")
-        icon.name: MD.SymbolNames.symbolArrowBack
+        icon.name: MD.Symbols.arrowBack
         overflowPolicy: MD.AppBarAction.NeverOverflow
     }
     MD.AppBarAction {
         id: favoriteAction
         text: qsTr("Favorite")
-        icon.name: MD.SymbolNames.symbolFavorite
+        icon.name: MD.Symbols.favorite
         checkable: true
         priority: 10
     }
     MD.AppBarAction {
         id: shareAction
         text: qsTr("Share")
-        icon.name: MD.SymbolNames.symbolShare
+        icon.name: MD.Symbols.share
         priority: 5
     }
     MD.AppBarAction {
         id: editAction
         text: qsTr("Edit")
-        icon.name: MD.SymbolNames.symbolEdit
+        icon.name: MD.Symbols.edit
         presentation: MD.AppBarAction.FilledButton
         priority: 20
     }
     MD.AppBarAction {
         id: avatarAction
         text: qsTr("Account")
-        icon.name: MD.SymbolNames.symbolAccountCircle
+        icon.name: MD.Symbols.accountCircle
         presentation: MD.AppBarAction.Avatar
         overflowPolicy: MD.AppBarAction.NeverOverflow
     }
     MD.AppBarAction {
         id: deleteAction
         text: qsTr("Delete")
-        icon.name: MD.SymbolNames.symbolDelete
+        icon.name: MD.Symbols.deleteIcon
         enabled: false
         overflowPolicy: MD.AppBarAction.AlwaysOverflow
     }

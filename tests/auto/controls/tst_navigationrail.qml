@@ -53,20 +53,20 @@ TestCase {
                 MD.NavigationRailItem {
                     id: firstItem
                     text: "Home"
-                    icon.name: "home"
+                    icon.name: MD.Symbols.home
                 }
 
                 MD.NavigationRailItem {
                     id: secondItem
                     text: "Disabled"
-                    icon.name: "block"
+                    icon.name: MD.Symbols.block
                     enabled: false
                 }
 
                 MD.NavigationRailItem {
                     id: thirdItem
                     text: "Profile"
-                    icon.name: "person"
+                    icon.name: MD.Symbols.person
                 }
             }
         }
@@ -94,12 +94,12 @@ TestCase {
                 MD.NavigationRailItem {
                     id: firstItem
                     text: "Home"
-                    icon.name: "home"
+                    icon.name: MD.Symbols.home
                 }
 
                 MD.NavigationRailItem {
                     text: "Profile"
-                    icon.name: "person"
+                    icon.name: MD.Symbols.person
                 }
             }
         }
@@ -113,7 +113,7 @@ TestCase {
 
             MD.NavigationRailItem {
                 text: ""
-                icon.name: "settings"
+                icon.name: MD.Symbols.settings
             }
         }
     }
@@ -123,7 +123,7 @@ TestCase {
 
         MD.NavigationRailItem {
             text: "Dynamic"
-            icon.name: "add"
+            icon.name: MD.Symbols.add
         }
     }
 
@@ -154,20 +154,20 @@ TestCase {
                 MD.NavigationRailItem {
                     id: firstItem
                     text: "Home"
-                    icon.name: "home"
+                    icon.name: MD.Symbols.home
                 }
 
                 MD.NavigationRailItem {
                     id: secondItem
                     text: "Disabled"
-                    icon.name: "block"
+                    icon.name: MD.Symbols.block
                     enabled: false
                 }
 
                 MD.NavigationRailItem {
                     id: thirdItem
                     text: "Profile"
-                    icon.name: "person"
+                    icon.name: MD.Symbols.person
                 }
             }
         }

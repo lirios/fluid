@@ -110,7 +110,7 @@ Item {
                     text: qsTr("alex")
 
                     leading: MD.Symbol {
-                        name: MD.SymbolNames.symbolPerson
+                        name: MD.Symbols.person
                         color: profileField.leadingContentColor
                     }
                 }
@@ -125,7 +125,7 @@ Item {
                     text: qsTr("Material")
 
                     leading: MD.Symbol {
-                        name: MD.SymbolNames.symbolSearch
+                        name: MD.Symbols.search
                         color: searchField.leadingContentColor
                     }
 
@@ -133,7 +133,7 @@ Item {
                         text: qsTr("Clear search")
                         type: MD.IconButton.Standard
                         size: MD.IconButton.ExtraSmall
-                        icon.name: MD.SymbolNames.symbolClear
+                        icon.name: MD.Symbols.clear
                         contentColor: searchField.trailingContentColor
                         disabledContentColor: searchField.trailingContentColor
                         enabled: searchField.text.length > 0
@@ -175,7 +175,7 @@ Item {
                     echoMode: TextInput.Password
 
                     leading: MD.Symbol {
-                        name: MD.SymbolNames.symbolLock
+                        name: MD.Symbols.lock
                         color: passwordField.leadingContentColor
                     }
 
@@ -183,7 +183,7 @@ Item {
                         text: passwordField.echoMode === TextInput.Password ? qsTr("Show password") : qsTr("Hide password")
                         type: MD.IconButton.Standard
                         size: MD.IconButton.ExtraSmall
-                        icon.name: passwordField.echoMode === TextInput.Password ? MD.SymbolNames.symbolVisibility : MD.SymbolNames.symbolVisibilityOff
+                        icon.name: passwordField.echoMode === TextInput.Password ? MD.Symbols.visibility : MD.Symbols.visibilityOff
                         contentColor: passwordField.trailingContentColor
                         disabledContentColor: passwordField.trailingContentColor
                         onClicked: passwordField.echoMode = passwordField.echoMode === TextInput.Password ? TextInput.Normal : TextInput.Password
@@ -254,7 +254,7 @@ Item {
                         supportingText: qsTr("سيتم إرسال رمز التحقق إلى هذا الرقم")
 
                         leading: MD.Symbol {
-                            name: MD.SymbolNames.symbolPhone
+                            name: MD.Symbols.phone
                             color: rtlPhoneField.leadingContentColor
                         }
                     }

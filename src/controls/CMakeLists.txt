@@ -84,7 +84,7 @@ target_link_libraries(${LIBNAME}
 # ------------------------------------------------------------
 # Define the QML module
 # ------------------------------------------------------------
-set_source_files_properties(qml/components/SymbolNames.qml PROPERTIES
+set_source_files_properties(qml/components/Symbols.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 set_source_files_properties(qml/core/Breakpoints.qml PROPERTIES

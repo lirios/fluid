@@ -74,25 +74,25 @@ TestCase {
 
                 anchors.fill: parent
                 text: "Create"
-                collapsedIconName: "add"
-                expandedIconName: "close"
+                collapsedIconName: MD.Symbols.add
+                expandedIconName: MD.Symbols.close
 
                 MD.FabMenuItem {
                     id: firstItem
                     text: "New document"
-                    icon.name: "description"
+                    icon.name: MD.Symbols.description
                 }
 
                 MD.FabMenuItem {
                     id: secondItem
                     text: "New folder"
-                    icon.name: "folder"
+                    icon.name: MD.Symbols.folder
                 }
 
                 MD.FabMenuItem {
                     id: thirdItem
                     text: "New label"
-                    icon.name: "star"
+                    icon.name: MD.Symbols.star
                 }
             }
         }
@@ -117,26 +117,26 @@ TestCase {
 
                 anchors.fill: parent
                 text: "Create"
-                collapsedIconName: "add"
-                expandedIconName: "close"
+                collapsedIconName: MD.Symbols.add
+                expandedIconName: MD.Symbols.close
 
                 MD.FabMenuItem {
                     id: firstItem
                     text: "New document"
-                    icon.name: "description"
+                    icon.name: MD.Symbols.description
                 }
 
                 MD.FabMenuItem {
                     id: secondItem
                     text: "New folder"
-                    icon.name: "folder"
+                    icon.name: MD.Symbols.folder
                     enabled: false
                 }
 
                 MD.FabMenuItem {
                     id: thirdItem
                     text: "New label"
-                    icon.name: "star"
+                    icon.name: MD.Symbols.star
                 }
             }
         }
@@ -163,25 +163,25 @@ TestCase {
 
                 anchors.fill: parent
                 text: "Create"
-                collapsedIconName: "add"
-                expandedIconName: "close"
+                collapsedIconName: MD.Symbols.add
+                expandedIconName: MD.Symbols.close
 
                 MD.FabMenuItem {
                     id: firstItem
                     text: "New document"
-                    icon.name: "description"
+                    icon.name: MD.Symbols.description
                 }
 
                 MD.FabMenuItem {
                     id: secondItem
                     text: "New folder"
-                    icon.name: "folder"
+                    icon.name: MD.Symbols.folder
                 }
 
                 MD.FabMenuItem {
                     id: thirdItem
                     text: "New label"
-                    icon.name: "star"
+                    icon.name: MD.Symbols.star
                 }
             }
         }

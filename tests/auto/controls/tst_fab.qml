@@ -25,7 +25,7 @@ Item {
         x: 20
         y: 20
         text: "Add"
-        icon.name: "add"
+        icon.name: MD.Symbols.add
     }
 
     MD.FAB {
@@ -34,7 +34,7 @@ Item {
         x: 160
         y: 20
         text: "Source action"
-        icon.name: "search"
+        icon.name: MD.Symbols.search
         icon.source: Qt.resolvedUrl(
                          "../../../src/gallery/icons/32x32/apps/io.liri.Fluid.Gallery.png")
     }
@@ -45,7 +45,7 @@ Item {
         x: 300
         y: 20
         text: "Forward"
-        icon.name: "arrow_forward"
+        icon.name: MD.Symbols.arrowForward
         mirrorIconInRtl: true
         LayoutMirroring.enabled: true
     }
@@ -56,7 +56,7 @@ Item {
         x: 440
         y: 20
         text: "Custom"
-        icon.name: "priority_high"
+        icon.name: MD.Symbols.priorityHigh
         containerColor: "#00ff00"
         contentColor: "#ff0000"
     }
@@ -78,7 +78,7 @@ Item {
             primaryFab.variant = MD.FAB.Variant.Primary;
             primaryFab.lowered = false;
             primaryFab.enabled = true;
-            primaryFab.icon.name = "add";
+            primaryFab.icon.name = MD.Symbols.add;
             primaryFab.icon.source = "";
             primaryFab.icon.color = "transparent";
             sourceFab.icon.source = Qt.resolvedUrl(
@@ -96,7 +96,7 @@ Item {
             compare(primaryFab.text, "Add");
             compare(primaryFab.Accessible.name, "Add");
             compare(primaryFab.focusPolicy, Qt.StrongFocus);
-            compare(primaryFab.effectiveIconName, "add");
+            compare(primaryFab.effectiveIconName, MD.Symbols.add);
             compare(primaryFab.effectiveIconSource.toString(), "");
         }
 

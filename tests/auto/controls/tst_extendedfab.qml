@@ -25,7 +25,7 @@ Item {
         x: 20
         y: 20
         text: "Create"
-        icon.name: "add"
+        icon.name: MD.Symbols.add
     }
 
     MD.ExtendedFAB {
@@ -34,7 +34,7 @@ Item {
         x: 260
         y: 20
         text: "Custom"
-        icon.name: "priority_high"
+        icon.name: MD.Symbols.priorityHigh
         containerColor: "#00ff00"
         contentColor: "#ff0000"
     }
@@ -54,7 +54,7 @@ Item {
         x: 720
         y: 20
         text: "Forward"
-        icon.name: "arrow_forward"
+        icon.name: MD.Symbols.arrowForward
         LayoutMirroring.enabled: true
     }
 
@@ -65,7 +65,7 @@ Item {
         y: 180
         width: 72
         text: "A deliberately long single-line label"
-        icon.name: "edit"
+        icon.name: MD.Symbols.edit
     }
 
     MD.IconLabel {
@@ -74,7 +74,7 @@ Item {
         x: 20
         y: 340
         text: "Opacity"
-        icon.name: "visibility"
+        icon.name: MD.Symbols.visibility
         icon.width: 24
         icon.height: 24
     }
@@ -98,7 +98,7 @@ Item {
             primaryFab.expanded = true;
             primaryFab.enabled = true;
             primaryFab.text = "Create";
-            primaryFab.icon.name = "add";
+            primaryFab.icon.name = MD.Symbols.add;
             primaryFab.icon.color = "transparent";
             opacityLabel.textOpacity = 1;
             testCase.forceActiveFocus();
@@ -121,7 +121,7 @@ Item {
             compare(primaryFab.text, "Create");
             compare(primaryFab.focusPolicy, Qt.StrongFocus);
             verify(primaryFab.hoverEnabled);
-            compare(primaryFab.effectiveIconName, "add");
+            compare(primaryFab.effectiveIconName, MD.Symbols.add);
             compare(primaryFab.effectiveIconColor, primaryFab.effectiveContentColor);
             compare(primaryFab.effectiveContainerColor, MD.Style.primaryContainerColor);
             compare(primaryFab.effectiveContentColor, MD.Style.onPrimaryContainerColor);

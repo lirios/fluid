@@ -22,7 +22,7 @@ MD.ApplicationWindow {
     readonly property var navigationCategories: [
         {
             "name": qsTr("Foundations"),
-            "icon": MD.SymbolNames.symbolFoundation,
+            "icon": MD.Symbols.foundation,
             "items": [
                 {
                     "name": qsTr("Elevation"),
@@ -48,7 +48,7 @@ MD.ApplicationWindow {
         },
         {
             "name": qsTr("Components"),
-            "icon": MD.SymbolNames.symbolWidgets,
+            "icon": MD.Symbols.widgets,
             "items": [
                 {
                     "name": qsTr("Components overview"),

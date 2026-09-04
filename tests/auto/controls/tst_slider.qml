@@ -163,12 +163,12 @@ TestCase {
         slider.valueIndicatorText = "Custom";
         compare(slider.valueIndicatorText, "Custom");
 
-        slider.trackIconActiveStart = "volume_up";
-        slider.trackIconActiveEnd = "add";
-        slider.trackIconInactiveStart = "remove";
-        slider.trackIconInactiveEnd = "volume_off";
-        compare(slider.trackIconActiveStart, "volume_up");
-        compare(slider.trackIconInactiveEnd, "volume_off");
+        slider.trackIconActiveStart = MD.Symbols.volumeUp;
+        slider.trackIconActiveEnd = MD.Symbols.add;
+        slider.trackIconInactiveStart = MD.Symbols.remove;
+        slider.trackIconInactiveEnd = MD.Symbols.volumeOff;
+        compare(slider.trackIconActiveStart, MD.Symbols.volumeUp);
+        compare(slider.trackIconInactiveEnd, MD.Symbols.volumeOff);
     }
 
     function test_sizes_data() {
@@ -381,10 +381,10 @@ TestCase {
         const slider = createSlider({
             size: MD.Slider.Size.Medium,
             value: 50,
-            trackIconActiveStart: "volume_up",
-            trackIconActiveEnd: "add",
-            trackIconInactiveStart: "remove",
-            trackIconInactiveEnd: "volume_off"
+            trackIconActiveStart: MD.Symbols.volumeUp,
+            trackIconActiveEnd: MD.Symbols.add,
+            trackIconInactiveStart: MD.Symbols.remove,
+            trackIconInactiveEnd: MD.Symbols.volumeOff
         });
         const track = trackFor(slider);
         const activeStart = findChild(track, "activeStartIcon");

@@ -223,20 +223,33 @@ Item {
                 pressedContainerShapeMedium: [12, 12, 12, 12],
                 pressedContainerShapeLarge: [16, 16, 16, 16],
                 pressedContainerShapeExtraLarge: [16, 16, 16, 16],
-                selectedContainerShapeRoundExtraSmall: [9999, 9999, 9999, 9999],
-                selectedContainerShapeRoundSmall: [9999, 9999, 9999, 9999],
-                selectedContainerShapeRoundMedium: [9999, 9999, 9999, 9999],
-                selectedContainerShapeRoundLarge: [9999, 9999, 9999, 9999],
-                selectedContainerShapeRoundExtraLarge: [9999, 9999, 9999, 9999],
-                selectedContainerShapeSquareExtraSmall: [12, 12, 12, 12],
-                selectedContainerShapeSquareSmall: [12, 12, 12, 12],
-                selectedContainerShapeSquareMedium: [16, 16, 16, 16],
-                selectedContainerShapeSquareLarge: [28, 28, 28, 28],
-                selectedContainerShapeSquareExtraLarge: [28, 28, 28, 28],
+                selectedContainerShapeRoundExtraSmall: [12, 12, 12, 12],
+                selectedContainerShapeRoundSmall: [12, 12, 12, 12],
+                selectedContainerShapeRoundMedium: [16, 16, 16, 16],
+                selectedContainerShapeRoundLarge: [28, 28, 28, 28],
+                selectedContainerShapeRoundExtraLarge: [28, 28, 28, 28],
+                selectedContainerShapeSquareExtraSmall: [9999, 9999, 9999, 9999],
+                selectedContainerShapeSquareSmall: [9999, 9999, 9999, 9999],
+                selectedContainerShapeSquareMedium: [9999, 9999, 9999, 9999],
+                selectedContainerShapeSquareLarge: [9999, 9999, 9999, 9999],
+                selectedContainerShapeSquareExtraLarge: [9999, 9999, 9999, 9999],
                 disabledContainerOpacity: 0.1, disabledIconOpacity: 0.38,
                 disabledLabelTextOpacity: 0.38, hoverStateLayerOpacity: 0.08,
                 focusStateLayerOpacity: 0.1, pressedStateLayerOpacity: 0.1,
                 elevatedContainerElevation: 1, flatContainerElevation: 0
+            });
+        }
+
+        function test_buttonGroup() {
+            verifyValues(MD.Tokens.buttonGroup, {
+                standardSpacing: 12,
+                connectedSpacing: 2,
+                smallReferenceHeight: 40,
+                connectedContainerShape: [9999, 9999, 9999, 9999],
+                connectedInnerCorner: 8,
+                pressedInnerCorner: 4,
+                selectedInnerCornerPercentage: 50,
+                standardPressedExpansionRatio: 0.15
             });
         }
 
@@ -534,21 +547,27 @@ Item {
                 pressedContainerShapeMedium: shape.cornerMedium,
                 pressedContainerShapeLarge: shape.cornerLarge,
                 pressedContainerShapeExtraLarge: shape.cornerLarge,
-                selectedContainerShapeRoundExtraSmall: shape.cornerFull,
-                selectedContainerShapeRoundSmall: shape.cornerFull,
-                selectedContainerShapeRoundMedium: shape.cornerFull,
-                selectedContainerShapeRoundLarge: shape.cornerFull,
-                selectedContainerShapeRoundExtraLarge: shape.cornerFull,
-                selectedContainerShapeSquareExtraSmall: shape.cornerMedium,
-                selectedContainerShapeSquareSmall: shape.cornerMedium,
-                selectedContainerShapeSquareMedium: shape.cornerLarge,
-                selectedContainerShapeSquareLarge: shape.cornerExtraLarge,
-                selectedContainerShapeSquareExtraLarge: shape.cornerExtraLarge,
+                selectedContainerShapeRoundExtraSmall: shape.cornerMedium,
+                selectedContainerShapeRoundSmall: shape.cornerMedium,
+                selectedContainerShapeRoundMedium: shape.cornerLarge,
+                selectedContainerShapeRoundLarge: shape.cornerExtraLarge,
+                selectedContainerShapeRoundExtraLarge: shape.cornerExtraLarge,
+                selectedContainerShapeSquareExtraSmall: shape.cornerFull,
+                selectedContainerShapeSquareSmall: shape.cornerFull,
+                selectedContainerShapeSquareMedium: shape.cornerFull,
+                selectedContainerShapeSquareLarge: shape.cornerFull,
+                selectedContainerShapeSquareExtraLarge: shape.cornerFull,
                 hoverStateLayerOpacity: state.hoverStateLayerOpacity,
                 focusStateLayerOpacity: state.focusStateLayerOpacity,
                 pressedStateLayerOpacity: state.pressedStateLayerOpacity,
                 elevatedContainerElevation: elevation.level1,
                 flatContainerElevation: elevation.level0
+            });
+
+            verifyValues(MD.Tokens.buttonGroup, {
+                connectedContainerShape: shape.cornerFull,
+                connectedInnerCorner: shape.cornerValueSmall,
+                pressedInnerCorner: shape.cornerValueExtraSmall
             });
 
             verifyValues(MD.Tokens.iconButton, {

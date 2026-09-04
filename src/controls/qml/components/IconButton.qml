@@ -93,6 +93,13 @@ T.ToolButton {
         */
     property int widthVariant: IconButton.Width.Default
 
+    // Set by ButtonGroup while this button is one of its direct children.
+    property var __buttonGroup: null
+    property real __groupTopLeftRadius: -1
+    property real __groupTopRightRadius: -1
+    property real __groupBottomLeftRadius: -1
+    property real __groupBottomRightRadius: -1
+
     /*!
         Optional icon displayed while a checkable button is checked.
 
@@ -200,6 +207,61 @@ T.ToolButton {
 
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
+
+    onCheckedChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childCheckedChanged(control);
+    }
+    onActiveFocusChanged: {
+        if (activeFocus && __buttonGroup)
+            __buttonGroup.__childFocused(control);
+    }
+    onPressedChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childGeometryChanged();
+    }
+    onImplicitWidthChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childGeometryChanged();
+    }
+    onVisibleChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childrenChanged();
+    }
+    onEnabledChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childrenChanged();
+    }
+    Keys.onPressed: event => {
+        if (__buttonGroup && __buttonGroup.__handleKey(control, event))
+            event.accepted = true;
+    }
+
+    Behavior on width {
+        enabled: control.__buttonGroup && control.__buttonGroup.__geometryInitialized
+                 && control.__buttonGroup.variant === control.__buttonGroup.__standardVariant
+        NumberAnimation {
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+            duration: MotionAnimation.expressiveFastSpatialDuration
+        }
+    }
+    Behavior on x {
+        enabled: control.__buttonGroup && control.__buttonGroup.__geometryInitialized
+                 && control.__buttonGroup.variant === control.__buttonGroup.__standardVariant
+        NumberAnimation {
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+            duration: MotionAnimation.expressiveFastSpatialDuration
+        }
+    }
+
+    Accessible.role: __buttonGroup && __buttonGroup.selectionMode === __buttonGroup.__singleSelectionMode
+                     ? Accessible.RadioButton
+                     : (__buttonGroup && __buttonGroup.selectionMode === __buttonGroup.__multiSelectionMode
+                        ? Accessible.CheckBox : Accessible.Button)
+    Accessible.checkable: checkable
+    Accessible.checked: checked
 
     QtObject {
         id: state
@@ -421,12 +483,13 @@ T.ToolButton {
         implicitWidth: state.buttonSize.width
         implicitHeight: state.buttonSize.height
 
-        topLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.topLeft, width, height)
-        topRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.topRight, width, height)
-        bottomLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomLeft, width, height)
-        bottomRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomRight, width, height)
+        topLeftRadius: control.__groupTopLeftRadius >= 0 ? control.__groupTopLeftRadius : UiMetrics.resolveShapeRadius(state.containerShape.topLeft, width, height)
+        topRightRadius: control.__groupTopRightRadius >= 0 ? control.__groupTopRightRadius : UiMetrics.resolveShapeRadius(state.containerShape.topRight, width, height)
+        bottomLeftRadius: control.__groupBottomLeftRadius >= 0 ? control.__groupBottomLeftRadius : UiMetrics.resolveShapeRadius(state.containerShape.bottomLeft, width, height)
+        bottomRightRadius: control.__groupBottomRightRadius >= 0 ? control.__groupBottomRightRadius : UiMetrics.resolveShapeRadius(state.containerShape.bottomRight, width, height)
 
         Behavior on topLeftRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -434,6 +497,7 @@ T.ToolButton {
             }
         }
         Behavior on topRightRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -441,6 +505,7 @@ T.ToolButton {
             }
         }
         Behavior on bottomLeftRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -448,6 +513,7 @@ T.ToolButton {
             }
         }
         Behavior on bottomRightRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve

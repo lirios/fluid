@@ -75,6 +75,11 @@ Button Tokens::button() const
     return m_button;
 }
 
+ButtonGroup Tokens::buttonGroup() const
+{
+    return m_buttonGroup;
+}
+
 // Component tokens - Check box
 CheckBox Tokens::checkBox() const
 {

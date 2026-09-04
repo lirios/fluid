@@ -272,43 +272,43 @@ public:
     }
     constexpr ShapeValue selectedContainerShapeRoundExtraSmall() const
     {
-        return ShapeTokens{ }.cornerFull();
+        return containerShapeSquareExtraSmall();
     }
     constexpr ShapeValue selectedContainerShapeRoundSmall() const
     {
-        return ShapeTokens{ }.cornerFull();
+        return containerShapeSquareSmall();
     }
     constexpr ShapeValue selectedContainerShapeRoundMedium() const
     {
-        return ShapeTokens{ }.cornerFull();
+        return containerShapeSquareMedium();
     }
     constexpr ShapeValue selectedContainerShapeRoundLarge() const
     {
-        return ShapeTokens{ }.cornerFull();
+        return containerShapeSquareLarge();
     }
     constexpr ShapeValue selectedContainerShapeRoundExtraLarge() const
     {
-        return ShapeTokens{ }.cornerFull();
+        return containerShapeSquareExtraLarge();
     }
     constexpr ShapeValue selectedContainerShapeSquareExtraSmall() const
     {
-        return ShapeTokens{ }.cornerMedium();
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr ShapeValue selectedContainerShapeSquareSmall() const
     {
-        return ShapeTokens{ }.cornerMedium();
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr ShapeValue selectedContainerShapeSquareMedium() const
     {
-        return ShapeTokens{ }.cornerLarge();
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr ShapeValue selectedContainerShapeSquareLarge() const
     {
-        return ShapeTokens{ }.cornerExtraLarge();
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr ShapeValue selectedContainerShapeSquareExtraLarge() const
     {
-        return ShapeTokens{ }.cornerExtraLarge();
+        return ShapeTokens{ }.cornerFull();
     }
     constexpr qreal disabledContainerOpacity() const
     {

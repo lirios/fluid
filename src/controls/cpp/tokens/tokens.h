@@ -8,6 +8,7 @@
 
 #include "appbar.h"
 #include "button.h"
+#include "buttongroup.h"
 #include "checkbox.h"
 #include "colordark.h"
 #include "colorlight.h"
@@ -88,6 +89,7 @@ class Tokens : public QObject
 
     // Component tokens - Button
     Q_PROPERTY(Fluid::Button button READ button CONSTANT FINAL)
+    Q_PROPERTY(Fluid::ButtonGroup buttonGroup READ buttonGroup CONSTANT FINAL)
 
     // Component tokens - Check box
     Q_PROPERTY(Fluid::CheckBox checkBox READ checkBox CONSTANT FINAL)
@@ -159,6 +161,7 @@ public:
 
     // Component tokens - Button
     Button button() const;
+    ButtonGroup buttonGroup() const;
 
     // Component tokens - Check box
     CheckBox checkBox() const;
@@ -226,6 +229,7 @@ private:
     ColorDarkTokens m_dark;
     AppBar m_appBar;
     Button m_button;
+    ButtonGroup m_buttonGroup;
     CheckBox m_checkBox;
     RadioButton m_radioButton;
     Dialog m_dialog;

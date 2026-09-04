@@ -45,7 +45,14 @@ P.BaseButton {
         The typescale to use for the button's text. This controls the font size, weight, and letter spacing.
         Ignore when the button is set to IconOnly display, as the text will not be shown.
     */
-    property MD.typescale typescale: MD.Tokens.typescale.labelLarge
+    property MD.typescale typescale: UiMetrics.buttonTypescale(control)
+
+    // Set by ButtonGroup while this button is one of its direct children.
+    property var __buttonGroup: null
+    property real __groupTopLeftRadius: -1
+    property real __groupTopRightRadius: -1
+    property real __groupBottomLeftRadius: -1
+    property real __groupBottomRightRadius: -1
 
     /*!
         Whether the button has an icon. This is used to determine padding and layout.
@@ -69,6 +76,61 @@ P.BaseButton {
 
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
+
+    onCheckedChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childCheckedChanged(control);
+    }
+    onActiveFocusChanged: {
+        if (activeFocus && __buttonGroup)
+            __buttonGroup.__childFocused(control);
+    }
+    onPressedChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childGeometryChanged();
+    }
+    onImplicitWidthChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childGeometryChanged();
+    }
+    onVisibleChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childrenChanged();
+    }
+    onEnabledChanged: {
+        if (__buttonGroup)
+            __buttonGroup.__childrenChanged();
+    }
+    Keys.onPressed: event => {
+        if (__buttonGroup && __buttonGroup.__handleKey(control, event))
+            event.accepted = true;
+    }
+
+    Behavior on width {
+        enabled: control.__buttonGroup && control.__buttonGroup.__geometryInitialized
+                 && control.__buttonGroup.variant === control.__buttonGroup.__standardVariant
+        NumberAnimation {
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+            duration: MotionAnimation.expressiveFastSpatialDuration
+        }
+    }
+    Behavior on x {
+        enabled: control.__buttonGroup && control.__buttonGroup.__geometryInitialized
+                 && control.__buttonGroup.variant === control.__buttonGroup.__standardVariant
+        NumberAnimation {
+            easing.type: Easing.BezierSpline
+            easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
+            duration: MotionAnimation.expressiveFastSpatialDuration
+        }
+    }
+
+    Accessible.role: __buttonGroup && __buttonGroup.selectionMode === __buttonGroup.__singleSelectionMode
+                     ? Accessible.RadioButton
+                     : (__buttonGroup && __buttonGroup.selectionMode === __buttonGroup.__multiSelectionMode
+                        ? Accessible.CheckBox : Accessible.Button)
+    Accessible.checkable: checkable
+    Accessible.checked: checked
 
     spacing: UiMetrics.buttonSpacing(control)
 
@@ -296,12 +358,13 @@ P.BaseButton {
 
         readonly property MD.shapeValue containerShape: UiMetrics.buttonShape(control)
 
-        topLeftRadius: UiMetrics.resolveShapeRadius(containerShape.topLeft, width, height)
-        topRightRadius: UiMetrics.resolveShapeRadius(containerShape.topRight, width, height)
-        bottomLeftRadius: UiMetrics.resolveShapeRadius(containerShape.bottomLeft, width, height)
-        bottomRightRadius: UiMetrics.resolveShapeRadius(containerShape.bottomRight, width, height)
+        topLeftRadius: control.__groupTopLeftRadius >= 0 ? control.__groupTopLeftRadius : UiMetrics.resolveShapeRadius(containerShape.topLeft, width, height)
+        topRightRadius: control.__groupTopRightRadius >= 0 ? control.__groupTopRightRadius : UiMetrics.resolveShapeRadius(containerShape.topRight, width, height)
+        bottomLeftRadius: control.__groupBottomLeftRadius >= 0 ? control.__groupBottomLeftRadius : UiMetrics.resolveShapeRadius(containerShape.bottomLeft, width, height)
+        bottomRightRadius: control.__groupBottomRightRadius >= 0 ? control.__groupBottomRightRadius : UiMetrics.resolveShapeRadius(containerShape.bottomRight, width, height)
 
         Behavior on topLeftRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -309,6 +372,7 @@ P.BaseButton {
             }
         }
         Behavior on topRightRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -316,6 +380,7 @@ P.BaseButton {
             }
         }
         Behavior on bottomLeftRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve
@@ -323,6 +388,7 @@ P.BaseButton {
             }
         }
         Behavior on bottomRightRadius {
+            enabled: !control.__buttonGroup || control.__buttonGroup.__geometryInitialized
             NumberAnimation {
                 easing.type: Easing.BezierSpline
                 easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve

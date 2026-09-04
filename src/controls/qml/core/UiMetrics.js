@@ -121,6 +121,17 @@ function buttonShape(control) {
     }
 }
 
+function buttonTypescale(control) {
+    const tokens = control.MD.Tokens.typescale;
+    switch (control.size) {
+    case MD.Button.Size.ExtraSmall:
+    case MD.Button.Size.Small: return tokens.labelLarge;
+    case MD.Button.Size.Medium: return tokens.titleMedium;
+    case MD.Button.Size.Large: return tokens.headlineSmall;
+    case MD.Button.Size.ExtraLarge: return tokens.headlineLarge;
+    }
+}
+
 function buttonInset(control) {
     return Math.max(0, (control.MD.Tokens.button.minimumInteractiveSize - buttonHeight(control)) / 2);
 }

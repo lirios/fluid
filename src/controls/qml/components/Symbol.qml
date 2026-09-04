@@ -156,7 +156,6 @@ Item {
         }
         font.variableAxes: {
             const gradeValues = [-25, 0, 200];
-            const weightValues = [Font.Thin, Font.ExtraLight, Font.Light, Font.Normal, Font.Medium, Font.DemiBold, Font.Bold];
             const opticalSizes = [20, 24, 40, 48];
 
             function closestValue(arr, val) {
@@ -174,11 +173,11 @@ Item {
             return {
                 "FILL": icon.fill ? 1 : 0,
                 "GRAD": closestValue(gradeValues, icon.grade),
-                "wght": closestValue(weightValues, icon.weight),
                 "opsz": closestValue(opticalSizes, icon.opticalSize)
             };
         }
-        font.pixelSize: Math.max(icon.iconWidth, icon.iconHeight) / scale
+        font.pixelSize: Math.max(icon.iconWidth, icon.iconHeight)
+        font.weight: icon.weight
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -186,10 +185,8 @@ Item {
         text: icon.name
         textFormat: Text.PlainText
 
-        lineHeight: MD.Tokens.typescale.labelLarge.lineHeight
+        lineHeight: font.pixelSize
         lineHeightMode: Text.FixedHeight
-
-        // scale: 1.0 / MD.Tokens.calculateCurveScale(Screen.devicePixelRatio)
 
         color: icon.color
         Accessible.ignored: true

@@ -12,7 +12,7 @@ import "../internal"
     \class ButtonGroup
     \brief A horizontal Material 3 Expressive group of buttons.
 
-    ButtonGroup accepts direct \l Button and \l IconButton children. Standard
+    ButtonGroup accepts direct \ref Button and \ref IconButton children. Standard
     groups space independent actions and animate a pressed button's width.
     Connected groups provide segmented selection with shared outer geometry.
 
@@ -46,31 +46,31 @@ T.Container {
     id: control
 
     /*!
-        \value Standard Spaces standalone buttons by 12 dp and redistributes
+        - \c Standard: Spaces standalone buttons by 12 dp and redistributes
         width between a pressed button and its immediate visible neighbors.
-        \value Connected Spaces buttons by 2 dp and joins their corner geometry.
+        - \c Connected: Spaces buttons by 2 dp and joins their corner geometry.
     */
     enum Variant { Standard, Connected }
 
     /*!
-        \value NoSelection Children are ordinary, non-checkable actions.
-        \value SingleSelection At most one child is selected.
-        \value MultiSelection Any number of children may be selected.
+        - \c NoSelection: Children are ordinary, non-checkable actions.
+        - \c SingleSelection: At most one child is selected.
+        - \c MultiSelection: Any number of children may be selected.
     */
     enum SelectionMode { NoSelection, SingleSelection, MultiSelection }
 
     /*!
-        \value ExtraSmall Propagates the extra-small button size.
-        \value Small Propagates the default small button size.
-        \value Medium Propagates the medium button size.
-        \value Large Propagates the large button size.
-        \value ExtraLarge Propagates the extra-large button size.
+        - \c ExtraSmall: Propagates the extra-small button size.
+        - \c Small: Propagates the default small button size.
+        - \c Medium: Propagates the medium button size.
+        - \c Large: Propagates the large button size.
+        - \c ExtraLarge: Propagates the extra-large button size.
     */
     enum Size { ExtraSmall, Small, Medium, Large, ExtraLarge }
 
     /*!
-        \value Round Uses fully rounded outer connected corners.
-        \value Square Uses the size-specific square outer corner token.
+        - \c Round: Uses fully rounded outer connected corners.
+        - \c Square: Uses the size-specific square outer corner token.
     */
     enum Shape { Round, Square }
 

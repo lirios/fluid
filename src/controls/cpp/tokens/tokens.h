@@ -26,6 +26,7 @@
 #include "navigationrail.h"
 #include "palette.h"
 #include "radiobutton.h"
+#include "segmentedbutton.h"
 #include "shapetokens.h"
 #include "typescale.h"
 #include "slider.h"
@@ -96,6 +97,9 @@ class Tokens : public QObject
 
     // Component tokens - Radio button
     Q_PROPERTY(Fluid::RadioButton radioButton READ radioButton CONSTANT FINAL)
+
+    // Component tokens - Segmented button
+    Q_PROPERTY(Fluid::SegmentedButton segmentedButton READ segmentedButton CONSTANT FINAL)
 
     // Component tokens - Dialog
     Q_PROPERTY(Fluid::Dialog dialog READ dialog CONSTANT FINAL)
@@ -169,6 +173,10 @@ public:
     // Component tokens - Radio button
     RadioButton radioButton() const;
 
+    // Component tokens - Segmented button
+    //! Returns the immutable outlined segmented-button component tokens.
+    SegmentedButton segmentedButton() const;
+
     // Component tokens - Dialog
     Dialog dialog() const;
 
@@ -232,6 +240,7 @@ private:
     ButtonGroup m_buttonGroup;
     CheckBox m_checkBox;
     RadioButton m_radioButton;
+    SegmentedButton m_segmentedButton;
     Dialog m_dialog;
     Fab m_fab;
     FabMenu m_fabMenu;

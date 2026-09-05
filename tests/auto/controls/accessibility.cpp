@@ -5,6 +5,7 @@
 #include <QAccessibleActionInterface>
 #include <QAccessibleValueInterface>
 #include <QGuiApplication>
+#include <QMetaEnum>
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickWindow>
@@ -37,7 +38,92 @@ private slots:
     void labeledFabInheritsButtonAccessibility();
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
+    void segmentedButtonsExposeSelectionAndActivation();
 };
+
+void FluidAccessibilityTest::segmentedButtonsExposeSelectionAndActivation()
+{
+    QAccessible::setActive(true);
+
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+
+        Window {
+            width: 480
+            height: 160
+            visible: true
+
+            MD.SegmentedButtonGroup {
+                objectName: "segments"
+                MD.SegmentedButton {
+                    objectName: "day"
+                    text: "Day"
+                }
+                MD.SegmentedButton {
+                    objectName: "week"
+                    icon.name: MD.Symbols.calendarMonth
+                    Accessible.name: "Week view"
+                }
+            }
+        }
+    )", QUrl(QStringLiteral("inline:segmented-buttons-accessibility.qml")));
+
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    QCoreApplication::processEvents();
+
+    auto *group = root->findChild<QObject *>(QStringLiteral("segments"));
+    auto *day = root->findChild<QObject *>(QStringLiteral("day"));
+    auto *week = root->findChild<QObject *>(QStringLiteral("week"));
+    QVERIFY(group);
+    QVERIFY(day);
+    QVERIFY(week);
+    auto *dayInterface = QAccessible::queryAccessibleInterface(day);
+    auto *weekInterface = QAccessible::queryAccessibleInterface(week);
+    QVERIFY(dayInterface);
+    QVERIFY(weekInterface);
+    QCOMPARE(dayInterface->role(), QAccessible::RadioButton);
+    QCOMPARE(weekInterface->role(), QAccessible::RadioButton);
+    QCOMPARE(weekInterface->text(QAccessible::Name), QStringLiteral("Week view"));
+    QVERIFY(dayInterface->state().checkable);
+    QVERIFY(dayInterface->state().checked);
+    QVERIFY(!weekInterface->state().checked);
+    QCOMPARE(dayInterface->childCount(), 0);
+    QCOMPARE(weekInterface->childCount(), 0);
+
+    auto *actions = weekInterface->actionInterface();
+    QVERIFY(actions);
+    QVERIFY(actions->actionNames().contains(QAccessibleActionInterface::pressAction()));
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(weekInterface->state().checked);
+    QVERIFY(!dayInterface->state().checked);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QVERIFY(weekInterface->state().checked);
+
+    // Resolve the public enum rather than duplicating its integer value.
+    const QMetaObject *metaObject = group->metaObject();
+    const int enumIndex = metaObject->indexOfEnumerator("SelectionMode");
+    QVERIFY(enumIndex >= 0);
+    const int multiSelection = metaObject->enumerator(enumIndex).keyToValue("MultiSelection");
+    QVERIFY(multiSelection >= 0);
+    QVERIFY(group->setProperty("selectionMode", multiSelection));
+    QCOMPARE(dayInterface->role(), QAccessible::CheckBox);
+    QCOMPARE(weekInterface->role(), QAccessible::CheckBox);
+    dayInterface->actionInterface()->doAction(QAccessibleActionInterface::pressAction());
+    QVERIFY(dayInterface->state().checked);
+    QVERIFY(weekInterface->state().checked);
+
+    QVERIFY(week->setProperty("enabled", false));
+    QVERIFY(weekInterface->state().disabled);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QVERIFY(weekInterface->state().checked);
+}
 
 void FluidAccessibilityTest::labeledFabInheritsButtonAccessibility()
 {

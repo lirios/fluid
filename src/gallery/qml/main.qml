@@ -59,6 +59,10 @@ MD.ApplicationWindow {
                     "source": "ButtonGroups.qml"
                 },
                 {
+                    "name": qsTr("Segmented buttons"),
+                    "source": "SegmentedButtons.qml"
+                },
+                {
                     "name": qsTr("Divider"),
                     "source": "Divider.qml"
                 },

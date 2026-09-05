@@ -240,6 +240,27 @@ Item {
             });
         }
 
+        function test_segmentedButton() {
+            const token = MD.Tokens.segmentedButton;
+            verifyValues(token, {
+                containerHeight: 40,
+                iconSize: 18,
+                outlineWidth: 1,
+                contentPadding: 12,
+                contentSpacing: 8,
+                minimumInteractiveSize: 48,
+                disabledContentOpacity: 0.38,
+                disabledOutlineOpacity: 0.12,
+                containerShape: MD.Tokens.shape.cornerFull,
+                hoverStateLayerOpacity: MD.Tokens.state.hoverStateLayerOpacity,
+                focusStateLayerOpacity: MD.Tokens.state.focusStateLayerOpacity,
+                pressedStateLayerOpacity: MD.Tokens.state.pressedStateLayerOpacity
+            });
+            compare(token.labelTextFont.fontSize, MD.Tokens.typescale.labelLarge.fontSize);
+            compare(token.labelTextFont.lineHeight, MD.Tokens.typescale.labelLarge.lineHeight);
+            compare(token.minimumInteractiveSize, MD.Tokens.measurement.minimumInteractiveSize);
+        }
+
         function test_buttonGroup() {
             verifyValues(MD.Tokens.buttonGroup, {
                 standardSpacing: 12,

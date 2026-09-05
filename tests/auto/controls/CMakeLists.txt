@@ -24,6 +24,7 @@ add_executable(tst_fluid_controls
     tst_navigationrail.qml
     tst_radiobutton.qml
     tst_ripple.qml
+    tst_segmentedbutton.qml
     tst_slider.qml
     tst_switch.qml
     tst_symbols.qml

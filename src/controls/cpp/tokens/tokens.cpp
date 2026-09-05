@@ -92,6 +92,12 @@ RadioButton Tokens::radioButton() const
     return m_radioButton;
 }
 
+// Component tokens - Segmented button
+SegmentedButton Tokens::segmentedButton() const
+{
+    return m_segmentedButton;
+}
+
 // Component tokens - Dialog
 Dialog Tokens::dialog() const
 {

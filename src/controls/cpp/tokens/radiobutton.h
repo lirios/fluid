@@ -6,6 +6,7 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "measurementtokens.h"
 #include "statetokens.h"
 
 // Component values map to the AndroidX Material 3 generated tokens where available:
@@ -37,7 +38,7 @@ struct RadioButton
 public:
     constexpr qreal minimumInteractiveSize() const
     {
-        return 48.0;
+        return MeasurementTokens{ }.minimumInteractiveSize();
     }
     constexpr qreal iconSize() const
     {

@@ -6,6 +6,7 @@
 #include <QtCore/qobject.h>
 #include <QtQml/qqmlregistration.h>
 
+#include "measurementtokens.h"
 #include "shapetokens.h"
 
 // Component values map to the AndroidX Material 3 generated tokens:
@@ -106,7 +107,7 @@ public:
     //! Minimum target size reserved for leading and trailing icon slots.
     constexpr qreal iconTargetSize() const
     {
-        return 48.0;
+        return MeasurementTokens{ }.minimumInteractiveSize();
     }
 
     //! Shape of a filled text-field container.

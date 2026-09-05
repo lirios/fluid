@@ -7,6 +7,7 @@
 #include <QtQml/qqmlregistration.h>
 
 #include "elevationtokens.h"
+#include "measurementtokens.h"
 #include "shapetokens.h"
 #include "statetokens.h"
 
@@ -167,7 +168,7 @@ public:
     }
     constexpr qreal minimumInteractiveSize() const
     {
-        return 48.0;
+        return MeasurementTokens{ }.minimumInteractiveSize();
     }
     constexpr qreal iconSize() const
     {
@@ -227,7 +228,7 @@ public:
     }
     constexpr qreal searchAvatarTargetSize() const
     {
-        return 48.0;
+        return MeasurementTokens{ }.minimumInteractiveSize();
     }
     constexpr qreal searchAvatarSize() const
     {

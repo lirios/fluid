@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 #include "slider.h"
+#include "measurementtokens.h"
 #include "statetokens.h"
 
 // Component values map to the AndroidX Material 3 generated tokens:
@@ -207,7 +208,7 @@ qreal Slider::trackIconPadding() const
 
 qreal Slider::minimumInteractiveSize() const
 {
-    return 48.0;
+    return MeasurementTokens{ }.minimumInteractiveSize();
 }
 
 qreal Slider::defaultLength() const

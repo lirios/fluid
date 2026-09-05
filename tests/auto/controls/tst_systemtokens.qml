@@ -92,6 +92,14 @@ Item {
 
         function test_measurement() {
             const measurement = MD.Tokens.measurement;
+            compare(measurement.minimumInteractiveSize, 48);
+            compare(MD.Tokens.appBar.searchAvatarTargetSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.button.minimumInteractiveSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.iconButton.minimumInteractiveSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.radioButton.minimumInteractiveSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.appBar.minimumInteractiveSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.slider.minimumInteractiveSize, measurement.minimumInteractiveSize);
+            compare(MD.Tokens.textField.iconTargetSize, measurement.minimumInteractiveSize);
             const multipliers = {
                 space0: 0,
                 space25: 0.25,

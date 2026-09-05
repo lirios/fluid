@@ -7,6 +7,7 @@
 #include <QtQml/qqmlregistration.h>
 
 #include "elevationtokens.h"
+#include "measurementtokens.h"
 #include "shapetokens.h"
 #include "statetokens.h"
 
@@ -104,7 +105,7 @@ struct Button
 public:
     constexpr qreal minimumInteractiveSize() const
     {
-        return 48.0;
+        return MeasurementTokens{ }.minimumInteractiveSize();
     }
     constexpr qreal containerHeightExtraSmall() const
     {

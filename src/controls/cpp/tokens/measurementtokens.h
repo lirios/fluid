@@ -8,10 +8,15 @@
 
 namespace Fluid {
 
+// The minimum interaction target follows AndroidX LocalMinimumInteractiveComponentSize:
+// https://raw.githubusercontent.com/androidx/androidx/androidx-main/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/InteractiveComponentSize.kt
+
 /*!
     \brief Material Design 3 system measurement tokens.
 
     Spacing values are multipliers of the 8 dp baseline unit exposed as \c space100.
+    The separate \c minimumInteractiveSize metric provides the 48 dp minimum
+    interaction target shared by controls.
 
     For more information see the
     <a href="https://m3.material.io/styles/spacing/overview">Material Design 3
@@ -22,6 +27,7 @@ struct MeasurementTokens
     Q_GADGET
     QML_ANONYMOUS
 
+    Q_PROPERTY(qreal minimumInteractiveSize READ minimumInteractiveSize CONSTANT FINAL)
     Q_PROPERTY(qreal space0 READ space0 CONSTANT FINAL)
     Q_PROPERTY(qreal space25 READ space25 CONSTANT FINAL)
     Q_PROPERTY(qreal space50 READ space50 CONSTANT FINAL)
@@ -42,6 +48,11 @@ struct MeasurementTokens
     Q_PROPERTY(qreal space900 READ space900 CONSTANT FINAL)
 
 public:
+    //! Minimum interaction target, matching AndroidX InteractiveComponentSize.kt.
+    constexpr qreal minimumInteractiveSize() const
+    {
+        return 48.0;
+    }
     constexpr qreal space0() const
     {
         return space100() * 0.0;

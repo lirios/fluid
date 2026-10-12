@@ -29,7 +29,8 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "git diff --name-only --diff-filter=ACMR -z | while IFS= read -r -d '' file; do case \"$file\" in *.qml) qmlformat --inplace --newline unix --semicolon-rule always \"$file\" 2>/dev/null || true ;; esac; done",
+                        "command": "python3 .agents/hooks/qmlformat_codex.py",
+                        "statusMessage": "Formatting QML files",
                         "timeout": 10
                     }
                 ]

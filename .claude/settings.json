@@ -28,7 +28,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "if [[ \"$CLAUDE_TOOL_INPUT_FILE_PATH\" == *.qml ]]; then qmlformat --inplace --newline unix --semicolon-rule always \"$CLAUDE_TOOL_INPUT_FILE_PATH\" 2>/dev/null || true; fi",
+                        "command": "python3 .agents/hooks/qmlformat_claude.py",
                         "timeout": 10
                     }
                 ]

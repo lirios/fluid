@@ -76,7 +76,7 @@ ctest --test-dir build --output-on-failure
 cmake --install build
 ```
 
-Qt >= 6.9 and `cmake-shared` are required. Built QML modules are in `build/qml_modules`.
+Built QML modules are in `build/qml_modules`.
 Run an isolated test with:
 
 ```sh

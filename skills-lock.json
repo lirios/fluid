@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "git-commit": {
+      "source": "plfiorini/agents",
+      "sourceType": "github",
+      "skillPath": "skills/git-commit/SKILL.md",
+      "computedHash": "f63c70c78285f1afbc339a286d2bd816cede95f75f44dffd5350e06de197ca34"
+    },
+    "github-issue-workflow": {
+      "source": "plfiorini/agents",
+      "sourceType": "github",
+      "skillPath": "skills/github-issue-workflow/SKILL.md",
+      "computedHash": "90f166eff9033888e8ac915e3ecf8da608846520bdf70f2781565db3687a48a7"
+    }
+  }
+}

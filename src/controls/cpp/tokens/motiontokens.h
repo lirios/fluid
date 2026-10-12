@@ -229,20 +229,26 @@ struct MotionSpringTokens
     Q_GADGET
     QML_ANONYMOUS
 
-    Q_PROPERTY(MotionSpringValue standardDefaultSpatial READ standardDefaultSpatial CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue standardFastSpatial READ standardFastSpatial CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue standardSlowSpatial READ standardSlowSpatial CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue standardDefaultEffects READ standardDefaultEffects CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue standardFastEffects READ standardFastEffects CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue standardSlowEffects READ standardSlowEffects CONSTANT FINAL)
-    Q_PROPERTY(
-            MotionSpringValue expressiveDefaultSpatial READ expressiveDefaultSpatial CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue expressiveFastSpatial READ expressiveFastSpatial CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue expressiveSlowSpatial READ expressiveSlowSpatial CONSTANT FINAL)
-    Q_PROPERTY(
-            MotionSpringValue expressiveDefaultEffects READ expressiveDefaultEffects CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue expressiveFastEffects READ expressiveFastEffects CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringValue expressiveSlowEffects READ expressiveSlowEffects CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardDefaultSpatial READ standardDefaultSpatial CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardFastSpatial READ standardFastSpatial CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardSlowSpatial READ standardSlowSpatial CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardDefaultEffects READ standardDefaultEffects CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardFastEffects READ standardFastEffects CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue standardSlowEffects READ standardSlowEffects CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveDefaultSpatial READ expressiveDefaultSpatial
+                       CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveFastSpatial READ expressiveFastSpatial CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveSlowSpatial READ expressiveSlowSpatial CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveDefaultEffects READ expressiveDefaultEffects
+                       CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveFastEffects READ expressiveFastEffects CONSTANT
+                       FINAL)
+    Q_PROPERTY(Fluid::MotionSpringValue expressiveSlowEffects READ expressiveSlowEffects CONSTANT
+                       FINAL)
 
 public:
     constexpr MotionSpringValue standardDefaultSpatial() const
@@ -310,7 +316,7 @@ struct MotionTokens
 
     Q_PROPERTY(MotionDurationTokens duration READ duration CONSTANT FINAL)
     Q_PROPERTY(MotionEasingTokens easing READ easing CONSTANT FINAL)
-    Q_PROPERTY(MotionSpringTokens spring READ spring CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionSpringTokens spring READ spring CONSTANT FINAL)
 
 public:
     constexpr MotionDurationTokens duration() const

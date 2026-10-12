@@ -109,6 +109,54 @@ Item {
                     name + ".bottomLeftRadius");
         }
 
+        function test_splitButtonTokens() {
+            const token = MD.Tokens.splitButton;
+            const suffixes = ["ExtraSmall", "Small", "Medium", "Large", "ExtraLarge"];
+            const metrics = {
+                containerHeight: [32, 40, 56, 96, 136],
+                betweenSpace: [2, 2, 2, 2, 2],
+                innerCornerCornerSize: [4, 4, 4, 8, 12],
+                innerHoveredCornerCornerSize: [8, 12, 12, 20, 20],
+                innerPressedCornerCornerSize: [8, 12, 12, 20, 20],
+                leadingButtonLeadingSpace: [12, 16, 24, 48, 64],
+                leadingButtonTrailingSpace: [10, 12, 24, 48, 64],
+                trailingIconSize: [22, 22, 26, 38, 50],
+                trailingButtonLeadingSpace: [13, 13, 15, 29, 43],
+                trailingButtonTrailingSpace: [13, 13, 15, 29, 43]
+            };
+            for (const metric in metrics) {
+                for (let size = 0; size < suffixes.length; ++size)
+                    compare(token[metric + suffixes[size]], metrics[metric][size],
+                            metric + suffixes[size]);
+            }
+            verifyShape(token.outerCornerShape, MD.Tokens.shape.cornerFull, "outerCornerShape");
+            verifyShape(token.trailingExpandedInnerCornerShape, MD.Tokens.shape.cornerFull,
+                        "trailingExpandedInnerCornerShape");
+            compare(token.innerCornerCornerSizeExtraSmall, MD.Tokens.shape.cornerValueExtraSmall);
+            compare(token.innerCornerCornerSizeSmall, MD.Tokens.shape.cornerValueExtraSmall);
+            compare(token.innerCornerCornerSizeMedium, MD.Tokens.shape.cornerValueExtraSmall);
+            compare(token.innerCornerCornerSizeLarge, MD.Tokens.shape.cornerValueSmall);
+            compare(token.innerCornerCornerSizeExtraLarge, MD.Tokens.shape.cornerValueMedium);
+            compare(token.innerHoveredCornerCornerSizeExtraSmall, MD.Tokens.shape.cornerValueSmall);
+            compare(token.innerHoveredCornerCornerSizeSmall, MD.Tokens.shape.cornerValueMedium);
+            compare(token.innerHoveredCornerCornerSizeMedium, MD.Tokens.shape.cornerValueMedium);
+            compare(token.innerHoveredCornerCornerSizeLarge, MD.Tokens.shape.cornerValueLargeIncreased);
+            compare(token.innerHoveredCornerCornerSizeExtraLarge, MD.Tokens.shape.cornerValueLargeIncreased);
+            for (const suffix of suffixes)
+                compare(token["innerPressedCornerCornerSize" + suffix],
+                        token["innerHoveredCornerCornerSize" + suffix]);
+            verifyValues(token, {
+                menuAnchorGap: 4,
+                trailingSelectedStateLayerOpacity: 0.10,
+                opticalCenteringCoefficient: 0.11,
+                flatContainerElevation: MD.Tokens.elevation.level0,
+                flatHoverContainerElevation: MD.Tokens.elevation.level1,
+                elevatedContainerElevation: MD.Tokens.elevation.level1,
+                elevatedHoverContainerElevation: MD.Tokens.elevation.level2,
+                disabledContainerElevation: MD.Tokens.elevation.level0
+            });
+        }
+
         function test_controlGeometry() {
             compare(metricButton.background.implicitHeight, MD.Tokens.button.containerHeightSmall);
             compare(metricButton.implicitHeight, MD.Tokens.button.minimumInteractiveSize);

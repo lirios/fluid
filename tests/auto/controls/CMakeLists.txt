@@ -26,6 +26,7 @@ add_executable(tst_fluid_controls
     tst_ripple.qml
     tst_segmentedbutton.qml
     tst_slider.qml
+    tst_splitbutton.qml
     tst_switch.qml
     tst_symbols.qml
     tst_textfield.qml

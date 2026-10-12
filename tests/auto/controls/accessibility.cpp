@@ -8,14 +8,14 @@
 #include <QMetaEnum>
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QQuickItem>
 #include <QQuickWindow>
 #include <QScopedPointer>
 #include <QTest>
 
 namespace {
 
-QAccessibleInterface *findAccessible(QAccessibleInterface *interface,
-                                     const QString &name)
+QAccessibleInterface *findAccessible(QAccessibleInterface *interface, const QString &name)
 {
     if (!interface || !interface->isValid())
         return nullptr;
@@ -26,6 +26,20 @@ QAccessibleInterface *findAccessible(QAccessibleInterface *interface,
             return match;
     }
     return nullptr;
+}
+
+int actionableButtonCount(QAccessibleInterface *interface)
+{
+    if (!interface || !interface->isValid())
+        return 0;
+    auto *actions = interface->actionInterface();
+    int count = interface->role() == QAccessible::Button && actions
+                    && actions->actionNames().contains(QAccessibleActionInterface::pressAction())
+            ? 1
+            : 0;
+    for (int index = 0; index < interface->childCount(); ++index)
+        count += actionableButtonCount(interface->child(index));
+    return count;
 }
 
 } // namespace
@@ -39,7 +53,291 @@ private slots:
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
     void segmentedButtonsExposeSelectionAndActivation();
+    void splitButtonExposesIndependentActionsAndManagedExpansion();
+    void splitButtonCustomPopupExposesBoundExpansion();
+    void splitButtonRestoresFocusAfterAccessibleMenuActivation_data();
+    void splitButtonRestoresFocusAfterAccessibleMenuActivation();
 };
+
+void FluidAccessibilityTest::splitButtonExposesIndependentActionsAndManagedExpansion()
+{
+    QAccessible::setActive(true);
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+
+        Window {
+            width: 640
+            height: 480
+            visible: true
+            property int primaryCount: 0
+            property int secondaryCount: 0
+            property int actionCount: 0
+            function replaceMenu() { split.menu = replacement }
+            function iconOnly() {
+                split.text = ""
+                split.icon.name = MD.Symbols.save
+                split.leadingButton.Accessible.name = "Save document"
+            }
+            MD.Action { id: save; text: "Save"; onTriggered: ++actionCount }
+            MD.SplitButton {
+                id: split
+                objectName: "split"
+                x: 100; y: 100
+                action: save
+                secondaryText: "More save options"
+                onClicked: ++primaryCount
+                onSecondaryClicked: ++secondaryCount
+                menu: MD.Menu {
+                    objectName: "managedMenu"
+                    MD.Action { text: "Save as" }
+                }
+            }
+            MD.Menu {
+                id: replacement
+                objectName: "replacementMenu"
+                MD.Action { text: "Export" }
+            }
+        }
+    )",
+                      QUrl(QStringLiteral("inline:split-button-accessibility.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    QVERIFY(window);
+    QCoreApplication::processEvents();
+    auto *split = root->findChild<QObject *>(QStringLiteral("split"));
+    auto *menu = root->findChild<QObject *>(QStringLiteral("managedMenu"));
+    auto *replacement = root->findChild<QObject *>(QStringLiteral("replacementMenu"));
+    QVERIFY(split);
+    QVERIFY(menu);
+    QVERIFY(replacement);
+    auto *windowInterface = QAccessible::queryAccessibleInterface(window);
+    QVERIFY(windowInterface);
+    auto *primary = findAccessible(windowInterface, QStringLiteral("Save"));
+    auto *secondary = findAccessible(windowInterface, QStringLiteral("More save options"));
+    QVERIFY(primary);
+    QVERIFY(secondary);
+    QVERIFY(primary != secondary);
+    QCOMPARE(primary->role(), QAccessible::Button);
+    QCOMPARE(secondary->role(), QAccessible::Button);
+    QCOMPARE(primary->childCount(), 0);
+    QCOMPARE(secondary->childCount(), 0);
+    QCOMPARE(actionableButtonCount(windowInterface), 2);
+    QVERIFY(primary->state().focusable);
+    QVERIFY(secondary->state().focusable);
+    QVERIFY(secondary->state().expandable);
+    // Qt Quick exposes expandable/expanded; it does not populate the collapsed bit.
+    QVERIFY(!secondary->state().expanded);
+    QVERIFY(!secondary->state().checkable);
+    QVERIFY(!secondary->state().checked);
+    if (auto *container = QAccessible::queryAccessibleInterface(split)) {
+        QVERIFY(container->role() != QAccessible::Button);
+        QVERIFY(!container->actionInterface()
+                || !container->actionInterface()->actionNames().contains(
+                        QAccessibleActionInterface::pressAction()));
+    }
+    auto *primaryActions = primary->actionInterface();
+    auto *secondaryActions = secondary->actionInterface();
+    QVERIFY(primaryActions);
+    QVERIFY(secondaryActions);
+    QVERIFY(primaryActions->actionNames().contains(QAccessibleActionInterface::pressAction()));
+    QVERIFY(secondaryActions->actionNames().contains(QAccessibleActionInterface::pressAction()));
+    primaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_COMPARE(root->property("primaryCount").toInt(), 1);
+    QCOMPARE(root->property("actionCount").toInt(), 1);
+    QCOMPARE(root->property("secondaryCount").toInt(), 0);
+    secondaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(menu->property("opened").toBool());
+    QCOMPARE(root->property("secondaryCount").toInt(), 1);
+    QCOMPARE(root->property("primaryCount").toInt(), 1);
+    QCOMPARE(root->property("actionCount").toInt(), 1);
+    QVERIFY(secondary->state().expanded);
+    QVERIFY(!secondary->state().checked);
+    QVERIFY(QMetaObject::invokeMethod(menu, "close"));
+    QTRY_VERIFY(!secondary->state().expanded);
+    QVERIFY(!secondary->state().expanded);
+    secondaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(menu->property("opened").toBool());
+    QTest::keyClick(window, Qt::Key_Escape);
+    QTRY_VERIFY(!secondary->state().expanded);
+    QCOMPARE(root->property("secondaryCount").toInt(), 2);
+    secondaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(menu->property("opened").toBool());
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "replaceMenu"));
+    QTRY_VERIFY(!menu->property("visible").toBool());
+    QTRY_VERIFY(!secondary->state().expanded);
+    QVERIFY(!secondary->state().expanded);
+    secondaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(replacement->property("opened").toBool());
+    QTRY_VERIFY(secondary->state().expanded);
+    QVERIFY(split->setProperty("secondaryEnabled", false));
+    QTRY_VERIFY(!replacement->property("visible").toBool());
+    QTRY_VERIFY(!secondary->state().expanded);
+    QVERIFY(secondary->state().disabled);
+    secondaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QVERIFY(!replacement->property("visible").toBool());
+    QCOMPARE(root->property("secondaryCount").toInt(), 4);
+    QVERIFY(split->setProperty("primaryEnabled", false));
+    QVERIFY(primary->state().disabled);
+    primaryActions->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("primaryCount").toInt(), 1);
+    QCOMPARE(root->property("actionCount").toInt(), 1);
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "iconOnly"));
+    QCOMPARE(primary->text(QAccessible::Name), QStringLiteral("Save document"));
+}
+
+void FluidAccessibilityTest::splitButtonCustomPopupExposesBoundExpansion()
+{
+    QAccessible::setActive(true);
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import QtQuick.Controls as QQC
+        import Fluid as MD
+        Window {
+            width: 640; height: 480; visible: true
+            property int secondaryCount: 0
+            function openPopup() { popup.open() }
+            function closePopup() { popup.close() }
+            MD.SplitButton {
+                id: split
+                objectName: "customSplit"
+                text: "Save"
+                secondaryText: "Custom save options"
+                expanded: popup.visible
+                onSecondaryClicked: {
+                    ++secondaryCount
+                    popup.visible ? popup.close() : popup.open()
+                }
+            }
+            QQC.Popup { id: popup; x: 200; y: 200; width: 100; height: 100 }
+        }
+    )",
+                      QUrl(QStringLiteral("inline:split-button-custom-accessibility.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    QCoreApplication::processEvents();
+    auto *split = root->findChild<QObject *>(QStringLiteral("customSplit"));
+    auto *secondary = findAccessible(QAccessible::queryAccessibleInterface(root.get()),
+                                     QStringLiteral("Custom save options"));
+    QVERIFY(split);
+    QVERIFY(secondary);
+    QVERIFY(secondary->state().expandable);
+    QVERIFY(!secondary->state().expanded);
+    auto *actions = secondary->actionInterface();
+    QVERIFY(actions);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(secondary->state().expanded);
+    QCOMPARE(root->property("secondaryCount").toInt(), 1);
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "closePopup"));
+    QTRY_VERIFY(!secondary->state().expanded);
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "openPopup"));
+    QTRY_VERIFY(secondary->state().expanded);
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "closePopup"));
+    QTRY_VERIFY(!secondary->state().expanded);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_VERIFY(secondary->state().expanded);
+    QCOMPARE(root->property("secondaryCount").toInt(), 2);
+    QVERIFY(!secondary->state().checkable);
+    QVERIFY(split->setProperty("secondaryEnabled", false));
+    QVERIFY(secondary->state().disabled);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("secondaryCount").toInt(), 2);
+}
+
+void FluidAccessibilityTest::splitButtonRestoresFocusAfterAccessibleMenuActivation_data()
+{
+    QTest::addColumn<bool>("animated");
+    QTest::newRow("animated") << true;
+    QTest::newRow("no-exit") << false;
+}
+
+void FluidAccessibilityTest::splitButtonRestoresFocusAfterAccessibleMenuActivation()
+{
+    QFETCH(bool, animated);
+    QAccessible::setActive(true);
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+        Window {
+            width: 640; height: 480; visible: true
+            function disableExit() { menu.exit = null }
+            function focusFirst() { menu.itemAt(0).forceActiveFocus(Qt.PopupFocusReason) }
+            MD.Button { objectName: "before"; text: "Before"; x: 20; y: 20 }
+            MD.SplitButton {
+                objectName: "split"; text: "Save"; x: 100; y: 100
+                secondaryText: "More save options"
+                menu: MD.Menu {
+                    id: menu
+                    objectName: "menu"
+                    MD.Action { text: "Save as" }
+                }
+            }
+            MD.Button { objectName: "after"; text: "After"; x: 500; y: 20 }
+        }
+    )",
+                      QUrl(QStringLiteral("inline:split-button-accessible-focus.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    auto *before = root->findChild<QQuickItem *>(QStringLiteral("before"));
+    auto *after = root->findChild<QQuickItem *>(QStringLiteral("after"));
+    auto *split = root->findChild<QObject *>(QStringLiteral("split"));
+    auto *menu = root->findChild<QObject *>(QStringLiteral("menu"));
+    QVERIFY(window);
+    QVERIFY(before);
+    QVERIFY(after);
+    QVERIFY(split);
+    QVERIFY(menu);
+    auto *trailing =
+            qobject_cast<QQuickItem *>(split->property("trailingButton").value<QObject *>());
+    QVERIFY(trailing);
+    QCoreApplication::processEvents();
+    if (!animated)
+        QVERIFY(QMetaObject::invokeMethod(root.get(), "disableExit"));
+    auto *secondary = findAccessible(QAccessible::queryAccessibleInterface(window),
+                                     QStringLiteral("More save options"));
+    QVERIFY(secondary);
+    auto *actions = secondary->actionInterface();
+    QVERIFY(actions);
+    for (const bool moveFocusOutside : { false, true }) {
+        before->forceActiveFocus(Qt::TabFocusReason);
+        QTRY_VERIFY(before->hasActiveFocus());
+        actions->doAction(QAccessibleActionInterface::pressAction());
+        QTRY_VERIFY(menu->property("opened").toBool());
+        QVERIFY(QMetaObject::invokeMethod(root.get(), "focusFirst"));
+        QVERIFY(window->activeFocusItem() != before);
+        QVERIFY(window->activeFocusItem() != trailing);
+        if (moveFocusOutside) {
+            after->forceActiveFocus(Qt::TabFocusReason);
+            QTRY_VERIFY(after->hasActiveFocus());
+        }
+        if (moveFocusOutside)
+            QVERIFY(QMetaObject::invokeMethod(menu, "close"));
+        else
+            actions->doAction(QAccessibleActionInterface::pressAction());
+        QTRY_VERIFY(!menu->property("visible").toBool());
+        if (moveFocusOutside)
+            QTRY_VERIFY(after->hasActiveFocus());
+        else
+            QTRY_VERIFY(trailing->hasActiveFocus());
+    }
+}
 
 void FluidAccessibilityTest::segmentedButtonsExposeSelectionAndActivation()
 {
@@ -70,7 +368,8 @@ void FluidAccessibilityTest::segmentedButtonsExposeSelectionAndActivation()
                 }
             }
         }
-    )", QUrl(QStringLiteral("inline:segmented-buttons-accessibility.qml")));
+    )",
+                      QUrl(QStringLiteral("inline:segmented-buttons-accessibility.qml")));
 
     QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
     QVERIFY2(component.isReady(), qPrintable(component.errorString()));
@@ -147,7 +446,8 @@ void FluidAccessibilityTest::labeledFabInheritsButtonAccessibility()
                 icon.name: MD.Symbols.add
             }
         }
-    )", QUrl(QStringLiteral("inline:labeled-fab-accessibility.qml")));
+    )",
+                      QUrl(QStringLiteral("inline:labeled-fab-accessibility.qml")));
 
     QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
     QVERIFY2(component.isReady(), qPrintable(component.errorString()));
@@ -196,7 +496,8 @@ void FluidAccessibilityTest::textFieldIsAnEditableAccessibleNode()
                 }
             }
         }
-    )", QUrl(QStringLiteral("inline:textfield-accessibility.qml")));
+    )",
+                      QUrl(QStringLiteral("inline:textfield-accessibility.qml")));
 
     QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
     QVERIFY2(component.isReady(), qPrintable(component.errorString()));
@@ -208,8 +509,7 @@ void FluidAccessibilityTest::textFieldIsAnEditableAccessibleNode()
     QCoreApplication::processEvents();
 
     auto *field = root->findChild<QObject *>(QStringLiteral("passwordField"));
-    auto *revealButton =
-            root->findChild<QObject *>(QStringLiteral("revealPasswordButton"));
+    auto *revealButton = root->findChild<QObject *>(QStringLiteral("revealPasswordButton"));
     QVERIFY(field);
     QVERIFY(revealButton);
     auto *fieldInterface = QAccessible::queryAccessibleInterface(field);
@@ -275,7 +575,8 @@ void FluidAccessibilityTest::rangeSliderHandlesAreRealAccessibleNodes()
                 Accessible.name: "Price range"
             }
         }
-    )", QUrl(QStringLiteral("inline:accessibility.qml")));
+    )",
+                      QUrl(QStringLiteral("inline:accessibility.qml")));
 
     QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
     QVERIFY2(component.isReady(), qPrintable(component.errorString()));

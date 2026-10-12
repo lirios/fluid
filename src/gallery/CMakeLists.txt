@@ -29,6 +29,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/Menus.qml
         qml/NavigationRails.qml
         qml/SegmentedButtons.qml
+        qml/SplitButtons.qml
         qml/Symbols.qml
         qml/SymbolsModel.qml
         qml/TextFields.qml

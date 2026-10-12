@@ -33,6 +33,7 @@ set(_sources
     cpp/tokens/radiobutton.cpp cpp/tokens/radiobutton.h
     cpp/tokens/segmentedbutton.cpp cpp/tokens/segmentedbutton.h
     cpp/tokens/shapetokens.cpp cpp/tokens/shapetokens.h
+    cpp/tokens/splitbutton.cpp cpp/tokens/splitbutton.h
     cpp/tokens/slider.cpp cpp/tokens/slider.h
     cpp/tokens/statetokens.cpp cpp/tokens/statetokens.h
     cpp/tokens/switch.cpp cpp/tokens/switch.h

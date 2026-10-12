@@ -28,6 +28,7 @@
 #include "radiobutton.h"
 #include "segmentedbutton.h"
 #include "shapetokens.h"
+#include "splitbutton.h"
 #include "typescale.h"
 #include "slider.h"
 #include "statetokens.h"
@@ -91,6 +92,7 @@ class Tokens : public QObject
     // Component tokens - Button
     Q_PROPERTY(Fluid::Button button READ button CONSTANT FINAL)
     Q_PROPERTY(Fluid::ButtonGroup buttonGroup READ buttonGroup CONSTANT FINAL)
+    Q_PROPERTY(Fluid::SplitButton splitButton READ splitButton CONSTANT FINAL)
 
     // Component tokens - Check box
     Q_PROPERTY(Fluid::CheckBox checkBox READ checkBox CONSTANT FINAL)
@@ -166,6 +168,7 @@ public:
     // Component tokens - Button
     Button button() const;
     ButtonGroup buttonGroup() const;
+    SplitButton splitButton() const;
 
     // Component tokens - Check box
     CheckBox checkBox() const;
@@ -238,6 +241,7 @@ private:
     AppBar m_appBar;
     Button m_button;
     ButtonGroup m_buttonGroup;
+    SplitButton m_splitButton;
     CheckBox m_checkBox;
     RadioButton m_radioButton;
     SegmentedButton m_segmentedButton;

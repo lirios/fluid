@@ -80,6 +80,11 @@ ButtonGroup Tokens::buttonGroup() const
     return m_buttonGroup;
 }
 
+SplitButton Tokens::splitButton() const
+{
+    return m_splitButton;
+}
+
 // Component tokens - Check box
 CheckBox Tokens::checkBox() const
 {

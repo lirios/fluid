@@ -50,6 +50,8 @@ jobs:
           echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
       - name: Build
         run: |
-          cmake -GNinja -B build -DFLUID_WITH_DOCUMENTATION=ON
+          cmake -GNinja -B build -DFLUID_WITH_DOCUMENTATION=ON -DBUILD_TESTING=ON
           cmake --build build
+          cmake --build build --target Fluid_qmllint
+          QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure
           cmake --install build

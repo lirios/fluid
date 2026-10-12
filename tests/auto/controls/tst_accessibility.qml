@@ -258,6 +258,47 @@ TestCase {
         }
     }
 
+    Component {
+        id: splitButtonComponent
+        MD.SplitButton {
+            text: "Save"
+            secondaryText: "More save options"
+            icon.name: MD.Symbols.save
+            menu: MD.Menu { MD.Action { text: "Save as" } }
+        }
+    }
+
+    function test_split_button_structured_semantics() {
+        const split = createTemporaryObject(splitButtonComponent, testCase);
+        verify(split);
+        // Native roles, default names and activation are verified in accessibility.cpp.
+        // Qt does not expose those implicit roles in QML while accessibility is inactive.
+        compare(split.trailingButton.Accessible.name, "More save options");
+        verify(split.trailingButton.Accessible.expandable);
+        verify(!split.trailingButton.Accessible.expanded);
+        verify(!split.trailingButton.Accessible.checkable);
+        verify(!split.trailingButton.Accessible.checked);
+        compare(split.trailingButton.Accessible.description, "");
+        for (const name of ["splitButtonLabel", "splitButtonSymbol", "splitButtonSourceIcon",
+                            "splitButtonTrailingSymbol"])
+            verify(findChild(split, name).Accessible.ignored, name + " is decorative");
+        split.openMenu();
+        tryCompare(split.menu, "opened", true);
+        verify(split.trailingButton.Accessible.expanded);
+        split.menu.close();
+        tryCompare(split, "expanded", false);
+        tryCompare(split.menu, "visible", false);
+        verify(!split.trailingButton.Accessible.expanded);
+        split.text = "";
+        split.leadingButton.Accessible.name = "Save document";
+        compare(split.leadingButton.Accessible.name, "Save document");
+        split.secondaryText = "Other save commands";
+        compare(split.trailingButton.Accessible.name, "Other save commands");
+        split.secondaryEnabled = false;
+        split.openMenu();
+        verify(!split.menu.visible);
+    }
+
     function test_composite_semantics() {
         const host = createTemporaryObject(semanticsComponent, testCase);
         verify(host);

@@ -9,14 +9,11 @@ tool_input.file_path) and under VS Code Copilot when it loads this hook set
 via chat.hookFilesLocations pointed at .claude/settings.json (tool_name
 "create_file", tool_input.filePath) - see .vscode/settings.json.
 
-Shares its SPDX-checking logic with .codex/hooks/check-license-header.py
-through scripts/hooks/license_header.py.
+Shares SPDX enforcement with the Codex adapter through license_header.
 """
-import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts', 'hooks'))
-from license_header import check_created_files, load_event  # noqa: E402
+from license_header import check_created_files, load_event
 
 CREATE_TOOL_NAMES = ('Write', 'create_file')
 

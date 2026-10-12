@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """
 Shared MPL-2.0 SPDX license-header checks used by the PreToolUse/PostToolUse
-hooks in .claude/hooks/ and .codex/hooks/.
+agent-specific hooks alongside this module in .agents/hooks/.
 
 Both hook sets enforce the same two rules - new guarded files must start
 with the SPDX header, and edits must not strip it - the only thing that
@@ -12,6 +12,8 @@ tool-use event is parsed into a list of (path, content) candidates (a
 single file per call vs. an apply_patch covering several). That parsing
 stays in each hook's own script; everything else lives here.
 """
+from __future__ import annotations
+
 import json
 import os
 import subprocess

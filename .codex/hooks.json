@@ -7,7 +7,8 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "python3 .codex/hooks/check-license-header.py",
+                        "command": "python3 .agents/hooks/check_license_header_codex.py",
+                        "statusMessage": "Checking license headers",
                         "timeout": 10
                     }
                 ]
@@ -19,7 +20,8 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "python3 .codex/hooks/audit-license-header.py",
+                        "command": "python3 .agents/hooks/audit_license_header_codex.py",
+                        "statusMessage": "Auditing license headers",
                         "timeout": 10
                     }
                 ]

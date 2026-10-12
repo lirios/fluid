@@ -6,7 +6,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "python3 .claude/hooks/check-license-header.py",
+                        "command": "python3 .agents/hooks/check_license_header_claude.py",
                         "timeout": 10
                     }
                 ]
@@ -18,7 +18,7 @@
                 "hooks": [
                     {
                         "type": "command",
-                        "command": "python3 .claude/hooks/audit-license-header.py",
+                        "command": "python3 .agents/hooks/audit_license_header_claude.py",
                         "timeout": 10
                     }
                 ]

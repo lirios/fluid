@@ -9,15 +9,13 @@ Scans every "*** Update File: <path>" block in the applied patch (honoring
 "*** Move to:" renames) and re-checks each guarded file on disk after the
 patch has been applied.
 
-Shares its SPDX-checking logic with .claude/hooks/audit-license-header.py
-through scripts/hooks/license_header.py.
+Accepts input/command dictionaries and raw patch strings, like qmlformat.
+Shares SPDX enforcement with the Claude adapter through license_header.
 """
-import os
 import re
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'scripts', 'hooks'))
-from license_header import check_edited_files, load_event  # noqa: E402
+from license_header import check_edited_files, load_event
 
 UPDATE_FILE_RE = re.compile(r'^\*\*\* Update File: (.+)$')
 MOVE_TO_RE = re.compile(r'^\*\*\* Move to: (.+)$')
@@ -49,12 +47,17 @@ def main() -> None:
     event = load_event()
 
     tool_name: str   = event.get('tool_name', '')
-    tool_input: dict = event.get('tool_input', {})
+    tool_input = event.get('tool_input', {})
 
     if tool_name != 'apply_patch':
         sys.exit(0)
 
-    patch_text: str = tool_input.get('input', '')
+    if isinstance(tool_input, dict):
+        patch_text = tool_input.get('command') or tool_input.get('input', '')
+    else:
+        patch_text = tool_input
+    if not isinstance(patch_text, str):
+        return
 
     check_edited_files(_iter_updated_files(patch_text))
 

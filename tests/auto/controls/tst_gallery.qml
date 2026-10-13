@@ -97,6 +97,7 @@ TestCase {
         const pages = [["app-bars", "AppBars.qml"], ["button-groups", "ButtonGroups.qml"], ["colors", "Colors.qml"], ["components", "Components.qml"], ["divider", "Divider.qml"], ["elevation", "Elevation.qml"], ["exposed-dropdown-menus", "ExposedDropdownMenus.qml"], ["fab", "FAB.qml"], ["fab-menu", "FabMenu.qml"], ["grids", "Grids.qml"], ["icon-button", "IconButton.qml"], ["indicators", "Indicators.qml"], ["segmented-buttons", "SegmentedButtons.qml"], ["slider", "Slider.qml"], ["lists", "Lists.qml"], ["menus", "Menus.qml"], ["navigation-rails", "NavigationRails.qml"], ["symbols", "Symbols.qml"], ["text-fields", "TextFields.qml"], ["typography", "Typography.qml"], ["tooltips", "ToolTips.qml"]];
 
         pages.push(["split-buttons", "SplitButtons.qml"]);
+        pages.push(["badges", "Badges.qml"]);
         const rows = [];
         for (const page of pages) {
             rows.push({
@@ -562,4 +563,144 @@ TestCase {
         verify(line);
         return line;
     }
+    function test_badgeGalleryBoundState_data() {
+        return [{tag: "compact", width: 480}, {tag: "medium", width: 720},
+                {tag: "large", width: 1280}];
+    }
+
+    function test_badgeGalleryBoundState(data) {
+        const component = Qt.createComponent(Qt.resolvedUrl("../../../src/gallery/qml/Badges.qml"));
+        tryCompare(component, "status", Component.Ready);
+        verify(component.status === Component.Ready, component.errorString());
+        const page = createTemporaryObject(component, testCase, {width: data.width, height: 700});
+        verify(page);
+        const action = findChild(page, "badge-unread-count-action");
+        const toggle = findChild(page, "badge-unread-count-toggle");
+        const destination = findChild(page, "badge-updates-destination");
+        const reset = findChild(page, "badge-updates-reset");
+        verify(action && toggle && destination && reset);
+        compare(action.badgeContent, 12);
+        compare(action.Accessible.name, "Inbox, 12 unread messages");
+        toggle.checked = false;
+        compare(action.badgeContent, "");
+        compare(action.Accessible.name, "Inbox");
+        toggle.checked = true;
+        compare(action.badgeContent, 12);
+        verify(destination.badgeNotification);
+        destination.clicked();
+        compare(page.updatesUnread, false);
+        compare(destination.badgeNotification, false);
+        compare(destination.Accessible.name, "Updates");
+        reset.checked = true;
+        reset.toggled();
+        compare(page.updatesUnread, true);
+        compare(destination.badgeNotification, true);
+        verify(destination.Accessible.name.length > destination.text.length);
+    }
+
+    function test_badgeGalleryComposition_data() {
+        return test_badgeGalleryBoundState_data();
+    }
+
+    function badgeAppBarActionDelegate(item, action) {
+        if (item.actionData !== undefined && item.actionData === action)
+            return item;
+        for (const child of item.children) {
+            const match = badgeAppBarActionDelegate(child, action);
+            if (match)
+                return match;
+        }
+        return null;
+    }
+
+    function test_badgeGalleryComposition(data) {
+        const component = Qt.createComponent(Qt.resolvedUrl("../../../src/gallery/qml/Badges.qml"));
+        tryCompare(component, "status", Component.Ready);
+        verify(component.status === Component.Ready, component.errorString());
+        const page = createTemporaryObject(component, testCase, {width: data.width, height: 700});
+        verify(page);
+        const wideBar = findChild(page, "badge-app-bar-wide");
+        const narrowBar = findChild(page, "badge-app-bar-narrow");
+        verify(wideBar && narrowBar);
+        tryVerify(() => wideBar.width > 0 && narrowBar.width > 0
+                  && wideBar.height > 0 && narrowBar.height > 0);
+        tryVerify(() => narrowBar.mapToItem(page, 0, 0).y
+                  >= wideBar.mapToItem(page, 0, 0).y + wideBar.height + page.sectionSpacing);
+        tryCompare(wideBar.visibleActions, "length", 2);
+        tryCompare(narrowBar.visibleActions, "length", 1);
+        for (const sample of [{bar: wideBar, action: page.searchAction},
+                              {bar: wideBar, action: page.unreadAction},
+                              {bar: narrowBar, action: page.narrowUnreadAction}]) {
+            const delegate = badgeAppBarActionDelegate(sample.bar, sample.action);
+            verify(delegate);
+            tryVerify(() => delegate.visible && delegate.loadedAction !== null);
+            const host = delegate.loadedAction;
+            const badge = findChild(host, "iconButtonBadge");
+            verify(host.visible && badge && badge.visible);
+            compare(badge.effectiveVariant, MD.Badge.Small);
+            compare(badge.width, MD.Tokens.badge.size);
+            compare(badge.height, MD.Tokens.badge.size);
+            compare(badge.displayText, "");
+            verify(host.Accessible.name.length > host.text.length);
+        }
+
+        const mailTab = findChild(page, "badge-mail-tab");
+        const activityTab = findChild(page, "badge-activity-tab");
+        const icon = findChild(page, "badge-mail-tab-icon");
+        const mailLabel = findChild(page, "badge-mail-tab-label");
+        const overlay = findChild(page, "badge-mail-tab-overlay");
+        const activityLabel = findChild(page, "badge-activity-tab-label");
+        const trailing = findChild(page, "badge-activity-tab-trailing");
+        verify(mailTab && activityTab && icon && mailLabel && overlay && activityLabel && trailing);
+        for (const item of [mailTab, activityTab, icon, mailLabel, overlay, activityLabel, trailing]) {
+            verify(item.visible);
+            tryVerify(() => item.width > 0 && item.height > 0);
+        }
+        verify(mailTab.x + mailTab.width <= activityTab.x);
+        compare(overlay.target, icon);
+        compare(overlay.x, icon.x + icon.width - MD.Tokens.badge.horizontalOffset);
+        compare(overlay.y, icon.y + MD.Tokens.badge.verticalOffset - overlay.height);
+        compare(overlay.effectiveVariant, MD.Badge.Small);
+        compare(trailing.effectiveVariant, MD.Badge.Large);
+        compare(trailing.displayText, "4");
+        tryCompare(trailing, "x", activityLabel.x + activityLabel.width + page.compactSpacing);
+
+        compare(mailTab.Accessible.name, "Mail, " + qsTr("New notification"));
+        compare(activityTab.Accessible.name, "Activity, " + trailing.accessibleDescription);
+        compare(trailing.accessibleDescription, Number(4).toLocaleString(trailing.locale, 'f', 0));
+        for (const item of [icon, mailLabel, overlay, activityLabel, trailing])
+            verify(item.Accessible.ignored);
+        for (const badge of [overlay, trailing])
+            compare(badge.focusPolicy, Qt.NoFocus);
+
+        overlay.accessibleDescription = "Unread mail";
+        compare(mailTab.Accessible.name, "Mail, Unread mail");
+        overlay.visible = false;
+        compare(mailTab.Accessible.name, "Mail");
+        overlay.accessibleDescription = "New mail while hidden";
+        compare(mailTab.Accessible.name, "Mail");
+        overlay.visible = true;
+        compare(mailTab.Accessible.name, "Mail, New mail while hidden");
+
+        trailing.visible = false;
+        compare(activityTab.Accessible.name, "Activity");
+        trailing.text = "Updated";
+        compare(activityTab.Accessible.name, "Activity");
+        trailing.visible = true;
+        compare(trailing.displayText, "Upd…");
+        compare(activityTab.Accessible.name, "Activity, Updated");
+
+        mailTab.checked = false;
+        activityTab.checked = false;
+        mailTab.Accessible.pressAction();
+        verify(mailTab.checked);
+        activityTab.Accessible.pressAction();
+        verify(activityTab.checked);
+        verify(!mailTab.checked);
+        mailTab.enabled = false;
+        mailTab.Accessible.pressAction();
+        verify(!mailTab.checked);
+        verify(activityTab.checked);
+    }
+
 }

@@ -38,4 +38,13 @@ T.Action {
 
     //! Optional textual or numeric badge content. The default is empty; numeric zero is valid.
     property var badgeContent: ""
+
+    //! Requests a notification dot while retaining any full badgeContent for accessibility.
+    property bool badgeNotification: false
+
+    //! Whether supported hosts render and describe this badge. The default is true.
+    property bool badgeVisible: true
+
+    //! Optional localized full description; empty uses the badge's default description.
+    property string badgeAccessibleDescription: ""
 }

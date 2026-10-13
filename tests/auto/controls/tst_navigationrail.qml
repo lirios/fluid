@@ -661,4 +661,97 @@ TestCase {
         modal.collapse();
         tryVerify(() => surface.x >= modal.width);
     }
+    function test_badge_placement_data() {
+        return [{tag: "ltr", rtl: false}, {tag: "rtl", rtl: true}];
+    }
+
+    function test_badge_placement(data) {
+        const fixture = createTemporaryObject(data.rtl ? rtlRailComponent : railComponent, testCase);
+        verify(fixture);
+        const item = fixture.firstItem;
+        const icon = findChild(item, "navigationRailItemIcon");
+        const label = findChild(item, "navigationRailItemLabel");
+        const overlay = findChild(item, "navigationRailBadgeOverlay");
+        const trailing = findChild(item, "navigationRailBadgeTrailing");
+        verify(icon && label && overlay && trailing);
+        fixture.rail.expanded = false;
+        tryCompare(item, "_positionProgress", 0);
+        const initialSize = [item.implicitWidth, item.implicitHeight];
+        const initialIcon = [icon.x, icon.y, icon.width, icon.height];
+        item.badgeContent = 1000;
+        tryCompare(overlay, "visible", true);
+        compare(trailing.visible, false);
+        compare([item.implicitWidth, item.implicitHeight], initialSize);
+        compare([icon.x, icon.y, icon.width, icon.height], initialIcon);
+        compare(item.Accessible.name, "Home, " + Number(1000).toLocaleString(item.locale, 'f', 0));
+        fixture.rail.expanded = true;
+        tryCompare(item, "_positionProgress", 1);
+        tryCompare(trailing, "visible", true);
+        compare(overlay.visible, false);
+        const badgePoint = trailing.mapToItem(label.parent, 0, 0);
+        if (data.rtl)
+            verify(badgePoint.x + trailing.width + MD.Tokens.measurement.space100 <= label.x + 0.5);
+        else
+            verify(label.x + label.width + MD.Tokens.measurement.space100 <= badgePoint.x + 0.5);
+        const expandedSize = [item.implicitWidth, item.implicitHeight];
+        item.text = "A very long destination label demonstrating safe text elision";
+        item.width = 240;
+        tryVerify(() => label.truncated);
+        const expandedIcon = [icon.x, icon.y, icon.width, icon.height];
+        item.badgeNotification = true;
+        tryCompare(overlay, "visible", true);
+        compare(trailing.visible, false);
+        compare(overlay.effectiveVariant, MD.Badge.Small);
+        compare([icon.x, icon.y, icon.width, icon.height], expandedIcon);
+        item.text = "Home";
+        compare([item.implicitWidth, item.implicitHeight], expandedSize);
+        item.checked = true;
+        verify(item.Accessible.selected);
+        item.badgeVisible = false;
+        compare(item.Accessible.name, "Home");
+        compare(overlay.visible, false);
+        compare(trailing.visible, false);
+        item.badgeVisible = true;
+        item.badgeNotification = false;
+        item.text = "";
+        tryCompare(overlay, "visible", true);
+        compare(trailing.visible, false);
+    }
+
+    Component {
+        id: badgedRailActionComponent
+        Item {
+            property alias action: action
+            property alias item: item
+            MD.Action { id: action; text: "Inbox"; icon.name: MD.Symbols.mail }
+            MD.NavigationRailItem { id: item; action: action }
+        }
+    }
+
+    function test_badge_action_bindings() {
+        const fixture = createTemporaryObject(badgedRailActionComponent, testCase);
+        verify(fixture);
+        const item = fixture.item;
+        compare(item.badgeContent, "");
+        compare(item.badgeNotification, false);
+        compare(item.badgeVisible, true);
+        compare(item.badgeAccessibleDescription, "");
+        fixture.action.badgeContent = 0;
+        compare(item.badgeContent, 0);
+        compare(item.Accessible.name, "Inbox, 0");
+        fixture.action.badgeNotification = true;
+        fixture.action.badgeAccessibleDescription = "Unread messages";
+        compare(item.badgeNotification, true);
+        compare(item.Accessible.name, "Inbox, Unread messages");
+        fixture.action.badgeVisible = false;
+        compare(item.Accessible.name, "Inbox");
+        item.badgeVisible = true;
+        item.badgeContent = "Local";
+        item.badgeNotification = false;
+        item.badgeAccessibleDescription = "Local status";
+        fixture.action.badgeContent = 42;
+        compare(item.badgeContent, "Local");
+        compare(item.Accessible.name, "Inbox, Local status");
+    }
+
 }

@@ -2,6 +2,7 @@ set(LIBNAME FluidPrivate)
 
 # Source files
 set(_sources
+    badgetext.cpp badgetext.h
     shortcututils.cpp shortcututils.h
     windowdecoration.cpp windowdecoration.h
 )
@@ -34,6 +35,8 @@ set_target_properties(${LIBNAME} PROPERTIES
 target_link_libraries(${LIBNAME}
     PRIVATE
         Qt6::Core
+        # BadgeText uses matching Qt Unicode grapheme properties.
+        Qt6::CorePrivate
         Qt6::Gui
         Qt6::Qml
         Qt6::Quick

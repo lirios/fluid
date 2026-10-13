@@ -6,6 +6,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtTest
 import Fluid as MD
+import "../../../src/controls/qml/internal" as Internal
 
 TestCase {
     id: testCase
@@ -15,6 +16,10 @@ TestCase {
     height: 700
     visible: true
     when: windowShown
+
+    function init() {
+        failOnWarning(/TypeError: Cannot read property 'badgeVisible' of null/);
+    }
 
     SignalSpy {
         id: signalSpy
@@ -480,4 +485,73 @@ TestCase {
         wait(0);
         compare(search.heightOffset, 0);
     }
+    Component {
+        id: badgedActionComponent
+        Item {
+            width: 100; height: 100
+            property alias action: action
+            property alias delegate: delegate
+            MD.AppBarAction {
+                id: action
+                text: "Notifications"
+                icon.name: MD.Symbols.notifications
+                badgeContent: 1000
+            }
+            Internal.AppBarActionDelegate {
+                id: delegate
+                actionData: action
+            }
+        }
+    }
+
+    function test_icon_action_badges_remain_small() {
+        const fixture = createTemporaryObject(badgedActionComponent, testCase);
+        verify(fixture);
+        tryVerify(() => fixture.delegate.loadedAction !== null);
+        const host = fixture.delegate.loadedAction;
+        const overlay = findChild(host, "iconButtonBadge");
+        verify(overlay);
+        compare(host.badgeVariant, MD.Badge.Small);
+        compare(overlay.effectiveVariant, MD.Badge.Small);
+        compare(overlay.displayText, "");
+        compare(overlay.implicitWidth, 6);
+        compare(overlay.implicitHeight, 6);
+        compare(host.Accessible.name, "Notifications, " + Number(1000).toLocaleString(host.locale, 'f', 0));
+        const size = [fixture.delegate.implicitWidth, fixture.delegate.implicitHeight];
+        fixture.action.badgeContent = "Updated account settings";
+        compare(host.Accessible.name, "Notifications, Updated account settings");
+        compare([fixture.delegate.implicitWidth, fixture.delegate.implicitHeight], size);
+        fixture.action.badgeVisible = false;
+        tryCompare(overlay, "visible", false);
+        compare(host.Accessible.name, "Notifications");
+    }
+
+    function test_icon_action_badges_clear_when_action_is_removed() {
+        const fixture = createTemporaryObject(badgedActionComponent, testCase);
+        verify(fixture);
+        tryVerify(() => fixture.delegate.loadedAction !== null);
+        const host = fixture.delegate.loadedAction;
+        const overlay = findChild(host, "iconButtonBadge");
+        verify(overlay);
+        verify(overlay.visible);
+
+        fixture.delegate.actionData = null;
+        tryCompare(host, "badgeVisible", false);
+        compare(overlay.visible, false);
+
+        const replacement = createTemporaryQmlObject(
+            'import Fluid as MD; MD.AppBarAction {'
+            + ' text: "Replacement"; icon.name: MD.Symbols.mail;'
+            + ' badgeContent: "Replacement status" }', testCase);
+        verify(replacement);
+        fixture.delegate.actionData = replacement;
+        tryCompare(overlay, "visible", true);
+        compare(host.Accessible.name, "Replacement, Replacement status");
+        replacement.destroy();
+        tryCompare(fixture.delegate, "actionData", null);
+        compare(host.badgeVisible, false);
+        compare(overlay.visible, false);
+        verify(host.Accessible.name.indexOf("Replacement status") === -1);
+    }
+
 }

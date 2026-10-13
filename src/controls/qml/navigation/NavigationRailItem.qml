@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl as TImpl
 import Fluid as MD
+import "../core/BadgeContent.js" as BadgeContent
 import "../internal" as Internal
 
 /*!
@@ -36,6 +37,27 @@ import "../internal" as Internal
 */
 T.ItemDelegate {
     id: control
+
+    //! Optional status string or nonnegative safe integer, defaulting from a Fluid Action.
+    property var badgeContent: _badgeAction ? _badgeAction.badgeContent : ""
+
+    //! Requests an icon notification dot, retaining full content for accessibility.
+    property bool badgeNotification: _badgeAction ? _badgeAction.badgeNotification : false
+
+    //! Whether the badge is rendered and included in the default accessible name.
+    property bool badgeVisible: _badgeAction ? _badgeAction.badgeVisible : true
+
+    //! Optional localized full description. Empty uses the badge's full value.
+    property string badgeAccessibleDescription: _badgeAction ? _badgeAction.badgeAccessibleDescription : ""
+
+    //! Requested badge presentation; notification dots always use Small.
+    property int badgeVariant: MD.Badge.Auto
+
+    readonly property MD.Action _badgeAction: action as MD.Action
+    readonly property bool _showBadge: badgeVisible
+        && (badgeNotification || BadgeContent.hasContent(badgeContent))
+    readonly property bool _useTrailingBadge: _expandedPlacement && _hasLabel
+        && !badgeNotification && badgeVariant !== MD.Badge.Small
 
     /*! Whether source-based icons are tinted with the resolved icon color.
 
@@ -120,9 +142,13 @@ T.ItemDelegate {
     icon.height: MD.Tokens.navigationRail.iconSize
 
     Accessible.role: Accessible.PageTab
-    Accessible.name: text
+    Accessible.name: BadgeContent.accessibleName(text,
+        trailingBadge && trailingBadge.visible ? trailingBadge.accessibleDescription
+        : overlayBadge && overlayBadge.visible ? overlayBadge.accessibleDescription : "")
     Accessible.selectable: true
     Accessible.selected: checked
+    // PageTab does not receive AbstractButton's automatic accessible press action.
+    Accessible.onPressAction: control.click()
 
     //! \internal Natural width of the expanded endpoint, independent of transition state.
     readonly property real _expandedImplicitWidth:
@@ -205,6 +231,8 @@ T.ItemDelegate {
         readonly property real expandedIconY: (height - control.icon.height) / 2
         readonly property real collapsedLabelWidth: Math.min(width,
                                                              collapsedLabelMeasure.implicitWidth)
+        readonly property real badgeReservedWidth: trailingBadge.visible
+            ? trailingBadge.width + MD.Tokens.measurement.space100 : 0
 
         implicitWidth: control.implicitWidth
         implicitHeight: control.implicitHeight
@@ -215,6 +243,7 @@ T.ItemDelegate {
             text: control.text
             typescale: MD.Tokens.typescale.labelMedium
             wrapMode: Text.NoWrap
+            Accessible.ignored: true
         }
 
         MD.Label {
@@ -223,6 +252,7 @@ T.ItemDelegate {
             text: control.text
             typescale: MD.Tokens.typescale.labelLarge
             wrapMode: Text.NoWrap
+            Accessible.ignored: true
         }
 
         Internal.NavigationRailItemIndicator {
@@ -258,6 +288,8 @@ T.ItemDelegate {
             width: control.icon.width
             height: control.icon.height
             opacity: control._contentOpacity
+            visible: control._hasNamedIcon || control._hasSourceIcon
+            Accessible.ignored: true
 
             TImpl.IconImage {
                 id: sourceIcon
@@ -267,6 +299,7 @@ T.ItemDelegate {
                 fillMode: Image.PreserveAspectFit
                 color: control.tintSourceIcon ? control._iconColor : "transparent"
                 visible: control._hasSourceIcon
+                Accessible.ignored: true
             }
 
             MD.Symbol {
@@ -277,7 +310,22 @@ T.ItemDelegate {
                 color: control._iconColor
                 fill: control.checked
                 visible: !control._hasSourceIcon && control._hasNamedIcon
+                Accessible.ignored: true
             }
+        }
+
+        MD.BadgeOverlay {
+            id: overlayBadge
+            objectName: "navigationRailBadgeOverlay"
+            target: iconSlot
+            layoutMirrored: control.mirrored
+            count: BadgeContent.count(control.badgeContent)
+            text: BadgeContent.text(control.badgeContent)
+            locale: control.locale
+            variant: control.badgeNotification ? MD.Badge.Small : control.badgeVariant
+            accessibleDescription: control.badgeAccessibleDescription.length > 0
+                ? control.badgeAccessibleDescription : _defaultAccessibleDescription
+            visible: control._showBadge && !control._useTrailingBadge && targetAvailable
         }
 
         MD.Label {
@@ -287,6 +335,7 @@ T.ItemDelegate {
             x: control._expandedPlacement
                ? control.mirrored
                  ? MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace
+                   + content.badgeReservedWidth
                  : MD.Tokens.navigationRail.horizontalFullWidthLeadingSpace
                    + control.icon.width + MD.Tokens.navigationRail.horizontalIconLabelSpace
                : (content.width - content.collapsedLabelWidth) / 2
@@ -299,12 +348,14 @@ T.ItemDelegate {
                    ? control.mirrored
                      ? Math.max(0, content.expandedIconX
                                       - MD.Tokens.navigationRail.horizontalIconLabelSpace
-                                      - MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace)
+                                      - MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace
+                                      - content.badgeReservedWidth)
                      : Math.max(0, content.width
                                       - MD.Tokens.navigationRail.horizontalFullWidthLeadingSpace
                                       - control.icon.width
                                       - MD.Tokens.navigationRail.horizontalIconLabelSpace
-                                      - MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace)
+                                      - MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace
+                                      - content.badgeReservedWidth)
                    : content.collapsedLabelWidth
             text: control.text
             color: control._labelColor
@@ -320,6 +371,21 @@ T.ItemDelegate {
                                  : Text.AlignHCenter
             Accessible.ignored: true
 
+        }
+
+        MD.Badge {
+            id: trailingBadge
+            objectName: "navigationRailBadgeTrailing"
+            x: control.mirrored ? MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace
+                : content.width - MD.Tokens.navigationRail.horizontalFullWidthTrailingSpace - width
+            y: (content.height - height) / 2
+            count: BadgeContent.count(control.badgeContent)
+            text: BadgeContent.text(control.badgeContent)
+            locale: control.locale
+            variant: control.badgeVariant
+            accessibleDescription: control.badgeAccessibleDescription.length > 0
+                ? control.badgeAccessibleDescription : _defaultAccessibleDescription
+            visible: control._showBadge && control._useTrailingBadge
         }
     }
 

@@ -71,7 +71,7 @@ Item {
         name: "ComponentTokenTests"
 
         function test_selfEnumReferences_data() {
-            return ["AppBar", "AppBarAction", "BaseAppBar", "FAB", "FabMenu", "FabMenuButton",
+            return ["Badge", "AppBar", "AppBarAction", "BaseAppBar", "FAB", "FabMenu", "FabMenuButton",
                     "IconButton", "IconLabel", "Menu", "MenuItem", "RangeSlider", "SearchAppBar",
                     "Slider", "Switch", "Symbol", "TextField", "ExposedDropdownMenu"].map(type => ({ tag: type, type: type }));
         }
@@ -123,6 +123,16 @@ Item {
             compare(rectangle.bottomLeftRadius,
                     shape.bottomLeft === full ? maximum : shape.bottomLeft,
                     name + ".bottomLeftRadius");
+        }
+
+        function test_badgeTokens() {
+            verifyValues(MD.Tokens.badge, {
+                size: 6, largeSize: 16, horizontalPadding: 4,
+                horizontalOffset: 6, verticalOffset: 6,
+                largeHorizontalOffset: 12, largeVerticalOffset: 14,
+                maximumCharacters: 4, maximumCount: 999,
+                shape: MD.Tokens.shape.cornerFull, largeShape: MD.Tokens.shape.cornerFull
+            });
         }
 
         function test_splitButtonTokens() {

@@ -1,10 +1,13 @@
 // SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Templates as T
 import QtQuick.Controls.impl as TImpl
 import Fluid as MD
+import "../core/BadgeContent.js" as BadgeContent
 import "../core/UiMetrics.js" as UiMetrics
 import "../internal/MotionAnimation.js" as MotionAnimation
 
@@ -23,6 +26,25 @@ import "../internal/MotionAnimation.js" as MotionAnimation
 */
 T.ToolButton {
     id: control
+
+    //! Optional string or nonnegative safe integer; defaults from a Fluid Action.
+    property var badgeContent: _badgeAction ? _badgeAction.badgeContent : ""
+
+    //! Requests a Small dot, retaining full content for accessibility.
+    property bool badgeNotification: _badgeAction ? _badgeAction.badgeNotification : false
+
+    //! Whether the badge is rendered and included in the default accessible name.
+    property bool badgeVisible: _badgeAction ? _badgeAction.badgeVisible : true
+
+    //! Optional localized full description. Empty uses the badge's full value.
+    property string badgeAccessibleDescription: _badgeAction ? _badgeAction.badgeAccessibleDescription : ""
+
+    //! Requested presentation; notification dots always use Small.
+    property int badgeVariant: MD.Badge.Auto
+
+    readonly property MD.Action _badgeAction: action as MD.Action
+    readonly property bool _showBadge: badgeVisible
+        && (badgeNotification || BadgeContent.hasContent(badgeContent))
 
     component IconData: QtObject {
         property string name
@@ -262,6 +284,8 @@ T.ToolButton {
                         ? Accessible.CheckBox : Accessible.Button)
     Accessible.checkable: checkable
     Accessible.checked: checked
+    Accessible.name: BadgeContent.accessibleName(text,
+        iconButtonBadge && iconButtonBadge.visible ? iconButtonBadge.accessibleDescription : "")
 
     QtObject {
         id: visualState
@@ -445,37 +469,61 @@ T.ToolButton {
         implicitWidth: control.icon.width
         implicitHeight: control.icon.height
 
-        transform: Scale {
-            origin.x: iconContent.width / 2
-            origin.y: iconContent.height / 2
-            xScale: control.effectiveIconMirrored ? -1 : 1
-        }
-
-        TImpl.IconImage {
-            id: sourceIcon
-
-            objectName: "iconButtonSourceImage"
+        Item {
+            id: iconSlot
+            objectName: "iconButtonIconSlot"
             anchors.centerIn: parent
             width: control.icon.width
             height: control.icon.height
-            source: control.effectiveIconSource
-            sourceSize: Qt.size(control.icon.width, control.icon.height)
-            fillMode: Image.PreserveAspectFit
-            color: control.tintSourceIcon ? control.effectiveIconColor : "transparent"
-            opacity: visualState.contentOpacity
             visible: control.effectiveIconSource.toString().length > 0
+                     || control.effectiveIconName.length > 0
+            Accessible.ignored: true
+
+            transform: Scale {
+                origin.x: iconSlot.width / 2
+                origin.y: iconSlot.height / 2
+                xScale: control.effectiveIconMirrored ? -1 : 1
+            }
+
+            TImpl.IconImage {
+                id: sourceIcon
+                objectName: "iconButtonSourceImage"
+                anchors.fill: parent
+                source: control.effectiveIconSource
+                sourceSize: Qt.size(control.icon.width, control.icon.height)
+                fillMode: Image.PreserveAspectFit
+                color: control.tintSourceIcon ? control.effectiveIconColor : "transparent"
+                opacity: visualState.contentOpacity
+                visible: control.effectiveIconSource.toString().length > 0
+                Accessible.ignored: true
+            }
+
+            MD.Symbol {
+                objectName: "iconButtonSymbol"
+                anchors.fill: parent
+                name: control.effectiveIconName
+                iconWidth: control.icon.width
+                iconHeight: control.icon.height
+                color: control.effectiveIconColor
+                opacity: visualState.contentOpacity
+                fill: control.effectiveIconFill
+                visible: control.effectiveIconSource.toString().length === 0 && name.length > 0
+                Accessible.ignored: true
+            }
         }
 
-        MD.Symbol {
-            objectName: "iconButtonSymbol"
-            anchors.centerIn: parent
-            name: control.effectiveIconName
-            iconWidth: control.icon.width
-            iconHeight: control.icon.height
-            color: control.effectiveIconColor
-            opacity: visualState.contentOpacity
-            fill: control.effectiveIconFill
-            visible: control.effectiveIconSource.toString().length === 0 && name.length > 0
+        MD.BadgeOverlay {
+            id: iconButtonBadge
+            objectName: "iconButtonBadge"
+            target: iconSlot
+            layoutMirrored: control.mirrored
+            count: BadgeContent.count(control.badgeContent)
+            text: BadgeContent.text(control.badgeContent)
+            locale: control.locale
+            variant: control.badgeNotification ? MD.Badge.Small : control.badgeVariant
+            accessibleDescription: control.badgeAccessibleDescription.length > 0
+                ? control.badgeAccessibleDescription : _defaultAccessibleDescription
+            visible: control._showBadge && targetAvailable
         }
     }
 

@@ -75,6 +75,9 @@ Item {
 
         MD.IconButton {
             action: control.actionData
+            badgeVariant: MD.Badge.Small
+            badgeVisible: control.actionData !== null && !control.isFilled
+                          && control.actionData.badgeVisible
             type: control.isFilled ? MD.IconButton.Type.Filled : MD.IconButton.Type.Standard
             shape: MD.IconButton.Shape.Round
             size: MD.IconButton.Size.Small
@@ -94,6 +97,7 @@ Item {
             id: avatarButton
 
             action: control.actionData
+            badgeVisible: false
             type: MD.IconButton.Type.Standard
             shape: MD.IconButton.Shape.Round
             size: MD.IconButton.Size.Small

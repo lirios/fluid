@@ -42,6 +42,9 @@ TestCase {
         compare(action.supportingText, "");
         compare(action.trailingText, "");
         compare(action.badgeContent, "");
+        compare(action.badgeNotification, false);
+        compare(action.badgeVisible, true);
+        compare(action.badgeAccessibleDescription, "");
         compare(action.text, "");
         compare(action.enabled, true);
         compare(action.checkable, false);
@@ -62,6 +65,12 @@ TestCase {
         compare(action.badgeContent, 0);
         verify(action.badgeContent !== "");
 
+        action.badgeNotification = true;
+        action.badgeVisible = false;
+        action.badgeAccessibleDescription = "Unread messages";
+        compare(action.badgeNotification, true);
+        compare(action.badgeVisible, false);
+        compare(action.badgeAccessibleDescription, "Unread messages");
         action.badgeContent = "New";
         compare(action.badgeContent, "New");
     }

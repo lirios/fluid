@@ -28,17 +28,18 @@ QAccessibleInterface *findAccessible(QAccessibleInterface *interface, const QStr
     return nullptr;
 }
 
-int actionableButtonCount(QAccessibleInterface *interface)
+int actionableButtonCount(QAccessibleInterface *interface, bool visibleOnly = false)
 {
     if (!interface || !interface->isValid())
         return 0;
     auto *actions = interface->actionInterface();
-    int count = interface->role() == QAccessible::Button && actions
+    int count = (!visibleOnly || !interface->state().invisible)
+                    && interface->role() == QAccessible::Button && actions
                     && actions->actionNames().contains(QAccessibleActionInterface::pressAction())
             ? 1
             : 0;
     for (int index = 0; index < interface->childCount(); ++index)
-        count += actionableButtonCount(interface->child(index));
+        count += actionableButtonCount(interface->child(index), visibleOnly);
     return count;
 }
 
@@ -49,6 +50,7 @@ class FluidAccessibilityTest : public QObject
     Q_OBJECT
 
 private slots:
+    void badgeHostsExposeFullInformationWithoutDecorativeNodes();
     void labeledFabInheritsButtonAccessibility();
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
@@ -58,6 +60,127 @@ private slots:
     void splitButtonRestoresFocusAfterAccessibleMenuActivation_data();
     void splitButtonRestoresFocusAfterAccessibleMenuActivation();
 };
+
+void FluidAccessibilityTest::badgeHostsExposeFullInformationWithoutDecorativeNodes()
+{
+    QAccessible::setActive(true);
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+        Window {
+            width: 800; height: 600; visible: true
+            property int activations: 0
+            MD.IconButton {
+                objectName: "inbox"
+                text: "Inbox"; icon.name: MD.Symbols.mail
+                badgeContent: "Updated"; x: 20; y: 100
+                onClicked: ++activations
+            }
+            MD.NavigationRail {
+                objectName: "rail"
+                y: 160; height: 400
+                MD.NavigationRailItem {
+                    objectName: "home"
+                    text: "Home"; icon.name: MD.Symbols.home
+                }
+                MD.NavigationRailItem {
+                    objectName: "destination"
+                    text: "Messages"; icon.name: MD.Symbols.mail
+                    badgeContent: 1000; badgeAccessibleDescription: "1000 unread messages"
+                    onClicked: ++activations
+                }
+            }
+            MD.AppBarAction {
+                id: notifications
+                objectName: "notifications"
+                text: "Notifications"; icon.name: MD.Symbols.notifications
+                badgeContent: "Updated"; badgeAccessibleDescription: "New account updates"
+                overflowPolicy: MD.AppBarAction.NeverOverflow
+                onTriggered: ++activations
+            }
+            MD.AppBar { width: parent.width; title: "Example"; actions: [notifications] }
+            MD.Badge { x: 400; y: 200; text: "Standalone status" }
+        }
+    )", QUrl(QStringLiteral("inline:badge-accessibility.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    QVERIFY(window);
+    QCoreApplication::processEvents();
+    auto *tree = QAccessible::queryAccessibleInterface(window);
+    QVERIFY(tree);
+    auto *inbox = findAccessible(tree, QStringLiteral("Inbox, Updated"));
+    auto *destination = findAccessible(tree, QStringLiteral("Messages, 1000 unread messages"));
+    auto *notifications = findAccessible(tree, QStringLiteral("Notifications, New account updates"));
+    auto *home = findAccessible(tree, QStringLiteral("Home"));
+    auto *railObject = root->findChild<QObject *>(QStringLiteral("rail"));
+    QVERIFY(inbox);
+    QVERIFY(destination);
+    QVERIFY(notifications);
+    QVERIFY(home && railObject);
+    QCOMPARE(inbox->role(), QAccessible::Button);
+    QCOMPARE(destination->role(), QAccessible::PageTab);
+    QCOMPARE(notifications->role(), QAccessible::Button);
+    QCOMPARE(inbox->childCount(), 0);
+    QCOMPARE(destination->childCount(), 0);
+    QCOMPARE(notifications->childCount(), 0);
+    QVERIFY(!findAccessible(tree, QStringLiteral("Upd…")));
+    QVERIFY(!findAccessible(tree, QStringLiteral("Updated")));
+    QVERIFY(!findAccessible(tree, QStringLiteral("999+")));
+    QVERIFY(!findAccessible(tree, QStringLiteral("Standalone status")));
+    // AppBar also owns hidden navigation/overflow buttons. Count visible hosts,
+    // while the empty child lists above reject decorative or duplicate nodes.
+    QCOMPARE(actionableButtonCount(tree, true), 2);
+    QCOMPARE(railObject->property("currentIndex").toInt(), 0);
+    QVERIFY(home->state().selected);
+    QVERIFY(!destination->state().selected);
+    for (auto *host : {inbox, destination, notifications}) {
+        QVERIFY(host->state().focusable);
+        auto *actions = host->actionInterface();
+        QVERIFY(actions);
+        QVERIFY(actions->actionNames().contains(QAccessibleActionInterface::pressAction()));
+        actions->doAction(QAccessibleActionInterface::pressAction());
+    }
+    QTRY_COMPARE(root->property("activations").toInt(), 3);
+    QTRY_COMPARE(railObject->property("currentIndex").toInt(), 1);
+    QVERIFY(destination->state().selected);
+    QVERIFY(!home->state().selected);
+    auto *inboxObject = root->findChild<QObject *>(QStringLiteral("inbox"));
+    auto *destinationObject = root->findChild<QObject *>(QStringLiteral("destination"));
+    auto *notificationAction = root->findChild<QObject *>(QStringLiteral("notifications"));
+    QVERIFY(inboxObject && destinationObject && notificationAction);
+    QVERIFY(inboxObject->setProperty("badgeContent", QStringLiteral("A full status value")));
+    QTRY_COMPARE(inbox->text(QAccessible::Name), QStringLiteral("Inbox, A full status value"));
+    QVERIFY(inboxObject->setProperty("badgeVisible", false));
+    QTRY_COMPARE(inbox->text(QAccessible::Name), QStringLiteral("Inbox"));
+    QVERIFY(destinationObject->setProperty("badgeVisible", false));
+    QTRY_COMPARE(destination->text(QAccessible::Name), QStringLiteral("Messages"));
+    QVERIFY(notificationAction->setProperty("badgeVisible", false));
+    QTRY_COMPARE(notifications->text(QAccessible::Name), QStringLiteral("Notifications"));
+    destination->actionInterface()->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_COMPARE(root->property("activations").toInt(), 4);
+    QVERIFY(destination->state().selected);
+    QVERIFY(inboxObject->setProperty("badgeVisible", true));
+    QVERIFY(inboxObject->setProperty("badgeContent", QString()));
+    QTRY_COMPARE(inbox->text(QAccessible::Name), QStringLiteral("Inbox"));
+    QVERIFY(inboxObject->setProperty("enabled", false));
+    QVERIFY(inbox->state().disabled);
+    inbox->actionInterface()->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("activations").toInt(), 4);
+    QVERIFY(destinationObject->setProperty("enabled", false));
+    QVERIFY(destination->state().disabled);
+    destination->actionInterface()->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("activations").toInt(), 4);
+    QVERIFY(destination->state().selected);
+    QCOMPARE(inbox->childCount(), 0);
+    QCOMPARE(destination->childCount(), 0);
+    QCOMPARE(notifications->childCount(), 0);
+}
 
 void FluidAccessibilityTest::splitButtonExposesIndependentActionsAndManagedExpansion()
 {

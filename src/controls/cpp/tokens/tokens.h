@@ -7,6 +7,7 @@
 #include <QQmlEngine>
 
 #include "appbar.h"
+#include "badge.h"
 #include "button.h"
 #include "buttongroup.h"
 #include "checkbox.h"
@@ -89,6 +90,9 @@ class Tokens : public QObject
     // Component tokens - App bar
     Q_PROPERTY(Fluid::AppBar appBar READ appBar CONSTANT FINAL)
 
+    // Component tokens - Badge
+    Q_PROPERTY(Fluid::Badge badge READ badge CONSTANT FINAL)
+
     // Component tokens - Button
     Q_PROPERTY(Fluid::Button button READ button CONSTANT FINAL)
     Q_PROPERTY(Fluid::ButtonGroup buttonGroup READ buttonGroup CONSTANT FINAL)
@@ -165,6 +169,9 @@ public:
     // Component tokens - App bar
     AppBar appBar() const;
 
+    // Component tokens - Badge
+    Badge badge() const;
+
     // Component tokens - Button
     Button button() const;
     ButtonGroup buttonGroup() const;
@@ -239,6 +246,7 @@ private:
     ColorLightTokens m_light;
     ColorDarkTokens m_dark;
     AppBar m_appBar;
+    Badge m_badge;
     Button m_button;
     ButtonGroup m_buttonGroup;
     SplitButton m_splitButton;

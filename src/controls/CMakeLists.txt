@@ -13,6 +13,7 @@ set(_sources
     cpp/style/style.cpp cpp/style/style.h
     cpp/style/theme.cpp cpp/style/theme.h
     cpp/tokens/appbar.cpp cpp/tokens/appbar.h
+    cpp/tokens/badge.cpp cpp/tokens/badge.h
     cpp/tokens/button.cpp cpp/tokens/button.h
     cpp/tokens/buttongroup.cpp cpp/tokens/buttongroup.h
     cpp/tokens/checkbox.cpp cpp/tokens/checkbox.h

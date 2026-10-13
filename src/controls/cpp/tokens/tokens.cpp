@@ -69,6 +69,12 @@ AppBar Tokens::appBar() const
     return m_appBar;
 }
 
+// Component tokens - Badge
+Badge Tokens::badge() const
+{
+    return m_badge;
+}
+
 // Component tokens - Button
 Button Tokens::button() const
 {

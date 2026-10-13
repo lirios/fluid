@@ -22,6 +22,7 @@ void registerEnumOwners()
         { "AppBar", "components" },
         { "AppBarAction", "components" },
         { "BaseAppBar", "internal" },
+        { "Badge", "components" },
         { "FAB", "components" },
         { "ExposedDropdownMenu", "components" },
         { "FabMenu", "components" },

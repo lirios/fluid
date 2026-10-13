@@ -10,14 +10,13 @@ add_executable(tst_fluid_controls
     tst_color.qml
     tst_colortokens.qml
     tst_componenttokens.qml
-    tst_date.qml
     tst_divider.qml
     tst_exposeddropdownmenu.qml
     tst_fab.qml
     tst_fabmenu.qml
     tst_gallery.qml
     tst_groupbox.qml
-    tst_icon.qml
+    tst_symbol.qml
     tst_iconbutton.qml
     tst_listitem.qml
     tst_menu.qml

@@ -12,7 +12,7 @@
 
 // Component values map to the AndroidX Material 3 generated tokens:
 // https://android.googlesource.com/platform/frameworks/support/+/5ba2cdd61be7b6945db999b238d14f3c626136fb/compose/material3/material3/src/commonMain/kotlin/androidx/compose/material3/tokens/
-// FabMenuTokens.kt, FabMenuCloseButtonTokens.kt, and FabMenuItemTokens.kt.
+// FabMenuBaselineTokens.kt, VERSION: v0_14_0.
 
 namespace Fluid {
 
@@ -128,7 +128,7 @@ public:
     //! Resting elevation of a list item.
     constexpr qreal listItemContainerElevation() const
     {
-        return ElevationTokens{ }.level0();
+        return ElevationTokens{ }.level3();
     }
 
     //! Size of the leading list item icon.

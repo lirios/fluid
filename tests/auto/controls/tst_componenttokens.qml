@@ -73,7 +73,7 @@ Item {
         function test_selfEnumReferences_data() {
             return ["AppBar", "AppBarAction", "BaseAppBar", "FAB", "FabMenu", "FabMenuButton",
                     "IconButton", "IconLabel", "Menu", "MenuItem", "RangeSlider", "SearchAppBar",
-                    "Slider", "Switch", "Symbol"].map(type => ({ tag: type, type: type }));
+                    "Slider", "Switch", "Symbol", "TextField", "ExposedDropdownMenu"].map(type => ({ tag: type, type: type }));
         }
 
         function test_selfEnumReferences(data) {

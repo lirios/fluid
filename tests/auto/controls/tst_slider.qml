@@ -80,9 +80,11 @@ TestCase {
     function verifyIndicatorIsWithinSlider(slider, indicator) {
         const point = indicator.mapToItem(slider, 0, 0);
         verify(point.x >= 0);
-        verify(point.y >= 0);
-        verify(point.x + indicator.width <= slider.width);
-        verify(point.y + indicator.height <= slider.height);
+        verify(point.y >= 0, "indicator top " + point.y + ", scale " + indicator.scale
+               + ", height " + indicator.height + ", slider height " + slider.height);
+        const farPoint = indicator.mapToItem(slider, indicator.width, indicator.height);
+        verify(farPoint.x <= slider.width, "indicator right " + farPoint.x + ", slider width " + slider.width);
+        verify(farPoint.y <= slider.height, "indicator bottom " + farPoint.y + ", slider height " + slider.height);
     }
 
     function test_tokens() {
@@ -460,7 +462,12 @@ TestCase {
         mouseMove(slider, slider.handle.x + slider.handle.width / 2,
                   slider.handle.y + slider.handle.height / 2);
         tryVerify(() => indicator.visible);
-        compareReal(indicator.height, MD.Tokens.slider.valueIndicatorMinHeight);
+        tryCompare(indicator, "scale", 1);
+        verify(indicator.height >= MD.Tokens.slider.valueIndicatorMinHeight);
+        const label = findChild(indicator, "valueIndicatorLabel");
+        const labelPosition = label.mapToItem(indicator, 0, 0);
+        verify(labelPosition.y >= indicator.topPadding, "label top " + labelPosition.y + ", padding " + indicator.topPadding);
+        verify(labelPosition.y + label.height <= indicator.height - indicator.bottomPadding, "label bottom " + (labelPosition.y + label.height) + ", height " + indicator.height + ", bottom padding " + indicator.bottomPadding);
         verify(indicator.width >= indicator.height);
         let point = indicator.mapToItem(slider, 0, 0);
         verify(point.y >= 0);

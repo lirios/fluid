@@ -7,7 +7,6 @@ import Fluid as MD
 GalleryPage {
     id: page
 
-    anchors.fill: parent
     headline: qsTr("Lists")
     description: qsTr("Lists organize related content into rows with text, imagery, and interactive trailing controls.")
 

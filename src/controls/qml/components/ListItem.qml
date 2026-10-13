@@ -27,11 +27,11 @@ import "../core/UiMetrics.js" as UiMetrics
         text: "Primary label"
         supportingText: "Supporting line"
 
-        leading: MD.Icon {
+        leading: MD.Symbol {
             name: MD.Symbols.accountCircle
         }
 
-        trailing: MD.Icon {
+        trailing: MD.Symbol {
             name: MD.Symbols.chevronRight
         }
     }

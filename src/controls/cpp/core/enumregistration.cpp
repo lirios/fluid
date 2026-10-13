@@ -19,14 +19,23 @@ void registerEnumOwners()
         const char *name;
         const char *directory;
     } owners[] = {
-        { "AppBar", "components" },      { "AppBarAction", "components" },
-        { "BaseAppBar", "internal" },    { "FAB", "components" },
-        { "FabMenu", "components" },     { "FabMenuButton", "components" },
-        { "IconButton", "components" },  { "IconLabel", "components" },
-        { "Menu", "components" },        { "MenuItem", "components" },
-        { "RangeSlider", "components" }, { "SearchAppBar", "components" },
-        { "Slider", "components" },      { "Switch", "components" },
+        { "AppBar", "components" },
+        { "AppBarAction", "components" },
+        { "BaseAppBar", "internal" },
+        { "FAB", "components" },
+        { "ExposedDropdownMenu", "components" },
+        { "FabMenu", "components" },
+        { "FabMenuButton", "components" },
+        { "IconButton", "components" },
+        { "IconLabel", "components" },
+        { "Menu", "components" },
+        { "MenuItem", "components" },
+        { "RangeSlider", "components" },
+        { "SearchAppBar", "components" },
+        { "Slider", "components" },
+        { "Switch", "components" },
         { "Symbol", "components" },
+        { "TextField", "components" },
     };
 
     for (const auto &owner : owners) {

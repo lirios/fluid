@@ -1,13 +1,13 @@
-// SPDX-FileCopyrightText: 2018 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
+// SPDX-FileCopyrightText: 2018-2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
 import QtQuick
-import QtQuick.Controls
 import QtTest
-import Fluid
+import Fluid as MD
 
 TestCase {
     id: testCase
+
     name: "TypographyTests"
     width: 200
     height: 200
@@ -15,116 +15,67 @@ TestCase {
     when: windowShown
 
     Component {
-        id: displayLabelComponent
-        DisplayLabel {}
+        id: labelComponent
+
+        MD.Label {
+            text: "Typography"
+        }
     }
 
-    Component {
-        id: bodyLabelComponent
-        BodyLabel {}
+    function verifyTypeScale(label, scale) {
+        compare(label.font.family, scale.face === MD.Style.TypeFace.Brand ? label.MD.Style.brandFontFamily : label.MD.Style.plainFontFamily);
+        compare(label.font.pixelSize, scale.fontSize);
+        compare(label.font.weight, scale.fontWeight);
+        // QFont stores letter spacing with 1/64-pixel precision.
+        fuzzyCompare(label.font.letterSpacing, scale.tracking, 1 / 64);
+        compare(label.lineHeight, scale.lineHeight);
+        compare(label.lineHeightMode, Text.FixedHeight);
     }
 
-    Component {
-        id: captionLabelComponent
-        CaptionLabel {}
+    function test_defaults() {
+        const label = createTemporaryObject(labelComponent, testCase);
+        verify(label);
+
+        verifyTypeScale(label, MD.Tokens.typescale.labelMedium);
+        compare(label.color, label.MD.Style.onSurfaceVariantColor);
+        compare(label.textFormat, Text.PlainText);
+        compare(label.wrapMode, Text.Wrap);
+        compare(label.elide, Text.ElideRight);
     }
 
-    Component {
-        id: headlineLabelComponent
-        HeadlineLabel {}
+    function test_typeScale_data() {
+        const names = ["displayLarge", "displayMedium", "displaySmall", "headlineLarge", "headlineMedium", "headlineSmall", "titleLarge", "titleMedium", "titleSmall", "bodyLarge", "bodyMedium", "bodySmall", "labelLarge", "labelMedium", "labelSmall"];
+        const rows = [];
+        for (const name of names) {
+            rows.push({
+                tag: name,
+                scale: MD.Tokens.typescale[name]
+            });
+            rows.push({
+                tag: "emphasized_" + name,
+                scale: MD.Tokens.emphasizedTypeScale[name]
+            });
+        }
+        return rows;
     }
 
-    Component {
-        id: subheadingLabelComponent
-        SubheadingLabel {}
+    function test_typeScale(data) {
+        const label = createTemporaryObject(labelComponent, testCase, {
+            typescale: data.scale
+        });
+        verify(label);
+
+        verifyTypeScale(label, data.scale);
     }
 
-    Component {
-        id: titleLabelComponent
-        TitleLabel {}
-    }
+    function test_typeScaleChange() {
+        const label = createTemporaryObject(labelComponent, testCase);
+        verify(label);
 
-    function test_display_label() {
-        var displayLabel = displayLabelComponent.createObject(testCase);
-        verify(displayLabel);
+        label.typescale = MD.Tokens.typescale.displayLarge;
+        verifyTypeScale(label, MD.Tokens.typescale.displayLarge);
 
-        displayLabel.level = 1;
-        compare(displayLabel.font.pixelSize, 34);
-        compare(displayLabel.font.weight, Font.Normal);
-        displayLabel.level = 2;
-        compare(displayLabel.font.pixelSize, 45);
-        compare(displayLabel.font.weight, Font.Normal);
-        displayLabel.level = 3;
-        compare(displayLabel.font.pixelSize, 56);
-        compare(displayLabel.font.weight, Font.Normal);
-        displayLabel.level = 4;
-        compare(displayLabel.font.pixelSize, 112);
-        compare(displayLabel.font.weight, Font.Light);
-    }
-
-    function test_body_label() {
-        var bodyLabel = bodyLabelComponent.createObject(testCase);
-        verify(bodyLabel);
-
-        bodyLabel.level = 1;
-        if (Device.isMobile)
-            compare(bodyLabel.font.pixelSize, 14);
-        else
-            compare(bodyLabel.font.pixelSize, 13);
-        compare(bodyLabel.lineHeight, 20.0);
-        compare(bodyLabel.lineHeightMode, Text.FixedHeight);
-
-        bodyLabel.level = 2;
-        if (Device.isMobile)
-            compare(bodyLabel.font.pixelSize, 14);
-        else
-            compare(bodyLabel.font.pixelSize, 13);
-        compare(bodyLabel.lineHeight, 24.0);
-        compare(bodyLabel.lineHeightMode, Text.FixedHeight);
-    }
-
-    function test_caption_label() {
-        var captionLabel = captionLabelComponent.createObject(testCase);
-        verify(captionLabel);
-
-        compare(captionLabel.font.pixelSize, 12);
-    }
-
-    function test_headline_label() {
-        var headlineLabel = headlineLabelComponent.createObject(testCase);
-        verify(headlineLabel);
-
-        compare(headlineLabel.font.pixelSize, 24);
-        compare(headlineLabel.lineHeight, 32.0);
-        compare(headlineLabel.lineHeightMode, Text.FixedHeight);
-    }
-
-    function test_subheading_label() {
-        var subheadingLabel = subheadingLabelComponent.createObject(testCase);
-        verify(subheadingLabel);
-
-        subheadingLabel.level = 1;
-        if (Device.isMobile)
-            compare(subheadingLabel.font.pixelSize, 16);
-        else
-            compare(subheadingLabel.font.pixelSize, 15);
-        compare(subheadingLabel.lineHeight, 24.0);
-        compare(subheadingLabel.lineHeightMode, Text.FixedHeight);
-
-        subheadingLabel.level = 2;
-        if (Device.isMobile)
-            compare(subheadingLabel.font.pixelSize, 16);
-        else
-            compare(subheadingLabel.font.pixelSize, 15);
-        compare(subheadingLabel.lineHeight, 28.0);
-        compare(subheadingLabel.lineHeightMode, Text.FixedHeight);
-    }
-
-    function test_title_label() {
-        var titleLabel = titleLabelComponent.createObject(testCase);
-        verify(titleLabel);
-
-        compare(titleLabel.font.pixelSize, 20);
-        compare(titleLabel.font.weight, Font.Medium);
+        label.typescale = MD.Tokens.emphasizedTypeScale.titleSmall;
+        verifyTypeScale(label, MD.Tokens.emphasizedTypeScale.titleSmall);
     }
 }

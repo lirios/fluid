@@ -35,6 +35,7 @@
 #include "statetokens.h"
 #include "switch.h"
 #include "symbol.h"
+#include "tab.h"
 #include "textfield.h"
 #include "tooltip.h"
 
@@ -144,6 +145,9 @@ class Tokens : public QObject
     // Component tokens - Symbol
     Q_PROPERTY(Fluid::Symbol symbol READ symbol CONSTANT FINAL)
 
+    // Component tokens - Tabs
+    Q_PROPERTY(Fluid::Tab tab READ tab CONSTANT FINAL)
+
     // Component tokens - Text field
     Q_PROPERTY(Fluid::TextField textField READ textField CONSTANT FINAL)
 
@@ -229,6 +233,9 @@ public:
     //! Returns the immutable text-field component token group.
     TextField textField() const;
 
+    //! Returns immutable primary and secondary tab metrics.
+    Tab tab() const;
+
     // Component tokens - Tool tip
     ToolTip toolTip() const;
 
@@ -265,6 +272,7 @@ private:
     Divider m_divider;
     Switch m_switch;
     Symbol m_symbol;
+    Tab m_tab;
     TextField m_textField;
     ToolTip m_toolTip;
 };

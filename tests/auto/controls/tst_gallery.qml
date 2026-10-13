@@ -98,6 +98,7 @@ TestCase {
 
         pages.push(["split-buttons", "SplitButtons.qml"]);
         pages.push(["badges", "Badges.qml"]);
+        pages.push(["tabs", "Tabs.qml"]);
         const rows = [];
         for (const page of pages) {
             rows.push({
@@ -142,6 +143,35 @@ TestCase {
         compare(grid.columns, data.columns);
         verify(headline && headline.text.length > 0);
         verify(description && description.text.length > 0);
+    }
+
+    function test_tabsExamples_data() {
+        return [{tag: "compact", width: 480}, {tag: "medium", width: 720},
+                {tag: "large", width: 1280}];
+    }
+
+    function test_tabsExamples(data) {
+        const component = Qt.createComponent(Qt.resolvedUrl("../../../src/gallery/qml/Tabs.qml"));
+        tryCompare(component, "status", Component.Ready);
+        if (component.status !== Component.Ready)
+            fail(component.errorString());
+        const page = createTemporaryObject(component, testCase, {width: data.width, height: 700});
+        verify(page);
+        for (const suffix of ["primary-fixed", "primary-scrollable", "secondary",
+                             "secondary-scrollable", "stack", "inline", "narrow", "rtl",
+                             "swipe", "icon-only", "badges", "theme", "primary-secondary"])
+            verify(findChild(page, "tab-gallery-" + suffix), "Tabs gallery example " + suffix);
+        const primary = findChild(page, "tab-gallery-primary-fixed");
+        const scrollable = findChild(page, "tab-gallery-primary-scrollable");
+        const secondary = findChild(page, "tab-gallery-secondary");
+        const secondaryScrollable = findChild(page, "tab-gallery-secondary-scrollable");
+        compare(primary.variant, MD.TabBar.Primary);
+        compare(primary.layoutMode, MD.TabBar.Fixed);
+        compare(scrollable.layoutMode, MD.TabBar.Scrollable);
+        compare(secondary.variant, MD.TabBar.Secondary);
+        compare(secondaryScrollable.variant, MD.TabBar.Secondary);
+        compare(secondaryScrollable.layoutMode, MD.TabBar.Scrollable);
+        verify(findChild(page, "tab-gallery-rtl").mirrored);
     }
 
     function test_fabPropertiesLayout_data() {

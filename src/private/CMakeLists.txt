@@ -4,6 +4,7 @@ set(LIBNAME FluidPrivate)
 set(_sources
     badgetext.cpp badgetext.h
     shortcututils.cpp shortcututils.h
+    tabkeybridge.cpp tabkeybridge.h
     windowdecoration.cpp windowdecoration.h
 )
 

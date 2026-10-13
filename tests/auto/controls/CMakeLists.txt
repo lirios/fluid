@@ -29,6 +29,7 @@ add_executable(tst_fluid_controls
     tst_splitbutton.qml
     tst_switch.qml
     tst_symbols.qml
+    tst_tabs.qml
     tst_textfield.qml
     tst_tooltip.qml
     tst_systemtokens.qml

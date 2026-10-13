@@ -181,6 +181,12 @@ Symbol Tokens::symbol() const
     return m_symbol;
 }
 
+// Component tokens - Tabs
+Tab Tokens::tab() const
+{
+    return m_tab;
+}
+
 // Component tokens - Text field
 TextField Tokens::textField() const
 {

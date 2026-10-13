@@ -5,12 +5,14 @@
 #include <QAccessibleActionInterface>
 #include <QAccessibleValueInterface>
 #include <QGuiApplication>
+#include <QKeyEvent>
 #include <QMetaEnum>
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QScopedPointer>
+#include <QSignalSpy>
 #include <QTest>
 
 namespace {
@@ -55,6 +57,8 @@ private slots:
     void rangeSliderHandlesAreRealAccessibleNodes();
     void textFieldIsAnEditableAccessibleNode();
     void segmentedButtonsExposeSelectionAndActivation();
+    void tabsExposeSelectionFocusActivationAndBadges();
+    void tabsRetainNativeKeyboardLifecycleAndIgnorePhysicalRepeats();
     void splitButtonExposesIndependentActionsAndManagedExpansion();
     void splitButtonCustomPopupExposesBoundExpansion();
     void splitButtonRestoresFocusAfterAccessibleMenuActivation_data();
@@ -755,6 +759,205 @@ void FluidAccessibilityTest::rangeSliderHandlesAreRealAccessibleNodes()
     secondActions->doAction(QAccessibleActionInterface::decreaseAction());
     QTRY_COMPARE(firstHandle->property("value").toDouble(), 30.0);
     QTRY_COMPARE(secondHandle->property("value").toDouble(), 70.0);
+}
+
+void FluidAccessibilityTest::tabsExposeSelectionFocusActivationAndBadges()
+{
+    QAccessible::setActive(true);
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+        Window {
+            width: 640; height: 480; visible: true
+            property int activations: 0
+            function overrideName() { last.Accessible.name = "Application supplied name" }
+            function lastIsRendered() {
+                return bar.contentItem.itemAt(last.x + last.width / 2,
+                                              last.y + last.height / 2) === last
+            }
+            MD.TabBar {
+                id: bar
+                objectName: "tabs"
+                x: 20; y: 80; width: 180
+                layoutMode: MD.TabBar.Scrollable
+                Accessible.name: "Library destinations"
+                MD.TabButton { objectName: "firstTab"; text: "Overview" }
+                MD.TabButton { text: "Working documents" }
+                MD.TabButton { text: "Archived documents" }
+                MD.TabButton { text: "Shared documents" }
+                MD.TabButton { text: "Account settings" }
+                MD.TabButton {
+                    id: last
+                    objectName: "lastTab"
+                    text: "Messages"; icon.name: MD.Symbols.mail
+                    badgeContent: 1000
+                    badgeAccessibleDescription: "1000 unread messages"
+                    onClicked: ++activations
+                }
+            }
+            MD.TabButton {
+                objectName: "iconOnlyTab"
+                x: 250; y: 80
+                icon.name: MD.Symbols.settings
+                Accessible.name: "Settings destination"
+            }
+        }
+    )",
+                      QUrl(QStringLiteral("inline:tabs-accessibility.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    QVERIFY(window);
+    QCoreApplication::processEvents();
+    auto *bar = root->findChild<QObject *>(QStringLiteral("tabs"));
+    auto *firstObject = root->findChild<QQuickItem *>(QStringLiteral("firstTab"));
+    auto *lastObject = root->findChild<QQuickItem *>(QStringLiteral("lastTab"));
+    auto *view = bar ? bar->findChild<QQuickItem *>(QStringLiteral("tabViewport")) : nullptr;
+    QVERIFY(bar && firstObject && lastObject && view);
+    auto *tree = QAccessible::queryAccessibleInterface(window);
+    QVERIFY(tree);
+    auto *list = findAccessible(tree, QStringLiteral("Library destinations"));
+    auto *first = findAccessible(tree, QStringLiteral("Overview"));
+    auto *last = findAccessible(tree, QStringLiteral("Messages, 1000 unread messages"));
+    auto *icon = findAccessible(tree, QStringLiteral("Settings destination"));
+    QVERIFY(list && first && last && icon);
+    QCOMPARE(list->role(), QAccessible::PageTabList);
+    for (auto *tab : { first, last, icon }) {
+        QCOMPARE(tab->role(), QAccessible::PageTab);
+        QCOMPARE(tab->childCount(), 0);
+        QVERIFY(tab->state().focusable);
+        QVERIFY(tab->actionInterface());
+        QVERIFY(tab->actionInterface()->actionNames().contains(
+                QAccessibleActionInterface::pressAction()));
+    }
+    QVERIFY(first->state().selected);
+    QVERIFY(!last->state().selected);
+    QVERIFY(!findAccessible(tree, QStringLiteral("999+")));
+    QVERIFY(!findAccessible(tree, QStringLiteral("1000 unread messages")));
+    QCOMPARE(bar->property("currentIndex").toInt(), 0);
+    const auto visible = [lastObject, view, &root]() {
+        QVariant rendered;
+        if (!QMetaObject::invokeMethod(root.get(), "lastIsRendered",
+                                       Q_RETURN_ARG(QVariant, rendered))
+            || !rendered.toBool())
+            return false;
+        const qreal x = lastObject->mapToItem(view, QPointF()).x();
+        return x >= -0.5 && x + lastObject->width() <= view->width() + 0.5;
+    };
+    QVERIFY(!visible());
+    auto *actions = last->actionInterface();
+    QVERIFY(actions->actionNames().contains(QAccessibleActionInterface::setFocusAction()));
+    actions->doAction(QAccessibleActionInterface::setFocusAction());
+    QTRY_VERIFY(lastObject->hasActiveFocus());
+    QTRY_VERIFY(visible());
+    QVERIFY(last->state().focused);
+    QVERIFY(!last->state().selected);
+    QCOMPARE(bar->property("currentIndex").toInt(), 0);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QTRY_COMPARE(bar->property("currentIndex").toInt(), 5);
+    QTRY_COMPARE(root->property("activations").toInt(), 1);
+    QVERIFY(last->state().selected);
+    QVERIFY(!first->state().selected);
+    QVERIFY(visible());
+    QVERIFY(lastObject->setProperty("badgeVisible", false));
+    QTRY_COMPARE(last->text(QAccessible::Name), QStringLiteral("Messages"));
+    QVERIFY(lastObject->setProperty("badgeVisible", true));
+    QVERIFY(lastObject->setProperty("badgeContent", QString()));
+    QTRY_COMPARE(last->text(QAccessible::Name), QStringLiteral("Messages"));
+    QVERIFY(lastObject->setProperty("badgeContent", QStringLiteral("Updated")));
+    QVERIFY(lastObject->setProperty("badgeAccessibleDescription", QString()));
+    QTRY_COMPARE(last->text(QAccessible::Name), QStringLiteral("Messages, Updated"));
+    QVERIFY(QMetaObject::invokeMethod(root.get(), "overrideName"));
+    QVERIFY(lastObject->setProperty("badgeContent", QStringLiteral("New")));
+    QTRY_COMPARE(last->text(QAccessible::Name), QStringLiteral("Application supplied name"));
+    QVERIFY(lastObject->setProperty("enabled", false));
+    QVERIFY(last->state().disabled);
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("activations").toInt(), 1);
+    QVERIFY(last->state().selected);
+    QVERIFY(lastObject->setProperty("enabled", true));
+    QVERIFY(lastObject->setProperty("visible", false));
+    actions->doAction(QAccessibleActionInterface::pressAction());
+    QCOMPARE(root->property("activations").toInt(), 1);
+    QCOMPARE(last->childCount(), 0);
+}
+
+void FluidAccessibilityTest::tabsRetainNativeKeyboardLifecycleAndIgnorePhysicalRepeats()
+{
+    QQmlEngine engine;
+    engine.addImportPath(QStringLiteral(FLUID_QML_IMPORT_PATH));
+    QQmlComponent component(&engine);
+    component.setData(R"(
+        import QtQuick
+        import Fluid as MD
+        Window {
+            width: 640; height: 480; visible: true
+            property int activations: 0
+            MD.Action { id: action; text: "Inbox"; onTriggered: ++activations }
+            MD.TabBar {
+                width: 360
+                MD.TabButton { text: "Overview" }
+                MD.TabButton { objectName: "keyTab"; action: action }
+            }
+            MD.Button { objectName: "outside"; y: 150; text: "Outside" }
+        }
+    )",
+                      QUrl(QStringLiteral("inline:tabs-keyboard.qml")));
+    QTRY_VERIFY_WITH_TIMEOUT(!component.isLoading(), 5000);
+    QVERIFY2(component.isReady(), qPrintable(component.errorString()));
+    QScopedPointer<QObject> root(component.create());
+    QVERIFY2(root, qPrintable(component.errorString()));
+    auto *window = qobject_cast<QQuickWindow *>(root.get());
+    auto *button = root->findChild<QQuickItem *>(QStringLiteral("keyTab"));
+    auto *outside = root->findChild<QQuickItem *>(QStringLiteral("outside"));
+    QVERIFY(window && button && outside);
+    QSignalSpy pressed(button, SIGNAL(pressed()));
+    QSignalSpy released(button, SIGNAL(released()));
+    QSignalSpy clicked(button, SIGNAL(clicked()));
+    QSignalSpy canceled(button, SIGNAL(canceled()));
+    QVERIFY(pressed.isValid() && released.isValid() && clicked.isValid() && canceled.isValid());
+
+    int completed = 0;
+    for (const auto key : { Qt::Key_Space, Qt::Key_Return, Qt::Key_Enter }) {
+        button->forceActiveFocus(Qt::TabFocusReason);
+        QTRY_VERIFY(button->hasActiveFocus());
+        QTest::keyPress(window, key);
+        QVERIFY(button->property("pressed").toBool());
+        QVERIFY(button->property("down").toBool());
+        QCOMPARE(pressed.count(), completed * 2 + 1);
+        QCOMPARE(clicked.count(), completed);
+        for (int repeat = 0; repeat < 3; ++repeat) {
+            QKeyEvent release(QEvent::KeyRelease, key, Qt::NoModifier, QString(), true);
+            QCoreApplication::sendEvent(window, &release);
+            QKeyEvent press(QEvent::KeyPress, key, Qt::NoModifier, QString(), true);
+            QCoreApplication::sendEvent(window, &press);
+            QVERIFY(button->property("pressed").toBool());
+            QCOMPARE(clicked.count(), completed);
+            QCOMPARE(pressed.count(), completed * 2 + 1);
+        }
+        QTest::keyRelease(window, key);
+        QVERIFY(!button->property("pressed").toBool());
+        QVERIFY(!button->property("down").toBool());
+        QCOMPARE(clicked.count(), completed + 1);
+        QCOMPARE(released.count(), completed + 1);
+        QCOMPARE(root->property("activations").toInt(), completed + 1);
+
+        QTest::keyPress(window, key);
+        QVERIFY(button->property("pressed").toBool());
+        outside->forceActiveFocus(Qt::TabFocusReason);
+        QTRY_VERIFY(!button->property("pressed").toBool());
+        QVERIFY(!button->property("down").toBool());
+        QCOMPARE(canceled.count(), completed + 1);
+        QTest::keyRelease(window, key);
+        QCOMPARE(clicked.count(), completed + 1);
+        QCOMPARE(released.count(), completed + 1);
+        ++completed;
+    }
 }
 
 QTEST_MAIN(FluidAccessibilityTest)

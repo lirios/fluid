@@ -64,8 +64,8 @@ import "../core/UiMetrics.js" as UiMetrics
     without automatic repositioning. NavigationRailItem uses an icon overlay when
     collapsed or icon-only, and a trailing Large badge beside an expanded label.
     App-bar icon actions always present Small while retaining the full accessible value.
-    For template-based tabs, compose BadgeOverlay around the icon or Badge beside
-    the label; tab-specific placement metrics are deferred to issue #393.
+    TabButton places badges beside inline labels or overlapping stacked and icon-only
+    icons, using the tab-specific spacing and overlap metrics.
 
     \code{.qml}
     Item {

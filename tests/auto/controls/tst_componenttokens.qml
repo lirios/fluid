@@ -620,6 +620,34 @@ Item {
             });
         }
 
+        function test_tab() {
+            verifyValues(MD.Tokens.tab, {
+                primaryContainerHeight: 48,
+                primaryWithIconAndLabelContainerHeight: 64,
+                secondaryContainerHeight: 48,
+                minimumInteractiveSize: 48,
+                iconSize: 24,
+                horizontalPadding: 16,
+                inlineIconLabelGap: 8,
+                stackedIconLabelGap: 2,
+                labelBadgeGap: 4,
+                badgeOverlap: 6,
+                scrollableLeadingOffset: 52,
+                primaryActiveIndicatorHeight: 3,
+                primaryActiveIndicatorMinimumWidth: 24,
+                primaryActiveIndicatorHorizontalInset: 2,
+                primaryActiveIndicatorShape: [3, 3, 3, 3],
+                secondaryActiveIndicatorHeight: 2,
+                secondaryActiveIndicatorShape: MD.Tokens.shape.cornerNone,
+                dividerHeight: 1,
+                containerShape: MD.Tokens.shape.cornerNone,
+                containerElevation: MD.Tokens.elevation.level0,
+                hoverStateLayerOpacity: MD.Tokens.state.hoverStateLayerOpacity,
+                focusStateLayerOpacity: MD.Tokens.state.focusStateLayerOpacity,
+                pressedStateLayerOpacity: MD.Tokens.state.pressedStateLayerOpacity
+            });
+        }
+
         function test_componentToSystemMappings() {
             const shape = MD.Tokens.shape;
             const elevation = MD.Tokens.elevation;

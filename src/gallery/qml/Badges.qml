@@ -207,7 +207,7 @@ GalleryPage {
                 }
             }
 
-            // Template composition only; tab-specific styling belongs to the tabs work.
+            // A generic template composition; use MD.TabBar for tab navigation.
             RowLayout {
                 id: sampleTabs
                 Layout.fillWidth: true

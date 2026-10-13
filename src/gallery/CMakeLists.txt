@@ -36,6 +36,7 @@ qt_add_resources(FluidGallery "gallery"
         qml/TextFields.qml
         qml/Typography.qml
         qml/ToolTips.qml
+        qml/Tabs.qml
         qml/ValueCircle.qml
 )
 

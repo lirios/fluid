@@ -103,6 +103,10 @@ MD.ApplicationWindow {
                     "source": "Badges.qml"
                 },
                 {
+                    "name": qsTr("Tabs"),
+                    "source": "Tabs.qml"
+                },
+                {
                     "name": qsTr("Indicators"),
                     "source": "Indicators.qml"
                 },

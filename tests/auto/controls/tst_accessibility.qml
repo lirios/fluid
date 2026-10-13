@@ -268,6 +268,48 @@ TestCase {
         }
     }
 
+    Component {
+        id: tabsComponent
+        MD.TabBar {
+            width: 360
+            Accessible.name: "Related content"
+            MD.TabButton { text: "Overview" }
+            MD.TabButton {
+                text: "Messages"
+                icon.name: MD.Symbols.mail
+                badgeContent: "Updated"
+            }
+        }
+    }
+
+    function test_tabs_structured_semantics() {
+        const bar = createTemporaryObject(tabsComponent, testCase);
+        verify(bar);
+        compare(bar.Accessible.name, "Related content");
+        const first = bar.itemAt(0);
+        const second = bar.itemAt(1);
+        compare(first.Accessible.name, "Overview");
+        // Native roles and selected states are asserted through QAccessible in C++.
+        compare(bar.currentIndex, 0);
+        compare(second.Accessible.name, "Messages, Updated");
+        for (const name of ["tabLabel", "tabIconSlot", "tabSymbol", "tabSourceImage", "tabBadge"])
+            verify(findChild(second, name).Accessible.ignored, name + " is decorative");
+        verify(findChild(bar, "tabDivider").Accessible.ignored);
+        verify(findChild(bar, "tabIndicator").Accessible.ignored);
+        second.forceActiveFocus(Qt.TabFocusReason);
+        compare(bar.currentIndex, 0);
+        second.Accessible.pressAction();
+        compare(bar.currentIndex, 1);
+        second.badgeVisible = false;
+        compare(second.Accessible.name, "Messages");
+        second.badgeVisible = true;
+        second.badgeContent = "";
+        compare(second.Accessible.name, "Messages");
+        second.Accessible.name = "Explicit destination";
+        second.badgeContent = 8;
+        compare(second.Accessible.name, "Explicit destination");
+    }
+
     function test_split_button_structured_semantics() {
         const split = createTemporaryObject(splitButtonComponent, testCase);
         verify(split);

@@ -59,6 +59,8 @@ flat system-token aliases, legacy spacing aliases, or another ad hoc spacing sca
 
 ## Build and test
 
+Run `Fluid_qmllint` and unit tests to validate changes.
+
 ```sh
 # Update git submodules
 git submodule update --init
@@ -69,7 +71,10 @@ cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
 # Build all configured targets
 cmake --build build
 
-# Run tests
+# Run QML lint
+cmake --build build --target Fluid_qmllint
+
+# Run unit tests
 ctest --test-dir build --output-on-failure
 
 # Install all configured targets

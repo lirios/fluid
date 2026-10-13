@@ -77,7 +77,7 @@ MD.BaseAppBar {
     }
 
     //! The app bar variant. The default is \c Small.
-    property int variant: AppBar.Small
+    property int variant: MD.AppBar.Small
 
     //! The primary title displayed by the app bar.
     property string title
@@ -86,7 +86,7 @@ MD.BaseAppBar {
     property string subtitle
 
     //! The logical title alignment. The default is \c Start.
-    property int titleAlignment: AppBar.Start
+    property int titleAlignment: MD.AppBar.Start
 
     /*!
         Maximum title lines in the expanded layout.
@@ -94,7 +94,7 @@ MD.BaseAppBar {
         The default is one line for a small app bar and two lines for flexible
         variants. Collapsed title content always uses one line.
     */
-    property int titleMaximumLineCount: variant === AppBar.Small ? 1 : 2
+    property int titleMaximumLineCount: variant === MD.AppBar.Small ? 1 : 2
 
     /*!
         Maximum subtitle lines in the expanded layout.
@@ -118,9 +118,9 @@ MD.BaseAppBar {
     //! \internal
     readonly property real _tokenExpandedHeight: {
         switch (variant) {
-        case AppBar.MediumFlexible:
+        case MD.AppBar.MediumFlexible:
             return _hasSubtitle ? MD.Tokens.appBar.mediumFlexibleContainerHeightWithSubtitle : MD.Tokens.appBar.mediumFlexibleContainerHeight;
-        case AppBar.LargeFlexible:
+        case MD.AppBar.LargeFlexible:
             return _hasSubtitle ? MD.Tokens.appBar.largeFlexibleContainerHeightWithSubtitle : MD.Tokens.appBar.largeFlexibleContainerHeight;
         default:
             return collapsedHeight;
@@ -128,23 +128,23 @@ MD.BaseAppBar {
     }
 
     //! \internal
-    readonly property real _expandedTitleLineHeight: variant === AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall.lineHeight : MD.Tokens.typescale.headlineMedium.lineHeight
+    readonly property real _expandedTitleLineHeight: variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall.lineHeight : MD.Tokens.typescale.headlineMedium.lineHeight
 
     //! \internal
-    readonly property real _expandedSubtitleLineHeight: _hasSubtitle ? (variant === AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium.lineHeight : MD.Tokens.typescale.labelLarge.lineHeight) : 0
+    readonly property real _expandedSubtitleLineHeight: _hasSubtitle ? (variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium.lineHeight : MD.Tokens.typescale.labelLarge.lineHeight) : 0
 
     //! \internal
-    readonly property real _expandedGap: _hasSubtitle ? (variant === AppBar.LargeFlexible ? MD.Tokens.appBar.largeTitleSubtitleGap : MD.Tokens.appBar.mediumTitleSubtitleGap) : 0
+    readonly property real _expandedGap: _hasSubtitle ? (variant === MD.AppBar.LargeFlexible ? MD.Tokens.appBar.largeTitleSubtitleGap : MD.Tokens.appBar.mediumTitleSubtitleGap) : 0
 
     //! \internal
     readonly property real _defaultExpandedTextHeight: _expandedTitleLineHeight + _expandedGap + _expandedSubtitleLineHeight
 
     //! \internal
-    readonly property real _bottomPadding: variant === AppBar.LargeFlexible ? MD.Tokens.appBar.largeTitleBottomPadding : MD.Tokens.appBar.mediumTitleBottomPadding
+    readonly property real _bottomPadding: variant === MD.AppBar.LargeFlexible ? MD.Tokens.appBar.largeTitleBottomPadding : MD.Tokens.appBar.mediumTitleBottomPadding
 
     collapsedHeight: MD.Tokens.appBar.smallContainerHeight
-    expandedHeight: variant === AppBar.Small ? collapsedHeight : _tokenExpandedHeight + Math.max(0, _expandedTextHeight - _defaultExpandedTextHeight)
-    scrollBehavior: variant === AppBar.Small ? MD.BaseAppBar.Pinned : MD.BaseAppBar.ExitUntilCollapsed
+    expandedHeight: variant === MD.AppBar.Small ? collapsedHeight : _tokenExpandedHeight + Math.max(0, _expandedTextHeight - _defaultExpandedTextHeight)
+    scrollBehavior: variant === MD.AppBar.Small ? MD.BaseAppBar.Pinned : MD.BaseAppBar.ExitUntilCollapsed
     minimumCenterWidth: Math.max(MD.Tokens.appBar.titleInset * 2, Math.min(barContentWidth, _titleImplicitWidth + MD.Tokens.appBar.titleInset * 2))
 
     centerContent: Component {
@@ -152,7 +152,7 @@ MD.BaseAppBar {
             id: titleArea
             objectName: "titleArea"
 
-            readonly property real fraction: control.variant === AppBar.Small ? 1 : control.collapsedFraction
+            readonly property real fraction: control.variant === MD.AppBar.Small ? 1 : control.collapsedFraction
             readonly property bool collapsedTypography: fraction >= 0.5
             readonly property real physicalLeadingWidth: control.layoutMirrored ? control.trailingWidth : control.leadingWidth
             readonly property real physicalTrailingWidth: control.layoutMirrored ? control.leadingWidth : control.trailingWidth
@@ -176,7 +176,7 @@ MD.BaseAppBar {
                 visible: false
                 width: Math.max(0, titleArea.width - MD.Tokens.appBar.titleInset * 2)
                 text: control.title
-                typescale: control.variant === AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall : MD.Tokens.typescale.headlineMedium
+                typescale: control.variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall : MD.Tokens.typescale.headlineMedium
                 maximumLineCount: Math.max(1, control.titleMaximumLineCount)
                 wrapMode: Text.Wrap
                 elide: Text.ElideRight
@@ -189,7 +189,7 @@ MD.BaseAppBar {
                 visible: false
                 width: expandedTitleMetrics.width
                 text: control.subtitle
-                typescale: control.variant === AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium : MD.Tokens.typescale.labelLarge
+                typescale: control.variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium : MD.Tokens.typescale.labelLarge
                 maximumLineCount: Math.max(1, control.subtitleMaximumLineCount)
                 wrapMode: Text.Wrap
                 elide: Text.ElideRight
@@ -223,7 +223,7 @@ MD.BaseAppBar {
                     width: parent.width
                     text: control.title
                     color: control.titleColor
-                    typescale: titleArea.collapsedTypography ? MD.Tokens.typescale.titleLarge : control.variant === AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall : MD.Tokens.typescale.headlineMedium
+                    typescale: titleArea.collapsedTypography ? MD.Tokens.typescale.titleLarge : control.variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.displaySmall : MD.Tokens.typescale.headlineMedium
                     maximumLineCount: titleArea.collapsedTypography ? 1 : Math.max(1, control.titleMaximumLineCount)
                     wrapMode: Text.Wrap
                     elide: Text.ElideRight
@@ -237,7 +237,7 @@ MD.BaseAppBar {
                     objectName: "subtitleLabel"
                     text: control.subtitle
                     color: control.subtitleColor
-                    typescale: titleArea.collapsedTypography ? MD.Tokens.typescale.labelMedium : control.variant === AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium : MD.Tokens.typescale.labelLarge
+                    typescale: titleArea.collapsedTypography ? MD.Tokens.typescale.labelMedium : control.variant === MD.AppBar.LargeFlexible ? MD.Tokens.typescale.titleMedium : MD.Tokens.typescale.labelLarge
                     maximumLineCount: titleArea.collapsedTypography ? 1 : Math.max(1, control.subtitleMaximumLineCount)
                     wrapMode: Text.Wrap
                     elide: Text.ElideRight

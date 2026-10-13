@@ -37,6 +37,9 @@ Item {
         Item created after \ref Loadable::component is loaded.
     */
     property alias item: loader.item
+    // Loaded components may expose optional show/hide methods and animations.
+    // Keep this interface dynamic to support custom components as well as Showable.
+    readonly property var _loadedItem: loader.item
     visible: false
 
     Loader {
@@ -46,13 +49,13 @@ Item {
         onStatusChanged: {
             if (status != Loader.Ready)
                 return;
-            if (item.showAnimation == undefined && root.showAnimation != undefined)
-                item.showAnimation = root.showAnimation;
-            if (item.hideAnimation == undefined && root.hideAnimation != undefined)
-                item.hideAnimation = root.hideAnimation;
+            if (root._loadedItem.showAnimation == undefined && root.showAnimation != undefined)
+                root._loadedItem.showAnimation = root.showAnimation;
+            if (root._loadedItem.hideAnimation == undefined && root.hideAnimation != undefined)
+                root._loadedItem.hideAnimation = root.hideAnimation;
             root.visible = true;
-            if (item.show != undefined)
-                item.show();
+            if (root._loadedItem.show != undefined)
+                root._loadedItem.show();
         }
     }
 
@@ -61,7 +64,7 @@ Item {
 
         function onVisibleChanged() {
             // Unload component as soon as it's hidden and hide this item as well
-            if (!loader.item.visible) {
+            if (!(loader.item as Item).visible) {
                 loader.sourceComponent = undefined;
                 root.visible = false;
             }
@@ -79,7 +82,7 @@ Item {
         Hide the component.
     */
     function hide() {
-        if (loader.item && loader.item.hide != undefined)
-            loader.item.hide();
+        if (root._loadedItem && root._loadedItem.hide !== undefined)
+            root._loadedItem.hide();
     }
 }

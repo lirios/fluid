@@ -16,7 +16,7 @@ import Fluid as MD
     <a href="https://m3.material.io/components/checkbox/overview">Material Design 3 checkbox guidelines</a>.
 */
 T.CheckBox {
-    id: control
+    id: rootControl
 
     //! The Material type scale used by the checkbox label.
     property MD.typescale typescale: MD.Tokens.typescale.labelLarge
@@ -35,15 +35,15 @@ T.CheckBox {
     focusPolicy: Qt.StrongFocus
 
     QtObject {
-        id: state
+        id: visualState
 
-        property color iconColor: control.error ? control.MD.Style.onErrorColor : control.MD.Style.onPrimaryColor
-        property color containerColor: control.checkState === Qt.Unchecked ? "transparent" : control.error ? control.MD.Style.errorColor : control.MD.Style.primaryColor
-        property color outlineColor: control.error ? control.MD.Style.errorColor : MD.Style.onSurfaceVariantColor
-        property color labelColor: control.MD.Style.onSurfaceColor
+        property color iconColor: rootControl.error ? rootControl.MD.Style.onErrorColor : rootControl.MD.Style.onPrimaryColor
+        property color containerColor: rootControl.checkState === Qt.Unchecked ? "transparent" : rootControl.error ? rootControl.MD.Style.errorColor : rootControl.MD.Style.primaryColor
+        property color outlineColor: rootControl.error ? rootControl.MD.Style.errorColor : MD.Style.onSurfaceVariantColor
+        property color labelColor: rootControl.MD.Style.onSurfaceColor
         property color stateLayerColor: "transparent"
 
-        property real outlineWidth: control.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
+        property real outlineWidth: rootControl.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
 
         property real contentOpacity: 1.0
         property real containerOpacity: 1.0
@@ -53,85 +53,81 @@ T.CheckBox {
     states: [
         State {
             name: "disabled"
-            when: !control.enabled
+            when: !rootControl.enabled
 
             PropertyChanges {
-                target: state
-                iconColor: control.MD.Style.surfaceColor
-                containerColor: control.checkState === Qt.Unchecked ? "transparent" : control.error ? control.MD.Style.errorColor : control.MD.Style.onSurfaceColor
-                outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
-                outlineWidth: control.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
-                contentOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
-                containerOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
+                visualState.iconColor: rootControl.MD.Style.surfaceColor
+                visualState.containerColor: rootControl.checkState === Qt.Unchecked ? "transparent" : rootControl.error ? rootControl.MD.Style.errorColor : rootControl.MD.Style.onSurfaceColor
+                visualState.outlineColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : rootControl.MD.Style.onSurfaceColor
+                visualState.outlineWidth: rootControl.checkState == Qt.Checked ? MD.Tokens.checkBox.selectedOutlineWidth : MD.Tokens.checkBox.unselectedOutlineWidth
+                visualState.contentOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
+                visualState.containerOpacity: MD.Tokens.checkBox.selectedDisabledContainerOpacity
             }
         },
         State {
             name: "hovered"
-            when: control.hovered && control.enabled
+            when: rootControl.hovered && rootControl.enabled
 
             PropertyChanges {
-                target: state
-                outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
-                stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: MD.Tokens.checkBox.hoverStateLayerOpacity
+                visualState.outlineColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? rootControl.MD.Style.primaryColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.checkBox.hoverStateLayerOpacity
             }
         },
         State {
             name: "focused"
-            when: control.visualFocus && control.enabled
+            when: rootControl.visualFocus && rootControl.enabled
 
             PropertyChanges {
-                target: state
-                outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
-                stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: MD.Tokens.checkBox.focusStateLayerOpacity
+                visualState.outlineColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? rootControl.MD.Style.primaryColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.checkBox.focusStateLayerOpacity
             }
         },
         State {
             name: "pressed"
-            when: control.down && control.enabled
+            when: rootControl.down && rootControl.enabled
 
             PropertyChanges {
-                target: state
-                outlineColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : control.MD.Style.onSurfaceColor
-                stateLayerColor: control.error ? control.MD.Style.errorColor : control.checkState === Qt.Checked ? control.MD.Style.primaryColor : control.MD.Style.onSurfaceColor
-                stateLayerOpacity: MD.Tokens.checkBox.pressedStateLayerOpacity
+                visualState.outlineColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? MD.Style.onSurfaceVariantColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.error ? rootControl.MD.Style.errorColor : rootControl.checkState === Qt.Checked ? rootControl.MD.Style.primaryColor : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.checkBox.pressedStateLayerOpacity
             }
         }
     ]
 
     indicator: MD.CheckIndicator {
-        x: control.text ? (control.mirrored ? control.width - width - control.rightPadding : control.leftPadding) : control.leftPadding + (control.availableWidth - width) / 2
-        y: control.topPadding + (control.availableHeight - height) / 2
+        x: rootControl.text ? (rootControl.mirrored ? rootControl.width - width - rootControl.rightPadding : rootControl.leftPadding) : rootControl.leftPadding + (rootControl.availableWidth - width) / 2
+        y: rootControl.topPadding + (rootControl.availableHeight - height) / 2
 
-        control: control
-        color: state.iconColor
-        opacity: state.containerOpacity
-        backgroundColor: state.containerColor
-        outlineColor: state.outlineColor
-        outlineWidth: state.outlineWidth
+        control: rootControl
+        color: visualState.iconColor
+        opacity: visualState.containerOpacity
+        backgroundColor: visualState.containerColor
+        outlineColor: visualState.outlineColor
+        outlineWidth: visualState.outlineWidth
 
         MD.Ripple {
             anchors.centerIn: parent
             width: MD.Tokens.checkBox.stateLayerSize
             height: MD.Tokens.checkBox.stateLayerSize
             radius: width / 2
-            pressX: control.pressX
-            pressY: control.pressY
-            pressed: control.pressed
-            stateOpacity: state.stateLayerOpacity
-            color: state.stateLayerColor
+            pressX: rootControl.pressX
+            pressY: rootControl.pressY
+            pressed: rootControl.pressed
+            stateOpacity: visualState.stateLayerOpacity
+            color: visualState.stateLayerColor
         }
     }
 
     contentItem: MD.Label {
-        leftPadding: control.indicator && !control.mirrored ? control.indicator.width + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored ? control.indicator.width + control.spacing : 0
+        leftPadding: rootControl.indicator && !rootControl.mirrored ? rootControl.indicator.width + rootControl.spacing : 0
+        rightPadding: rootControl.indicator && rootControl.mirrored ? rootControl.indicator.width + rootControl.spacing : 0
 
-        text: control.text
-        typescale: control.typescale
-        color: state.labelColor
-        opacity: state.contentOpacity
+        text: rootControl.text
+        typescale: rootControl.typescale
+        color: visualState.labelColor
+        opacity: visualState.contentOpacity
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
     }

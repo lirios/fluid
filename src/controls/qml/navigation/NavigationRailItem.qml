@@ -59,7 +59,7 @@ T.ItemDelegate {
     property color unselectedLabelColor: control.MD.Style.onSurfaceVariantColor
 
     //! \internal The NavigationRail that owns this destination.
-    property NavigationRail rail: null
+    property MD.NavigationRail rail: null
 
     //! \internal Position of this destination in its owning rail.
     property int _railIndex: -1

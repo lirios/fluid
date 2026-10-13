@@ -92,7 +92,7 @@ Item {
     /*!
         The symbol style.
     */
-    property int style: Symbol.Style.Outlined
+    property int style: MD.Symbol.Style.Outlined
 
     /*!
         Symbol stroke weight. Weight can also affect the overall size of the symbol.
@@ -113,14 +113,14 @@ Item {
         * Normal emphasis: symbol is not highlighted.
         * High emphasis: to highlight a symbol.
     */
-    property int grade: Symbol.Grade.NormalEmphasis
+    property int grade: MD.Symbol.Grade.NormalEmphasis
 
     /*!
         Automatically adjusts the stroke weight when the symbol size is increased or decreased.
         Optical size ranges from 20dp to 48dp.
         Defaults to OpticalSize.Normal.
     */
-    property int opticalSize: Symbol.OpticalSize.Normal
+    property int opticalSize: MD.Symbol.OpticalSize.Normal
 
     //! The horizontal alignment of the symbol inside its item.
     property alias horizontalAlignment: text.horizontalAlignment
@@ -145,11 +145,11 @@ Item {
 
         font.family: {
             switch (icon.style) {
-            case Symbol.Style.Rounded:
+            case MD.Symbol.Style.Rounded:
                 return MD.Theme.symbolsRoundedFontFamily;
-            case Symbol.Style.Sharp:
+            case MD.Symbol.Style.Sharp:
                 return MD.Theme.symbolsSharpFontFamily;
-            case Symbol.Style.Outlined:
+            case MD.Symbol.Style.Outlined:
             default:
                 return MD.Theme.symbolsOutlinedFontFamily;
             }

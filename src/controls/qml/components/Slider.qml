@@ -47,17 +47,17 @@ T.Slider {
     /*!
         Controls when the value indicator is shown.
     */
-    property int labelBehavior: Slider.LabelBehavior.Floating
+    property int labelBehavior: MD.Slider.LabelBehavior.Floating
 
     /*!
         Controls how discrete tick marks are shown.
     */
-    property int tickVisibilityMode: Slider.TickVisibilityMode.AutoLimit
+    property int tickVisibilityMode: MD.Slider.TickVisibilityMode.AutoLimit
 
     /*!
         Controls the slider's expressive track and handle size.
     */
-    property int size: Slider.Size.ExtraSmall
+    property int size: MD.Slider.Size.ExtraSmall
 
     /*!
         Makes the active track extend from the midpoint to the handle.
@@ -100,15 +100,15 @@ T.Slider {
 
         readonly property real handleHeight: {
             switch (control.size) {
-            case Slider.Size.ExtraSmall:
+            case MD.Slider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeHandleHeightExtraSmall;
-            case Slider.Size.Small:
+            case MD.Slider.Size.Small:
                 return MD.Tokens.slider.activeHandleHeightSmall;
-            case Slider.Size.Medium:
+            case MD.Slider.Size.Medium:
                 return MD.Tokens.slider.activeHandleHeightMedium;
-            case Slider.Size.Large:
+            case MD.Slider.Size.Large:
                 return MD.Tokens.slider.activeHandleHeightLarge;
-            case Slider.Size.ExtraLarge:
+            case MD.Slider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeHandleHeightExtraLarge;
             }
             return MD.Tokens.slider.activeHandleHeightExtraSmall;
@@ -116,15 +116,15 @@ T.Slider {
 
         readonly property real trackHeight: {
             switch (control.size) {
-            case Slider.Size.ExtraSmall:
+            case MD.Slider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeTrackHeightExtraSmall;
-            case Slider.Size.Small:
+            case MD.Slider.Size.Small:
                 return MD.Tokens.slider.activeTrackHeightSmall;
-            case Slider.Size.Medium:
+            case MD.Slider.Size.Medium:
                 return MD.Tokens.slider.activeTrackHeightMedium;
-            case Slider.Size.Large:
+            case MD.Slider.Size.Large:
                 return MD.Tokens.slider.activeTrackHeightLarge;
-            case Slider.Size.ExtraLarge:
+            case MD.Slider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeTrackHeightExtraLarge;
             }
             return MD.Tokens.slider.activeTrackHeightExtraSmall;
@@ -132,15 +132,15 @@ T.Slider {
 
         readonly property real trackOuterCornerRadius: {
             switch (control.size) {
-            case Slider.Size.ExtraSmall:
+            case MD.Slider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraSmall;
-            case Slider.Size.Small:
+            case MD.Slider.Size.Small:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusSmall;
-            case Slider.Size.Medium:
+            case MD.Slider.Size.Medium:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusMedium;
-            case Slider.Size.Large:
+            case MD.Slider.Size.Large:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusLarge;
-            case Slider.Size.ExtraLarge:
+            case MD.Slider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraLarge;
             }
             return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraSmall;
@@ -148,11 +148,11 @@ T.Slider {
 
         readonly property real trackIconSize: {
             switch (control.size) {
-            case Slider.Size.Medium:
+            case MD.Slider.Size.Medium:
                 return MD.Tokens.slider.trackIconSizeMedium;
-            case Slider.Size.Large:
+            case MD.Slider.Size.Large:
                 return MD.Tokens.slider.trackIconSizeLarge;
-            case Slider.Size.ExtraLarge:
+            case MD.Slider.Size.ExtraLarge:
                 return MD.Tokens.slider.trackIconSizeExtraLarge;
             }
             return 0;
@@ -160,11 +160,11 @@ T.Slider {
 
         readonly property real trackIconPadding: {
             switch (control.size) {
-            case Slider.Size.Medium:
+            case MD.Slider.Size.Medium:
                 return MD.Tokens.slider.trackIconPaddingMedium;
-            case Slider.Size.Large:
+            case MD.Slider.Size.Large:
                 return MD.Tokens.slider.trackIconPaddingLarge;
-            case Slider.Size.ExtraLarge:
+            case MD.Slider.Size.ExtraLarge:
                 return MD.Tokens.slider.trackIconPaddingExtraLarge;
             }
             return 0;
@@ -172,7 +172,7 @@ T.Slider {
 
         readonly property real effectiveHandleWidth: control.pressed ? MD.Tokens.slider.pressedHandleWidth : (control.visualFocus ? MD.Tokens.slider.focusHandleWidth : MD.Tokens.slider.handleWidth)
         readonly property real handleContainerSize: trackOuterCornerRadius * 2
-        readonly property bool reservesLabelSpace: control.labelBehavior === Slider.LabelBehavior.WithinBounds || control.labelBehavior === Slider.LabelBehavior.Visible
+        readonly property bool reservesLabelSpace: control.labelBehavior === MD.Slider.LabelBehavior.WithinBounds || control.labelBehavior === MD.Slider.LabelBehavior.Visible
         readonly property real labelSpace: {
             if (!reservesLabelSpace)
                 return 0;
@@ -202,9 +202,9 @@ T.Slider {
         rangeTo: control.to
         stepSize: control.stepSize
         tickVisibilityMode: control.tickVisibilityMode
-        autoLimitMode: Slider.TickVisibilityMode.AutoLimit
-        autoHideMode: Slider.TickVisibilityMode.AutoHide
-        hiddenMode: Slider.TickVisibilityMode.Hidden
+        autoLimitMode: MD.Slider.TickVisibilityMode.AutoLimit
+        autoHideMode: MD.Slider.TickVisibilityMode.AutoHide
+        hiddenMode: MD.Slider.TickVisibilityMode.Hidden
         trackHeight: metrics.trackHeight
         trackOuterCornerRadius: metrics.trackOuterCornerRadius
         handleHeight: metrics.handleHeight

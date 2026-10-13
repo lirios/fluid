@@ -70,6 +70,22 @@ Item {
     TestCase {
         name: "ComponentTokenTests"
 
+        function test_selfEnumReferences_data() {
+            return ["AppBar", "AppBarAction", "BaseAppBar", "FAB", "FabMenu", "FabMenuButton",
+                    "IconButton", "IconLabel", "Menu", "MenuItem", "RangeSlider", "SearchAppBar",
+                    "Slider", "Switch", "Symbol"].map(type => ({ tag: type, type: type }));
+        }
+
+        function test_selfEnumReferences(data) {
+            // Exercise runtime enum lookups as well as qmllint's type resolution.
+            failOnWarning(/TypeError|Unable to assign \[undefined\]/);
+            const component = Qt.createComponent("Fluid", data.type);
+            compare(component.status, Component.Ready, component.errorString());
+            const control = createTemporaryObject(component, this);
+            verify(control);
+            wait(0);
+        }
+
         function verifyValues(token, expected) {
             for (const propertyName in expected) {
                 const expectedValue = expected[propertyName];

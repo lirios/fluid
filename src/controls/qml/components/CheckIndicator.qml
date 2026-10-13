@@ -25,7 +25,7 @@ Item {
     Accessible.ignored: true
 
     //! The checkbox whose \c checkState is rendered.
-    property Item control
+    property var control
 
     //! The checkmark or indeterminate-mark color.
     property color color
@@ -82,7 +82,7 @@ Item {
             id: checkmark
 
             anchors.fill: parent
-            visible: control.checkState !== Qt.Unchecked
+            visible: indicatorItem.control.checkState !== Qt.Unchecked
 
             transform: [
                 Translate {
@@ -95,7 +95,7 @@ Item {
                 objectName: "svg_path:checked"
                 strokeColor: "transparent"
                 fillRule: ShapePath.WindingFill
-                fillColor: control.checkState === Qt.Checked ? indicatorItem.color : "transparent"
+                fillColor: indicatorItem.control.checkState === Qt.Checked ? indicatorItem.color : "transparent"
                 pathHints: ShapePath.PathQuadratic | ShapePath.PathNonIntersecting | ShapePath.PathNonOverlappingControlPointTriangles
 
                 PathSvg {
@@ -107,7 +107,7 @@ Item {
                 objectName: "svg_path:partially_checked"
                 strokeColor: "transparent"
                 fillRule: ShapePath.WindingFill
-                fillColor: control.checkState === Qt.PartiallyChecked ? indicatorItem.color : "transparent"
+                fillColor: indicatorItem.control.checkState === Qt.PartiallyChecked ? indicatorItem.color : "transparent"
                 pathHints: ShapePath.PathQuadratic | ShapePath.PathNonIntersecting | ShapePath.PathNonOverlappingControlPointTriangles
 
                 PathSvg {

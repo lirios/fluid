@@ -3,6 +3,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQml.Models
 import QtQuick.Templates as T
 import Fluid as MD
 import "../internal/MotionAnimation.js" as MotionAnimation
@@ -96,7 +97,7 @@ T.ItemDelegate {
         This is safe to use even if the ListItem is not in a ListView,
         since it checks for view !== null before accessing the index.
     */
-    readonly property bool _first: ListView.view !== null && index === 0
+    readonly property bool _first: ListView.view !== null && DelegateModel.itemsIndex === 0
 
     /*!
         \internal
@@ -110,14 +111,14 @@ T.ItemDelegate {
         This is safe to use even if the ListItem is not in a ListView,
         since it checks for view !== null before accessing the index.
     */
-    readonly property bool _last: ListView.view !== null && index === ListView.view.count - 1
+    readonly property bool _last: ListView.view !== null && DelegateModel.itemsIndex === ListView.view.count - 1
 
     QtObject {
         id: internal
 
         // Active text row count: label (always 1) plus optional overline and
         // optional supporting text.  Determines the item's baseline height.
-        readonly property int lineCount: 1 + (overline.length > 0 ? 1 : 0) + (supportingText.length > 0 ? 1 : 0)
+        readonly property int lineCount: 1 + (control.overline.length > 0 ? 1 : 0) + (control.supportingText.length > 0 ? 1 : 0)
     }
 
     implicitWidth: Math.max(parent ? parent.width : 0, implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
@@ -242,7 +243,7 @@ T.ItemDelegate {
             // Leading slot — LayoutItemProxy positions the loaded item here and
             // forwards any Layout-attached properties it declares.
             LayoutItemProxy {
-                target: _leadingLoader.item
+                target: _leadingLoader.item as Item
                 visible: _leadingLoader.item !== null
 
                 // MD3: for three-line items the leading element aligns to the
@@ -310,7 +311,7 @@ T.ItemDelegate {
             // Trailing slot — LayoutItemProxy positions the loaded item here and
             // forwards any Layout-attached properties it declares.
             LayoutItemProxy {
-                target: _trailingLoader.item
+                target: _trailingLoader.item as Item
                 visible: _trailingLoader.item !== null
                 Layout.alignment: internal.lineCount >= 3 ? (Qt.AlignTop | Qt.AlignRight) : Qt.AlignVCenter
                 Layout.topMargin: internal.lineCount >= 3 ? 4 : 0

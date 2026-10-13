@@ -70,7 +70,7 @@ Item {
             __priv.nextLoader = loader2;
         }
 
-        __priv.currentLoader.source = sourceUrl;
+        __priv.currentLoader.source = root.source;
         __priv.currentLoader.opacity = 0;
         __priv.currentLoader.z = 1;
         __priv.nextLoader.z = 0;

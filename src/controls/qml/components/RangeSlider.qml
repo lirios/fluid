@@ -52,17 +52,17 @@ T.RangeSlider {
     /*!
         Controls when the value indicator is shown.
     */
-    property int labelBehavior: RangeSlider.LabelBehavior.Floating
+    property int labelBehavior: MD.RangeSlider.LabelBehavior.Floating
 
     /*!
         Controls how discrete tick marks are shown.
     */
-    property int tickVisibilityMode: RangeSlider.TickVisibilityMode.AutoLimit
+    property int tickVisibilityMode: MD.RangeSlider.TickVisibilityMode.AutoLimit
 
     /*!
         Controls the slider's expressive track and handle size.
     */
-    property int size: RangeSlider.Size.ExtraSmall
+    property int size: MD.RangeSlider.Size.ExtraSmall
 
     /*!
         Text displayed in the first handle value indicator.
@@ -104,15 +104,15 @@ T.RangeSlider {
 
         readonly property real handleHeight: {
             switch (control.size) {
-            case RangeSlider.Size.ExtraSmall:
+            case MD.RangeSlider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeHandleHeightExtraSmall;
-            case RangeSlider.Size.Small:
+            case MD.RangeSlider.Size.Small:
                 return MD.Tokens.slider.activeHandleHeightSmall;
-            case RangeSlider.Size.Medium:
+            case MD.RangeSlider.Size.Medium:
                 return MD.Tokens.slider.activeHandleHeightMedium;
-            case RangeSlider.Size.Large:
+            case MD.RangeSlider.Size.Large:
                 return MD.Tokens.slider.activeHandleHeightLarge;
-            case RangeSlider.Size.ExtraLarge:
+            case MD.RangeSlider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeHandleHeightExtraLarge;
             }
             return MD.Tokens.slider.activeHandleHeightExtraSmall;
@@ -120,15 +120,15 @@ T.RangeSlider {
 
         readonly property real trackHeight: {
             switch (control.size) {
-            case RangeSlider.Size.ExtraSmall:
+            case MD.RangeSlider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeTrackHeightExtraSmall;
-            case RangeSlider.Size.Small:
+            case MD.RangeSlider.Size.Small:
                 return MD.Tokens.slider.activeTrackHeightSmall;
-            case RangeSlider.Size.Medium:
+            case MD.RangeSlider.Size.Medium:
                 return MD.Tokens.slider.activeTrackHeightMedium;
-            case RangeSlider.Size.Large:
+            case MD.RangeSlider.Size.Large:
                 return MD.Tokens.slider.activeTrackHeightLarge;
-            case RangeSlider.Size.ExtraLarge:
+            case MD.RangeSlider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeTrackHeightExtraLarge;
             }
             return MD.Tokens.slider.activeTrackHeightExtraSmall;
@@ -136,15 +136,15 @@ T.RangeSlider {
 
         readonly property real trackOuterCornerRadius: {
             switch (control.size) {
-            case RangeSlider.Size.ExtraSmall:
+            case MD.RangeSlider.Size.ExtraSmall:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraSmall;
-            case RangeSlider.Size.Small:
+            case MD.RangeSlider.Size.Small:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusSmall;
-            case RangeSlider.Size.Medium:
+            case MD.RangeSlider.Size.Medium:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusMedium;
-            case RangeSlider.Size.Large:
+            case MD.RangeSlider.Size.Large:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusLarge;
-            case RangeSlider.Size.ExtraLarge:
+            case MD.RangeSlider.Size.ExtraLarge:
                 return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraLarge;
             }
             return MD.Tokens.slider.activeTrackLeadingCornerRadiusExtraSmall;
@@ -152,7 +152,7 @@ T.RangeSlider {
 
         readonly property real effectiveHandleWidth: (control.first.pressed || control.second.pressed) ? MD.Tokens.slider.pressedHandleWidth : (control.visualFocus ? MD.Tokens.slider.focusHandleWidth : MD.Tokens.slider.handleWidth)
         readonly property real handleContainerSize: trackOuterCornerRadius * 2
-        readonly property bool reservesLabelSpace: control.labelBehavior === RangeSlider.LabelBehavior.WithinBounds || control.labelBehavior === RangeSlider.LabelBehavior.Visible
+        readonly property bool reservesLabelSpace: control.labelBehavior === MD.RangeSlider.LabelBehavior.WithinBounds || control.labelBehavior === MD.RangeSlider.LabelBehavior.Visible
         readonly property real labelSpace: {
             if (!reservesLabelSpace)
                 return 0;
@@ -182,9 +182,9 @@ T.RangeSlider {
         rangeTo: control.to
         stepSize: control.stepSize
         tickVisibilityMode: control.tickVisibilityMode
-        autoLimitMode: RangeSlider.TickVisibilityMode.AutoLimit
-        autoHideMode: RangeSlider.TickVisibilityMode.AutoHide
-        hiddenMode: RangeSlider.TickVisibilityMode.Hidden
+        autoLimitMode: MD.RangeSlider.TickVisibilityMode.AutoLimit
+        autoHideMode: MD.RangeSlider.TickVisibilityMode.AutoHide
+        hiddenMode: MD.RangeSlider.TickVisibilityMode.Hidden
         trackHeight: metrics.trackHeight
         trackOuterCornerRadius: metrics.trackOuterCornerRadius
         handleHeight: metrics.handleHeight

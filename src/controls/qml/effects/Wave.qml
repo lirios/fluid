@@ -2,8 +2,10 @@
 // SPDX-FileCopyrightText: 2014 Bogdan Cuza <bogdan.cuza@hotmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+pragma ComponentBehavior: Bound
+
 import QtQuick
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 
 /*!
     \class Wave
@@ -77,16 +79,19 @@ Item {
 
     visible: open
     layer.enabled: true
-    layer.effect: OpacityMask {
-        maskSource: Item {
-            width: wave.width
-            height: wave.height
-            Rectangle {
-                x: initialX - size / 2
-                y: initialY - size / 2
-                width: size
-                height: size
-                radius: size / 2
+    layer.effect: MultiEffect {
+        maskEnabled: true
+        maskSource: ShaderEffectSource {
+            sourceItem: Item {
+                width: wave.width
+                height: wave.height
+                Rectangle {
+                    x: wave.initialX - wave.size / 2
+                    y: wave.initialY - wave.size / 2
+                    width: wave.size
+                    height: wave.size
+                    radius: wave.size / 2
+                }
             }
         }
     }
@@ -96,8 +101,7 @@ Item {
         when: wave.open
 
         PropertyChanges {
-            target: wave
-            size: wave.diameter
+            wave.size: wave.diameter
         }
     }
 

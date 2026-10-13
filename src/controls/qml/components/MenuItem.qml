@@ -53,11 +53,11 @@ T.MenuItem {
     }
 
     //! Geometry specification; defaults to \c MenuItem.Vertical.
-    property int variant: MenuItem.Vertical
+    property int variant: MD.MenuItem.Vertical
     //! Semantic color family; defaults to \c MenuItem.Standard.
-    property int colorStyle: MenuItem.Standard
+    property int colorStyle: MD.MenuItem.Standard
     //! Position in a connected group; defaults to \c MenuItem.Only.
-    property int groupPosition: MenuItem.Only
+    property int groupPosition: MD.MenuItem.Only
     //! Optional secondary line displayed below the inherited \c text.
     property string supportingText: ""
     //! Optional trailing text displayed before shortcut and submenu content.
@@ -80,7 +80,7 @@ T.MenuItem {
     readonly property bool _hasBadge: badgeContent !== undefined && badgeContent !== null
                                       && badgeContent.toString().length > 0
     //! \internal Whether Expressive vertical geometry is active.
-    readonly property bool _vertical: variant === MenuItem.Vertical
+    readonly property bool _vertical: variant === MD.MenuItem.Vertical
     //! \internal Icon size for the active geometry.
     readonly property real _iconSize: _vertical ? MD.Tokens.menu.verticalIconSize
                                                 : MD.Tokens.menu.iconSize
@@ -91,9 +91,9 @@ T.MenuItem {
         if (checked)
             return MD.Tokens.menu.verticalSelectedItemShape;
         switch (groupPosition) {
-        case MenuItem.First: return MD.Tokens.menu.verticalFirstItemShape;
-        case MenuItem.Middle: return MD.Tokens.menu.verticalMiddleItemShape;
-        case MenuItem.Last: return MD.Tokens.menu.verticalLastItemShape;
+        case MD.MenuItem.First: return MD.Tokens.menu.verticalFirstItemShape;
+        case MD.MenuItem.Middle: return MD.Tokens.menu.verticalMiddleItemShape;
+        case MD.MenuItem.Last: return MD.Tokens.menu.verticalLastItemShape;
         default: return MD.Tokens.menu.verticalOnlyItemShape;
         }
     }
@@ -102,7 +102,7 @@ T.MenuItem {
         if (!_vertical)
             return checked ? menuItem.MD.Style.onSecondaryContainerColor
                            : menuItem.MD.Style.onSurfaceColor;
-        if (colorStyle === MenuItem.Vibrant)
+        if (colorStyle === MD.MenuItem.Vibrant)
             return checked ? menuItem.MD.Style.onTertiaryColor
                            : menuItem.MD.Style.onTertiaryContainerColor;
         return checked ? menuItem.MD.Style.onTertiaryContainerColor
@@ -112,7 +112,7 @@ T.MenuItem {
     readonly property color _secondaryColor: {
         if (checked)
             return _contentColor;
-        if (_vertical && colorStyle === MenuItem.Vibrant)
+        if (_vertical && colorStyle === MD.MenuItem.Vibrant)
             return menuItem.MD.Style.onTertiaryContainerColor;
         return menuItem.MD.Style.onSurfaceVariantColor;
     }
@@ -286,7 +286,7 @@ T.MenuItem {
                 return "transparent";
             if (!menuItem._vertical)
                 return menuItem.MD.Style.secondaryContainerColor;
-            return menuItem.colorStyle === MenuItem.Vibrant
+            return menuItem.colorStyle === MD.MenuItem.Vibrant
                     ? menuItem.MD.Style.tertiaryColor
                     : menuItem.MD.Style.tertiaryContainerColor;
         }

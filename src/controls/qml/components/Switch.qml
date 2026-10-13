@@ -40,7 +40,7 @@ T.Switch {
 
         \sa MD.Switch.IconConfiguration
     */
-    property int iconConfiguration: Switch.IconConfiguration.NoIcons
+    property int iconConfiguration: MD.Switch.IconConfiguration.NoIcons
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding, implicitIndicatorHeight + topPadding + bottomPadding)
@@ -81,17 +81,17 @@ T.Switch {
                     return control.checked ? control.MD.Style.surfaceColor : control.MD.Style.onSurfaceColor;
                 if (control.checked)
                     return control.MD.Style.onPrimaryColor;
-                return control.iconConfiguration === Switch.IconConfiguration.BothIcons ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.outlineColor;
+                return control.iconConfiguration === MD.Switch.IconConfiguration.BothIcons ? control.MD.Style.onSurfaceVariantColor : control.MD.Style.outlineColor;
             }
-            property real handleSize: control.pressed ? MD.Tokens.switch.pressedHandleSize : (control.checked ? MD.Tokens.switch.selectedHandleSize : (control.iconConfiguration === Switch.IconConfiguration.BothIcons ? MD.Tokens.switch.withIconHandleSize : MD.Tokens.switch.unselectedHandleSize))
+            property real handleSize: control.pressed ? MD.Tokens.switch.pressedHandleSize : (control.checked ? MD.Tokens.switch.selectedHandleSize : (control.iconConfiguration === MD.Switch.IconConfiguration.BothIcons ? MD.Tokens.switch.withIconHandleSize : MD.Tokens.switch.unselectedHandleSize))
             property real handleOpacity: !control.enabled ? (control.checked ? MD.Tokens.switch.disabledSelectedHandleOpacity : MD.Tokens.switch.disabledUnselectedHandleOpacity) : 1.0
 
             // Icon
-            property bool showIcon: control.iconConfiguration === Switch.IconConfiguration.BothIcons || (control.iconConfiguration === Switch.IconConfiguration.SelectedIcon && control.checked)
+            property bool showIcon: control.iconConfiguration === MD.Switch.IconConfiguration.BothIcons || (control.iconConfiguration === MD.Switch.IconConfiguration.SelectedIcon && control.checked)
             property string iconName: {
                 if (control.checked)
                     return control.icon.name.length > 0 ? control.icon.name : MD.Symbols.check;
-                if (control.iconConfiguration === Switch.IconConfiguration.BothIcons)
+                if (control.iconConfiguration === MD.Switch.IconConfiguration.BothIcons)
                     return MD.Symbols.close;
                 // SelectedIcon + unselected: keep the check name while fading out
                 return control.icon.name.length > 0 ? control.icon.name : MD.Symbols.check;

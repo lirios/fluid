@@ -143,16 +143,16 @@ struct MotionEasingTokens
     Q_GADGET
     QML_ANONYMOUS
 
-    Q_PROPERTY(MotionEasingValue emphasized READ emphasized CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue emphasizedAccelerate READ emphasizedAccelerate CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue emphasizedDecelerate READ emphasizedDecelerate CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue legacy READ legacy CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue legacyAccelerate READ legacyAccelerate CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue legacyDecelerate READ legacyDecelerate CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue linear READ linear CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue standard READ standard CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue standardAccelerate READ standardAccelerate CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingValue standardDecelerate READ standardDecelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue emphasized READ emphasized CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue emphasizedAccelerate READ emphasizedAccelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue emphasizedDecelerate READ emphasizedDecelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue legacy READ legacy CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue legacyAccelerate READ legacyAccelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue legacyDecelerate READ legacyDecelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue linear READ linear CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue standard READ standard CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue standardAccelerate READ standardAccelerate CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingValue standardDecelerate READ standardDecelerate CONSTANT FINAL)
 
 public:
     constexpr MotionEasingValue emphasized() const
@@ -314,8 +314,8 @@ struct MotionTokens
     Q_GADGET
     QML_ANONYMOUS
 
-    Q_PROPERTY(MotionDurationTokens duration READ duration CONSTANT FINAL)
-    Q_PROPERTY(MotionEasingTokens easing READ easing CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionDurationTokens duration READ duration CONSTANT FINAL)
+    Q_PROPERTY(Fluid::MotionEasingTokens easing READ easing CONSTANT FINAL)
     Q_PROPERTY(Fluid::MotionSpringTokens spring READ spring CONSTANT FINAL)
 
 public:

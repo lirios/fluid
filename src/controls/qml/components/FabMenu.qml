@@ -88,10 +88,10 @@ T.Pane {
     property bool expanded: false
 
     //! The semantic color variant of the menu.
-    property int variant: FabMenu.Variant.Primary
+    property int variant: MD.FabMenu.Variant.Primary
 
     //! The direction the list of items grows towards.
-    property int direction: FabMenu.Direction.Up
+    property int direction: MD.FabMenu.Direction.Up
 
     //! The logical horizontal alignment of the button and the items.
     property int alignment: Qt.AlignRight
@@ -133,11 +133,11 @@ T.Pane {
     //! The background color of the items.
     readonly property color itemContainerColor: {
         switch (variant) {
-        case FabMenu.Variant.Primary:
+        case MD.FabMenu.Variant.Primary:
             return control.MD.Style.primaryContainerColor;
-        case FabMenu.Variant.Secondary:
+        case MD.FabMenu.Variant.Secondary:
             return control.MD.Style.secondaryContainerColor;
-        case FabMenu.Variant.Tertiary:
+        case MD.FabMenu.Variant.Tertiary:
             return control.MD.Style.tertiaryContainerColor;
         }
     }
@@ -145,11 +145,11 @@ T.Pane {
     //! The foreground color of the items.
     readonly property color itemContentColor: {
         switch (variant) {
-        case FabMenu.Variant.Primary:
+        case MD.FabMenu.Variant.Primary:
             return control.MD.Style.onPrimaryContainerColor;
-        case FabMenu.Variant.Secondary:
+        case MD.FabMenu.Variant.Secondary:
             return control.MD.Style.onSecondaryContainerColor;
-        case FabMenu.Variant.Tertiary:
+        case MD.FabMenu.Variant.Tertiary:
             return control.MD.Style.onTertiaryContainerColor;
         }
     }
@@ -158,7 +158,7 @@ T.Pane {
     readonly property bool _alignedRight: (alignment === Qt.AlignRight) !== mirrored
 
     //! \internal Sign of the collapsed offset of the items, towards the button.
-    readonly property real _entranceDirection: direction === FabMenu.Direction.Up ? 1 : -1
+    readonly property real _entranceDirection: direction === MD.FabMenu.Direction.Up ? 1 : -1
 
     //! \internal Space reserved for the button on its side of the item list.
     readonly property real _buttonMargin: margins + MD.Tokens.fabMenu.closeButtonContainerHeight + MD.Tokens.fabMenu.closeButtonBetweenSpace
@@ -199,7 +199,7 @@ T.Pane {
             if (item && item.menu === control && item.enabled)
                 items.push(item);
         }
-        if (control.direction === FabMenu.Direction.Down)
+        if (control.direction === MD.FabMenu.Direction.Down)
             items.unshift(fabMenuButton);
         else
             items.push(fabMenuButton);
@@ -284,8 +284,8 @@ T.Pane {
     bottomInset: 0
     leftPadding: margins
     rightPadding: margins
-    topPadding: direction === FabMenu.Direction.Up ? margins : _buttonMargin
-    bottomPadding: direction === FabMenu.Direction.Up ? _buttonMargin : margins
+    topPadding: direction === MD.FabMenu.Direction.Up ? margins : _buttonMargin
+    bottomPadding: direction === MD.FabMenu.Direction.Up ? _buttonMargin : margins
 
     // Only the toggle participates in normal Tab traversal. Menu actions use
     // programmatic focus while expanded, and the non-actionable pane remains
@@ -347,7 +347,7 @@ T.Pane {
         // The pane stretches its content item over the available area, so the
         // items are pushed down to sit next to a button placed at the bottom.
         transform: Translate {
-            y: control.direction === FabMenu.Direction.Up ? Math.max(0, column.height - column.implicitHeight) : 0
+            y: control.direction === MD.FabMenu.Direction.Up ? Math.max(0, column.height - column.implicitHeight) : 0
         }
     }
 
@@ -388,7 +388,7 @@ T.Pane {
             // anchor to undefined does not restore the implicit size it overrode,
             // which would stretch the button when the direction or alignment flips.
             x: control._alignedRight ? control.width - width - control.margins : control.margins
-            y: control.direction === FabMenu.Direction.Up ? control.height - height - control.margins : control.margins
+            y: control.direction === MD.FabMenu.Direction.Up ? control.height - height - control.margins : control.margins
             z: 2
 
             expanded: control.expanded

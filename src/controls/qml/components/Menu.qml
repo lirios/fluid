@@ -102,14 +102,14 @@ T.Menu {
         The default is \c Menu.Vertical. Set this to \c Menu.Baseline to retain
         the original Material 3 menu geometry.
     */
-    property int variant: Menu.Vertical
+    property int variant: MD.Menu.Vertical
 
     /*!
         \brief Semantic color family used by the menu and its default items.
 
         The default is \c Menu.Standard.
     */
-    property int colorStyle: Menu.Standard
+    property int colorStyle: MD.Menu.Standard
 
     //! \internal Width available inside the window's popup viewport.
     readonly property real _viewportWidth: parent && parent.Window.window && parent.Window.window.width > 0
@@ -129,7 +129,7 @@ T.Menu {
 
     //! \internal Rebuilds the surface model after content or delegate changes.
     function _updateSurfaceGroups() {
-        if (variant !== Menu.Vertical) {
+        if (variant !== MD.Menu.Vertical) {
             _surfaceGroups = [];
             return;
         }
@@ -267,13 +267,13 @@ T.Menu {
     implicitHeight: Math.max(0, Math.min(_viewportHeight, _naturalHeight))
 
     margins: 0
-    leftMargin: variant === Menu.Vertical ? MD.Tokens.menu.horizontalViewportMargin : MD.Tokens.menu.viewportMargin
+    leftMargin: variant === MD.Menu.Vertical ? MD.Tokens.menu.horizontalViewportMargin : MD.Tokens.menu.viewportMargin
     rightMargin: leftMargin
-    topMargin: variant === Menu.Vertical ? MD.Tokens.menu.verticalViewportMargin : MD.Tokens.menu.viewportMargin
+    topMargin: variant === MD.Menu.Vertical ? MD.Tokens.menu.verticalViewportMargin : MD.Tokens.menu.viewportMargin
     bottomMargin: topMargin
-    topPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.topPadding
-    bottomPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.bottomPadding
-    leftPadding: variant === Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : 0
+    topPadding: variant === MD.Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.topPadding
+    bottomPadding: variant === MD.Menu.Vertical ? MD.Tokens.menu.verticalGroupContentPadding : MD.Tokens.menu.bottomPadding
+    leftPadding: variant === MD.Menu.Vertical ? MD.Tokens.menu.verticalGroupPadding : 0
     rightPadding: leftPadding
     overlap: 0
 
@@ -298,8 +298,8 @@ T.Menu {
             return -1;
         }
 
-        variant: control.variant === Menu.Vertical ? MD.MenuItem.Vertical : MD.MenuItem.Baseline
-        colorStyle: control.colorStyle === Menu.Vibrant ? MD.MenuItem.Vibrant : MD.MenuItem.Standard
+        variant: control.variant === MD.Menu.Vertical ? MD.MenuItem.Vertical : MD.MenuItem.Baseline
+        colorStyle: control.colorStyle === MD.Menu.Vibrant ? MD.MenuItem.Vibrant : MD.MenuItem.Standard
         groupPosition: control._itemGroupPosition(_menuIndex)
         supportingText: _materialAction ? _materialAction.supportingText : ""
         trailingText: _materialAction ? _materialAction.trailingText : ""
@@ -335,14 +335,14 @@ T.Menu {
         objectName: "menuBackground"
 
         implicitWidth: MD.Tokens.menu.minimumWidth
-        readonly property var containerShape: control.variant === Menu.Vertical
+        readonly property var containerShape: control.variant === MD.Menu.Vertical
                                               ? MD.Tokens.menu.verticalContainerShape
                                               : MD.Tokens.menu.containerShape
 
-        implicitHeight: control.variant === Menu.Vertical ? MD.Tokens.menu.verticalItemHeight : MD.Tokens.menu.itemHeight
-        color: control.variant === Menu.Vertical
+        implicitHeight: control.variant === MD.Menu.Vertical ? MD.Tokens.menu.verticalItemHeight : MD.Tokens.menu.itemHeight
+        color: control.variant === MD.Menu.Vertical
                ? "transparent"
-               : control.colorStyle === Menu.Vibrant
+               : control.colorStyle === MD.Menu.Vibrant
                  ? control.MD.Style.tertiaryContainerColor
                  : control.MD.Style.surfaceContainerColor
         topLeftRadius: UiMetrics.resolveShapeRadius(containerShape.topLeft,
@@ -372,7 +372,7 @@ T.Menu {
                 y: control._surfaceY(index, modelData)
                 width: parent.width
                 height: control._surfaceHeight(index, modelData)
-                color: control.colorStyle === Menu.Vibrant
+                color: control.colorStyle === MD.Menu.Vibrant
                        ? control.MD.Style.tertiaryContainerColor
                        : control.MD.Style.surfaceContainerLowColor
                 topLeftRadius: UiMetrics.resolveShapeRadius(groupShape.topLeft, width, height)
@@ -387,7 +387,7 @@ T.Menu {
     enter: Transition {
         NumberAnimation {
             property: "scale"
-            from: control.variant === Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
+            from: control.variant === MD.Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
             to: 1
             duration: MotionAnimation.expressiveFastSpatialDuration
             easing.type: Easing.BezierSpline
@@ -407,7 +407,7 @@ T.Menu {
         NumberAnimation {
             property: "scale"
             from: 1
-            to: control.variant === Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
+            to: control.variant === MD.Menu.Vertical ? MD.Tokens.menu.closedScale : 0.94
             duration: MotionAnimation.expressiveFastSpatialDuration
             easing.type: Easing.BezierSpline
             easing.bezierCurve: MotionAnimation.expressiveFastSpatialCurve

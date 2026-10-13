@@ -142,7 +142,7 @@ P.BaseButton {
     font.letterSpacing: typescale.tracking
 
     QtObject {
-        id: state
+        id: visualState
 
         property color containerColor: {
             switch (control.type) {
@@ -348,8 +348,8 @@ P.BaseButton {
 
         typescale: control.typescale
         text: control.text
-        opacity: state.contentOpacity
-        color: state.labelColor
+        opacity: visualState.contentOpacity
+        color: visualState.labelColor
     }
 
     background: MD.ElevationRectangle {
@@ -399,11 +399,11 @@ P.BaseButton {
         border.width: control.type == P.BaseButton.Type.Outlined ? UiMetrics.buttonOutlineWidth(control) : 0
         border.color: MD.Style.outlineVariantColor
 
-        elevation: state.elevation
+        elevation: visualState.elevation
         elevationVisible: !MD.Utils.epsilonEqual(elevation, MD.Tokens.elevation.level0) && !control.flat && color.a > 0
 
-        opacity: state.containerOpacity
-        color: state.containerColor
+        opacity: visualState.containerOpacity
+        color: visualState.containerColor
 
         MD.Ripple {
             anchors.fill: parent
@@ -417,8 +417,8 @@ P.BaseButton {
             pressX: control.pressX
             pressY: control.pressY
 
-            stateOpacity: state.stateLayerOpacity
-            color: state.stateLayerColor
+            stateOpacity: visualState.stateLayerOpacity
+            color: visualState.stateLayerColor
         }
     }
 }

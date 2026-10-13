@@ -20,7 +20,7 @@ import Fluid as MD
     \sa RadioIndicator
 */
 T.RadioButton {
-    id: control
+    id: rootControl
 
     Accessible.role: Accessible.RadioButton
     Accessible.name: text
@@ -30,8 +30,8 @@ T.RadioButton {
     Accessible.focused: activeFocus
     Accessible.pressed: down
     Accessible.onPressAction: {
-        if (control.enabled)
-            control.click();
+        if (rootControl.enabled)
+            rootControl.click();
     }
 
     //! The Material type scale used by the radio-button label.
@@ -52,11 +52,11 @@ T.RadioButton {
     focusPolicy: Qt.StrongFocus
 
     QtObject {
-        id: state
+        id: visualState
 
-        property color iconColor: control.checked ? control.MD.Style.primaryColor
-                                                  : control.MD.Style.onSurfaceVariantColor
-        property color labelColor: control.MD.Style.onSurfaceColor
+        property color iconColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                  : rootControl.MD.Style.onSurfaceVariantColor
+        property color labelColor: rootControl.MD.Style.onSurfaceColor
         property color stateLayerColor: "transparent"
 
         property real iconOpacity: 1.0
@@ -67,50 +67,50 @@ T.RadioButton {
     states: [
         State {
             name: "disabled"
-            when: !control.enabled
+            when: !rootControl.enabled
 
             PropertyChanges {
-                state.iconColor: control.MD.Style.onSurfaceColor
-                state.iconOpacity: control.checked
+                visualState.iconColor: rootControl.MD.Style.onSurfaceColor
+                visualState.iconOpacity: rootControl.checked
                                    ? MD.Tokens.radioButton.selectedDisabledIconOpacity
                                    : MD.Tokens.radioButton.unselectedDisabledIconOpacity
-                state.contentOpacity: MD.Tokens.radioButton.unselectedDisabledIconOpacity
+                visualState.contentOpacity: MD.Tokens.radioButton.unselectedDisabledIconOpacity
             }
         },
         State {
             name: "hovered"
-            when: control.hovered && control.enabled && !control.down
+            when: rootControl.hovered && rootControl.enabled && !rootControl.down
 
             PropertyChanges {
-                state.iconColor: control.checked ? control.MD.Style.primaryColor
-                                                 : control.MD.Style.onSurfaceColor
-                state.stateLayerColor: control.checked ? control.MD.Style.primaryColor
-                                                       : control.MD.Style.onSurfaceColor
-                state.stateLayerOpacity: MD.Tokens.radioButton.hoverStateLayerOpacity
+                visualState.iconColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                 : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                       : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.radioButton.hoverStateLayerOpacity
             }
         },
         State {
             name: "focused"
-            when: control.visualFocus && control.enabled && !control.down
+            when: rootControl.visualFocus && rootControl.enabled && !rootControl.down
 
             PropertyChanges {
-                state.iconColor: control.checked ? control.MD.Style.primaryColor
-                                                 : control.MD.Style.onSurfaceColor
-                state.stateLayerColor: control.checked ? control.MD.Style.primaryColor
-                                                       : control.MD.Style.onSurfaceColor
-                state.stateLayerOpacity: MD.Tokens.radioButton.focusStateLayerOpacity
+                visualState.iconColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                 : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                       : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.radioButton.focusStateLayerOpacity
             }
         },
         State {
             name: "pressed"
-            when: control.down && control.enabled
+            when: rootControl.down && rootControl.enabled
 
             PropertyChanges {
-                state.iconColor: control.checked ? control.MD.Style.primaryColor
-                                                 : control.MD.Style.onSurfaceColor
-                state.stateLayerColor: control.checked ? control.MD.Style.primaryColor
-                                                       : control.MD.Style.onSurfaceColor
-                state.stateLayerOpacity: MD.Tokens.radioButton.pressedStateLayerOpacity
+                visualState.iconColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                 : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerColor: rootControl.checked ? rootControl.MD.Style.primaryColor
+                                                       : rootControl.MD.Style.onSurfaceColor
+                visualState.stateLayerOpacity: MD.Tokens.radioButton.pressedStateLayerOpacity
             }
         }
     ]
@@ -118,15 +118,15 @@ T.RadioButton {
     indicator: MD.RadioIndicator {
         id: radioIndicator
 
-        x: control.text
-           ? (control.mirrored ? control.width - width - control.rightPadding
-                               : control.leftPadding)
-           : control.leftPadding + (control.availableWidth - width) / 2
-        y: control.topPadding + (control.availableHeight - height) / 2
+        x: rootControl.text
+           ? (rootControl.mirrored ? rootControl.width - width - rootControl.rightPadding
+                               : rootControl.leftPadding)
+           : rootControl.leftPadding + (rootControl.availableWidth - width) / 2
+        y: rootControl.topPadding + (rootControl.availableHeight - height) / 2
 
-        control: control
-        color: state.iconColor
-        opacity: state.iconOpacity
+        control: rootControl
+        color: visualState.iconColor
+        opacity: visualState.iconOpacity
 
         MD.Ripple {
             objectName: "radioStateLayer"
@@ -136,24 +136,24 @@ T.RadioButton {
             radius: width / 2
             pressX: width / 2
             pressY: height / 2
-            pressed: control.pressed
-            stateOpacity: state.stateLayerOpacity
-            color: state.stateLayerColor
+            pressed: rootControl.pressed
+            stateOpacity: visualState.stateLayerOpacity
+            color: visualState.stateLayerColor
         }
     }
 
     contentItem: MD.Label {
         Accessible.ignored: true
 
-        leftPadding: control.indicator && !control.mirrored
-                     ? control.indicator.width + control.spacing : 0
-        rightPadding: control.indicator && control.mirrored
-                      ? control.indicator.width + control.spacing : 0
+        leftPadding: rootControl.indicator && !rootControl.mirrored
+                     ? rootControl.indicator.width + rootControl.spacing : 0
+        rightPadding: rootControl.indicator && rootControl.mirrored
+                      ? rootControl.indicator.width + rootControl.spacing : 0
 
-        text: control.text
-        typescale: control.typescale
-        color: state.labelColor
-        opacity: state.contentOpacity
+        text: rootControl.text
+        typescale: rootControl.typescale
+        color: visualState.labelColor
+        opacity: visualState.contentOpacity
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
     }

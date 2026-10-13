@@ -69,28 +69,28 @@ Item {
     /*!
         Whether the icon should be shown. This is used to determine padding and layout.
     */
-    readonly property bool showIcon: hasIcon && display !== IconLabel.TextOnly
+    readonly property bool showIcon: hasIcon && display !== MD.IconLabel.TextOnly
 
     /*!
         Whether the text should be shown. This is used to determine padding and layout.
     */
-    readonly property bool showText: text.length > 0 && display !== IconLabel.IconOnly
+    readonly property bool showText: text.length > 0 && display !== MD.IconLabel.IconOnly
 
     /*!
         The display mode of the icon label.
     */
-    property int display: IconLabel.TextBesideIcon
+    property int display: MD.IconLabel.TextBesideIcon
 
     /*!
         The effective display mode, which accounts for whether the icon is shown or not.
     */
     readonly property int effectiveDisplay: {
         switch (display) {
-        case IconLabel.TextBesideIcon:
-        case IconLabel.TextUnderIcon:
+        case MD.IconLabel.TextBesideIcon:
+        case MD.IconLabel.TextUnderIcon:
             if (showIcon && showText)
                 return display;
-            return showIcon ? IconLabel.IconOnly : IconLabel.TextOnly;
+            return showIcon ? MD.IconLabel.IconOnly : MD.IconLabel.TextOnly;
         default:
             return display;
         }
@@ -108,25 +108,25 @@ Item {
 
     implicitWidth: {
         switch (effectiveDisplay) {
-        case IconLabel.IconOnly:
+        case MD.IconLabel.IconOnly:
             return iconItem.implicitWidth;
-        case IconLabel.TextOnly:
+        case MD.IconLabel.TextOnly:
             return label.implicitWidth;
-        case IconLabel.TextBesideIcon:
+        case MD.IconLabel.TextBesideIcon:
             return iconItem.implicitWidth + label.implicitWidth + effectiveSpacing;
-        case IconLabel.TextUnderIcon:
+        case MD.IconLabel.TextUnderIcon:
             return Math.max(iconItem.implicitWidth, label.implicitWidth);
         }
     }
     implicitHeight: {
         switch (effectiveDisplay) {
-        case IconLabel.IconOnly:
+        case MD.IconLabel.IconOnly:
             return iconItem.implicitHeight;
-        case IconLabel.TextOnly:
+        case MD.IconLabel.TextOnly:
             return label.implicitHeight;
-        case IconLabel.TextBesideIcon:
+        case MD.IconLabel.TextBesideIcon:
             return Math.max(iconItem.implicitHeight, label.implicitHeight);
-        case IconLabel.TextUnderIcon:
+        case MD.IconLabel.TextUnderIcon:
             return iconItem.implicitHeight + label.implicitHeight + effectiveSpacing;
         }
     }
@@ -183,7 +183,7 @@ Item {
     states: [
         State {
             name: "iconOnly"
-            when: root.effectiveDisplay === IconLabel.IconOnly
+            when: root.effectiveDisplay === MD.IconLabel.IconOnly
 
             AnchorChanges {
                 target: iconItem
@@ -207,7 +207,7 @@ Item {
         },
         State {
             name: "textOnly"
-            when: root.effectiveDisplay === IconLabel.TextOnly
+            when: root.effectiveDisplay === MD.IconLabel.TextOnly
 
             AnchorChanges {
                 target: label
@@ -231,7 +231,7 @@ Item {
         },
         State {
             name: "textBesideIcon"
-            when: root.effectiveDisplay === IconLabel.TextBesideIcon && !root.mirrored
+            when: root.effectiveDisplay === MD.IconLabel.TextBesideIcon && !root.mirrored
 
             AnchorChanges {
                 target: iconItem
@@ -254,16 +254,15 @@ Item {
             }
 
             PropertyChanges {
-                target: label
-                anchors.leftMargin: root.effectiveSpacing
-                anchors.rightMargin: 0
-                anchors.topMargin: 0
-                anchors.bottomMargin: 0
+                label.anchors.leftMargin: root.effectiveSpacing
+                label.anchors.rightMargin: 0
+                label.anchors.topMargin: 0
+                label.anchors.bottomMargin: 0
             }
         },
         State {
             name: "textBesideIconMirrored"
-            when: root.effectiveDisplay === IconLabel.TextBesideIcon && root.mirrored
+            when: root.effectiveDisplay === MD.IconLabel.TextBesideIcon && root.mirrored
 
             AnchorChanges {
                 target: iconItem
@@ -286,16 +285,15 @@ Item {
             }
 
             PropertyChanges {
-                target: label
-                anchors.leftMargin: 0
-                anchors.rightMargin: root.effectiveSpacing
-                anchors.topMargin: 0
-                anchors.bottomMargin: 0
+                label.anchors.leftMargin: 0
+                label.anchors.rightMargin: root.effectiveSpacing
+                label.anchors.topMargin: 0
+                label.anchors.bottomMargin: 0
             }
         },
         State {
             name: "textUnderIcon"
-            when: root.effectiveDisplay === IconLabel.TextUnderIcon
+            when: root.effectiveDisplay === MD.IconLabel.TextUnderIcon
 
             AnchorChanges {
                 target: iconItem
@@ -318,11 +316,10 @@ Item {
             }
 
             PropertyChanges {
-                target: label
-                anchors.leftMargin: 0
-                anchors.rightMargin: 0
-                anchors.topMargin: root.effectiveSpacing
-                anchors.bottomMargin: 0
+                label.anchors.leftMargin: 0
+                label.anchors.rightMargin: 0
+                label.anchors.topMargin: root.effectiveSpacing
+                label.anchors.bottomMargin: 0
             }
         }
     ]

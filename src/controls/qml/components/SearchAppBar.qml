@@ -76,7 +76,7 @@ MD.BaseAppBar {
     }
 
     //! The capsule interaction mode. The default is \c Launcher.
-    property int mode: SearchAppBar.Launcher
+    property int mode: MD.SearchAppBar.Launcher
 
     /*!
         The current query text.
@@ -90,7 +90,7 @@ MD.BaseAppBar {
     property string placeholderText: qsTr("Search")
 
     //! The logical alignment of query and placeholder text.
-    property int textAlignment: SearchAppBar.Start
+    property int textAlignment: MD.SearchAppBar.Start
 
     /*!
         Input-method hints forwarded to the editable text field.
@@ -235,7 +235,7 @@ MD.BaseAppBar {
         The function has no effect while \c mode is \c Launcher.
     */
     function forceSearchFocus() {
-        if (mode === SearchAppBar.Editable && _searchFieldItem)
+        if (mode === MD.SearchAppBar.Editable && _searchFieldItem)
             _searchFieldItem.forceActiveFocus();
     }
 
@@ -248,7 +248,7 @@ MD.BaseAppBar {
     onSearchNavigationActionChanged: _scheduleSearchReflow()
     on_CapsuleWidthChanged: _scheduleSearchReflow()
     onModeChanged: {
-        if (mode === SearchAppBar.Editable && _searchFieldItem)
+        if (mode === MD.SearchAppBar.Editable && _searchFieldItem)
             Qt.callLater(() => control.forceSearchFocus());
     }
 
@@ -314,7 +314,7 @@ MD.BaseAppBar {
 
                     anchors.fill: parent
                     text: control.text.length > 0 ? control.text : control.placeholderText
-                    visible: control.mode === SearchAppBar.Launcher
+                    visible: control.mode === MD.SearchAppBar.Launcher
                     hoverEnabled: true
                     focusPolicy: Qt.StrongFocus
                     background: Item {}
@@ -340,7 +340,7 @@ MD.BaseAppBar {
                     actionData: control.searchNavigationAction || defaultSearchAction
                     contentColor: control.searchContentColor
                     visible: control.searchNavigationAction !== null && control.searchNavigationAction.visible
-                    accessibilityIgnored: control.mode === SearchAppBar.Launcher
+                    accessibilityIgnored: control.mode === MD.SearchAppBar.Launcher
                                           && control.searchNavigationAction === defaultSearchAction
                     z: 2
                 }
@@ -419,7 +419,7 @@ MD.BaseAppBar {
                     verticalAlignment: Text.AlignVCenter
                     maximumLineCount: 1
                     elide: Text.ElideRight
-                    visible: control.mode === SearchAppBar.Launcher
+                    visible: control.mode === MD.SearchAppBar.Launcher
                     Accessible.ignored: true
                 }
 
@@ -455,7 +455,7 @@ MD.BaseAppBar {
                     topPadding: 0
                     bottomPadding: 0
                     focusPolicy: Qt.StrongFocus
-                    visible: control.mode === SearchAppBar.Editable
+                    visible: control.mode === MD.SearchAppBar.Editable
                     background: Item {}
 
                     Accessible.role: Accessible.EditableText
@@ -467,7 +467,7 @@ MD.BaseAppBar {
                 }
 
                 TapHandler {
-                    enabled: control.mode === SearchAppBar.Editable
+                    enabled: control.mode === MD.SearchAppBar.Editable
                     gesturePolicy: TapHandler.ReleaseWithinBounds
                     onTapped: searchFieldProxy.forceActiveFocus()
                 }

@@ -42,10 +42,10 @@ T.ToolButton {
     }
 
     //! The size of the FAB.
-    property int size: FAB.Size.Default
+    property int size: MD.FAB.Size.Default
 
     //! The semantic color variant of the FAB.
-    property int variant: FAB.Variant.Primary
+    property int variant: MD.FAB.Variant.Primary
 
     //! Whether the FAB uses the lower-emphasis elevation treatment.
     property bool lowered: false
@@ -71,13 +71,13 @@ T.ToolButton {
     //! The background color used in normal interactive states.
     property color containerColor: {
         switch (variant) {
-        case FAB.Variant.Surface:
+        case MD.FAB.Variant.Surface:
             return lowered ? control.MD.Style.surfaceContainerLowColor : control.MD.Style.surfaceContainerHighColor;
-        case FAB.Variant.Primary:
+        case MD.FAB.Variant.Primary:
             return control.MD.Style.primaryContainerColor;
-        case FAB.Variant.Secondary:
+        case MD.FAB.Variant.Secondary:
             return control.MD.Style.secondaryContainerColor;
-        case FAB.Variant.Tertiary:
+        case MD.FAB.Variant.Tertiary:
             return control.MD.Style.tertiaryContainerColor;
         }
     }
@@ -85,25 +85,25 @@ T.ToolButton {
     //! The foreground color used in normal interactive states.
     property color contentColor: {
         switch (variant) {
-        case FAB.Variant.Surface:
+        case MD.FAB.Variant.Surface:
             return control.MD.Style.primaryColor;
-        case FAB.Variant.Primary:
+        case MD.FAB.Variant.Primary:
             return control.MD.Style.onPrimaryContainerColor;
-        case FAB.Variant.Secondary:
+        case MD.FAB.Variant.Secondary:
             return control.MD.Style.onSecondaryContainerColor;
-        case FAB.Variant.Tertiary:
+        case MD.FAB.Variant.Tertiary:
             return control.MD.Style.onTertiaryContainerColor;
         }
     }
 
     //! The resolved foreground color after interaction states.
-    readonly property color effectiveContentColor: state.contentColor
+    readonly property color effectiveContentColor: visualState.contentColor
 
     //! The resolved background color after interaction states.
-    readonly property color effectiveContainerColor: state.containerColor
+    readonly property color effectiveContainerColor: visualState.containerColor
 
     //! The resolved elevation after interaction states.
-    readonly property real effectiveElevation: state.elevation
+    readonly property real effectiveElevation: visualState.elevation
 
     //! The resolved icon name.
     readonly property string effectiveIconName: icon.name
@@ -125,35 +125,35 @@ T.ToolButton {
 
     //! \internal The FAB's natural labeled width.
     readonly property real _expandedWidth: Math.max(_collapsedWidth,
-                                                    state.expandedLeadingSpace
+                                                    visualState.expandedLeadingSpace
                                                     + contentItem.implicitWidth
-                                                    + state.expandedTrailingSpace)
+                                                    + visualState.expandedTrailingSpace)
 
     //! \internal Expansion progress derived solely from the animated container width.
     readonly property real _layoutProgress: {
         const distance = _expandedWidth - _collapsedWidth;
         if (distance <= 0)
             return _effectiveExpanded ? 1 : 0;
-        return Math.max(0, Math.min(1, (state.containerWidth - _collapsedWidth) / distance));
+        return Math.max(0, Math.min(1, (visualState.containerWidth - _collapsedWidth) / distance));
     }
 
     //! \internal Logical leading padding interpolated from the centered icon endpoint.
-    readonly property real _leadingPadding: state.collapsedIconPadding
-                                             + (state.expandedLeadingSpace
-                                                - state.collapsedIconPadding)
+    readonly property real _leadingPadding: visualState.collapsedIconPadding
+                                             + (visualState.expandedLeadingSpace
+                                                - visualState.collapsedIconPadding)
                                              * _layoutProgress
 
     //! \internal Logical trailing padding interpolated from the centered icon endpoint.
-    readonly property real _trailingPadding: state.collapsedIconPadding
-                                              + (state.expandedTrailingSpace
-                                                 - state.collapsedIconPadding)
+    readonly property real _trailingPadding: visualState.collapsedIconPadding
+                                              + (visualState.expandedTrailingSpace
+                                                 - visualState.collapsedIconPadding)
                                               * _layoutProgress
 
-    icon.width: state.iconSize
-    icon.height: state.iconSize
+    icon.width: visualState.iconSize
+    icon.height: visualState.iconSize
 
-    implicitWidth: state.containerWidth
-    implicitHeight: state.containerHeight
+    implicitWidth: visualState.containerWidth
+    implicitHeight: visualState.containerHeight
 
     leftInset: 0
     rightInset: 0
@@ -163,7 +163,7 @@ T.ToolButton {
     rightPadding: mirrored ? _leadingPadding : _trailingPadding
     topPadding: 0
     bottomPadding: 0
-    spacing: state.iconLabelSpacing
+    spacing: visualState.iconLabelSpacing
 
     hoverEnabled: true
     focusPolicy: Qt.StrongFocus
@@ -172,7 +172,7 @@ T.ToolButton {
     Accessible.role: Accessible.Button
 
     QtObject {
-        id: state
+        id: visualState
 
         readonly property real containerHeight: UiMetrics.fabContainerHeight(control)
         readonly property MD.shapeValue containerShape: UiMetrics.fabContainerShape(control)
@@ -209,9 +209,9 @@ T.ToolButton {
             when: control.down && control.enabled
 
             PropertyChanges {
-                state.elevation: control.lowered ? MD.Tokens.fab.loweredPressedContainerElevation : MD.Tokens.fab.pressedContainerElevation
-                state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: MD.Tokens.fab.pressedStateLayerOpacity
+                visualState.elevation: control.lowered ? MD.Tokens.fab.loweredPressedContainerElevation : MD.Tokens.fab.pressedContainerElevation
+                visualState.stateLayerColor: control.effectiveIconColor
+                visualState.stateLayerOpacity: MD.Tokens.fab.pressedStateLayerOpacity
             }
         },
         State {
@@ -219,9 +219,9 @@ T.ToolButton {
             when: control.visualFocus && control.enabled
 
             PropertyChanges {
-                state.elevation: control.lowered ? MD.Tokens.fab.loweredFocusContainerElevation : MD.Tokens.fab.focusContainerElevation
-                state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: MD.Tokens.fab.focusStateLayerOpacity
+                visualState.elevation: control.lowered ? MD.Tokens.fab.loweredFocusContainerElevation : MD.Tokens.fab.focusContainerElevation
+                visualState.stateLayerColor: control.effectiveIconColor
+                visualState.stateLayerOpacity: MD.Tokens.fab.focusStateLayerOpacity
             }
         },
         State {
@@ -229,9 +229,9 @@ T.ToolButton {
             when: control.hovered && control.enabled
 
             PropertyChanges {
-                state.elevation: control.lowered ? MD.Tokens.fab.loweredHoverContainerElevation : MD.Tokens.fab.hoverContainerElevation
-                state.stateLayerColor: control.effectiveIconColor
-                state.stateLayerOpacity: MD.Tokens.fab.hoverStateLayerOpacity
+                visualState.elevation: control.lowered ? MD.Tokens.fab.loweredHoverContainerElevation : MD.Tokens.fab.hoverContainerElevation
+                visualState.stateLayerColor: control.effectiveIconColor
+                visualState.stateLayerOpacity: MD.Tokens.fab.hoverStateLayerOpacity
             }
         }
     ]
@@ -245,14 +245,14 @@ T.ToolButton {
         display: MD.IconLabel.TextBesideIcon
         mirrored: control.mirrored
         mirrorIconInRtl: control.mirrorIconInRtl
-        spacing: state.iconLabelSpacing
+        spacing: visualState.iconLabelSpacing
         typescale: control.typescale
         color: control.effectiveContentColor
         textOpacity: control._effectiveExpanded ? 1 : 0
         icon.name: control.effectiveIconName
         icon.source: control.effectiveIconSource
-        icon.width: state.iconSize
-        icon.height: state.iconSize
+        icon.width: visualState.iconSize
+        icon.height: visualState.iconSize
         icon.color: control.effectiveIconColor
 
         Behavior on textOpacity {
@@ -267,15 +267,15 @@ T.ToolButton {
     }
 
     background: MD.ElevationRectangle {
-        implicitWidth: state.containerWidth
-        implicitHeight: state.containerHeight
-        topLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.topLeft, width, height)
-        topRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.topRight, width, height)
-        bottomLeftRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomLeft, width, height)
-        bottomRightRadius: UiMetrics.resolveShapeRadius(state.containerShape.bottomRight, width,
+        implicitWidth: visualState.containerWidth
+        implicitHeight: visualState.containerHeight
+        topLeftRadius: UiMetrics.resolveShapeRadius(visualState.containerShape.topLeft, width, height)
+        topRightRadius: UiMetrics.resolveShapeRadius(visualState.containerShape.topRight, width, height)
+        bottomLeftRadius: UiMetrics.resolveShapeRadius(visualState.containerShape.bottomLeft, width, height)
+        bottomRightRadius: UiMetrics.resolveShapeRadius(visualState.containerShape.bottomRight, width,
                                                         height)
-        color: state.containerColor
-        elevation: state.elevation
+        color: visualState.containerColor
+        elevation: visualState.elevation
 
         MD.Ripple {
             objectName: "fabRipple"
@@ -287,8 +287,8 @@ T.ToolButton {
             pressed: control.pressed
             pressX: control.pressX
             pressY: control.pressY
-            stateOpacity: state.stateLayerOpacity
-            color: state.stateLayerColor
+            stateOpacity: visualState.stateLayerOpacity
+            color: visualState.stateLayerColor
         }
     }
 }

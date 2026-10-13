@@ -40,7 +40,7 @@ T.ToolButton {
     }
 
     //! The size of the button while it is collapsed.
-    property int size: FabMenuButton.Size.Default
+    property int size: MD.FabMenuButton.Size.Default
 
     /*!
         Whether the button renders as a close button.
@@ -65,16 +65,16 @@ T.ToolButton {
     property string expandedIconName: MD.Symbols.close
 
     //! The resolved background color after interaction states.
-    readonly property color effectiveContainerColor: state.containerColor
+    readonly property color effectiveContainerColor: visualState.containerColor
 
     //! The resolved foreground color after interaction states.
-    readonly property color effectiveContentColor: state.contentColor
+    readonly property color effectiveContentColor: visualState.contentColor
 
     //! The resolved elevation after interaction states.
-    readonly property real effectiveElevation: state.elevation
+    readonly property real effectiveElevation: visualState.elevation
 
-    icon.width: state.iconSize
-    icon.height: state.iconSize
+    icon.width: visualState.iconSize
+    icon.height: visualState.iconSize
 
     implicitWidth: Math.max(implicitBackgroundWidth + leftInset + rightInset, implicitContentWidth + leftPadding + rightPadding)
     implicitHeight: Math.max(implicitBackgroundHeight + topInset + bottomInset, implicitContentHeight + topPadding + bottomPadding)
@@ -95,54 +95,54 @@ T.ToolButton {
     Accessible.checked: expanded
 
     QtObject {
-        id: state
+        id: visualState
 
         readonly property real collapsedContainerWidth: {
             switch (control.size) {
-            case FabMenuButton.Size.Default:
+            case MD.FabMenuButton.Size.Default:
                 return MD.Tokens.fab.containerWidth;
-            case FabMenuButton.Size.Medium:
+            case MD.FabMenuButton.Size.Medium:
                 return MD.Tokens.fab.mediumContainerWidth;
-            case FabMenuButton.Size.Large:
+            case MD.FabMenuButton.Size.Large:
                 return MD.Tokens.fab.largeContainerWidth;
             }
         }
         readonly property real collapsedContainerHeight: {
             switch (control.size) {
-            case FabMenuButton.Size.Default:
+            case MD.FabMenuButton.Size.Default:
                 return MD.Tokens.fab.containerHeight;
-            case FabMenuButton.Size.Medium:
+            case MD.FabMenuButton.Size.Medium:
                 return MD.Tokens.fab.mediumContainerHeight;
-            case FabMenuButton.Size.Large:
+            case MD.FabMenuButton.Size.Large:
                 return MD.Tokens.fab.largeContainerHeight;
             }
         }
         readonly property MD.shapeValue collapsedContainerShape: {
             switch (control.size) {
-            case FabMenuButton.Size.Default:
+            case MD.FabMenuButton.Size.Default:
                 return MD.Tokens.fab.containerShape;
-            case FabMenuButton.Size.Medium:
+            case MD.FabMenuButton.Size.Medium:
                 return MD.Tokens.fab.mediumContainerShape;
-            case FabMenuButton.Size.Large:
+            case MD.FabMenuButton.Size.Large:
                 return MD.Tokens.fab.largeContainerShape;
             }
         }
         readonly property real collapsedIconSize: {
             switch (control.size) {
-            case FabMenuButton.Size.Default:
+            case MD.FabMenuButton.Size.Default:
                 return MD.Tokens.fab.iconSize;
-            case FabMenuButton.Size.Medium:
+            case MD.FabMenuButton.Size.Medium:
                 return MD.Tokens.fab.mediumIconSize;
-            case FabMenuButton.Size.Large:
+            case MD.FabMenuButton.Size.Large:
                 return MD.Tokens.fab.largeIconSize;
             }
         }
 
-        property real containerWidth: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerWidth : state.collapsedContainerWidth
-        property real containerHeight: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerHeight : state.collapsedContainerHeight
+        property real containerWidth: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerWidth : visualState.collapsedContainerWidth
+        property real containerHeight: control.expanded ? MD.Tokens.fabMenu.closeButtonContainerHeight : visualState.collapsedContainerHeight
         readonly property MD.shapeValue containerShape: control.expanded
                                                         ? MD.Tokens.fabMenu.closeButtonContainerShape
-                                                        : state.collapsedContainerShape
+                                                        : visualState.collapsedContainerShape
         property real topLeftRadius: UiMetrics.resolveShapeRadius(
                                          containerShape.topLeft, containerWidth, containerHeight)
         property real topRightRadius: UiMetrics.resolveShapeRadius(
@@ -153,7 +153,7 @@ T.ToolButton {
         property real bottomRightRadius: UiMetrics.resolveShapeRadius(
                                              containerShape.bottomRight, containerWidth,
                                              containerHeight)
-        property real iconSize: control.expanded ? MD.Tokens.fabMenu.closeButtonIconSize : state.collapsedIconSize
+        property real iconSize: control.expanded ? MD.Tokens.fabMenu.closeButtonIconSize : visualState.collapsedIconSize
 
         property color containerColor: control.containerColor
         property color contentColor: control.contentColor
@@ -239,9 +239,9 @@ T.ToolButton {
             when: control.down && control.enabled
 
             PropertyChanges {
-                state.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonPressedContainerElevation : MD.Tokens.fab.pressedContainerElevation
-                state.stateLayerColor: control.effectiveContentColor
-                state.stateLayerOpacity: MD.Tokens.fabMenu.pressedStateLayerOpacity
+                visualState.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonPressedContainerElevation : MD.Tokens.fab.pressedContainerElevation
+                visualState.stateLayerColor: control.effectiveContentColor
+                visualState.stateLayerOpacity: MD.Tokens.fabMenu.pressedStateLayerOpacity
             }
         },
         State {
@@ -249,9 +249,9 @@ T.ToolButton {
             when: control.visualFocus && control.enabled
 
             PropertyChanges {
-                state.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonFocusContainerElevation : MD.Tokens.fab.focusContainerElevation
-                state.stateLayerColor: control.effectiveContentColor
-                state.stateLayerOpacity: MD.Tokens.fabMenu.focusStateLayerOpacity
+                visualState.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonFocusContainerElevation : MD.Tokens.fab.focusContainerElevation
+                visualState.stateLayerColor: control.effectiveContentColor
+                visualState.stateLayerOpacity: MD.Tokens.fabMenu.focusStateLayerOpacity
             }
         },
         State {
@@ -259,24 +259,24 @@ T.ToolButton {
             when: control.hovered && control.enabled
 
             PropertyChanges {
-                state.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonHoverContainerElevation : MD.Tokens.fab.hoverContainerElevation
-                state.stateLayerColor: control.effectiveContentColor
-                state.stateLayerOpacity: MD.Tokens.fabMenu.hoverStateLayerOpacity
+                visualState.elevation: control.expanded ? MD.Tokens.fabMenu.closeButtonHoverContainerElevation : MD.Tokens.fab.hoverContainerElevation
+                visualState.stateLayerColor: control.effectiveContentColor
+                visualState.stateLayerOpacity: MD.Tokens.fabMenu.hoverStateLayerOpacity
             }
         }
     ]
 
     contentItem: Item {
-        implicitWidth: state.iconSize
-        implicitHeight: state.iconSize
+        implicitWidth: visualState.iconSize
+        implicitHeight: visualState.iconSize
 
         MD.Symbol {
             objectName: "fabMenuButtonCollapsedSymbol"
 
             anchors.centerIn: parent
             name: control.collapsedIconName
-            iconWidth: state.iconSize
-            iconHeight: state.iconSize
+            iconWidth: visualState.iconSize
+            iconHeight: visualState.iconSize
             color: control.effectiveContentColor
             opacity: control.expanded ? 0 : 1
             visible: opacity > 0
@@ -293,8 +293,8 @@ T.ToolButton {
 
             anchors.centerIn: parent
             name: control.expandedIconName
-            iconWidth: state.iconSize
-            iconHeight: state.iconSize
+            iconWidth: visualState.iconSize
+            iconHeight: visualState.iconSize
             color: control.effectiveContentColor
             opacity: control.expanded ? 1 : 0
             visible: opacity > 0
@@ -308,14 +308,14 @@ T.ToolButton {
     }
 
     background: MD.ElevationRectangle {
-        implicitWidth: state.containerWidth
-        implicitHeight: state.containerHeight
-        topLeftRadius: state.topLeftRadius
-        topRightRadius: state.topRightRadius
-        bottomLeftRadius: state.bottomLeftRadius
-        bottomRightRadius: state.bottomRightRadius
-        color: state.containerColor
-        elevation: state.elevation
+        implicitWidth: visualState.containerWidth
+        implicitHeight: visualState.containerHeight
+        topLeftRadius: visualState.topLeftRadius
+        topRightRadius: visualState.topRightRadius
+        bottomLeftRadius: visualState.bottomLeftRadius
+        bottomRightRadius: visualState.bottomRightRadius
+        color: visualState.containerColor
+        elevation: visualState.elevation
 
         MD.Ripple {
             objectName: "fabMenuButtonRipple"
@@ -328,8 +328,8 @@ T.ToolButton {
             pressed: control.pressed
             pressX: control.pressX
             pressY: control.pressY
-            stateOpacity: state.stateLayerOpacity
-            color: state.stateLayerColor
+            stateOpacity: visualState.stateLayerOpacity
+            color: visualState.stateLayerColor
         }
     }
 }

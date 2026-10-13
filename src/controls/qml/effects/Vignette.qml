@@ -45,7 +45,7 @@ Item {
         property real radius: 16
         property real brightness: 0.1
 
-        fragmentShader: "
+        fragmentShader: `
             varying highp vec2 qt_TexCoord0;
             uniform highp float qt_Opacity;
             uniform highp float radius;
@@ -62,6 +62,6 @@ Item {
                 lowp vec3 col = orig.rgb * clamp(pow(vignette, radius) + brightness, 0.0, 1.0);
 
                 gl_FragColor = vec4(col, 1.0);
-            }"
+            }`
     }
 }

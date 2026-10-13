@@ -54,8 +54,8 @@ MD.Action {
     property int priority: 0
 
     //! The policy controlling whether this action moves into overflow.
-    property int overflowPolicy: AppBarAction.AutoOverflow
+    property int overflowPolicy: MD.AppBarAction.AutoOverflow
 
     //! The visual presentation used while this action is directly visible.
-    property int presentation: AppBarAction.IconButton
+    property int presentation: MD.AppBarAction.IconButton
 }

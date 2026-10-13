@@ -70,7 +70,7 @@ T.ToolBar {
     property Flickable scrollTarget: null
 
     //! The scrolling behavior applied to \c scrollTarget.
-    property int scrollBehavior: BaseAppBar.Pinned
+    property int scrollBehavior: MD.BaseAppBar.Pinned
 
     //! Height of the fully collapsed container, excluding the top safe area.
     property real collapsedHeight: MD.Tokens.appBar.smallContainerHeight
@@ -129,7 +129,7 @@ T.ToolBar {
     readonly property real collapsedFraction: {
         if (_collapseRange > 0)
             return _heightOffset / _collapseRange;
-        if (scrollBehavior === BaseAppBar.EnterAlways && _maximumHeightOffset > 0)
+        if (scrollBehavior === MD.BaseAppBar.EnterAlways && _maximumHeightOffset > 0)
             return _heightOffset / _maximumHeightOffset;
         return 1;
     }
@@ -171,7 +171,7 @@ T.ToolBar {
     readonly property real logicalEndOccupiedWidth: trailingWidth
 
     //! \internal Current container height after flexible collapse.
-    readonly property real currentContainerHeight: scrollBehavior === BaseAppBar.ExitUntilCollapsed ? expandedHeight - _heightOffset : expandedHeight
+    readonly property real currentContainerHeight: scrollBehavior === MD.BaseAppBar.ExitUntilCollapsed ? expandedHeight - _heightOffset : expandedHeight
 
     //! \internal
     property real _heightOffset: 0
@@ -194,9 +194,9 @@ T.ToolBar {
     //! \internal
     readonly property real _maximumHeightOffset: {
         switch (scrollBehavior) {
-        case BaseAppBar.EnterAlways:
+        case MD.BaseAppBar.EnterAlways:
             return expandedHeight + SafeArea.margins.top;
-        case BaseAppBar.ExitUntilCollapsed:
+        case MD.BaseAppBar.ExitUntilCollapsed:
             return _collapseRange;
         default:
             return 0;
@@ -210,7 +210,7 @@ T.ToolBar {
     clip: false
 
     transform: Translate {
-        y: control.scrollBehavior === BaseAppBar.EnterAlways ? -control._heightOffset : 0
+        y: control.scrollBehavior === MD.BaseAppBar.EnterAlways ? -control._heightOffset : 0
     }
 
     //! \internal
@@ -326,12 +326,12 @@ T.ToolBar {
         const delta = position - _lastScrollPosition;
         _lastScrollPosition = position;
 
-        if (scrollBehavior === BaseAppBar.Pinned) {
+        if (scrollBehavior === MD.BaseAppBar.Pinned) {
             _heightOffset = 0;
-        } else if (scrollBehavior === BaseAppBar.EnterAlways) {
+        } else if (scrollBehavior === MD.BaseAppBar.EnterAlways) {
             settleAnimation.stop();
             _heightOffset = _clampOffset(_heightOffset + delta);
-        } else if (scrollBehavior === BaseAppBar.ExitUntilCollapsed) {
+        } else if (scrollBehavior === MD.BaseAppBar.ExitUntilCollapsed) {
             settleAnimation.stop();
             if (position <= origin)
                 _heightOffset = 0;
@@ -342,11 +342,11 @@ T.ToolBar {
 
     //! \internal
     function _settle() {
-        if (scrollBehavior === BaseAppBar.Pinned || _maximumHeightOffset <= 0)
+        if (scrollBehavior === MD.BaseAppBar.Pinned || _maximumHeightOffset <= 0)
             return;
 
         let destination = _heightOffset >= _maximumHeightOffset / 2 ? _maximumHeightOffset : 0;
-        if (scrollBehavior === BaseAppBar.ExitUntilCollapsed && scrollTarget && !scrollTarget.atYBeginning) {
+        if (scrollBehavior === MD.BaseAppBar.ExitUntilCollapsed && scrollTarget && !scrollTarget.atYBeginning) {
             destination = _maximumHeightOffset;
         }
         settleAnimation.to = destination;
@@ -550,7 +550,7 @@ T.ToolBar {
     DragHandler {
         id: dragHandler
 
-        enabled: control.scrollBehavior !== BaseAppBar.Pinned
+        enabled: control.scrollBehavior !== MD.BaseAppBar.Pinned
         target: null
         acceptedDevices: PointerDevice.TouchScreen | PointerDevice.TouchPad | PointerDevice.Mouse
 

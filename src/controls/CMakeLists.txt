@@ -3,6 +3,7 @@ set(LIBNAME Fluid)
 # Source files
 set(_sources
     cpp/core/clipboard.cpp cpp/core/clipboard.h
+    cpp/core/enumregistration.cpp
     cpp/core/inputregion.cpp cpp/core/inputregion.h
     cpp/core/tooltipattached.cpp cpp/core/tooltipattached.h
     cpp/scenegraph/elevationmaterial.cpp cpp/scenegraph/elevationmaterial.h

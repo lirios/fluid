@@ -7,7 +7,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import Fluid as MD
 
 // Material You "realistic" ripple, ported from Skia's RippleShader.rts
 // (third_party/skia/resources/sksl/realistic/RippleShader.rts) and the

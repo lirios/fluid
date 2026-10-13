@@ -174,7 +174,7 @@ Item {
 
         By default, this property is set to \c true.
     */
-    property bool smooth: true
+    smooth: true
 
     /*!
         This signal is emitted when the swap between the old source and the new
@@ -223,14 +223,14 @@ Item {
         animation.stop();
 
         // Unload both images
-        if (root.source == "") {
+        if (root.source.toString() === "") {
             __priv.currentImage.source = "";
             __priv.nextImage.source = "";
             __priv.loadingImage = null;
             return;
         }
 
-        if (__priv.currentImage.source == "") {
+        if (__priv.currentImage.source.toString() === "") {
             // Assign the source to the current image for the first time
             __priv.currentImage.source = root.source;
             __priv.loadingImage = __priv.currentImage;

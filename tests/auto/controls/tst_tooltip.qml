@@ -225,18 +225,39 @@ TestCase {
         tryCompare(anchor.toolTip, "visible", false);
     }
 
-    function test_plain_sizing_and_wrapping() {
+    function test_plain_sizing_and_wrapping_data() {
+        return [
+            { tag: "configured-font", fontFamily: "" },
+            { tag: "icon-font-fallback", fontFamily: MD.Theme.symbolsOutlinedFontFamily }
+        ];
+    }
+
+    function test_plain_sizing_and_wrapping(data) {
+        const emptyToolTip = createPlain({ text: "" });
+        verify(emptyToolTip !== null);
+        compare(emptyToolTip.implicitWidth, MD.Tokens.toolTip.minimumWidth);
+
         const shortToolTip = createPlain({ text: "Tip" });
         verify(shortToolTip !== null);
-        compare(shortToolTip.implicitWidth, MD.Tokens.toolTip.minimumWidth);
+        const shortLabel = findChild(shortToolTip, "plainToolTipLabel");
+        if (data.fontFamily)
+            shortLabel.font.family = data.fontFamily;
+        verify(shortToolTip.implicitWidth >= MD.Tokens.toolTip.minimumWidth);
+        verify(shortToolTip.implicitWidth <= MD.Tokens.toolTip.plainMaximumWidth);
+        verify(shortToolTip.implicitWidth >= shortLabel.implicitWidth
+               + shortToolTip.leftPadding + shortToolTip.rightPadding);
         verify(shortToolTip.implicitHeight >= MD.Tokens.toolTip.minimumHeight);
 
         const longToolTip = createPlain({
             text: "A deliberately long tooltip description that must wrap within the Material maximum width instead of growing indefinitely."
         });
         verify(longToolTip !== null);
+        const longLabel = findChild(longToolTip, "plainToolTipLabel");
+        if (data.fontFamily)
+            longLabel.font.family = data.fontFamily;
         compare(longToolTip.implicitWidth, MD.Tokens.toolTip.plainMaximumWidth);
         verify(longToolTip.implicitHeight > MD.Tokens.toolTip.minimumHeight);
+        verify(longLabel.lineCount > 1);
     }
 
     function test_plain_position_fallback() {

@@ -4,7 +4,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 
 Item {
@@ -77,7 +76,7 @@ Item {
                            : (content.height - height) / 2
         visible: content.iconVisible
 
-        TImpl.IconImage {
+        MD.IconImage {
             objectName: "segmentedButtonSourceIcon"
             anchors.fill: parent
             source: content.iconSource

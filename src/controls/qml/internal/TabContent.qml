@@ -4,7 +4,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 import "../core/BadgeContent.js" as BadgeContent
 
@@ -95,7 +94,7 @@ Item {
             y: root.stacked ? 0 : (group.height - height) / 2
             Accessible.ignored: true
 
-            TImpl.IconImage {
+            MD.IconImage {
                 objectName: "tabSourceImage"
                 anchors.fill: parent
                 source: root.iconSource

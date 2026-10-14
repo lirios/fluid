@@ -19,6 +19,7 @@ add_executable(tst_fluid_controls
     tst_groupbox.qml
     tst_symbol.qml
     tst_iconbutton.qml
+    tst_iconimage.qml
     tst_listitem.qml
     tst_menu.qml
     tst_navigationrail.qml

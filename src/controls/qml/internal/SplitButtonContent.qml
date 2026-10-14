@@ -5,7 +5,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 import "MotionAnimation.js" as MotionAnimation
 
@@ -62,7 +61,7 @@ Item {
                           : (content.height - height) / 2
         visible: content.iconVisible
 
-        TImpl.IconImage {
+        MD.IconImage {
             objectName: "splitButtonSourceIcon"
             anchors.fill: parent
             source: content.iconSource

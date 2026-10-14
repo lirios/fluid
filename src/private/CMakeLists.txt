@@ -3,6 +3,7 @@ set(LIBNAME FluidPrivate)
 # Source files
 set(_sources
     badgetext.cpp badgetext.h
+    iconimage.cpp iconimage.h
     shortcututils.cpp shortcututils.h
     tabkeybridge.cpp tabkeybridge.h
     windowdecoration.cpp windowdecoration.h
@@ -41,6 +42,8 @@ target_link_libraries(${LIBNAME}
         Qt6::Gui
         Qt6::Qml
         Qt6::Quick
+        # IconImage extends Qt Quick's image loader and renderer.
+        Qt6::QuickPrivate
         Qt6::QuickControls2
 )
 if(LINUX AND NOT ANDROID)

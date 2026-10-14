@@ -1,0 +1,7 @@
+<!-- SPDX-FileCopyrightText: 2026 Pier Luigi Fiorini <pierluigi.fiorini@gmail.com> -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20" viewBox="0 0 40 20">
+  <path fill="#ff0000" d="M0 0h10v20H0z"/>
+  <path fill="#0000ff" d="M10 0h10v20H10z"/>
+  <path fill="#00ff00" fill-opacity="0.5" d="M20 0h10v20H20z"/>
+</svg>

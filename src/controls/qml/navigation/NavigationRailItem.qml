@@ -5,7 +5,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.impl as TImpl
 import Fluid as MD
 import "../core/BadgeContent.js" as BadgeContent
 import "../internal" as Internal
@@ -291,7 +290,7 @@ T.ItemDelegate {
             visible: control._hasNamedIcon || control._hasSourceIcon
             Accessible.ignored: true
 
-            TImpl.IconImage {
+            Internal.IconImage {
                 id: sourceIcon
                 anchors.fill: iconSlot
                 source: control.icon.source

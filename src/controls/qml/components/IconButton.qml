@@ -5,8 +5,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Templates as T
-import QtQuick.Controls.impl as TImpl
 import Fluid as MD
+import "../internal" as Internal
 import "../core/BadgeContent.js" as BadgeContent
 import "../core/UiMetrics.js" as UiMetrics
 import "../internal/MotionAnimation.js" as MotionAnimation
@@ -485,7 +485,7 @@ T.ToolButton {
                 xScale: control.effectiveIconMirrored ? -1 : 1
             }
 
-            TImpl.IconImage {
+            Internal.IconImage {
                 id: sourceIcon
                 objectName: "iconButtonSourceImage"
                 anchors.fill: parent

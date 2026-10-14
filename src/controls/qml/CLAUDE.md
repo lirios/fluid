@@ -12,8 +12,8 @@ Applies to public components under `src/controls/qml/`.
 
 1. Use the root SPDX header and `pragma ComponentBehavior: Bound` when nested components access
    outer IDs.
-2. Import only what is used and root the control in the appropriate Qt Quick Template. Never use
-   `QtQuick.Controls`; build on `QtQuick.Templates` directly.
+2. Import only what is used and root the control in the appropriate Qt Quick Template. Never import
+   `QtQuick.Controls` or `QtQuick.Controls.impl`; build on `QtQuick.Templates` directly.
 3. Document public APIs and derive implicit size from content, background, insets, padding,
    minimum target, and reserved indicator space.
 4. Read system metrics from `MD.Tokens.shape`, `.elevation`, `.state`, `.motion`, or
